@@ -7,9 +7,10 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
 
     protected $width;
     protected $height;
-    protected $frameRate = 25;
+    protected $frameRate   = 25;
     protected $videoCodec;
-    protected $GOPsize   = 25;
+    protected $GOPsize     = 25;
+    protected $kiloBitrate = 1000;
 
     public function __construct($width, $height)
     {

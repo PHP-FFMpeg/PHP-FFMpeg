@@ -7,7 +7,7 @@ abstract class DefaultAudioFormat implements AudioFormat
 
     protected $audioCodec;
     protected $audioSampleRate = 44100;
-    protected $kiloBitrate     = 1000;
+    protected $kiloBitrate     = 128;
 
     public function getExtraParams()
     {

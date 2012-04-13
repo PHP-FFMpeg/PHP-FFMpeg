@@ -2,7 +2,7 @@
 
 namespace FFMpeg\Format;
 
-interface VideoFormat
+interface VideoFormat extends AudioFormat
 {
 
     public function getWidth();

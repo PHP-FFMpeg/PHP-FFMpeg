@@ -63,6 +63,45 @@ class FFMpeg extends Binary
 
         $threads = max(min($threads, 64), 1);
 
+        switch (true)
+        {
+            case $format instanceof Format\VideoFormat:
+                return $this->encodeVideo($format, $outputPathfile, $threads);
+                break;
+            default:
+            case $format instanceof Format\AudioFormat:
+                return $this->encodeAudio($format, $outputPathfile, $threads);
+                break;
+        }
+
+        return false;
+    }
+
+    protected function encodeAudio(Format\AudioFormat $format, $outputPathfile, $threads)
+    {
+        $cmd = $this->binary
+          . ' -y -i '
+          . escapeshellarg($this->pathfile)
+          . ' ' . $format->getExtraParams()
+          . ' -threads ' . $threads
+          . ' -acodec ' . $format->getAudioCodec()
+          . ' -ab ' . $format->getKiloBitrate() . 'k '
+          . ' -ac 2 -ar ' . $format->getAudioSampleRate()
+          . ' ' . escapeshellarg($outputPathfile);
+
+        $process = new \Symfony\Component\Process\Process($cmd);
+        $process->run();
+
+        if ( ! $process->isSuccessful())
+        {
+            throw new \RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
+        }
+
+        return true;
+    }
+
+    protected function encodeVideo(Format\VideoFormat $format, $outputPathfile, $threads)
+    {
         $cmd_part1 = $this->binary
           . ' -y -i '
           . escapeshellarg($this->pathfile) . ' '

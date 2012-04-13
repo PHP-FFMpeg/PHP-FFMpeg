@@ -187,6 +187,14 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(16, $this->object->getMultiple(8, 16));
     }
 
+    /**
+     * @covers FFMpeg\Format\DefaultVideoFormat::getKiloBitrate
+     */
+    public function testGetKiloBitrate()
+    {
+        $this->assertEquals(1000, $this->object->getKiloBitrate());
+    }
+
 }
 
 class DefaultVideoFormatTester extends DefaultVideoFormat

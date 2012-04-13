@@ -107,7 +107,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetKiloBitrate()
     {
-        $this->assertEquals(1000, $this->object->getKiloBitrate());
+        $this->assertEquals(128, $this->object->getKiloBitrate());
     }
 
     /**
