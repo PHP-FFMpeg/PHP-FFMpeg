@@ -39,6 +39,9 @@ class WebMTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_scalar($this->object->getExtraParams()));
     }
 
+    /**
+     * @covers FFMpeg\Format\Video\WebM::__construct
+     */
     public function testConstruct()
     {
         $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultVideoFormat', $this->object);

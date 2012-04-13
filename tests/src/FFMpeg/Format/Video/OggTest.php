@@ -15,6 +15,9 @@ class OggTest extends \PHPUnit_Framework_TestCase
         $this->object = new Ogg(320, 320);
     }
 
+    /**
+     * @covers FFMpeg\Format\Video\Ogg::__construct
+     */
     public function testConstruct()
     {
         $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultVideoFormat', $this->object);
