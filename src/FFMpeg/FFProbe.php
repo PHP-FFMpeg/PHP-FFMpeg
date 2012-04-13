@@ -27,6 +27,7 @@ class FFProbe extends Binary
      * @param string $pathfile
      * @return string
      * @throws Exception\InvalidFileArgumentException
+     * @throws Exception\RuntimeException
      */
     public function probeFormat($pathfile)
     {
@@ -46,6 +47,7 @@ class FFProbe extends Binary
      * @param string $pathfile
      * @return string
      * @throws Exception\InvalidFileArgumentException
+     * @throws Exception\RuntimeException
      */
     public function probeStreams($pathfile)
     {
@@ -56,14 +58,7 @@ class FFProbe extends Binary
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_streams';
 
-        try
-        {
-            return $this->executeProbe($cmd);
-        }
-        catch (Exception\RuntimeException $e)
-        {
-
-        }
+        return $this->executeProbe($cmd);
     }
 
     /**

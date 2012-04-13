@@ -51,12 +51,13 @@ class FFMpeg extends Binary
      * @param int $height       The height of the image
      * @return boolean          True if success
      * @throws Exception\RuntimeException
+     * @throws Exception\LogicException
      */
     public function extractImage($time, $output, $width, $height)
     {
         if ( ! $this->pathfile)
         {
-            throw new Exception\RuntimeException('No file open');
+            throw new Exception\LogicException('No file open');
         }
 
         $cmd = $this->binary
@@ -99,12 +100,13 @@ class FFMpeg extends Binary
      * @param int $threads                  The number of threads to use
      * @return boolean                      True if success
      * @throws Exception\RuntimeException
+     * @throws Exception\LogicException
      */
     public function encode(Format\AudioFormat $format, $outputPathfile, $threads = 1)
     {
         if ( ! $this->pathfile)
         {
-            throw new Exception\RuntimeException('No file open');
+            throw new Exception\LogicException('No file open');
         }
 
         $threads = max(min($threads, 64), 1);
