@@ -6,63 +6,65 @@ class FFProbeTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @covers FFMpeg\FFProbe::probeFormat
-     * @todo Implement testProbeFormat().
+     *
+     * @var FFProbe
      */
-    public function testProbeFormat()
+    protected $object;
+
+    public function setUp()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object = FFProbe::load();
+    }
+
+    /**
+     * @covers FFMpeg\FFProbe::probeFormat
+     * @covers FFMpeg\FFProbe::probeStreams
+     * @covers FFMpeg\FFProbe::executeProbe
+     */
+    public function testProbe()
+    {
+        $this->object->probeFormat(__DIR__ . '/../../files/Test.ogv');
+        $this->object->probeStreams(__DIR__ . '/../../files/Test.ogv');
+    }
+
+    /**
+     * @covers FFMpeg\FFProbe::probeFormat
+     * @covers FFMpeg\FFProbe::executeProbe
+     * @expectedException \RuntimeException
+     */
+    public function testProbeInvalidFile()
+    {
+        $this->object->probeFormat(__DIR__ . '/../../files/WrongFile.mp4');
     }
 
     /**
      * @covers FFMpeg\FFProbe::probeStreams
-     * @todo Implement testProbeStreams().
+     * @covers FFMpeg\FFProbe::executeProbe
+     * @expectedException \RuntimeException
      */
-    public function testProbeStreams()
+    public function testProbeStreamsInvalidFile()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->probeStreams(__DIR__ . '/../../files/WrongFile.mp4');
     }
 
     /**
-     * @covers FFMpeg\FFProbe::probeFrames
-     * @todo Implement testProbeFrames().
+     * @covers FFMpeg\FFProbe::probeStreams
+     * @covers FFMpeg\FFProbe::executeProbe
+     * @expectedException \InvalidArgumentException
      */
-    public function testProbeFrames()
+    public function testProbeStreamsInvalidPathFile()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->probeStreams(__DIR__ . '/../../files/unknown.file');
     }
 
     /**
-     * @covers FFMpeg\FFProbe::probePackets
-     * @todo Implement testProbePackets().
+     * @covers FFMpeg\FFProbe::probeFormat
+     * @covers FFMpeg\FFProbe::executeProbe
+     * @expectedException \InvalidArgumentException
      */
-    public function testProbePackets()
+    public function testProbeFormatInvalidPathFile()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers FFMpeg\FFProbe::probeErrors
-     * @todo Implement testProbeErrors().
-     */
-    public function testProbeErrors()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->probeFormat(__DIR__ . '/../../files/unknown.file');
     }
 
 }
