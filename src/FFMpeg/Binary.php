@@ -11,6 +11,11 @@
 
 namespace FFMpeg;
 
+use \Symfony\Component\Process\ExecutableFinder;
+
+/**
+ * Binary abstract class
+ */
 abstract class Binary implements AdapterInterface
 {
 
@@ -22,6 +27,12 @@ abstract class Binary implements AdapterInterface
      */
     protected $logger;
 
+    /**
+     * Binary constructor
+     *
+     * @param type $binary              The path file to the binary
+     * @param \Monolog\Logger $logger   A logger
+     */
     public function __construct($binary, $logger = null)
     {
         $this->binary = $binary;
@@ -35,9 +46,16 @@ abstract class Binary implements AdapterInterface
         $this->logger = $logger;
     }
 
+    /**
+     * Load the static binary
+     *
+     * @param \Monolog\Logger $logger               A logger
+     * @return \FFMpeg\Binary                       The binary
+     * @throws Exception\BinaryNotFoundException
+     */
     public static function load(\Monolog\Logger $logger = null)
     {
-        $finder = new \Symfony\Component\Process\ExecutableFinder();
+        $finder = new ExecutableFinder();
 
         if (null === $binary = $finder->find(static::getBinaryName()))
         {
@@ -47,25 +65,14 @@ abstract class Binary implements AdapterInterface
         return new static($binary, $logger);
     }
 
-    protected static function run($command, $bypass_errors = false)
-    {
-        $process = new \Symfony\Component\Process\Process($command);
-        $process->run();
-
-        if ( ! $process->isSuccessful() && ! $bypass_errors)
-        {
-            throw new \RuntimeException('Failed to execute ' . $command);
-        }
-
-        $result = $process->getOutput();
-        unset($process);
-
-        return $result;
-    }
-
+    /**
+     * Return the binary name
+     *
+     * @throws \Exception
+     */
     protected static function getBinaryName()
     {
-        throw new Exception('Should be implemented');
+        throw new \Exception('Should be implemented');
     }
 
 }
