@@ -1,14 +1,19 @@
 {
     "name": "php-ffmpeg/php-ffmpeg",
     "type": "library",
-    "description": "FFMpeg",
-    "keywords": ["video"],
+    "description": "FFMpeg PHP, an Object Oriented library for easy file conversion, image extraction with ffmpeg",
+    "keywords": ["video processing", "video", "audio processing", "audio"],
     "license": "MIT",
     "authors": [
     {
         "name": "Romain Neutron",
         "email": "imprec@gmail.com",
         "homepage": "http://www.lickmychip.com/"
+    },
+    {
+        "name": "Phraseanet Team",
+        "email": "info@alchemy.fr",
+        "homepage": "http://www.phraseanet.com/"
     }
     ],
     "require": {
