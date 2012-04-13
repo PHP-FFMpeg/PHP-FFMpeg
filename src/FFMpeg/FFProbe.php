@@ -11,14 +11,28 @@
 
 namespace FFMpeg;
 
+use \Symfony\Component\Process\Process;
+
+/**
+ * FFProbe driver
+ *
+ * @author Romain Neutron imprec@gmail.com
+ */
 class FFProbe extends Binary
 {
 
+    /**
+     * Probe the format of a given file
+     *
+     * @param string $pathfile
+     * @return string
+     * @throws Exception\InvalidFileArgumentException
+     */
     public function probeFormat($pathfile)
     {
         if ( ! is_file($pathfile))
         {
-            throw new \InvalidArgumentException($pathfile);
+            throw new Exception\InvalidFileArgumentException($pathfile);
         }
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_format';
@@ -26,32 +40,64 @@ class FFProbe extends Binary
         return $this->executeProbe($cmd);
     }
 
+    /**
+     * Probe the streams contained in a given file
+     *
+     * @param string $pathfile
+     * @return string
+     * @throws Exception\InvalidFileArgumentException
+     */
     public function probeStreams($pathfile)
     {
         if ( ! is_file($pathfile))
         {
-            throw new \InvalidArgumentException($pathfile);
+            throw new Exception\InvalidFileArgumentException($pathfile);
         }
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_streams';
 
-        return $this->executeProbe($cmd);
+        try
+        {
+            return $this->executeProbe($cmd);
+        }
+        catch (Exception\RuntimeException $e)
+        {
+
+        }
     }
 
+    /**
+     *
+     * @param string $command
+     * @return string
+     * @throws Exception\RuntimeException
+     */
     protected function executeProbe($command)
     {
-        $process = new \Symfony\Component\Process\Process($command);
+        try
+        {
+            $process = new Process($command);
 
-        $process->run();
+            $process->run();
+        }
+        catch (\RuntimeException $e)
+        {
+            throw new Exception\RuntimeException(sprintf('Failed to run the given command %s', $command));
+        }
 
         if ( ! $process->isSuccessful())
         {
-            throw new \RuntimeException(sprintf('Failed to probe %s', $command));
+            throw new Exception\RuntimeException(sprintf('Failed to probe %s', $command));
         }
 
         return $process->getOutput();
     }
 
+    /**
+     * Return the binary name
+     *
+     * @return string
+     */
     protected static function getBinaryName()
     {
         return 'ffprobe';
