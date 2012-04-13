@@ -15,6 +15,8 @@ use \Symfony\Component\Process\ExecutableFinder;
 
 /**
  * Binary abstract class
+ *
+ * @author Romain Neutron imprec@gmail.com
  */
 abstract class Binary implements AdapterInterface
 {

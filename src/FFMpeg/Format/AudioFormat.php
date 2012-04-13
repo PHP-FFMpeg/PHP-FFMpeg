@@ -20,4 +20,6 @@ interface AudioFormat
 
     public function getKiloBitrate();
 
+    public function getAvailableAudioCodecs();
+
 }

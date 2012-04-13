@@ -24,4 +24,6 @@ interface VideoFormat extends AudioFormat
 
     public function getGOPSize();
 
+    public function getAvailableVideoCodecs();
+
 }

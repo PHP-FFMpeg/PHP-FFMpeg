@@ -11,6 +11,11 @@
 
 namespace FFMpeg\Format;
 
+/**
+ * The abstract default Video format
+ *
+ * @author Romain Neutron imprec@gmail.com
+ */
 abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFormat
 {
 
@@ -26,16 +31,33 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
         $this->setDimensions($width, $height);
     }
 
+    /**
+     * Returns the width
+     *
+     * @return int
+     */
     public function getWidth()
     {
         return $this->width;
     }
 
+    /**
+     * Returns the height
+     *
+     * @return int
+     */
     public function getHeight()
     {
         return $this->height;
     }
 
+    /**
+     * Set the dimensions
+     *
+     * @param int $width    The heigth
+     * @param int $height   The width
+     * @throws \InvalidArgumentException
+     */
     public function setDimensions($width, $height)
     {
         if ($width < 1)
@@ -49,15 +71,24 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
 
         $this->width = $this->getMultiple($width, 16);
         $this->height = $this->getMultiple($height, 16);
-
-        return;
     }
 
+    /**
+     * Returns the framerate
+     *
+     * @return int
+     */
     public function getFrameRate()
     {
         return $this->frameRate;
     }
 
+    /**
+     * Set the framerate
+     *
+     * @param int $frameRate
+     * @throws \InvalidArgumentException
+     */
     public function setFrameRate($frameRate)
     {
         if ($frameRate < 1)
@@ -68,11 +99,23 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
         $this->frameRate = (int) $frameRate;
     }
 
+    /**
+     * Returns the video codec
+     *
+     * @return string
+     */
     public function getVideoCodec()
     {
         return $this->videoCodec;
     }
 
+    /**
+     * Set the video codec, Should be in the available ones, otherwise an
+     * exception is thrown
+     *
+     * @param string $videoCodec
+     * @throws \InvalidArgumentException
+     */
     public function setVideoCodec($videoCodec)
     {
         if ( ! in_array($videoCodec, $this->getAvailableVideoCodecs()))
@@ -83,11 +126,22 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
         $this->videoCodec = $videoCodec;
     }
 
+    /**
+     * Returns the GOP size
+     *
+     * @return int
+     */
     public function getGOPsize()
     {
         return $this->GOPsize;
     }
 
+    /**
+     * Set the GOP size
+     *
+     * @param int $GOPsize
+     * @throws \InvalidArgumentException
+     */
     public function setGOPsize($GOPsize)
     {
         if ($GOPsize < 1)
@@ -98,6 +152,13 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
         $this->GOPsize = (int) $GOPsize;
     }
 
+    /**
+     * Returns the nearest multiple for a value
+     *
+     * @param int $value
+     * @param int $multiple
+     * @return int
+     */
     protected function getMultiple($value, $multiple)
     {
         $modulo = $value % $multiple;
@@ -129,6 +190,11 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
         return (int) $ret;
     }
 
-    abstract protected function getAvailableVideoCodecs();
+    /**
+     * Returns the list of available video codecs for this format
+     *
+     * @return array
+     */
+    abstract public function getAvailableVideoCodecs();
 
 }
