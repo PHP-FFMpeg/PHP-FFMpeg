@@ -193,12 +193,12 @@ class DefaultVideoFormatTester extends DefaultVideoFormat
     protected $audioCodec = 'audiocodec1';
     protected $videoCodec = 'videocodec2';
 
-    protected function getAvailableAudioCodecs()
+    public function getAvailableAudioCodecs()
     {
         return array('audiocodec1', 'audiocodec2', 'audiocodec3');
     }
 
-    protected function getAvailableVideoCodecs()
+    public function getAvailableVideoCodecs()
     {
         return array('videocodec1', 'videocodec2');
     }

@@ -122,7 +122,7 @@ class DefaultAudioFormatTester extends DefaultAudioFormat
 
     protected $audioCodec = 'audiocodec1';
 
-    protected function getAvailableAudioCodecs()
+    public function getAvailableAudioCodecs()
     {
         return array('audiocodec1', 'audiocodec2', 'audiocodec3');
     }
