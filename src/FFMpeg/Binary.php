@@ -30,7 +30,7 @@ abstract class Binary implements AdapterInterface
     {
         if ('' === $binary = self::autodetect(static::getBinaryName()))
         {
-            throw new \Exception('Binary not found');
+            throw new Exception\BinaryNotFoundException('Binary not found');
         }
 
         return new static($binary, $logger);
@@ -43,7 +43,7 @@ abstract class Binary implements AdapterInterface
 
         if ( ! $process->isSuccessful() && ! $bypass_errors)
         {
-            throw new Exception\RuntimeException('Failed to execute ' . $command);
+            throw new \RuntimeException('Failed to execute ' . $command);
         }
 
         $result = $process->getOutput();
