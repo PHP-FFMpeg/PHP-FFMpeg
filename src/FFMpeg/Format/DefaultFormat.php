@@ -21,7 +21,7 @@ abstract class DefaultFormat implements Format
 
     public function getExtraParams()
     {
-
+        return '';
     }
 
     public function getWidth()
@@ -133,6 +133,11 @@ abstract class DefaultFormat implements Format
 
     public function setGOPsize($GOPsize)
     {
+        if ($GOPsize < 1)
+        {
+            throw new \InvalidArgumentException('Wrong GOP size value');
+        }
+
         $this->GOPsize = (int) $GOPsize;
     }
 
