@@ -1,0 +1,24 @@
+{
+    "name": "php-ffmpeg/php-ffmpeg",
+    "type": "library",
+    "description": "FFMpeg",
+    "keywords": ["video"],
+    "license": "MIT",
+    "authors": [
+    {
+        "name": "Romain Neutron",
+        "email": "imprec@gmail.com",
+        "homepage": "http://www.lickmychip.com/"
+    }
+    ],
+    "require": {
+        "php": ">=5.3.6",
+        "symfony/process": ">2.0",
+        "monolog/monolog": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "FFMpeg": "src"
+        }
+    }
+}
