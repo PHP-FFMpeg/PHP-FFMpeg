@@ -37,7 +37,9 @@ abstract class Binary implements AdapterInterface
 
     public static function load(\Monolog\Logger $logger = null)
     {
-        if ('' === $binary = self::autodetect(static::getBinaryName()))
+        $finder = new \Symfony\Component\Process\ExecutableFinder();
+
+        if (null === $binary = $finder->find(static::getBinaryName()))
         {
             throw new Exception\BinaryNotFoundException('Binary not found');
         }
@@ -59,17 +61,6 @@ abstract class Binary implements AdapterInterface
         unset($process);
 
         return $result;
-    }
-
-    /**
-     * Autodetect the presence of a binary
-     *
-     * @param   string      $binaryName
-     * @return  string
-     */
-    protected static function autodetect($binaryName)
-    {
-        return trim(self::run(sprintf('which %s', escapeshellarg($binaryName)), true));
     }
 
     protected static function getBinaryName()
