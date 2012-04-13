@@ -1,8 +1,10 @@
 <?php
 
-namespace FFMpeg\Format;
+namespace FFMpeg\Format\Video;
 
-class X264 extends DefaultFormat
+use FFMpeg\Format\DefaultVideoFormat;
+
+class X264 extends DefaultVideoFormat
 {
 
     protected $audioCodec = 'libmp3lame';

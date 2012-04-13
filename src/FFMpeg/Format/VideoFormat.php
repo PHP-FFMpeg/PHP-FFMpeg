@@ -2,10 +2,8 @@
 
 namespace FFMpeg\Format;
 
-interface Format
+interface VideoFormat
 {
-
-    public function getExtraParams();
 
     public function getWidth();
 
@@ -13,13 +11,7 @@ interface Format
 
     public function getFrameRate();
 
-    public function getAudioCodec();
-
-    public function getAudioSampleRate();
-
     public function getVideoCodec();
-
-    public function getKiloBitrate();
 
     public function getGOPSize();
 

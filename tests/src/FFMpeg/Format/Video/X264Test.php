@@ -1,8 +1,6 @@
 <?php
 
-namespace FFMpeg\Format;
-
-require_once dirname(__FILE__) . '/../../../../src/FFMpeg/Format/X264.php';
+namespace FFMpeg\Format\Video;
 
 class X264Test extends \PHPUnit_Framework_TestCase
 {
@@ -19,11 +17,11 @@ class X264Test extends \PHPUnit_Framework_TestCase
 
     public function testConstruct()
     {
-        $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultFormat', $this->object);
+        $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultVideoFormat', $this->object);
     }
 
     /**
-     * @covers FFMpeg\Format\X264::getAvailableAudioCodecs
+     * @covers FFMpeg\Format\Video\X264::getAvailableAudioCodecs
      */
     public function testGetAvailableAudioCodecs()
     {
@@ -31,12 +29,11 @@ class X264Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\X264::getAvailableVideoCodecs
+     * @covers FFMpeg\Format\Video\X264::getAvailableVideoCodecs
      */
     public function testGetAvailableVideoCodecs()
     {
         $this->object->setVideoCodec('libx264');
     }
-
 
 }

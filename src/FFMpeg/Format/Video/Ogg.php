@@ -1,8 +1,10 @@
 <?php
 
-namespace FFMpeg\Format;
+namespace FFMpeg\Format\Video;
 
-class Ogg extends DefaultFormat
+use FFMpeg\Format\DefaultVideoFormat;
+
+class Ogg extends DefaultVideoFormat
 {
 
     protected $audioCodec = 'libvorbis';

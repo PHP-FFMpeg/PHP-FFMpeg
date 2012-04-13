@@ -1,8 +1,10 @@
 <?php
 
-namespace FFMpeg\Format;
+namespace FFMpeg\Format\Video;
 
-class WebM extends DefaultFormat
+use FFMpeg\Format\DefaultVideoFormat;
+
+class WebM extends DefaultVideoFormat
 {
 
     protected $audioCodec = 'libvorbis';

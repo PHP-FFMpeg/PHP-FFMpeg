@@ -53,7 +53,6 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         unlink($dest);
     }
 
-
     /**
      * @covers FFMpeg\FFMpeg::extractImage
      * @expectedException \RuntimeException
@@ -69,7 +68,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncode()
     {
-        $this->object->encode(new Format\WebM(32, 32), './invalid.file');
+        $this->object->encode(new Format\Video\WebM(32, 32), './invalid.file');
     }
 
     /**
@@ -83,7 +82,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
 
         $ffmpeg = new FFMpeg('wrongbinary', $logger);
         $ffmpeg->open(__DIR__ . '/../../files/Test.ogv');
-        $ffmpeg->encode(new Format\WebM(32, 32), './invalid.file');
+        $ffmpeg->encode(new Format\Video\WebM(32, 32), './invalid.file');
     }
 
     /**
@@ -94,7 +93,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         $dest = __DIR__ . '/../../files/encode_test.webm';
 
         $this->object->open(__DIR__ . '/../../files/Test.ogv');
-        $this->object->encode(new Format\WebM(32, 32), $dest);
+        $this->object->encode(new Format\Video\WebM(32, 32), $dest);
 
         $this->probe->probeFormat($dest);
 
@@ -109,7 +108,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         $dest = __DIR__ . '/../../files/encode_test.ogv';
 
         $this->object->open(__DIR__ . '/../../files/Test.ogv');
-        $this->object->encode(new Format\Ogg(32, 32), $dest);
+        $this->object->encode(new Format\Video\Ogg(32, 32), $dest);
 
         $this->probe->probeFormat($dest);
 
@@ -124,7 +123,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         $dest = __DIR__ . '/../../files/encode_test.mp4';
 
         $this->object->open(__DIR__ . '/../../files/Test.ogv');
-        $this->object->encode(new Format\X264(32, 32), $dest);
+        $this->object->encode(new Format\Video\X264(32, 32), $dest);
 
         $this->probe->probeFormat($dest);
 

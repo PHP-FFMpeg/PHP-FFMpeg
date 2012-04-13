@@ -1,8 +1,6 @@
 <?php
 
-namespace FFMpeg\Format;
-
-require_once dirname(__FILE__) . '/../../../../src/FFMpeg/Format/WebM.php';
+namespace FFMpeg\Format\Video;
 
 class WebMTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +16,7 @@ class WebMTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\WebM::getAvailableAudioCodecs
+     * @covers FFMpeg\Format\Video\WebM::getAvailableAudioCodecs
      */
     public function testGetAvailableAudioCodecs()
     {
@@ -26,7 +24,7 @@ class WebMTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\WebM::getAvailableVideoCodecs
+     * @covers FFMpeg\Format\Video\WebM::getAvailableVideoCodecs
      */
     public function testGetAvailableVideoCodecs()
     {
@@ -34,7 +32,7 @@ class WebMTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\WebM::getExtraParams
+     * @covers FFMpeg\Format\Video\WebM::getExtraParams
      */
     public function testGetExtraParams()
     {
@@ -43,7 +41,7 @@ class WebMTest extends \PHPUnit_Framework_TestCase
 
     public function testConstruct()
     {
-        $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultFormat', $this->object);
+        $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultVideoFormat', $this->object);
     }
 
 }

@@ -54,7 +54,7 @@ class FFMpeg extends Binary
         return true;
     }
 
-    public function encode(Format\Format $format, $outputPathfile, $threads = 1)
+    public function encode(Format\AudioFormat $format, $outputPathfile, $threads = 1)
     {
         if ( ! $this->pathfile)
         {

@@ -2,26 +2,18 @@
 
 namespace FFMpeg\Format;
 
-abstract class DefaultFormat implements Format
+abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFormat
 {
 
     protected $width;
     protected $height;
-    protected $frameRate       = 25;
-    protected $audioCodec;
-    protected $audioSampleRate = 44100;
+    protected $frameRate = 25;
     protected $videoCodec;
-    protected $kiloBitrate     = 1000;
-    protected $GOPsize         = 25;
+    protected $GOPsize   = 25;
 
     public function __construct($width, $height)
     {
         $this->setDimensions($width, $height);
-    }
-
-    public function getExtraParams()
-    {
-        return '';
     }
 
     public function getWidth()
@@ -66,36 +58,6 @@ abstract class DefaultFormat implements Format
         $this->frameRate = (int) $frameRate;
     }
 
-    public function getAudioCodec()
-    {
-        return $this->audioCodec;
-    }
-
-    public function setAudioCodec($audioCodec)
-    {
-        if ( ! in_array($audioCodec, $this->getAvailableAudioCodecs()))
-        {
-            throw new \InvalidArgumentException('Wrong audiocodec value');
-        }
-
-        $this->audioCodec = $audioCodec;
-    }
-
-    public function getAudioSampleRate()
-    {
-        return $this->audioSampleRate;
-    }
-
-    public function setAudioSampleRate($audioSampleRate)
-    {
-        if ($audioSampleRate < 1)
-        {
-            throw new \InvalidArgumentException('Wrong audio sample rate value');
-        }
-
-        $this->audioSampleRate = (int) $audioSampleRate;
-    }
-
     public function getVideoCodec()
     {
         return $this->videoCodec;
@@ -109,21 +71,6 @@ abstract class DefaultFormat implements Format
         }
 
         $this->videoCodec = $videoCodec;
-    }
-
-    public function getKiloBitrate()
-    {
-        return $this->kiloBitrate;
-    }
-
-    public function setKiloBitrate($kiloBitrate)
-    {
-        if ($kiloBitrate < 1)
-        {
-            throw new \InvalidArgumentException('Wrong kiloBitrate value');
-        }
-
-        $this->kiloBitrate = (int) $kiloBitrate;
     }
 
     public function getGOPsize()
@@ -171,8 +118,6 @@ abstract class DefaultFormat implements Format
 
         return (int) $ret;
     }
-
-    abstract protected function getAvailableAudioCodecs();
 
     abstract protected function getAvailableVideoCodecs();
 

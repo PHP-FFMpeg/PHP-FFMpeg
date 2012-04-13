@@ -1,8 +1,6 @@
 <?php
 
-namespace FFMpeg\Format;
-
-require_once dirname(__FILE__) . '/../../../../src/FFMpeg/Format/Ogg.php';
+namespace FFMpeg\Format\Video;
 
 class OggTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,11 +17,11 @@ class OggTest extends \PHPUnit_Framework_TestCase
 
     public function testConstruct()
     {
-        $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultFormat', $this->object);
+        $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultVideoFormat', $this->object);
     }
 
     /**
-     * @covers FFMpeg\Format\Ogg::getAvailableAudioCodecs
+     * @covers FFMpeg\Format\Video\Ogg::getAvailableAudioCodecs
      */
     public function testGetAvailableAudioCodecs()
     {
@@ -31,7 +29,7 @@ class OggTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\Ogg::getAvailableVideoCodecs
+     * @covers FFMpeg\Format\Video\Ogg::getAvailableVideoCodecs
      */
     public function testGetAvailableVideoCodecs()
     {
