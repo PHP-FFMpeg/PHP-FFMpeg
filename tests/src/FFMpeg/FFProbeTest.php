@@ -40,7 +40,7 @@ class FFProbeTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers FFMpeg\FFProbe::probeStreams
      * @covers FFMpeg\FFProbe::executeProbe
-     * @expectedException \RuntimeException
+     * @expectedException \FFMpeg\Exception\RuntimeException
      */
     public function testProbeStreamsInvalidFile()
     {

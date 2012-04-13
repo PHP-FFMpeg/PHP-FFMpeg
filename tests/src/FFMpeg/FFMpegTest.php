@@ -55,7 +55,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\FFMpeg::extractImage
-     * @expectedException \RuntimeException
+     * @expectedException \FFMpeg\Exception\LogicException
      */
     public function testExtractImageNoMovie()
     {
@@ -64,7 +64,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\FFMpeg::encode
-     * @expectedException \RuntimeException
+     * @expectedException \FFMpeg\Exception\LogicException
      */
     public function testEncode()
     {
