@@ -9,8 +9,7 @@ class FFProbe extends Binary
     {
         if ( ! is_file($pathfile))
         {
-
-            throw new \RuntimeException($pathfile);
+            throw new \InvalidArgumentException($pathfile);
         }
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_format';
@@ -22,7 +21,7 @@ class FFProbe extends Binary
     {
         if ( ! is_file($pathfile))
         {
-            throw new \RuntimeException($pathfile);
+            throw new \InvalidArgumentException($pathfile);
         }
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_streams';
@@ -38,7 +37,7 @@ class FFProbe extends Binary
 
         if ( ! $process->isSuccessful())
         {
-            throw new \RuntimeException('Failed to probe');
+            throw new \RuntimeException(sprintf('Failed to probe %s', $command));
         }
 
         return $process->getOutput();
