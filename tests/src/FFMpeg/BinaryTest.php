@@ -2,8 +2,6 @@
 
 namespace FFMpeg;
 
-require_once dirname(__FILE__) . '/../../../src/FFMpeg/Binary.php';
-
 class BinaryTest extends \PHPUnit_Framework_TestCase
 {
 
