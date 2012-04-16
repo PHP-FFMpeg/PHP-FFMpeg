@@ -35,7 +35,7 @@ abstract class Binary implements AdapterInterface
      * @param type $binary              The path file to the binary
      * @param \Monolog\Logger $logger   A logger
      */
-    public function __construct($binary, $logger = null)
+    public function __construct($binary, \Monolog\Logger $logger = null)
     {
         $this->binary = $binary;
 
