@@ -27,6 +27,7 @@ class FFMpeg extends Binary
      * Opens a file in order to be processed
      *
      * @param string $pathfile
+     * @return \FFMpeg\FFMpeg
      * @throws Exception\InvalidFileArgumentException
      */
     public function open($pathfile)
@@ -41,6 +42,20 @@ class FFMpeg extends Binary
         $this->logger->addInfo(sprintf('FFmpeg opens %s', $pathfile));
 
         $this->pathfile = $pathfile;
+
+        return $this;
+    }
+
+    /**
+     * Close a file
+     *
+     * @return \FFMpeg\FFMpeg
+     */
+    public function close()
+    {
+        $this->pathfile = null;
+
+        return $this;
     }
 
     /**
@@ -49,7 +64,7 @@ class FFMpeg extends Binary
      * @param string $output    The pathfile where to write
      * @param int $width        The width of the image
      * @param int $height       The height of the image
-     * @return boolean          True if success
+     * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      * @throws Exception\LogicException
      */
@@ -89,7 +104,7 @@ class FFMpeg extends Binary
 
         $this->logger->addInfo('Command run with success');
 
-        return true;
+        return $this;
     }
 
     /**
@@ -98,7 +113,7 @@ class FFMpeg extends Binary
      * @param Format\AudioFormat $format    The output format
      * @param string $outputPathfile        The pathfile where to write
      * @param int $threads                  The number of threads to use
-     * @return boolean                      True if success
+     * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      * @throws Exception\LogicException
      */
@@ -114,15 +129,15 @@ class FFMpeg extends Binary
         switch (true)
         {
             case $format instanceof Format\VideoFormat:
-                return $this->encodeVideo($format, $outputPathfile, $threads);
+                $this->encodeVideo($format, $outputPathfile, $threads);
                 break;
             default:
             case $format instanceof Format\AudioFormat:
-                return $this->encodeAudio($format, $outputPathfile, $threads);
+                $this->encodeAudio($format, $outputPathfile, $threads);
                 break;
         }
 
-        return false;
+        return $this;
     }
 
     /**
@@ -131,7 +146,7 @@ class FFMpeg extends Binary
      * @param Format\AudioFormat $format    The output format
      * @param string $outputPathfile        The pathfile where to write
      * @param int $threads                  The number of threads to use
-     * @return boolean                      True if success
+     * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      */
     protected function encodeAudio(Format\AudioFormat $format, $outputPathfile, $threads)
@@ -162,7 +177,7 @@ class FFMpeg extends Binary
             throw new Exception\RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
         }
 
-        return true;
+        return $this;
     }
 
     /**
@@ -171,7 +186,7 @@ class FFMpeg extends Binary
      * @param Format\VideoFormat $format    The output format
      * @param string $outputPathfile        The pathfile where to write
      * @param int $threads                  The number of threads to use
-     * @return boolean                      True if success
+     * @return \FFMpeg\FFMpeg 
      * @throws Exception\RuntimeException
      */
     protected function encodeVideo(Format\VideoFormat $format, $outputPathfile, $threads)
@@ -228,7 +243,7 @@ class FFMpeg extends Binary
             throw new Exception\RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
         }
 
-        return true;
+        return $this;
     }
 
     /**
