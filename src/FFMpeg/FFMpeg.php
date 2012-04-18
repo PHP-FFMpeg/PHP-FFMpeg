@@ -62,13 +62,11 @@ class FFMpeg extends Binary
      *
      * @param int $time         The time in second where to take the snapshot
      * @param string $output    The pathfile where to write
-     * @param int $width        The width of the image
-     * @param int $height       The height of the image
      * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      * @throws Exception\LogicException
      */
-    public function extractImage($time, $output, $width, $height)
+    public function extractImage($time, $output)
     {
         if ( ! $this->pathfile)
         {
@@ -186,7 +184,7 @@ class FFMpeg extends Binary
      * @param Format\VideoFormat $format    The output format
      * @param string $outputPathfile        The pathfile where to write
      * @param int $threads                  The number of threads to use
-     * @return \FFMpeg\FFMpeg 
+     * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      */
     protected function encodeVideo(Format\VideoFormat $format, $outputPathfile, $threads)

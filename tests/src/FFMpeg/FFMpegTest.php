@@ -46,7 +46,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         $dest = __DIR__ . '/../../files/extract_Test.jpg';
 
         $this->object->open(__DIR__ . '/../../files/Test.ogv');
-        $this->object->extractImage(2, $dest, 200, 200);
+        $this->object->extractImage(2, $dest);
 
         $this->probe->probeFormat($dest);
 
@@ -59,7 +59,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
      */
     public function testExtractImageNoMovie()
     {
-        $this->object->extractImage(2, 'Path', 200, 200);
+        $this->object->extractImage(2, 'Path');
     }
 
     /**
