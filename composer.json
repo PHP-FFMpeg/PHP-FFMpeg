@@ -19,7 +19,7 @@
     "require": {
         "php": ">=5.3.6",
         "symfony/process": ">2.0",
-        "monolog/monolog": "dev-master"
+        "monolog/monolog": "1.0.*"
     },
     "autoload": {
         "psr-0": {
