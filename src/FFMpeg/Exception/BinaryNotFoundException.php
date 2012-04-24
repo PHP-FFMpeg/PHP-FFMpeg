@@ -11,7 +11,7 @@
 
 namespace FFMpeg\Exception;
 
-class BinaryNotFoundException extends \Exception
+class BinaryNotFoundException extends \Exception implements Exception
 {
 
 }
