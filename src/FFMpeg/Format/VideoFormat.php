@@ -24,6 +24,10 @@ interface VideoFormat extends AudioFormat
 
     public function getGOPSize();
 
+    /**
+     * Returns the list of available video codecs for this format
+     *
+     * @return array
+     */
     public function getAvailableVideoCodecs();
-
 }

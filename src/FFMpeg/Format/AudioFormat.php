@@ -20,6 +20,10 @@ interface AudioFormat
 
     public function getKiloBitrate();
 
+    /**
+     * Returns the list of available audio codecs for this format
+     *
+     * @return array
+     */
     public function getAvailableAudioCodecs();
-
 }

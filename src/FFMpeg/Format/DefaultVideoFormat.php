@@ -18,12 +18,11 @@ namespace FFMpeg\Format;
  */
 abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFormat
 {
-
     protected $width;
     protected $height;
-    protected $frameRate   = 25;
+    protected $frameRate = 25;
     protected $videoCodec;
-    protected $GOPsize     = 25;
+    protected $GOPsize = 25;
     protected $kiloBitrate = 1000;
 
     public function __construct($width, $height)
@@ -60,12 +59,10 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
      */
     public function setDimensions($width, $height)
     {
-        if ($width < 1)
-        {
+        if ($width < 1) {
             throw new \InvalidArgumentException('Wrong width value');
         }
-        if ($height < 1)
-        {
+        if ($height < 1) {
             throw new \InvalidArgumentException('Wrong height value');
         }
 
@@ -91,8 +88,7 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
      */
     public function setFrameRate($frameRate)
     {
-        if ($frameRate < 1)
-        {
+        if ($frameRate < 1) {
             throw new \InvalidArgumentException('Wrong framerate value');
         }
 
@@ -118,9 +114,11 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
      */
     public function setVideoCodec($videoCodec)
     {
-        if ( ! in_array($videoCodec, $this->getAvailableVideoCodecs()))
-        {
-            throw new \InvalidArgumentException('Wrong videocodec value');
+        if ( ! in_array($videoCodec, $this->getAvailableVideoCodecs())) {
+            throw new \InvalidArgumentException(sprintf(
+                    'Wrong videocodec value for %s, available formats are %s'
+                    , $videoCodec, implode(', ', $this->getAvailableVideoCodecs())
+            ));
         }
 
         $this->videoCodec = $videoCodec;
@@ -144,8 +142,7 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
      */
     public function setGOPsize($GOPsize)
     {
-        if ($GOPsize < 1)
-        {
+        if ($GOPsize < 1) {
             throw new \InvalidArgumentException('Wrong GOP size value');
         }
 
@@ -167,12 +164,11 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
 
         $halfDistance = $multiple / 2;
         if ($modulo <= $halfDistance)
-            $bound        = 'bottom';
+            $bound = 'bottom';
         else
-            $bound        = 'top';
+            $bound = 'top';
 
-        switch ($bound)
-        {
+        switch ($bound) {
             default:
             case 'top':
                 $ret = $value + $multiple - $modulo;
@@ -182,19 +178,10 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
                 break;
         }
 
-        if ($ret < $multiple)
-        {
+        if ($ret < $multiple) {
             $ret = (int) $multiple;
         }
 
         return (int) $ret;
     }
-
-    /**
-     * Returns the list of available video codecs for this format
-     *
-     * @return array
-     */
-    abstract public function getAvailableVideoCodecs();
-
 }

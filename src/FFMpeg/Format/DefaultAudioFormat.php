@@ -18,10 +18,9 @@ namespace FFMpeg\Format;
  */
 abstract class DefaultAudioFormat implements AudioFormat
 {
-
     protected $audioCodec;
     protected $audioSampleRate = 44100;
-    protected $kiloBitrate     = 128;
+    protected $kiloBitrate = 128;
 
     /**
      * Returns extra parameters for the encoding
@@ -52,9 +51,11 @@ abstract class DefaultAudioFormat implements AudioFormat
      */
     public function setAudioCodec($audioCodec)
     {
-        if ( ! in_array($audioCodec, $this->getAvailableAudioCodecs()))
-        {
-            throw new \InvalidArgumentException('Wrong audiocodec value');
+        if ( ! in_array($audioCodec, $this->getAvailableAudioCodecs())) {
+            throw new \InvalidArgumentException(sprintf(
+                    'Wrong audiocodec value for %s, available formats are %s'
+                    , $audioCodec, implode(', ', $this->getAvailableAudioCodecs())
+            ));
         }
 
         $this->audioCodec = $audioCodec;
@@ -78,8 +79,7 @@ abstract class DefaultAudioFormat implements AudioFormat
      */
     public function setAudioSampleRate($audioSampleRate)
     {
-        if ($audioSampleRate < 1)
-        {
+        if ($audioSampleRate < 1) {
             throw new \InvalidArgumentException('Wrong audio sample rate value');
         }
 
@@ -104,19 +104,10 @@ abstract class DefaultAudioFormat implements AudioFormat
      */
     public function setKiloBitrate($kiloBitrate)
     {
-        if ($kiloBitrate < 1)
-        {
+        if ($kiloBitrate < 1) {
             throw new \InvalidArgumentException('Wrong kiloBitrate value');
         }
 
         $this->kiloBitrate = (int) $kiloBitrate;
     }
-
-    /**
-     * Returns the list of available audio codecs for this format
-     *
-     * @return array
-     */
-    abstract public function getAvailableAudioCodecs();
-
 }
