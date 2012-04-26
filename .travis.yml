@@ -7,5 +7,6 @@ before_script:
   - php composer.phar install
 
 php:
+  - 5.3.2
   - 5.3
   - 5.4
