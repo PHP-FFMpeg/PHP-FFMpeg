@@ -59,7 +59,7 @@ abstract class Binary implements AdapterInterface
         $binary = null;
 
         foreach (static::getBinaryName() as $candidate) {
-            if (null !== $binary = $finder->find(static::getBinaryName())) {
+            if (null !== $binary = $finder->find($candidate)) {
                 break;
             }
         }

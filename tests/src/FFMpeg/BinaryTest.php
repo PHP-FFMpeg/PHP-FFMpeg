@@ -43,7 +43,7 @@ class BinaryTester extends Binary
 
     protected static function getBinaryName()
     {
-        return 'php';
+        return array('php');
     }
 
 }
@@ -53,7 +53,7 @@ class BinaryTesterWrongBinary extends Binary
 
     protected static function getBinaryName()
     {
-        return '';
+        return array('');
     }
 
 }

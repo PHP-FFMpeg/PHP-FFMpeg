@@ -174,7 +174,7 @@ class FFMpeg extends Binary
      * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      */
-    protected function encodeVideo(Format\VideoFormat $format, $outputPathfile, $threads, $control)
+    protected function encodeVideo(Format\VideoFormat $format, $outputPathfile, $threads)
     {
         $cmd_part1 = $this->binary
             . ' -y -i '
@@ -209,14 +209,7 @@ class FFMpeg extends Binary
             $process = new Process($pass);
 
             try {
-//                $process->run();
-                $process->run(function($data, $dodo) {
-//                    echo $data.$dodo."\nend chunk\n";
-                        $matches = array();
-                        preg_match('/time=([0-9:\.]+)/', $dodo, $matches);
-                        if ($matches[1])
-                            var_dump($matches);
-                    });
+                $process->run();
             } catch (\RuntimeException $e) {
                 break;
             }
