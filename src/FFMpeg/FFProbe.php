@@ -31,8 +31,7 @@ class FFProbe extends Binary
      */
     public function probeFormat($pathfile)
     {
-        if ( ! is_file($pathfile))
-        {
+        if ( ! is_file($pathfile)) {
             throw new Exception\InvalidFileArgumentException($pathfile);
         }
 
@@ -51,8 +50,7 @@ class FFProbe extends Binary
      */
     public function probeStreams($pathfile)
     {
-        if ( ! is_file($pathfile))
-        {
+        if ( ! is_file($pathfile)) {
             throw new Exception\InvalidFileArgumentException($pathfile);
         }
 
@@ -69,19 +67,15 @@ class FFProbe extends Binary
      */
     protected function executeProbe($command)
     {
-        try
-        {
+        try {
             $process = new Process($command);
 
             $process->run();
-        }
-        catch (\RuntimeException $e)
-        {
+        } catch (\RuntimeException $e) {
             throw new Exception\RuntimeException(sprintf('Failed to run the given command %s', $command));
         }
 
-        if ( ! $process->isSuccessful())
-        {
+        if ( ! $process->isSuccessful()) {
             throw new Exception\RuntimeException(sprintf('Failed to probe %s', $command));
         }
 
@@ -95,7 +89,6 @@ class FFProbe extends Binary
      */
     protected static function getBinaryName()
     {
-        return 'ffprobe';
+        return array('avprobe', 'ffprobe');
     }
-
 }

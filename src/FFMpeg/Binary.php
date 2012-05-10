@@ -20,7 +20,6 @@ use \Symfony\Component\Process\ExecutableFinder;
  */
 abstract class Binary implements AdapterInterface
 {
-
     protected $binary;
 
     /**
@@ -39,8 +38,7 @@ abstract class Binary implements AdapterInterface
     {
         $this->binary = $binary;
 
-        if ( ! $logger)
-        {
+        if ( ! $logger) {
             $logger = new \Monolog\Logger('default');
             $logger->pushHandler(new \Monolog\Handler\NullHandler());
         }
@@ -58,9 +56,15 @@ abstract class Binary implements AdapterInterface
     public static function load(\Monolog\Logger $logger = null)
     {
         $finder = new ExecutableFinder();
+        $binary = null;
 
-        if (null === $binary = $finder->find(static::getBinaryName()))
-        {
+        foreach (static::getBinaryName() as $candidate) {
+            if (null !== $binary = $finder->find(static::getBinaryName())) {
+                break;
+            }
+        }
+
+        if (null === $binary) {
             throw new Exception\BinaryNotFoundException('Binary not found');
         }
 
@@ -76,5 +80,4 @@ abstract class Binary implements AdapterInterface
     {
         throw new \Exception('Should be implemented');
     }
-
 }

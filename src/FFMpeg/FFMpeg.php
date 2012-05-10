@@ -20,7 +20,6 @@ use \Symfony\Component\Process\Process;
  */
 class FFMpeg extends Binary
 {
-
     protected $pathfile;
 
     /**
@@ -32,8 +31,7 @@ class FFMpeg extends Binary
      */
     public function open($pathfile)
     {
-        if ( ! file_exists($pathfile))
-        {
+        if ( ! file_exists($pathfile)) {
             $this->logger->addError(sprintf('Request to open %s failed', $pathfile));
 
             throw new Exception\InvalidFileArgumentException(sprintf('File %s does not exists', $pathfile));
@@ -68,31 +66,26 @@ class FFMpeg extends Binary
      */
     public function extractImage($time, $output)
     {
-        if ( ! $this->pathfile)
-        {
+        if ( ! $this->pathfile) {
             throw new Exception\LogicException('No file open');
         }
 
         $cmd = $this->binary
-          . ' -i ' . escapeshellarg($this->pathfile)
-          . ' -vframes 1 -ss ' . $time
-          . ' -f image2 ' . escapeshellarg($output);
+            . ' -i ' . escapeshellarg($this->pathfile)
+            . ' -vframes 1 -ss ' . $time
+            . ' -f image2 ' . escapeshellarg($output);
 
         $this->logger->addInfo(sprintf('Executing command %s', $cmd));
 
         $process = new Process($cmd);
 
-        try
-        {
+        try {
             $process->run();
-        }
-        catch (\RuntimeException $e)
-        {
+        } catch (\RuntimeException $e) {
 
         }
 
-        if ( ! $process->isSuccessful())
-        {
+        if ( ! $process->isSuccessful()) {
             $this->logger->addError(sprintf('Command failed :: %s', $process->getErrorOutput()));
 
             $this->cleanupTemporaryFile($output);
@@ -117,15 +110,13 @@ class FFMpeg extends Binary
      */
     public function encode(Format\AudioFormat $format, $outputPathfile, $threads = 1)
     {
-        if ( ! $this->pathfile)
-        {
+        if ( ! $this->pathfile) {
             throw new Exception\LogicException('No file open');
         }
 
         $threads = max(min($threads, 64), 1);
 
-        switch (true)
-        {
+        switch (true) {
             case $format instanceof Format\VideoFormat:
                 $this->encodeVideo($format, $outputPathfile, $threads);
                 break;
@@ -150,28 +141,24 @@ class FFMpeg extends Binary
     protected function encodeAudio(Format\AudioFormat $format, $outputPathfile, $threads)
     {
         $cmd = $this->binary
-          . ' -y -i '
-          . escapeshellarg($this->pathfile)
-          . ' ' . $format->getExtraParams()
-          . ' -threads ' . $threads
-          . ' -acodec ' . $format->getAudioCodec()
-          . ' -ab ' . $format->getKiloBitrate() . 'k '
-          . ' -ac 2 -ar ' . $format->getAudioSampleRate()
-          . ' ' . escapeshellarg($outputPathfile);
+            . ' -y -i '
+            . escapeshellarg($this->pathfile)
+            . ' ' . $format->getExtraParams()
+            . ' -threads ' . $threads
+            . ' -acodec ' . $format->getAudioCodec()
+            . ' -ab ' . $format->getKiloBitrate() . 'k '
+            . ' -ac 2 -ar ' . $format->getAudioSampleRate()
+            . ' ' . escapeshellarg($outputPathfile);
 
         $process = new Process($cmd);
 
-        try
-        {
+        try {
             $process->run();
-        }
-        catch (\RuntimeException $e)
-        {
+        } catch (\RuntimeException $e) {
 
         }
 
-        if ( ! $process->isSuccessful())
-        {
+        if ( ! $process->isSuccessful()) {
             throw new Exception\RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
         }
 
@@ -187,23 +174,23 @@ class FFMpeg extends Binary
      * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      */
-    protected function encodeVideo(Format\VideoFormat $format, $outputPathfile, $threads)
+    protected function encodeVideo(Format\VideoFormat $format, $outputPathfile, $threads, $control)
     {
         $cmd_part1 = $this->binary
-          . ' -y -i '
-          . escapeshellarg($this->pathfile) . ' '
-          . $format->getExtraParams() . ' ';
+            . ' -y -i '
+            . escapeshellarg($this->pathfile) . ' '
+            . $format->getExtraParams() . ' ';
 
         $cmd_part2 = ' -s ' . $format->getWidth() . 'x' . $format->getHeight()
-          . ' -r ' . $format->getFrameRate()
-          . ' -vcodec ' . $format->getVideoCodec()
-          . ' -b ' . $format->getKiloBitrate() . 'k -g 25 -bf 3'
-          . ' -threads ' . $threads
-          . ' -refs 6 -b_strategy 1 -coder 1 -qmin 10 -qmax 51 '
-          . ' -sc_threshold 40 -flags +loop -cmp +chroma'
-          . ' -me_range 16 -subq 7 -i_qfactor 0.71 -qcomp 0.6 -qdiff 4 '
-          . ' -trellis 1 -qscale 1 '
-          . '-acodec ' . $format->getAudioCodec() . ' -ab 92k ';
+            . ' -r ' . $format->getFrameRate()
+            . ' -vcodec ' . $format->getVideoCodec()
+            . ' -b ' . $format->getKiloBitrate() . 'k -g 25 -bf 3'
+            . ' -threads ' . $threads
+            . ' -refs 6 -b_strategy 1 -coder 1 -qmin 10 -qmax 51 '
+            . ' -sc_threshold 40 -flags +loop -cmp +chroma'
+            . ' -me_range 16 -subq 7 -i_qfactor 0.71 -qcomp 0.6 -qdiff 4 '
+            . ' -trellis 1 -qscale 1 '
+            . '-acodec ' . $format->getAudioCodec() . ' -ab 92k ';
 
 
         $tmpFile = new \SplFileInfo(tempnam(sys_get_temp_dir(), 'temp') . '.' . pathinfo($outputPathfile, PATHINFO_EXTENSION));
@@ -211,23 +198,26 @@ class FFMpeg extends Binary
         $passes = array();
 
         $passes[] = $cmd_part1 . ' -pass 1 ' . $cmd_part2
-          . ' -an ' . escapeshellarg($tmpFile->getPathname());
+            . ' -an ' . escapeshellarg($tmpFile->getPathname());
 
         $passes[] = $cmd_part1 . ' -pass 2 ' . $cmd_part2
-          . ' -ac 2 -ar 44100 ' . escapeshellarg($outputPathfile);
+            . ' -ac 2 -ar 44100 ' . escapeshellarg($outputPathfile);
 
         $process = null;
 
-        foreach ($passes as $pass)
-        {
+        foreach ($passes as $pass) {
             $process = new Process($pass);
 
-            try
-            {
-                $process->run();
-            }
-            catch (\RuntimeException $e)
-            {
+            try {
+//                $process->run();
+                $process->run(function($data, $dodo) {
+//                    echo $data.$dodo."\nend chunk\n";
+                        $matches = array();
+                        preg_match('/time=([0-9:\.]+)/', $dodo, $matches);
+                        if ($matches[1])
+                            var_dump($matches);
+                    });
+            } catch (\RuntimeException $e) {
                 break;
             }
         }
@@ -236,8 +226,7 @@ class FFMpeg extends Binary
         $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log');
         $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log.mbtree');
 
-        if ( ! $process->isSuccessful())
-        {
+        if ( ! $process->isSuccessful()) {
             throw new Exception\RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
         }
 
@@ -251,8 +240,7 @@ class FFMpeg extends Binary
      */
     protected function cleanupTemporaryFile($pathfile)
     {
-        if (file_exists($pathfile) && is_writable($pathfile))
-        {
+        if (file_exists($pathfile) && is_writable($pathfile)) {
             unlink($pathfile);
         }
     }
@@ -264,7 +252,6 @@ class FFMpeg extends Binary
      */
     protected static function getBinaryName()
     {
-        return 'ffmpeg';
+        return array('avconv', 'ffmpeg');
     }
-
 }
