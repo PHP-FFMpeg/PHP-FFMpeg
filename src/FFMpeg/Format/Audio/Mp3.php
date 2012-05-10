@@ -20,7 +20,6 @@ use FFMpeg\Format\DefaultAudioFormat;
  */
 class Mp3 extends DefaultAudioFormat
 {
-
     protected $audioCodec = 'libmp3lame';
 
     /**
@@ -30,5 +29,4 @@ class Mp3 extends DefaultAudioFormat
     {
         return array('libmp3lame');
     }
-
 }

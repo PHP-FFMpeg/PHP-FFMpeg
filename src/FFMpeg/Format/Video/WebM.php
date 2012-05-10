@@ -20,7 +20,6 @@ use FFMpeg\Format\DefaultVideoFormat;
  */
 class WebM extends DefaultVideoFormat
 {
-
     protected $audioCodec = 'libvorbis';
     protected $videoCodec = 'libvpx';
 
@@ -47,5 +46,4 @@ class WebM extends DefaultVideoFormat
     {
         return array('libvpx');
     }
-
 }

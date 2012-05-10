@@ -20,7 +20,6 @@ use FFMpeg\Format\DefaultVideoFormat;
  */
 class X264 extends DefaultVideoFormat
 {
-
     protected $audioCodec = 'libmp3lame';
     protected $videoCodec = 'libx264';
 
@@ -39,5 +38,4 @@ class X264 extends DefaultVideoFormat
     {
         return array('libx264');
     }
-
 }

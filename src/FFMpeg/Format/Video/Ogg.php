@@ -20,7 +20,6 @@ use FFMpeg\Format\DefaultVideoFormat;
  */
 class Ogg extends DefaultVideoFormat
 {
-
     protected $audioCodec = 'libvorbis';
     protected $videoCodec = 'libtheora';
 
@@ -39,5 +38,4 @@ class Ogg extends DefaultVideoFormat
     {
         return array('libtheora');
     }
-
 }

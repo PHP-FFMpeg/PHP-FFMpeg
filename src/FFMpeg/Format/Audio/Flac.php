@@ -20,7 +20,6 @@ use FFMpeg\Format\DefaultAudioFormat;
  */
 class Flac extends DefaultAudioFormat
 {
-
     protected $audioCodec = 'flac';
 
     /**
@@ -30,5 +29,4 @@ class Flac extends DefaultAudioFormat
     {
         return array('flac');
     }
-
 }
