@@ -55,6 +55,37 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\FFMpeg::extractImage
+     */
+    public function testExtractImagePng()
+    {
+        $dest = __DIR__ . '/../../files/extract_Test.png';
+
+        $this->object->open(__DIR__ . '/../../files/Test.ogv');
+        $this->object->extractImage(2, $dest);
+
+        $this->probe->probeFormat($dest);
+
+        unlink($dest);
+    }
+
+
+    /**
+     * @covers FFMpeg\FFMpeg::extractImage
+     */
+    public function testExtractImageGif()
+    {
+        $dest = __DIR__ . '/../../files/extract_Test.gif';
+
+        $this->object->open(__DIR__ . '/../../files/Test.ogv');
+        $this->object->extractImage(2, $dest);
+
+        $this->probe->probeFormat($dest);
+
+        unlink($dest);
+    }
+
+    /**
+     * @covers FFMpeg\FFMpeg::extractImage
      * @expectedException \FFMpeg\Exception\LogicException
      */
     public function testExtractImageNoMovie()
