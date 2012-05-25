@@ -53,8 +53,8 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
     /**
      * Set the dimensions
      *
-     * @param int $width    The heigth
-     * @param int $height   The width
+     * @param  integer                   $width  The heigth
+     * @param  integer                   $height The width
      * @throws \InvalidArgumentException
      */
     public function setDimensions($width, $height)
@@ -83,7 +83,7 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
     /**
      * Set the framerate
      *
-     * @param int $frameRate
+     * @param  integer                   $frameRate
      * @throws \InvalidArgumentException
      */
     public function setFrameRate($frameRate)
@@ -109,7 +109,7 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
      * Set the video codec, Should be in the available ones, otherwise an
      * exception is thrown
      *
-     * @param string $videoCodec
+     * @param  string                    $videoCodec
      * @throws \InvalidArgumentException
      */
     public function setVideoCodec($videoCodec)
@@ -137,7 +137,7 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
     /**
      * Set the GOP size
      *
-     * @param int $GOPsize
+     * @param  integer                   $GOPsize
      * @throws \InvalidArgumentException
      */
     public function setGOPsize($GOPsize)
@@ -152,8 +152,8 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
     /**
      * Returns the nearest multiple for a value
      *
-     * @param int $value
-     * @param int $multiple
+     * @param  integer $value
+     * @param  integer $multiple
      * @return int
      */
     protected function getMultiple($value, $multiple)

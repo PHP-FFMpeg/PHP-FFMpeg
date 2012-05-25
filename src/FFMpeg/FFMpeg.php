@@ -25,7 +25,7 @@ class FFMpeg extends Binary
     /**
      * Opens a file in order to be processed
      *
-     * @param string $pathfile
+     * @param  string                                 $pathfile
      * @return \FFMpeg\FFMpeg
      * @throws Exception\InvalidFileArgumentException
      */
@@ -58,8 +58,8 @@ class FFMpeg extends Binary
 
     /**
      *
-     * @param int $time         The time in second where to take the snapshot
-     * @param string $output    The pathfile where to write
+     * @param  integer                    $time   The time in second where to take the snapshot
+     * @param  string                     $output The pathfile where to write
      * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      * @throws Exception\LogicException
@@ -101,9 +101,9 @@ class FFMpeg extends Binary
     /**
      * Encode the file to the specified format
      *
-     * @param Format\AudioFormat $format    The output format
-     * @param string $outputPathfile        The pathfile where to write
-     * @param int $threads                  The number of threads to use
+     * @param  Format\AudioFormat         $format         The output format
+     * @param  string                     $outputPathfile The pathfile where to write
+     * @param  integer                    $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      * @throws Exception\LogicException
@@ -132,9 +132,9 @@ class FFMpeg extends Binary
     /**
      * Encode to audio
      *
-     * @param Format\AudioFormat $format    The output format
-     * @param string $outputPathfile        The pathfile where to write
-     * @param int $threads                  The number of threads to use
+     * @param  Format\AudioFormat         $format         The output format
+     * @param  string                     $outputPathfile The pathfile where to write
+     * @param  integer                    $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      */
@@ -168,9 +168,9 @@ class FFMpeg extends Binary
     /**
      * Encode to video
      *
-     * @param Format\VideoFormat $format    The output format
-     * @param string $outputPathfile        The pathfile where to write
-     * @param int $threads                  The number of threads to use
+     * @param  Format\VideoFormat         $format         The output format
+     * @param  string                     $outputPathfile The pathfile where to write
+     * @param  integer                    $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws Exception\RuntimeException
      */
@@ -191,7 +191,6 @@ class FFMpeg extends Binary
             . ' -me_range 16 -subq 7 -i_qfactor 0.71 -qcomp 0.6 -qdiff 4 '
             . ' -trellis 1 -qscale 1 '
             . '-acodec ' . $format->getAudioCodec() . ' -ab 92k ';
-
 
         $tmpFile = new \SplFileInfo(tempnam(sys_get_temp_dir(), 'temp') . '.' . pathinfo($outputPathfile, PATHINFO_EXTENSION));
 

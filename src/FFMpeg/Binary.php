@@ -31,8 +31,8 @@ abstract class Binary implements AdapterInterface
     /**
      * Binary constructor
      *
-     * @param type $binary              The path file to the binary
-     * @param \Monolog\Logger $logger   A logger
+     * @param type            $binary The path file to the binary
+     * @param \Monolog\Logger $logger A logger
      */
     public function __construct($binary, \Monolog\Logger $logger = null)
     {
@@ -49,8 +49,8 @@ abstract class Binary implements AdapterInterface
     /**
      * Load the static binary
      *
-     * @param \Monolog\Logger $logger               A logger
-     * @return \FFMpeg\Binary                       The binary
+     * @param  \Monolog\Logger                   $logger A logger
+     * @return \FFMpeg\Binary                    The binary
      * @throws Exception\BinaryNotFoundException
      */
     public static function load(\Monolog\Logger $logger = null)

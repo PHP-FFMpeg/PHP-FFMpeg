@@ -46,7 +46,7 @@ abstract class DefaultAudioFormat implements AudioFormat
      * Set the audio codec, Should be in the available ones, otherwise an
      * exception is thrown
      *
-     * @param string $audioCodec
+     * @param  string                    $audioCodec
      * @throws \InvalidArgumentException
      */
     public function setAudioCodec($audioCodec)
@@ -74,7 +74,7 @@ abstract class DefaultAudioFormat implements AudioFormat
     /**
      * Set the audio sample rate
      *
-     * @param int $audioSampleRate
+     * @param  integer                   $audioSampleRate
      * @throws \InvalidArgumentException
      */
     public function setAudioSampleRate($audioSampleRate)
@@ -99,7 +99,7 @@ abstract class DefaultAudioFormat implements AudioFormat
     /**
      * Set the kiloBitrate value
      *
-     * @param int $kiloBitrate
+     * @param  int integer               $kiloBitrate
      * @throws \InvalidArgumentException
      */
     public function setKiloBitrate($kiloBitrate)
