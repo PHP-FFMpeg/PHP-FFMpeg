@@ -34,7 +34,7 @@ abstract class Binary implements AdapterInterface
      * @param type            $binary The path file to the binary
      * @param \Monolog\Logger $logger A logger
      */
-    public function __construct($binary, \Monolog\Logger $logger = null)
+    public function __construct($binary, \Monolog\Logger $logger)
     {
         $this->binary = $binary;
 
@@ -53,7 +53,7 @@ abstract class Binary implements AdapterInterface
      * @return \FFMpeg\Binary                    The binary
      * @throws Exception\BinaryNotFoundException
      */
-    public static function load(\Monolog\Logger $logger = null)
+    public static function load(\Monolog\Logger $logger)
     {
         $finder = new ExecutableFinder();
         $binary = null;
