@@ -1,6 +1,11 @@
 PHP FFMpeg documentation
 ========================
 
+.. toctree::
+   :hidden:
+
+   Recipes
+
 Introduction
 ------------
 
