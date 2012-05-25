@@ -26,7 +26,7 @@ class FFProbe extends Binary
     /**
      * Probe the format of a given file
      *
-     * @param  string                                 $pathfile
+     * @param  string                   $pathfile
      * @return string
      * @throws InvalidArgumentException
      * @throws RuntimeException
@@ -45,7 +45,7 @@ class FFProbe extends Binary
     /**
      * Probe the streams contained in a given file
      *
-     * @param  string                                 $pathfile
+     * @param  string                   $pathfile
      * @return string
      * @throws InvalidArgumentException
      * @throws RuntimeException
@@ -63,7 +63,7 @@ class FFProbe extends Binary
 
     /**
      *
-     * @param  string                     $command
+     * @param  string           $command
      * @return string
      * @throws RuntimeException
      */

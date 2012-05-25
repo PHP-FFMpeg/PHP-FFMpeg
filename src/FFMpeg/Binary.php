@@ -33,7 +33,7 @@ abstract class Binary implements AdapterInterface
     /**
      * Binary constructor
      *
-     * @param type            $binary The path file to the binary
+     * @param type   $binary The path file to the binary
      * @param Logger $logger A logger
      */
     public function __construct($binary, Logger $logger)
@@ -53,8 +53,8 @@ abstract class Binary implements AdapterInterface
     /**
      * {@inheritdoc}
      *
-     * @param  Logger                   $logger A logger
-     * @return Binary                    The binary
+     * @param  Logger $logger A logger
+     * @return Binary The binary
      *
      * @throws Exception\BinaryNotFoundException
      */

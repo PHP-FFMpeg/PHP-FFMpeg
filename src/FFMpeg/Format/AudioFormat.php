@@ -30,7 +30,7 @@ interface AudioFormat
 
     /**
      * Get the kiloBitrate value
-     * 
+     *
      * @return integer
      */
     public function getKiloBitrate();

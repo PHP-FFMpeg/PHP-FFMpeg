@@ -30,7 +30,7 @@ class FFMpeg extends Binary
     /**
      * Opens a file in order to be processed
      *
-     * @param  string                                 $pathfile A pathfile
+     * @param  string                   $pathfile A pathfile
      * @return \FFMpeg\FFMpeg
      * @throws InvalidArgumentException
      */
@@ -65,8 +65,8 @@ class FFMpeg extends Binary
 
     /**
      *
-     * @param  integer                    $time   The time in second where to take the snapshot
-     * @param  string                     $output The pathfile where to write
+     * @param  integer          $time   The time in second where to take the snapshot
+     * @param  string           $output The pathfile where to write
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      * @throws LogicException
@@ -108,9 +108,9 @@ class FFMpeg extends Binary
     /**
      * Encode the file to the specified format
      *
-     * @param  AudioFormat         $format         The output format
-     * @param  string                     $outputPathfile The pathfile where to write
-     * @param  integer                    $threads        The number of threads to use
+     * @param  AudioFormat      $format         The output format
+     * @param  string           $outputPathfile The pathfile where to write
+     * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      * @throws LogicException
@@ -139,9 +139,9 @@ class FFMpeg extends Binary
     /**
      * Encode to audio
      *
-     * @param  AudioFormat         $format         The output format
-     * @param  string                     $outputPathfile The pathfile where to write
-     * @param  integer                    $threads        The number of threads to use
+     * @param  AudioFormat      $format         The output format
+     * @param  string           $outputPathfile The pathfile where to write
+     * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      */
@@ -180,9 +180,9 @@ class FFMpeg extends Binary
     /**
      * Encode to video
      *
-     * @param  VideoFormat         $format         The output format
-     * @param  string                     $outputPathfile The pathfile where to write
-     * @param  integer                    $threads        The number of threads to use
+     * @param  VideoFormat      $format         The output format
+     * @param  string           $outputPathfile The pathfile where to write
+     * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      */

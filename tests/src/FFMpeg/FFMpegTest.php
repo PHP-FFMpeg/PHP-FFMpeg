@@ -75,7 +75,6 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         unlink($dest);
     }
 
-
     /**
      * @covers FFMpeg\FFMpeg::extractImage
      */
@@ -108,7 +107,6 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->encode(new Format\Video\WebM(32, 32), './invalid.file');
     }
-
 
     /**
      * @covers FFMpeg\FFMpeg::encode

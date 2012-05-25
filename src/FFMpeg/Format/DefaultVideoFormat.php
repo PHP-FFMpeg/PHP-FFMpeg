@@ -87,7 +87,7 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
     /**
      * Set the framerate
      *
-     * @param  integer                   $frameRate
+     * @param integer $frameRate
      *
      * @throws \InvalidArgumentException
      */
@@ -142,7 +142,7 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
     /**
      * Set the GOP size
      *
-     * @param  integer                   $GOPsize
+     * @param integer $GOPsize
      *
      * @throws \InvalidArgumentException
      */
