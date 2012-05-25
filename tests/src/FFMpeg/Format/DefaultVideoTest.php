@@ -2,23 +2,23 @@
 
 namespace FFMpeg\Format;
 
-class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
+class DefaultVideoTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var DefaultVideoFormat
+     * @var DefaultVideo
      */
     protected $object;
 
     protected function setUp()
     {
-        $this->object = new DefaultVideoFormatTester();
+        $this->object = new DefaultVideoTester();
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::setDimensions
-     * @covers FFMpeg\Format\DefaultVideoFormat::getWidth
-     * @covers FFMpeg\Format\DefaultVideoFormat::getHeight
+     * @covers FFMpeg\Format\DefaultVideo::setDimensions
+     * @covers FFMpeg\Format\DefaultVideo::getWidth
+     * @covers FFMpeg\Format\DefaultVideo::getHeight
      */
     public function testSetDimensions()
     {
@@ -32,7 +32,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::setDimensions
+     * @covers FFMpeg\Format\DefaultVideo::setDimensions
      * @dataProvider getWrongDimensions
      * @expectedException \InvalidArgumentException
      */
@@ -59,7 +59,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::getFrameRate
+     * @covers FFMpeg\Format\DefaultVideo::getFrameRate
      */
     public function testGetFrameRate()
     {
@@ -67,7 +67,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::setFrameRate
+     * @covers FFMpeg\Format\DefaultVideo::setFrameRate
      */
     public function testSetFrameRate()
     {
@@ -76,7 +76,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::setFrameRate
+     * @covers FFMpeg\Format\DefaultVideo::setFrameRate
      * @dataProvider getWrongFrameRates
      * @expectedException \InvalidArgumentException
      */
@@ -96,7 +96,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::getVideoCodec
+     * @covers FFMpeg\Format\DefaultVideo::getVideoCodec
      */
     public function testGetVideoCodec()
     {
@@ -104,7 +104,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::setVideoCodec
+     * @covers FFMpeg\Format\DefaultVideo::setVideoCodec
      */
     public function testSetVideoCodec()
     {
@@ -115,7 +115,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::setVideoCodec
+     * @covers FFMpeg\Format\DefaultVideo::setVideoCodec
      * @expectedException \InvalidArgumentException
      */
     public function testSetWrongVideoCodec()
@@ -124,7 +124,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::getGOPsize
+     * @covers FFMpeg\Format\DefaultVideo::getGOPsize
      */
     public function testGetGOPsize()
     {
@@ -132,7 +132,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::setGOPsize
+     * @covers FFMpeg\Format\DefaultVideo::setGOPsize
      */
     public function testSetGOPsize()
     {
@@ -141,7 +141,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::setGOPsize
+     * @covers FFMpeg\Format\DefaultVideo::setGOPsize
      * @dataProvider getWrongGOPsize
      * @expectedException \InvalidArgumentException
      */
@@ -156,7 +156,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::getMultiple
+     * @covers FFMpeg\Format\DefaultVideo::getMultiple
      */
     public function testGetMultiple()
     {
@@ -169,7 +169,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::getKiloBitrate
+     * @covers FFMpeg\Format\DefaultVideo::getKiloBitrate
      */
     public function testGetKiloBitrate()
     {
@@ -178,7 +178,7 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
 
 }
 
-class DefaultVideoFormatTester extends DefaultVideoFormat
+class DefaultVideoTester extends DefaultVideo
 {
 
     protected $audioCodec = 'audiocodec1';

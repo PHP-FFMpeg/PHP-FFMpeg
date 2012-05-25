@@ -11,7 +11,7 @@
 
 namespace FFMpeg\Format;
 
-interface AudioFormat
+interface Audio
 {
 
     /**

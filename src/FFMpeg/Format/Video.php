@@ -16,7 +16,7 @@ namespace FFMpeg\Format;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-interface VideoFormat extends AudioFormat
+interface Video extends Audio
 {
 
     /**

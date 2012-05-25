@@ -11,14 +11,14 @@
 
 namespace FFMpeg\Format\Audio;
 
-use FFMpeg\Format\DefaultAudioFormat;
+use FFMpeg\Format\DefaultAudio;
 
 /**
  * The MP3 audio format
  *
  * @author Romain Neutron imprec@gmail.com
  */
-class Mp3 extends DefaultAudioFormat
+class Mp3 extends DefaultAudio
 {
     protected $audioCodec = 'libmp3lame';
 

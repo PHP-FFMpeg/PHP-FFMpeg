@@ -11,14 +11,14 @@
 
 namespace FFMpeg\Format\Video;
 
-use FFMpeg\Format\DefaultVideoFormat;
+use FFMpeg\Format\DefaultVideo;
 
 /**
  * The Ogg video format
  *
  * @author Romain Neutron imprec@gmail.com
  */
-class Ogg extends DefaultVideoFormat
+class Ogg extends DefaultVideo
 {
     protected $audioCodec = 'libvorbis';
     protected $videoCodec = 'libtheora';

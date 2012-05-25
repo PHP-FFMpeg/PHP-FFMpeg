@@ -2,21 +2,21 @@
 
 namespace FFMpeg\Format;
 
-class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
+class DefaultAudioTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var DefaultAudioFormat
+     * @var DefaultAudio
      */
     protected $object;
 
     protected function setUp()
     {
-        $this->object = new DefaultAudioFormatTester();
+        $this->object = new DefaultAudioTester();
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::getExtraParams
+     * @covers FFMpeg\Format\DefaultAudio::getExtraParams
      */
     public function testGetExtraParams()
     {
@@ -24,7 +24,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::getAudioCodec
+     * @covers FFMpeg\Format\DefaultAudio::getAudioCodec
      */
     public function testGetAudioCodec()
     {
@@ -32,7 +32,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::setAudioCodec
+     * @covers FFMpeg\Format\DefaultAudio::setAudioCodec
      */
     public function testSetAudioCodec()
     {
@@ -43,7 +43,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::setAudioCodec
+     * @covers FFMpeg\Format\DefaultAudio::setAudioCodec
      * @expectedException \InvalidArgumentException
      */
     public function testSetWrongAudioCodec()
@@ -52,7 +52,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::getAudioSampleRate
+     * @covers FFMpeg\Format\DefaultAudio::getAudioSampleRate
      */
     public function testGetAudioSampleRate()
     {
@@ -60,7 +60,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::setAudioSampleRate
+     * @covers FFMpeg\Format\DefaultAudio::setAudioSampleRate
      */
     public function testSetAudioSampleRate()
     {
@@ -69,7 +69,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::setAudioSampleRate
+     * @covers FFMpeg\Format\DefaultAudio::setAudioSampleRate
      * @expectedException \InvalidArgumentException
      * @dataProvider getWrongAudioSampleRate
      */
@@ -84,7 +84,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::getKiloBitrate
+     * @covers FFMpeg\Format\DefaultAudio::getKiloBitrate
      */
     public function testGetKiloBitrate()
     {
@@ -92,7 +92,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::setKiloBitrate
+     * @covers FFMpeg\Format\DefaultAudio::setKiloBitrate
      */
     public function testSetKiloBitrate()
     {
@@ -101,7 +101,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultAudioFormat::setKiloBitrate
+     * @covers FFMpeg\Format\DefaultAudio::setKiloBitrate
      * @dataProvider getWrongKiloBitrate
      * @expectedException \InvalidArgumentException
      */
@@ -117,7 +117,7 @@ class DefaultAudioFormatTest extends \PHPUnit_Framework_TestCase
 
 }
 
-class DefaultAudioFormatTester extends DefaultAudioFormat
+class DefaultAudioTester extends DefaultAudio
 {
 
     protected $audioCodec = 'audiocodec1';

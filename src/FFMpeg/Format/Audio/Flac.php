@@ -11,14 +11,14 @@
 
 namespace FFMpeg\Format\Audio;
 
-use FFMpeg\Format\DefaultAudioFormat;
+use FFMpeg\Format\DefaultAudio;
 
 /**
  * The Flac audio format
  *
  * @author Romain Neutron imprec@gmail.com
  */
-class Flac extends DefaultAudioFormat
+class Flac extends DefaultAudio
 {
     protected $audioCodec = 'flac';
 

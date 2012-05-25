@@ -18,7 +18,7 @@ use FFMpeg\Exception\InvalidArgumentException;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-abstract class DefaultAudioFormat implements AudioFormat
+abstract class DefaultAudio implements Audio
 {
     protected $audioCodec;
     protected $audioSampleRate = 44100;

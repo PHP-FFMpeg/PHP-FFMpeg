@@ -18,7 +18,7 @@ use FFMpeg\Exception\InvalidArgumentException;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFormat
+abstract class DefaultVideo extends DefaultAudio implements Video
 {
     protected $width;
     protected $height;
