@@ -144,7 +144,7 @@ About
 -----
 
 PHP-FFMpeg has been written by Romain Neutron @ `Alchemy <http://alchemy.fr/>`_
-for `Phraseanet <https://github.com/alchemy-fr/Phraseanet>`, our DAM software.
+for `Phraseanet <https://github.com/alchemy-fr/Phraseanet>`_, our DAM software.
 Try it, it's awesome !
 
 License
