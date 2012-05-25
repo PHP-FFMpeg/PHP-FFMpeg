@@ -21,6 +21,9 @@
         "symfony/process": ">2.0",
         "monolog/monolog": "1.0.*"
     },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "master"
+    },
     "autoload": {
         "psr-0": {
             "FFMpeg": "src"
