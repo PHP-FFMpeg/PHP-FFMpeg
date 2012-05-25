@@ -11,7 +11,12 @@
 
 namespace FFMpeg;
 
-use \Symfony\Component\Process\Process;
+use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\LogicException;
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Format\AudioFormat;
+use FFMpeg\Format\VideoFormat;
+use Symfony\Component\Process\Process;
 
 /**
  * FFMpeg driver
@@ -25,16 +30,16 @@ class FFMpeg extends Binary
     /**
      * Opens a file in order to be processed
      *
-     * @param  string                                 $pathfile
+     * @param  string                                 $pathfile A pathfile
      * @return \FFMpeg\FFMpeg
-     * @throws Exception\InvalidFileArgumentException
+     * @throws InvalidArgumentException
      */
     public function open($pathfile)
     {
         if ( ! file_exists($pathfile)) {
-            $this->logger->addError(sprintf('Request to open %s failed', $pathfile));
+            $this->logger->addError(sprintf('FFmpeg failed to open %s', $pathfile));
 
-            throw new Exception\InvalidFileArgumentException(sprintf('File %s does not exists', $pathfile));
+            throw new InvalidArgumentException(sprintf('File %s does not exists', $pathfile));
         }
 
         $this->logger->addInfo(sprintf('FFmpeg opens %s', $pathfile));
@@ -51,6 +56,8 @@ class FFMpeg extends Binary
      */
     public function close()
     {
+        $this->logger->addInfo(sprintf('FFmpeg closes %s', $this->pathfile));
+
         $this->pathfile = null;
 
         return $this;
@@ -61,13 +68,13 @@ class FFMpeg extends Binary
      * @param  integer                    $time   The time in second where to take the snapshot
      * @param  string                     $output The pathfile where to write
      * @return \FFMpeg\FFMpeg
-     * @throws Exception\RuntimeException
-     * @throws Exception\LogicException
+     * @throws RuntimeException
+     * @throws LogicException
      */
     public function extractImage($time, $output)
     {
         if ( ! $this->pathfile) {
-            throw new Exception\LogicException('No file open');
+            throw new LogicException('No file open');
         }
 
         $cmd = $this->binary
@@ -75,7 +82,7 @@ class FFMpeg extends Binary
             . ' -vframes 1 -ss ' . $time
             . ' -f image2 ' . escapeshellarg($output);
 
-        $this->logger->addInfo(sprintf('Executing command %s', $cmd));
+        $this->logger->addInfo(sprintf('FFmpeg executes command %s', $cmd));
 
         $process = new Process($cmd);
 
@@ -86,14 +93,14 @@ class FFMpeg extends Binary
         }
 
         if ( ! $process->isSuccessful()) {
-            $this->logger->addError(sprintf('Command failed :: %s', $process->getErrorOutput()));
+            $this->logger->addError(sprintf('FFmpeg command failed : %s', $process->getErrorOutput()));
 
             $this->cleanupTemporaryFile($output);
 
-            throw new Exception\RuntimeException('Failed to extract image');
+            throw new RuntimeException('Failed to extract image');
         }
 
-        $this->logger->addInfo('Command run with success');
+        $this->logger->addInfo(sprintf('FFmpeg command successful'));
 
         return $this;
     }
@@ -101,27 +108,27 @@ class FFMpeg extends Binary
     /**
      * Encode the file to the specified format
      *
-     * @param  Format\AudioFormat         $format         The output format
+     * @param  AudioFormat         $format         The output format
      * @param  string                     $outputPathfile The pathfile where to write
      * @param  integer                    $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
-     * @throws Exception\RuntimeException
-     * @throws Exception\LogicException
+     * @throws RuntimeException
+     * @throws LogicException
      */
-    public function encode(Format\AudioFormat $format, $outputPathfile, $threads = 1)
+    public function encode(AudioFormat $format, $outputPathfile, $threads = 1)
     {
         if ( ! $this->pathfile) {
-            throw new Exception\LogicException('No file open');
+            throw new LogicException('No file open');
         }
 
         $threads = max(min($threads, 64), 1);
 
         switch (true) {
-            case $format instanceof Format\VideoFormat:
+            case $format instanceof VideoFormat:
                 $this->encodeVideo($format, $outputPathfile, $threads);
                 break;
             default:
-            case $format instanceof Format\AudioFormat:
+            case $format instanceof AudioFormat:
                 $this->encodeAudio($format, $outputPathfile, $threads);
                 break;
         }
@@ -132,13 +139,13 @@ class FFMpeg extends Binary
     /**
      * Encode to audio
      *
-     * @param  Format\AudioFormat         $format         The output format
+     * @param  AudioFormat         $format         The output format
      * @param  string                     $outputPathfile The pathfile where to write
      * @param  integer                    $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
-     * @throws Exception\RuntimeException
+     * @throws RuntimeException
      */
-    protected function encodeAudio(Format\AudioFormat $format, $outputPathfile, $threads)
+    protected function encodeAudio(AudioFormat $format, $outputPathfile, $threads)
     {
         $cmd = $this->binary
             . ' -y -i '
@@ -152,6 +159,8 @@ class FFMpeg extends Binary
 
         $process = new Process($cmd);
 
+        $this->logger->addInfo(sprintf('FFmpeg executes command %s', $cmd));
+
         try {
             $process->run();
         } catch (\RuntimeException $e) {
@@ -159,8 +168,11 @@ class FFMpeg extends Binary
         }
 
         if ( ! $process->isSuccessful()) {
-            throw new Exception\RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
+            $this->logger->addInfo(sprintf('FFmpeg command failed'));
+            throw new RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
         }
+
+        $this->logger->addInfo(sprintf('FFmpeg command successful'));
 
         return $this;
     }
@@ -168,13 +180,13 @@ class FFMpeg extends Binary
     /**
      * Encode to video
      *
-     * @param  Format\VideoFormat         $format         The output format
+     * @param  VideoFormat         $format         The output format
      * @param  string                     $outputPathfile The pathfile where to write
      * @param  integer                    $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
-     * @throws Exception\RuntimeException
+     * @throws RuntimeException
      */
-    protected function encodeVideo(Format\VideoFormat $format, $outputPathfile, $threads)
+    protected function encodeVideo(VideoFormat $format, $outputPathfile, $threads)
     {
         $cmd_part1 = $this->binary
             . ' -y -i '
@@ -205,6 +217,9 @@ class FFMpeg extends Binary
         $process = null;
 
         foreach ($passes as $pass) {
+
+            $this->logger->addInfo(sprintf('FFmpeg executes command %s', $pass));
+
             $process = new Process($pass);
 
             try {
@@ -219,8 +234,11 @@ class FFMpeg extends Binary
         $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log.mbtree');
 
         if ( ! $process->isSuccessful()) {
-            throw new Exception\RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
+            $this->logger->addInfo(sprintf('FFmpeg command failed'));
+            throw new RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
         }
+
+        $this->logger->addInfo(sprintf('FFmpeg command successful'));
 
         return $this;
     }
@@ -238,7 +256,7 @@ class FFMpeg extends Binary
     }
 
     /**
-     * Return the binary name
+     * {@inheritdoc}
      *
      * @return string
      */

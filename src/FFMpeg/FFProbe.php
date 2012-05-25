@@ -11,7 +11,9 @@
 
 namespace FFMpeg;
 
-use \Symfony\Component\Process\Process;
+use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\RuntimeException;
+use Symfony\Component\Process\Process;
 
 /**
  * FFProbe driver
@@ -26,13 +28,13 @@ class FFProbe extends Binary
      *
      * @param  string                                 $pathfile
      * @return string
-     * @throws Exception\InvalidFileArgumentException
-     * @throws Exception\RuntimeException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function probeFormat($pathfile)
     {
         if ( ! is_file($pathfile)) {
-            throw new Exception\InvalidFileArgumentException($pathfile);
+            throw new InvalidArgumentException($pathfile);
         }
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_format';
@@ -45,13 +47,13 @@ class FFProbe extends Binary
      *
      * @param  string                                 $pathfile
      * @return string
-     * @throws Exception\InvalidFileArgumentException
-     * @throws Exception\RuntimeException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function probeStreams($pathfile)
     {
         if ( ! is_file($pathfile)) {
-            throw new Exception\InvalidFileArgumentException($pathfile);
+            throw new InvalidArgumentException($pathfile);
         }
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_streams';
@@ -63,27 +65,35 @@ class FFProbe extends Binary
      *
      * @param  string                     $command
      * @return string
-     * @throws Exception\RuntimeException
+     * @throws RuntimeException
      */
     protected function executeProbe($command)
     {
+        $this->logger->addInfo(sprintf('FFprobe executes command %s', $command));
+
         try {
             $process = new Process($command);
 
             $process->run();
         } catch (\RuntimeException $e) {
-            throw new Exception\RuntimeException(sprintf('Failed to run the given command %s', $command));
+            $this->logger->addInfo('FFprobe command failed');
+
+            throw new RuntimeException(sprintf('Failed to run the given command %s', $command));
         }
 
         if ( ! $process->isSuccessful()) {
-            throw new Exception\RuntimeException(sprintf('Failed to probe %s', $command));
+            $this->logger->addInfo('FFprobe command failed');
+
+            throw new RuntimeException(sprintf('Failed to probe %s', $command));
         }
+
+        $this->logger->addInfo('FFprobe command successful');
 
         return $process->getOutput();
     }
 
     /**
-     * Return the binary name
+     * {@inheritdoc}
      *
      * @return string
      */

@@ -14,10 +14,25 @@ namespace FFMpeg\Format;
 interface AudioFormat
 {
 
+    /**
+     * Returns the audio codec
+     *
+     * @return string
+     */
     public function getAudioCodec();
 
+    /**
+     * Get the audio sample rate
+     *
+     * @return integer
+     */
     public function getAudioSampleRate();
 
+    /**
+     * Get the kiloBitrate value
+     * 
+     * @return integer
+     */
     public function getKiloBitrate();
 
     /**

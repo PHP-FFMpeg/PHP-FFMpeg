@@ -11,7 +11,7 @@
 
 namespace FFMpeg\Exception;
 
-class InvalidFileArgumentException extends \InvalidArgumentException implements Exception
+class InvalidArgumentException extends \InvalidArgumentException implements Exception
 {
 
 }

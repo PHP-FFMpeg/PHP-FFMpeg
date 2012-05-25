@@ -11,8 +11,18 @@
 
 namespace FFMpeg;
 
+use Monolog\Logger;
+
+/**
+ * FFMpeg Adapter interface
+ *
+ * @author Romain Neutron imprec@gmail.com
+ */
 interface AdapterInterface
 {
 
-    public static function load(\Monolog\Logger $logger);
+    /**
+     * Loads the adapter
+     */
+    public static function load(Logger $logger);
 }

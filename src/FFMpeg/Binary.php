@@ -11,7 +11,9 @@
 
 namespace FFMpeg;
 
-use \Symfony\Component\Process\ExecutableFinder;
+use FFMpeg\Exception\BinaryNotFoundException;
+use Monolog\Logger;
+use Symfony\Component\Process\ExecutableFinder;
 
 /**
  * Binary abstract class
@@ -24,7 +26,7 @@ abstract class Binary implements AdapterInterface
 
     /**
      *
-     * @var \Monolog\Logger
+     * @var Logger
      */
     protected $logger;
 
@@ -32,28 +34,31 @@ abstract class Binary implements AdapterInterface
      * Binary constructor
      *
      * @param type            $binary The path file to the binary
-     * @param \Monolog\Logger $logger A logger
+     * @param Logger $logger A logger
      */
-    public function __construct($binary, \Monolog\Logger $logger)
+    public function __construct($binary, Logger $logger)
     {
         $this->binary = $binary;
-
-        if ( ! $logger) {
-            $logger = new \Monolog\Logger('default');
-            $logger->pushHandler(new \Monolog\Handler\NullHandler());
-        }
-
         $this->logger = $logger;
     }
 
     /**
-     * Load the static binary
+     * Destructor
+     */
+    public function __destruct()
+    {
+        $this->binary = $binary = $this->logger = null;
+    }
+
+    /**
+     * {@inheritdoc}
      *
-     * @param  \Monolog\Logger                   $logger A logger
-     * @return \FFMpeg\Binary                    The binary
+     * @param  Logger                   $logger A logger
+     * @return Binary                    The binary
+     *
      * @throws Exception\BinaryNotFoundException
      */
-    public static function load(\Monolog\Logger $logger)
+    public static function load(Logger $logger)
     {
         $finder = new ExecutableFinder();
         $binary = null;
@@ -65,7 +70,7 @@ abstract class Binary implements AdapterInterface
         }
 
         if (null === $binary) {
-            throw new Exception\BinaryNotFoundException('Binary not found');
+            throw new BinaryNotFoundException('Binary not found');
         }
 
         return new static($binary, $logger);
@@ -73,8 +78,6 @@ abstract class Binary implements AdapterInterface
 
     /**
      * Return the binary name
-     *
-     * @throws \Exception
      */
     protected static function getBinaryName()
     {

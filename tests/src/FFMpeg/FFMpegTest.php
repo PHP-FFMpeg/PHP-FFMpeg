@@ -2,6 +2,9 @@
 
 namespace FFMpeg;
 
+use Monolog\Logger;
+use Monolog\Handler\NullHandler;
+
 class FFMpegTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -14,11 +17,15 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
      * @var FFProbe
      */
     protected $probe;
+    protected $logger;
 
     public function setUp()
     {
-        $this->object = FFMpeg::load();
-        $this->probe = FFProbe::load();
+        $this->logger = new Logger('tests');
+        $this->logger->pushHandler(new NullHandler());
+
+        $this->object = FFMpeg::load($this->logger);
+        $this->probe = FFProbe::load($this->logger);
     }
 
     /**

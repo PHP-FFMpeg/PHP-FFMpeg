@@ -11,6 +11,8 @@
 
 namespace FFMpeg\Format;
 
+use FFMpeg\Exception\InvalidArgumentException;
+
 /**
  * The abstract default Audio format
  *
@@ -33,9 +35,7 @@ abstract class DefaultAudioFormat implements AudioFormat
     }
 
     /**
-     * Returns the audio codec
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getAudioCodec()
     {
@@ -52,19 +52,19 @@ abstract class DefaultAudioFormat implements AudioFormat
     public function setAudioCodec($audioCodec)
     {
         if ( ! in_array($audioCodec, $this->getAvailableAudioCodecs())) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                     'Wrong audiocodec value for %s, available formats are %s'
                     , $audioCodec, implode(', ', $this->getAvailableAudioCodecs())
             ));
         }
 
         $this->audioCodec = $audioCodec;
+
+        return $this;
     }
 
     /**
-     * Get the audio sample rate
-     *
-     * @return type
+     * {@inheritdoc}
      */
     public function getAudioSampleRate()
     {
@@ -80,16 +80,16 @@ abstract class DefaultAudioFormat implements AudioFormat
     public function setAudioSampleRate($audioSampleRate)
     {
         if ($audioSampleRate < 1) {
-            throw new \InvalidArgumentException('Wrong audio sample rate value');
+            throw new InvalidArgumentException('Wrong audio sample rate value');
         }
 
         $this->audioSampleRate = (int) $audioSampleRate;
+
+        return $this;
     }
 
     /**
-     * Get the kiloBitrate value
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getKiloBitrate()
     {
@@ -105,9 +105,11 @@ abstract class DefaultAudioFormat implements AudioFormat
     public function setKiloBitrate($kiloBitrate)
     {
         if ($kiloBitrate < 1) {
-            throw new \InvalidArgumentException('Wrong kiloBitrate value');
+            throw new InvalidArgumentException('Wrong kiloBitrate value');
         }
 
         $this->kiloBitrate = (int) $kiloBitrate;
+
+        return $this;
     }
 }

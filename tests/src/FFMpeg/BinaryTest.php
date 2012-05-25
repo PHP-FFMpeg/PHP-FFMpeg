@@ -2,6 +2,9 @@
 
 namespace FFMpeg;
 
+use Monolog\Logger;
+use Monolog\Handler\NullHandler;
+
 class BinaryTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -9,14 +12,20 @@ class BinaryTest extends \PHPUnit_Framework_TestCase
      * @var Binary
      */
     protected $object;
+    protected $logger;
+
+    public function setUp()
+    {
+        $this->logger = new Logger('tests');
+        $this->logger->pushHandler(new NullHandler());
+    }
 
     /**
      * @covers FFMpeg\Binary::__construct
      */
     public function testConstruct()
     {
-        $binary = new BinaryTester('pretty_binary');
-        $binary = new BinaryTester('pretty_binary', new \Monolog\Logger('test'));
+        $binary = new BinaryTester('pretty_binary', $this->logger);
     }
 
     /**
@@ -24,7 +33,7 @@ class BinaryTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        BinaryTester::load();
+        BinaryTester::load($this->logger);
     }
 
     /**
@@ -33,7 +42,7 @@ class BinaryTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadWrongBinary()
     {
-        BinaryTesterWrongBinary::load();
+        BinaryTesterWrongBinary::load($this->logger);
     }
 
 }
