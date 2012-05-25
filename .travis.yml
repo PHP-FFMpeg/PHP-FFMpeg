@@ -10,6 +10,6 @@ php:
   - 5.3
   - 5.4
 
-script
+script:
   - phpunit
   - sh -c "cd docs && make clean && make html"
