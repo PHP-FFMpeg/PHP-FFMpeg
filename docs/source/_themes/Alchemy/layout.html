@@ -111,8 +111,6 @@
         <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
         {%- endif %}
 
-
-
         <!-- Use the .htaccess and remove these lines to avoid edge case issues.
              More info: h5bp.com/i/378 -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -122,7 +120,6 @@
         <!-- Mobile viewport optimized: h5bp.com/viewport -->
         <meta name="viewport" content="width=device-width">
 
-
         <!-- Le styles -->
         <link href="{{ pathto('_static/less/bootstrap.less', 1) }}" rel="stylesheet/less">
         <style type="text/css">
@@ -131,12 +128,10 @@
                 padding-bottom: 40px;
             }
         </style>
-
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
@@ -148,47 +143,41 @@
              Modernizr enables HTML5 elements & feature detects for optimal performance.
              Create your own custom Modernizr build: www.modernizr.com/download/ -->
         <script src="{{ pathto('_static/js/modernizr-2.5.3.min.js', 1) }}"></script>
-
         <script src="{{ pathto('_static/js/less-1.3.0.min.js', 1) }}" type="text/javascript"></script>
 
-
-
-
+        <link rel="stylesheet" href="{{ pathto('_static/bootstrapCustom.css', 1) }}">
         <link rel="stylesheet" href="{{ pathto('_static/main.css', 1) }}">
-
-
-
-
     </head>
     <body>
         <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
              chromium.org/developers/how-tos/chrome-frame-getting-started -->
         <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
-        <a href="https://github.com/alchemy-fr/PHP-FFmpeg/">
-            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
-        </a>
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="{{ pathto(master_doc) }}">{{ docstitle }}</a>
-		            <div class="nav-collapse" id="navigation" class="related">
+                    <a class="brand" href="{{ pathto(master_doc) }}">{{ project }} documentation</a>
+		            <!--<div class="nav-collapse" id="navigation" class="related">
 	                    {{ toctree(collapse=True, maxdepth=-1, titles_only=False) }}
-	                </div>
+	                </div>-->
                 </div>
             </div>
+            <a href="https://github.com/alchemy-fr/PHP-FFmpeg/">
+                <img style="z-index:1200;position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+            </a>
         </div>
         <div role="main" class="container">
 
             <div class="row-fluid">
                 <div class="span4">
+                    <img src="{{ pathto('_static/img/ffmpeg.png', 1) }}"/>
                 	{{ sidebar() }}
                 </div>
                 <div class="span8">
-                    {%- if next and prev == None %}
+                    {%- if prev == None %}
                         <div class="hero-unit">
-                            <h1>{{ docstitle }}</h1>
+                            <h1>{{ project }} documentation</h1>
                             <p>
                                 <!-- Your subtitle here-->
                             </p>
