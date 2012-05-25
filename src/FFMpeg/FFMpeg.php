@@ -14,8 +14,8 @@ namespace FFMpeg;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\LogicException;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Format\AudioFormat;
-use FFMpeg\Format\VideoFormat;
+use FFMpeg\Format\Audio;
+use FFMpeg\Format\Video;
 use Symfony\Component\Process\Process;
 
 /**
@@ -108,14 +108,14 @@ class FFMpeg extends Binary
     /**
      * Encode the file to the specified format
      *
-     * @param  AudioFormat      $format         The output format
+     * @param  Audio            $format         The output format
      * @param  string           $outputPathfile The pathfile where to write
      * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      * @throws LogicException
      */
-    public function encode(AudioFormat $format, $outputPathfile, $threads = 1)
+    public function encode(Audio $format, $outputPathfile, $threads = 1)
     {
         if ( ! $this->pathfile) {
             throw new LogicException('No file open');
@@ -124,11 +124,11 @@ class FFMpeg extends Binary
         $threads = max(min($threads, 64), 1);
 
         switch (true) {
-            case $format instanceof VideoFormat:
+            case $format instanceof Video:
                 $this->encodeVideo($format, $outputPathfile, $threads);
                 break;
             default:
-            case $format instanceof AudioFormat:
+            case $format instanceof Audio:
                 $this->encodeAudio($format, $outputPathfile, $threads);
                 break;
         }
@@ -139,13 +139,13 @@ class FFMpeg extends Binary
     /**
      * Encode to audio
      *
-     * @param  AudioFormat      $format         The output format
+     * @param  Audio            $format         The output format
      * @param  string           $outputPathfile The pathfile where to write
      * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      */
-    protected function encodeAudio(AudioFormat $format, $outputPathfile, $threads)
+    protected function encodeAudio(Audio $format, $outputPathfile, $threads)
     {
         $cmd = $this->binary
             . ' -y -i '
@@ -180,13 +180,13 @@ class FFMpeg extends Binary
     /**
      * Encode to video
      *
-     * @param  VideoFormat      $format         The output format
+     * @param  Video            $format         The output format
      * @param  string           $outputPathfile The pathfile where to write
      * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      */
-    protected function encodeVideo(VideoFormat $format, $outputPathfile, $threads)
+    protected function encodeVideo(Video $format, $outputPathfile, $threads)
     {
         $cmd_part1 = $this->binary
             . ' -y -i '
