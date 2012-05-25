@@ -7,6 +7,9 @@ before_script:
   - php composer.phar install
 
 php:
-  - 5.3.2
   - 5.3
   - 5.4
+
+script
+  - phpunit
+  - sh -c "cd docs && make clean && make html"
