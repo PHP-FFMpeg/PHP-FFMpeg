@@ -195,7 +195,7 @@ class FFMpeg extends Binary
 
         $cmd_part2 = '';
 
-        if ($format->getWidth() && $format->getHieght()) {
+        if ($format->getWidth() && $format->getHeight()) {
             $cmd_part2 .= ' -s ' . $format->getWidth() . 'x' . $format->getHeight();
         }
 
