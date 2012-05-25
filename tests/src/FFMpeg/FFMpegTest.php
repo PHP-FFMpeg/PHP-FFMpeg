@@ -7,7 +7,6 @@ use Monolog\Handler\NullHandler;
 
 class FFMpegTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var FFMpeg
      */
@@ -105,7 +104,9 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncode()
     {
-        $this->object->encode(new Format\Video\WebM(32, 32), './invalid.file');
+        $format = new Format\Video\WebM();
+        $format-> setDimensions(32, 32);
+        $this->object->encode($format, './invalid.file');
     }
 
     /**
@@ -119,7 +120,11 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
 
         $ffmpeg = new FFMpeg('wrongbinary', $logger);
         $ffmpeg->open(__DIR__ . '/../../files/Test.ogv');
-        $ffmpeg->encode(new Format\Video\WebM(32, 32), './invalid.file');
+
+        $format = new Format\Video\WebM();
+        $format-> setDimensions(32, 32);
+
+        $ffmpeg->encode($format, './invalid.file');
     }
 
     /**
@@ -162,8 +167,11 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
     {
         $dest = __DIR__ . '/../../files/encode_test.webm';
 
+        $format = new Format\Video\WebM();
+        $format-> setDimensions(32, 32);
+
         $this->object->open(__DIR__ . '/../../files/Test.ogv');
-        $this->object->encode(new Format\Video\WebM(32, 32), $dest);
+        $this->object->encode($format, $dest);
 
         $this->probe->probeFormat($dest);
 
@@ -178,8 +186,11 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
     {
         $dest = __DIR__ . '/../../files/encode_test.ogv';
 
+        $format = new Format\Video\Ogg();
+        $format->setDimensions(32, 32);
+        
         $this->object->open(__DIR__ . '/../../files/Test.ogv');
-        $this->object->encode(new Format\Video\Ogg(32, 32), $dest);
+        $this->object->encode($format, $dest);
 
         $this->probe->probeFormat($dest);
 
@@ -194,12 +205,14 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
     {
         $dest = __DIR__ . '/../../files/encode_test.mp4';
 
+        $format = new Format\Video\WebM();
+        $format-> setDimensions(32, 32);
+
         $this->object->open(__DIR__ . '/../../files/Test.ogv');
-        $this->object->encode(new Format\Video\X264(32, 32), $dest);
+        $this->object->encode($format, $dest);
 
         $this->probe->probeFormat($dest);
 
         unlink($dest);
     }
-
 }

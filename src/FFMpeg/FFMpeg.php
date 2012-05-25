@@ -193,8 +193,13 @@ class FFMpeg extends Binary
             . escapeshellarg($this->pathfile) . ' '
             . $format->getExtraParams() . ' ';
 
-        $cmd_part2 = ' -s ' . $format->getWidth() . 'x' . $format->getHeight()
-            . ' -r ' . $format->getFrameRate()
+        $cmd_part2 = '';
+
+        if ($format->getWidth() && $format->getHieght()) {
+            $cmd_part2 .= ' -s ' . $format->getWidth() . 'x' . $format->getHeight();
+        }
+
+        $cmd_part2 .= ' -r ' . $format->getFrameRate()
             . ' -vcodec ' . $format->getVideoCodec()
             . ' -b ' . $format->getKiloBitrate() . 'k -g 25 -bf 3'
             . ' -threads ' . $threads

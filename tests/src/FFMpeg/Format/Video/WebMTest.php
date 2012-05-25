@@ -12,7 +12,8 @@ class WebMTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new WebM(320, 320);
+        $this->object = new WebM();
+        $this->object->setDimensions(320, 320);
     }
 
     /**
@@ -37,14 +38,6 @@ class WebMTest extends \PHPUnit_Framework_TestCase
     public function testGetExtraParams()
     {
         $this->assertTrue(is_scalar($this->object->getExtraParams()));
-    }
-
-    /**
-     * @covers FFMpeg\Format\Video\WebM::__construct
-     */
-    public function testConstruct()
-    {
-        $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultVideoFormat', $this->object);
     }
 
 }

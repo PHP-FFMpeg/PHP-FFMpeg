@@ -12,15 +12,8 @@ class X264Test extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new X264(320, 320);
-    }
-
-    /**
-     * @covers FFMpeg\Format\Video\X264::__construct
-     */
-    public function testConstruct()
-    {
-        $this->assertInstanceOf('\\FFMpeg\\Format\\DefaultVideoFormat', $this->object);
+        $this->object = new X264();
+        $this->object->setDimensions(320, 320);
     }
 
     /**

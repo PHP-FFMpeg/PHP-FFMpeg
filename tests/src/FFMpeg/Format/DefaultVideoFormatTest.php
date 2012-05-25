@@ -12,22 +12,13 @@ class DefaultVideoFormatTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new DefaultVideoFormatTester(320, 240);
-    }
-
-    /**
-     * @covers FFMpeg\Format\DefaultVideoFormat::__construct
-     * @covers FFMpeg\Format\DefaultVideoFormat::getWidth
-     * @covers FFMpeg\Format\DefaultVideoFormat::getHeight
-     */
-    public function testConstruct()
-    {
-        $this->assertEquals(320, $this->object->getWidth());
-        $this->assertEquals(240, $this->object->getHeight());
+        $this->object = new DefaultVideoFormatTester();
     }
 
     /**
      * @covers FFMpeg\Format\DefaultVideoFormat::setDimensions
+     * @covers FFMpeg\Format\DefaultVideoFormat::getWidth
+     * @covers FFMpeg\Format\DefaultVideoFormat::getHeight
      */
     public function testSetDimensions()
     {

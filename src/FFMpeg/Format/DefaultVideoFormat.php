@@ -28,17 +28,6 @@ abstract class DefaultVideoFormat extends DefaultAudioFormat implements VideoFor
     protected $kiloBitrate = 1000;
 
     /**
-     * Constructor
-     *
-     * @param integer $width
-     * @param integer $height The height of the video format
-     */
-    public function __construct($width, $height)
-    {
-        $this->setDimensions($width, $height);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getWidth()
