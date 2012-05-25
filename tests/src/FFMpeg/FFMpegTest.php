@@ -188,7 +188,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
 
         $format = new Format\Video\Ogg();
         $format->setDimensions(32, 32);
-        
+
         $this->object->open(__DIR__ . '/../../files/Test.ogv');
         $this->object->encode($format, $dest);
 
