@@ -1,0 +1,71 @@
+{
+    "hash": "df8dea92fddcc47c4b68e4ab869c10ac",
+    "packages": [
+        {
+            "package": "monolog/monolog",
+            "version": "1.0.2"
+        },
+        {
+            "package": "symfony/process",
+            "version": "dev-master",
+            "source-reference": "106f2db51cecf2fe5ee59e428b8f4a918c4034fa",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/process",
+            "version": "dev-master",
+            "source-reference": "106f2db51cecf2fe5ee59e428b8f4a918c4034fa"
+        }
+    ],
+    "packages-dev": [
+        {
+            "package": "fabpot/php-cs-fixer",
+            "version": "dev-master",
+            "source-reference": "33ee181472e603a0eccdb245248745dc1abfface"
+        },
+        {
+            "package": "symfony/console",
+            "version": "dev-master",
+            "source-reference": "1edd7b739561e87bde81ff1c2ce08bd89e92277e",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/console",
+            "version": "dev-master",
+            "source-reference": "1edd7b739561e87bde81ff1c2ce08bd89e92277e"
+        },
+        {
+            "package": "symfony/filesystem",
+            "version": "dev-master",
+            "source-reference": "e1f7c293c029502921d77f914275b411f80ccbca",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/filesystem",
+            "version": "dev-master",
+            "source-reference": "e1f7c293c029502921d77f914275b411f80ccbca"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "dev-master",
+            "source-reference": "a2cef64d5072b284b671ee8e06b8ebc38c2969e1",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "dev-master",
+            "source-reference": "a2cef64d5072b284b671ee8e06b8ebc38c2969e1"
+        }
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ]
+}
