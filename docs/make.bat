@@ -24,8 +24,6 @@ if "%1" == "help" (
 	echo.  pickle     to make pickle files
 	echo.  json       to make JSON files
 	echo.  htmlhelp   to make HTML files and a HTML help project
-	echo.  qthelp     to make HTML files and a qthelp project
-	echo.  devhelp    to make HTML files and a Devhelp project
 	echo.  epub       to make an epub
 	echo.  latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter
 	echo.  text       to make text files
@@ -90,18 +88,6 @@ if "%1" == "htmlhelp" (
 	echo.
 	echo.Build finished; now you can run HTML Help Workshop with the ^
 .hhp project file in %BUILDDIR%/htmlhelp.
-	goto end
-)
-
-if "%1" == "qthelp" (
-	%SPHINXBUILD% -b qthelp %ALLSPHINXOPTS% %BUILDDIR%/qthelp
-	if errorlevel 1 exit /b 1
-	echo.
-	echo.Build finished; now you can run "qcollectiongenerator" with the ^
-.qhcp project file in %BUILDDIR%/qthelp, like this:
-	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\PHPXPDF.qhcp
-	echo.To view the help file:
-	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\PHPXPDF.ghc
 	goto end
 )
 

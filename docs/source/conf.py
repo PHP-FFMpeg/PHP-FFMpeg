@@ -1,4 +1,5 @@
 import sys, os
+import os.path
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -228,38 +229,6 @@ texinfo_documents = [
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
 
-
-
-# project name
-project = u'PHP-FFMpeg'
-
-# Tex info conf
-texinfo_documents = [
-  ('index', 'PHP-FFMpeg', u'PHP-FFMpeg Documentation',
-   u'Romain Neutron - Alchemy', 'PHP-FFMpeg', 'One line description of project.',
-   'Miscellaneous'),
-]
-
-# Man page conf
-man_pages = [
-    ('index', 'phpffmpeg', u'PHP-FFMpeg name Documentation',
-     [u'Romain Neutron - Alchemy'], 1)
-]
-
-# Latex doc conf
-latex_documents = [
-  ('index', 'PHPFFMpeg.tex', u'PHP-FFMpeg Documentation',
-   u'Romain Neutron - Alchemy', 'manual'),
-]
-
-# html help basename
-htmlhelp_basename = 'PHPFFMpegdoc'
-
-# version
-version = '0.1'
-
-# release
-release = '0.1'
-
-# Copyright Value  ex : copyright = u'2012, Alchemy'
-copyright = u'2012, Romain Neutron - Alchemy'
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(current_dir)
+from local_conf import *
