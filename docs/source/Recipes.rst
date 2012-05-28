@@ -8,8 +8,8 @@ In the examples  we will show you, we assume we work in an environnment where
 FFMpeg has been initialized to ``$ffmpeg`` var ; there are two ways to
 initialize the environment :
 
-Autoloading FFMpeg
-^^^^^^^^^^^^^^^^^^
+Loading FFMpeg automatically
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The easiest way to initialize ``FMpeg`` it is to call the loader ; this will
 look in your PATH environment variable to find ffmpeg/avconv binary :
@@ -29,7 +29,7 @@ look in your PATH environment variable to find ffmpeg/avconv binary :
     // This logger provides some usefull infos about what's happening
     $ffmpeg = FFMpeg::load($logger);
 
-.. note:: FFMpeg and FFProbe both requires a logger with gives ffedback about
+.. note:: FFMpeg and FFProbe both requires a logger with gives feedback about
     what's happening. By passing a NullHandler to the logger, you disable the
     logging system.
 
@@ -42,7 +42,7 @@ You can also initialize with a custom path to the binary :
 .. code-block:: php
 
     <?php
-    $ffmpeg = new FFMpeg::load('/usr/local/src/ffmpeg/bin/ffmpeg', $logger);
+    $ffmpeg = new FFMpeg('/usr/local/src/ffmpeg/bin/ffmpeg', $logger);
 
 
 Defining formats
@@ -67,6 +67,9 @@ target file `file.ogv` :
     $ffmpeg->open('Video.mpeg')
         ->encode($oggFormat, 'file.ogv')
         ->close();
+
+.. note: ``FFmpeg`` methods always return the object itself so you can chain
+multiple methods.
 
 Create HTML5 videos
 ^^^^^^^^^^^^^^^^^^^
@@ -108,6 +111,7 @@ These formats are available as these objects :
 Create your own media type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+        
 
 FFProbe recipes
 ---------------
