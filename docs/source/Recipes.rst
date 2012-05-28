@@ -69,7 +69,7 @@ target file `file.ogv` :
         ->close();
 
 .. note: ``FFmpeg`` methods always return the object itself so you can chain
-multiple methods.
+    multiple methods.
 
 Create HTML5 videos
 ^^^^^^^^^^^^^^^^^^^
