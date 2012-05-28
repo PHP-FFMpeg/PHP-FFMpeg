@@ -1,9 +1,6 @@
 # project name
 project = u'PHP-FFMpeg'
 
-#github repository URL
-github_repo = 'https://github.com/alchemy-fr/PHP-FFmpeg'
-
 # Tex info conf
 texinfo_documents = [
   ('index', 'PHP-FFMpeg', u'PHP-FFMpeg Documentation',
