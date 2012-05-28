@@ -18,6 +18,8 @@ namespace FFMpeg\Format;
  */
 interface Video extends Audio
 {
+    const RESIZEMODE_FIT = 'fit';
+    const RESIZEMODE_INSET = 'inset';
 
     /**
      * Returns the width
@@ -32,6 +34,13 @@ interface Video extends Audio
      * @return integer
      */
     public function getHeight();
+
+    /**
+     * Get the current resize mode
+     * 
+     * @return string
+     */
+    public function getResizeMode();
 
     /**
      * Returns the frame rate

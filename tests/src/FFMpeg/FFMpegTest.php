@@ -25,6 +25,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
 
         $this->object = FFMpeg::load($this->logger);
         $this->probe = FFProbe::load($this->logger);
+        $this->object->setProber($this->probe);
     }
 
     /**
@@ -119,6 +120,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         $logger->pushHandler(new \Monolog\Handler\NullHandler());
 
         $ffmpeg = new FFMpeg('wrongbinary', $logger);
+        $ffmpeg->setProber($this->probe);
         $ffmpeg->open(__DIR__ . '/../../files/Test.ogv');
 
         $format = new Format\Video\WebM();
@@ -214,5 +216,27 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         $this->probe->probeFormat($dest);
 
         unlink($dest);
+    }
+
+    /**
+     * @covers FFMpeg\FFMpeg::getMultiple
+     */
+    public function testGetMultiple()
+    {
+        $object = FFMpegTester::load($this->logger);
+        $this->assertEquals(320, $object->getMultipleTester(321, 16));
+        $this->assertEquals(320, $object->getMultipleTester(319, 16));
+        $this->assertEquals(320, $object->getMultipleTester(313, 16));
+        $this->assertEquals(304, $object->getMultipleTester(312, 16));
+        $this->assertEquals(336, $object->getMultipleTester(329, 16));
+        $this->assertEquals(16, $object->getMultipleTester(8, 16));
+    }
+}
+
+class FFMpegTester extends FFMpeg
+{
+    public function getMultipleTester($value, $multiple)
+    {
+        return parent::getMultiple($value, $multiple);
     }
 }

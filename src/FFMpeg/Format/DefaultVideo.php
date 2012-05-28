@@ -20,9 +20,11 @@ use FFMpeg\Exception\InvalidArgumentException;
  */
 abstract class DefaultVideo extends DefaultAudio implements Video
 {
+
     protected $width;
     protected $height;
     protected $frameRate = 25;
+    protected $resizeMode = self::RESIZEMODE_FIT;
     protected $videoCodec;
     protected $GOPsize = 25;
     protected $kiloBitrate = 1000;
@@ -59,10 +61,40 @@ abstract class DefaultVideo extends DefaultAudio implements Video
             throw new InvalidArgumentException('Wrong height value');
         }
 
-        $this->width = $this->getMultiple($width, 16);
-        $this->height = $this->getMultiple($height, 16);
+        $this->width = $width;
+        $this->height = $height;
 
         return $this;
+    }
+
+    /**
+     * Set the resize mode
+     * 
+     * @param string $mode  The mode, one of the self::RESIZEMODE_* constants
+     * 
+     * @throws InvalidArgumentException
+     */
+    public function setResizeMode($mode)
+    {
+        if ( ! in_array($mode, array(self::RESIZEMODE_FIT, self::RESIZEMODE_INSET))) {
+            throw new InvalidArgumentException(
+                'Resize mode `%s` is not valid , avalaible values are %s',
+                $mode,
+                implode(', ', array(self::RESIZEMODE_FIT, self::RESIZEMODE_INSET))
+            );
+        }
+
+        $this->resizeMode = $mode;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResizeMode()
+    {
+        return $this->resizeMode;
     }
 
     /**
@@ -144,41 +176,5 @@ abstract class DefaultVideo extends DefaultAudio implements Video
         $this->GOPsize = (int) $GOPsize;
 
         return $this;
-    }
-
-    /**
-     * Returns the nearest multiple for a value
-     *
-     * @param  integer $value
-     * @param  integer $multiple
-     * @return integer
-     */
-    protected function getMultiple($value, $multiple)
-    {
-        $modulo = $value % $multiple;
-
-        $ret = (int) $multiple;
-
-        $halfDistance = $multiple / 2;
-        if ($modulo <= $halfDistance)
-            $bound = 'bottom';
-        else
-            $bound = 'top';
-
-        switch ($bound) {
-            default:
-            case 'top':
-                $ret = $value + $multiple - $modulo;
-                break;
-            case 'bottom':
-                $ret = $value - $modulo;
-                break;
-        }
-
-        if ($ret < $multiple) {
-            $ret = (int) $multiple;
-        }
-
-        return (int) $ret;
     }
 }

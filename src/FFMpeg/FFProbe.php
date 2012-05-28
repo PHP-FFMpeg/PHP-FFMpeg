@@ -58,7 +58,23 @@ class FFProbe extends Binary
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_streams';
 
-        return $this->executeProbe($cmd);
+        $output = explode("\n", $this->executeProbe($cmd));
+
+        $ret = array();
+        $n = 0;
+
+        foreach ($output as $line) {
+
+            if (in_array($line, array('[STREAM]', '[/STREAM]'))) {
+                $n ++;
+                $ret[$n] = array();
+                continue;
+            }
+
+            $ret[$n][] = $line;
+        }
+        
+        return $ret;
     }
 
     /**

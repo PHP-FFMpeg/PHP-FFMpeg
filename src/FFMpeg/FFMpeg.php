@@ -28,6 +28,18 @@ class FFMpeg extends Binary
     protected $pathfile;
 
     /**
+     *
+     * @var FFProbe 
+     */
+    protected $prober;
+
+    public function __destruct()
+    {
+        $this->prober = null;
+        parent::__destruct();
+    }
+    
+    /**
      * Opens a file in order to be processed
      *
      * @param  string                   $pathfile A pathfile
@@ -46,6 +58,18 @@ class FFMpeg extends Binary
 
         $this->pathfile = $pathfile;
 
+        return $this;
+    }
+
+    /**
+     * Set a prober
+     * 
+     * @return \FFMpeg\FFMpeg
+     */
+    public function setProber(FFProbe $prober)
+    {
+        $this->prober = $prober;
+        
         return $this;
     }
 
@@ -89,7 +113,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-
+            
         }
 
         if ( ! $process->isSuccessful()) {
@@ -164,7 +188,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-
+            
         }
 
         if ( ! $process->isSuccessful()) {
@@ -196,7 +220,43 @@ class FFMpeg extends Binary
         $cmd_part2 = '';
 
         if ($format->getWidth() && $format->getHeight()) {
-            $cmd_part2 .= ' -s ' . $format->getWidth() . 'x' . $format->getHeight();
+
+            switch ($format->getResizeMode()) {
+                case Video::RESIZEMODE_FIT:
+                default:
+                    $width = $this->getMultiple($format->getWidth(), 16);
+                    $height = $this->getMultiple($format->getHeight(), 16);
+                    break;
+                case Video::RESIZEMODE_INSET:
+
+                    if ( ! $this->prober) {
+                        throw new LogicException('You must set a valid prober if you use RESIZEMODE_INSET');
+                    }
+
+                    $result = $this->prober->probeStreams($this->pathfile);
+
+                    $originalWidth = $format->getWidth();
+                    $originalHeight = $format->getHeight();
+
+                    foreach ($result as $stream) {
+                        foreach ($stream as $info) {
+                            if (strpos($info, 'width=') === 0) {
+                                $originalWidth = substr($info, 6);
+                                continue;
+                            }
+                            if (strpos($info, 'height=') === 0) {
+                                $originalHeight = substr($info, 7);
+                                continue;
+                            }
+                        }
+                    }
+
+                    $width = $this->getMultiple($originalWidth, 16);
+                    $height = $this->getMultiple($originalHeight, 16);
+                    break;
+            }
+
+            $cmd_part2 .= ' -s ' . $width . 'x' . $height;
         }
 
         $cmd_part2 .= ' -r ' . $format->getFrameRate()
@@ -258,6 +318,42 @@ class FFMpeg extends Binary
         if (file_exists($pathfile) && is_writable($pathfile)) {
             unlink($pathfile);
         }
+    }
+
+    /**
+     * Returns the nearest multiple for a value
+     *
+     * @param  integer $value
+     * @param  integer $multiple
+     * @return integer
+     */
+    protected function getMultiple($value, $multiple)
+    {
+        $modulo = $value % $multiple;
+
+        $ret = (int) $multiple;
+
+        $halfDistance = $multiple / 2;
+        if ($modulo <= $halfDistance)
+            $bound = 'bottom';
+        else
+            $bound = 'top';
+
+        switch ($bound) {
+            default:
+            case 'top':
+                $ret = $value + $multiple - $modulo;
+                break;
+            case 'bottom':
+                $ret = $value - $modulo;
+                break;
+        }
+
+        if ($ret < $multiple) {
+            $ret = (int) $multiple;
+        }
+
+        return (int) $ret;
     }
 
     /**

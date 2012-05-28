@@ -27,8 +27,8 @@ class DefaultVideoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(640, $this->object->getHeight());
 
         $this->object->setDimensions(242, 638);
-        $this->assertEquals(240, $this->object->getWidth());
-        $this->assertEquals(640, $this->object->getHeight());
+        $this->assertEquals(242, $this->object->getWidth());
+        $this->assertEquals(638, $this->object->getHeight());
     }
 
     /**
@@ -156,19 +156,6 @@ class DefaultVideoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FFMpeg\Format\DefaultVideo::getMultiple
-     */
-    public function testGetMultiple()
-    {
-        $this->assertEquals(320, $this->object->getMultiple(321, 16));
-        $this->assertEquals(320, $this->object->getMultiple(319, 16));
-        $this->assertEquals(320, $this->object->getMultiple(313, 16));
-        $this->assertEquals(304, $this->object->getMultiple(312, 16));
-        $this->assertEquals(336, $this->object->getMultiple(329, 16));
-        $this->assertEquals(16, $this->object->getMultiple(8, 16));
-    }
-
-    /**
      * @covers FFMpeg\Format\DefaultVideo::getKiloBitrate
      */
     public function testGetKiloBitrate()
@@ -197,11 +184,6 @@ class DefaultVideoTester extends DefaultVideo
     public function getExtraParams()
     {
         return '-f format';
-    }
-
-    public function getMultiple($value, $multiple)
-    {
-        return parent::getMultiple($value, $multiple);
     }
 
 }
