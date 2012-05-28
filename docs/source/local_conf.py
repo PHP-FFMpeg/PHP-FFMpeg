@@ -1,31 +1,30 @@
-
 # project name
-project = u'Project Name'
+project = u'PHP-FFMpeg'
 
 #github repository URL
-github_repo = ''
+github_repo = 'https://github.com/alchemy-fr/PHP-FFmpeg'
 
 # Tex info conf
 texinfo_documents = [
-  ('index', 'Project name', u'Project Documentation',
-   u'Copyright holder', 'Project name', 'One line description of project.',
+  ('index', 'PHP-FFMpeg', u'PHP-FFMpeg Documentation',
+   u'Romain Neutron - Alchemy', 'PHP-FFMpeg', 'One line description of project.',
    'Miscellaneous'),
 ]
 
 # Man page conf
 man_pages = [
-    ('index', 'projectname', u'PProject name Documentation',
-     [u'Copyright holder'], 1)
+    ('index', 'phpffmpeg', u'PHP-FFMpeg name Documentation',
+     [u'Romain Neutron - Alchemy'], 1)
 ]
 
 # Latex doc conf
 latex_documents = [
-  ('index', 'ProjectName.tex', u'Project Name Documentation',
-   u'Copyright holder', 'manual'),
+  ('index', 'PHPFFMpeg.tex', u'PHP-FFMpeg Documentation',
+   u'Romain Neutron - Alchemy', 'manual'),
 ]
 
 # html help basename
-htmlhelp_basename = 'PROJECTdoc'
+htmlhelp_basename = 'PHPFFMpegdoc'
 
 # version
 version = '0.1'
@@ -34,4 +33,6 @@ version = '0.1'
 release = '0.1'
 
 # Copyright Value  ex : copyright = u'2012, Alchemy'
-copyright = u'2012, Alchemy'
+copyright = u'2012, Romain Neutron - Alchemy'
+
+
