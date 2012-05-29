@@ -250,9 +250,21 @@ class FFMpeg extends Binary
                             }
                         }
                     }
+                    
+                    $originalRatio = $originalWidth / $originalHeight;
+                    
+                    $targetRatio = $format->getWidth() / $format->getHeight();
+                    
+                    if($targetRatio >= $originalRatio){
+                        $height = $format->getHeight();
+                        $width = $format->getHeight() * $originalRatio;
+                    }else{
+                        $width = $format->getWidth();
+                        $height = $format->getWidth() / $originalRatio;
+                    }
 
-                    $width = $this->getMultiple($originalWidth, 16);
-                    $height = $this->getMultiple($originalHeight, 16);
+                    $width = $this->getMultiple($width, 16);
+                    $height = $this->getMultiple($height, 16);
                     break;
             }
 
