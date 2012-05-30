@@ -12,3 +12,7 @@ h1,h2,h3,h4,h5,h6, a, a:hover, a:visited{
 .hero-unit{
     background-color: transparent;
 }
+
+.admonition.note .first.admonition-title {
+    background-color:#B17F4A;
+}

@@ -1,12 +1,6 @@
 PHP FFMpeg documentation
 ========================
 
-.. toctree::
-   :hidden:
-   :maxdepth: 4
-
-   Recipes
-
 Introduction
 ------------
 
@@ -92,6 +86,11 @@ Recipes
 -------
 
 You'll find usefull recipes in our :doc:`Recipes`
+
+.. toctree::
+   :maxdepth: 4
+
+   Recipes
 
 Handling Exceptions
 -------------------
