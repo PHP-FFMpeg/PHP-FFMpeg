@@ -73,7 +73,7 @@ class FFProbe extends Binary
 
             $ret[$n][] = $line;
         }
-        
+
         return $ret;
     }
 

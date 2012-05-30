@@ -29,7 +29,7 @@ class FFMpeg extends Binary
 
     /**
      *
-     * @var FFProbe 
+     * @var FFProbe
      */
     protected $prober;
 
@@ -38,7 +38,7 @@ class FFMpeg extends Binary
         $this->prober = null;
         parent::__destruct();
     }
-    
+
     /**
      * Opens a file in order to be processed
      *
@@ -63,13 +63,13 @@ class FFMpeg extends Binary
 
     /**
      * Set a prober
-     * 
+     *
      * @return \FFMpeg\FFMpeg
      */
     public function setProber(FFProbe $prober)
     {
         $this->prober = $prober;
-        
+
         return $this;
     }
 
@@ -113,7 +113,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            
+
         }
 
         if ( ! $process->isSuccessful()) {
@@ -188,7 +188,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            
+
         }
 
         if ( ! $process->isSuccessful()) {
@@ -219,54 +219,33 @@ class FFMpeg extends Binary
 
         $cmd_part2 = '';
 
-        if ($format->getWidth() && $format->getHeight()) {
-
-            switch ($format->getResizeMode()) {
-                case Video::RESIZEMODE_FIT:
-                default:
-                    $width = $this->getMultiple($format->getWidth(), 16);
-                    $height = $this->getMultiple($format->getHeight(), 16);
-                    break;
-                case Video::RESIZEMODE_INSET:
-
-                    if ( ! $this->prober) {
-                        throw new LogicException('You must set a valid prober if you use RESIZEMODE_INSET');
-                    }
-
-                    $result = $this->prober->probeStreams($this->pathfile);
-
-                    $originalWidth = $format->getWidth();
-                    $originalHeight = $format->getHeight();
-
-                    foreach ($result as $stream) {
-                        foreach ($stream as $info) {
-                            if (strpos($info, 'width=') === 0) {
-                                $originalWidth = substr($info, 6);
-                                continue;
-                            }
-                            if (strpos($info, 'height=') === 0) {
-                                $originalHeight = substr($info, 7);
-                                continue;
-                            }
-                        }
-                    }
-                    
-                    $originalRatio = $originalWidth / $originalHeight;
-                    
-                    $targetRatio = $format->getWidth() / $format->getHeight();
-                    
-                    if($targetRatio >= $originalRatio){
-                        $height = $format->getHeight();
-                        $width = $format->getHeight() * $originalRatio;
-                    }else{
-                        $width = $format->getWidth();
-                        $height = $format->getWidth() / $originalRatio;
-                    }
-
-                    $width = $this->getMultiple($width, 16);
-                    $height = $this->getMultiple($height, 16);
-                    break;
+        if ($format instanceof Format\ResizableVideo) {
+            if ( ! $this->prober) {
+                throw new LogicException('You must set a valid prober if you use RESIZEMODE_INSET');
             }
+
+            $result = $this->prober->probeStreams($this->pathfile);
+
+            $originalWidth = $format->getWidth();
+            $originalHeight = $format->getHeight();
+
+            foreach ($result as $stream) {
+                foreach ($stream as $info) {
+                    if (strpos($info, 'width=') === 0) {
+                        $originalWidth = substr($info, 6);
+                        continue;
+                    }
+                    if (strpos($info, 'height=') === 0) {
+                        $originalHeight = substr($info, 7);
+                        continue;
+                    }
+                }
+            }
+
+            list($width, $height) = $format->getComputedDimensions($originalWidth, $originalHeight);
+
+            $width = $this->getMultiple($format->getWidth(), 16);
+            $height = $this->getMultiple($format->getHeight(), 16);
 
             $cmd_part2 .= ' -s ' . $width . 'x' . $height;
         }
