@@ -11,8 +11,6 @@
 
 namespace FFMpeg\Format\Audio;
 
-use FFMpeg\Format\DefaultAudio;
-
 /**
  * The MP3 audio format
  *

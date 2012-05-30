@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace FFMpeg\Format;
+namespace FFMpeg\Format\Video;
 
+use FFMpeg\Format\Audio\DefaultAudio;
 use FFMpeg\Exception\InvalidArgumentException;
 
 /**
@@ -18,8 +19,10 @@ use FFMpeg\Exception\InvalidArgumentException;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-abstract class DefaultVideo extends DefaultAudio implements Video
+abstract class DefaultVideo extends DefaultAudio implements InteractiveVideo, ResamplableVideo, ResizableVideo
 {
+    const RESIZEMODE_FIT = 'fit';
+    const RESIZEMODE_INSET = 'inset';
 
     protected $width;
     protected $height;
@@ -68,10 +71,38 @@ abstract class DefaultVideo extends DefaultAudio implements Video
     }
 
     /**
+     * {@inheritdoc)
+     */
+    public function getComputedDimensions($originalWidth, $originalHeight)
+    {
+        switch ($this->getResizeMode()) {
+            case self::RESIZEMODE_INSET:
+                $originalRatio = $originalWidth / $originalHeight;
+                $targetRatio = $this->width / $this->height;
+
+                if ($targetRatio > $originalRatio) {
+                    $height = $this->height;
+                    $width = round($originalRatio * $this->height);
+                } else {
+                    $width = $this->width;
+                    $height = round($this->width / $originalRatio);
+                }
+                break;
+            case self::RESIZEMODE_FIT:
+            default:
+                $width = $this->width;
+                $height = $this->height;
+                break;
+        }
+
+        return array($width, $height);
+    }
+
+    /**
      * Set the resize mode
-     * 
-     * @param string $mode  The mode, one of the self::RESIZEMODE_* constants
-     * 
+     *
+     * @param string $mode The mode, one of the self::RESIZEMODE_* constants
+     *
      * @throws InvalidArgumentException
      */
     public function setResizeMode($mode)

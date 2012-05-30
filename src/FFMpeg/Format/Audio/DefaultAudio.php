@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FFMpeg\Format;
+namespace FFMpeg\Format\Audio;
 
 use FFMpeg\Exception\InvalidArgumentException;
 
@@ -18,7 +18,7 @@ use FFMpeg\Exception\InvalidArgumentException;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-abstract class DefaultAudio implements Audio
+abstract class DefaultAudio implements ResamplableAudio, InteractiveAudio
 {
     protected $audioCodec;
     protected $audioSampleRate = 44100;

@@ -11,20 +11,22 @@
 
 namespace FFMpeg\Format\Audio;
 
+use FFMpeg\Format\Audio as BaseAudio;
+
 /**
- * The Flac audio format
- *
+ * The resamplable audio interface
+ * 
+ * This provide a method to define the AudiosampleRate 
+ * 
  * @author Romain Neutron imprec@gmail.com
  */
-class Flac extends DefaultAudio
+interface ResamplableAudio extends BaseAudio
 {
-    protected $audioCodec = 'flac';
 
     /**
-     * {@inheritDoc}
+     * Get the audio sample rate
+     *
+     * @return integer
      */
-    public function getAvailableAudioCodecs()
-    {
-        return array('flac');
-    }
+    public function getAudioSampleRate();
 }

@@ -11,6 +11,11 @@
 
 namespace FFMpeg\Format;
 
+/**
+ * The base audio interface
+ * 
+ * @author Romain Neutron imprec@gmail.com
+ */
 interface Audio
 {
 
@@ -22,23 +27,10 @@ interface Audio
     public function getAudioCodec();
 
     /**
-     * Get the audio sample rate
-     *
-     * @return integer
-     */
-    public function getAudioSampleRate();
-
-    /**
      * Get the kiloBitrate value
      *
      * @return integer
      */
     public function getKiloBitrate();
 
-    /**
-     * Returns the list of available audio codecs for this format
-     *
-     * @return array
-     */
-    public function getAvailableAudioCodecs();
 }

@@ -12,42 +12,12 @@
 namespace FFMpeg\Format;
 
 /**
- * The video format interface
- *
+ * The base video interface
+ * 
  * @author Romain Neutron imprec@gmail.com
  */
 interface Video extends Audio
 {
-    const RESIZEMODE_FIT = 'fit';
-    const RESIZEMODE_INSET = 'inset';
-
-    /**
-     * Returns the width
-     *
-     * @return integer
-     */
-    public function getWidth();
-
-    /**
-     * Returns the height
-     *
-     * @return integer
-     */
-    public function getHeight();
-
-    /**
-     * Get the current resize mode
-     * 
-     * @return string
-     */
-    public function getResizeMode();
-
-    /**
-     * Returns the frame rate
-     *
-     * @return integer
-     */
-    public function getFrameRate();
 
     /**
      * Returns the video codec
@@ -55,18 +25,4 @@ interface Video extends Audio
      * @return string
      */
     public function getVideoCodec();
-
-    /**
-     * Returns the GOP size
-     *
-     * @return integer
-     */
-    public function getGOPSize();
-
-    /**
-     * Returns the list of available video codecs for this format
-     *
-     * @return array
-     */
-    public function getAvailableVideoCodecs();
 }

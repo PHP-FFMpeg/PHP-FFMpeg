@@ -11,8 +11,6 @@
 
 namespace FFMpeg\Format\Video;
 
-use FFMpeg\Format\DefaultVideo;
-
 /**
  * The Ogg video format
  *
