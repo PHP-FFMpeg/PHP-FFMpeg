@@ -9,7 +9,7 @@
          stopOnFailure="false"
          syntaxCheck="true"
          verbose="false"
-         bootstrap="bootstrap.php"
+         bootstrap="vendor/autoload.php"
 >
     <logging>
       <log type="coverage-html" target="tests/phpunit_report/report" charset="UTF-8"

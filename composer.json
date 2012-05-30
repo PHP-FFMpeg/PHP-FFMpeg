@@ -22,7 +22,8 @@
         "monolog/monolog": "1.0.*"
     },
     "require-dev": {
-        "fabpot/php-cs-fixer": "master"
+        "fabpot/php-cs-fixer": "master",
+	"sami/sami": "dev-master"
     },
     "autoload": {
         "psr-0": {
