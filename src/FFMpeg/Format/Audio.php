@@ -20,17 +20,18 @@ interface Audio
 {
 
     /**
-     * Returns the audio codec
-     *
-     * @return string
-     */
-    public function getAudioCodec();
-
-    /**
      * Get the kiloBitrate value
      *
      * @return integer
      */
     public function getKiloBitrate();
+    
+    /**
+     * Give som extra parameters to add to ffmpeg commandline
+     * Parameters MUST be escaped
+     * 
+     * @return string
+     */
+    public function getExtraParams();
 
 }

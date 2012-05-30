@@ -12,28 +12,18 @@
 namespace FFMpeg\Format\Video;
 
 use FFMpeg\Format\Video as BaseVideo;
+use FFMpeg\Format\Dimension;
 
 /**
- * The resamplable video interface
- *
- * This interface provides frame rate and GOP size settings for video encoding
- *
  * @author Romain Neutron imprec@gmail.com
  */
-interface ResamplableVideo extends BaseVideo
+interface Transcodable extends BaseVideo
 {
 
     /**
-     * Returns the frame rate
+     * Returns the video codec
      *
-     * @return integer
+     * @return string
      */
-    public function getFrameRate();
-
-    /**
-     * Returns the GOP size
-     *
-     * @return integer
-     */
-    public function getGOPSize();
+    public function getVideoCodec();
 }

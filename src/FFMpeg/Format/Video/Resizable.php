@@ -12,6 +12,7 @@
 namespace FFMpeg\Format\Video;
 
 use FFMpeg\Format\Video as BaseVideo;
+use FFMpeg\Format\Dimension;
 
 /**
  * The resizable video interface
@@ -20,24 +21,8 @@ use FFMpeg\Format\Video as BaseVideo;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-interface ResizableVideo extends BaseVideo
+interface Resizable extends BaseVideo
 {
-
-    /**
-     * Returns the width setting.
-     * The return of this method should not depend on a media file size
-     *
-     * @return integer
-     */
-    public function getWidth();
-
-    /**
-     * Returns the height setting
-     * The return of this method should not depend on a media file size
-     *
-     * @return integer
-     */
-    public function getHeight();
 
     /**
      * Returns the computed dimensions for the resize, after operation.
@@ -45,14 +30,7 @@ interface ResizableVideo extends BaseVideo
      *
      * @param  integer $originalWidth
      * @param  integer $originalHeight
-     * @return array   An indexed array containing the width and the height
+     * @return Dimension  A dimension
      */
     public function getComputedDimensions($originalWidth, $originalHeight);
-
-    /**
-     * Get the current resize mode name
-     *
-     * @return string
-     */
-    public function getResizeMode();
 }

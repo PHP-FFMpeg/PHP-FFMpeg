@@ -14,19 +14,15 @@ namespace FFMpeg\Format\Audio;
 use FFMpeg\Format\Audio as BaseAudio;
 
 /**
- * The interactive audio interface. This provide a method to list available
- * codecs. This is usefull to build interactive development and switch between
- * different codecs
- *
  * @author Romain Neutron imprec@gmail.com
  */
-interface InteractiveAudio extends BaseAudio
+interface Transcodable extends BaseAudio
 {
 
     /**
-     * Returns the list of available audio codecs for this format
+     * Returns the audio codec
      *
-     * @return array
+     * @return string
      */
-    public function getAvailableAudioCodecs();
+    public function getAudioCodec();
 }

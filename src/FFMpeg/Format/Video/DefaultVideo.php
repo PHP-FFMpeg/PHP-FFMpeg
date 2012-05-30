@@ -12,6 +12,7 @@
 namespace FFMpeg\Format\Video;
 
 use FFMpeg\Format\Audio\DefaultAudio;
+use FFMpeg\Format\Dimension;
 use FFMpeg\Exception\InvalidArgumentException;
 
 /**
@@ -19,7 +20,7 @@ use FFMpeg\Exception\InvalidArgumentException;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-abstract class DefaultVideo extends DefaultAudio implements InteractiveVideo, ResamplableVideo, ResizableVideo
+abstract class DefaultVideo extends DefaultAudio implements Interactive, Resamplable, Resizable
 {
     const RESIZEMODE_FIT = 'fit';
     const RESIZEMODE_INSET = 'inset';
@@ -33,7 +34,10 @@ abstract class DefaultVideo extends DefaultAudio implements InteractiveVideo, Re
     protected $kiloBitrate = 1000;
 
     /**
-     * {@inheritdoc}
+     * Returns the width setting.
+     * The return of this method should not depend on a media file size
+     *
+     * @return integer
      */
     public function getWidth()
     {
@@ -41,7 +45,10 @@ abstract class DefaultVideo extends DefaultAudio implements InteractiveVideo, Re
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the height setting
+     * The return of this method should not depend on a media file size
+     *
+     * @return integer
      */
     public function getHeight()
     {
@@ -95,7 +102,7 @@ abstract class DefaultVideo extends DefaultAudio implements InteractiveVideo, Re
                 break;
         }
 
-        return array($width, $height);
+        return new Dimension($width, $height);
     }
 
     /**
@@ -121,7 +128,9 @@ abstract class DefaultVideo extends DefaultAudio implements InteractiveVideo, Re
     }
 
     /**
-     * {@inheritdoc}
+     * Get the current resize mode name
+     *
+     * @return string
      */
     public function getResizeMode()
     {

@@ -18,11 +18,5 @@ namespace FFMpeg\Format;
  */
 interface Video extends Audio
 {
-
-    /**
-     * Returns the video codec
-     *
-     * @return string
-     */
-    public function getVideoCodec();
+    
 }

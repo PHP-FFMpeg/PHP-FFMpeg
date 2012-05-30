@@ -20,7 +20,7 @@ use FFMpeg\Format\Audio as BaseAudio;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-interface ResamplableAudio extends BaseAudio
+interface Resamplable extends BaseAudio
 {
 
     /**

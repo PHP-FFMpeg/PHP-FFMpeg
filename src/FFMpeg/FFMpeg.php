@@ -113,7 +113,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-
+            
         }
 
         if ( ! $process->isSuccessful()) {
@@ -176,10 +176,16 @@ class FFMpeg extends Binary
             . escapeshellarg($this->pathfile)
             . ' ' . $format->getExtraParams()
             . ' -threads ' . $threads
-            . ' -acodec ' . $format->getAudioCodec()
             . ' -ab ' . $format->getKiloBitrate() . 'k '
-            . ' -ac 2 -ar ' . $format->getAudioSampleRate()
             . ' ' . escapeshellarg($outputPathfile);
+
+        if ($format instanceof Audio\Transcodable) {
+            $cmd .= ' -acodec ' . $format->getAudioCodec();
+        }
+        
+        if ($format instanceof Audio\Resamplable) {
+            $cmd .= ' -ac 2 -ar ' . $format->getAudioSampleRate();
+        }
 
         $process = new Process($cmd);
 
@@ -188,7 +194,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-
+            
         }
 
         if ( ! $process->isSuccessful()) {
@@ -226,8 +232,7 @@ class FFMpeg extends Binary
 
             $result = $this->prober->probeStreams($this->pathfile);
 
-            $originalWidth = $format->getWidth();
-            $originalHeight = $format->getHeight();
+            $originalWidth = $originalHeight = null;
 
             foreach ($result as $stream) {
                 foreach ($stream as $info) {
@@ -242,23 +247,35 @@ class FFMpeg extends Binary
                 }
             }
 
-            list($width, $height) = $format->getComputedDimensions($originalWidth, $originalHeight);
+            if ($originalHeight !== null && $originalWidth !== null) {
+                list($width, $height) = $format->getComputedDimensions($originalWidth, $originalHeight);
 
-            $width = $this->getMultiple($format->getWidth(), 16);
-            $height = $this->getMultiple($format->getHeight(), 16);
+                $width = $this->getMultiple($width, 16);
+                $height = $this->getMultiple($height, 16);
 
-            $cmd_part2 .= ' -s ' . $width . 'x' . $height;
+                $cmd_part2 .= ' -s ' . $width . 'x' . $height;
+            }
         }
 
-        $cmd_part2 .= ' -r ' . $format->getFrameRate()
-            . ' -vcodec ' . $format->getVideoCodec()
-            . ' -b ' . $format->getKiloBitrate() . 'k -g 25 -bf 3'
+        if ($format instanceof Video\Resamplable) {
+            $cmd_part2 .= ' -r ' . $format->getFrameRate();
+        }
+
+        if ($format instanceof Video\Transcodable) {
+            $cmd_part2 .= ' -vcodec ' . $format->getVideoCodec();
+        }
+
+        $cmd_part2 .= ' -b ' . $format->getKiloBitrate() . 'k -g 25 -bf 3'
             . ' -threads ' . $threads
             . ' -refs 6 -b_strategy 1 -coder 1 -qmin 10 -qmax 51 '
             . ' -sc_threshold 40 -flags +loop -cmp +chroma'
             . ' -me_range 16 -subq 7 -i_qfactor 0.71 -qcomp 0.6 -qdiff 4 '
             . ' -trellis 1 -qscale 1 '
-            . '-acodec ' . $format->getAudioCodec() . ' -ab 92k ';
+            . ' -ab 92k ';
+
+        if ($format instanceof Audio\Transcodable) {
+            $cmd_part2 .= '-acodec ' . $format->getAudioCodec();
+        }
 
         $tmpFile = new \SplFileInfo(tempnam(sys_get_temp_dir(), 'temp') . '.' . pathinfo($outputPathfile, PATHINFO_EXTENSION));
 

@@ -18,7 +18,7 @@ use FFMpeg\Exception\InvalidArgumentException;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-abstract class DefaultAudio implements ResamplableAudio, InteractiveAudio
+abstract class DefaultAudio implements Resamplable, Interactive
 {
     protected $audioCodec;
     protected $audioSampleRate = 44100;
