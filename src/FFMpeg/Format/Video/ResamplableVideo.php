@@ -15,9 +15,9 @@ use FFMpeg\Format\Video as BaseVideo;
 
 /**
  * The resamplable video interface
- * 
+ *
  * This interface provides frame rate and GOP size settings for video encoding
- * 
+ *
  * @author Romain Neutron imprec@gmail.com
  */
 interface ResamplableVideo extends BaseVideo

@@ -15,16 +15,16 @@ use FFMpeg\Format\Video as BaseVideo;
 
 /**
  * The resizable video interface
- * 
+ *
  * This interface provides methods for video resizing.
- * 
+ *
  * @author Romain Neutron imprec@gmail.com
  */
 interface ResizableVideo extends BaseVideo
 {
 
     /**
-     * Returns the width setting. 
+     * Returns the width setting.
      * The return of this method should not depend on a media file size
      *
      * @return integer

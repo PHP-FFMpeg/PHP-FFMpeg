@@ -15,9 +15,9 @@ use FFMpeg\Format\Audio as BaseAudio;
 
 /**
  * The resamplable audio interface
- * 
- * This provide a method to define the AudiosampleRate 
- * 
+ *
+ * This provide a method to define the AudiosampleRate
+ *
  * @author Romain Neutron imprec@gmail.com
  */
 interface ResamplableAudio extends BaseAudio

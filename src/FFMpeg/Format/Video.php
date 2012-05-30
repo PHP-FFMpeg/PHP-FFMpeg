@@ -13,7 +13,7 @@ namespace FFMpeg\Format;
 
 /**
  * The base video interface
- * 
+ *
  * @author Romain Neutron imprec@gmail.com
  */
 interface Video extends Audio

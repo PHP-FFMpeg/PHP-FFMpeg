@@ -13,7 +13,7 @@ namespace FFMpeg\Format;
 
 /**
  * The base audio interface
- * 
+ *
  * @author Romain Neutron imprec@gmail.com
  */
 interface Audio

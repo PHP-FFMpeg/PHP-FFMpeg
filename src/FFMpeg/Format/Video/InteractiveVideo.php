@@ -14,10 +14,10 @@ namespace FFMpeg\Format\Video;
 use FFMpeg\Format\Video as BaseVideo;
 
 /**
- * The interactive video interface. This provide a method to list available 
+ * The interactive video interface. This provide a method to list available
  * codecs. This is usefull to build interactive development and switch between
  * different codecs
- * 
+ *
  * @author Romain Neutron imprec@gmail.com
  */
 interface InteractiveVideo extends BaseVideo
