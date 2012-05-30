@@ -33,6 +33,9 @@ class FFMpeg extends Binary
      */
     protected $prober;
 
+    /**
+     * Destructor
+     */
     public function __destruct()
     {
         $this->prober = null;
@@ -88,6 +91,7 @@ class FFMpeg extends Binary
     }
 
     /**
+     * Extract an image from a media file
      *
      * @param  integer          $time   The time in second where to take the snapshot
      * @param  string           $output The pathfile where to write
