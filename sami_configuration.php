@@ -14,6 +14,6 @@ $iterator = Finder::create()
 
 return new Sami($iterator, array(
     'title'                => 'PHP FFMpeg API',
-    'build_dir'            => __DIR__.'/docs/build/html/API',
-    'cache_dir'            => __DIR__.'/docs/build/html/API/cache',
+    'build_dir'            => __DIR__.'/docs/API',
+    'cache_dir'            => __DIR__.'/docs/API/cache',
 ));
