@@ -225,7 +225,7 @@ class FFMpeg extends Binary
 
         $cmd_part2 = '';
 
-        if ($format instanceof Format\ResizableVideo) {
+        if ($format instanceof Video\Resizable) {
             if ( ! $this->prober) {
                 throw new LogicException('You must set a valid prober if you use RESIZEMODE_INSET');
             }
@@ -248,10 +248,10 @@ class FFMpeg extends Binary
             }
 
             if ($originalHeight !== null && $originalWidth !== null) {
-                list($width, $height) = $format->getComputedDimensions($originalWidth, $originalHeight);
+                $dimensions = $format->getComputedDimensions($originalWidth, $originalHeight);
 
-                $width = $this->getMultiple($width, 16);
-                $height = $this->getMultiple($height, 16);
+                $width = $this->getMultiple($dimensions->getWidth(), 16);
+                $height = $this->getMultiple($dimensions->getHeight(), 16);
 
                 $cmd_part2 .= ' -s ' . $width . 'x' . $height;
             }
