@@ -3,6 +3,7 @@ PHP FFMpeg documentation
 
 .. toctree::
    :hidden:
+   :maxdepth: 4
 
    Recipes
 

@@ -158,12 +158,12 @@
             <div class="navbar-inner">
                 <div class="container">
                     <a class="brand" href="{{ pathto(master_doc) }}">{{ project }} documentation</a>
-		            <!--<div class="nav-collapse" id="navigation" class="related">
-	                    {{ toctree(collapse=True, maxdepth=-1, titles_only=False) }}
-	                </div>-->
+		        <div class="nav-collapse" id="navigation" class="related">
+	                    {{ toctree(collapse=True, maxdepth=1, titles_only=False) }}
 	                </div>
                 </div>
                 {% include "ribbon.html" %}
+            </div>
         </div>
         <div role="main" class="container">
 

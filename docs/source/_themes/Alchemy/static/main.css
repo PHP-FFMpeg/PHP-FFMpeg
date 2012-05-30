@@ -1,6 +1,14 @@
 /**
  * Here you write your customizations
- */
+*/
 body, html {
     background-color:#CEC7CB;
+}
+
+h1,h2,h3,h4,h5,h6, a, a:hover, a:visited{
+    color:#404040;
+}
+
+.hero-unit{
+    background-color: transparent;
 }

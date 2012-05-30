@@ -5,3 +5,13 @@ h1, h2, h3, h4, h5, h6{
 h3{
  padding: 40px 0 10px;
 }
+
+a, a:hover, a:visited{
+    color:#0088CC;
+    text-decoration:underline;
+}
+
+.navbar a,
+.sphinxsidebarwrapper a{
+    text-decoration:none;
+}
