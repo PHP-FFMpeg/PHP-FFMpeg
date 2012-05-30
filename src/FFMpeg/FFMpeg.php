@@ -308,6 +308,7 @@ class FFMpeg extends Binary
 
         $this->cleanupTemporaryFile($tmpFile->getPathname());
         $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log');
+        $this->cleanupTemporaryFile(getcwd() . '/av2pass-0.log');
         $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log.mbtree');
 
         if ( ! $process->isSuccessful()) {
