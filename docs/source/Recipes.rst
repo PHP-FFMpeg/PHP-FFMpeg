@@ -48,24 +48,27 @@ You can also initialize with a custom path to the binary :
     <?php
     $ffmpeg = new FFMpeg('/usr/local/src/ffmpeg/bin/ffmpeg', $logger);
 
-Defining formats
-----------------
+Formats
+-------
 
-Two base format interface are given by PHP-FFMpeg : ``FFMpeg\Format\Audio`` and
-``FFMpeg\Format\Video``. ``Video`` is an extension of ``Audio``.
-By implementing one of these interface, you're ready to encode a video.
+PHP-FFMpeg provibes a set of predefined audio and video formats. These format
+are usefulll, but you'll probably need to define your own format with their own
+resize rules, etc...
 
-But you format can implement more than these interfaces ; PHP-FFMpeg provides a 
-set of interfaces to transcode, resize and resample audio / video.
+This section describe hox to use media formats, and how to define them. 
 
-PHP-FFMpeg also provides a set of default audio and video usefull formats for
-web usages.
+.. note:: Defining a format is just about implementing interfaces.
 
-Encode a video
-^^^^^^^^^^^^^^
+Video
+^^^^^
 
-To encode a video, you have to define the target format. A format is an object
-that implements ``FFMpeg\Format\Video``
+This section describes video processing and Interfaces for building video 
+formats.
+
+Simple transcoding
+++++++++++++++++++
+
+To transcode a video, you have to pass the target format to FFMpeg.
 
 The following example initialize a Ogg format and encodes a `Video.mpeg` to a
 target file `file.ogv` :
@@ -84,11 +87,10 @@ target file `file.ogv` :
 .. note:: ``FFmpeg`` methods always return the object itself so you can chain
     multiple methods.
 
-Encode for HTML5
-^^^^^^^^^^^^^^^^
+HTML5
++++++
 
-PHP-FFMpeg provides three video format out of the box : HTML5 video formats.
-These formats are available as these objects :
+PHP-FFMpeg provides three video format out of the box : HTML5 video formats 
 
  - ``FFMpeg\Format\Video\WebM``
  - ``FFMpeg\Format\Video\X264``
@@ -119,13 +121,17 @@ These formats are available as these objects :
         ->encode($oggFormat, 'file.ogv')
         ->close();
 
+.. note:: All formats provided by PHP-FFMpeg extends DefaultVideo, have a look
+    at the API doc for more information on its behavior.
+
 .. note:: Use PHP-MP4Box to make it compatible with pseudo stream !
 
 Create your own media type
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+++++++++++++++++++++++++++
 
-It is very easy to define the media type you want as target. All you need to 
-do is implement the ``FFMpeg\Format\Video`` interface
+PHP-FFMpeg provides ``FFMpeg\Format\Video``, as base interface for creating a
+Video format. To define a target format, all you need to do is implement this
+Interface.
 
 .. code-block:: php
 
@@ -162,13 +168,13 @@ PHP-FFmpeg brings more interfaces for your video formats :
 .. note:: You can combine these features in one video format.
 
 Advanced media type
-^^^^^^^^^^^^^^^^^^^
++++++++++++++++++++
 
 This section present basic usage of the different interfaces. You can combine 
 them in your own format.
 
 Resizable
-+++++++++
+.........
 
 This interface provide an easy way to resize a video
 The example below resizes a video by half.
@@ -198,7 +204,7 @@ The example below resizes a video by half.
 
 
 Resamplable
-+++++++++++
+...........
 
 This interface provide an easy way to resample a video
 The example below resample the video at 15 frame per second with a keyframe 
@@ -232,7 +238,7 @@ every 30 image.
         ->close();
 
 Interactive
-+++++++++++
+...........
 
 This interface provide a method to list available codec for the format
 The example below provide a format object listing available videocodec for
@@ -265,17 +271,45 @@ flash video.
         ->encode($format, 'file.mp4')
         ->close();
 
-Adding custom commandline options
-+++++++++++++++++++++++++++++++++
 
-If you need to add custom FFmpeg command line option, you can use the 
+Audio
+^^^^^
+
+This section describes audio processing and Interfaces for building video 
+formats.
+
+Simple transcoding
+++++++++++++++++++
+
+Extract soundtrack from movie
++++++++++++++++++++++++++++++
+
+Create your own media type
+++++++++++++++++++++++++++
+
+Advanced media type
++++++++++++++++++++
+
+Resamplable
+...........
+
+Transcodable
+............
+
+Interactive
+...........
+
+
+Custom commandline options
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you need to add custom FFmpeg command line option, use the 
 ``FFMpeg\Format\Audio::getExtraParams`` method.
-As Video extends Audio, it is also available in any format.
+As ``Video`` extends ``Audio``, it is also available in any format.
 
-The following example shows a getExtraParams usage for aac encoding. With the
-latest FFMPeg version, aac encoding can be executed with command parameters
-``-strict experimental``. Here is what happens if you do not add this extra
-parameter : 
+The following example shows a ``getExtraParams`` usage for aac encoding. With the
+latest AvConv / FFMPeg version, aac encoding has to be executed with extra command parameters
+``-strict experimental``.
 
 .. code-block:: php
 
@@ -309,8 +343,6 @@ parameter :
     $ffmpeg->open('Video.mp4')
         ->encode($format, 'output-aac.mp4')
         ->close();
-
-
 
 FFProbe recipes
 ---------------
