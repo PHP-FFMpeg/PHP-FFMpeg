@@ -90,7 +90,7 @@ Basic Usage
 Recipes
 -------
 
-You'll find usefull recipes in our recipe guide
+You'll find usefull recipes in our :doc:`Recipes`
 
 Handling Exceptions
 -------------------
