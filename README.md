@@ -6,7 +6,11 @@ An Object Oriented library to convert video/audio files with AVConv / FFmpeg.
 
 ##Documentation
 
-Read The Documentation at http://readthedocs.org/docs/ffmpeg-php/ !
+Read The Documentation at [Read The Docs !](http://readthedocs.org/docs/ffmpeg-php/)
+
+##API Browser
+
+Browse the [API](http://readthedocs.org/docs/ffmpeg-php/en/latest/_static/API/)
 
 ##Usage Example
 
