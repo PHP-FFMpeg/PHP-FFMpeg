@@ -241,11 +241,11 @@ class FFMpeg extends Binary
             foreach ($result as $stream) {
                 foreach ($stream as $name => $value) {
                     if ($name == 'width') {
-                        $originalWidth = substr($info, 6);
+                        $originalWidth = $value;
                         continue;
                     }
                     if ($name == 'value') {
-                        $originalHeight = substr($info, 7);
+                        $originalHeight = $value;
                         continue;
                     }
                 }
