@@ -480,4 +480,120 @@ latest AvConv / FFMPeg version, aac encoding has to be executed with extra comma
 FFProbe recipes
 ---------------
 
+FFProbe / AvProbe is a usefull tool for probing media files. PHP-FFMpeg 
+implementation is currenly light.
 
+Load FFProbe
+^^^^^^^^^^^^
+
+As FFMpeg, you can load FFProbe two ways ; either with the binary detector or
+specifying the binary you want to use
+
+.. code-block:: php
+
+    <?php
+    use Monolog\Logger;
+    use Monolog\Handler\NullHandler;
+    use FFMpeg\FFProbe;
+
+    // Create a logger
+    $logger = new Logger('MyLogger');
+    $logger->pushHandler(new NullHandler());
+
+    // ------------------------------------------------------------------------
+    // Load with binary detection
+
+    // You have to pass a Monolog logger
+    // This logger provides some usefull infos about what's happening
+    $ffprobe = FFProbe::load($logger);
+
+
+    // ------------------------------------------------------------------------
+    // Or load manually
+
+    $ffprobe = new FFProbe('/usr/local/src/ffmpeg/bin/ffprobe', $logger);
+
+
+Probe streams
+^^^^^^^^^^^^^
+
+Probe streams returns the output of ``avprobe -show_streams`` as  a json 
+object.
+
+.. code-block:: php
+
+    <?php
+    echo $ffprobe->probeStreams('Video.ogv');
+
+will output something like 
+
+.. code-block:: json
+
+    [
+        {
+            "index": 0,
+            "codec_name": "theora",
+            "codec_long_name": "Theora",
+            "codec_type": "video",
+            "codec_time_base": "1/15",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "width": 400,
+            "height": 304,
+            "has_b_frames": 0,
+            "pix_fmt": "yuv420p",
+            "level": "-99",
+            "r_frame_rate": "15/1",
+            "avg_frame_rate": "15/1",
+            "time_base": "1/15",
+            "start_time": "0.000000",
+            "duration": "29.533333"
+        },
+        {
+            "index": 1,
+            "codec_name": "vorbis",
+            "codec_long_name": "Vorbis",
+            "codec_type": "audio",
+            "codec_time_base": "1/44100",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "sample_rate": "44100.000000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/44100",
+            "start_time": "0.000000",
+            "duration": "29.489342",
+            "TAG:TITLE": "Halo",
+            "TAG:LICENSE": "http://creativecommons.org/licenses/publicdomain/",
+            "TAG:LOCATION": "http://www.archive.org/details/ctvc"
+        }
+    ]
+
+
+Probe formats
+^^^^^^^^^^^^^
+
+Probe format returns the output of ``avprobe -show_format`` as  a json 
+object.
+
+.. code-block:: php
+
+    <?php
+    echo $ffprobe->probeFormat('Video.ogv');
+
+will output something like 
+
+.. code-block:: json
+
+    {
+        "filename": "Video.ogv",
+        "nb_streams": 2,
+        "format_name": "ogg",
+        "format_long_name": "Ogg",
+        "start_time": "0.000000",
+        "duration": "29.533333",
+        "size": "1786693.000000",
+        "bit_rate": "483980.000000"
+    }
