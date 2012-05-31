@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>FFMpeg\Format\Video\DefaultVideo | PHP-XPDF API</title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">PHP-XPDF API</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../FFMpeg/Format/Video.html">FFMpeg\Format\Video</a>\DefaultVideo</h1>
+    </div>
+        <div class="content">
+                <p>abstract class    <strong>DefaultVideo</strong>        extends <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a>        implements
+        <a href="../../../FFMpeg/Format/Video/Interactive.html"><abbr title="FFMpeg\Format\Video\Interactive">Interactive</abbr></a>, <a href="../../../FFMpeg/Format/Video/Resamplable.html"><abbr title="FFMpeg\Format\Video\Resamplable">Resamplable</abbr></a>, <a href="../../../FFMpeg/Format/Video/Resizable.html"><abbr title="FFMpeg\Format\Video\Resizable">Resizable</abbr></a></p>
+
+            <div class="description">
+            <p>The abstract default Video format</p>
+            <p></p>
+        </div>
+    
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>RESIZEMODE_FIT</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>RESIZEMODE_INSET</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getExtraParams">getExtraParams</a>()
+                    <p>Returns extra parameters for the encoding</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getExtraParams"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getAudioCodec">getAudioCodec</a>()
+                    <p>{@inheritdoc}</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioCodec"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setAudioCodec">setAudioCodec</a>(string $audioCodec)
+                    <p>Set the audio codec, Should be in the available ones, otherwise an exception is thrown</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioCodec"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_getAudioSampleRate">getAudioSampleRate</a>()
+                    <p>Get the audio sample rate</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioSampleRate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setAudioSampleRate">setAudioSampleRate</a>(integer $audioSampleRate)
+                    <p>Set the audio sample rate</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioSampleRate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getKiloBitrate">getKiloBitrate</a>()
+                    <p>{@inheritdoc}</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getKiloBitrate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setKiloBitrate">setKiloBitrate</a>(int $kiloBitrate)
+                    <p>Set the kiloBitrate value</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setKiloBitrate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_getWidth">getWidth</a>()
+                    <p>Returns the width setting.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_getHeight">getHeight</a>()
+                    <p>Returns the height setting The return of this method should not depend on a media file size</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setDimensions">setDimensions</a>(integer $width, integer $height)
+                    <p>Set the dimensions</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Format/Dimension.html"><abbr title="FFMpeg\Format\Dimension">Dimension</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getComputedDimensions">getComputedDimensions</a>(integer $originalWidth, integer $originalHeight)
+                    <p>{@inheritdoc)</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setResizeMode">setResizeMode</a>(string $mode)
+                    <p>Set the resize mode</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getResizeMode">getResizeMode</a>()
+                    <p>Get the current resize mode name</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_getFrameRate">getFrameRate</a>()
+                    <p>Returns the frame rate</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setFrameRate">setFrameRate</a>(integer $frameRate)
+                    <p>Set the framerate</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getVideoCodec">getVideoCodec</a>()
+                    <p>{@inheritdoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setVideoCodec">setVideoCodec</a>(string $videoCodec)
+                    <p>Set the video codec, Should be in the available ones, otherwise an exception is thrown</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getGOPsize">getGOPsize</a>()
+                    <p>{@inheritdoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setGOPsize">setGOPsize</a>(integer $GOPsize)
+                    <p>Set the GOP size</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getExtraParams">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getExtraParams"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 32</div>
+        <code>            public            string
+    <strong>getExtraParams</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns extra parameters for the encoding</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAudioCodec">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioCodec"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 40</div>
+        <code>            public            
+    <strong>getAudioCodec</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritdoc}</p>
+        <p></p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAudioCodec">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioCodec"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 52</div>
+        <code>            public            
+    <strong>setAudioCodec</strong>(string $audioCodec)</code>
+    </h3>
+    <div class="details">
+        <p>Set the audio codec, Should be in the available ones, otherwise an exception is thrown</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$audioCodec</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAudioSampleRate">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioSampleRate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 69</div>
+        <code>            public            integer
+    <strong>getAudioSampleRate</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the audio sample rate</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAudioSampleRate">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioSampleRate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 80</div>
+        <code>            public            
+    <strong>setAudioSampleRate</strong>(integer $audioSampleRate)</code>
+    </h3>
+    <div class="details">
+        <p>Set the audio sample rate</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$audioSampleRate</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getKiloBitrate">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getKiloBitrate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 94</div>
+        <code>            public            
+    <strong>getKiloBitrate</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritdoc}</p>
+        <p></p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setKiloBitrate">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setKiloBitrate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 105</div>
+        <code>            public            
+    <strong>setKiloBitrate</strong>(int $kiloBitrate)</code>
+    </h3>
+    <div class="details">
+        <p>Set the kiloBitrate value</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>int</td>
+                <td>$kiloBitrate</td>
+                <td>integer               $kiloBitrate</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getWidth">
+        <div class="location">at line 42</div>
+        <code>            public            integer
+    <strong>getWidth</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the width setting.</p>
+        <p>The return of this method should not depend on a media file size</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getHeight">
+        <div class="location">at line 53</div>
+        <code>            public            integer
+    <strong>getHeight</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the height setting The return of this method should not depend on a media file size</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setDimensions">
+        <div class="location">at line 65</div>
+        <code>            public            
+    <strong>setDimensions</strong>(integer $width, integer $height)</code>
+    </h3>
+    <div class="details">
+        <p>Set the dimensions</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$width</td>
+                <td>The heigth</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$height</td>
+                <td>The width</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getComputedDimensions">
+        <div class="location">at line 83</div>
+        <code>            public            <a href="../../../FFMpeg/Format/Dimension.html"><abbr title="FFMpeg\Format\Dimension">Dimension</abbr></a>
+    <strong>getComputedDimensions</strong>(integer $originalWidth, integer $originalHeight)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritdoc)</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$originalWidth</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$originalHeight</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Format/Dimension.html"><abbr title="FFMpeg\Format\Dimension">Dimension</abbr></a></td>
+            <td>A dimension</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setResizeMode">
+        <div class="location">at line 115</div>
+        <code>            public            
+    <strong>setResizeMode</strong>(string $mode)</code>
+    </h3>
+    <div class="details">
+        <p>Set the resize mode</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$mode</td>
+                <td>The mode, one of the self::RESIZEMODE_* constants</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getResizeMode">
+        <div class="location">at line 135</div>
+        <code>            public            string
+    <strong>getResizeMode</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the current resize mode name</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFrameRate">
+        <div class="location">at line 143</div>
+        <code>            public            integer
+    <strong>getFrameRate</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the frame rate</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setFrameRate">
+        <div class="location">at line 155</div>
+        <code>            public            
+    <strong>setFrameRate</strong>(integer $frameRate)</code>
+    </h3>
+    <div class="details">
+        <p>Set the framerate</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$frameRate</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getVideoCodec">
+        <div class="location">at line 169</div>
+        <code>            public            
+    <strong>getVideoCodec</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritdoc}</p>
+        <p></p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setVideoCodec">
+        <div class="location">at line 181</div>
+        <code>            public            
+    <strong>setVideoCodec</strong>(string $videoCodec)</code>
+    </h3>
+    <div class="details">
+        <p>Set the video codec, Should be in the available ones, otherwise an exception is thrown</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$videoCodec</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getGOPsize">
+        <div class="location">at line 198</div>
+        <code>            public            
+    <strong>getGOPsize</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritdoc}</p>
+        <p></p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setGOPsize">
+        <div class="location">at line 210</div>
+        <code>            public            
+    <strong>setGOPsize</strong>(integer $GOPsize)</code>
+    </h3>
+    <div class="details">
+        <p>Set the GOP size</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$GOPsize</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

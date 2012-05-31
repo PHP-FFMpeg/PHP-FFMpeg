@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>FFMpeg\FFMpeg | PHP-XPDF API</title>
+                    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../classes.html">Classes</a></li>
+                            <li><a href="../namespaces.html">Namespaces</a></li>
+                        <li><a href="../interfaces.html">Interfaces</a></li>
+            <li><a href="../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">PHP-XPDF API</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../FFMpeg.html">FFMpeg</a>\FFMpeg</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>FFMpeg</strong>        extends <a href="../FFMpeg/Binary.html"><abbr title="FFMpeg\Binary">Binary</abbr></a></p>
+
+            <div class="description">
+            <p>FFMpeg driver</p>
+            <p></p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<abbr title="FFMpeg\type">type</abbr> $binary, <abbr title="Monolog\Logger">Logger</abbr> $logger)
+                    <p>Binary constructor</p>
+                </td>
+                <td><small>from&nbsp;<a href="../FFMpeg/Binary.html#method___construct"><abbr title="FFMpeg\Binary">Binary</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___destruct">__destruct</a>()
+                    <p>Destructor</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<a href="../FFMpeg/Binary.html"><abbr title="FFMpeg\Binary">Binary</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_load">load</a>(<abbr title="Monolog\Logger">Logger</abbr> $logger)
+                    <p>Loads the adapter</p>
+                </td>
+                <td><small>from&nbsp;<a href="../FFMpeg/Binary.html#method_load"><abbr title="FFMpeg\Binary">Binary</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_open">open</a>(string $pathfile)
+                    <p>Opens a file in order to be processed</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setProber">setProber</a>(<a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $prober)
+                    <p>Set a prober</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_close">close</a>()
+                    <p>Close a file</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_extractImage">extractImage</a>(integer $time, string $output)
+                    <p>Extract an image from a media file</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_encode">encode</a>(<a href="../FFMpeg/Format/Audio.html"><abbr title="FFMpeg\Format\Audio">Audio</abbr></a> $format, string $outputPathfile, integer $threads = 1)
+                    <p>Encode the file to the specified format</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">in <a href="../FFMpeg/Binary.html#method___construct"><abbr title="FFMpeg\Binary">Binary</abbr></a> at line 39</div>
+        <code>            public            
+    <strong>__construct</strong>(<abbr title="FFMpeg\type">type</abbr> $binary, <abbr title="Monolog\Logger">Logger</abbr> $logger)</code>
+    </h3>
+    <div class="details">
+        <p>Binary constructor</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="FFMpeg\type">type</abbr></td>
+                <td>$binary</td>
+                <td>The path file to the binary</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Monolog\Logger">Logger</abbr></td>
+                <td>$logger</td>
+                <td>A logger</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___destruct">
+        <div class="location">at line 39</div>
+        <code>            public            
+    <strong>__destruct</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Destructor</p>
+        <p></p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_load">
+        <div class="location">in <a href="../FFMpeg/Binary.html#method_load"><abbr title="FFMpeg\Binary">Binary</abbr></a> at line 61</div>
+        <code>        static    public            <a href="../FFMpeg/Binary.html"><abbr title="FFMpeg\Binary">Binary</abbr></a>
+    <strong>load</strong>(<abbr title="Monolog\Logger">Logger</abbr> $logger)</code>
+    </h3>
+    <div class="details">
+        <p>Loads the adapter</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Monolog\Logger">Logger</abbr></td>
+                <td>$logger</td>
+                <td>A logger</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/Binary.html"><abbr title="FFMpeg\Binary">Binary</abbr></a></td>
+            <td>The binary</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_open">
+        <div class="location">at line 52</div>
+        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+    <strong>open</strong>(string $pathfile)</code>
+    </h3>
+    <div class="details">
+        <p>Opens a file in order to be processed</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pathfile</td>
+                <td>A pathfile</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setProber">
+        <div class="location">at line 72</div>
+        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+    <strong>setProber</strong>(<a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $prober)</code>
+    </h3>
+    <div class="details">
+        <p>Set a prober</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$prober</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_close">
+        <div class="location">at line 84</div>
+        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+    <strong>close</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Close a file</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_extractImage">
+        <div class="location">at line 102</div>
+        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+    <strong>extractImage</strong>(integer $time, string $output)</code>
+    </h3>
+    <div class="details">
+        <p>Extract an image from a media file</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$time</td>
+                <td>The time in second where to take the snapshot</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$output</td>
+                <td>The pathfile where to write</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_encode">
+        <div class="location">at line 146</div>
+        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+    <strong>encode</strong>(<a href="../FFMpeg/Format/Audio.html"><abbr title="FFMpeg\Format\Audio">Audio</abbr></a> $format, string $outputPathfile, integer $threads = 1)</code>
+    </h3>
+    <div class="details">
+        <p>Encode the file to the specified format</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../FFMpeg/Format/Audio.html"><abbr title="FFMpeg\Format\Audio">Audio</abbr></a></td>
+                <td>$format</td>
+                <td>The output format</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$outputPathfile</td>
+                <td>The pathfile where to write</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$threads</td>
+                <td>The number of threads to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
