@@ -13,7 +13,7 @@ $iterator = Finder::create()
 ;
 
 return new Sami($iterator, array(
-    'title'                => 'PHP-XPDF API',
+    'title'                => 'PHP-FFMpeg API',
     'theme'                => 'enhanced',
     'build_dir'            => __DIR__.'/docs/source/API/API',
     'cache_dir'            => __DIR__.'/docs/source/API/API/cache',
