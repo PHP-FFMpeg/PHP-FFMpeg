@@ -186,7 +186,7 @@ class FFMpeg extends Binary
         if ($format instanceof Audio\Transcodable) {
             $cmd .= ' -acodec ' . $format->getAudioCodec();
         }
-        
+
         if ($format instanceof Audio\Resamplable) {
             $cmd .= ' -ac 2 -ar ' . $format->getAudioSampleRate();
         }
@@ -234,17 +234,17 @@ class FFMpeg extends Binary
                 throw new LogicException('You must set a valid prober if you use RESIZEMODE_INSET');
             }
 
-            $result = $this->prober->probeStreams($this->pathfile);
+            $result = json_decode($this->prober->probeStreams($this->pathfile), true);
 
             $originalWidth = $originalHeight = null;
 
             foreach ($result as $stream) {
-                foreach ($stream as $info) {
-                    if (strpos($info, 'width=') === 0) {
+                foreach ($stream as $name => $value) {
+                    if ($name == 'width') {
                         $originalWidth = substr($info, 6);
                         continue;
                     }
-                    if (strpos($info, 'height=') === 0) {
+                    if ($name == 'value') {
                         $originalHeight = substr($info, 7);
                         continue;
                     }

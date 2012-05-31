@@ -27,7 +27,8 @@ class FFProbe extends Binary
      * Probe the format of a given file
      *
      * @param  string                   $pathfile
-     * @return string
+     * @return string    A Json object containing the key/values of the probe output
+     * 
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
@@ -39,14 +40,41 @@ class FFProbe extends Binary
 
         $cmd = $this->binary . ' ' . $pathfile . ' -show_format';
 
-        return $this->executeProbe($cmd);
+        $output = $this->executeProbe($cmd);
+
+        $ret = array();
+
+        foreach (explode("\n", $output) as $line) {
+
+            if (in_array($line, array('[FORMAT]', '[/FORMAT]'))) {
+                continue;
+            }
+
+            $chunks = explode('=', $line);
+            $key = array_shift($chunks);
+
+            if ('' === trim($key)) {
+                continue;
+            }
+
+            $value = trim(implode('=', $chunks));
+
+            if (ctype_digit($value)) {
+                $value = (int) $value;
+            }
+
+            $ret[$key] = $value;
+        }
+
+        return json_encode($ret);
     }
 
     /**
      * Probe the streams contained in a given file
      *
      * @param  string                   $pathfile
-     * @return string
+     * @return array    An array of streams array
+     * 
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
@@ -65,16 +93,32 @@ class FFProbe extends Binary
 
         foreach ($output as $line) {
 
-            if (in_array($line, array('[STREAM]', '[/STREAM]'))) {
+            if ($line == '[STREAM]') {
                 $n ++;
                 $ret[$n] = array();
                 continue;
             }
+            if ($line == '[/STREAM]') {
+                continue;
+            }
 
-            $ret[$n][] = $line;
+            $chunks = explode('=', $line);
+            $key = array_shift($chunks);
+
+            if ('' === trim($key)) {
+                continue;
+            }
+
+            $value = trim(implode('=', $chunks));
+
+            if (ctype_digit($value)) {
+                $value = (int) $value;
+            }
+
+            $ret[$n][$key] = $value;
         }
 
-        return $ret;
+        return json_encode(array_values($ret));
     }
 
     /**
