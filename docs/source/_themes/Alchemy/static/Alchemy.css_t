@@ -37,13 +37,13 @@ h2 {
 }
 
 /* -- navigation styles ----- */
-#navbar, #menu {
-	margin-bottom: 10px;
+.navbar {
+    line-height:1em;
 }
 #navigation {
     min-height: 29px;
     line-height: 30px;
-	display:inline-block;
+    display:inline-block;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
 }
@@ -56,7 +56,7 @@ h2 {
 }
 #navigation li {
     float: left;
-	display:block;
+    display:block;
     line-height:38px;
 }
 #navigation ul > li > a {
