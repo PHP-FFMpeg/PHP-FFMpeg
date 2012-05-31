@@ -12,16 +12,13 @@ Read The Documentation at http://readthedocs.org/docs/ffmpeg-php/ !
 
 ```php
 <?php
-$WebMFormat = new Format\Video\WebM();
-$x264Format = new Format\Video\X264();
-$OggFormat  = new Format\Video\Ogg();
-
+$x264 = new X264();
 $x264->setDimensions(320, 240);
 
 $ffmpeg->open('Video.mpeg')
-    ->encode($WebMFormat, 'file.webm')
-    ->encode($x264Format, 'file.mp4')
-    ->encode($OggFormat, 'file.ogv')
+    ->encode($new WebM(), 'file.webm')
+    ->encode($x264, 'file.mp4')
+    ->encode($new Ogg(), 'file.ogv')
     ->close();
 ```
 
