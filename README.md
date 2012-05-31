@@ -11,7 +11,7 @@ Read The Documentation at http://readthedocs.org/docs/ffmpeg-php/ !
 ##Usage Example
 
 ```php
-<php
+<?php
 $WebMFormat = new Format\Video\WebM();
 $x264Format = new Format\Video\X264();
 $OggFormat  = new Format\Video\Ogg();
