@@ -4,13 +4,13 @@ Recipes
 Initializing FFMpeg
 -------------------
 
-In the examples  we will show you, we assume we work in an environnment where
-FFMpeg has been initialized to ``$ffmpeg`` var ; there are two ways to
-initialize the environment.
+In the following examples, we assume we work in an environnment where
+FFMpeg has been initialized to ``$ffmpeg``; there are two ways to
+initialize the environment (see below).
 
 PHP-FFMpeg supports both ``avconv`` and legacy ``ffmpeg``. If both are installed 
-on your system, ``avconv`` will be loaded in priority. Please read the dedicated 
-chapter below if you want to load ``FFMpeg``.
+on your system, ``avconv`` will be loaded in first priority. Please read the 
+dedicated chapter below if you want to load ``FFMpeg``.
 
 Load FFMpeg automatically
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -33,7 +33,7 @@ look in your PATH environment variable to find ffmpeg/avconv binary :
     // This logger provides some usefull infos about what's happening
     $ffmpeg = FFMpeg::load($logger);
 
-.. note:: FFMpeg and FFProbe both requires a logger with gives feedback about
+.. note:: FFMpeg and FFProbe both requires a logger for giving feedback about
     what's happening. By passing a NullHandler to the logger, you will disable 
     the log system.
 
@@ -51,19 +51,22 @@ You can also initialize with a custom path to the binary :
 Formats
 -------
 
-PHP-FFMpeg provibes a set of predefined audio and video formats. These format
-are usefulll, but you'll probably need to define your own format with their own
+PHP-FFMpeg provides a set of predefined audio and video formats. These formats
+are usefull, but you'll probably need to define your own format with their own
 resize rules, etc...
 
-This section describe hox to use media formats, and how to define them. 
+This section describe how to use media formats, and how to define them. 
 
 .. note:: Defining a format is just about implementing interfaces.
+
+.. _video-reference:
 
 Video
 ^^^^^
 
 This section describes video processing and Interfaces for building video 
-formats.
+formats. As Video is an extension of audio, all these features can be combined
+with audio features (see :ref:`dedicated audio section<audio-reference>`).
 
 Simple transcoding
 ++++++++++++++++++
@@ -90,7 +93,7 @@ target file `file.ogv` :
 HTML5
 +++++
 
-PHP-FFMpeg provides three video format out of the box : HTML5 video formats 
+PHP-FFMpeg provides three video formats out of the box : HTML5 video formats 
 
  - ``FFMpeg\Format\Video\WebM``
  - ``FFMpeg\Format\Video\X264``
@@ -105,6 +108,7 @@ PHP-FFMpeg provides three video format out of the box : HTML5 video formats
     $webMFormat->setDimensions(320, 240)
         ->setFrameRate(15)
         ->setGopSize(25);
+
     $x264Format = new Video\X264();
     $x264Format->setDimensions(320, 240)
         ->setFrameRate(15)
@@ -160,6 +164,7 @@ Interface.
         ->close();
 
 PHP-FFmpeg brings more interfaces for your video formats : 
+
  - ``FFMpeg\Format\Video\Resamplable``
  - ``FFMpeg\Format\Video\Resizable``
  - ``FFMpeg\Format\Video\Transcodable`` 
@@ -170,13 +175,13 @@ PHP-FFmpeg brings more interfaces for your video formats :
 Advanced media type
 +++++++++++++++++++
 
-This section present basic usage of the different interfaces. You can combine 
-them in your own format.
+This section presents usage for the different interfaces. You can combine 
+them for your own formats.
 
 Resizable
 .........
 
-This interface provide an easy way to resize a video
+This interface provide an easy way to resize a video.
 The example below resizes a video by half.
 
 .. code-block:: php
@@ -206,9 +211,9 @@ The example below resizes a video by half.
 Resamplable
 ...........
 
-This interface provide an easy way to resample a video
-The example below resample the video at 15 frame per second with a keyframe 
-every 30 image.
+This interface provides video resampling. The example below resample the video 
+at 15 frame per second with a I-frame every 30 image (see 
+`GOP on wikipedia <https://wikipedia.org/wiki/Group_of_pictures>`_).
 
 .. code-block:: php
 
@@ -240,9 +245,9 @@ every 30 image.
 Interactive
 ...........
 
-This interface provide a method to list available codec for the format
-The example below provide a format object listing available videocodec for
-flash video.
+This interface provides a method to list available codecs for the format.
+The example below provides a format object listing available video-codecs for
+video supported in flash player.
 
 .. code-block:: php
 
@@ -271,33 +276,161 @@ flash video.
         ->encode($format, 'file.mp4')
         ->close();
 
+.. _audio-reference:
 
 Audio
 ^^^^^
 
 This section describes audio processing and Interfaces for building video 
-formats.
+formats. As Video is an extension of audio, all these features can be combined
+with video features (see :ref:`dedicated video section<video-reference>`).
 
 Simple transcoding
 ++++++++++++++++++
 
+To transcode audio file or extract an audio soundtrack from a video, you have to 
+pass the target format to FFMpeg.
+
+The following example initialize a Mp3 format and transcode the file `tune.wav`
+to `tune.mp3` :
+
+.. code-block:: php
+
+    <?php
+    use FFMpeg\Format\Audio\Mp3;
+
+    $mp3Format = new Mp3();
+
+    $ffmpeg->open('tune.wav')
+        ->encode($mp3Format, 'tune.mp3')
+        ->close();
+
 Extract soundtrack from movie
 +++++++++++++++++++++++++++++
+
+The following example initialize a Flac format and extract the audio track from 
+`Video.mpeg` to a target file `soudtrack.flac` :
+
+.. code-block:: php
+
+    <?php
+    use FFMpeg\Format\Audio\Flac;
+
+    $flacFormat = new Flac();
+
+    $ffmpeg->open('Video.mpeg')
+        ->encode($flacFormat, 'soundtrack.flac')
+        ->close();
+
+.. note:: You must ensure that FFmpeg support the format you request, otherwise
+    a FFMpeg\Exception\RuntimeException will be thrown.
 
 Create your own media type
 ++++++++++++++++++++++++++
 
+PHP-FFMpeg provides ``FFMpeg\Format\Audio``, as base interface for creating an
+Audio format. To define a target format, all you need to do is implement this
+Interface.
+
+This example transcodes the mp3 track to a 128kb mp3 :
+
+.. code-block:: php
+
+    <?php
+    namespace Foo\Bar;
+
+    use FFMpeg\Format\Audio;
+
+    class MyFormat implements Audio
+    {
+        public function getKiloBitrate()
+        {
+            return 128;
+        }
+
+        public function getExtraParams()
+        {
+            return '';
+        }
+    }
+
+    $format = new MyFormat();
+
+    $ffmpeg->open('song.mp3')
+        ->encode($format, 'song-128.mp3')
+        ->close();
+
+PHP-FFmpeg brings more interfaces for your audio formats : 
+
+ - ``FFMpeg\Format\Audio\Resamplable``
+ - ``FFMpeg\Format\Audio\Transcodable`` 
+ - ``FFMpeg\Format\Audio\Interactive``
+
+.. note:: You can combine these features in one video format.
+
 Advanced media type
 +++++++++++++++++++
+
+This section presents usage for the different audio interfaces. You can combine 
+them for your own formats.
 
 Resamplable
 ...........
 
-Transcodable
-............
+This interface provides video resampling. The example below resample the video 
+at 15 frame per second with a I-frame every 30 image (see 
+`GOP on wikipedia <https://wikipedia.org/wiki/Group_of_pictures>`_).
+
+.. code-block:: php
+
+    <?php
+    namespace Foo\Bar;
+
+    use FFMpeg\Format\Audio\Resamplable;
+
+    class MyFormat implements Resamplable
+    {
+        public function getAudioSampleRate();
+        {
+            return 44100;
+        }
+
+    }
+
+    $format = new MyFormat();
+
+    $ffmpeg->open('song.mp3')
+        ->encode($format, 'song-44100.mp3')
+        ->close();
+
 
 Interactive
 ...........
+
+This interface provides a method to list available codecs for the format.
+The example below provides a format object listing available audio-codecs for
+a portable player.
+
+.. code-block:: php
+
+    <?php
+    namespace Foo\Bar;
+
+    use FFMpeg\Format\Audio\Interactive;
+
+    class MyFormat implements Interactive
+    {
+        
+        public function getAudioCodec()
+        {
+            return 'libvorbis';
+        }
+
+        public function getAvailableVideoCodecs()
+        {
+            return array('libvorbis', 'libmp3lame', 'libflac');
+        }
+    }
 
 
 Custom commandline options
