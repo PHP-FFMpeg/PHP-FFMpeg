@@ -15,7 +15,7 @@ use FFMpeg\Exception\InvalidArgumentException;
 
 /**
  * Dimension object, used for manipulating width and height couples
- * 
+ *
  * @author Romain Neutron imprec@gmail.com
  */
 class Dimension
@@ -25,9 +25,9 @@ class Dimension
 
     /**
      * Constructor
-     * 
-     * @param  integer $width
-     * @param  integer $height
+     *
+     * @param  integer                  $width
+     * @param  integer                  $height
      * @throws InvalidArgumentException when one of the parameteres is invalid
      */
     public function __construct($width, $height)
@@ -42,7 +42,7 @@ class Dimension
 
     /**
      * Return width
-     * 
+     *
      * @return width
      */
     public function getWidth()
@@ -52,7 +52,7 @@ class Dimension
 
     /**
      * Return height
-     * 
+     *
      * @return integer
      */
     public function getHeight()

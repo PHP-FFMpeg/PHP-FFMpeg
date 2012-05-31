@@ -28,9 +28,9 @@ interface Resizable extends BaseVideo
      * Returns the computed dimensions for the resize, after operation.
      * This method return the actual dimensions that FFmpeg will use.
      *
-     * @param  integer $originalWidth
-     * @param  integer $originalHeight
-     * @return Dimension  A dimension
+     * @param  integer   $originalWidth
+     * @param  integer   $originalHeight
+     * @return Dimension A dimension
      */
     public function getComputedDimensions($originalWidth, $originalHeight);
 }

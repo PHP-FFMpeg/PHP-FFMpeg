@@ -26,9 +26,9 @@ class FFProbe extends Binary
     /**
      * Probe the format of a given file
      *
-     * @param  string                   $pathfile
-     * @return string    A Json object containing the key/values of the probe output
-     * 
+     * @param  string $pathfile
+     * @return string A Json object containing the key/values of the probe output
+     *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
@@ -72,9 +72,9 @@ class FFProbe extends Binary
     /**
      * Probe the streams contained in a given file
      *
-     * @param  string                   $pathfile
-     * @return array    An array of streams array
-     * 
+     * @param  string $pathfile
+     * @return array  An array of streams array
+     *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */

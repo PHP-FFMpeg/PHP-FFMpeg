@@ -18,5 +18,5 @@ namespace FFMpeg\Format;
  */
 interface Video extends Audio
 {
-    
+
 }

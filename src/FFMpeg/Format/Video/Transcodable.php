@@ -12,7 +12,6 @@
 namespace FFMpeg\Format\Video;
 
 use FFMpeg\Format\Video as BaseVideo;
-use FFMpeg\Format\Dimension;
 
 /**
  * @author Romain Neutron imprec@gmail.com

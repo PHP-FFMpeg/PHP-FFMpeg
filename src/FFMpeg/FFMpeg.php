@@ -117,7 +117,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            
+
         }
 
         if ( ! $process->isSuccessful()) {
@@ -198,7 +198,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            
+
         }
 
         if ( ! $process->isSuccessful()) {
