@@ -14,12 +14,12 @@ and `Monolog <https://github.com/Seldaek/monolog>`_.
 Design
 ------
 
-This library is designed to deal with legacy binaries of FFMpeg. We do not rely
+This library is designed to deal with legacy binaries of FFMpeg. It does not rely
 on the FFmpeg extension.
 
 This library is object oriented, this means that nearly everything is an object,
 or ought to be. So you won't find any out of-the-box function to extract
-images or encode video. This provides a testable design and a fail fast behavior.
+images or encode video. This design is headed for tests and a fail fast behavior.
 We hope you'll enjoy it !
 
 Installation
