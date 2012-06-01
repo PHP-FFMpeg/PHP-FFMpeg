@@ -117,7 +117,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-
+            
         }
 
         if ( ! $process->isSuccessful()) {
@@ -198,7 +198,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-
+            
         }
 
         if ( ! $process->isSuccessful()) {
@@ -244,13 +244,19 @@ class FFMpeg extends Binary
                         $originalWidth = $value;
                         continue;
                     }
-                    if ($name == 'value') {
+                    if ($name == 'height') {
                         $originalHeight = $value;
                         continue;
                     }
                 }
             }
 
+            if ($originalHeight !== null && $originalWidth !== null) {
+                $this->logger->addInfo(sprintf('Read dimension for resizin succesful : %s x %s', $originalWidth, $originalHeight));
+            } else {
+                $this->logger->addInfo(sprintf('Read dimension for resizin failed !'));
+            }
+            
             if ($originalHeight !== null && $originalWidth !== null) {
                 $dimensions = $format->getComputedDimensions($originalWidth, $originalHeight);
 
