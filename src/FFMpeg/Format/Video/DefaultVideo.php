@@ -97,8 +97,13 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
                 break;
             case self::RESIZEMODE_FIT:
             default:
-                $width = $this->width;
-                $height = $this->height;
+                if (null !== $this->width && null !== $this->height) {
+                    $width = $this->width;
+                    $height = $this->height;
+                } else {
+                    $width = $originalWidth;
+                    $height = $originalHeight;
+                }
                 break;
         }
 
