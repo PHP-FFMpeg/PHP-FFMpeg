@@ -117,7 +117,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            
+
         }
 
         if ( ! $process->isSuccessful()) {
@@ -198,7 +198,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            
+
         }
 
         if ( ! $process->isSuccessful()) {
@@ -231,7 +231,7 @@ class FFMpeg extends Binary
 
         if ($format instanceof Video\Resizable) {
             if ( ! $this->prober) {
-                throw new LogicException('You must set a valid prober if you use RESIZEMODE_INSET');
+                throw new LogicException('You must set a valid prober if you use a resizable format');
             }
 
             $result = json_decode($this->prober->probeStreams($this->pathfile), true);
@@ -256,7 +256,7 @@ class FFMpeg extends Binary
             } else {
                 $this->logger->addInfo(sprintf('Read dimension for resizin failed !'));
             }
-            
+
             if ($originalHeight !== null && $originalWidth !== null) {
                 $dimensions = $format->getComputedDimensions($originalWidth, $originalHeight);
 
@@ -269,15 +269,22 @@ class FFMpeg extends Binary
 
         if ($format instanceof Video\Resamplable) {
             $cmd_part2 .= ' -r ' . $format->getFrameRate();
+
+            /**
+             * @see http://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping
+             */
+            if ($format->supportBFrames()) {
+                $cmd_part2 .= ' -b_strategy 1 -bf 3 -g ' . $format->getGOPSize();
+            }
         }
 
         if ($format instanceof Video\Transcodable) {
             $cmd_part2 .= ' -vcodec ' . $format->getVideoCodec();
         }
 
-        $cmd_part2 .= ' -b ' . $format->getKiloBitrate() . 'k -g 25 -bf 3'
+        $cmd_part2 .= ' -b ' . $format->getKiloBitrate() . 'k'
             . ' -threads ' . $threads
-            . ' -refs 6 -b_strategy 1 -coder 1 -qmin 10 -qmax 51 '
+            . ' -refs 6 -coder 1 -qmin 10 -qmax 51 '
             . ' -sc_threshold 40 -flags +loop -cmp +chroma'
             . ' -me_range 16 -subq 7 -i_qfactor 0.71 -qcomp 0.6 -qdiff 4 '
             . ' -trellis 1 -qscale 1 '

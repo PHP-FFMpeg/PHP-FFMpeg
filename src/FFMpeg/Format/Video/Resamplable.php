@@ -31,7 +31,18 @@ interface Resamplable extends BaseVideo
     public function getFrameRate();
 
     /**
+     * Returns true if the current format supports B-Frames
+     *
+     * @see https://wikipedia.org/wiki/Video_compression_picture_types
+     *
+     * @return Boolean
+     */
+    public function supportBFrames();
+
+    /**
      * Returns the GOP size
+     *
+     * @see https://wikipedia.org/wiki/Group_of_pictures
      *
      * @return integer
      */
