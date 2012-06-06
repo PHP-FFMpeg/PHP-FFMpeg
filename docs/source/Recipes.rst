@@ -8,8 +8,8 @@ In the following examples, we assume we work in an environnment where
 FFMpeg has been initialized to ``$ffmpeg``; there are two ways to
 initialize the environment (see below).
 
-PHP-FFMpeg supports both ``avconv`` and legacy ``ffmpeg``. If both are installed 
-on your system, ``avconv`` will be loaded in first priority. Please read the 
+PHP-FFMpeg supports both ``avconv`` and legacy ``ffmpeg``. If both are installed
+on your system, ``avconv`` will be loaded in first priority. Please read the
 dedicated chapter below if you want to load ``FFMpeg``.
 
 Load FFMpeg automatically
@@ -34,7 +34,7 @@ look in your PATH environment variable to find ffmpeg/avconv binary :
     $ffmpeg = FFMpeg::load($logger);
 
 .. note:: FFMpeg and FFProbe both requires a logger for giving feedback about
-    what's happening. By passing a NullHandler to the logger, you will disable 
+    what's happening. By passing a NullHandler to the logger, you will disable
     the log system.
 
 
@@ -55,7 +55,7 @@ PHP-FFMpeg provides a set of predefined audio and video formats. These formats
 are usefull, but you'll probably need to define your own format with their own
 resize rules, etc...
 
-This section describe how to use media formats, and how to define them. 
+This section describe how to use media formats, and how to define them.
 
 .. note:: Defining a format is just about implementing interfaces.
 
@@ -64,7 +64,7 @@ This section describe how to use media formats, and how to define them.
 Video
 ^^^^^
 
-This section describes video processing and Interfaces for building video 
+This section describes video processing and Interfaces for building video
 formats. As Video is an extension of audio, all these features can be combined
 with audio features (see :ref:`dedicated audio section<audio-reference>`).
 
@@ -73,13 +73,23 @@ Simple transcoding
 
 To transcode a video, you have to pass the target format to FFMpeg.
 
+When you define a format which implements the
+:ref:`Resizable <resizable-reference>` interface.
+You must set FFprobe (see :ref:`FF-probe<ffprobe-reference>`)
+for probing the media and found its height and size.
+
 The following example initialize a Ogg format and encodes a `Video.mpeg` to a
 target file `file.ogv` :
 
 .. code-block:: php
 
     <?php
+    use FFMpeg\FFProbe;
     use FFMpeg\Format\Video\Ogg;
+
+    $ffprobe = FFProbe::load($logger);
+
+    $ffmpeg->setProber($ffprobe);
 
     $oggFormat = new Ogg();
 
@@ -93,7 +103,7 @@ target file `file.ogv` :
 HTML5
 +++++
 
-PHP-FFMpeg provides three video formats out of the box : HTML5 video formats 
+PHP-FFMpeg provides three video formats out of the box : HTML5 video formats
 
  - ``FFMpeg\Format\Video\WebM``
  - ``FFMpeg\Format\Video\X264``
@@ -163,11 +173,11 @@ Interface.
         ->encode($format, 'file.mp4')
         ->close();
 
-PHP-FFmpeg brings more interfaces for your video formats : 
+PHP-FFmpeg brings more interfaces for your video formats :
 
  - ``FFMpeg\Format\Video\Resamplable``
  - ``FFMpeg\Format\Video\Resizable``
- - ``FFMpeg\Format\Video\Transcodable`` 
+ - ``FFMpeg\Format\Video\Transcodable``
  - ``FFMpeg\Format\Video\Interactive``
 
 .. note:: You can combine these features in one video format.
@@ -175,8 +185,10 @@ PHP-FFmpeg brings more interfaces for your video formats :
 Advanced media type
 +++++++++++++++++++
 
-This section presents usage for the different interfaces. You can combine 
+This section presents usage for the different interfaces. You can combine
 them for your own formats.
+
+.. _resizable-reference:
 
 Resizable
 .........
@@ -207,13 +219,15 @@ The example below resizes a video by half.
         ->encode($format, 'file.mp4')
         ->close();
 
+.. _resamplable-reference:
 
 Resamplable
 ...........
 
-This interface provides video resampling. The example below resample the video 
-at 15 frame per second with a I-frame every 30 image (see 
-`GOP on wikipedia <https://wikipedia.org/wiki/Group_of_pictures>`_).
+This interface provides video resampling. The example below resample the video
+at 15 frame per second with a I-frame every 30 image (see
+`GOP on wikipedia <https://wikipedia.org/wiki/Group_of_pictures>`_) and supports
+B-frames (see `B-frames on wikipedia <https://wikipedia.org/wiki/Video_compression_picture_types>`_)
 
 .. code-block:: php
 
@@ -234,6 +248,10 @@ at 15 frame per second with a I-frame every 30 image (see
             return 30;
         }
 
+        public function supportBFrames()
+        {
+            return true;
+        }
     }
 
     $format = new MyFormat();
@@ -258,7 +276,7 @@ video supported in flash player.
 
     class MyFormat implements Interactive
     {
-        
+
         public function getVideoCodec()
         {
             return 'libx264';
@@ -281,14 +299,14 @@ video supported in flash player.
 Audio
 ^^^^^
 
-This section describes audio processing and Interfaces for building video 
+This section describes audio processing and Interfaces for building video
 formats. As Video is an extension of audio, all these features can be combined
 with video features (see :ref:`dedicated video section<video-reference>`).
 
 Simple transcoding
 ++++++++++++++++++
 
-To transcode audio file or extract an audio soundtrack from a video, you have to 
+To transcode audio file or extract an audio soundtrack from a video, you have to
 pass the target format to FFMpeg.
 
 The following example initialize a Mp3 format and transcode the file `tune.wav`
@@ -308,7 +326,7 @@ to `tune.mp3` :
 Extract soundtrack from movie
 +++++++++++++++++++++++++++++
 
-The following example initialize a Flac format and extract the audio track from 
+The following example initialize a Flac format and extract the audio track from
 `Video.mpeg` to a target file `soudtrack.flac` :
 
 .. code-block:: php
@@ -360,10 +378,10 @@ This example transcodes the mp3 track to a 128kb mp3 :
         ->encode($format, 'song-128.mp3')
         ->close();
 
-PHP-FFmpeg brings more interfaces for your audio formats : 
+PHP-FFmpeg brings more interfaces for your audio formats :
 
  - ``FFMpeg\Format\Audio\Resamplable``
- - ``FFMpeg\Format\Audio\Transcodable`` 
+ - ``FFMpeg\Format\Audio\Transcodable``
  - ``FFMpeg\Format\Audio\Interactive``
 
 .. note:: You can combine these features in one video format.
@@ -371,14 +389,14 @@ PHP-FFmpeg brings more interfaces for your audio formats :
 Advanced media type
 +++++++++++++++++++
 
-This section presents usage for the different audio interfaces. You can combine 
+This section presents usage for the different audio interfaces. You can combine
 them for your own formats.
 
 Resamplable
 ...........
 
-This interface provides video resampling. The example below resample the video 
-at 15 frame per second with a I-frame every 30 image (see 
+This interface provides video resampling. The example below resample the video
+at 15 frame per second with a I-frame every 30 image (see
 `GOP on wikipedia <https://wikipedia.org/wiki/Group_of_pictures>`_).
 
 .. code-block:: php
@@ -420,7 +438,7 @@ a portable player.
 
     class MyFormat implements Interactive
     {
-        
+
         public function getAudioCodec()
         {
             return 'libvorbis';
@@ -436,7 +454,7 @@ a portable player.
 Custom commandline options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you need to add custom FFmpeg command line option, use the 
+If you need to add custom FFmpeg command line option, use the
 ``FFMpeg\Format\Audio::getExtraParams`` method.
 As ``Video`` extends ``Audio``, it is also available in any format.
 
@@ -454,7 +472,7 @@ latest AvConv / FFMPeg version, aac encoding has to be executed with extra comma
 
     class MyFormat implements Video, Transcodable
     {
-        
+
         public function getAudioCodec()
         {
             return 'aac';
@@ -477,10 +495,12 @@ latest AvConv / FFMPeg version, aac encoding has to be executed with extra comma
         ->encode($format, 'output-aac.mp4')
         ->close();
 
+.. _ffprobe-reference:
+
 FFProbe recipes
 ---------------
 
-FFProbe / AvProbe is a usefull tool for probing media files. PHP-FFMpeg 
+FFProbe / AvProbe is a usefull tool for probing media files. PHP-FFMpeg
 implementation is currenly light.
 
 Load FFProbe
@@ -517,7 +537,7 @@ specifying the binary you want to use
 Probe streams
 ^^^^^^^^^^^^^
 
-Probe streams returns the output of ``avprobe -show_streams`` as  a json 
+Probe streams returns the output of ``avprobe -show_streams`` as  a json
 object.
 
 .. code-block:: php
@@ -525,7 +545,7 @@ object.
     <?php
     echo $ffprobe->probeStreams('Video.ogv');
 
-will output something like 
+will output something like
 
 .. code-block:: json
 
@@ -575,7 +595,7 @@ will output something like
 Probe formats
 ^^^^^^^^^^^^^
 
-Probe format returns the output of ``avprobe -show_format`` as  a json 
+Probe format returns the output of ``avprobe -show_format`` as  a json
 object.
 
 .. code-block:: php
@@ -583,7 +603,7 @@ object.
     <?php
     echo $ffprobe->probeFormat('Video.ogv');
 
-will output something like 
+will output something like
 
 .. code-block:: json
 
