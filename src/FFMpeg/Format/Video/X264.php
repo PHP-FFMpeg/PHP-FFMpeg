@@ -24,6 +24,14 @@ class X264 extends DefaultVideo
     /**
      * {@inheritDoc}
      */
+    public function supportBFrames()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getAvailableAudioCodecs()
     {
         return array('libvo_aacenc', 'libfaac', 'libmp3lame');

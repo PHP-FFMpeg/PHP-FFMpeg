@@ -171,6 +171,11 @@ class DefaultVideoTester extends DefaultVideo
     protected $audioCodec = 'audiocodec1';
     protected $videoCodec = 'videocodec2';
 
+    public function supportBFrames()
+    {
+        return true;
+    }
+
     public function getAvailableAudioCodecs()
     {
         return array('audiocodec1', 'audiocodec2', 'audiocodec3');
