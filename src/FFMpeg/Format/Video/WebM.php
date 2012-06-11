@@ -24,6 +24,14 @@ class WebM extends DefaultVideo
     /**
      * {@inheritDoc}
      */
+    public function supportBFrames()
+    {
+        return true;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
     public function getExtraParams()
     {
         return '-f webm';
