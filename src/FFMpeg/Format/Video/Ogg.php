@@ -24,6 +24,14 @@ class Ogg extends DefaultVideo
     /**
      * {@inheritDoc}
      */
+    public function supportBFrames()
+    {
+        return true;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
     public function getAvailableAudioCodecs()
     {
         return array('libvorbis');
