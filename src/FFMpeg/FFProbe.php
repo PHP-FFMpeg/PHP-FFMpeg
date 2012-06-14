@@ -38,7 +38,7 @@ class FFProbe extends Binary
             throw new InvalidArgumentException($pathfile);
         }
 
-        $cmd = $this->binary . ' ' . $pathfile . ' -show_format';
+        $cmd = $this->binary . ' ' . escapeshellarg($pathfile) . ' -show_format';
 
         $output = $this->executeProbe($cmd);
 
@@ -84,7 +84,7 @@ class FFProbe extends Binary
             throw new InvalidArgumentException($pathfile);
         }
 
-        $cmd = $this->binary . ' ' . $pathfile . ' -show_streams';
+        $cmd = $this->binary . ' ' . escapeshellarg($pathfile) . ' -show_streams';
 
         $output = explode("\n", $this->executeProbe($cmd));
 
