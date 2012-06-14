@@ -32,6 +32,7 @@ class FFMpeg extends Binary
      * @var FFProbe
      */
     protected $prober;
+    protected $threads = 1;
 
     /**
      * Destructor
@@ -40,6 +41,22 @@ class FFMpeg extends Binary
     {
         $this->prober = null;
         parent::__destruct();
+    }
+
+    public function setThreads($threads)
+    {
+        if ($threads > 64 || $threads < 1) {
+            throw new InvalidArgumentException('Invalid `threads` value ; threads must fit in range 1 - 64');
+        }
+
+        $this->threads = (int) $threads;
+        
+        return $this;
+    }
+    
+    public function getThreads()
+    {
+        return $this->threads;
     }
 
     /**
@@ -117,7 +134,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-
+            
         }
 
         if ( ! $process->isSuccessful()) {
@@ -138,26 +155,23 @@ class FFMpeg extends Binary
      *
      * @param  Audio            $format         The output format
      * @param  string           $outputPathfile The pathfile where to write
-     * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      * @throws LogicException
      */
-    public function encode(Audio $format, $outputPathfile, $threads = 1)
+    public function encode(Audio $format, $outputPathfile)
     {
         if ( ! $this->pathfile) {
             throw new LogicException('No file open');
         }
 
-        $threads = max(min($threads, 64), 1);
-
         switch (true) {
             case $format instanceof Video:
-                $this->encodeVideo($format, $outputPathfile, $threads);
+                $this->encodeVideo($format, $outputPathfile);
                 break;
             default:
             case $format instanceof Audio:
-                $this->encodeAudio($format, $outputPathfile, $threads);
+                $this->encodeAudio($format, $outputPathfile);
                 break;
         }
 
@@ -169,17 +183,16 @@ class FFMpeg extends Binary
      *
      * @param  Audio            $format         The output format
      * @param  string           $outputPathfile The pathfile where to write
-     * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      */
-    protected function encodeAudio(Audio $format, $outputPathfile, $threads)
+    protected function encodeAudio(Audio $format, $outputPathfile)
     {
         $cmd = $this->binary
             . ' -y -i '
             . escapeshellarg($this->pathfile)
             . ' ' . $format->getExtraParams()
-            . ' -threads ' . $threads
+            . ' -threads ' . $this->threads
             . ' -ab ' . $format->getKiloBitrate() . 'k '
             . ' ' . escapeshellarg($outputPathfile);
 
@@ -198,7 +211,7 @@ class FFMpeg extends Binary
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-
+            
         }
 
         if ( ! $process->isSuccessful()) {
@@ -216,11 +229,10 @@ class FFMpeg extends Binary
      *
      * @param  Video            $format         The output format
      * @param  string           $outputPathfile The pathfile where to write
-     * @param  integer          $threads        The number of threads to use
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      */
-    protected function encodeVideo(Video $format, $outputPathfile, $threads)
+    protected function encodeVideo(Video $format, $outputPathfile)
     {
         $cmd_part1 = $this->binary
             . ' -y -i '
@@ -283,7 +295,7 @@ class FFMpeg extends Binary
         }
 
         $cmd_part2 .= ' -b ' . $format->getKiloBitrate() . 'k'
-            . ' -threads ' . $threads
+            . ' -threads ' . $this->threads
             . ' -refs 6 -coder 1 -qmin 10 -qmax 51 '
             . ' -sc_threshold 40 -flags +loop -cmp +chroma'
             . ' -me_range 16 -subq 7 -i_qfactor 0.71 -qcomp 0.6 -qdiff 4 '
