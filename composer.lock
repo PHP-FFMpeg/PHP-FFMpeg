@@ -14,12 +14,6 @@
         {
             "package": "symfony/process",
             "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/process",
-            "version": "dev-master",
             "source-reference": "f4f101fc7c1adb8b157058dcc1715f28f1d53208"
         }
     ],
