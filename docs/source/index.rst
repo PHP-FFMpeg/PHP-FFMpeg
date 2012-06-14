@@ -139,7 +139,7 @@ Run tests
 
 PHP-FFMpeg relies on `PHPUnit <http://www.phpunit.de/manual/current/en/>`_ for
 unit tests. To run tests on your system, ensure you have PHPUnit installed,
-and, at the root of PHP-XPDF (vendor/php-ffmpeg/php-ffmpeg), execute it :
+and, at the root of PHP-FFMpeg, execute it :
 
 .. code-block:: bash
 
