@@ -21,9 +21,11 @@
         "symfony/process": ">2.0",
         "monolog/monolog": "1.0.*"
     },
+    "minimum-stability": "dev",
     "require-dev": {
         "fabpot/php-cs-fixer": "master",
-	"sami/sami": "dev-master"
+	    "sami/sami": "dev-master",
+	    "silex/silex": "dev-master"
     },
     "autoload": {
         "psr-0": {
