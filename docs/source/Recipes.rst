@@ -48,6 +48,60 @@ You can also initialize with a custom path to the binary :
     <?php
     $ffmpeg = new FFMpeg('/usr/local/src/ffmpeg/bin/ffmpeg', $logger);
 
+Working with Silex Microframework
+---------------------------------
+
+If you're using `Silex MicroFramework <http://silex.sensiolabs.org/>`_, you can
+use FFMpeg-PHP with the bundled Service Provider :
+
+.. code-block:: php
+
+    <?php
+    use Silex\Application;
+    use FFMpeg\FFMpegServiceProvider;
+
+    $app = new Application();
+    $app->register(new FFMpegServiceProvider());
+
+    // Instance of FFMpeg\FFMpeg
+    $app['ffmpeg.ffmpeg'];
+
+    // Instance of FFMpeg\FFProbe
+    $app['ffmpeg.ffprobe'];
+
+
+Service Provider options
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, `FFMpegServiceProvider` will look for monolog service to log
+messages. You can customize FFMpeg logger with the 'ffmpeg.logger' option.
+
+You can also customize the number of threads to open and the path to FFMpeg and
+FFProbe binaries :
+
+.. code-block:: php
+
+    <?php
+    use Silex\Application;
+    use FFMpeg\FFMpegServiceProvider;
+    use Monolog\Logger;
+    use Monolog\Handler\NullHandler;
+
+    $app = new Application();
+
+    $logger = new Logger('FFMpeg');
+    $logger->pushHandler(new NullHandler());
+
+    $options = array(
+        'ffmpeg.ffmpeg.binary'  => '/path/to/custom/ffmpeg/binary',
+        'ffmpeg.ffprobe.binary' => '/path/to/custom/ffprobe/binary',
+        'ffmpeg.threads'        => 8,       # number of threads to open
+        'ffmpeg.logger'         => $logger, # custom logger service
+    );
+
+    $app->register(new FFMpegServiceProvider(), $options);
+
+
 Formats
 -------
 
