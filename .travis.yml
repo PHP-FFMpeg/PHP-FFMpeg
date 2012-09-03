@@ -5,7 +5,7 @@ before_script:
   - sudo easy_install sphinx
   - sudo apt-get install -y ffmpeg libavcodec-extra-53
   - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install
+  - php composer.phar install --dev
 
 php:
   - 5.3
