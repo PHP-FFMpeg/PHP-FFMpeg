@@ -38,6 +38,10 @@ abstract class Binary implements AdapterInterface
      */
     public function __construct($binary, Logger $logger)
     {
+        if (!is_executable($binary)) {
+            throw new \FFMpeg\Exception\BinaryNotFoundException(sprintf('`%s` is not a valid binary', $binary));
+        }
+
         $this->binary = $binary;
         $this->logger = $logger;
     }
