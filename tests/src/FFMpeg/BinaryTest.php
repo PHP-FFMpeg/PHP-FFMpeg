@@ -22,6 +22,7 @@ class BinaryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\Binary::__construct
+     * @expectedException \FFMpeg\Exception\BinaryNotFoundException
      */
     public function testConstruct()
     {

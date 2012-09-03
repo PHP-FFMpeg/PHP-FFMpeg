@@ -112,7 +112,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\FFMpeg::encode
-     * @expectedException \RuntimeException
+     * @expectedException FFMpeg\Exception\BinaryNotFoundException
      */
     public function testWrongBinary()
     {
@@ -120,13 +120,6 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         $logger->pushHandler(new \Monolog\Handler\NullHandler());
 
         $ffmpeg = new FFMpeg('wrongbinary', $logger);
-        $ffmpeg->setProber($this->probe);
-        $ffmpeg->open(__DIR__ . '/../../files/Test.ogv');
-
-        $format = new Format\Video\WebM();
-        $format-> setDimensions(32, 32);
-
-        $ffmpeg->encode($format, './invalid.file');
     }
 
     /**
