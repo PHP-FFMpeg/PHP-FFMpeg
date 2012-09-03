@@ -28,6 +28,7 @@ var tree = [["FFMpeg","FFMpeg.html","",
                 [        ]]        ]],["AdapterInterface","FFMpeg\/AdapterInterface.html","",
                 [        ]],["Binary","FFMpeg\/Binary.html","",
                 [        ]],["FFMpeg","FFMpeg\/FFMpeg.html"," < Binary",
+                [        ]],["FFMpegServiceProvider","FFMpeg\/FFMpegServiceProvider.html","",
                 [        ]],["FFProbe","FFMpeg\/FFProbe.html"," < Binary",
                 [        ]]        ]]        ]
 
