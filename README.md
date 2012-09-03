@@ -17,7 +17,6 @@ Browse the [API](http://readthedocs.org/docs/ffmpeg-php/en/latest/_static/API/)
 ##Usage Example
 
 ```php
-<?php
 $x264 = new X264();
 $x264->setDimensions(320, 240);
 
@@ -26,6 +25,16 @@ $ffmpeg->open('Video.mpeg')
     ->encode($x264, 'file.mp4')
     ->encode($new Ogg(), 'file.ogv')
     ->close();
+```
+
+##Using with Silex Microframework
+
+```php
+use FFMpeg\SilexServiceProvider;
+use Silex\Application;
+
+$app = new Application();
+$app->register(new FFMpegServiceProvider());
 ```
 
 ##License
