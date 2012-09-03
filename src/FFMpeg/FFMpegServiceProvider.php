@@ -25,10 +25,12 @@ class FFMpegServiceProvider implements ServiceProviderInterface
 
         $app['ffmpeg.ffmpeg'] = $app->share(function(Application $app) {
             if (isset($app['ffmpeg.ffmpeg.binary'])) {
-                return new FFMpeg($app['ffmpeg.ffmpeg.binary'], $app['ffmpeg.logger']);
+                $ffmpeg = new FFMpeg($app['ffmpeg.ffmpeg.binary'], $app['ffmpeg.logger']);
             } else {
-                return FFMpeg::load($app['ffmpeg.logger']);
+                $ffmpeg = FFMpeg::load($app['ffmpeg.logger']);
             }
+
+            return $ffmpeg->setThreads(isset($app['ffmpeg.threads']) ? $app['ffmpeg.threads'] : 1);
         });
 
         $app['ffmpeg.ffprobe'] = $app->share(function(Application $app) {

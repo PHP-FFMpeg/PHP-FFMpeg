@@ -68,5 +68,16 @@ class FFMpegServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\\FFMpeg\\FFProbe', $app['ffmpeg.ffprobe']);
         $this->assertInstanceOf('\\FFMpeg\\FFMpeg', $app['ffmpeg.ffmpeg']);
     }
+
+    /**
+     * @covers FFMpeg\FFMpegServiceProvider::register
+     */
+    public function testCustomThreadsFFMpeg()
+    {
+        $app = $this->getApplication();
+        $app->register(new FFMpegServiceProvider(), array('ffmpeg.threads'=>18));
+
+        $this->assertEquals(18, $app['ffmpeg.ffmpeg']->getThreads());
+    }
 }
 
