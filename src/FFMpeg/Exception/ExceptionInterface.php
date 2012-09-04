@@ -11,7 +11,7 @@
 
 namespace FFMpeg\Exception;
 
-interface Exception
+interface ExceptionInterface
 {
 
 }
