@@ -17,8 +17,8 @@
     }
     ],
     "require": {
-        "php": ">=5.3.2",
-        "symfony/process": ">2.0",
+        "php": ">=5.3.3",
+        "symfony/process": ">=2.0,<=2.2",
         "monolog/monolog": "1.0.*"
     },
     "minimum-stability": "dev",
