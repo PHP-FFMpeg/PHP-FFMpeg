@@ -28,13 +28,13 @@ class WebM extends DefaultVideo
     {
         return true;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function getExtraParams()
     {
-        return '-f webm';
+        return array('-f', 'webm');
     }
 
     /**

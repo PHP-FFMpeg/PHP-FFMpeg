@@ -14,6 +14,7 @@ namespace FFMpeg;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * FFProbe driver
@@ -38,9 +39,11 @@ class FFProbe extends Binary
             throw new InvalidArgumentException($pathfile);
         }
 
-        $cmd = $this->binary . ' ' . escapeshellarg($pathfile) . ' -show_format';
+        $builder = ProcessBuilder::create(array(
+            $this->binary, $pathfile, '-show_format'
+        ));
 
-        $output = $this->executeProbe($cmd);
+        $output = $this->executeProbe($builder->getProcess());
 
         $ret = array();
 
@@ -84,9 +87,11 @@ class FFProbe extends Binary
             throw new InvalidArgumentException($pathfile);
         }
 
-        $cmd = $this->binary . ' ' . escapeshellarg($pathfile) . ' -show_streams';
+        $builder = ProcessBuilder::create(array(
+            $this->binary, $pathfile, '-show_streams'
+        ));
 
-        $output = explode("\n", $this->executeProbe($cmd));
+        $output = explode("\n", $this->executeProbe($builder->getProcess()));
 
         $ret = array();
         $n = 0;
@@ -123,28 +128,26 @@ class FFProbe extends Binary
 
     /**
      *
-     * @param  string           $command
+     * @param  Process          $process
      * @return string
      * @throws RuntimeException
      */
-    protected function executeProbe($command)
+    protected function executeProbe(Process $process)
     {
-        $this->logger->addInfo(sprintf('FFprobe executes command %s', $command));
+        $this->logger->addInfo(sprintf('FFprobe executes command %s', $process->getCommandline()));
 
         try {
-            $process = new Process($command);
-
             $process->run();
         } catch (\RuntimeException $e) {
             $this->logger->addInfo('FFprobe command failed');
 
-            throw new RuntimeException(sprintf('Failed to run the given command %s', $command));
+            throw new RuntimeException(sprintf('Failed to run the given command %s', $process->getCommandline()));
         }
 
         if ( ! $process->isSuccessful()) {
             $this->logger->addInfo('FFprobe command failed');
 
-            throw new RuntimeException(sprintf('Failed to probe %s', $command));
+            throw new RuntimeException(sprintf('Failed to probe %s', $process->getCommandline()));
         }
 
         $this->logger->addInfo('FFprobe command successful');

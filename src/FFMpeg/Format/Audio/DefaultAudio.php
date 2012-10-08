@@ -31,7 +31,7 @@ abstract class DefaultAudio implements Resamplable, Interactive
      */
     public function getExtraParams()
     {
-        return '';
+        return array();
     }
 
     /**

@@ -17,6 +17,7 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Format\Audio;
 use FFMpeg\Format\Video;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * FFMpeg driver
@@ -50,10 +51,10 @@ class FFMpeg extends Binary
         }
 
         $this->threads = (int) $threads;
-        
+
         return $this;
     }
-    
+
     public function getThreads()
     {
         return $this->threads;
@@ -68,7 +69,7 @@ class FFMpeg extends Binary
      */
     public function open($pathfile)
     {
-        if ( ! file_exists($pathfile)) {
+        if (!file_exists($pathfile)) {
             $this->logger->addError(sprintf('FFmpeg failed to open %s', $pathfile));
 
             throw new InvalidArgumentException(sprintf('File %s does not exists', $pathfile));
@@ -118,26 +119,28 @@ class FFMpeg extends Binary
      */
     public function extractImage($time, $output)
     {
-        if ( ! $this->pathfile) {
+        if (!$this->pathfile) {
             throw new LogicException('No file open');
         }
 
-        $cmd = $this->binary
-            . ' -i ' . escapeshellarg($this->pathfile)
-            . ' -vframes 1 -ss ' . $time
-            . ' -f image2 ' . escapeshellarg($output);
+        $builder = ProcessBuilder::create(array(
+                $this->binary,
+                '-i', $this->pathfile,
+                '-vframes', '1', '-ss', $time,
+                '-f', 'image2', $output
+            ));
 
-        $this->logger->addInfo(sprintf('FFmpeg executes command %s', $cmd));
+        $process = $builder->getProcess();
 
-        $process = new Process($cmd);
+        $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            
+
         }
 
-        if ( ! $process->isSuccessful()) {
+        if (!$process->isSuccessful()) {
             $this->logger->addError(sprintf('FFmpeg command failed : %s', $process->getErrorOutput()));
 
             $this->cleanupTemporaryFile($output);
@@ -161,7 +164,7 @@ class FFMpeg extends Binary
      */
     public function encode(Audio $format, $outputPathfile)
     {
-        if ( ! $this->pathfile) {
+        if (!$this->pathfile) {
             throw new LogicException('No file open');
         }
 
@@ -188,33 +191,40 @@ class FFMpeg extends Binary
      */
     protected function encodeAudio(Audio $format, $outputPathfile)
     {
-        $cmd = $this->binary
-            . ' -y -i '
-            . escapeshellarg($this->pathfile)
-            . ' ' . $format->getExtraParams()
-            . ' -threads ' . $this->threads
-            . ' -ab ' . $format->getKiloBitrate() . 'k '
-            . ' ' . escapeshellarg($outputPathfile);
+        $builder = ProcessBuilder::create(array(
+                $this->binary,
+                '-y', '-i',
+                $this->pathfile,
+                '-threads', $this->threads,
+                '-ab', $format->getKiloBitrate() . 'k ',
+            ));
+
+        foreach ($format->getExtraParams() as $parameter) {
+            $builder->add($parameter);
+        }
 
         if ($format instanceof Audio\Transcodable) {
-            $cmd .= ' -acodec ' . $format->getAudioCodec();
+            $builder->add('-acodec')->add($format->getAudioCodec());
         }
 
         if ($format instanceof Audio\Resamplable) {
-            $cmd .= ' -ac 2 -ar ' . $format->getAudioSampleRate();
+            $builder->add('-ac')->add(2)->add('-ar')->add($format->getAudioSampleRate());
         }
 
-        $process = new Process($cmd);
+        $builder->add($outputPathfile);
 
-        $this->logger->addInfo(sprintf('FFmpeg executes command %s', $cmd));
+        $process = $builder->getProcess();
 
+        $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandLine()));
+
+        echo $process->getCommandLine() . "\n\n";
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            
+
         }
 
-        if ( ! $process->isSuccessful()) {
+        if (!$process->isSuccessful()) {
             $this->logger->addInfo(sprintf('FFmpeg command failed'));
             throw new RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
         }
@@ -234,15 +244,17 @@ class FFMpeg extends Binary
      */
     protected function encodeVideo(Video $format, $outputPathfile)
     {
-        $cmd_part1 = $this->binary
-            . ' -y -i '
-            . escapeshellarg($this->pathfile) . ' '
-            . $format->getExtraParams() . ' ';
+        $builder = ProcessBuilder::create(array(
+                $this->binary, '-y', '-i',
+                $this->pathfile
+            ));
 
-        $cmd_part2 = '';
+        foreach ($format->getExtraParams() as $parameter) {
+            $builder->add($parameter);
+        }
 
         if ($format instanceof Video\Resizable) {
-            if ( ! $this->prober) {
+            if (!$this->prober) {
                 throw new LogicException('You must set a valid prober if you use a resizable format');
             }
 
@@ -275,54 +287,62 @@ class FFMpeg extends Binary
                 $width = $this->getMultiple($dimensions->getWidth(), 16);
                 $height = $this->getMultiple($dimensions->getHeight(), 16);
 
-                $cmd_part2 .= ' -s ' . $width . 'x' . $height;
+                $builder->add('-s')->add($width . 'x' . $height);
             }
         }
 
         if ($format instanceof Video\Resamplable) {
-            $cmd_part2 .= ' -r ' . $format->getFrameRate();
+            $builder->add('-r')->add($format->getFrameRate());
 
             /**
              * @see http://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping
              */
             if ($format->supportBFrames()) {
-                $cmd_part2 .= ' -b_strategy 1 -bf 3 -g ' . $format->getGOPSize();
+                $builder->add('-b_strategy')
+                    ->add('1')
+                    ->add('-bf')
+                    ->add('3')
+                    ->add('-g')
+                    ->add($format->getGOPSize());
             }
         }
 
         if ($format instanceof Video\Transcodable) {
-            $cmd_part2 .= ' -vcodec ' . $format->getVideoCodec();
+            $builder->add('-vcodec')->add($format->getVideoCodec());
         }
 
-        $cmd_part2 .= ' -b ' . $format->getKiloBitrate() . 'k'
-            . ' -threads ' . $this->threads
-            . ' -refs 6 -coder 1 -qmin 10 -qmax 51 '
-            . ' -sc_threshold 40 -flags +loop -cmp +chroma'
-            . ' -me_range 16 -subq 7 -i_qfactor 0.71 -qcomp 0.6 -qdiff 4 '
-            . ' -trellis 1 -qscale 1 '
-            . ' -ab 92k ';
+        $builder->add('-b')->add($format->getKiloBitrate() . 'k')
+            ->add('-threads')->add($this->threads)
+            ->add('-refs')->add('6')->add('-coder')->add('1')->add('-qmin')
+            ->add('10')->add('-qmax')->add('51')
+            ->add('-sc_threshold')->add('40')->add('-flags')->add('+loop')
+            ->add('-cmp')->add('+chroma')
+            ->add('-me_range')->add('16')->add('-subq')->add('7')
+            ->add('-i_qfactor')->add('0.71')->add('-qcomp')->add('0.6')
+            ->add('-qdiff')->add('4')
+            ->add('-trellis')->add('1')->add('-qscale')->add('1')
+            ->add('-ab')->add('92k');
 
         if ($format instanceof Audio\Transcodable) {
-            $cmd_part2 .= '-acodec ' . $format->getAudioCodec();
+            $builder->add('-acodec')->add($format->getAudioCodec());
         }
 
         $tmpFile = new \SplFileInfo(tempnam(sys_get_temp_dir(), 'temp') . '.' . pathinfo($outputPathfile, PATHINFO_EXTENSION));
 
-        $passes = array();
+        $pass1 = $builder;
+        $pass2 = clone $builder;
 
-        $passes[] = $cmd_part1 . ' -pass 1 ' . $cmd_part2
-            . ' -an ' . escapeshellarg($tmpFile->getPathname());
+        $passes[] = $pass1
+            ->add('-pass')->add('1')->add('-an')->add($tmpFile->getPathname())
+            ->getProcess();
+        $passes[] = $pass2
+            ->add('-pass')->add('2')->add('-ac')->add('2')
+            ->add('-ar')->add('44100')->add($outputPathfile)
+            ->getProcess();
 
-        $passes[] = $cmd_part1 . ' -pass 2 ' . $cmd_part2
-            . ' -ac 2 -ar 44100 ' . escapeshellarg($outputPathfile);
+        foreach ($passes as $process) {
 
-        $process = null;
-
-        foreach ($passes as $pass) {
-
-            $this->logger->addInfo(sprintf('FFmpeg executes command %s', $pass));
-
-            $process = new Process($pass);
+            $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
             try {
                 $process->run();
@@ -336,7 +356,7 @@ class FFMpeg extends Binary
         $this->cleanupTemporaryFile(getcwd() . '/av2pass-0.log');
         $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log.mbtree');
 
-        if ( ! $process->isSuccessful()) {
+        if (!$process->isSuccessful()) {
             $this->logger->addInfo(sprintf('FFmpeg command failed'));
             throw new RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
         }

@@ -27,10 +27,9 @@ interface Audio
     public function getKiloBitrate();
 
     /**
-     * Give som extra parameters to add to ffmpeg commandline
-     * Parameters MUST be escaped
+     * Return an array of extra parameters to add to ffmpeg commandline
      *
-     * @return string
+     * @return array()
      */
     public function getExtraParams();
 
