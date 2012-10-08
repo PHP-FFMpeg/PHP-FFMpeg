@@ -23,7 +23,11 @@ class FFMpegServiceProvider implements ServiceProviderInterface
 
     public function register(Application $app)
     {
-        if ( ! isset($app['ffmpeg.logger'])) {
+        if (isset($app['monolog'])) {
+            $app['ffmpeg.logger'] = function() use ($app) {
+                return $app['monolog'];
+            };
+        } else {
             $app['ffmpeg.logger'] = $app->share(function(Application $app) {
                 $logger = new Logger('FFMpeg logger');
                 $logger->pushHandler(new NullHandler());
