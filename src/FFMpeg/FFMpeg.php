@@ -217,7 +217,6 @@ class FFMpeg extends Binary
 
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandLine()));
 
-        echo $process->getCommandLine() . "\n\n";
         try {
             $process->run();
         } catch (\RuntimeException $e) {
