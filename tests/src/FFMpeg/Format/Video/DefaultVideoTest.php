@@ -163,6 +163,13 @@ class DefaultVideoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1000, $this->object->getKiloBitrate());
     }
 
+    /**
+     * @covers FFMpeg\Format\Video\DefaultVideo::getExtraParams
+     */
+    public function testGetExtraParams()
+    {
+        $this->assertTrue(is_array($this->object->getExtraParams()));
+    }
 }
 
 class DefaultVideoTester extends DefaultVideo
@@ -188,7 +195,7 @@ class DefaultVideoTester extends DefaultVideo
 
     public function getExtraParams()
     {
-        return '-f format';
+        return array('-f', 'format');
     }
 
 }

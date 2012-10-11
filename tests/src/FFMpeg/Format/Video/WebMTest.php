@@ -37,7 +37,7 @@ class WebMTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExtraParams()
     {
-        $this->assertTrue(is_scalar($this->object->getExtraParams()));
+        $this->assertTrue(is_array($this->object->getExtraParams()));
     }
 
 }
