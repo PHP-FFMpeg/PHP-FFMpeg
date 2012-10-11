@@ -19,7 +19,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/process": ">=2.0,<=2.2",
-        "monolog/monolog": "1.0.*"
+        "monolog/monolog": "1.*"
     },
     "minimum-stability": "dev",
     "require-dev": {
