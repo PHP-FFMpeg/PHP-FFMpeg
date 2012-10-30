@@ -200,7 +200,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
     {
         $dest = __DIR__ . '/../../files/encode_test.mp4';
 
-        $format = new Format\Video\WebM();
+        $format = new Format\Video\X264();
         $format-> setDimensions(32, 32);
 
         $this->object->open(__DIR__ . '/../../files/Test.ogv');

@@ -16,7 +16,7 @@ namespace FFMpeg\Format;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-interface Video extends Audio
+interface VideoInterface extends AudioInterface
 {
     /**
      * Returns the number of passes

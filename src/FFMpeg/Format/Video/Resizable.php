@@ -11,7 +11,7 @@
 
 namespace FFMpeg\Format\Video;
 
-use FFMpeg\Format\Video as BaseVideo;
+use FFMpeg\Format\VideoInterface;
 use FFMpeg\Format\Dimension;
 
 /**
@@ -21,7 +21,7 @@ use FFMpeg\Format\Dimension;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-interface Resizable extends BaseVideo
+interface Resizable extends VideoInterface
 {
 
     /**

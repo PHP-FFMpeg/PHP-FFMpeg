@@ -11,12 +11,12 @@
 
 namespace FFMpeg\Format\Video;
 
-use FFMpeg\Format\Video as BaseVideo;
+use FFMpeg\Format\VideoInterface;
 
 /**
  * @author Romain Neutron imprec@gmail.com
  */
-interface Transcodable extends BaseVideo
+interface Transcodable extends VideoInterface
 {
 
     /**

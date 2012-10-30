@@ -11,7 +11,7 @@
 
 namespace FFMpeg\Format\Video;
 
-use FFMpeg\Format\Video as BaseVideo;
+use FFMpeg\Format\VideoInterface;
 
 /**
  * The resamplable video interface
@@ -20,7 +20,7 @@ use FFMpeg\Format\Video as BaseVideo;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-interface Resamplable extends BaseVideo
+interface Resamplable extends VideoInterface
 {
 
     /**

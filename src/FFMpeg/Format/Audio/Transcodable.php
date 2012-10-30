@@ -11,12 +11,12 @@
 
 namespace FFMpeg\Format\Audio;
 
-use FFMpeg\Format\Audio as BaseAudio;
+use FFMpeg\Format\AudioInterface;
 
 /**
  * @author Romain Neutron imprec@gmail.com
  */
-interface Transcodable extends BaseAudio
+interface Transcodable extends AudioInterface
 {
 
     /**

@@ -14,8 +14,8 @@ namespace FFMpeg;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\LogicException;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Format\Audio;
-use FFMpeg\Format\Video;
+use FFMpeg\Format\AudioInterface;
+use FFMpeg\Format\VideoInterface;
 use FFMpeg\Helper\HelperInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
@@ -183,24 +183,24 @@ class FFMpeg extends Binary
     /**
      * Encode the file to the specified format
      *
-     * @param  Audio            $format         The output format
+     * @param  AudioInterface   $format         The output format
      * @param  string           $outputPathfile The pathfile where to write
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      * @throws LogicException
      */
-    public function encode(Audio $format, $outputPathfile)
+    public function encode(AudioInterface $format, $outputPathfile)
     {
         if (!$this->pathfile) {
             throw new LogicException('No file open');
         }
 
         switch (true) {
-            case $format instanceof Video:
+            case $format instanceof VideoInterface:
                 $this->encodeVideo($format, $outputPathfile);
                 break;
             default:
-            case $format instanceof Audio:
+            case $format instanceof AudioInterface:
                 $this->encodeAudio($format, $outputPathfile);
                 break;
         }
@@ -216,7 +216,7 @@ class FFMpeg extends Binary
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      */
-    protected function encodeAudio(Audio $format, $outputPathfile)
+    protected function encodeAudio(AudioInterface $format, $outputPathfile)
     {
         $builder = ProcessBuilder::create(array(
                 $this->binary,
@@ -263,12 +263,12 @@ class FFMpeg extends Binary
     /**
      * Encode to video
      *
-     * @param  Video            $format         The output format
+     * @param  VideoInterface   $format         The output format
      * @param  string           $outputPathfile The pathfile where to write
      * @return \FFMpeg\FFMpeg
      * @throws RuntimeException
      */
-    protected function encodeVideo(Video $format, $outputPathfile)
+    protected function encodeVideo(VideoInterface $format, $outputPathfile)
     {
         $builder = ProcessBuilder::create(array(
                 $this->binary, '-y', '-i',

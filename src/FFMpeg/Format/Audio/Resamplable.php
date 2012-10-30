@@ -11,7 +11,7 @@
 
 namespace FFMpeg\Format\Audio;
 
-use FFMpeg\Format\Audio as BaseAudio;
+use FFMpeg\Format\AudioInterface;
 
 /**
  * The resamplable audio interface
@@ -20,7 +20,7 @@ use FFMpeg\Format\Audio as BaseAudio;
  *
  * @author Romain Neutron imprec@gmail.com
  */
-interface Resamplable extends BaseAudio
+interface Resamplable extends AudioInterface
 {
 
     /**

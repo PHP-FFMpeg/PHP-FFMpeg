@@ -197,18 +197,18 @@ PHP-FFMpeg provides three video formats out of the box : HTML5 video formats
 Create your own media type
 ++++++++++++++++++++++++++
 
-PHP-FFMpeg provides ``FFMpeg\Format\Video``, as base interface for creating a
-Video format. To define a target format, all you need to do is implement this
-Interface.
+PHP-FFMpeg provides ``FFMpeg\Format\VideoInterface``, as base interface for
+creating a Video format. To define a target format, all you need to do is
+implement this Interface.
 
 .. code-block:: php
 
     <?php
     namespace Foo\Bar;
 
-    use FFMpeg\Format\Video;
+    use FFMpeg\Format\VideoInterface;
 
-    class MyFormat implements Video
+    class MyFormat implements VideoInterface
     {
         public function getKiloBitrate()
         {
@@ -400,9 +400,9 @@ The following example initialize a Flac format and extract the audio track from
 Create your own media type
 ++++++++++++++++++++++++++
 
-PHP-FFMpeg provides ``FFMpeg\Format\Audio``, as base interface for creating an
-Audio format. To define a target format, all you need to do is implement this
-Interface.
+PHP-FFMpeg provides ``FFMpeg\Format\AudioInterface``, as base interface for
+creating an Audio format. To define a target format, all you need to do is
+implement this Interface.
 
 This example transcodes the mp3 track to a 128kb mp3 :
 
@@ -411,9 +411,9 @@ This example transcodes the mp3 track to a 128kb mp3 :
     <?php
     namespace Foo\Bar;
 
-    use FFMpeg\Format\Audio;
+    use FFMpeg\Format\AudioInterface;
 
-    class MyFormat implements Audio
+    class MyFormat implements AudioInterface
     {
         public function getKiloBitrate()
         {
@@ -522,9 +522,9 @@ latest AvConv / FFMPeg version, aac encoding has to be executed with extra comma
     namespace Foo\Bar;
 
     use FFMpeg\Format\Audio\Transcodable;
-    use FFMpeg\Format\Video;
+    use FFMpeg\Format\VideoInterface;
 
-    class MyFormat implements Video, Transcodable
+    class MyFormat implements VideoInterface, Transcodable
     {
 
         public function getAudioCodec()
