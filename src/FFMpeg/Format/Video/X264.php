@@ -44,4 +44,12 @@ class X264 extends DefaultVideo
     {
         return array('libx264');
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPasses()
+    {
+        return 2;
+    }
 }

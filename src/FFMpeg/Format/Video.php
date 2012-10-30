@@ -18,5 +18,10 @@ namespace FFMpeg\Format;
  */
 interface Video extends Audio
 {
-
+    /**
+     * Returns the number of passes
+     *
+     * @return string
+     */
+    public function getPasses();
 }

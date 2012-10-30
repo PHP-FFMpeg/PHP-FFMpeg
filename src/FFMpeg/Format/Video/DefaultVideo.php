@@ -222,4 +222,12 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
 
         return $this;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPasses()
+    {
+        return 1;
+    }
 }

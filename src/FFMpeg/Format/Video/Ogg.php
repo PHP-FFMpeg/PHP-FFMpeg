@@ -28,7 +28,7 @@ class Ogg extends DefaultVideo
     {
         return true;
     }
-    
+
     /**
      * {@inheritDoc}
      */
