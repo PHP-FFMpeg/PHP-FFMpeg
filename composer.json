@@ -21,6 +21,9 @@
         "symfony/process": ">=2.0,<=2.2",
         "monolog/monolog": "1.*"
     },
+    "suggest": {
+	"php-ffmpeg/extra": "A compilation of common audio & video drivers for PHP-FFMpeg"
+    },
     "minimum-stability": "dev",
     "require-dev": {
         "fabpot/php-cs-fixer": "master",
