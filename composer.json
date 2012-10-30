@@ -1,7 +1,6 @@
 {
     "name": "php-ffmpeg/php-ffmpeg",
     "type": "library",
-    "version": "0.1.0",
     "description": "FFMpeg PHP, an Object Oriented library to communicate with AVconv / ffmpeg",
     "keywords": ["video processing", "video", "audio processing", "audio", "avconv", "ffmpeg", "avprobe", "ffprobe"],
     "license": "MIT",
@@ -34,6 +33,11 @@
     "autoload": {
         "psr-0": {
             "FFMpeg": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
         }
     }
 }
