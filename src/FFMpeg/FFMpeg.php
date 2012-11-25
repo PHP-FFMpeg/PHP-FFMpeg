@@ -36,12 +36,27 @@ class FFMpeg extends Binary
     protected $threads = 1;
 
     /**
+     * @var Closure|string|array
+     */
+    protected $callback = null;
+
+    /**
      * Destructor
      */
     public function __destruct()
     {
         $this->prober = null;
         parent::__destruct();
+    }
+
+    /**
+     * @param Closure|string|array $callback
+     */
+    public function setCallback($callback)
+    {
+        $this->callback = $callback;
+
+        return $this;
     }
 
     public function setThreads($threads)
@@ -135,7 +150,7 @@ class FFMpeg extends Binary
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
         try {
-            $process->run();
+            $process->run($this->callback);
         } catch (\RuntimeException $e) {
 
         }
@@ -218,7 +233,7 @@ class FFMpeg extends Binary
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandLine()));
 
         try {
-            $process->run();
+            $process->run($this->callback);
         } catch (\RuntimeException $e) {
 
         }
@@ -344,7 +359,7 @@ class FFMpeg extends Binary
             $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
             try {
-                $process->run();
+                $process->run($this->callback);
             } catch (\RuntimeException $e) {
                 break;
             }
