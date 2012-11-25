@@ -24,6 +24,8 @@ use Symfony\Component\Process\ProcessBuilder;
 class FFProbe extends Binary
 {
 
+    protected $cachedFormats = array();
+
     /**
      * Probe the format of a given file
      *
@@ -37,6 +39,10 @@ class FFProbe extends Binary
     {
         if ( ! is_file($pathfile)) {
             throw new InvalidArgumentException($pathfile);
+        }
+
+        if (isset($this->cachedFormats[$pathfile])) {
+            return $this->cachedFormats[$pathfile];
         }
 
         $builder = ProcessBuilder::create(array(
@@ -69,7 +75,7 @@ class FFProbe extends Binary
             $ret[$key] = $value;
         }
 
-        return json_encode($ret);
+        return $this->cachedFormats[$pathfile] = json_encode($ret);
     }
 
     /**

@@ -16,6 +16,7 @@ use FFMpeg\Exception\LogicException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Format\Audio;
 use FFMpeg\Format\Video;
+use FFMpeg\Helper\HelperInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 
@@ -36,12 +37,35 @@ class FFMpeg extends Binary
     protected $threads = 1;
 
     /**
+     * @var HelperInterface[]
+     */
+    protected $helpers = array();
+
+    /**
      * Destructor
      */
     public function __destruct()
     {
         $this->prober = null;
         parent::__destruct();
+    }
+
+    /**
+     * @param HelperInterface $helper
+     * @return \FFMpeg\FFMpeg
+     */
+    public function attachHelper(HelperInterface $helper)
+    {
+        $this->helpers[] = $helper;
+        $helper->setProber($this->prober);
+
+        // ensure the helpers have the path to the file in case
+        // they need to probe for format information
+        if ($this->pathfile !== null) {
+            $helper->open($this->pathfile);
+        }
+
+        return $this;
     }
 
     public function setThreads($threads)
@@ -76,8 +100,11 @@ class FFMpeg extends Binary
         }
 
         $this->logger->addInfo(sprintf('FFmpeg opens %s', $pathfile));
-
         $this->pathfile = $pathfile;
+
+        foreach ($this->helpers as $helper) {
+            $helper->open($pathfile);
+        }
 
         return $this;
     }
@@ -135,7 +162,7 @@ class FFMpeg extends Binary
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
         try {
-            $process->run();
+            $process->run(array($this, 'transcodeCallback'));
         } catch (\RuntimeException $e) {
 
         }
@@ -218,7 +245,7 @@ class FFMpeg extends Binary
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandLine()));
 
         try {
-            $process->run();
+            $process->run(array($this, 'transcodeCallback'));
         } catch (\RuntimeException $e) {
 
         }
@@ -344,7 +371,7 @@ class FFMpeg extends Binary
             $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
             try {
-                $process->run();
+                $process->run(array($this, 'transcodeCallback'));
             } catch (\RuntimeException $e) {
                 break;
             }
@@ -363,6 +390,19 @@ class FFMpeg extends Binary
         $this->logger->addInfo(sprintf('FFmpeg command successful'));
 
         return $this;
+    }
+
+    /**
+     * The main transcoding callback, delegates the content to the helpers.
+     *
+     * @param string $channel (stdio|stderr)
+     * @param string $content the current line of the ffmpeg output
+     */
+    public function transcodeCallback($channel, $content)
+    {
+        foreach ($this->helpers as $helper) {
+            $helper->transcodeCallback($channel, $content);
+        }
     }
 
     /**
