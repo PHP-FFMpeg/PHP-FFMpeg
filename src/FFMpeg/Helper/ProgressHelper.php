@@ -180,8 +180,12 @@ abstract class ProgressHelper implements HelperInterface
     {
         $ar = array_reverse(explode(":", $rawDuration));
         $duration = floatval($ar[0]);
-        if (!empty($ar[1])) $duration += intval($ar[1]) * 60;
-        if (!empty($ar[2])) $duration += intval($ar[2]) * 60 * 60;
+        if (!empty($ar[1])) {
+            $duration += intval($ar[1]) * 60;
+        }
+        if (!empty($ar[2])) {
+            $duration += intval($ar[2]) * 60 * 60;
+        }
 
         return $duration;
     }
@@ -196,10 +200,6 @@ abstract class ProgressHelper implements HelperInterface
         }
 
         return array(
-            /*
-            'currentSize' => $this->currentSize,
-            'currentTime' => $this->currentTime,
-            */
             'percent' => $this->percent,
             'remaining' => $this->remaining,
             'rate' => $this->rate
