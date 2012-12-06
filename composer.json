@@ -27,8 +27,9 @@
     "minimum-stability": "dev",
     "require-dev": {
         "fabpot/php-cs-fixer": "master",
-	    "sami/sami": "dev-master",
-	    "silex/silex": "dev-master"
+        "sami/sami": "dev-master",
+        "silex/silex": "dev-master",
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-0": {

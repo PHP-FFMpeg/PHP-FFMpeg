@@ -2,4 +2,5 @@
 /vendor/
 /docs/build
 composer.phar
+phpunit.xml
 

@@ -27,6 +27,21 @@ $ffmpeg->open('Video.mpeg')
     ->close();
 ```
 
+##Getting progress information
+
+
+```php
+$progressHelper = new FFMpeg\Helper\AudioProgressHelper(function($percent, $remaining, $rate) {
+	echo "Current progress: " . $percent "%\n";
+	echo "Remaining time: " . $remaining " seconds\n";
+});
+
+$ffmpeg->open('Audio.wav')
+	->attachHelper($progressHelper)
+    ->encode(new Mp3(), 'file.mp3')
+    ->close();
+```
+
 ##Using with Silex Microframework
 
 ```php
