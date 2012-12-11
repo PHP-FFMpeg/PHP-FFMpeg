@@ -152,15 +152,20 @@ abstract class ProgressHelper implements HelperInterface
         $currentDuration = $this->convertDuration($matches[2]);
         $currentTime = $this->microtimeFloat();
         $currentSize = trim(str_replace('kb', '', strtolower(($matches[1]))));
-        $percent = $currentDuration/ $this->duration;
+        $percent = max(0, min(1, $currentDuration / $this->duration));
 
         if ($this->lastOutput !== null) {
             $delta = $currentTime - $this->lastOutput;
             $deltaSize = $currentSize - $this->currentSize;
             $rate = $deltaSize * $delta;
-            $totalDuration = $this->totalSize / $rate;
-            $this->remaining = floor($totalDuration - ($totalDuration * $percent));
-            $this->rate = floor($rate);
+            if ($rate > 0) {
+                $totalDuration = $this->totalSize / $rate;
+                $this->remaining = floor($totalDuration - ($totalDuration * $percent));
+                $this->rate = floor($rate);
+            } else {
+                $this->remaining = 0;
+                $this->rate = 0;
+            }
         }
 
         $this->percent = floor($percent * 100);
