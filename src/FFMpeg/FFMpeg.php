@@ -16,6 +16,11 @@ use FFMpeg\Exception\LogicException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Format\Video\Resamplable as VideoResamplable;
+use FFMpeg\Format\Video\Resizable as VideoResizable;
+use FFMpeg\Format\Video\Transcodable as VideoTranscodable;
+use FFMpeg\Format\Audio\Resamplable as AudioResamplable;
+use FFMpeg\Format\Audio\Transcodable as AudioTranscodable;
 use FFMpeg\Helper\HelperInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
@@ -230,11 +235,11 @@ class FFMpeg extends Binary
             $builder->add($parameter);
         }
 
-        if ($format instanceof Audio\Transcodable) {
+        if ($format instanceof AudioTranscodable) {
             $builder->add('-acodec')->add($format->getAudioCodec());
         }
 
-        if ($format instanceof Audio\Resamplable) {
+        if ($format instanceof AudioResamplable) {
             $builder->add('-ac')->add(2)->add('-ar')->add($format->getAudioSampleRate());
         }
 
@@ -279,7 +284,7 @@ class FFMpeg extends Binary
             $builder->add($parameter);
         }
 
-        if ($format instanceof Video\Resizable) {
+        if ($format instanceof VideoResizable) {
             if (!$this->prober) {
                 throw new LogicException('You must set a valid prober if you use a resizable format');
             }
@@ -317,7 +322,8 @@ class FFMpeg extends Binary
             }
         }
 
-        if ($format instanceof Video\Resamplable) {
+
+        if ($format instanceof VideoResamplable) {
             $builder->add('-r')->add($format->getFrameRate());
 
             /**
@@ -333,7 +339,7 @@ class FFMpeg extends Binary
             }
         }
 
-        if ($format instanceof Video\Transcodable) {
+        if ($format instanceof VideoTranscodable) {
             $builder->add('-vcodec')->add($format->getVideoCodec());
         }
 
@@ -349,7 +355,7 @@ class FFMpeg extends Binary
             ->add('-trellis')->add('1')->add('-qscale')->add('1')
             ->add('-ab')->add('92k');
 
-        if ($format instanceof Audio\Transcodable) {
+        if ($format instanceof AudioTranscodable) {
             $builder->add('-acodec')->add($format->getAudioCodec());
         }
 
