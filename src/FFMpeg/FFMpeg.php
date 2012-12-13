@@ -143,25 +143,41 @@ class FFMpeg extends Binary
     /**
      * Extract an image from a media file
      *
-     * @param  integer          $time   The time in second where to take the snapshot
-     * @param  string           $output The pathfile where to write
+     * @param  integer|string   $time     The time where to take the snapshot, time could either be in second or in hh:mm:ss[.xxx] form.
+     * @param  string           $output   The pathfile where to write
+     * @param  Boolean          $accurate Whether to decode the whole video until position or seek and extract. See -ss option in FFMpeg manual (http://ffmpeg.org/ffmpeg.html#Main-options)
+     *
      * @return \FFMpeg\FFMpeg
+     *
      * @throws RuntimeException
      * @throws LogicException
      */
-    public function extractImage($time, $output)
+    public function extractImage($time, $output, $accurate = false)
     {
         if (!$this->pathfile) {
             throw new LogicException('No file open');
         }
 
-        $builder = ProcessBuilder::create(array(
+        /**
+         * @see http://ffmpeg.org/ffmpeg.html#Main-options
+         */
+        if ($accurate) {
+            $options = array(
+                $this->binary, '-ss', $time,
+                '-i', $this->pathfile,
+                '-vframes', '1',
+                '-f', 'image2', $output
+            );
+        } else {
+            $options = array(
                 $this->binary,
                 '-i', $this->pathfile,
                 '-vframes', '1', '-ss', $time,
                 '-f', 'image2', $output
-            ));
+            );
+        }
 
+        $builder = ProcessBuilder::create($options);
         $process = $builder->getProcess();
 
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
