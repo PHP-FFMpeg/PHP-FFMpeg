@@ -161,7 +161,7 @@ class FFMpeg extends Binary
         /**
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
-        if ($accurate) {
+        if (!$accurate) {
             $options = array(
                 $this->binary, '-ss', $time,
                 '-i', $this->pathfile,
