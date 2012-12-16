@@ -158,6 +158,12 @@ abstract class ProgressHelper implements HelperInterface
             $delta = $currentTime - $this->lastOutput;
             $deltaSize = $currentSize - $this->currentSize;
             $rate = $deltaSize * $delta;
+
+            if ($rate == 0) {
+                // Unable to calculate rate, prevent division by zero.
+                return null;
+            }
+
             $totalDuration = $this->totalSize / $rate;
             $this->remaining = floor($totalDuration - ($totalDuration * $percent));
             $this->rate = floor($rate);
