@@ -150,7 +150,7 @@ abstract class ProgressHelper implements HelperInterface
         }
 
         $currentDuration = $this->convertDuration($matches[2]);
-        $currentTime = $this->microtimeFloat();
+        $currentTime = microtime(true);
         $currentSize = trim(str_replace('kb', '', strtolower(($matches[1]))));
         $percent = max(0, min(1, $currentDuration / $this->duration));
 
@@ -209,15 +209,6 @@ abstract class ProgressHelper implements HelperInterface
             'remaining' => $this->remaining,
             'rate' => $this->rate
         );
-    }
-
-    /**
-     * @return number
-     */
-    protected function microtimeFloat()
-    {
-        list($usec, $sec) = explode(" ", microtime());
-        return ((float)$usec + (float)$sec);
     }
 
     /**
