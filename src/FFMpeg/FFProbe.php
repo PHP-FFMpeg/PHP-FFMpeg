@@ -82,54 +82,31 @@ class FFProbe extends Binary
      * Probe the streams contained in a given file
      *
      * @param  string $pathfile
+     * @param  boolean $toArray If the returned value should be an array or the raw json output from ffmpeg
      * @return array  An array of streams array
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function probeStreams($pathfile)
+    public function probeStreams($pathfile, $toArray = false)
     {
         if ( ! is_file($pathfile)) {
             throw new InvalidArgumentException($pathfile);
         }
 
         $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-show_streams'
+            $this->binary, $pathfile, '-v', 'quiet', '-print_format', 'json', '-show_streams'
         ));
 
-        $output = explode(PHP_EOL, $this->executeProbe($builder->getProcess()));
+        $output = json_decode($this->executeProbe($builder->getProcess()), true);
+        $data = $output['streams'];
 
-        $ret = array();
-        $n = 0;
-
-        foreach ($output as $line) {
-
-            if ($line == '[STREAM]') {
-                $n ++;
-                $ret[$n] = array();
-                continue;
-            }
-            if ($line == '[/STREAM]') {
-                continue;
-            }
-
-            $chunks = explode('=', $line);
-            $key = array_shift($chunks);
-
-            if ('' === trim($key)) {
-                continue;
-            }
-
-            $value = trim(implode('=', $chunks));
-
-            if (ctype_digit($value)) {
-                $value = (int) $value;
-            }
-
-            $ret[$n][$key] = $value;
+        // prevents BC breaks with older versions
+        if ($toArray === false) {
+            $data = json_encode($data);
         }
 
-        return json_encode(array_values($ret));
+        return $data;
     }
 
     /**
