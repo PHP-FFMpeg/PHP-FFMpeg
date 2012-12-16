@@ -30,12 +30,13 @@ class FFProbe extends Binary
      * Probe the format of a given file
      *
      * @param  string $pathfile
+     * @param  boolean $toArray If the returned value should be an array or the raw json output from ffmpeg
      * @return string A Json object containing the key/values of the probe output
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function probeFormat($pathfile)
+    public function probeFormat($pathfile, $toArray = false)
     {
         if ( ! is_file($pathfile)) {
             throw new InvalidArgumentException($pathfile);
@@ -46,36 +47,18 @@ class FFProbe extends Binary
         }
 
         $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-show_format'
+            $this->binary, $pathfile, '-v', 'quiet', '-print_format', 'json', '-show_format'
         ));
 
-        $output = $this->executeProbe($builder->getProcess());
+        $output = json_decode($this->executeProbe($builder->getProcess()), true);
+        $data = $output['format'];
 
-        $ret = array();
-
-        foreach (explode("\n", $output) as $line) {
-
-            if (in_array($line, array('[FORMAT]', '[/FORMAT]'))) {
-                continue;
-            }
-
-            $chunks = explode('=', $line);
-            $key = array_shift($chunks);
-
-            if ('' === trim($key)) {
-                continue;
-            }
-
-            $value = trim(implode('=', $chunks));
-
-            if (ctype_digit($value)) {
-                $value = (int) $value;
-            }
-
-            $ret[$key] = $value;
+        // prevents BC breaks with older versions
+        if ($toArray === false) {
+            $data = json_encode($data);
         }
 
-        return $this->cachedFormats[$pathfile] = json_encode($ret);
+        return $this->cachedFormats[$pathfile . $toArray] = $data;
     }
 
     /**
