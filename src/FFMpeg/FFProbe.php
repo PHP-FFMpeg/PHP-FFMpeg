@@ -53,7 +53,7 @@ class FFProbe extends Binary
 
         $ret = array();
 
-        foreach (explode("\n", $output) as $line) {
+        foreach (explode(PHP_EOL, $output) as $line) {
 
             if (in_array($line, array('[FORMAT]', '[/FORMAT]'))) {
                 continue;
@@ -97,7 +97,7 @@ class FFProbe extends Binary
             $this->binary, $pathfile, '-show_streams'
         ));
 
-        $output = explode("\n", $this->executeProbe($builder->getProcess()));
+        $output = explode(PHP_EOL, $this->executeProbe($builder->getProcess()));
 
         $ret = array();
         $n = 0;
