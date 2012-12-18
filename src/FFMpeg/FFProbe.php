@@ -30,21 +30,68 @@ class FFProbe extends Binary
      * Probe the format of a given file
      *
      * @param  string $pathfile
-     * @return string A Json object containing the key/values of the probe output
+     * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
+     * @return array|string  A format array or JSON-string
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function probeFormat($pathfile)
+    public function probeFormat($pathfile, $toArray = false)
     {
         if ( ! is_file($pathfile)) {
             throw new InvalidArgumentException($pathfile);
         }
 
-        if (isset($this->cachedFormats[$pathfile])) {
-            return $this->cachedFormats[$pathfile];
+        if (isset($this->cachedFormats[$pathfile . $toArray])) {
+            return $this->cachedFormats[$pathfile . $toArray];
         }
 
+        // If option 'print_format' is available then parse JSON output and return result
+        if ($this->checkOption('print_format')) {
+            return $this->parseFormatFromJson($pathfile, $toArray);
+        }
+        // ... else parse plain output and return output
+        else {
+            return $this->parseFormatFromPlain($pathfile, $toArray);
+        }
+    }
+
+    /**
+     * Parse format from JSON output
+     *
+     * @param  string $pathfile
+     * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
+     * @return array|string  A format array or JSON-string
+     */
+    protected function parseFormatFromJson($pathfile, $toArray)
+    {
+        // Create process builder
+        $builder = ProcessBuilder::create(array(
+            $this->binary, $pathfile, '-loglevel', 'quiet', '-print_format', 'json', '-show_format'
+        ));
+
+        // Decode JSON output
+        $output = json_decode($this->executeProbe($builder->getProcess()), true);
+        $data = $output['format'];
+
+        // Convert returned data to JSON if it needs
+        if ($toArray === false) {
+            $data = json_encode($data);
+        }
+
+        return $this->cachedFormats[$pathfile . $toArray] = $data;
+    }
+
+    /**
+     * Parse format from plain output
+     *
+     * @param  string $pathfile
+     * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
+     * @return array|string  A format array or JSON-string
+     */
+    protected function parseFormatFromPlain($pathfile, $toArray)
+    {
+        // Create process builder
         $builder = ProcessBuilder::create(array(
             $this->binary, $pathfile, '-show_format'
         ));
@@ -54,7 +101,6 @@ class FFProbe extends Binary
         $ret = array();
 
         foreach (explode(PHP_EOL, $output) as $line) {
-
             if (in_array($line, array('[FORMAT]', '[/FORMAT]'))) {
                 continue;
             }
@@ -75,15 +121,20 @@ class FFProbe extends Binary
             $ret[$key] = $value;
         }
 
-        return $this->cachedFormats[$pathfile] = json_encode($ret);
+        // Convert returned data to JSON if it needs
+        if ($toArray === false) {
+            $ret = json_encode(array_values($ret));
+        }
+
+        return $this->cachedFormats[$pathfile . $toArray] = $ret;
     }
 
     /**
      * Probe the streams contained in a given file
      *
      * @param  string $pathfile
-     * @param  boolean $toArray If the returned value should be an array or the raw json output from ffmpeg
-     * @return array  An array of streams array
+     * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
+     * @return array|string  An array of streams array or JSON-string
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
@@ -94,19 +145,93 @@ class FFProbe extends Binary
             throw new InvalidArgumentException($pathfile);
         }
 
+        // If option 'print_format' is available then parse JSON output and return result
+        if ($this->checkOption('print_format')) {
+            return $this->parseStreamsFromJson($pathfile, $toArray);
+        }
+        // ... else parse plain output and return output
+        else {
+            return $this->parseStreamsFromPlain($pathfile, $toArray);
+        }
+    }
+
+    /**
+     * Parse streams from JSON output
+     *
+     * @param  string $pathfile
+     * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
+     * @return array|string  An array of streams array or JSON-string
+     */
+    protected function parseStreamsFromJson($pathfile, $toArray)
+    {
+        // Create process builder
         $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-v', 'quiet', '-print_format', 'json', '-show_streams'
+            $this->binary, $pathfile, '-loglevel', 'quiet', '-print_format', 'json', '-show_streams'
         ));
 
+        // Decode JSON output
         $output = json_decode($this->executeProbe($builder->getProcess()), true);
         $data = $output['streams'];
 
-        // prevents BC breaks with older versions
+        // Convert returned data to JSON if it needs
         if ($toArray === false) {
             $data = json_encode($data);
         }
 
         return $data;
+    }
+
+    /**
+     * Parse streams from plain output
+     *
+     * @param  string $pathfile
+     * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
+     * @return array|string  An array of streams array or JSON-string
+     */
+    protected function parseStreamsFromPlain($pathfile, $toArray)
+    {
+        // Create process builder
+        $builder = ProcessBuilder::create(array(
+            $this->binary, $pathfile, '-show_streams'
+        ));
+
+        $output = explode(PHP_EOL, $this->executeProbe($builder->getProcess()));
+
+        $ret = array();
+        $n = 0;
+
+        foreach ($output as $line) {
+            if ($line == '[STREAM]') {
+                $n ++;
+                $ret[$n] = array();
+                continue;
+            }
+            if ($line == '[/STREAM]') {
+                continue;
+            }
+
+            $chunks = explode('=', $line);
+            $key = array_shift($chunks);
+
+            if ('' === trim($key)) {
+                continue;
+            }
+
+            $value = trim(implode('=', $chunks));
+
+            if (ctype_digit($value)) {
+                $value = (int) $value;
+            }
+
+            $ret[$n][$key] = $value;
+        }
+
+        // Convert returned data to JSON if it needs
+        if ($toArray === false) {
+            $ret = json_encode(array_values($ret));
+        }
+
+        return $ret;
     }
 
     /**

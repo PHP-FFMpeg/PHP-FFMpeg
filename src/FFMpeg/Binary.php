@@ -14,6 +14,7 @@ namespace FFMpeg;
 use FFMpeg\Exception\BinaryNotFoundException;
 use Monolog\Logger;
 use Symfony\Component\Process\ExecutableFinder;
+use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * Binary abstract class
@@ -35,6 +36,8 @@ abstract class Binary implements AdapterInterface
      *
      * @param type   $binary The path file to the binary
      * @param Logger $logger A logger
+     *
+     * @throws BinaryNotFoundException
      */
     public function __construct($binary, Logger $logger)
     {
@@ -51,7 +54,7 @@ abstract class Binary implements AdapterInterface
      */
     public function __destruct()
     {
-        $this->binary = $binary = $this->logger = null;
+        $this->binary = $this->logger = null;
     }
 
     /**
@@ -78,6 +81,34 @@ abstract class Binary implements AdapterInterface
         }
 
         return new static($binary, $logger);
+    }
+
+    /**
+     * Check binary option
+     *
+     * @param string $option
+     * @return boolean
+     */
+    protected function checkOption($option)
+    {
+        // Create process builder
+        $builder = ProcessBuilder::create(array(
+            $this->binary, '-help', '-loglevel', 'quiet'
+        ));
+
+        // Execute process & fetch its output
+        $output = explode(PHP_EOL, $this->executeProbe($builder->getProcess()));
+
+        // Search the option at the beginning of one of the line of output array
+        $isPrintFormat = false;
+        foreach ($output as $line) {
+            if (strpos($line, '-' . $option) === 0) {
+                $isPrintFormat = true;
+                break;
+            }
+        }
+
+        return $isPrintFormat;
     }
 
     /**
