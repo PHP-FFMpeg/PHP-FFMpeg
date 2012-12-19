@@ -34,7 +34,6 @@ class FFProbe extends Binary
      * @return array|string  A format array or JSON-string
      *
      * @throws InvalidArgumentException
-     * @throws RuntimeException
      */
     public function probeFormat($pathfile, $toArray = false)
     {
@@ -50,10 +49,9 @@ class FFProbe extends Binary
         if ($this->checkOption('print_format')) {
             return $this->parseFormatFromJson($pathfile, $toArray);
         }
+
         // ... else parse plain output and return output
-        else {
-            return $this->parseFormatFromPlain($pathfile, $toArray);
-        }
+        return $this->parseFormatFromPlain($pathfile, $toArray);
     }
 
     /**
@@ -123,7 +121,7 @@ class FFProbe extends Binary
 
         // Convert returned data to JSON if it needs
         if ($toArray === false) {
-            $ret = json_encode(array_values($ret));
+            $ret = json_encode($ret);
         }
 
         return $this->cachedFormats[$pathfile . $toArray] = $ret;
@@ -137,7 +135,6 @@ class FFProbe extends Binary
      * @return array|string  An array of streams array or JSON-string
      *
      * @throws InvalidArgumentException
-     * @throws RuntimeException
      */
     public function probeStreams($pathfile, $toArray = false)
     {
@@ -149,10 +146,9 @@ class FFProbe extends Binary
         if ($this->checkOption('print_format')) {
             return $this->parseStreamsFromJson($pathfile, $toArray);
         }
+
         // ... else parse plain output and return output
-        else {
-            return $this->parseStreamsFromPlain($pathfile, $toArray);
-        }
+        return $this->parseStreamsFromPlain($pathfile, $toArray);
     }
 
     /**
