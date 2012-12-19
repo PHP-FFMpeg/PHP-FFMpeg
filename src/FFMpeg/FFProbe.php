@@ -47,54 +47,28 @@ class FFProbe extends Binary
 
         // If option 'print_format' is available then parse JSON output and return result
         if ($this->checkOption('print_format')) {
-            return $this->parseFormatFromJson($pathfile, $toArray);
+            return $this->cachedFormats[$pathfile . $toArray] = $this->parseJson($pathfile, 'show_format', 'format', $toArray);
         }
 
         // ... else parse plain output and return output
-        return $this->parseFormatFromPlain($pathfile, $toArray);
+        return $this->parseFormatPlain($pathfile, $toArray);
     }
 
     /**
-     * Parse format from JSON output
+     * Parse format plain output
      *
      * @param  string $pathfile
      * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
      * @return array|string  A format array or JSON-string
      */
-    protected function parseFormatFromJson($pathfile, $toArray)
+    protected function parseFormatPlain($pathfile, $toArray)
     {
         // Create process builder
         $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-loglevel', 'quiet', '-print_format', 'json', '-show_format'
+            $this->binary, $pathfile, '-loglevel', 'quiet', '-show_format'
         ));
 
-        // Decode JSON output
-        $output = json_decode($this->executeProbe($builder->getProcess()), true);
-        $data = $output['format'];
-
-        // Convert returned data to JSON if it needs
-        if ($toArray === false) {
-            $data = json_encode($data);
-        }
-
-        return $this->cachedFormats[$pathfile . $toArray] = $data;
-    }
-
-    /**
-     * Parse format from plain output
-     *
-     * @param  string $pathfile
-     * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
-     * @return array|string  A format array or JSON-string
-     */
-    protected function parseFormatFromPlain($pathfile, $toArray)
-    {
-        // Create process builder
-        $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-show_format'
-        ));
-
-        $output = $this->executeProbe($builder->getProcess());
+        $output = $this->execute($builder->getProcess());
 
         $ret = array();
 
@@ -144,54 +118,28 @@ class FFProbe extends Binary
 
         // If option 'print_format' is available then parse JSON output and return result
         if ($this->checkOption('print_format')) {
-            return $this->parseStreamsFromJson($pathfile, $toArray);
+            return $this->parseJson($pathfile, 'show_streams', 'streams', $toArray);
         }
 
         // ... else parse plain output and return output
-        return $this->parseStreamsFromPlain($pathfile, $toArray);
+        return $this->parseStreamsPlain($pathfile, $toArray);
     }
 
     /**
-     * Parse streams from JSON output
+     * Parse streams plain output
      *
      * @param  string $pathfile
      * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
      * @return array|string  An array of streams array or JSON-string
      */
-    protected function parseStreamsFromJson($pathfile, $toArray)
+    protected function parseStreamsPlain($pathfile, $toArray)
     {
         // Create process builder
         $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-loglevel', 'quiet', '-print_format', 'json', '-show_streams'
+            $this->binary, $pathfile, '-loglevel', 'quiet', '-show_streams'
         ));
 
-        // Decode JSON output
-        $output = json_decode($this->executeProbe($builder->getProcess()), true);
-        $data = $output['streams'];
-
-        // Convert returned data to JSON if it needs
-        if ($toArray === false) {
-            $data = json_encode($data);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Parse streams from plain output
-     *
-     * @param  string $pathfile
-     * @param  boolean $toArray If the returned value should be an array or the raw JSON output from ffmpeg
-     * @return array|string  An array of streams array or JSON-string
-     */
-    protected function parseStreamsFromPlain($pathfile, $toArray)
-    {
-        // Create process builder
-        $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-show_streams'
-        ));
-
-        $output = explode(PHP_EOL, $this->executeProbe($builder->getProcess()));
+        $output = explode(PHP_EOL, $this->execute($builder->getProcess()));
 
         $ret = array();
         $n = 0;
@@ -231,21 +179,47 @@ class FFProbe extends Binary
     }
 
     /**
+     * Parse JSON output
+     *
+     * @param  string $pathfile  Source file
+     * @param  string $option    Requested option
+     * @param  string $key       The key of the output array
+     * @param  boolean $toArray  If the returned value should be an array or the raw JSON output from ffmpeg
+     * @return array|string      A format array or JSON-string
+     */
+    protected function parseJson($pathfile, $option, $key, $toArray)
+    {
+        // Create process builder
+        $builder = ProcessBuilder::create(array(
+            $this->binary, $pathfile, '-loglevel', 'quiet', '-print_format', 'json', '-' . $option
+        ));
+
+        // Decode JSON output
+        $output = json_decode($this->execute($builder->getProcess()), true);
+        $data = $output[$key];
+
+        // Convert returned data to JSON if it needs
+        if ($toArray === false) {
+            $data = json_encode($data);
+        }
+
+        return $data;
+    }
+
+    /**
      *
      * @param  Process          $process
      * @return string
      * @throws RuntimeException
      */
-    protected function executeProbe(Process $process)
+    protected function execute(Process $process)
     {
         $this->logger->addInfo(sprintf('FFprobe executes command %s', $process->getCommandline()));
 
         try {
             $process->run();
         } catch (\RuntimeException $e) {
-            $this->logger->addInfo('FFprobe command failed');
 
-            throw new RuntimeException(sprintf('Failed to run the given command %s', $process->getCommandline()));
         }
 
         if ( ! $process->isSuccessful()) {
