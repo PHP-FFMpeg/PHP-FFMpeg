@@ -10,7 +10,6 @@ class ProgressTest extends FFMpegTest
      * @covers FFMpeg\Helper\ProgressHelper::parseProgress
      * @covers FFMpeg\Helper\ProgressHelper::convertDuration
      * @covers FFMpeg\Helper\ProgressHelper::getProgressInfo
-     * @covers FFMpeg\Helper\ProgressHelper::microtimeFloat
      * @covers FFMpeg\Helper\AudioProgressHelper::getPattern
      */
     public function testProgressHelper()
