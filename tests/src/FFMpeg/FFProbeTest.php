@@ -26,7 +26,7 @@ class FFProbeTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers FFMpeg\FFProbe::probeFormat
      * @covers FFMpeg\FFProbe::probeStreams
-     * @covers FFMpeg\FFProbe::executeProbe
+     * @covers FFMpeg\FFProbe::execute
      */
     public function testProbe()
     {
@@ -36,7 +36,7 @@ class FFProbeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\FFProbe::probeFormat
-     * @covers FFMpeg\FFProbe::executeProbe
+     * @covers FFMpeg\FFProbe::execute
      * @expectedException \RuntimeException
      */
     public function testProbeInvalidFile()
@@ -46,7 +46,7 @@ class FFProbeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\FFProbe::probeStreams
-     * @covers FFMpeg\FFProbe::executeProbe
+     * @covers FFMpeg\FFProbe::execute
      * @expectedException \FFMpeg\Exception\RuntimeException
      */
     public function testProbeStreamsInvalidFile()
@@ -56,7 +56,7 @@ class FFProbeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\FFProbe::probeStreams
-     * @covers FFMpeg\FFProbe::executeProbe
+     * @covers FFMpeg\FFProbe::execute
      * @expectedException \InvalidArgumentException
      */
     public function testProbeStreamsInvalidPathFile()
@@ -66,7 +66,7 @@ class FFProbeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers FFMpeg\FFProbe::probeFormat
-     * @covers FFMpeg\FFProbe::executeProbe
+     * @covers FFMpeg\FFProbe::execute
      * @expectedException \InvalidArgumentException
      */
     public function testProbeFormatInvalidPathFile()
