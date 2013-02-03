@@ -179,6 +179,8 @@ class FFMpeg extends Binary
 
         $builder = ProcessBuilder::create($options);
         $process = $builder->getProcess();
+        $process->setTimeout($this->timeout);
+
 
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
