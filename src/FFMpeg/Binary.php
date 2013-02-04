@@ -31,12 +31,18 @@ abstract class Binary implements AdapterInterface
     protected $logger;
 
     /**
+     * @var Integer
+     */
+    protected $timeout;
+
+    /**
      * Binary constructor
      *
      * @param type   $binary The path file to the binary
      * @param Logger $logger A logger
+     * @param Integer $timeout The timout for the underlying process
      */
-    public function __construct($binary, Logger $logger)
+    public function __construct($binary, Logger $logger, $timeout = 60)
     {
         if (!is_executable($binary)) {
             throw new \FFMpeg\Exception\BinaryNotFoundException(sprintf('`%s` is not a valid binary', $binary));
@@ -44,6 +50,7 @@ abstract class Binary implements AdapterInterface
 
         $this->binary = $binary;
         $this->logger = $logger;
+        $this->timeout = $timeout;
     }
 
     /**
