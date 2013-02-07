@@ -379,16 +379,20 @@ class FFMpeg extends Binary
             $builder->add('-acodec')->add($format->getAudioCodec());
         }
 
-        $tmpFile = new \SplFileInfo(tempnam(sys_get_temp_dir(), 'temp') . '.' . pathinfo($outputPathfile, PATHINFO_EXTENSION));
-
+        $passPrefix = uniqid('pass-');
+        
         $pass1 = $builder;
         $pass2 = clone $builder;
 
         $passes[] = $pass1
-            ->add('-pass')->add('1')->add('-an')->add($tmpFile->getPathname())
+            ->add('-pass')->add('1')
+            ->add('-passlogfile')->add($passPrefix)
+            ->add('-an')->add($outputPathfile)
             ->getProcess();
         $passes[] = $pass2
-            ->add('-pass')->add('2')->add('-ac')->add('2')
+            ->add('-pass')->add('2')
+            ->add('-passlogfile')->add($passPrefix)
+            ->add('-ac')->add('2')
             ->add('-ar')->add('44100')->add($outputPathfile)
             ->getProcess();
 
@@ -403,10 +407,9 @@ class FFMpeg extends Binary
             }
         }
 
-        $this->cleanupTemporaryFile($tmpFile->getPathname());
-        $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log');
-        $this->cleanupTemporaryFile(getcwd() . '/av2pass-0.log');
-        $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log.mbtree');
+        $this->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log');
+        $this->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log');
+        $this->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log.mbtree');
 
         if (!$process->isSuccessful()) {
             $this->logger->addInfo(sprintf('FFmpeg command failed'));
