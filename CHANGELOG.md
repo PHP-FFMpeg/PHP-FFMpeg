@@ -1,6 +1,12 @@
 CHANGELOG
 ---------
 
+* 0.2.2 (xx-xx-2013)
+
+  * Add compatibility with FFMpeg 1.1
+  * Upgrade deprecated options (`-ab`, `-qscale` and `-b`)
+  * Use of a custom stat file for each multi-pass encoding (fix #20)
+
 * 0.2.1 (02-04-2013)
 
   * Parse the output of FFProbe using correct EOL sequences (@ak76)
