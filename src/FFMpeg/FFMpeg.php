@@ -361,31 +361,38 @@ class FFMpeg extends Binary
             $builder->add('-vcodec')->add($format->getVideoCodec());
         }
 
-        $builder->add('-b')->add($format->getKiloBitrate() . 'k')
+        $builder->add('-b:v')->add($format->getKiloBitrate() . 'k')
             ->add('-threads')->add($this->threads)
-            ->add('-refs')->add('6')->add('-coder')->add('1')->add('-qmin')
-            ->add('10')->add('-qmax')->add('51')
-            ->add('-sc_threshold')->add('40')->add('-flags')->add('+loop')
-            ->add('-me_range')->add('16')->add('-subq')->add('7')
-            ->add('-i_qfactor')->add('0.71')->add('-qcomp')->add('0.6')
+            ->add('-refs')->add('6')
+            ->add('-coder')->add('1')
+            ->add('-sc_threshold')->add('40')
+            ->add('-flags')->add('+loop')
+            ->add('-me_range')->add('16')
+            ->add('-subq')->add('7')
+            ->add('-i_qfactor')->add('0.71')
+            ->add('-qcomp')->add('0.6')
             ->add('-qdiff')->add('4')
-            ->add('-trellis')->add('1')->add('-qscale')->add('1')
-            ->add('-ab')->add('92k');
+            ->add('-trellis')->add('1')
+            ->add('-b:a')->add('92k');
 
         if ($format instanceof AudioTranscodable) {
             $builder->add('-acodec')->add($format->getAudioCodec());
         }
 
-        $tmpFile = new \SplFileInfo(tempnam(sys_get_temp_dir(), 'temp') . '.' . pathinfo($outputPathfile, PATHINFO_EXTENSION));
-
+        $passPrefix = uniqid('pass-');
+        
         $pass1 = $builder;
         $pass2 = clone $builder;
 
         $passes[] = $pass1
-            ->add('-pass')->add('1')->add('-an')->add($tmpFile->getPathname())
+            ->add('-pass')->add('1')
+            ->add('-passlogfile')->add($passPrefix)
+            ->add('-an')->add($outputPathfile)
             ->getProcess();
         $passes[] = $pass2
-            ->add('-pass')->add('2')->add('-ac')->add('2')
+            ->add('-pass')->add('2')
+            ->add('-passlogfile')->add($passPrefix)
+            ->add('-ac')->add('2')
             ->add('-ar')->add('44100')->add($outputPathfile)
             ->getProcess();
 
@@ -400,10 +407,9 @@ class FFMpeg extends Binary
             }
         }
 
-        $this->cleanupTemporaryFile($tmpFile->getPathname());
-        $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log');
-        $this->cleanupTemporaryFile(getcwd() . '/av2pass-0.log');
-        $this->cleanupTemporaryFile(getcwd() . '/ffmpeg2pass-0.log.mbtree');
+        $this->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log');
+        $this->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log');
+        $this->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log.mbtree');
 
         if (!$process->isSuccessful()) {
             $this->logger->addInfo(sprintf('FFmpeg command failed'));
