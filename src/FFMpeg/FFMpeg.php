@@ -315,7 +315,6 @@ class FFMpeg extends Binary
             ->add('-refs')->add('6')->add('-coder')->add('1')->add('-qmin')
             ->add('10')->add('-qmax')->add('51')
             ->add('-sc_threshold')->add('40')->add('-flags')->add('+loop')
-            ->add('-cmp')->add('+chroma')
             ->add('-me_range')->add('16')->add('-subq')->add('7')
             ->add('-i_qfactor')->add('0.71')->add('-qcomp')->add('0.6')
             ->add('-qdiff')->add('4')
