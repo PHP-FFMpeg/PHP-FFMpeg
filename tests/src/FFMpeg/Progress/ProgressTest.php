@@ -1,11 +1,35 @@
 <?php
 use FFMpeg\Helper\AudioProgressHelper;
-use FFMpeg\FFMpegTest;
+use FFMpeg\FFProbe;
+use FFMpeg\FFMpeg;
 use FFMpeg\Format\Audio\Mp3;
 use FFMpeg\Helper\VideoProgressHelper;
+use Monolog\Logger;
+use Monolog\Handler\NullHandler;
 
-class ProgressTest extends FFMpegTest
+class ProgressTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var FFMpeg
+     */
+    protected $object;
+
+    /**
+     * @var FFProbe
+     */
+    protected $probe;
+    protected $logger;
+
+    public function setUp()
+    {
+        $this->logger = new Logger('tests');
+        $this->logger->pushHandler(new NullHandler());
+
+        $this->object = FFMpeg::load($this->logger);
+        $this->probe = FFProbe::load($this->logger);
+        $this->object->setProber($this->probe);
+    }
+
     /**
      * @covers FFMpeg\Helper\ProgressHelper::parseProgress
      * @covers FFMpeg\Helper\ProgressHelper::convertDuration
