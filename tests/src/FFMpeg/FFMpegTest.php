@@ -203,7 +203,7 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
         $format = new Format\Video\X264();
         $format-> setDimensions(32, 32);
 
-        $this->object->open(__DIR__ . '/../../files/Test.ogv');
+        $this->object->open(__DIR__ . '/../../files/EmpireStateofMind-Jay-Z.mov');
         $this->object->encode($format, $dest);
 
         $this->probe->probeFormat($dest);

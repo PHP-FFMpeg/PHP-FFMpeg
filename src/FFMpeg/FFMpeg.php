@@ -361,16 +361,19 @@ class FFMpeg extends Binary
             $builder->add('-vcodec')->add($format->getVideoCodec());
         }
 
-        $builder->add('-b')->add($format->getKiloBitrate() . 'k')
+        $builder->add('-b:v')->add($format->getKiloBitrate() . 'k')
             ->add('-threads')->add($this->threads)
-            ->add('-refs')->add('6')->add('-coder')->add('1')->add('-qmin')
-            ->add('10')->add('-qmax')->add('51')
-            ->add('-sc_threshold')->add('40')->add('-flags')->add('+loop')
-            ->add('-me_range')->add('16')->add('-subq')->add('7')
-            ->add('-i_qfactor')->add('0.71')->add('-qcomp')->add('0.6')
+            ->add('-refs')->add('6')
+            ->add('-coder')->add('1')
+            ->add('-sc_threshold')->add('40')
+            ->add('-flags')->add('+loop')
+            ->add('-me_range')->add('16')
+            ->add('-subq')->add('7')
+            ->add('-i_qfactor')->add('0.71')
+            ->add('-qcomp')->add('0.6')
             ->add('-qdiff')->add('4')
-            ->add('-trellis')->add('1')->add('-qscale')->add('1')
-            ->add('-ab')->add('92k');
+            ->add('-trellis')->add('1')
+            ->add('-b:a')->add('92k');
 
         if ($format instanceof AudioTranscodable) {
             $builder->add('-acodec')->add($format->getAudioCodec());
