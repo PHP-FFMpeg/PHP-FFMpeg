@@ -12,6 +12,6 @@ CHANGELOG
   * Add HelperInterface and support for realtime progress ( @pulse00 ).
   * Add `accurate` option to `FFMpeg::extractImage` method.
 
-* 0.1.0 (30-10-2012)
+* 0.1.0 (10-30-2012)
 
   * First stable version.
