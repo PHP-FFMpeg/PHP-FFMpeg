@@ -25,9 +25,8 @@
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "sami/sami"       : "dev-master",
-        "silex/silex"     : "dev-master",
-        "phpunit/phpunit" : "~3.7"
+        "sami/sami"       : "dev-master@dev",
+        "silex/silex"     : "1.0.x-dev@dev"
     },
     "autoload": {
         "psr-0": {
