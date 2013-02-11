@@ -1,11 +1,12 @@
 CHANGELOG
 ---------
 
-* 0.2.2 (xx-xx-2013)
+* 0.2.2 (02-11-2013)
 
   * Add compatibility with FFMpeg 1.1
   * Upgrade deprecated options (`-ab`, `-qscale` and `-b`)
   * Use of a custom stat file for each multi-pass encoding (fix #20)
+  * Use larger version range for dependencies
 
 * 0.2.1 (02-04-2013)
 
