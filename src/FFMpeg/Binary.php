@@ -40,7 +40,7 @@ abstract class Binary implements AdapterInterface
      *
      * @param type   $binary The path file to the binary
      * @param Logger $logger A logger
-     * @param Integer $timeout The timout for the underlying process
+     * @param Integer $timeout The timout for the underlying process, 0 means no timeout
      */
     public function __construct($binary, Logger $logger, $timeout = 60)
     {
@@ -65,11 +65,13 @@ abstract class Binary implements AdapterInterface
      * {@inheritdoc}
      *
      * @param  Logger $logger A logger
+     * @param  Integer $timeout The timout for the underlying process, 0 means no timeout
+     *
      * @return Binary The binary
      *
      * @throws Exception\BinaryNotFoundException
      */
-    public static function load(Logger $logger)
+    public static function load(Logger $logger, $timeout = 60)
     {
         $finder = new ExecutableFinder();
         $binary = null;
@@ -84,7 +86,7 @@ abstract class Binary implements AdapterInterface
             throw new BinaryNotFoundException('Binary not found');
         }
 
-        return new static($binary, $logger);
+        return new static($binary, $logger, $timeout);
     }
 
     /**
