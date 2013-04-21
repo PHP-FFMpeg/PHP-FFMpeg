@@ -1,6 +1,11 @@
 CHANGELOG
 ---------
 
+* 0.2.3 (04-21-2013)
+
+  * Add timeout getter and setter on FFMpeg and FFProbe
+  * Add timeout setting via second argument on FFMpeg::load and FFProbe::load 
+
 * 0.2.2 (02-11-2013)
 
   * Add compatibility with FFMpeg 1.1
