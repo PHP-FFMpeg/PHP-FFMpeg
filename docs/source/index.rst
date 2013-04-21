@@ -85,8 +85,9 @@ Basic Usage
 Process Timeout
 ---------------
 
-PHP-FFMpeg runs ffmpeg commands to processs your medias. A default timeout of
-60 seconds is set, but you can override this by passing a second argument load :
+PHP-FFMpeg runs ffmpeg commands to process your medias. A default timeout of
+60 seconds is set, but you can override this by passing a second argument to the
+``load`` method :
 
 .. code-block:: php
 
