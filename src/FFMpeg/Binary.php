@@ -12,6 +12,7 @@
 namespace FFMpeg;
 
 use FFMpeg\Exception\BinaryNotFoundException;
+use FFMpeg\Exception\InvalidArgumentException;
 use Monolog\Logger;
 use Symfony\Component\Process\ExecutableFinder;
 
@@ -50,7 +51,35 @@ abstract class Binary implements AdapterInterface
 
         $this->binary = $binary;
         $this->logger = $logger;
+        $this->setTimeout($timeout);
+    }
+
+    /**
+     * Returns the current timeout for underlying processes.
+     *
+     * @return integer|float
+     */
+    public function getTimeout()
+    {
+        return $this->timeout;
+    }
+
+    /**
+     * Sets the timeout for the underlying processes, use 0 to disable timeout.
+     *
+     * @param integer|float $timeout
+     *
+     * @return Binary
+     */
+    public function setTimeout($timeout)
+    {
+        if (0 > $timeout) {
+            throw new InvalidArgumentException('Timeout must be a positive value');
+        }
+
         $this->timeout = $timeout;
+
+        return $this;
     }
 
     /**
