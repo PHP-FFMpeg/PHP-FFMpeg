@@ -82,6 +82,34 @@ Basic Usage
            ->extractImage(12, 'second-screenshot.jpg')
            ->close();
 
+Process Timeout
+---------------
+
+PHP-FFMpeg runs ffmpeg commands to processs your medias. A default timeout of
+60 seconds is set, but you can override this by passing a second argument load :
+
+.. code-block:: php
+
+    <?php
+    $ffmpeg = FFMpeg::load($logger, 500);
+
+    // 500
+    echo $ffmpeg->getTimeOut();
+
+You can also set and get the timeout with the appropriate getter and setter :
+
+.. code-block:: php
+
+    <?php
+    $ffmpeg->setTimeout(200);
+
+    // 200
+    echo $ffmpeg->getTimeOut();
+
+.. note::
+
+    To disable timeout, set its value to 0.
+
 Recipes
 -------
 

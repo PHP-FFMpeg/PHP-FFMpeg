@@ -12,6 +12,7 @@
 namespace FFMpeg;
 
 use FFMpeg\Exception\BinaryNotFoundException;
+use FFMpeg\Exception\InvalidArgumentException;
 use Monolog\Logger;
 use Symfony\Component\Process\ExecutableFinder;
 
@@ -40,7 +41,7 @@ abstract class Binary implements AdapterInterface
      *
      * @param type   $binary The path file to the binary
      * @param Logger $logger A logger
-     * @param Integer $timeout The timout for the underlying process
+     * @param Integer $timeout The timout for the underlying process, 0 means no timeout
      */
     public function __construct($binary, Logger $logger, $timeout = 60)
     {
@@ -50,7 +51,35 @@ abstract class Binary implements AdapterInterface
 
         $this->binary = $binary;
         $this->logger = $logger;
+        $this->setTimeout($timeout);
+    }
+
+    /**
+     * Returns the current timeout for underlying processes.
+     *
+     * @return integer|float
+     */
+    public function getTimeout()
+    {
+        return $this->timeout;
+    }
+
+    /**
+     * Sets the timeout for the underlying processes, use 0 to disable timeout.
+     *
+     * @param integer|float $timeout
+     *
+     * @return Binary
+     */
+    public function setTimeout($timeout)
+    {
+        if (0 > $timeout) {
+            throw new InvalidArgumentException('Timeout must be a positive value');
+        }
+
         $this->timeout = $timeout;
+
+        return $this;
     }
 
     /**
@@ -65,11 +94,13 @@ abstract class Binary implements AdapterInterface
      * {@inheritdoc}
      *
      * @param  Logger $logger A logger
+     * @param  Integer $timeout The timout for the underlying process, 0 means no timeout
+     *
      * @return Binary The binary
      *
      * @throws Exception\BinaryNotFoundException
      */
-    public static function load(Logger $logger)
+    public static function load(Logger $logger, $timeout = 60)
     {
         $finder = new ExecutableFinder();
         $binary = null;
@@ -84,7 +115,7 @@ abstract class Binary implements AdapterInterface
             throw new BinaryNotFoundException('Binary not found');
         }
 
-        return new static($binary, $logger);
+        return new static($binary, $logger, $timeout);
     }
 
     /**
