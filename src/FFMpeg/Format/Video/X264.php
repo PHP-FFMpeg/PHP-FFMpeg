@@ -52,4 +52,9 @@ class X264 extends DefaultVideo
     {
         return 2;
     }
+
+    public function getModulus()
+    {
+        return 2;
+    }
 }
