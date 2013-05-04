@@ -34,5 +34,15 @@ interface Resizable extends VideoInterface
      */
     public function getComputedDimensions($originalWidth, $originalHeight);
 
+    /**
+     * Returns the modulus used by the Resizable video.
+     *
+     * This used to calculate the target dimensions while maintaining the best
+     * aspect ratio.
+     *
+     * @see http://www.undeadborn.net/tools/rescalculator.php
+     *
+     * @return integer
+     */
     public function getModulus();
 }
