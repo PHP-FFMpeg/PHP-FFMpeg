@@ -24,6 +24,8 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
 {
     const RESIZEMODE_FIT = 'fit';
     const RESIZEMODE_INSET = 'inset';
+    const RESIZEMODE_SCALE_WIDTH = 'width';
+    const RESIZEMODE_SCALE_HEIGHT = 'height';
 
     protected $width;
     protected $height;
@@ -32,6 +34,7 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
     protected $videoCodec;
     protected $GOPsize = 25;
     protected $kiloBitrate = 1000;
+    protected $modulus = 16;
 
     /**
      * Returns the width setting.
@@ -82,9 +85,18 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
      */
     public function getComputedDimensions($originalWidth, $originalHeight)
     {
+        $originalRatio = $originalWidth / $originalHeight;
+
         switch ($this->getResizeMode()) {
+            case self::RESIZEMODE_SCALE_WIDTH:
+                $height = $this->height;
+                $width = round($originalRatio * $this->height);
+                break;
+            case self::RESIZEMODE_SCALE_HEIGHT:
+                $width = $this->width;
+                $height = round($this->width / $originalRatio);
+                break;
             case self::RESIZEMODE_INSET:
-                $originalRatio = $originalWidth / $originalHeight;
                 $targetRatio = $this->width / $this->height;
 
                 if ($targetRatio > $originalRatio) {
@@ -119,11 +131,11 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
      */
     public function setResizeMode($mode)
     {
-        if ( ! in_array($mode, array(self::RESIZEMODE_FIT, self::RESIZEMODE_INSET))) {
+        if ( ! in_array($mode, array(self::RESIZEMODE_FIT, self::RESIZEMODE_INSET, self::RESIZEMODE_SCALE_WIDTH, self::RESIZEMODE_SCALE_HEIGHT))) {
             throw new InvalidArgumentException(
                 'Resize mode `%s` is not valid , avalaible values are %s',
                 $mode,
-                implode(', ', array(self::RESIZEMODE_FIT, self::RESIZEMODE_INSET))
+                implode(', ', array(self::RESIZEMODE_FIT, self::RESIZEMODE_INSET, self::RESIZEMODE_SCALE_WIDTH, self::RESIZEMODE_SCALE_HEIGHT))
             );
         }
 
@@ -229,5 +241,27 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
     public function getPasses()
     {
         return 1;
+    }
+
+    /**
+     * Used to determine what resolutions sizes are valid.
+     *
+     * @param int $value
+     */
+    public function setModulus($value)
+    {
+        if(!in_array($value, array(2, 4, 8, 16))){
+            throw new InvalidArgumentException('Wrong modulus division value. Valid values are 2, 4, 8 or 16');
+        }
+
+        $this->modulus = $value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getModulus()
+    {
+        return $this->modulus;
     }
 }

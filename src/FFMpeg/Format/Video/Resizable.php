@@ -33,4 +33,6 @@ interface Resizable extends VideoInterface
      * @return Dimension A dimension
      */
     public function getComputedDimensions($originalWidth, $originalHeight);
+
+    public function getModulus();
 }

@@ -332,9 +332,8 @@ class FFMpeg extends Binary
 
             if ($originalHeight !== null && $originalWidth !== null) {
                 $dimensions = $format->getComputedDimensions($originalWidth, $originalHeight);
-
-                $width = $this->getMultiple($dimensions->getWidth(), 16);
-                $height = $this->getMultiple($dimensions->getHeight(), 16);
+                $width = $this->getMultiple($dimensions->getWidth(), $format->getModulus());
+                $height = $this->getMultiple($dimensions->getHeight(), $format->getModulus());
 
                 $builder->add('-s')->add($width . 'x' . $height);
             }
@@ -455,31 +454,15 @@ class FFMpeg extends Binary
      */
     protected function getMultiple($value, $multiple)
     {
-        $modulo = $value % $multiple;
-
-        $ret = (int) $multiple;
-
-        $halfDistance = $multiple / 2;
-        if ($modulo <= $halfDistance)
-            $bound = 'bottom';
-        else
-            $bound = 'top';
-
-        switch ($bound) {
-            default:
-            case 'top':
-                $ret = $value + $multiple - $modulo;
-                break;
-            case 'bottom':
-                $ret = $value - $modulo;
-                break;
+        if (($value % $multiple) === 0){
+            return $value;
         }
 
-        if ($ret < $multiple) {
-            $ret = (int) $multiple;
-        }
+        do {
+            $value++;
+        } while (($value % $multiple) != 0);
 
-        return (int) $ret;
+        return $value;
     }
 
     /**
