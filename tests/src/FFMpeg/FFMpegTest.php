@@ -217,10 +217,13 @@ class FFMpegTest extends \PHPUnit_Framework_TestCase
     public function testGetMultiple()
     {
         $object = FFMpegTester::load($this->logger);
-        $this->assertEquals(320, $object->getMultipleTester(321, 16));
+        $this->assertEquals(336, $object->getMultipleTester(321, 16));
+        $this->assertEquals(322, $object->getMultipleTester(321, 2));
+        $this->assertEquals(324, $object->getMultipleTester(321, 4));
+        $this->assertEquals(328, $object->getMultipleTester(321, 8));
         $this->assertEquals(320, $object->getMultipleTester(319, 16));
         $this->assertEquals(320, $object->getMultipleTester(313, 16));
-        $this->assertEquals(304, $object->getMultipleTester(312, 16));
+        $this->assertEquals(320, $object->getMultipleTester(312, 16));
         $this->assertEquals(336, $object->getMultipleTester(329, 16));
         $this->assertEquals(16, $object->getMultipleTester(8, 16));
     }
