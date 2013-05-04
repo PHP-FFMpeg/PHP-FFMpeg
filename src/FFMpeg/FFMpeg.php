@@ -379,7 +379,7 @@ class FFMpeg extends Binary
         }
 
         $passPrefix = uniqid('pass-');
-        
+
         $pass1 = $builder;
         $pass2 = clone $builder;
 
@@ -454,14 +454,10 @@ class FFMpeg extends Binary
      */
     protected function getMultiple($value, $multiple)
     {
-        if (($value % $multiple) === 0){
-            return $value;
-        }
-
-        do {
+        while (0 !== $value % $multiple) {
             $value++;
-        } while (($value % $multiple) != 0);
-
+        }
+        
         return $value;
     }
 
