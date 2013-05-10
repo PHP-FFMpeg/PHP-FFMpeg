@@ -4,6 +4,7 @@ CHANGELOG
 * 0.2.4 (xx-xx-2013)
 
   * Add Video\ResizableInterface::getModulus method for better output scaling (@retrojunk)
+  * Fix timeout setting on audio/video encoding (@xammep-ua)
 
 * 0.2.3 (04-21-2013)
 
