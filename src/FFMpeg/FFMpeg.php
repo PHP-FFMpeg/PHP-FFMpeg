@@ -265,6 +265,8 @@ class FFMpeg extends Binary
 
         $process = $builder->getProcess();
 
+        $process->setTimeout($this->timeout);
+
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandLine()));
 
         try {
@@ -397,6 +399,8 @@ class FFMpeg extends Binary
 
         foreach ($passes as $process) {
 
+            $process->setTimeout($this->timeout);
+
             $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
             try {
@@ -457,7 +461,7 @@ class FFMpeg extends Binary
         while (0 !== $value % $multiple) {
             $value++;
         }
-        
+
         return $value;
     }
 
