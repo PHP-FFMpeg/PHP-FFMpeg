@@ -14,9 +14,30 @@ class TestCase extends \PHPUnit_Framework_TestCase
         return $this->getMock('Doctrine\Common\Cache\Cache');
     }
 
+    public function getTimeCodeMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Coordinate\TimeCode')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    public function getFFMpegDriverMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Driver\FFMpegDriver')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function getFFProbeDriverMock()
     {
         return $this->getMockBuilder('FFMpeg\Driver\FFProbeDriver')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    public function getFFProbeMock()
+    {
+        return $this->getMockBuilder('FFMpeg\FFProbe')
             ->disableOriginalConstructor()
             ->getMock();
     }
