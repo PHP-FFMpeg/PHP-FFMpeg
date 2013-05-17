@@ -178,9 +178,8 @@ class FFMpeg extends Binary
         }
 
         $builder = ProcessBuilder::create($options);
+        $builder->setTimeout($this->timeout);
         $process = $builder->getProcess();
-        $process->setTimeout($this->timeout);
-
 
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
@@ -262,10 +261,9 @@ class FFMpeg extends Binary
         }
 
         $builder->add($outputPathfile);
+        $builder->setTimeout($this->timeout);
 
         $process = $builder->getProcess();
-
-        $process->setTimeout($this->timeout);
 
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandLine()));
 
@@ -389,17 +387,17 @@ class FFMpeg extends Binary
             ->add('-pass')->add('1')
             ->add('-passlogfile')->add($passPrefix)
             ->add('-an')->add($outputPathfile)
+            ->setTimeout($this->timeout)
             ->getProcess();
         $passes[] = $pass2
             ->add('-pass')->add('2')
             ->add('-passlogfile')->add($passPrefix)
             ->add('-ac')->add('2')
             ->add('-ar')->add('44100')->add($outputPathfile)
+            ->setTimeout($this->timeout)
             ->getProcess();
 
         foreach ($passes as $process) {
-
-            $process->setTimeout($this->timeout);
 
             $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
