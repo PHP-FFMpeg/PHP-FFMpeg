@@ -13,7 +13,7 @@ namespace FFMpeg\FFProbe\DataMapping;
 
 use FFMpeg\Exception\InvalidArgumentException;
 
-abstract class AbstractData
+abstract class AbstractData implements \Countable
 {
     private $properties;
 
@@ -68,5 +68,10 @@ abstract class AbstractData
     public function all()
     {
         return $this->properties;
+    }
+
+    public function count()
+    {
+        return count($this->properties);
     }
 }
