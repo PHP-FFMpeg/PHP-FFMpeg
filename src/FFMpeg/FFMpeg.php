@@ -365,7 +365,7 @@ class FFMpeg extends Binary
         }
 
         $builder->add('-b:v')->add($format->getKiloBitrate() . 'k')
-            ->add('-maxrate')->add($format->getKiloBitrate() . 'k')
+            ->add('-maxrate')->add(round($format->getKiloBitrate() * 1.5) . 'k')
             ->add('-bufsize')->add($format->getKiloBitrate() * 2 . 'k')
             ->add('-threads')->add($this->threads)
             ->add('-refs')->add('6')
