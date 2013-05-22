@@ -178,9 +178,8 @@ class FFMpeg extends Binary
         }
 
         $builder = ProcessBuilder::create($options);
+        $builder->setTimeout($this->timeout);
         $process = $builder->getProcess();
-        $process->setTimeout($this->timeout);
-
 
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
@@ -262,10 +261,9 @@ class FFMpeg extends Binary
         }
 
         $builder->add($outputPathfile);
+        $builder->setTimeout($this->timeout);
 
         $process = $builder->getProcess();
-
-        $process->setTimeout($this->timeout);
 
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandLine()));
 
@@ -360,9 +358,15 @@ class FFMpeg extends Binary
 
         if ($format instanceof VideoTranscodable) {
             $builder->add('-vcodec')->add($format->getVideoCodec());
+            if (method_exists($format, 'getX264Compatibility')) {
+                $builder->add('-profile:v')->add($format->getX264Compatibility());
+            }
+                
         }
 
         $builder->add('-b:v')->add($format->getKiloBitrate() . 'k')
+            ->add('-maxrate')->add(round($format->getKiloBitrate() * 1.5) . 'k')
+            ->add('-bufsize')->add($format->getKiloBitrate() * 2 . 'k')
             ->add('-threads')->add($this->threads)
             ->add('-refs')->add('6')
             ->add('-coder')->add('1')
@@ -374,7 +378,11 @@ class FFMpeg extends Binary
             ->add('-qcomp')->add('0.6')
             ->add('-qdiff')->add('4')
             ->add('-trellis')->add('1')
-            ->add('-b:a')->add('92k');
+            // Set the pixel format to yuv420p so that it's quicktime compatible.
+            ->add('-pix_fmt')->add('yuv420p')
+            // Hardwire compression system to slow for now
+            ->add('-preset')->add('slow')      
+            ->add('-b:a')->add($format->getAudioBitrate() . 'k');
 
         if ($format instanceof AudioTranscodable) {
             $builder->add('-acodec')->add($format->getAudioCodec());
@@ -389,17 +397,17 @@ class FFMpeg extends Binary
             ->add('-pass')->add('1')
             ->add('-passlogfile')->add($passPrefix)
             ->add('-an')->add($outputPathfile)
+            ->setTimeout($this->timeout)
             ->getProcess();
         $passes[] = $pass2
             ->add('-pass')->add('2')
             ->add('-passlogfile')->add($passPrefix)
             ->add('-ac')->add('2')
             ->add('-ar')->add('44100')->add($outputPathfile)
+            ->setTimeout($this->timeout)
             ->getProcess();
 
         foreach ($passes as $process) {
-
-            $process->setTimeout($this->timeout);
 
             $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
