@@ -34,7 +34,9 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
     protected $videoCodec;
     protected $GOPsize = 25;
     protected $kiloBitrate = 1000;
+    protected $audioBitrate = 92;
     protected $modulus = 16;
+
 
     /**
      * Returns the width setting.
@@ -264,4 +266,25 @@ abstract class DefaultVideo extends DefaultAudio implements Interactive, Resampl
     {
         return $this->modulus;
     }
+    
+    /**
+     * Returns the audio Bit rate setting.
+     *
+     * @return integer
+     */
+    public function getAudioBitrate()
+    {
+        return $this->audioBitrate;
+    }
+    
+    /**
+     * Used to set the audio Bit rate for video encoding.
+     *
+     * @param int $kBitrate
+     */
+    public function setAudioBitrate($kBitrate)
+    {
+        $this->audioBitrate = $kBitrate;
+    }
+    
 }

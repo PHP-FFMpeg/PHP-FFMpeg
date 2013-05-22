@@ -20,6 +20,9 @@ class X264 extends DefaultVideo
 {
     protected $audioCodec = 'libmp3lame';
     protected $videoCodec = 'libx264';
+    // baseline, main, high, high10, high422, high444. Online baseline and main supported by qt according to 
+    // http://ffmpeg.org/trac/ffmpeg/wiki/x264EncodingGuide#compatibility
+    protected $compatabilityProfile = 'baseline';
 
     /**
      * {@inheritDoc}
@@ -57,4 +60,16 @@ class X264 extends DefaultVideo
     {
         return 2;
     }
+    
+    public function getX264Compatibility()
+    {
+        return $this->compatabilityProfile;
+    }
+    
+    public function setX264Compatibility($profile)
+    {
+        $this->compatabilityProfile = $profile;    
+    }
+    
+
 }

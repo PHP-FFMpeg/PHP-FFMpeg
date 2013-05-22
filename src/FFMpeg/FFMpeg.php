@@ -358,9 +358,15 @@ class FFMpeg extends Binary
 
         if ($format instanceof VideoTranscodable) {
             $builder->add('-vcodec')->add($format->getVideoCodec());
+            if (method_exists($format, 'getX264Compatibility')) {
+                $builder->add('-profile:v')->add($format->getX264Compatibility());
+            }
+                
         }
 
         $builder->add('-b:v')->add($format->getKiloBitrate() . 'k')
+            ->add('-maxrate')->add($format->getKiloBitrate() . 'k')
+            ->add('-bufsize')->add($format->getKiloBitrate() * 2 . 'k')
             ->add('-threads')->add($this->threads)
             ->add('-refs')->add('6')
             ->add('-coder')->add('1')
@@ -372,7 +378,11 @@ class FFMpeg extends Binary
             ->add('-qcomp')->add('0.6')
             ->add('-qdiff')->add('4')
             ->add('-trellis')->add('1')
-            ->add('-b:a')->add('92k');
+            // Set the pixel format to yuv420p so that it's quicktime compatible.
+            ->add('-pix_fmt')->add('yuv420p')
+            // Hardwire compression system to slow for now
+            ->add('-preset')->add('slow')      
+            ->add('-b:a')->add($format->getAudioBitrate() . 'k');
 
         if ($format instanceof AudioTranscodable) {
             $builder->add('-acodec')->add($format->getAudioCodec());
