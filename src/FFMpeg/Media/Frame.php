@@ -12,6 +12,8 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Filters\Frame\FrameFilterInterface;
+use FFMpeg\Filters\Frame\FrameFilters;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
@@ -26,6 +28,28 @@ class Frame extends AbstractMediaType
     {
         parent::__construct($pathfile, $driver, $ffprobe);
         $this->timecode = $timecode;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return FrameFilters
+     */
+    public function filters()
+    {
+        return new FrameFilters($this);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return Frame
+     */
+    public function addFilter(FrameFilterInterface $filter)
+    {
+        $this->filters->add($filter);
+
+        return $this;
     }
 
     /**

@@ -3,14 +3,13 @@
 namespace FFMpeg\Tests\Media;
 
 use FFMpeg\Media\Frame;
-use FFMpeg\Tests\TestCase;
 
-class FrameTest extends TestCase
+class FrameTest extends AbstractMediaTestCase
 {
     /**
      * @expectedException FFMpeg\Exception\InvalidArgumentException
      */
-    public function testFrameWithInvalidFile()
+    public function testWithInvalidFile()
     {
         new Frame('/No/file', $this->getFFMpegDriverMock(), $this->getFFProbeMock(), $this->getTimeCodeMock());
     }
@@ -23,6 +22,37 @@ class FrameTest extends TestCase
 
         $frame = new Frame(__FILE__, $driver, $ffprobe, $timecode);
         $this->assertSame($timecode, $frame->getTimeCode());
+    }
+
+    public function testFiltersReturnFilters()
+    {
+        $driver = $this->getFFMpegDriverMock();
+        $ffprobe = $this->getFFProbeMock();
+        $timecode = $this->getTimeCodeMock();
+
+        $frame = new Frame(__FILE__, $driver, $ffprobe, $timecode);
+        $this->assertInstanceOf('FFMpeg\Filters\Frame\FrameFilters', $frame->filters());
+    }
+
+    public function testAddFiltersAddsAFilter()
+    {
+        $driver = $this->getFFMpegDriverMock();
+        $ffprobe = $this->getFFProbeMock();
+        $timecode = $this->getTimeCodeMock();
+
+        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $filter = $this->getMock('FFMpeg\Filters\Frame\FrameFilterInterface');
+
+        $filters->expects($this->once())
+            ->method('add')
+            ->with($filter);
+
+        $frame = new Frame(__FILE__, $driver, $ffprobe, $timecode);
+        $frame->setFiltersCollection($filters);
+        $frame->addFilter($filter);
     }
 
     /**
