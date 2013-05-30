@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.2.5 (xx-xx-2013)
+
+  * Bump dependency to Symfony 2.1 as Symfony 2.0 was not yet supporting ProcessBuilder.
+
 * 0.2.4 (05-10-2013)
 
   * Add Video\ResizableInterface::getModulus method for better output scaling (@retrojunk)

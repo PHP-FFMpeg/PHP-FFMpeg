@@ -18,15 +18,15 @@
     ],
     "require": {
         "php"             : ">=5.3.3",
-        "symfony/process" : "~2.0",
+        "symfony/process" : "~2.1",
         "monolog/monolog" : "~1.0"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "sami/sami"       : "dev-master@dev",
-        "silex/silex"     : "1.0.x-dev@dev"
+        "sami/sami"       : "~1.0",
+        "silex/silex"     : "~1.0"
     },
     "autoload": {
         "psr-0": {
