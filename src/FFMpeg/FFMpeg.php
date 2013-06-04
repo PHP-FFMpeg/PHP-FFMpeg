@@ -101,7 +101,7 @@ class FFMpeg extends Binary
         if (!file_exists($pathfile)) {
             $this->logger->addError(sprintf('FFmpeg failed to open %s', $pathfile));
 
-            throw new InvalidArgumentException(sprintf('File %s does not exists', $pathfile));
+            throw new InvalidArgumentException(sprintf('File %s does not exist', $pathfile));
         }
 
         $this->logger->addInfo(sprintf('FFmpeg opens %s', $pathfile));
@@ -181,7 +181,6 @@ class FFMpeg extends Binary
         $process = $builder->getProcess();
         $process->setTimeout($this->timeout);
 
-
         $this->logger->addInfo(sprintf('FFmpeg executes command %s', $process->getCommandline()));
 
         try {
@@ -191,7 +190,7 @@ class FFMpeg extends Binary
         }
 
         if (!$process->isSuccessful()) {
-            $this->logger->addError(sprintf('FFmpeg command failed : %s', $process->getErrorOutput()));
+            $this->logger->addError(sprintf('FFmpeg command failed: %s', $process->getErrorOutput()));
 
             $this->cleanupTemporaryFile($output);
 
@@ -277,7 +276,7 @@ class FFMpeg extends Binary
 
         if (!$process->isSuccessful()) {
             $this->logger->addInfo(sprintf('FFmpeg command failed'));
-            throw new RuntimeException(sprintf('Encoding failed : %s', $process->getErrorOutput()));
+            throw new RuntimeException(sprintf('Encoding failed: %s', $process->getErrorOutput()));
         }
 
         $this->logger->addInfo(sprintf('FFmpeg command successful'));
@@ -327,9 +326,9 @@ class FFMpeg extends Binary
             }
 
             if ($originalHeight !== null && $originalWidth !== null) {
-                $this->logger->addInfo(sprintf('Read dimension for resizin succesful : %s x %s', $originalWidth, $originalHeight));
+                $this->logger->addInfo(sprintf('Read dimension for resizing succesful : %s x %s', $originalWidth, $originalHeight));
             } else {
-                $this->logger->addInfo(sprintf('Read dimension for resizin failed !'));
+                $this->logger->addInfo(sprintf('Read dimension for resizing failed !'));
             }
 
             if ($originalHeight !== null && $originalWidth !== null) {
