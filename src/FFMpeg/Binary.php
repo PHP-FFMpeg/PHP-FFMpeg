@@ -74,7 +74,7 @@ abstract class Binary implements AdapterInterface
     public function setTimeout($timeout)
     {
         if (0 > $timeout) {
-            throw new InvalidArgumentException('Timeout must be a positive value');
+            throw new InvalidArgumentException('Timeout must be a non-negative value');
         }
 
         $this->timeout = $timeout;
