@@ -13,6 +13,8 @@ namespace FFMpeg\Coordinate;
 
 use FFMpeg\Exception\InvalidArgumentException;
 
+// see http://en.wikipedia.org/wiki/List_of_common_resolutions
+
 class AspectRatio
 {
     // named 4:3 or 1.33:1 Traditional TV
