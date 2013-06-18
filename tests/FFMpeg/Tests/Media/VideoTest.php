@@ -220,6 +220,9 @@ class VideoTest extends AbstractMediaTestCase
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
+        $format->expects($this->any())
+            ->method('getKiloBitrate')
+            ->will($this->returnValue(663));
 
         $audioVideoFormat = $this->getMock('FFMpeg\Format\VideoInterface');
         $audioVideoFormat->expects($this->any())
@@ -231,11 +234,17 @@ class VideoTest extends AbstractMediaTestCase
         $audioVideoFormat->expects($this->any())
             ->method('getAudioCodec')
             ->will($this->returnValue('patati-patata-audio'));
+        $audioVideoFormat->expects($this->any())
+            ->method('getKiloBitrate')
+            ->will($this->returnValue(664));
 
         $formatExtra = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array('extra', 'param')));
+        $formatExtra->expects($this->any())
+            ->method('getKiloBitrate')
+            ->will($this->returnValue(665));
 
         $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
 
@@ -247,17 +256,20 @@ class VideoTest extends AbstractMediaTestCase
         $progressableFormat->expects($this->any())
             ->method('getListeners')
             ->will($this->returnValue($listeners));
+        $progressableFormat->expects($this->any())
+            ->method('getKiloBitrate')
+            ->will($this->returnValue(666));
 
         return array(
             array(false, array(array(
-                    '-y', '-i', __FILE__, '-b:v', 'k',
+                    '-y', '-i', __FILE__, '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '1', '-passlogfile',
                     '-an', '/target/file',
                 ), array(
                     '-y', '-i', __FILE__,
-                    '-b:v', 'k',
+                    '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
@@ -266,7 +278,7 @@ class VideoTest extends AbstractMediaTestCase
             array(false, array(array(
                     '-y', '-i', __FILE__,
                     '-vcodec', 'gloubi-boulga-video',
-                    '-acodec', 'patati-patata-audio', '-b:v', 'k',
+                    '-acodec', 'patati-patata-audio', '-b:v', '664k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '1', '-passlogfile',
@@ -275,7 +287,7 @@ class VideoTest extends AbstractMediaTestCase
                     '-y', '-i', __FILE__,
                     '-vcodec', 'gloubi-boulga-video',
                     '-acodec', 'patati-patata-audio',
-                    '-b:v', 'k',
+                    '-b:v', '664k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
@@ -283,14 +295,14 @@ class VideoTest extends AbstractMediaTestCase
                 )), null, $audioVideoFormat),
             array(false, array(array(
                     '-y', '-i', __FILE__,
-                    'extra', 'param','-b:v', 'k',
+                    'extra', 'param','-b:v', '665k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '1', '-passlogfile',
                     '-an', '/target/file',
                 ), array(
                     '-y', '-i', __FILE__,
-                    'extra', 'param', '-b:v', 'k',
+                    'extra', 'param', '-b:v', '665k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
@@ -298,7 +310,7 @@ class VideoTest extends AbstractMediaTestCase
                 )), null, $formatExtra),
             array(true, array(array(
                     '-y', '-i', __FILE__,
-                    '-threads', 24, '-b:v', 'k',
+                    '-threads', 24, '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '1', '-passlogfile',
@@ -306,7 +318,7 @@ class VideoTest extends AbstractMediaTestCase
                 ), array(
                     '-y', '-i', __FILE__,
                     '-threads', 24,
-                    '-b:v', 'k',
+                    '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
@@ -314,28 +326,28 @@ class VideoTest extends AbstractMediaTestCase
                 )), null, $format),
             array(true, array(array(
                     '-y', '-i', __FILE__,
-                    'extra', 'param', '-threads', 24, '-b:v', 'k',
+                    'extra', 'param', '-threads', 24, '-b:v', '665k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '1', '-passlogfile',
                     '-an', '/target/file',
                 ), array(
                     '-y', '-i', __FILE__,
-                    'extra', 'param', '-threads', 24, '-b:v', 'k',
+                    'extra', 'param', '-threads', 24, '-b:v', '665k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
                     '-ac', '2', '-ar', '44100', '/target/file',
                 )), null, $formatExtra),
             array(false, array(array(
-                    '-y', '-i', __FILE__, '-b:v', 'k',
+                    '-y', '-i', __FILE__, '-b:v', '666k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '1', '-passlogfile',
                     '-an', '/target/file',
                 ), array(
                     '-y', '-i', __FILE__,
-                    '-b:v', 'k',
+                    '-b:v', '666k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
@@ -343,7 +355,7 @@ class VideoTest extends AbstractMediaTestCase
                 )), $listeners, $progressableFormat),
             array(true, array(array(
                     '-y', '-i', __FILE__,
-                    '-threads', 24, '-b:v', 'k',
+                    '-threads', 24, '-b:v', '666k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '1', '-passlogfile',
@@ -351,7 +363,7 @@ class VideoTest extends AbstractMediaTestCase
                 ), array(
                     '-y', '-i', __FILE__,
                     '-threads', 24,
-                    '-b:v', 'k',
+                    '-b:v', '666k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
