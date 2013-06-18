@@ -56,9 +56,7 @@ class AspectRatio
     // Rotated 2.39
     const AR_ROTATED_2_DOT_39 = '1/2.39';
 
-    const STRATEGY_NEAREST = 1;
-    const STRATEGY_CUSTOM = 2;
-
+    /** @var float */
     private $ratio;
 
     public function __construct($ratio)
@@ -66,31 +64,92 @@ class AspectRatio
         $this->ratio = $ratio;
     }
 
+    /**
+     * Returns the value of the ratio
+     *
+     * @return float
+     */
     public function getValue()
     {
         return $this->ratio;
     }
 
     /**
+     * Compute the best width for given height and modulus.
+     *
+     * @param Integer $height
+     * @param Integer $modulus
+     *
+     * @return Integer
+     */
+    public function calculateWidth($height, $modulus = 1)
+    {
+        $maxPossibleWidth = $this->getMultipleUp(ceil($this->ratio * $height), $modulus);
+        $minPossibleWidth = $this->getMultipleDown(floor($this->ratio * $height), $modulus);
+
+        $maxRatioDiff = abs($this->ratio - ($maxPossibleWidth / $height));
+        $minRatioDiff = abs($this->ratio - ($minPossibleWidth / $height));
+
+        return $maxRatioDiff < $minRatioDiff ? $maxPossibleWidth : $minPossibleWidth;
+    }
+
+    /**
+     * Compute the best height for given width and modulus.
+     *
+     * @param Integer $width
+     * @param Integer $modulus
+     * @return Integer
+     */
+    public function calculateHeight($width, $modulus = 1)
+    {
+        $maxPossibleHeight = $this->getMultipleUp(ceil($width / $this->ratio), $modulus);
+        $minPossibleHeight = $this->getMultipleDown(floor($width / $this->ratio), $modulus);
+
+        $maxRatioDiff = abs($this->ratio - ($width / $maxPossibleHeight));
+        $minRatioDiff = abs($this->ratio - ($width / $minPossibleHeight));
+
+        return $maxRatioDiff < $minRatioDiff ? $maxPossibleHeight : $minPossibleHeight;
+    }
+
+    private function getMultipleUp($value, $multiple)
+    {
+        while (0 !== $value % $multiple) {
+            $value++;
+        }
+
+        return $value;
+    }
+
+    private function getMultipleDown($value, $multiple)
+    {
+        while (0 !== $value % $multiple) {
+            $value--;
+        }
+
+        return $value;
+    }
+
+    /**
+     * Creates a ratio based on Dimension.
+     *
+     * The strategy parameter forces by default to use standardized ratios. If
+     * custom ratio need to be used, disable it
      *
      * @param Dimension $dimension
-     * @param Integer $strategy
+     * @param Boolean   $forceStandards Wheter to force or not standard ratios
      *
      * @return AspectRatio
      *
      * @throws InvalidArgumentException
      */
-    public static function fromDimensions(Dimension $dimension, $strategy)
+    public static function create(Dimension $dimension, $forceStandards = true)
     {
         $incoming = $dimension->getWidth() / $dimension->getHeight();
 
-        switch ($strategy) {
-            case static::STRATEGY_NEAREST:
-                return new static(static::nearestStrategy($incoming));
-            case static::STRATEGY_CUSTOM:
-                return new static(static::customStrategy($incoming));
-            default:
-                throw new InvalidArgumentException(sprintf('Invalid strategy %s', $strategy));
+        if ($forceStandards) {
+            return new static(static::nearestStrategy($incoming));
+        } else {
+            return new static(static::customStrategy($incoming));
         }
     }
 
