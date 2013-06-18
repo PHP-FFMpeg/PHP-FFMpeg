@@ -95,4 +95,11 @@ class TestCase extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
     }
+
+    protected function getAudioMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Media\Audio')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
 }
