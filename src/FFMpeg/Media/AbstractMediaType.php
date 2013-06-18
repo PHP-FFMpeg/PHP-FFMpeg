@@ -29,6 +29,11 @@ abstract class AbstractMediaType implements MediaTypeInterface
         $this->filters = new FiltersCollection();
     }
 
+    public function getPathfile()
+    {
+        return $this->pathfile;
+    }
+
     /**
      * @param FiltersCollection $filters
      *
