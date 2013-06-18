@@ -1,6 +1,6 @@
 <?php
 
-namespace FFMpeg\Tests\Filter\Audio;
+namespace FFMpeg\Tests\Filters\Audio;
 
 use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Tests\TestCase;

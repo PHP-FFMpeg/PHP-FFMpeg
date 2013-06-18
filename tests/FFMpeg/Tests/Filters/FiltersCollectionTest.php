@@ -1,6 +1,6 @@
 <?php
 
-namespace FFMpeg\Tests\Filter;
+namespace FFMpeg\Tests\Filters;
 
 use FFMpeg\Filters\FiltersCollection;
 
