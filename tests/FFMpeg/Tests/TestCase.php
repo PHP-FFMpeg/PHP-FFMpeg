@@ -4,6 +4,11 @@ namespace FFMpeg\Tests;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
+    public function assertScalar($value)
+    {
+        $this->assertTrue(is_scalar($value));
+    }
+
     public function getLoggerMock()
     {
         return $this->getMock('Psr\Log\LoggerInterface');
@@ -17,6 +22,20 @@ class TestCase extends \PHPUnit_Framework_TestCase
     public function getTimeCodeMock()
     {
         return $this->getMockBuilder('FFMpeg\Coordinate\TimeCode')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    public function getDimensionMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Coordinate\Dimension')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    public function getFramerateMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Coordinate\Framerate')
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -99,6 +118,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected function getAudioMock()
     {
         return $this->getMockBuilder('FFMpeg\Media\Audio')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    protected function getVideoMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Media\Video')
             ->disableOriginalConstructor()
             ->getMock();
     }

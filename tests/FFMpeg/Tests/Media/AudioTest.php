@@ -207,7 +207,7 @@ class AudioTest extends AbstractMediaTestCase
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
         $progressableFormat->expects($this->any())
-            ->method('getListeners')
+            ->method('createProgressListener')
             ->will($this->returnValue($listeners));
         $progressableFormat->expects($this->any())
             ->method('getKiloBitrate')
