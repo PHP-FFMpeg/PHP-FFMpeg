@@ -57,7 +57,7 @@ class Audio extends AbstractMediaType implements MediaTypeInterface
         $listeners = null;
 
         if ($format instanceof ProgressableInterface) {
-            $listeners = $format->getListeners();
+            $listeners = $format->createProgressListener($this->ffprobe, $this->pathfile);
         }
 
         $commands = array_merge(array('-y', '-i', $this->pathfile), $format->getExtraParams());
