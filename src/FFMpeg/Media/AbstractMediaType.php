@@ -29,6 +29,49 @@ abstract class AbstractMediaType implements MediaTypeInterface
         $this->filters = new FiltersCollection();
     }
 
+    /**
+     * @return FFMpegDriver
+     */
+    public function getFFMpegDriver()
+    {
+        return $this->driver;
+    }
+
+    /**
+     * @param FFMpegDriver $driver
+     *
+     * @return MediaTypeInterface
+     */
+    public function setFFMpegDriver(FFMpegDriver $driver)
+    {
+        $this->driver = $driver;
+
+        return $this;
+    }
+
+    /**
+     * @return FFProbe
+     */
+    public function getFFProbe()
+    {
+        return $this->ffprobe;
+    }
+
+    /**
+     * @param FFProbe $ffprobe
+     *
+     * @return MediaTypeInterface
+     */
+    public function setFFProbe(FFProbe $ffprobe)
+    {
+        $this->ffprobe = $ffprobe;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getPathfile()
     {
         return $this->pathfile;
