@@ -27,4 +27,12 @@ class TimeCodeTest extends TestCase
             array('00:00:00.00', '00:00:00.00'),
         );
     }
+
+    /**
+     * @expectedException FFMpeg\Exception\InvalidArgumentException
+     */
+    public function testFromInvalidString()
+    {
+        TimeCode::fromString('lalali lala');
+    }
 }
