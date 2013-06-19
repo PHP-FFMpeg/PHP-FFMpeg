@@ -11,23 +11,22 @@
 
 namespace FFMpeg\Format\Audio;
 
+use Evenement\EventEmitter;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Format\AudioInterface;
+use FFMpeg\Format\FormatInterface;
+use FFMpeg\Format\ProgressableInterface;
+use FFMpeg\Format\ProgressListener\AudioProgressListener;
+use FFMpeg\Driver\FFMpegDriver;
+use FFMpeg\FFProbe;
 
-/**
- * The abstract default Audio format
- *
- * @author Romain Neutron imprec@gmail.com
- */
-abstract class DefaultAudio implements Resamplable, Interactive
+abstract class DefaultAudio extends EventEmitter implements AudioInterface, ProgressableInterface
 {
     protected $audioCodec;
-    protected $audioSampleRate = 44100;
     protected $kiloBitrate = 128;
 
     /**
-     * Returns extra parameters for the encoding
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getExtraParams()
     {
@@ -66,31 +65,6 @@ abstract class DefaultAudio implements Resamplable, Interactive
     /**
      * {@inheritdoc}
      */
-    public function getAudioSampleRate()
-    {
-        return $this->audioSampleRate;
-    }
-
-    /**
-     * Set the audio sample rate
-     *
-     * @param  integer                   $audioSampleRate
-     * @throws \InvalidArgumentException
-     */
-    public function setAudioSampleRate($audioSampleRate)
-    {
-        if ($audioSampleRate < 1) {
-            throw new InvalidArgumentException('Wrong audio sample rate value');
-        }
-
-        $this->audioSampleRate = (int) $audioSampleRate;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getKiloBitrate()
     {
         return $this->kiloBitrate;
@@ -111,5 +85,16 @@ abstract class DefaultAudio implements Resamplable, Interactive
         $this->kiloBitrate = (int) $kiloBitrate;
 
         return $this;
+    }
+
+    public function createProgressListener(FFProbe $ffprobe, $pathfile)
+    {
+        $format = $this;
+        $listener = new AudioProgressListener($ffprobe, $pathfile);
+        $listener->on('progress', function () use ($format) {
+           $format->emit('progress', func_get_args());
+        });
+
+        return array($listener);
     }
 }
