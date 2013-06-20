@@ -16,6 +16,7 @@ use FFMpeg\Media\Audio;
 
 class AudioResamplableFilter implements AudioFilterInterface
 {
+    /** @var string */
     private $rate;
 
     public function __construct($rate)
@@ -23,11 +24,18 @@ class AudioResamplableFilter implements AudioFilterInterface
         $this->rate = $rate;
     }
 
+    /**
+     *
+     * @return Integer
+     */
     public function getRate()
     {
         return $this->rate;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function apply(Audio $audio, AudioInterface $format)
     {
         return array('-ac', 2, '-ar', $this->rate);

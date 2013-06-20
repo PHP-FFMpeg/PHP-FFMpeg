@@ -13,13 +13,14 @@ namespace FFMpeg\Format\Video;
 
 /**
  * The WMV video format
- *
- * @author Romain Neutron imprec@gmail.com
  */
 class WMV3 extends DefaultVideo
 {
-    protected $audioCodec = 'wmav3';
-    protected $videoCodec = 'wmv3';
+    public function __construct()
+    {
+        $this->audioCodec = 'wmav3';
+        $this->videoCodec = 'wmv3';
+    }
 
     /**
      * {@inheritDoc}

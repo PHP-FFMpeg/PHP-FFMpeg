@@ -14,16 +14,17 @@ namespace FFMpeg\Format\Audio;
 use Evenement\EventEmitter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Format\AudioInterface;
-use FFMpeg\Format\FormatInterface;
 use FFMpeg\Media\MediaTypeInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\ProgressListener\AudioProgressListener;
-use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 
 abstract class DefaultAudio extends EventEmitter implements AudioInterface, ProgressableInterface
 {
+    /** @var string */
     protected $audioCodec;
+
+    /** @var integer */
     protected $kiloBitrate = 128;
 
     /**
@@ -43,11 +44,12 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * Set the audio codec, Should be in the available ones, otherwise an
+     * Sets the audio codec, Should be in the available ones, otherwise an
      * exception is thrown
      *
-     * @param  string                    $audioCodec
-     * @throws \InvalidArgumentException
+     * @param string $audioCodec
+     *
+     * @throws InvalidArgumentException
      */
     public function setAudioCodec($audioCodec)
     {
@@ -72,10 +74,10 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * Set the kiloBitrate value
+     * Sets the kiloBitrate value
      *
-     * @param  int integer               $kiloBitrate
-     * @throws \InvalidArgumentException
+     * @param  integer                  $kiloBitrate
+     * @throws InvalidArgumentException
      */
     public function setKiloBitrate($kiloBitrate)
     {

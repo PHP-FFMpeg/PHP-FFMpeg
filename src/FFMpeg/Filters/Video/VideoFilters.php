@@ -24,6 +24,15 @@ class VideoFilters
         $this->video = $video;
     }
 
+    /**
+     * Resizes a video to a given dimension
+     *
+     * @param Dimension $dimension
+     * @param string    $mode
+     * @param Boolean   $forceStandards
+     *
+     * @return VideoFilters
+     */
     public function resize(Dimension $dimension, $mode = ResizeFilter::RESIZEMODE_FIT, $forceStandards = true)
     {
         $this->video->addFilter(new ResizeFilter($dimension, $this->video->getFFProbe(), $mode, $forceStandards));
@@ -31,8 +40,18 @@ class VideoFilters
         return $this;
     }
 
+    /**
+     * Resamples the video to the given framerate.
+     *
+     * @param FrameRate $framerate
+     * @param type      $gop
+     *
+     * @return VideoFilters
+     */
     public function resample(FrameRate $framerate, $gop)
     {
-        return $this->video->addFilter(new VideoResampleFilter($framerate, $gop));
+        $this->video->addFilter(new VideoResampleFilter($framerate, $gop));
+
+        return $this;
     }
 }

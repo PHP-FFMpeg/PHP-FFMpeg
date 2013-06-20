@@ -13,13 +13,14 @@ namespace FFMpeg\Format\Video;
 
 /**
  * The X264 video format
- *
- * @author Romain Neutron imprec@gmail.com
  */
 class X264 extends DefaultVideo
 {
-    protected $audioCodec = 'libmp3lame';
-    protected $videoCodec = 'libx264';
+    public function __construct()
+    {
+        $this->audioCodec = 'libmp3lame';
+        $this->videoCodec = 'libx264';
+    }
 
     /**
      * {@inheritDoc}

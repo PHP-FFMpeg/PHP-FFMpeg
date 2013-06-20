@@ -18,15 +18,21 @@ class Point
 
     public function __construct($x, $y)
     {
-        $this->x = $x;
-        $this->y = $y;
+        $this->x = (int) $x;
+        $this->y = (int) $y;
     }
 
+    /**
+     * @return integer
+     */
     public function getX()
     {
         return $this->x;
     }
 
+    /**
+     * @return integer
+     */
     public function getY()
     {
         return $this->y;

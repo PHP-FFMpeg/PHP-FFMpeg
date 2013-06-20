@@ -14,7 +14,6 @@ namespace FFMpeg;
 use Alchemy\BinaryDriver\ConfigurationInterface;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\InvalidArgumentException;
-use FFMpeg\Media\MediaTypeInterface;
 use FFMpeg\Media\Audio;
 use FFMpeg\Media\Video;
 use Monolog\Logger;
@@ -83,9 +82,9 @@ class FFMpeg
     /**
      * Opens a file in order to be processed
      *
-     * @param  string                   $pathfile A pathfile
+     * @param string $pathfile A pathfile
      *
-     * @return MediaTypeInterface
+     * @return Audio|Video
      *
      * @throws InvalidArgumentException
      */
@@ -110,8 +109,8 @@ class FFMpeg
      * Creates a new FFMpeg instance
      *
      * @param array|ConfigurationInterface $configuration
-     * @param LoggerInterface $logger
-     * @param FFProbe $probe
+     * @param LoggerInterface              $logger
+     * @param FFProbe                      $probe
      *
      * @return FFMpeg
      */

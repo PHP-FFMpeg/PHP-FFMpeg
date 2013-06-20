@@ -28,7 +28,7 @@ class FFProbeDriver extends AbstractBinary
     /**
      * Creates an FFProbeDriver
      *
-     * @param LoggerInterface $logger
+     * @param LoggerInterface     $logger
      * @param array|Configuration $configuration
      *
      * @return FFProbeDriver

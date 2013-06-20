@@ -57,4 +57,16 @@ class Dimension
     {
         return $this->height;
     }
+
+    /**
+     * Get the ratio
+     *
+     * @param type $forceStandards Whether or not force the use of standards ratios;
+     *
+     * @return AspectRatio
+     */
+    public function getRatio($forceStandards = true)
+    {
+        return AspectRatio::create($this, $forceStandards);
+    }
 }

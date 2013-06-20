@@ -26,11 +26,11 @@ class FFMpegDriver extends AbstractBinary
     }
 
     /**
-     * Creates an FFMpegDriver
+     * Creates an FFMpegDriver.
      *
-     * @param LoggerInterface $logger
+     * @param LoggerInterface     $logger
      * @param array|Configuration $configuration
-     * 
+     *
      * @return FFMpegDriver
      */
     public static function create(LoggerInterface $logger, $configuration)

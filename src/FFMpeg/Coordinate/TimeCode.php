@@ -34,6 +34,15 @@ class TimeCode
         return sprintf('%02d:%02d:%02d.%02d', $this->hours, $this->minutes, $this->seconds, $this->frames);
     }
 
+    /**
+     * Creates timecode from string
+     *
+     * @param string $timecode
+     *
+     * @return TimeCode
+     *
+     * @throws InvalidArgumentException In case an invalid timecode is supplied
+     */
     public static function fromString($timecode)
     {
         $days = 0;

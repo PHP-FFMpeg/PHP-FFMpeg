@@ -14,7 +14,6 @@ namespace FFMpeg\Coordinate;
 use FFMpeg\Exception\InvalidArgumentException;
 
 // see http://en.wikipedia.org/wiki/List_of_common_resolutions
-
 class AspectRatio
 {
     // named 4:3 or 1.33:1 Traditional TV
@@ -65,7 +64,7 @@ class AspectRatio
     }
 
     /**
-     * Returns the value of the ratio
+     * Returns the value of the ratio.
      *
      * @return float
      */
@@ -98,6 +97,7 @@ class AspectRatio
      *
      * @param Integer $width
      * @param Integer $modulus
+     *
      * @return Integer
      */
     public function calculateHeight($width, $modulus = 1)
@@ -133,10 +133,10 @@ class AspectRatio
      * Creates a ratio based on Dimension.
      *
      * The strategy parameter forces by default to use standardized ratios. If
-     * custom ratio need to be used, disable it
+     * custom ratio need to be used, disable it.
      *
      * @param Dimension $dimension
-     * @param Boolean   $forceStandards Wheter to force or not standard ratios
+     * @param Boolean   $forceStandards Whether to force or not standard ratios
      *
      * @return AspectRatio
      *

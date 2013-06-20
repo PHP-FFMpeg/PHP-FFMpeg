@@ -12,7 +12,6 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Filters\Video\VideoFilterInterface;
@@ -48,7 +47,7 @@ class Video extends AbstractMediaType
      * Export the video in the desired format, applies registered filters
      *
      * @param FormatInterface $format
-     * @param string $outputPathfile
+     * @param string          $outputPathfile
      *
      * @return Video
      *
@@ -156,7 +155,7 @@ class Video extends AbstractMediaType
     /**
      * Get the frame at timecode
      *
-     * @param Timecode $at
+     * @param  Timecode $at
      * @return Frame
      */
     public function frame(Timecode $at)

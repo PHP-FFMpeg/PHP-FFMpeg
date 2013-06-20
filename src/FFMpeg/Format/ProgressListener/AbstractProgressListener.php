@@ -74,7 +74,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
     /**
      * @param FFProbe $ffprobe
-     * @param string $pathfile
+     * @param string  $pathfile
      *
      * @throws RuntimeException
      */
@@ -189,7 +189,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
     /**
      *
-     * @param string $rawDuration in the format 00:00:00.00
+     * @param  string $rawDuration in the format 00:00:00.00
      * @return number
      */
     private function convertDuration($rawDuration)

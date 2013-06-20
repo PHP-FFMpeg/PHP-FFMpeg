@@ -46,7 +46,7 @@ class Audio extends AbstractMediaType implements MediaTypeInterface
      * Export the audio in the desired format, applies registered filters
      *
      * @param FormatInterface $format
-     * @param string $outputPathfile
+     * @param string          $outputPathfile
      *
      * @return Audio
      *

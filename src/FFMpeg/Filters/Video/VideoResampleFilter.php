@@ -41,13 +41,16 @@ class VideoResampleFilter implements VideoFilterInterface
      *
      * @see https://wikipedia.org/wiki/Group_of_pictures
      *
-     * @return integer
+     * @return Integer
      */
     public function getGOP()
     {
         return $this->gop;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function apply(Video $video, VideoInterface $format)
     {
         $commands = array('-r', $this->rate->getValue());

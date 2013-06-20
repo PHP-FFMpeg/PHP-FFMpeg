@@ -14,8 +14,17 @@ class AudioFilters
         $this->audio = $audio;
     }
 
+    /**
+     * Resamples the audio file.
+     *
+     * @param Integer $rate
+     *
+     * @return AudioFilters
+     */
     public function resample($rate)
     {
-        return $this->audio->addFilter(new AudioResamplableFilter($rate));
+        $this->audio->addFilter(new AudioResamplableFilter($rate));
+
+        return $this;
     }
 }

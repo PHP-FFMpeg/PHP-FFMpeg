@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace FFMpeg\Exception;
+namespace FFMpeg\FFProbe\DataMapping;
 
-class LogicException extends \LogicException implements ExceptionInterface
+class Format extends AbstractData
 {
-
 }

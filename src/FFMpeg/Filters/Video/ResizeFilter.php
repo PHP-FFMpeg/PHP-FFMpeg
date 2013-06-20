@@ -15,7 +15,6 @@ use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\FFProbe;
-use FFMpeg\Coordinate\AspectRatio;
 
 class ResizeFilter implements VideoFilterInterface
 {
@@ -24,9 +23,13 @@ class ResizeFilter implements VideoFilterInterface
     const RESIZEMODE_SCALE_WIDTH = 'width';
     const RESIZEMODE_SCALE_HEIGHT = 'height';
 
+    /** @var Dimension */
     private $dimension;
+    /** @var string */
     private $mode;
+    /** @var Boolean */
     private $forceStandards;
+    /** @var FFProbe */
     private $ffprobe;
 
     public function __construct(Dimension $dimension, FFProbe $ffprobe, $mode = self::RESIZEMODE_FIT, $forceStandards = true)
@@ -37,26 +40,41 @@ class ResizeFilter implements VideoFilterInterface
         $this->ffprobe = $ffprobe;
     }
 
+    /**
+     * @return Dimension
+     */
     public function getDimension()
     {
         return $this->dimension;
     }
 
+    /**
+     * @return string
+     */
     public function getMode()
     {
         return $this->mode;
     }
 
+    /**
+     * @return FFProbe
+     */
     public function getFFProbe()
     {
         return $this->ffprobe;
     }
 
+    /**
+     * @return Boolean
+     */
     public function areStandardsForced()
     {
         return $this->forceStandards;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function apply(Video $video, VideoInterface $format)
     {
         $originalWidth = $originalHeight = null;
@@ -86,7 +104,7 @@ class ResizeFilter implements VideoFilterInterface
 
     private function getComputedDimensions(Dimension $dimension, $modulus)
     {
-        $originalRatio = AspectRatio::create($dimension, $this->forceStandards);
+        $originalRatio = $dimension->getRatio($this->forceStandards);
 
         switch ($this->mode) {
             case self::RESIZEMODE_SCALE_WIDTH:
@@ -98,7 +116,7 @@ class ResizeFilter implements VideoFilterInterface
                 $height = $originalRatio->calculateHeight($width, $modulus);
                 break;
             case self::RESIZEMODE_INSET:
-                $targetRatio = AspectRatio::create($this->dimension, $this->forceStandards);
+                $targetRatio = $this->dimension->getRatio($this->forceStandards);
 
                 if ($targetRatio->getValue() > $originalRatio->getValue()) {
                     $height = $this->dimension->getHeight();

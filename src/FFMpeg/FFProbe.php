@@ -158,7 +158,7 @@ class FFProbe
      *
      * Probe the format of a given file
      *
-     * @param  string $pathfile
+     * @param string $pathfile
      *
      * @return Format A Format object
      *
@@ -175,9 +175,9 @@ class FFProbe
      *
      * Probe the streams contained in a given file
      *
-     * @param  string $pathfile
+     * @param string $pathfile
      *
-     * @return StreamCollection  A collection of streams
+     * @return StreamCollection A collection of streams
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
@@ -190,9 +190,9 @@ class FFProbe
     /**
      * @api
      *
-     * @param LoggerInterface $logger
-     * @param Cache $cache
-     * @param array|ConfigurationInterface $configuration
+     * @param  LoggerInterface              $logger
+     * @param  Cache                        $cache
+     * @param  array|ConfigurationInterface $configuration
      * @return FFProbe
      */
     public static function create(LoggerInterface $logger = null, Cache $cache = null, $configuration = array())

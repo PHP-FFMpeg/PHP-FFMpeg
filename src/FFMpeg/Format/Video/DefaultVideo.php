@@ -23,8 +23,13 @@ use FFMpeg\Format\ProgressListener\VideoProgressListener;
  */
 abstract class DefaultVideo extends DefaultAudio implements VideoInterface
 {
+    /** @var string */
     protected $videoCodec;
+
+    /** @var Integer */
     protected $kiloBitrate = 1000;
+
+    /** @var Integer */
     protected $modulus = 16;
 
     /**
@@ -36,11 +41,11 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * Set the video codec, Should be in the available ones, otherwise an
+     * Sets the video codec, Should be in the available ones, otherwise an
      * exception is thrown
      *
-     * @param  string                    $videoCodec
-     * @throws \InvalidArgumentException
+     * @param  string                   $videoCodec
+     * @throws InvalidArgumentException
      */
     public function setVideoCodec($videoCodec)
     {
@@ -65,7 +70,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getModulus()
     {

@@ -21,9 +21,9 @@ interface ProgressableInterface extends EventEmitterInterface
      * Creates the progress listener
      *
      * @param MediaTypeInterface $media
-     * @param FFProbe $ffprobe
-     * @param integer $pass The current pas snumber
-     * @param integer $total The total pass number
+     * @param FFProbe            $ffprobe
+     * @param Integer            $pass    The current pas snumber
+     * @param Integer            $total   The total pass number
      *
      * @return array An array of listeners
      */
