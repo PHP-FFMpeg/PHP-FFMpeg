@@ -18,8 +18,8 @@ use FFMpeg\Exception\InvalidArgumentException;
  */
 class Dimension
 {
-    protected $width;
-    protected $height;
+    private $width;
+    private $height;
 
     /**
      * Constructor
