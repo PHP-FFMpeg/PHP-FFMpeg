@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="FFMpeg Tests Suite">
-            <directory>tests/FFMpeg/Tests</directory>
+            <directory>tests/FFMpeg/Functional</directory>
         </testsuite>
     </testsuites>
     <filter>
