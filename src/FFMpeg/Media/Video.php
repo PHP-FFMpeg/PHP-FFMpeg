@@ -56,12 +56,6 @@ class Video extends AbstractMediaType
      */
     public function save(VideoInterface $format, $outputPathfile)
     {
-        $listeners = null;
-
-        if ($format instanceof ProgressableInterface) {
-            $listeners = $format->createProgressListener($this->ffprobe, $this->pathfile);
-        }
-
         $commands = array_merge(array('-y', '-i', $this->pathfile), $format->getExtraParams());
 
         foreach ($this->filters as $filter) {
@@ -131,9 +125,15 @@ class Video extends AbstractMediaType
 
         $failure = null;
 
-        foreach (array($pass1, $pass2) as $passCommands) {
+        foreach (array($pass1, $pass2) as $pass => $passCommands) {
             try {
                 /** add listeners here */
+                $listeners = null;
+
+                if ($format instanceof ProgressableInterface) {
+                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, 2);
+                }
+
                 $this->driver->command($passCommands, false, $listeners);
             } catch (ExecutionFailureException $e) {
                 $failure = $e;

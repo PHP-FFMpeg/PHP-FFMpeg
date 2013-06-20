@@ -15,6 +15,7 @@ use Evenement\EventEmitter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\FormatInterface;
+use FFMpeg\Media\MediaTypeInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\ProgressListener\AudioProgressListener;
 use FFMpeg\Driver\FFMpegDriver;
@@ -87,12 +88,15 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
         return $this;
     }
 
-    public function createProgressListener(FFProbe $ffprobe, $pathfile)
+    /**
+     * {@inheritdoc}
+     */
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
     {
         $format = $this;
-        $listener = new AudioProgressListener($ffprobe, $pathfile);
-        $listener->on('progress', function () use ($format) {
-           $format->emit('progress', func_get_args());
+        $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $pass, $total);
+        $listener->on('progress', function () use ($media, $format) {
+           $format->emit('progress', array_merge(array($media, $format), func_get_args()));
         });
 
         return array($listener);

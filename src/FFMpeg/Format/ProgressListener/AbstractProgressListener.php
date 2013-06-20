@@ -45,6 +45,12 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /** @var Boolean */
     private $initialized = false;
 
+    /** @var integer */
+    private $currentPass;
+
+    /** @var integer */
+    private $totalPass;
+
     /**
      * Transcoding rate in kb/s
      *
@@ -72,10 +78,44 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      *
      * @throws RuntimeException
      */
-    public function __construct(FFProbe $ffprobe, $pathfile)
+    public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass)
     {
         $this->ffprobe = $ffprobe;
         $this->pathfile = $pathfile;
+        $this->currentPass = $currentPass;
+        $this->totalPass = $totalPass;
+    }
+
+    /**
+     * @return FFProbe
+     */
+    public function getFFProbe()
+    {
+        return $this->ffprobe;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPathfile()
+    {
+        return $this->pathfile;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getCurrentPass()
+    {
+        return $this->currentPass;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getTotalPass()
+    {
+        return $this->totalPass;
     }
 
     /**
@@ -136,6 +176,8 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
                 $this->rate = 0;
             }
         }
+
+        $percent = $percent / $this->totalPass + ($this->currentPass - 1) / $this->totalPass;
 
         $this->percent = floor($percent * 100);
         $this->lastOutput = $currentTime;

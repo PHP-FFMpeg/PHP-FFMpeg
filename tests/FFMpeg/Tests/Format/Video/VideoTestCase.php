@@ -42,11 +42,19 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testCreateProgressListener()
     {
+        $media = $this->getMock('FFMpeg\Media\MediaTypeInterface');
+        $media->expects($this->any())
+            ->method('getPathfile')
+            ->will($this->returnValue(__FILE__));
         $format = $this->getFormat();
         $ffprobe = $this->getFFProbeMock();
 
-        foreach ($format->createProgressListener($ffprobe, __FILE__) as $listener) {
+        foreach ($format->createProgressListener($media, $ffprobe, 1, 3) as $listener) {
             $this->assertInstanceOf('FFMpeg\Format\ProgressListener\VideoProgressListener', $listener);
+            $this->assertSame($ffprobe, $listener->getFFProbe());
+            $this->assertSame(__FILE__, $listener->getPathfile());
+            $this->assertSame(1, $listener->getCurrentPass());
+            $this->assertSame(3, $listener->getTotalPass());
         }
     }
 

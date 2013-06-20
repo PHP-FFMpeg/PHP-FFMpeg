@@ -13,7 +13,8 @@ class AudioProgressListenerTest extends TestCase
      */
     public function testHandle($size, $duration,
         $data, $expectedPercent, $expectedRemaining, $expectedRate,
-        $data2, $expectedPercent2, $expectedRemaining2, $expectedRate2
+        $data2, $expectedPercent2, $expectedRemaining2, $expectedRate2,
+        $currentPass, $totalPass
     )
     {
         $ffprobe = $this->getFFProbeMock();
@@ -25,7 +26,7 @@ class AudioProgressListenerTest extends TestCase
                 'duration' => $duration,
             ))));
 
-        $listener = new AudioProgressListener($ffprobe, __FILE__);
+        $listener = new AudioProgressListener($ffprobe, __FILE__, $currentPass, $totalPass);
         $phpunit = $this;
         $n = 0;
         $listener->on('progress', function ($percent, $remaining, $rate) use (&$n, $phpunit, $expectedPercent, $expectedRemaining, $expectedRate, $expectedPercent2, $expectedRemaining2, $expectedRate2) {
@@ -64,6 +65,22 @@ class AudioProgressListenerTest extends TestCase
                 49,
                 2,
                 563,
+                1,
+                1
+            ),
+            array(
+                2894412,
+                180.900750,
+                'size=     712kB time=00:00:45.50 bitrate= 128.1kbits/s',
+                12,
+                0,
+                0,
+                'size=     1274kB time=00:01:29.32 bitrate= 142.8kbits/s',
+                24,
+                2,
+                563,
+                1,
+                2
             )
         );
     }

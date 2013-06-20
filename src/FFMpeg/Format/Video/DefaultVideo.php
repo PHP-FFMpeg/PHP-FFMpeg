@@ -15,6 +15,7 @@ use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Format\Audio\DefaultAudio;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Media\MediaTypeInterface;
 use FFMpeg\Format\ProgressListener\VideoProgressListener;
 
 /**
@@ -71,14 +72,17 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
         return $this->modulus;
     }
 
-    public function createProgressListener(FFProbe $ffprobe, $pathfile)
+    /**
+     * {@inheritdoc}
+     */
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
     {
         $format = $this;
-        $listeners = array(new VideoProgressListener($ffprobe, $pathfile));
+        $listeners = array(new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total));
 
         foreach ($listeners as $listener) {
-            $listener->on('progress', function () use ($format) {
-               $format->emit('progress', func_get_args());
+            $listener->on('progress', function () use ($format, $media) {
+               $format->emit('progress', array_merge(array($media, $format), func_get_args()));
             });
         }
 
