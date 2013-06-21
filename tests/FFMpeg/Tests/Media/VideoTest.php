@@ -3,7 +3,6 @@
 namespace FFMpeg\Tests\Media;
 
 use FFMpeg\Media\Video;
-use FFMpeg\Format\FormatInterface;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\VideoInterface;
