@@ -23,11 +23,11 @@ class FrameRate
             throw new InvalidArgumentException('Invalid frame rate, must be positive value.');
         }
 
-        $this->value = (int) $value;
+        $this->value = $value;
     }
 
     /**
-     * @return Integer
+     * @return float
      */
     public function getValue()
     {
