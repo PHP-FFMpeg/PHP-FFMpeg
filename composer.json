@@ -18,10 +18,9 @@
     ],
     "require": {
         "php"                      : ">=5.3.3",
-        "alchemy/binary-driver"    : "~1.4, >=1.4.1",
+        "alchemy/binary-driver"    : "~1.5",
         "doctrine/cache"           : "~1.0",
         "evenement/evenement"      : "~1.0",
-        "monolog/monolog"          : "~1.0",
         "symfony/process"          : "~2.0"
     },
     "suggest": {

@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4ee27041b157a0a1a11db4f1b1a5ed4b",
+    "hash": "336691561433798ee6f95d41970f1eae",
     "packages": [
         {
             "name": "alchemy/binary-driver",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alchemy-fr/BinaryDriver.git",
-                "reference": "1.4.1"
+                "reference": "1.5.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alchemy-fr/BinaryDriver/zipball/1.4.1",
-                "reference": "1.4.1",
+                "url": "https://api.github.com/repos/alchemy-fr/BinaryDriver/zipball/1.5.0",
+                "reference": "1.5.0",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "binary",
                 "driver"
             ],
-            "time": "2013-05-23 17:00:34"
+            "time": "2013-06-21 15:51:20"
         },
         {
             "name": "doctrine/cache",
@@ -810,7 +810,7 @@
         },
         {
             "name": "sami/sami",
-            "version": "v1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Sami.git",
@@ -1256,17 +1256,17 @@
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v2.3.0",
+            "version": "v2.3.1",
             "target-dir": "Symfony/Component/HttpKernel",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "v2.3.0"
+                "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/v2.3.0",
-                "reference": "v2.3.0",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/v2.3.1",
+                "reference": "v2.3.1",
                 "shasum": ""
             },
             "require": {
@@ -1322,7 +1322,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2013-06-03 14:13:35"
+            "time": "2013-06-11 11:46:38"
         },
         {
             "name": "symfony/routing",
