@@ -6,6 +6,7 @@ use FFMpeg\Tests\TestCase;
 use FFMpeg\FFProbe;
 use Symfony\Component\Process\ExecutableFinder;
 use Alchemy\BinaryDriver\ConfigurationInterface;
+use Alchemy\BinaryDriver\Configuration;
 
 class FFProbeTest extends TestCase
 {
@@ -280,7 +281,7 @@ class FFProbeTest extends TestCase
         $ffprobe = FFProbe::create();
         $this->assertInstanceOf('FFMpeg\FFprobe', $ffprobe);
 
-        $ffprobe = FFProbe::create($logger, $cache, $conf);
+        $ffprobe = FFProbe::create($conf, $logger, $cache);
         $this->assertInstanceOf('FFMpeg\FFprobe', $ffprobe);
 
         if (null !== $cache) {
@@ -299,7 +300,7 @@ class FFProbeTest extends TestCase
         return array(
             array(null, array('key' => 'value'), null),
             array($this->getLoggerMock(), array('key' => 'value'), null),
-            array(null, $this->getConfigurationMock(), null),
+            array(null, new Configuration(), null),
             array(null, array('key' => 'value'), $this->getCacheMock()),
         );
     }

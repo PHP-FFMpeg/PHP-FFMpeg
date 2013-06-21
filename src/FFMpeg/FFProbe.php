@@ -24,8 +24,6 @@ use FFMpeg\FFProbe\OutputParser;
 use FFMpeg\FFProbe\OutputParserInterface;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
-use Monolog\Handler\NullHandler;
-use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
 class FFProbe
@@ -190,23 +188,19 @@ class FFProbe
     /**
      * @api
      *
-     * @param  LoggerInterface              $logger
-     * @param  Cache                        $cache
-     * @param  array|ConfigurationInterface $configuration
+     * @param array|ConfigurationInterface $configuration
+     * @param LoggerInterface              $logger
+     * @param Cache                        $cache
+     *
      * @return FFProbe
      */
-    public static function create(LoggerInterface $logger = null, Cache $cache = null, $configuration = array())
+    public static function create($configuration = array(), LoggerInterface $logger = null, Cache $cache = null)
     {
         if (null === $cache) {
             $cache = new ArrayCache();
         }
 
-        if (null === $logger) {
-            $logger = new Logger('ffprobe');
-            $logger->pushHandler(new NullHandler());
-        }
-
-        return new static(FFProbeDriver::create($logger, $configuration), $cache);
+        return new static(FFProbeDriver::create($configuration, $logger), $cache);
     }
 
     private function probe($pathfile, $command, $type)

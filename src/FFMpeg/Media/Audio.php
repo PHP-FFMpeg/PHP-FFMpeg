@@ -66,9 +66,9 @@ class Audio extends AbstractMediaType implements MediaTypeInterface
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        if ($this->driver->getConfiguration()->has('threads')) {
+        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $commands[] = '-threads';
-            $commands[] = $this->driver->getConfiguration()->get('threads');
+            $commands[] = $this->driver->getConfiguration()->get('ffmpeg.threads');
         }
 
         if (null !== $format->getAudioCodec()) {

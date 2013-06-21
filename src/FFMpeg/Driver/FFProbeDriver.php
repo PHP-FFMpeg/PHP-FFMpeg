@@ -13,6 +13,7 @@ namespace FFMpeg\Driver;
 
 use Alchemy\BinaryDriver\AbstractBinary;
 use Alchemy\BinaryDriver\Configuration;
+use Alchemy\BinaryDriver\ConfigurationInterface;
 use Psr\Log\LoggerInterface;
 
 class FFProbeDriver extends AbstractBinary
@@ -28,13 +29,19 @@ class FFProbeDriver extends AbstractBinary
     /**
      * Creates an FFProbeDriver
      *
-     * @param LoggerInterface     $logger
-     * @param array|Configuration $configuration
+     * @param array|ConfigurationInterface $configuration
+     * @param LoggerInterface              $logger
      *
      * @return FFProbeDriver
      */
-    public static function create(LoggerInterface $logger, $configuration)
+    public static function create($configuration, LoggerInterface $logger = null)
     {
-        return static::load(array('avprobe', 'ffprobe'), $logger, $configuration);
+        if (!$configuration instanceof ConfigurationInterface) {
+            $configuration = new Configuration($configuration);
+        }
+
+        $binaries = $configuration->get('ffprobe.binaries', array('avprobe', 'ffprobe'));
+
+        return static::load($binaries, $logger, $configuration);
     }
 }

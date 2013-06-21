@@ -16,8 +16,7 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Media\Audio;
 use FFMpeg\Media\Video;
-use Monolog\Logger;
-use Monolog\Handler\NullHandler;
+use Alchemy\BinaryDriver\Configuration;
 use Psr\Log\LoggerInterface;
 
 class FFMpeg
@@ -116,15 +115,20 @@ class FFMpeg
      */
     public static function create($configuration = array(), LoggerInterface $logger = null, FFProbe $probe = null)
     {
-        if (null === $logger) {
-            $logger = new Logger('ffmpeg');
-            $logger->pushHandler(new NullHandler());
+        if (!$configuration instanceof ConfigurationInterface) {
+            $configuration = new Configuration($configuration);
         }
 
-        $driver = FFMpegDriver::load(array('avconv', 'ffmpeg'), $logger, $configuration);
+        $binaries = $configuration->get('ffmpeg.binaries', array('avconv', 'ffmpeg'));
+
+        if (!$configuration->has('timeout')) {
+            $configuration->set('timeout', 300);
+        }
+
+        $driver = FFMpegDriver::load($binaries, $logger, $configuration);
 
         if (null === $probe) {
-            $probe = FFProbe::create($logger, null, $configuration);
+            $probe = FFProbe::create($configuration, $logger, null);
         }
 
         return new static($driver, $probe);

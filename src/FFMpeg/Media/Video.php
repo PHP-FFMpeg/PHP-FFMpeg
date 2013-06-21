@@ -12,12 +12,13 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Format\VideoInterface;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Filters\Video\VideoFilterInterface;
+use FFMpeg\Format\VideoInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Media\Frame;
-use FFMpeg\Exception\RuntimeException;
 
 class Video extends AbstractMediaType
 {
@@ -61,9 +62,9 @@ class Video extends AbstractMediaType
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        if ($this->driver->getConfiguration()->has('threads')) {
+        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $commands[] = '-threads';
-            $commands[] = $this->driver->getConfiguration()->get('threads');
+            $commands[] = $this->driver->getConfiguration()->get('ffmpeg.threads');
         }
 
         if (null !== $format->getVideoCodec()) {
