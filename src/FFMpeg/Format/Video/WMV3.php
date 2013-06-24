@@ -16,10 +16,11 @@ namespace FFMpeg\Format\Video;
  */
 class WMV3 extends DefaultVideo
 {
-    public function __construct()
+    public function __construct($audioCodec = 'wmav3', $videoCodec = 'wmv3')
     {
-        $this->audioCodec = 'wmav3';
-        $this->videoCodec = 'wmv3';
+        $this
+            ->setAudioCodec($audioCodec)
+            ->setVideoCodec($videoCodec);
     }
 
     /**

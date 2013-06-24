@@ -16,10 +16,11 @@ namespace FFMpeg\Format\Video;
  */
 class X264 extends DefaultVideo
 {
-    public function __construct()
+    public function __construct($audioCodec = 'libfaac', $videoCodec = 'libx264')
     {
-        $this->audioCodec = 'libmp3lame';
-        $this->videoCodec = 'libx264';
+        $this
+            ->setAudioCodec($audioCodec)
+            ->setVideoCodec($videoCodec);
     }
 
     /**

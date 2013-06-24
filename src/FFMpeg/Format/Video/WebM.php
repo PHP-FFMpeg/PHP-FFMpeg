@@ -16,10 +16,11 @@ namespace FFMpeg\Format\Video;
  */
 class WebM extends DefaultVideo
 {
-    public function __construct()
+    public function __construct($audioCodec = 'libvorbis', $videoCodec = 'libvpx')
     {
-        $this->audioCodec = 'libvorbis';
-        $this->videoCodec = 'libvpx';
+        $this
+            ->setAudioCodec($audioCodec)
+            ->setVideoCodec($videoCodec);
     }
 
     /**
