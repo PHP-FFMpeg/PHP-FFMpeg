@@ -11,13 +11,22 @@
 
 namespace FFMpeg\Media;
 
+use FFMpeg\FFProbe\DataMapping\Stream;
+use FFMpeg\FFProbe\DataMapping\StreamCollection;
+
 abstract class AbstractStreamableMedia extends AbstractMediaType
 {
+    /**
+     * @return StreamCollection
+     */
     public function getStreams()
     {
         return $this->ffprobe->streams($this->pathfile);
     }
 
+    /**
+     * @return Stream
+     */
     public function getFormat()
     {
         return $this->ffprobe->format($this->pathfile);
