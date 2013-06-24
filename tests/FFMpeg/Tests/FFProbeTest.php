@@ -137,8 +137,6 @@ class FFProbeTest extends TestCase
 
     /**
      * @dataProvider provideDataForInvalidJson
-     * @expectedException FFMpeg\Exception\RuntimeException
-     * @expectedExceptionMessage Unable to parse json
      */
     public function testProbeWithWrongJson($output, $method, $commands, $type, $caughtCommands)
     {
@@ -148,26 +146,29 @@ class FFProbeTest extends TestCase
         $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
 
         $mapper = $this->getFFProbeMapperMock();
-        $mapper->expects($this->never())
-            ->method('map');
+        $mapper->expects($this->once())
+            ->method('map')
+            ->with($this->isType('string'), 'good data parsed')
+            ->will($this->returnValue($output));
 
         $parser = $this->getFFProbeParserMock();
-        $parser->expects($this->never())
-            ->method('parse');
+        $parser->expects($this->once())
+            ->method('parse')
+            ->with($this->isType('string', json_encode($data) . 'lala'))
+            ->will($this->returnValue('good data parsed'));
 
         $tester = $this->getFFProbeOptionsTesterMockWithOptions($commands);
 
         $cache = $this->getCacheMock();
-        $cache->expects($this->once())
+        $cache->expects($this->exactly(2))
             ->method('contains')
             ->will($this->returnValue(false));
         $cache->expects($this->never())
             ->method('fetch');
 
         $driver = $this->getFFProbeDriverMock();
-        $driver->expects($this->once())
+        $driver->expects($this->exactly(2))
             ->method('command')
-            ->with($caughtCommands)
             ->will($this->returnValue(json_encode($data) . 'lala'));
 
         $ffprobe->setOptionsTester($tester)

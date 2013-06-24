@@ -203,7 +203,7 @@ class FFProbe
         return new static(FFProbeDriver::create($configuration, $logger), $cache);
     }
 
-    private function probe($pathfile, $command, $type)
+    private function probe($pathfile, $command, $type, $allowJson = true)
     {
         if (!is_file($pathfile)) {
             throw new InvalidArgumentException(sprintf(
@@ -228,7 +228,7 @@ class FFProbe
 
         $parseIsToDo = false;
 
-        if ($this->optionsTester->has('-print_format')) {
+        if ($allowJson && $this->optionsTester->has('-print_format')) {
             $commands[] = '-print_format';
             $commands[] = 'json';
         } else {
@@ -240,7 +240,12 @@ class FFProbe
         if ($parseIsToDo) {
             $data = $this->parser->parse($type, $output);
         } else {
-            $data = $this->parseJson($output);
+            try {
+                // Malformed json may be retrieved
+                $data = $this->parseJson($output);
+            } catch (RuntimeException $e) {
+                return $this->probe($pathfile, $command, $type, false);
+            }
         }
 
         $ret = $this->mapper->map($type, $data);
