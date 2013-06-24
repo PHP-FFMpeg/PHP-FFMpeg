@@ -64,4 +64,16 @@ class VideoFiltersTest extends TestCase
         $this->assertSame($framerate, $capturedFilter->getFramerate());
         $this->assertSame($gop, $capturedFilter->getGOP());
     }
+
+    public function testSynchronize()
+    {
+        $video = $this->getVideoMock();
+        $filters = new VideoFilters($video);
+
+        $video->expects($this->once())
+            ->method('addFilter')
+            ->with($this->isInstanceOf('FFMpeg\Filters\Video\SynchronizeFilter'));
+
+        $filters->synchronize();
+    }
 }

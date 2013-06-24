@@ -54,4 +54,16 @@ class VideoFilters
 
         return $this;
     }
+
+    /**
+     * Synchronizes audio and video.
+     *
+     * @return VideoFilters
+     */
+    public function synchronize()
+    {
+        $this->video->addFilter(new SynchronizeFilter());
+
+        return $this;
+    }
 }
