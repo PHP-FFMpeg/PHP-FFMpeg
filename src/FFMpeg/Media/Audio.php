@@ -76,8 +76,8 @@ class Audio extends AbstractStreamableMedia
             $commands[] = $format->getAudioCodec();
         }
 
-        $commands[] = '-ab';
-        $commands[] = $format->getKiloBitrate() . 'k';
+        $commands[] = '-b:a';
+        $commands[] = $format->getAudioKiloBitrate() . 'k';
         $commands[] = $outputPathfile;
 
         try {

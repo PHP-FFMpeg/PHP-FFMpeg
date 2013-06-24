@@ -25,7 +25,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     protected $audioCodec;
 
     /** @var integer */
-    protected $kiloBitrate = 128;
+    protected $audioKiloBitrate = 128;
 
     /**
      * {@inheritdoc}
@@ -68,9 +68,9 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * {@inheritdoc}
      */
-    public function getKiloBitrate()
+    public function getAudioKiloBitrate()
     {
-        return $this->kiloBitrate;
+        return $this->audioKiloBitrate;
     }
 
     /**
@@ -79,13 +79,13 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      * @param  integer                  $kiloBitrate
      * @throws InvalidArgumentException
      */
-    public function setKiloBitrate($kiloBitrate)
+    public function setAudioKiloBitrate($kiloBitrate)
     {
         if ($kiloBitrate < 1) {
             throw new InvalidArgumentException('Wrong kiloBitrate value');
         }
 
-        $this->kiloBitrate = (int) $kiloBitrate;
+        $this->audioKiloBitrate = (int) $kiloBitrate;
 
         return $this;
     }

@@ -222,6 +222,9 @@ class VideoTest extends AbstractStreamableTestCase
         $format->expects($this->any())
             ->method('getKiloBitrate')
             ->will($this->returnValue(663));
+        $format->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
 
         $audioVideoFormat = $this->getMock('FFMpeg\Format\VideoInterface');
         $audioVideoFormat->expects($this->any())
@@ -236,6 +239,9 @@ class VideoTest extends AbstractStreamableTestCase
         $audioVideoFormat->expects($this->any())
             ->method('getKiloBitrate')
             ->will($this->returnValue(664));
+        $audioVideoFormat->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
 
         $formatExtra = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra->expects($this->any())
@@ -244,6 +250,9 @@ class VideoTest extends AbstractStreamableTestCase
         $formatExtra->expects($this->any())
             ->method('getKiloBitrate')
             ->will($this->returnValue(665));
+        $formatExtra->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
 
         $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
 
@@ -258,6 +267,9 @@ class VideoTest extends AbstractStreamableTestCase
         $progressableFormat->expects($this->any())
             ->method('getKiloBitrate')
             ->will($this->returnValue(666));
+        $progressableFormat->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
 
         return array(
             array(false, array(array(

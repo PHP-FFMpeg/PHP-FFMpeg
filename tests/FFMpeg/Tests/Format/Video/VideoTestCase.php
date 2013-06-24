@@ -27,6 +27,18 @@ abstract class VideoTestCase extends AudioTestCase
         }
     }
 
+    public function testGetKiloBitrate()
+    {
+        $this->assertInternalType('integer', $this->getFormat()->getKiloBitrate());
+    }
+
+    public function testSetKiloBitrate()
+    {
+        $format = $this->getFormat();
+        $format->setKiloBitrate(2560);
+        $this->assertEquals(2560, $format->getKiloBitrate());
+    }
+
     /**
      * @expectedException FFMpeg\Exception\InvalidArgumentException
      */

@@ -35,6 +35,31 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * {@inheritdoc}
      */
+    public function getKiloBitrate()
+    {
+        return $this->kiloBitrate;
+    }
+
+    /**
+     * Sets the kiloBitrate value
+     *
+     * @param  integer                  $kiloBitrate
+     * @throws InvalidArgumentException
+     */
+    public function setKiloBitrate($kiloBitrate)
+    {
+        if ($kiloBitrate < 1) {
+            throw new InvalidArgumentException('Wrong kiloBitrate value');
+        }
+
+        $this->kiloBitrate = (int) $kiloBitrate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getVideoCodec()
     {
         return $this->videoCodec;

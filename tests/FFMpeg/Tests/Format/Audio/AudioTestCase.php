@@ -43,16 +43,16 @@ abstract class AudioTestCase extends TestCase
         $this->assertGreaterThan(0, count($this->getFormat()->getAvailableAudioCodecs()));
     }
 
-    public function testGetKiloBitrate()
+    public function testGetAudioKiloBitrate()
     {
-        $this->assertInternalType('integer', $this->getFormat()->getKiloBitrate());
+        $this->assertInternalType('integer', $this->getFormat()->getAudioKiloBitrate());
     }
 
-    public function testSetKiloBitrate()
+    public function testSetAudioKiloBitrate()
     {
         $format = $this->getFormat();
-        $format->setKiloBitrate(256);
-        $this->assertEquals(256, $format->getKiloBitrate());
+        $format->setAudioKiloBitrate(256);
+        $this->assertEquals(256, $format->getAudioKiloBitrate());
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class AudioTestCase extends TestCase
      */
     public function testSetInvalidKiloBitrate()
     {
-        $this->getFormat()->setKiloBitrate(0);
+        $this->getFormat()->setAudioKiloBitrate(0);
     }
 
     /**
@@ -68,7 +68,7 @@ abstract class AudioTestCase extends TestCase
      */
     public function testSetNegativeKiloBitrate()
     {
-        $this->getFormat()->setKiloBitrate(-10);
+        $this->getFormat()->setAudioKiloBitrate(-10);
     }
 
     public function testCreateProgressListener()

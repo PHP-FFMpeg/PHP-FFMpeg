@@ -14,6 +14,13 @@ namespace FFMpeg\Format;
 interface VideoInterface extends AudioInterface
 {
     /**
+     * Get the kiloBitrate value
+     *
+     * @return integer
+     */
+    public function getKiloBitrate();
+
+    /**
      * Returns the number of passes
      *
      * @return string

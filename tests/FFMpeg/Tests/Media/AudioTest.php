@@ -176,7 +176,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
         $format->expects($this->any())
-            ->method('getKiloBitrate')
+            ->method('getAudioKiloBitrate')
             ->will($this->returnValue(663));
 
         $audioFormat = $this->getMock('FFMpeg\Format\AudioInterface');
@@ -184,7 +184,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
         $audioFormat->expects($this->any())
-            ->method('getKiloBitrate')
+            ->method('getAudioKiloBitrate')
             ->will($this->returnValue(664));
         $audioFormat->expects($this->any())
             ->method('getAudioCodec')
@@ -195,7 +195,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getExtraParams')
             ->will($this->returnValue(array('extra', 'param')));
         $formatExtra->expects($this->any())
-            ->method('getKiloBitrate')
+            ->method('getAudioKiloBitrate')
             ->will($this->returnValue(665));
 
         $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
@@ -209,49 +209,49 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('createProgressListener')
             ->will($this->returnValue($listeners));
         $progressableFormat->expects($this->any())
-            ->method('getKiloBitrate')
+            ->method('getAudioKiloBitrate')
             ->will($this->returnValue(666));
 
         return array(
             array(false, array(
                     '-y', '-i', __FILE__,
-                    '-ab', '663k',
+                    '-b:a', '663k',
                     '/target/file',
                 ), null, $format),
             array(false, array(
                     '-y', '-i', __FILE__,
                     '-acodec', 'patati-patata-audio',
-                    '-ab', '664k',
+                    '-b:a', '664k',
                     '/target/file',
                 ), null, $audioFormat),
             array(false, array(
                     '-y', '-i', __FILE__,
                     'extra', 'param',
-                    '-ab', '665k',
+                    '-b:a', '665k',
                     '/target/file',
                 ), null, $formatExtra),
             array(true, array(
                     '-y', '-i', __FILE__,
                     '-threads', 24,
-                    '-ab', '663k',
+                    '-b:a', '663k',
                     '/target/file',
                 ), null, $format),
             array(true, array(
                     '-y', '-i', __FILE__,
                     'extra', 'param',
                     '-threads', 24,
-                    '-ab', '665k',
+                    '-b:a', '665k',
                     '/target/file',
                 ), null, $formatExtra),
             array(false, array(
                     '-y', '-i', __FILE__,
-                    '-ab', '666k',
+                    '-b:a', '666k',
                     '/target/file',
                 ), $listeners, $progressableFormat),
             array(true, array(
                     '-y', '-i', __FILE__,
                     '-threads', 24,
-                    '-ab', '666k',
+                    '-b:a', '666k',
                     '/target/file',
                 ), $listeners, $progressableFormat),
         );

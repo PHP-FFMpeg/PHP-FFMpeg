@@ -99,7 +99,7 @@ class Video extends AbstractStreamableMedia
         $commands[] = '-trellis';
         $commands[] = '1';
         $commands[] = '-b:a';
-        $commands[] = '92k';
+        $commands[] = $format->getAudioKiloBitrate() . 'k';
 
         $passPrefix = uniqid('pass-');
 
