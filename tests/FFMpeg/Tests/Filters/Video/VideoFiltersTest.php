@@ -15,11 +15,7 @@ class VideoFiltersTest extends TestCase
     {
         $capturedFilter = null;
 
-        $ffprobe = $this->getFFProbeMock();
         $video = $this->getVideoMock();
-        $video->expects($this->any())
-            ->method('getFFProbe')
-            ->will($this->returnValue($ffprobe));
         $filters = new VideoFilters($video);
         $dimension = $this->getDimensionMock();
 
@@ -32,7 +28,6 @@ class VideoFiltersTest extends TestCase
 
         $filters->resize($dimension, $mode, $forceStandards);
 
-        $this->assertSame($ffprobe, $capturedFilter->getFFProbe());
         $this->assertSame($mode, $capturedFilter->getMode());
         $this->assertSame($forceStandards, $capturedFilter->areStandardsForced());
         $this->assertSame($dimension, $capturedFilter->getDimension());

@@ -14,7 +14,6 @@ namespace FFMpeg\Filters\Video;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
-use FFMpeg\FFProbe;
 
 class ResizeFilter implements VideoFilterInterface
 {
@@ -29,15 +28,12 @@ class ResizeFilter implements VideoFilterInterface
     private $mode;
     /** @var Boolean */
     private $forceStandards;
-    /** @var FFProbe */
-    private $ffprobe;
 
-    public function __construct(Dimension $dimension, FFProbe $ffprobe, $mode = self::RESIZEMODE_FIT, $forceStandards = true)
+    public function __construct(Dimension $dimension, $mode = self::RESIZEMODE_FIT, $forceStandards = true)
     {
         $this->dimension = $dimension;
         $this->mode = $mode;
         $this->forceStandards = $forceStandards;
-        $this->ffprobe = $ffprobe;
     }
 
     /**
@@ -57,14 +53,6 @@ class ResizeFilter implements VideoFilterInterface
     }
 
     /**
-     * @return FFProbe
-     */
-    public function getFFProbe()
-    {
-        return $this->ffprobe;
-    }
-
-    /**
      * @return Boolean
      */
     public function areStandardsForced()
@@ -79,7 +67,7 @@ class ResizeFilter implements VideoFilterInterface
     {
         $originalWidth = $originalHeight = null;
 
-        foreach ($this->ffprobe->streams($video->getPathfile()) as $stream) {
+        foreach ($video->getStreams() as $stream) {
             if ($stream->isVideo()) {
                 if ($stream->has('width')) {
                     $originalWidth = $stream->get('width');

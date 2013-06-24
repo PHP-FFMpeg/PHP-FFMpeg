@@ -20,7 +20,7 @@ use FFMpeg\Format\VideoInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Media\Frame;
 
-class Video extends AbstractMediaType
+class Video extends AbstractStreamableMedia
 {
     /**
      * {@inheritdoc}

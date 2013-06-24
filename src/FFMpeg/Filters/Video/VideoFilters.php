@@ -35,7 +35,7 @@ class VideoFilters
      */
     public function resize(Dimension $dimension, $mode = ResizeFilter::RESIZEMODE_FIT, $forceStandards = true)
     {
-        $this->video->addFilter(new ResizeFilter($dimension, $this->video->getFFProbe(), $mode, $forceStandards));
+        $this->video->addFilter(new ResizeFilter($dimension, $mode, $forceStandards));
 
         return $this;
     }

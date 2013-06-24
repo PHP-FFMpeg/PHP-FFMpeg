@@ -15,7 +15,6 @@ class ResizeFilterTest extends TestCase
      */
     public function testApply(Dimension $dimension, $mode, $width, $height, $modulus, $expected, $forceStandards = true)
     {
-        $ffprobe = $this->getFFProbeMock();
         $video = $this->getVideoMock();
         $pathfile = '/path/to/file'.mt_rand();
 
@@ -23,10 +22,6 @@ class ResizeFilterTest extends TestCase
         $format->expects($this->any())
             ->method('getModulus')
             ->will($this->returnValue($modulus));
-
-        $video->expects($this->once())
-            ->method('getPathfile')
-            ->will($this->returnValue($pathfile));
 
         $streams = new StreamCollection(array(
             new Stream(array(
@@ -36,12 +31,11 @@ class ResizeFilterTest extends TestCase
             ))
         ));
 
-        $ffprobe->expects($this->once())
-            ->method('streams')
-            ->with($pathfile)
+        $video->expects($this->once())
+            ->method('getStreams')
             ->will($this->returnValue($streams));
 
-        $filter = new ResizeFilter($dimension, $ffprobe, $mode, $forceStandards);
+        $filter = new ResizeFilter($dimension, $mode, $forceStandards);
         $this->assertEquals($expected, $filter->apply($video, $format));
     }
 

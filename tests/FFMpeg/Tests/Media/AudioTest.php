@@ -7,7 +7,7 @@ use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\AudioInterface;
 
-class AudioTest extends AbstractMediaTestCase
+class AudioTest extends AbstractStreamableTestCase
 {
     /**
      * @expectedException FFMpeg\Exception\InvalidArgumentException
@@ -137,13 +137,13 @@ class AudioTest extends AbstractMediaTestCase
 
         $configuration->expects($this->once())
             ->method('has')
-            ->with($this->equalTo('threads'))
+            ->with($this->equalTo('ffmpeg.threads'))
             ->will($this->returnValue($threads));
 
         if ($threads) {
             $configuration->expects($this->once())
                 ->method('get')
-                ->with($this->equalTo('threads'))
+                ->with($this->equalTo('ffmpeg.threads'))
                 ->will($this->returnValue(24));
         } else {
             $configuration->expects($this->never())
@@ -255,6 +255,11 @@ class AudioTest extends AbstractMediaTestCase
                     '/target/file',
                 ), $listeners, $progressableFormat),
         );
+    }
+
+    public function getClassName()
+    {
+        return 'FFMpeg\Media\Audio';
     }
 }
 

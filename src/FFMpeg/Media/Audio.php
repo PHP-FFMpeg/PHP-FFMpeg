@@ -18,7 +18,7 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Filters\Audio\AudioFilterInterface;
 use FFMpeg\Format\ProgressableInterface;
 
-class Audio extends AbstractMediaType implements MediaTypeInterface
+class Audio extends AbstractStreamableMedia
 {
     /**
      * {@inheritdoc}

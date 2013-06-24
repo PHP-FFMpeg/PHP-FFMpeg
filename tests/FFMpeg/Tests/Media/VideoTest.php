@@ -7,7 +7,7 @@ use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\VideoInterface;
 
-class VideoTest extends AbstractMediaTestCase
+class VideoTest extends AbstractStreamableTestCase
 {
     /**
      * @expectedException FFMpeg\Exception\InvalidArgumentException
@@ -151,13 +151,13 @@ class VideoTest extends AbstractMediaTestCase
 
         $configuration->expects($this->once())
             ->method('has')
-            ->with($this->equalTo('threads'))
+            ->with($this->equalTo('ffmpeg.threads'))
             ->will($this->returnValue($threads));
 
         if ($threads) {
             $configuration->expects($this->once())
                 ->method('get')
-                ->with($this->equalTo('threads'))
+                ->with($this->equalTo('ffmpeg.threads'))
                 ->will($this->returnValue(24));
         } else {
             $configuration->expects($this->never())
@@ -369,6 +369,11 @@ class VideoTest extends AbstractMediaTestCase
                     '-ac', '2', '-ar', '44100', '/target/file',
                 )), $listeners, $progressableFormat),
         );
+    }
+
+    public function getClassName()
+    {
+        return 'FFMpeg\Media\Video';
     }
 }
 
