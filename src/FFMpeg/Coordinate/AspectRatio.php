@@ -241,8 +241,8 @@ class AspectRatio
 
         if (($current - $incoming) < ($incoming - $previous)) {
             return $current;
-        } else {
-            return $previous;
         }
+
+        return $previous;
     }
 }
