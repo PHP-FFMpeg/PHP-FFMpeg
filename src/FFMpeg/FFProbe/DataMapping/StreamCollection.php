@@ -21,6 +21,19 @@ class StreamCollection implements \Countable, \IteratorAggregate
     }
 
     /**
+     * Returns the first stream of the collection, null if the collection is
+     * empty.
+     *
+     * @return null|Stream
+     */
+    public function first()
+    {
+        $stream = reset($this->streams);
+
+        return $stream ?: null;
+    }
+
+    /**
      * Adds a stream to the collection
      *
      * @param Stream $stream

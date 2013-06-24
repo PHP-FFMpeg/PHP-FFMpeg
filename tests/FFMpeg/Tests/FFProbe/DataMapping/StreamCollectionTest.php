@@ -76,4 +76,14 @@ class StreamCollectionTest extends TestCase
         $this->assertInstanceOf('\Iterator', $collection->getIterator());
         $this->assertCount(2, $collection->getIterator());
     }
+
+    public function testFirst()
+    {
+        $stream1 = $this->getStreamMock();
+        $stream2 = $this->getStreamMock();
+
+        $coll = new StreamCollection(array($stream1, $stream2));
+
+        $this->assertSame($stream1, $coll->first());
+    }
 }
