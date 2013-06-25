@@ -22,8 +22,8 @@ class Dimension
     private $height;
 
     /**
-     * @param  integer                  $width
-     * @param  integer                  $height
+     * @param integer $width
+     * @param integer $height
      *
      * @throws InvalidArgumentException when one of the parameteres is invalid
      */

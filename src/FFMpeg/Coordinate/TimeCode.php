@@ -67,7 +67,7 @@ class TimeCode
     /**
      * Creates timecode from number of seconds.
      *
-     * @param float $seconds
+     * @param float $quantity
      *
      * @return TimeCode
      */

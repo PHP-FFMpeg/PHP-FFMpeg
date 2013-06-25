@@ -188,6 +188,8 @@ class FFProbe
     /**
      * @api
      *
+     * Creates an FFProbe.
+     *
      * @param array|ConfigurationInterface $configuration
      * @param LoggerInterface              $logger
      * @param Cache                        $cache
