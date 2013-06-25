@@ -15,12 +15,12 @@ use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Filters\Video\VideoFilters;
-use FFMpeg\Filters\Video\VideoFilterInterface;
-use FFMpeg\Format\VideoInterface;
+use FFMpeg\Filters\FilterInterface;
+use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Media\Frame;
 
-class Video extends AbstractStreamableMedia
+class Video extends Audio
 {
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ class Video extends AbstractStreamableMedia
      *
      * @return Video
      */
-    public function addFilter(VideoFilterInterface $filter)
+    public function addFilter(FilterInterface $filter)
     {
         $this->filters->add($filter);
 
@@ -54,7 +54,7 @@ class Video extends AbstractStreamableMedia
      *
      * @throws RuntimeException
      */
-    public function save(VideoInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, $outputPathfile)
     {
         $commands = array_merge(array('-y', '-i', $this->pathfile), $format->getExtraParams());
 
@@ -110,17 +110,12 @@ class Video extends AbstractStreamableMedia
         $pass1[] = '1';
         $pass1[] = '-passlogfile';
         $pass1[] = $passPrefix;
-        $pass1[] = '-an';
         $pass1[] = $outputPathfile;
 
         $pass2[] = '-pass';
         $pass2[] = '2';
         $pass2[] = '-passlogfile';
         $pass2[] = $passPrefix;
-        $pass2[] = '-ac';
-        $pass2[] = '2';
-        $pass2[] = '-ar';
-        $pass2[] = '44100';
         $pass2[] = $outputPathfile;
 
         $failure = null;

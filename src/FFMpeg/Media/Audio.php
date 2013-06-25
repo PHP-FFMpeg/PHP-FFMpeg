@@ -15,7 +15,9 @@ use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Filters\Audio\AudioFilterInterface;
+use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\ProgressableInterface;
 
 class Audio extends AbstractStreamableMedia
@@ -35,8 +37,12 @@ class Audio extends AbstractStreamableMedia
      *
      * @return Audio
      */
-    public function addFilter(AudioFilterInterface $filter)
+    public function addFilter(FilterInterface $filter)
     {
+        if (!$filter instanceof AudioFilterInterface) {
+            throw new InvalidArgumentException('Audio only accepts AudioFilterInterface filters');
+        }
+
         $this->filters->add($filter);
 
         return $this;

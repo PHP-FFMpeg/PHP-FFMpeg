@@ -50,6 +50,27 @@ class AudioTest extends AbstractStreamableTestCase
         $audio->addFilter($filter);
     }
 
+    public function testAddAVideoFilterThrowsException()
+    {
+        $driver = $this->getFFMpegDriverMock();
+        $ffprobe = $this->getFFProbeMock();
+
+        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $audio = new Audio(__FILE__, $driver, $ffprobe);
+        $audio->setFiltersCollection($filters);
+
+        $filter = $this->getMock('FFMpeg\Filters\Video\VideoFilterInterface');
+
+        $filters->expects($this->never())
+            ->method('add');
+
+        $this->setExpectedException('FFMpeg\Exception\InvalidArgumentException');
+        $audio->addFilter($filter);
+    }
+
     public function testSaveWithFailure()
     {
         $driver = $this->getFFMpegDriverMock();
