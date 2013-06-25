@@ -34,5 +34,10 @@
         "psr-0": {
             "FFMpeg": "src"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.3-dev"
+        }
     }
 }
