@@ -45,7 +45,7 @@ class Video extends AbstractStreamableMedia
     }
 
     /**
-     * Export the video in the desired format, applies registered filters
+     * Exports the video in the desired format, applies registered filters.
      *
      * @param FormatInterface $format
      * @param string          $outputPathfile
@@ -154,7 +154,7 @@ class Video extends AbstractStreamableMedia
     }
 
     /**
-     * Get the frame at timecode
+     * Gets the frame at timecode.
      *
      * @param  Timecode $at
      * @return Frame

@@ -41,7 +41,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * Sets the kiloBitrate value
+     * Sets the kiloBitrate value.
      *
      * @param  integer                  $kiloBitrate
      * @throws InvalidArgumentException
@@ -67,7 +67,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
 
     /**
      * Sets the video codec, Should be in the available ones, otherwise an
-     * exception is thrown
+     * exception is thrown.
      *
      * @param  string                   $videoCodec
      * @throws InvalidArgumentException

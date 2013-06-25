@@ -13,28 +13,28 @@ namespace FFMpeg\Format;
 interface AudioInterface extends FormatInterface
 {
     /**
-     * Get the audio kiloBitrate value
+     * Gets the audio kiloBitrate value.
      *
      * @return integer
      */
     public function getAudioKiloBitrate();
 
     /**
-     * Return an array of extra parameters to add to ffmpeg commandline
+     * Returns an array of extra parameters to add to ffmpeg commandline.
      *
      * @return array()
      */
     public function getExtraParams();
 
     /**
-     * Returns the audio codec
+     * Returns the audio codec.
      *
      * @return string
      */
     public function getAudioCodec();
 
     /**
-     * Returns the list of available audio codecs for this format
+     * Returns the list of available audio codecs for this format.
      *
      * @return array
      */

@@ -27,7 +27,7 @@ class VideoResampleFilter implements VideoFilterInterface
     }
 
     /**
-     * Returns the frame rate
+     * Returns the frame rate.
      *
      * @return FrameRate
      */
@@ -37,7 +37,7 @@ class VideoResampleFilter implements VideoFilterInterface
     }
 
     /**
-     * Returns the GOP size
+     * Returns the GOP size.
      *
      * @see https://wikipedia.org/wiki/Group_of_pictures
      *

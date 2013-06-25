@@ -35,7 +35,7 @@ class TimeCode
     }
 
     /**
-     * Creates timecode from string
+     * Creates timecode from string.
      *
      * @param string $timecode
      *

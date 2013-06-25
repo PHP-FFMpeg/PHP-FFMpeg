@@ -74,7 +74,7 @@ class AspectRatio
     }
 
     /**
-     * Compute the best width for given height and modulus.
+     * Computes the best width for given height and modulus.
      *
      * @param Integer $height
      * @param Integer $modulus
@@ -93,7 +93,7 @@ class AspectRatio
     }
 
     /**
-     * Compute the best height for given width and modulus.
+     * Computes the best height for given width and modulus.
      *
      * @param Integer $width
      * @param Integer $modulus

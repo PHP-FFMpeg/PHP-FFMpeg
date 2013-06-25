@@ -14,8 +14,14 @@ namespace FFMpeg\Filters\Video;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
+/**
+ * Synchronizes audio and video in case of desynchronized movies.
+ */
 class SynchronizeFilter implements VideoFilterInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function apply(Video $video, VideoInterface $format)
     {
         $streams = $video->getStreams();

@@ -14,14 +14,14 @@ namespace FFMpeg\Format;
 interface VideoInterface extends AudioInterface
 {
     /**
-     * Get the kiloBitrate value
+     * Gets the kiloBitrate value.
      *
      * @return integer
      */
     public function getKiloBitrate();
 
     /**
-     * Returns the number of passes
+     * Returns the number of passes.
      *
      * @return string
      */
@@ -40,14 +40,14 @@ interface VideoInterface extends AudioInterface
     public function getModulus();
 
     /**
-     * Returns the video codec
+     * Returns the video codec.
      *
      * @return string
      */
     public function getVideoCodec();
 
     /**
-     * Returns true if the current format supports B-Frames
+     * Returns true if the current format supports B-Frames.
      *
      * @see https://wikipedia.org/wiki/Video_compression_picture_types
      *
@@ -56,7 +56,7 @@ interface VideoInterface extends AudioInterface
     public function supportBFrames();
 
     /**
-     * Returns the list of available video codecs for this format
+     * Returns the list of available video codecs for this format.
      *
      * @return array
      */

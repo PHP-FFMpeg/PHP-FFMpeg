@@ -22,10 +22,9 @@ class Dimension
     private $height;
 
     /**
-     * Constructor
-     *
      * @param  integer                  $width
      * @param  integer                  $height
+     *
      * @throws InvalidArgumentException when one of the parameteres is invalid
      */
     public function __construct($width, $height)
@@ -39,7 +38,7 @@ class Dimension
     }
 
     /**
-     * Return width
+     * Returns width.
      *
      * @return width
      */
@@ -49,7 +48,7 @@ class Dimension
     }
 
     /**
-     * Return height
+     * Returns height.
      *
      * @return integer
      */
@@ -59,7 +58,7 @@ class Dimension
     }
 
     /**
-     * Get the ratio
+     * Returns the ratio.
      *
      * @param type $forceStandards Whether or not force the use of standards ratios;
      *

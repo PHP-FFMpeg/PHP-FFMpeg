@@ -43,7 +43,7 @@ class Audio extends AbstractStreamableMedia
     }
 
     /**
-     * Export the audio in the desired format, applies registered filters
+     * Exports the audio in the desired format, applies registered filters.
      *
      * @param FormatInterface $format
      * @param string          $outputPathfile

@@ -14,7 +14,7 @@ namespace FFMpeg\FFProbe;
 interface OutputParserInterface
 {
     /**
-     * Parses ffprobe raw output
+     * Parses ffprobe raw output.
      *
      * @param string $type One of FFProbe::TYPE_* constant
      * @param string $data The data

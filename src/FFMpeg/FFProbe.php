@@ -154,7 +154,7 @@ class FFProbe
     /**
      * @api
      *
-     * Probe the format of a given file
+     * Probes the format of a given file.
      *
      * @param string $pathfile
      *
@@ -171,7 +171,7 @@ class FFProbe
     /**
      * @api
      *
-     * Probe the streams contained in a given file
+     * Probes the streams contained in a given file.
      *
      * @param string $pathfile
      *

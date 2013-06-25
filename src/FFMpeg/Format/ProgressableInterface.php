@@ -18,7 +18,7 @@ use FFMpeg\Media\MediaTypeInterface;
 interface ProgressableInterface extends EventEmitterInterface
 {
     /**
-     * Creates the progress listener
+     * Creates the progress listener.
      *
      * @param MediaTypeInterface $media
      * @param FFProbe            $ffprobe

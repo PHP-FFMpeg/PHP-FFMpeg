@@ -25,7 +25,7 @@ class VideoFilters
     }
 
     /**
-     * Resizes a video to a given dimension
+     * Resizes a video to a given dimension.
      *
      * @param Dimension $dimension
      * @param string    $mode

@@ -75,6 +75,7 @@ class Frame extends AbstractMediaType
     public function saveAs($pathfile, $accurate = false)
     {
         /**
+         * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
         if (!$accurate) {

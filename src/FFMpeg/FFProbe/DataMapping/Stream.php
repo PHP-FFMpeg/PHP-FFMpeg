@@ -14,7 +14,7 @@ namespace FFMpeg\FFProbe\DataMapping;
 class Stream extends AbstractData
 {
     /**
-     * Returns true if the stream is an audio stream
+     * Returns true if the stream is an audio stream.
      *
      * @return Boolean
      */
@@ -24,7 +24,7 @@ class Stream extends AbstractData
     }
 
     /**
-     * Returns true if the stream is a video stream
+     * Returns true if the stream is a video stream.
      *
      * @return Boolean
      */

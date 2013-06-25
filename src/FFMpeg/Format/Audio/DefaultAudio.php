@@ -45,7 +45,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
 
     /**
      * Sets the audio codec, Should be in the available ones, otherwise an
-     * exception is thrown
+     * exception is thrown.
      *
      * @param string $audioCodec
      *
@@ -74,7 +74,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * Sets the kiloBitrate value
+     * Sets the kiloBitrate value.
      *
      * @param  integer                  $kiloBitrate
      * @throws InvalidArgumentException

@@ -14,7 +14,7 @@ namespace FFMpeg\FFProbe;
 interface OptionsTesterInterface
 {
     /**
-     * Tells if the given option is supported by ffprobe
+     * Tells if the given option is supported by ffprobe.
      *
      * @param string $name
      *

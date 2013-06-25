@@ -33,7 +33,7 @@ class FFMpeg
     }
 
     /**
-     * Sets ffprobe
+     * Sets FFProbe.
      *
      * @param FFProbe
      *
@@ -47,7 +47,7 @@ class FFMpeg
     }
 
     /**
-     * Gets FFProbe
+     * Gets FFProbe.
      *
      * @return FFProbe
      */
@@ -57,7 +57,7 @@ class FFMpeg
     }
 
     /**
-     * Sets ffmpeg driver
+     * Sets the ffmpeg driver.
      *
      * @return FFMpeg
      */
@@ -69,7 +69,7 @@ class FFMpeg
     }
 
     /**
-     * Gets the ffmpeg driver
+     * Gets the ffmpeg driver.
      *
      * @return FFMpegDriver
      */
@@ -79,7 +79,7 @@ class FFMpeg
     }
 
     /**
-     * Opens a file in order to be processed
+     * Opens a file in order to be processed.
      *
      * @param string $pathfile A pathfile
      *
@@ -105,7 +105,7 @@ class FFMpeg
     }
 
     /**
-     * Creates a new FFMpeg instance
+     * Creates a new FFMpeg instance.
      *
      * @param array|ConfigurationInterface $configuration
      * @param LoggerInterface              $logger

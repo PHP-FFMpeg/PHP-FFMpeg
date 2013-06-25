@@ -23,7 +23,7 @@ abstract class AbstractData implements \Countable
     }
 
     /**
-     * Returns true if data has property
+     * Returns true if data has property.
      *
      * @param  string  $property
      * @return Boolean
@@ -34,7 +34,7 @@ abstract class AbstractData implements \Countable
     }
 
     /**
-     * Returns the property value given its name
+     * Returns the property value given its name.
      *
      * @param  string $property
      * @return mixed
@@ -51,7 +51,7 @@ abstract class AbstractData implements \Countable
     }
 
     /**
-     * Returns all property names
+     * Returns all property names.
      *
      * @return array
      */
@@ -61,7 +61,7 @@ abstract class AbstractData implements \Countable
     }
 
     /**
-     * Returns all properties and their values
+     * Returns all properties and their values.
      *
      * @return array
      */

@@ -14,7 +14,7 @@ namespace FFMpeg\FFProbe;
 interface MapperInterface
 {
     /**
-     * Maps data given its type
+     * Maps data given its type.
      *
      * @param string $type One of FFProbe::TYPE_* constant
      * @param string $data The data

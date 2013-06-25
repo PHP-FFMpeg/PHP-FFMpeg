@@ -34,7 +34,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Adds a stream to the collection
+     * Adds a stream to the collection.
      *
      * @param Stream $stream
      *
@@ -48,7 +48,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Returns a new StreamCollection with only video streams
+     * Returns a new StreamCollection with only video streams.
      *
      * @return StreamCollection
      */
@@ -60,7 +60,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Returns a new StreamCollection with only audio streams
+     * Returns a new StreamCollection with only audio streams.
      *
      * @return StreamCollection
      */
@@ -80,7 +80,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Returns the array of contained streams
+     * Returns the array of contained streams.
      *
      * @return array
      */

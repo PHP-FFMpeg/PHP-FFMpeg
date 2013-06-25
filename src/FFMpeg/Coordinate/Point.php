@@ -14,7 +14,7 @@ namespace FFMpeg\Coordinate;
 class Point
 {
     private $x;
-    private $Y;
+    private $y;
 
     public function __construct($x, $y)
     {
