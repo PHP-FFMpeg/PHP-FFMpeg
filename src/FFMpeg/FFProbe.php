@@ -11,163 +11,258 @@
 
 namespace FFMpeg;
 
+use Alchemy\BinaryDriver\ConfigurationInterface;
+use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Cache\Cache;
+use FFMpeg\Driver\FFProbeDriver;
+use FFMpeg\FFProbe\DataMapping\Format;
+use FFMpeg\FFProbe\Mapper;
+use FFMpeg\FFProbe\MapperInterface;
+use FFMpeg\FFProbe\OptionsTester;
+use FFMpeg\FFProbe\OptionsTesterInterface;
+use FFMpeg\FFProbe\OutputParser;
+use FFMpeg\FFProbe\OutputParserInterface;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
+use Psr\Log\LoggerInterface;
 
-/**
- * FFProbe driver
- *
- * @author Romain Neutron imprec@gmail.com
- */
-class FFProbe extends Binary
+class FFProbe
 {
+    const TYPE_STREAMS = 'streams';
+    const TYPE_FORMAT = 'format';
 
-    protected $cachedFormats = array();
+    /** @var Cache */
+    private $cache;
+    /** @var OptionsTesterInterface */
+    private $optionsTester;
+    /** @var OutputParserInterface */
+    private $parser;
+    /** @var FFProbeDriver */
+    private $ffprobe;
+    /** @var MapperInterface */
+    private $mapper;
+
+    public function __construct(FFProbeDriver $ffprobe, Cache $cache)
+    {
+        $this->ffprobe = $ffprobe;
+        $this->optionsTester = new OptionsTester($ffprobe, $cache);
+        $this->parser = new OutputParser();
+        $this->mapper = new Mapper();
+        $this->cache = $cache;
+    }
 
     /**
+     * @return OutputParserInterface
+     */
+    public function getParser()
+    {
+        return $this->parser;
+    }
+
+    /**
+     * @param OutputParserInterface $parser
+     *
+     * @return FFProbe
+     */
+    public function setParser(OutputParserInterface $parser)
+    {
+        $this->parser = $parser;
+
+        return $this;
+    }
+
+    /**
+     * @return FFProbeDriver
+     */
+    public function getFFProbeDriver()
+    {
+        return $this->ffprobe;
+    }
+
+    /**
+     * @param FFProbeDriver $ffprobe
+     *
+     * @return FFProbe
+     */
+    public function setFFProbeDriver(FFProbeDriver $ffprobe)
+    {
+        $this->ffprobe = $ffprobe;
+
+        return $this;
+    }
+
+    /**
+     * @param OptionsTesterInterface $tester
+     *
+     * @return FFProbe
+     */
+    public function setOptionsTester(OptionsTesterInterface $tester)
+    {
+        $this->optionsTester = $tester;
+
+        return $this;
+    }
+
+    /**
+     * @return OptionsTesterInterface
+     */
+    public function getOptionsTester()
+    {
+        return $this->optionsTester;
+    }
+
+    /**
+     * @param Cache $cache
+     *
+     * @return FFProbe
+     */
+    public function setCache(Cache $cache)
+    {
+        $this->cache = $cache;
+
+        return $this;
+    }
+
+    /**
+     * @return Cache
+     */
+    public function getCache()
+    {
+        return $this->cache;
+    }
+
+    /**
+     * @return MapperInterface
+     */
+    public function getMapper()
+    {
+        return $this->mapper;
+    }
+
+    /**
+     * @param MapperInterface $mapper
+     *
+     * @return FFProbe
+     */
+    public function setMapper(MapperInterface $mapper)
+    {
+        $this->mapper = $mapper;
+
+        return $this;
+    }
+
+    /**
+     * @api
+     *
      * Probe the format of a given file
      *
-     * @param  string $pathfile
-     * @return string A Json object containing the key/values of the probe output
+     * @param string $pathfile
+     *
+     * @return Format A Format object
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function probeFormat($pathfile)
+    public function format($pathfile)
     {
-        if ( ! is_file($pathfile)) {
-            throw new InvalidArgumentException($pathfile);
-        }
-
-        if (isset($this->cachedFormats[$pathfile])) {
-            return $this->cachedFormats[$pathfile];
-        }
-
-        $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-show_format'
-        ));
-
-        $output = $this->executeProbe($builder->getProcess());
-
-        $ret = array();
-
-        foreach (explode(PHP_EOL, $output) as $line) {
-
-            if (in_array($line, array('[FORMAT]', '[/FORMAT]'))) {
-                continue;
-            }
-
-            $chunks = explode('=', $line);
-            $key = array_shift($chunks);
-
-            if ('' === trim($key)) {
-                continue;
-            }
-
-            $value = trim(implode('=', $chunks));
-
-            if (ctype_digit($value)) {
-                $value = (int) $value;
-            }
-
-            $ret[$key] = $value;
-        }
-
-        return $this->cachedFormats[$pathfile] = json_encode($ret);
+        return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
     }
 
     /**
+     * @api
+     *
      * Probe the streams contained in a given file
      *
-     * @param  string $pathfile
-     * @return array  An array of streams array
+     * @param string $pathfile
+     *
+     * @return StreamCollection A collection of streams
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function probeStreams($pathfile)
+    public function streams($pathfile)
     {
-        if ( ! is_file($pathfile)) {
-            throw new InvalidArgumentException($pathfile);
-        }
-
-        $builder = ProcessBuilder::create(array(
-            $this->binary, $pathfile, '-show_streams'
-        ));
-
-        $output = explode(PHP_EOL, $this->executeProbe($builder->getProcess()));
-
-        $ret = array();
-        $n = 0;
-
-        foreach ($output as $line) {
-
-            if ($line == '[STREAM]') {
-                $n ++;
-                $ret[$n] = array();
-                continue;
-            }
-            if ($line == '[/STREAM]') {
-                continue;
-            }
-
-            $chunks = explode('=', $line);
-            $key = array_shift($chunks);
-
-            if ('' === trim($key)) {
-                continue;
-            }
-
-            $value = trim(implode('=', $chunks));
-
-            if (ctype_digit($value)) {
-                $value = (int) $value;
-            }
-
-            $ret[$n][$key] = $value;
-        }
-
-        return json_encode(array_values($ret));
+        return $this->probe($pathfile, '-show_streams', static::TYPE_STREAMS);
     }
 
     /**
+     * @api
      *
-     * @param  Process          $process
-     * @return string
-     * @throws RuntimeException
+     * @param array|ConfigurationInterface $configuration
+     * @param LoggerInterface              $logger
+     * @param Cache                        $cache
+     *
+     * @return FFProbe
      */
-    protected function executeProbe(Process $process)
+    public static function create($configuration = array(), LoggerInterface $logger = null, Cache $cache = null)
     {
-        $this->logger->addInfo(sprintf('FFprobe executes command %s', $process->getCommandline()));
-
-        try {
-            $process->run();
-        } catch (\RuntimeException $e) {
-            $this->logger->addInfo('FFprobe command failed');
-
-            throw new RuntimeException(sprintf('Failed to run the given command %s', $process->getCommandline()));
+        if (null === $cache) {
+            $cache = new ArrayCache();
         }
 
-        if ( ! $process->isSuccessful()) {
-            $this->logger->addInfo('FFprobe command failed');
-
-            throw new RuntimeException(sprintf('Failed to probe %s', $process->getCommandline()));
-        }
-
-        $this->logger->addInfo('FFprobe command successful');
-
-        return $process->getOutput();
+        return new static(FFProbeDriver::create($configuration, $logger), $cache);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return string
-     */
-    protected static function getBinaryName()
+    private function probe($pathfile, $command, $type, $allowJson = true)
     {
-        return array('avprobe', 'ffprobe');
+        if (!is_file($pathfile)) {
+            throw new InvalidArgumentException(sprintf(
+                'Invalid filepath %s, unable to read.', $pathfile
+            ));
+        }
+
+        $id = sprintf('%s-%s', $command, $pathfile);
+
+        if ($this->cache->contains($id)) {
+            return $this->cache->fetch($id);
+        }
+
+        if (!$this->optionsTester->has($command)) {
+            throw new RuntimeException(sprintf(
+                'This version of ffprobe is too old and '
+                . 'does not support `%s` option, please upgrade', $command
+            ));
+        }
+
+        $commands = array($pathfile, $command);
+
+        $parseIsToDo = false;
+
+        if ($allowJson && $this->optionsTester->has('-print_format')) {
+            $commands[] = '-print_format';
+            $commands[] = 'json';
+        } else {
+            $parseIsToDo = true;
+        }
+
+        $output = $this->ffprobe->command($commands);
+
+        if ($parseIsToDo) {
+            $data = $this->parser->parse($type, $output);
+        } else {
+            try {
+                // Malformed json may be retrieved
+                $data = $this->parseJson($output);
+            } catch (RuntimeException $e) {
+                return $this->probe($pathfile, $command, $type, false);
+            }
+        }
+
+        $ret = $this->mapper->map($type, $data);
+
+        $this->cache->save($id, $ret);
+
+        return $ret;
+    }
+
+    private function parseJson($data)
+    {
+        $ret = @json_decode($data, true);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new RuntimeException(sprintf('Unable to parse json %s', $ret));
+        }
+
+        return $ret;
     }
 }

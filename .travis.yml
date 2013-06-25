@@ -10,8 +10,9 @@ before_script:
 php:
   - 5.3
   - 5.4
-#  - 5.5
+  - 5.5
 
 script:
-  - phpunit
+  - vendor/bin/phpunit -c phpunit.xml.dist
+  - vendor/bin/phpunit -c phpunit-functional.xml.dist
   - sh -c "cd docs && make clean && make html"
