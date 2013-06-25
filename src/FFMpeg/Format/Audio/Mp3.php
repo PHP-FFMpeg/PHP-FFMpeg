@@ -13,12 +13,13 @@ namespace FFMpeg\Format\Audio;
 
 /**
  * The MP3 audio format
- *
- * @author Romain Neutron imprec@gmail.com
  */
 class Mp3 extends DefaultAudio
 {
-    protected $audioCodec = 'libmp3lame';
+    public function __construct()
+    {
+        $this->audioCodec = 'libmp3lame';
+    }
 
     /**
      * {@inheritDoc}

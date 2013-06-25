@@ -11,23 +11,24 @@
 
 namespace FFMpeg\Format\Audio;
 
+use Evenement\EventEmitter;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Format\AudioInterface;
+use FFMpeg\Media\MediaTypeInterface;
+use FFMpeg\Format\ProgressableInterface;
+use FFMpeg\Format\ProgressListener\AudioProgressListener;
+use FFMpeg\FFProbe;
 
-/**
- * The abstract default Audio format
- *
- * @author Romain Neutron imprec@gmail.com
- */
-abstract class DefaultAudio implements Resamplable, Interactive
+abstract class DefaultAudio extends EventEmitter implements AudioInterface, ProgressableInterface
 {
+    /** @var string */
     protected $audioCodec;
-    protected $audioSampleRate = 44100;
-    protected $kiloBitrate = 128;
+
+    /** @var integer */
+    protected $audioKiloBitrate = 128;
 
     /**
-     * Returns extra parameters for the encoding
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getExtraParams()
     {
@@ -43,11 +44,12 @@ abstract class DefaultAudio implements Resamplable, Interactive
     }
 
     /**
-     * Set the audio codec, Should be in the available ones, otherwise an
-     * exception is thrown
+     * Sets the audio codec, Should be in the available ones, otherwise an
+     * exception is thrown.
      *
-     * @param  string                    $audioCodec
-     * @throws \InvalidArgumentException
+     * @param string $audioCodec
+     *
+     * @throws InvalidArgumentException
      */
     public function setAudioCodec($audioCodec)
     {
@@ -66,24 +68,24 @@ abstract class DefaultAudio implements Resamplable, Interactive
     /**
      * {@inheritdoc}
      */
-    public function getAudioSampleRate()
+    public function getAudioKiloBitrate()
     {
-        return $this->audioSampleRate;
+        return $this->audioKiloBitrate;
     }
 
     /**
-     * Set the audio sample rate
+     * Sets the kiloBitrate value.
      *
-     * @param  integer                   $audioSampleRate
-     * @throws \InvalidArgumentException
+     * @param  integer                  $kiloBitrate
+     * @throws InvalidArgumentException
      */
-    public function setAudioSampleRate($audioSampleRate)
+    public function setAudioKiloBitrate($kiloBitrate)
     {
-        if ($audioSampleRate < 1) {
-            throw new InvalidArgumentException('Wrong audio sample rate value');
+        if ($kiloBitrate < 1) {
+            throw new InvalidArgumentException('Wrong kiloBitrate value');
         }
 
-        $this->audioSampleRate = (int) $audioSampleRate;
+        $this->audioKiloBitrate = (int) $kiloBitrate;
 
         return $this;
     }
@@ -91,25 +93,14 @@ abstract class DefaultAudio implements Resamplable, Interactive
     /**
      * {@inheritdoc}
      */
-    public function getKiloBitrate()
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
     {
-        return $this->kiloBitrate;
-    }
+        $format = $this;
+        $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $pass, $total);
+        $listener->on('progress', function () use ($media, $format) {
+           $format->emit('progress', array_merge(array($media, $format), func_get_args()));
+        });
 
-    /**
-     * Set the kiloBitrate value
-     *
-     * @param  int integer               $kiloBitrate
-     * @throws \InvalidArgumentException
-     */
-    public function setKiloBitrate($kiloBitrate)
-    {
-        if ($kiloBitrate < 1) {
-            throw new InvalidArgumentException('Wrong kiloBitrate value');
-        }
-
-        $this->kiloBitrate = (int) $kiloBitrate;
-
-        return $this;
+        return array($listener);
     }
 }

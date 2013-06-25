@@ -13,13 +13,15 @@ namespace FFMpeg\Format\Video;
 
 /**
  * The WebM video format
- *
- * @author Romain Neutron imprec@gmail.com
  */
 class WebM extends DefaultVideo
 {
-    protected $audioCodec = 'libvorbis';
-    protected $videoCodec = 'libvpx';
+    public function __construct($audioCodec = 'libvorbis', $videoCodec = 'libvpx')
+    {
+        $this
+            ->setAudioCodec($audioCodec)
+            ->setVideoCodec($videoCodec);
+    }
 
     /**
      * {@inheritDoc}
