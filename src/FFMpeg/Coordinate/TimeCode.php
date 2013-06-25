@@ -63,4 +63,30 @@ class TimeCode
 
         return new static($hours, $minutes, $seconds, $frames);
     }
+
+    /**
+     * Creates timecode from number of seconds.
+     *
+     * @param float $seconds
+     *
+     * @return TimeCode
+     */
+    public static function fromSeconds($quantity)
+    {
+        $minutes = $hours = $frames = 0;
+
+        $frames = round(100 * ($quantity - floor($quantity)));
+        $seconds = floor($quantity);
+
+        if ($seconds > 59) {
+            $minutes = floor($seconds / 60);
+            $seconds = $seconds % 60;
+        }
+        if ($minutes > 59) {
+            $hours = floor($minutes / 60);
+            $minutes = $minutes % 60;
+        }
+
+        return new static($hours, $minutes, $seconds, $frames);
+    }
 }

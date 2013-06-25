@@ -35,4 +35,26 @@ class TimeCodeTest extends TestCase
     {
         TimeCode::fromString('lalali lala');
     }
+
+    /**
+     * @dataProvider provideSeconds
+     */
+    public function testFromSeconds($seconds, $expected)
+    {
+        $tc = TimeCode::fromSeconds($seconds);
+        $this->assertEquals($expected, (string) $tc);
+    }
+
+    public function provideSeconds()
+    {
+        return array(
+            array(0.467,  '00:00:00.47'),
+            array(12.467, '00:00:12.47'),
+            array(59.867, '00:00:59.87'),
+            array(72.467, '00:01:12.47'),
+            array(3599.467, '00:59:59.47'),
+            array(3600.467, '01:00:00.47'),
+            array(86422.467, '24:00:22.47'),
+        );
+    }
 }
