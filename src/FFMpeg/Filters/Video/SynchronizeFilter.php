@@ -19,6 +19,21 @@ use FFMpeg\Media\Video;
  */
 class SynchronizeFilter implements VideoFilterInterface
 {
+    private $priority;
+
+    public function __construct($priority = 12)
+    {
+        $this->priority = $priority;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
     /**
      * {@inheritdoc}
      */

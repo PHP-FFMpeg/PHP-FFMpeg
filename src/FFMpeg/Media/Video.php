@@ -13,6 +13,7 @@ namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Filters\FilterInterface;
@@ -56,24 +57,22 @@ class Video extends Audio
      */
     public function save(FormatInterface $format, $outputPathfile)
     {
-        $commands = array_merge(array('-y', '-i', $this->pathfile), $format->getExtraParams());
+        $commands = array('-y', '-i', $this->pathfile);
+
+        $this->addFilter(new SimpleFilter($format->getExtraParams(), 10));
+
+        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
+            $this->addFilter(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+        }
+        if (null !== $format->getVideoCodec()) {
+            $this->addFilter(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+        }
+        if (null !== $format->getAudioCodec()) {
+            $this->addFilter(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+        }
 
         foreach ($this->filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this, $format));
-        }
-
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $commands[] = '-threads';
-            $commands[] = $this->driver->getConfiguration()->get('ffmpeg.threads');
-        }
-
-        if (null !== $format->getVideoCodec()) {
-            $commands[] = '-vcodec';
-            $commands[] = $format->getVideoCodec();
-        }
-        if (null !== $format->getAudioCodec()) {
-            $commands[] = '-acodec';
-            $commands[] = $format->getAudioCodec();
         }
 
         $commands[] = '-b:v';

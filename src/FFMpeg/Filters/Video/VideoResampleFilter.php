@@ -19,11 +19,21 @@ class VideoResampleFilter implements VideoFilterInterface
 {
     private $rate;
     private $gop;
+    private $priority;
 
-    public function __construct(FrameRate $rate, $gop)
+    public function __construct(FrameRate $rate, $gop, $priority = 0)
     {
         $this->rate = $rate;
         $this->gop = $gop;
+        $this->priority = $priority;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 
     /**

@@ -13,4 +13,10 @@ namespace FFMpeg\Filters;
 
 interface FilterInterface
 {
+    /**
+     * Returns the priority of the filter.
+     *
+     * @return integer
+     */
+    public function getPriority();
 }

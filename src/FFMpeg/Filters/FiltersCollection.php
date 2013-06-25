@@ -13,6 +13,7 @@ namespace FFMpeg\Filters;
 
 class FiltersCollection implements \Countable, \IteratorAggregate
 {
+    private $sorted;
     private $filters = array();
 
     /**
@@ -22,7 +23,8 @@ class FiltersCollection implements \Countable, \IteratorAggregate
      */
     public function add(FilterInterface $filter)
     {
-        $this->filters[] = $filter;
+        $this->filters[$filter->getPriority()][] = $filter;
+        $this->sorted = null;
 
         return $this;
     }
@@ -32,7 +34,11 @@ class FiltersCollection implements \Countable, \IteratorAggregate
      */
     public function count()
     {
-        return count($this->filters);
+        if (0 === count($this->filters)) {
+            return 0;
+        }
+
+        return count(call_user_func_array('array_merge', $this->filters));
     }
 
     /**
@@ -40,6 +46,11 @@ class FiltersCollection implements \Countable, \IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->filters);
+        if (null === $this->sorted) {
+            krsort($this->filters);
+            $this->sorted = call_user_func_array('array_merge', $this->filters);
+        }
+
+        return new \ArrayIterator($this->sorted);
     }
 }

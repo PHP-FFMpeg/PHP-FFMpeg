@@ -28,12 +28,23 @@ class ResizeFilter implements VideoFilterInterface
     private $mode;
     /** @var Boolean */
     private $forceStandards;
+    /** @var integer */
+    private $priority;
 
-    public function __construct(Dimension $dimension, $mode = self::RESIZEMODE_FIT, $forceStandards = true)
+    public function __construct(Dimension $dimension, $mode = self::RESIZEMODE_FIT, $forceStandards = true, $priority = 0)
     {
         $this->dimension = $dimension;
         $this->mode = $mode;
         $this->forceStandards = $forceStandards;
+        $this->priority = $priority;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 
     /**

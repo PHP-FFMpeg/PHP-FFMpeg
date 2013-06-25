@@ -14,6 +14,7 @@ namespace FFMpeg\Media;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Format\FormatInterface;
+use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Filters\Audio\AudioFilterInterface;
@@ -66,20 +67,19 @@ class Audio extends AbstractStreamableMedia
             $listeners = $format->createProgressListener($this, $this->ffprobe, 1, 1);
         }
 
-        $commands = array_merge(array('-y', '-i', $this->pathfile), $format->getExtraParams());
+        $commands = array('-y', '-i', $this->pathfile);
+
+        $this->addFilter(new SimpleFilter($format->getExtraParams(), 10));
+
+        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
+            $this->addFilter(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+        }
+        if (null !== $format->getAudioCodec()) {
+            $this->addFilter(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+        }
 
         foreach ($this->filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this, $format));
-        }
-
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $commands[] = '-threads';
-            $commands[] = $this->driver->getConfiguration()->get('ffmpeg.threads');
-        }
-
-        if (null !== $format->getAudioCodec()) {
-            $commands[] = '-acodec';
-            $commands[] = $format->getAudioCodec();
         }
 
         $commands[] = '-b:a';
