@@ -17,25 +17,23 @@
     }
     ],
     "require": {
-        "php"             : ">=5.3.3",
-        "symfony/process" : "~2.1",
-        "monolog/monolog" : "~1.0"
+        "php"                      : ">=5.3.3",
+        "alchemy/binary-driver"    : "~1.5",
+        "doctrine/cache"           : "~1.0",
+        "evenement/evenement"      : "~1.0",
+        "symfony/process"          : "~2.0"
     },
     "suggest": {
-        "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
+        "php-ffmpeg/extras"        : "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "sami/sami"       : "~1.0",
-        "silex/silex"     : "~1.0"
+        "sami/sami"       : "dev-master@dev",
+        "silex/silex"     : "~1.0",
+        "phpunit/phpunit" : "~3.7"
     },
     "autoload": {
         "psr-0": {
             "FFMpeg": "src"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.3-dev"
         }
     }
 }

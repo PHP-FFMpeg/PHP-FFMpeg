@@ -11,49 +11,52 @@
 
 namespace FFMpeg;
 
+use Doctrine\Common\Cache\ArrayCache;
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
-use Monolog\Logger;
-use Monolog\Handler\NullHandler;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
 class FFMpegServiceProvider implements ServiceProviderInterface
 {
-
     public function register(Application $app)
     {
-        if (isset($app['monolog'])) {
-            $app['ffmpeg.logger'] = function() use ($app) {
-                return $app['monolog'];
-            };
-        } else {
-            $app['ffmpeg.logger'] = $app->share(function(Application $app) {
-                $logger = new Logger('FFMpeg logger');
-                $logger->pushHandler(new NullHandler());
+        $app['ffmpeg.configuration'] = array();
+        $app['ffmpeg.default.configuration'] = array(
+            'ffmpeg.threads'   => 4,
+            'ffmpeg.timeout'   => 300,
+            'ffmpeg.binaries'  => array('avconv', 'ffmpeg'),
+            'ffprobe.timeout'  => 30,
+            'ffprobe.binaries' => array('avprobe', 'ffprobe'),
+        );
+        $app['ffmpeg.logger'] = null;
 
-                return $logger;
-            });
-        }
+        $app['ffmpeg.configuration.build'] = $app->share(function (Application $app) {
+            return array_replace($app['ffmpeg.default.configuration'], $app['ffmpeg.configuration']);
+        });
 
-        $app['ffmpeg.ffmpeg'] = $app->share(function(Application $app) {
-            if (isset($app['ffmpeg.ffmpeg.binary'])) {
-                $ffmpeg = new FFMpeg($app['ffmpeg.ffmpeg.binary'], $app['ffmpeg.logger']);
-            } else {
-                $ffmpeg = FFMpeg::load($app['ffmpeg.logger']);
+        $app['ffmpeg'] = $app['ffmpeg.ffmpeg'] = $app->share(function(Application $app) {
+            $configuration = $app['ffmpeg.configuration.build'];
+
+            if (isset($configuration['ffmpeg.timeout'])) {
+                $configuration['timeout'] = $configuration['ffmpeg.timeout'];
             }
 
-            return $ffmpeg
-                    ->setProber($app['ffmpeg.ffprobe'])
-                    ->setThreads(isset($app['ffmpeg.threads']) ? $app['ffmpeg.threads'] : 1);
+            return FFMpeg::create($configuration, $app['ffmpeg.logger'], $app['ffmpeg.ffprobe']);
+        });
+
+        $app['ffprobe.cache'] = $app->share(function () {
+            return new ArrayCache();
         });
 
         $app['ffmpeg.ffprobe'] = $app->share(function(Application $app) {
-            if (isset($app['ffmpeg.ffprobe.binary'])) {
-                return new FFProbe($app['ffmpeg.ffprobe.binary'], $app['ffmpeg.logger']);
-            } else {
-                return FFProbe::load($app['ffmpeg.logger']);
+            $configuration = $app['ffmpeg.configuration.build'];
+
+            if (isset($configuration['ffmpeg.timeout'])) {
+                $configuration['timeout'] = $configuration['ffprobe.timeout'];
             }
+
+            return FFProbe::create($configuration, $app['ffmpeg.logger'], $app['ffprobe.cache']);
         });
     }
 
