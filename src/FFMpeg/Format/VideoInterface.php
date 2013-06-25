@@ -11,17 +11,54 @@
 
 namespace FFMpeg\Format;
 
-/**
- * The base video interface
- *
- * @author Romain Neutron imprec@gmail.com
- */
 interface VideoInterface extends AudioInterface
 {
     /**
-     * Returns the number of passes
+     * Gets the kiloBitrate value.
+     *
+     * @return integer
+     */
+    public function getKiloBitrate();
+
+    /**
+     * Returns the number of passes.
      *
      * @return string
      */
     public function getPasses();
+
+    /**
+     * Returns the modulus used by the Resizable video.
+     *
+     * This used to calculate the target dimensions while maintaining the best
+     * aspect ratio.
+     *
+     * @see http://www.undeadborn.net/tools/rescalculator.php
+     *
+     * @return integer
+     */
+    public function getModulus();
+
+    /**
+     * Returns the video codec.
+     *
+     * @return string
+     */
+    public function getVideoCodec();
+
+    /**
+     * Returns true if the current format supports B-Frames.
+     *
+     * @see https://wikipedia.org/wiki/Video_compression_picture_types
+     *
+     * @return Boolean
+     */
+    public function supportBFrames();
+
+    /**
+     * Returns the list of available video codecs for this format.
+     *
+     * @return array
+     */
+    public function getAvailableVideoCodecs();
 }
