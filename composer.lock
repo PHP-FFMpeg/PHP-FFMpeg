@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "336691561433798ee6f95d41970f1eae",
+    "hash": "f60a181f600f8da53459ceae2034d79d",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -312,60 +312,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "dflydev/markdown",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dflydev/dflydev-markdown.git",
-                "reference": "v1.0.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/dflydev/dflydev-markdown/zipball/v1.0.2",
-                "reference": "v1.0.2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "dflydev\\markdown": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "New BSD License"
-            ],
-            "authors": [
-                {
-                    "name": "Dragonfly Development Inc.",
-                    "email": "info@dflydev.com",
-                    "homepage": "http://dflydev.com"
-                },
-                {
-                    "name": "Beau Simensen",
-                    "email": "beau@dflydev.com",
-                    "homepage": "http://beausimensen.com"
-                },
-                {
-                    "name": "Michel Fortin",
-                    "homepage": "http://michelf.com"
-                },
-                {
-                    "name": "John Gruber",
-                    "homepage": "http://daringfireball.net"
-                }
-            ],
-            "description": "PHP Markdown & Extra",
-            "homepage": "http://github.com/dflydev/dflydev-markdown",
-            "keywords": [
-                "markdown"
-            ],
-            "time": "2012-01-15 19:36:37"
-        },
         {
             "name": "nikic/php-parser",
             "version": "v0.9.3",
@@ -810,20 +756,19 @@
         },
         {
             "name": "sami/sami",
-            "version": "dev-master",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Sami.git",
-                "reference": "9503a81e0b505be1cd9f7eec93e0da8b2615c211"
+                "reference": "v1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Sami/zipball/9503a81e0b505be1cd9f7eec93e0da8b2615c211",
-                "reference": "9503a81e0b505be1cd9f7eec93e0da8b2615c211",
+                "url": "https://api.github.com/repos/fabpot/Sami/zipball/v1.0",
+                "reference": "v1.0",
                 "shasum": ""
             },
             "require": {
-                "dflydev/markdown": "1.0.*",
                 "nikic/php-parser": "0.9.*",
                 "php": ">=5.3.0",
                 "pimple/pimple": "1.0.*",
@@ -863,7 +808,7 @@
             "keywords": [
                 "phpdoc"
             ],
-            "time": "2013-06-02 12:00:43"
+            "time": "2013-04-05 13:01:32"
         },
         {
             "name": "silex/silex",
@@ -1483,9 +1428,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "sami/sami": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.3.3"
     },

@@ -20,14 +20,13 @@
         "php"                      : ">=5.3.3",
         "alchemy/binary-driver"    : "~1.5",
         "doctrine/cache"           : "~1.0",
-        "evenement/evenement"      : "~1.0",
-        "symfony/process"          : "~2.0"
+        "evenement/evenement"      : "~1.0"
     },
     "suggest": {
         "php-ffmpeg/extras"        : "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "sami/sami"       : "dev-master@dev",
+        "sami/sami"       : "~1.0",
         "silex/silex"     : "~1.0",
         "phpunit/phpunit" : "~3.7"
     },
