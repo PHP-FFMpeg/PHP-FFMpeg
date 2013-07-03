@@ -35,7 +35,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 3
-        $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"] = $this->env->loadTemplate("macros.twig");
+        $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"] = $this->env->loadTemplate("macros.twig");
         $this->getParent($context)->display($context, array_merge($this->blocks, $blocks));
     }
 
@@ -66,7 +66,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
         echo "</div>
     <h1>";
         // line 11
-        echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->getnamespace_link($this->getAttribute((isset($context["class"]) ? $context["class"] : $this->getContext($context, "class")), "namespace"));
+        echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->getnamespace_link($this->getAttribute((isset($context["class"]) ? $context["class"] : $this->getContext($context, "class")), "namespace"));
         if ($this->getAttribute((isset($context["class"]) ? $context["class"] : $this->getContext($context, "class")), "namespace")) {
             echo "\\";
         }
@@ -171,7 +171,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
         if ($this->getAttribute((isset($context["class"]) ? $context["class"] : $this->getContext($context, "class")), "parent")) {
             // line 52
             echo "        extends ";
-            echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->getclass_link($this->getAttribute((isset($context["class"]) ? $context["class"] : $this->getContext($context, "class")), "parent"));
+            echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->getclass_link($this->getAttribute((isset($context["class"]) ? $context["class"] : $this->getContext($context, "class")), "parent"));
         }
         // line 54
         if ((twig_length_filter($this->env, $this->getAttribute((isset($context["class"]) ? $context["class"] : $this->getContext($context, "class")), "interfaces")) > 0)) {
@@ -196,7 +196,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
             }
             foreach ($context['_seq'] as $context["_key"] => $context["interface"]) {
                 // line 57
-                echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->getclass_link((isset($context["interface"]) ? $context["interface"] : $this->getContext($context, "interface")));
+                echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->getclass_link((isset($context["interface"]) ? $context["interface"] : $this->getContext($context, "interface")));
                 // line 58
                 if ((!$this->getAttribute((isset($context["loop"]) ? $context["loop"] : $this->getContext($context, "loop")), "last"))) {
                     echo ", ";
@@ -250,7 +250,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
         }
         // line 70
         echo "    ";
-        echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->gethint_link($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "hint"));
+        echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->gethint_link($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "hint"));
         echo "
     <strong>";
         // line 71
@@ -263,9 +263,9 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
     public function block_method_parameters_signature($context, array $blocks = array())
     {
         // line 75
-        $context["__internal_414e14486d5ed2ceb667c3f2d1468ff30c67b6a0"] = $this->env->loadTemplate("macros.twig");
+        $context["__internal_4166eb279fec520fbd16f694a8ba8c228c82e1ab"] = $this->env->loadTemplate("macros.twig");
         // line 76
-        echo $context["__internal_414e14486d5ed2ceb667c3f2d1468ff30c67b6a0"]->getmethod_parameters_signature((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")));
+        echo $context["__internal_4166eb279fec520fbd16f694a8ba8c228c82e1ab"]->getmethod_parameters_signature((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")));
     }
 
     // line 79
@@ -283,7 +283,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
                 <td>";
             // line 83
             if ($this->getAttribute((isset($context["parameter"]) ? $context["parameter"] : $this->getContext($context, "parameter")), "hint")) {
-                echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->gethint_link($this->getAttribute((isset($context["parameter"]) ? $context["parameter"] : $this->getContext($context, "parameter")), "hint"));
+                echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->gethint_link($this->getAttribute((isset($context["parameter"]) ? $context["parameter"] : $this->getContext($context, "parameter")), "hint"));
             }
             echo "</td>
                 <td>\$";
@@ -313,7 +313,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
         <tr>
             <td>";
         // line 94
-        echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->gethint_link($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "hint"));
+        echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->gethint_link($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "hint"));
         echo "</td>
             <td>";
         // line 95
@@ -338,7 +338,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
             echo "            <tr>
                 <td>";
             // line 104
-            echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->getclass_link($this->getAttribute((isset($context["exception"]) ? $context["exception"] : $this->getContext($context, "exception")), 0, array(), "array"));
+            echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->getclass_link($this->getAttribute((isset($context["exception"]) ? $context["exception"] : $this->getContext($context, "exception")), 0, array(), "array"));
             echo "</td>
                 <td>";
             // line 105
@@ -451,7 +451,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
             }
             // line 143
             echo "                    ";
-            echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->gethint_link($this->getAttribute((isset($context["property"]) ? $context["property"] : $this->getContext($context, "property")), "hint"));
+            echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->gethint_link($this->getAttribute((isset($context["property"]) ? $context["property"] : $this->getContext($context, "property")), "hint"));
             echo "
                 </td>
                 <td>\$";
@@ -504,7 +504,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
             if ($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "static")) {
                 echo "static&nbsp;";
             }
-            echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->gethint_link($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "hint"));
+            echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->gethint_link($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "hint"));
             echo "
                 </td>
                 <td class=\"last\">
@@ -526,7 +526,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
             if ((!($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "class") === (isset($context["class"]) ? $context["class"] : $this->getContext($context, "class"))))) {
                 // line 165
                 echo "<small>from&nbsp;";
-                echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->getmethod_link((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), array(), false, true);
+                echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->getmethod_link((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), array(), false, true);
                 echo "</small>";
             }
             // line 167
@@ -601,7 +601,7 @@ class __TwigTemplate_87511ea6fcf36da225b02399be17013a extends Twig_Template
         // line 181
         if ((!($this->getAttribute((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), "class") === (isset($context["class"]) ? $context["class"] : $this->getContext($context, "class"))))) {
             echo "in ";
-            echo $context["__internal_087e42990ba1ed12834fea4145be2bbaf2a3214d"]->getmethod_link((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), array(), false, true);
+            echo $context["__internal_26c91edb41d54ff3bec87ce7806aa320e5807271"]->getmethod_link((isset($context["method"]) ? $context["method"] : $this->getContext($context, "method")), array(), false, true);
             echo " ";
         }
         echo "at line ";
