@@ -2,17 +2,143 @@
 
 [![Build Status](https://secure.travis-ci.org/alchemy-fr/PHP-FFmpeg.png?branch=master)](http://travis-ci.org/alchemy-fr/PHP-FFmpeg)
 
-An Object Oriented library to convert video/audio files with AVConv / FFmpeg.
+An Object Oriented library to convert video/audio files with FFmpeg / AVConv.
 
 Check another amazing repo : [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
 
-##Documentation
+## Installation
 
-Read The Documentation at [Read The Docs !](http://readthedocs.org/docs/ffmpeg-php/)
+The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
-##API Browser
+```json
+{
+    "require": {
+        "php-ffmpeg/php-ffmpeg": "~0.3.0"
+    }
+}
+```
 
-Browse the [API](http://readthedocs.org/docs/ffmpeg-php/en/latest/_static/API/)
+## Basic Usage
+
+## Documentation
+
+This documentation is an introduction to discover the API. It's recommended
+to browse the source code as it is self-documented.
+
+### FFMpeg
+
+`FFMpeg\FFMpeg` is the main object to use to manipulate medias. To build it,
+use the static `FFMpeg\FFMpeg::create` :
+
+```php
+$ffmpeg = FFMpeg\FFMpeg::create();
+```
+
+FFMpeg will autodetect ffmpeg and ffprobe binaries. If you want to give binary
+paths explicitely, you can pass an array as configuration. A `Psr\Logger\LoggerInterface`
+can also be passed to log binary executions.
+
+```php
+$ffmpeg = FFMpeg\FFMpeg::create(array(
+    'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
+    'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
+    'timeout'          => 3600, // The timeout for the underlying process
+    'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
+), $logger);
+```
+
+### Manipulate media
+
+`FFMpeg\FFMpeg` creates media based on file paths. To open a file path, use the
+`FFMpeg\FFMpeg::open` method.
+
+```php
+$ffmpeg->open('video.mpeg');
+```
+
+Two types of media can be resolved : `FFMpeg\Media\Audio` and `FFMpeg\Media\Video`.
+A third type, `FFMpeg\Media\Frame`, is available through videos.
+
+#### Video
+
+##### Transcoding
+
+You can transcode videos using the `FFMpeg\Media\Video:save` method. You will
+pass a `FFMpeg\Format\FormatInterface` for that.
+
+```php
+$format = new Format\Video\X264();
+$format->on('progress', function ($video, $format, $percentage) {
+    echo "$percentage % transcoded";
+});
+
+$video->save($format, 'video.avi');
+```
+
+Transcoding progress can be monitored in realtime, see Format documentation
+below for more informations.
+
+##### Extracting image
+
+You can extract a frame at any timecode using the `FFMpeg\Media\Video::frame`
+method.
+
+This code return a `FFMpeg\Media\Frame` instance corresponding to the second 42.
+You can pass any `FFMpeg\Coordinate\TimeCode` as argument, see dedicated
+documentation below for more information.
+
+```php
+$frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(42));
+$frame->saveAs('image.jpg');
+```
+
+##### Filters
+
+#### Audio
+
+##### Transcoding
+
+##### Filters
+
+#### Frame
+
+##### Filters
+
+#### Formats
+
+A format implements `FFMpeg\Format\FormatInterface`. To save to a video file,
+use `FFMpeg\Format\VideoInterface`, and `FFMpeg\Format\AudioInterface` for
+audio files.
+
+Format can also extends `FFMpeg\Format\ProgressableInterface` to get realtime
+informations about the transcoding.
+
+Predefined formats already provide progress informations as events.
+
+```php
+$format = new Format\Video\X264();
+$format->on('progress', function ($video, $format, $percentage) {
+    echo "$percentage % transcoded";
+});
+
+$video->save($format, 'video.avi');
+```
+
+The callback provided for the event can be any callable.
+
+### Coordinates
+
+FFMpeg use many units for time and space coordinates.
+
+#### `FFMpeg\Coordinate\AspectRatio`
+
+#### `FFMpeg\Coordinate\Dimension`
+
+#### `FFMpeg\Coordinate\FrameRate`
+
+#### `FFMpeg\Coordinate\Point`
+
+#### `FFMpeg\Coordinate\TimeCode`
 
 ##Usage Example
 
@@ -52,7 +178,11 @@ $app = new Application();
 $app->register(new FFMpegServiceProvider());
 ```
 
-##License
+## API Browser
+
+Browse the [API](http://readthedocs.org/docs/ffmpeg-php/en/latest/_static/API/)
+
+## License
 
 This project is licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
