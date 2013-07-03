@@ -11,8 +11,10 @@
 
 namespace FFMpeg\FFProbe;
 
+use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
+use FFMpeg\Exception\RuntimeException;
 
 class OptionsTester implements OptionsTesterInterface
 {
@@ -55,7 +57,11 @@ class OptionsTester implements OptionsTesterInterface
             return $this->cache->fetch($id);
         }
 
-        $output = $this->ffprobe->command(array('-help', '-loglevel', 'quiet'));
+        try {
+            $output = $this->ffprobe->command(array('-help', '-loglevel', 'quiet'));
+        } catch (ExecutionFailureException $e) {
+            throw new RuntimeException('Your FFProbe version is too old and does not support `-help` option, please upgrade.', $e->getCode(), $e);
+        }
 
         $this->cache->save($id, $output);
 
