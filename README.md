@@ -94,6 +94,60 @@ $frame->saveAs('image.jpg');
 
 ##### Filters
 
+You can apply filters on `FFMpeg\Media\Video` with the `FFMpeg\Media\Video::addFilter`
+method. Video accepts Audio and Video filters.
+
+You can build your own filters and some are bundled in PHP-FFMpeg - they are
+accessible through the `FFMpeg\Media\Video::filters` method.
+
+Filters are chainable
+
+```php
+$video
+    ->filters()
+    ->resize($dimension, $mode, $useStandards)
+    ->resample($framerate, $gop)
+    ->synchronize();
+
+
+###### Resize
+
+Resizes a video to a given size.
+
+```php
+$video->filters()->resize($dimension, $mode, $useStandards);
+```
+
+The resize filter takes three parameters :
+
+- `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`
+- `$mode`, one of the constants `FFMpeg\Filters\Video\ResizeFilter::RESIZEMODE_*` constants
+- `$useStandards`, a boolean to force the use of the nearest aspect ratio standard.
+
+###### Resample
+
+Resample the video frame rate.
+
+```php
+$video->filters()->resample($framerate, $gop);
+```
+
+The resample filter takes two parameters :
+
+- `$framerate`, an instance of `FFMpeg\Coordinate\Framerate`
+- `$gop`, a [GOP](https://wikipedia.org/wiki/Group_of_pictures) value (integer)
+
+###### Synchronize
+
+Synchronizes audio and video.
+
+Some containers may use a delay that results in desynchronized outputs. This
+filters solves this issue.
+
+```php
+$video->filters()->synchronize();
+```
+
 #### Audio
 
 ##### Transcoding
@@ -126,19 +180,19 @@ $video->save($format, 'video.avi');
 
 The callback provided for the event can be any callable.
 
-### Coordinates
+#### Coordinates
 
 FFMpeg use many units for time and space coordinates.
 
-#### `FFMpeg\Coordinate\AspectRatio`
+##### `FFMpeg\Coordinate\AspectRatio`
 
-#### `FFMpeg\Coordinate\Dimension`
+##### `FFMpeg\Coordinate\Dimension`
 
-#### `FFMpeg\Coordinate\FrameRate`
+##### `FFMpeg\Coordinate\FrameRate`
 
-#### `FFMpeg\Coordinate\Point`
+##### `FFMpeg\Coordinate\Point`
 
-#### `FFMpeg\Coordinate\TimeCode`
+##### `FFMpeg\Coordinate\TimeCode`
 
 ##Usage Example
 
