@@ -115,22 +115,10 @@ class FFMpeg
      */
     public static function create($configuration = array(), LoggerInterface $logger = null, FFProbe $probe = null)
     {
-        if (!$configuration instanceof ConfigurationInterface) {
-            $configuration = new Configuration($configuration);
-        }
-
-        $binaries = $configuration->get('ffmpeg.binaries', array('avconv', 'ffmpeg'));
-
-        if (!$configuration->has('timeout')) {
-            $configuration->set('timeout', 300);
-        }
-
-        $driver = FFMpegDriver::load($binaries, $logger, $configuration);
-
         if (null === $probe) {
             $probe = FFProbe::create($configuration, $logger, null);
         }
 
-        return new static($driver, $probe);
+        return new static(FFMpegDriver::create($logger, $configuration), $probe);
     }
 }

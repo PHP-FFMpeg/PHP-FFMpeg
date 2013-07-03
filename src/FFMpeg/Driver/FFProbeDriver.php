@@ -14,6 +14,8 @@ namespace FFMpeg\Driver;
 use Alchemy\BinaryDriver\AbstractBinary;
 use Alchemy\BinaryDriver\Configuration;
 use Alchemy\BinaryDriver\ConfigurationInterface;
+use Alchemy\BinaryDriver\Exception\ExecutableNotFoundException as BinaryDriverExecutableNotFound;
+use FFMpeg\Exception\ExecutableNotFoundException;
 use Psr\Log\LoggerInterface;
 
 class FFProbeDriver extends AbstractBinary
@@ -42,6 +44,10 @@ class FFProbeDriver extends AbstractBinary
 
         $binaries = $configuration->get('ffprobe.binaries', array('avprobe', 'ffprobe'));
 
-        return static::load($binaries, $logger, $configuration);
+        try {
+            return static::load($binaries, $logger, $configuration);
+        } catch (BinaryDriverExecutableNotFound $e) {
+            throw new ExecutableNotFoundException('Unable to load FFProbe', $e->getCode(), $e);
+        }
     }
 }

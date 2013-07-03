@@ -13,6 +13,9 @@ namespace FFMpeg\Driver;
 
 use Alchemy\BinaryDriver\AbstractBinary;
 use Alchemy\BinaryDriver\Configuration;
+use Alchemy\BinaryDriver\ConfigurationInterface;
+use Alchemy\BinaryDriver\Exception\ExecutableNotFoundException as BinaryDriverExecutableNotFound;
+use FFMpeg\Exception\ExecutableNotFoundException;
 use Psr\Log\LoggerInterface;
 
 class FFMpegDriver extends AbstractBinary
@@ -33,8 +36,22 @@ class FFMpegDriver extends AbstractBinary
      *
      * @return FFMpegDriver
      */
-    public static function create(LoggerInterface $logger, $configuration)
+    public static function create(LoggerInterface $logger = null, $configuration = array())
     {
-        return static::load(array('avconv', 'ffmpeg'), $logger, $configuration);
+        if (!$configuration instanceof ConfigurationInterface) {
+            $configuration = new Configuration($configuration);
+        }
+
+        $binaries = $configuration->get('ffmpeg.binaries', array('avconv', 'ffmpeg'));
+
+        if (!$configuration->has('timeout')) {
+            $configuration->set('timeout', 300);
+        }
+
+        try {
+            return static::load($binaries, $logger, $configuration);
+        } catch (BinaryDriverExecutableNotFound $e) {
+            throw new ExecutableNotFoundException('Unable to load FFMpeg', $e->getCode(), $e);
+        }
     }
 }

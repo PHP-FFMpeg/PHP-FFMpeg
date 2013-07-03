@@ -50,7 +50,7 @@ class FFMpegServiceProviderTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $this->setExpectedException('Alchemy\BinaryDriver\Exception\ExecutableNotFoundException', 'Executable not found, proposed : /path/to/ffmpeg');
+        $this->setExpectedException('FFMpeg\Exception\ExecutableNotFoundException', 'Unable to load FFMpeg');
         $app['ffmpeg'];
     }
 
@@ -63,7 +63,7 @@ class FFMpegServiceProviderTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $this->setExpectedException('Alchemy\BinaryDriver\Exception\ExecutableNotFoundException', 'Executable not found, proposed : /path/to/ffprobe');
+        $this->setExpectedException('FFMpeg\Exception\ExecutableNotFoundException', 'Unable to load FFProbe');
         $app['ffmpeg.ffprobe'];
     }
 }

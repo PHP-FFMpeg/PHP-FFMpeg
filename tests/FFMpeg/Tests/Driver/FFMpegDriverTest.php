@@ -40,4 +40,12 @@ class FFMpegDriverTest extends TestCase
         $ffmpeg = FFMpegDriver::create($this->getLoggerMock(), $conf);
         $this->assertEquals($conf, $ffmpeg->getConfiguration());
     }
+
+    /**
+     * @expectedException FFMpeg\Exception\ExecutableNotFoundException
+     */
+    public function testCreateFailureThrowsAnException()
+    {
+        FFMpegDriver::create($this->getLoggerMock(), array('ffmpeg.binaries' => '/path/to/nowhere'));
+    }
 }
