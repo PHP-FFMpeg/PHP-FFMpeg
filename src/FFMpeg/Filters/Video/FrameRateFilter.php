@@ -15,7 +15,7 @@ use FFMpeg\Coordinate\FrameRate;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 
-class VideoResampleFilter implements VideoFilterInterface
+class FrameRateFilter implements VideoFilterInterface
 {
     private $rate;
     private $gop;

@@ -54,12 +54,12 @@ class VideoFiltersTest extends TestCase
 
         $video->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Video\VideoResampleFilter'))
+            ->with($this->isInstanceOf('FFMpeg\Filters\Video\FrameRateFilter'))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
 
-        $filters->resample($framerate, $gop);
+        $filters->framerate($framerate, $gop);
 
         $this->assertSame($framerate, $capturedFilter->getFramerate());
         $this->assertSame($gop, $capturedFilter->getGOP());

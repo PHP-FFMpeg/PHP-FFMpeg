@@ -14,14 +14,14 @@ namespace FFMpeg\Filters\Video;
 use FFMpeg\Media\Video;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\FrameRate;
+use FFMpeg\Filters\Audio\AudioResamplableFilter;
+use FFMpeg\Filters\Audio\AudioFilters;
 
-class VideoFilters
+class VideoFilters extends AudioFilters
 {
-    private $video;
-
-    public function __construct(Video $video)
+    public function __construct(Video $media)
     {
-        $this->video = $video;
+        parent::__construct($media);
     }
 
     /**
@@ -35,22 +35,22 @@ class VideoFilters
      */
     public function resize(Dimension $dimension, $mode = ResizeFilter::RESIZEMODE_FIT, $forceStandards = true)
     {
-        $this->video->addFilter(new ResizeFilter($dimension, $mode, $forceStandards));
+        $this->media->addFilter(new ResizeFilter($dimension, $mode, $forceStandards));
 
         return $this;
     }
 
     /**
-     * Resamples the video to the given framerate.
+     * Changes the video framerate.
      *
      * @param FrameRate $framerate
      * @param type      $gop
      *
      * @return VideoFilters
      */
-    public function resample(FrameRate $framerate, $gop)
+    public function framerate(FrameRate $framerate, $gop)
     {
-        $this->video->addFilter(new VideoResampleFilter($framerate, $gop));
+        $this->media->addFilter(new FrameRateFilter($framerate, $gop));
 
         return $this;
     }
@@ -62,7 +62,21 @@ class VideoFilters
      */
     public function synchronize()
     {
-        $this->video->addFilter(new SynchronizeFilter());
+        $this->media->addFilter(new SynchronizeFilter());
+
+        return $this;
+    }
+
+    /**
+     * Resamples the audio file.
+     *
+     * @param Integer $rate
+     *
+     * @return AudioFilters
+     */
+    public function audioResample($rate)
+    {
+        $this->media->addFilter(new AudioResamplableFilter($rate));
 
         return $this;
     }

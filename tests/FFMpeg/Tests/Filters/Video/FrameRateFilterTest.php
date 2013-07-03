@@ -2,11 +2,11 @@
 
 namespace FFMpeg\Tests\Filters\Video;
 
-use FFMpeg\Filters\Video\VideoResampleFilter;
+use FFMpeg\Filters\Video\FrameRateFilter;
 use FFMpeg\Tests\TestCase;
 use FFMpeg\Coordinate\FrameRate;
 
-class VideoResampleFilterTest extends TestCase
+class FrameRateFilterTest extends TestCase
 {
     public function testApplyWithAFormatThatSupportsBFrames()
     {
@@ -21,7 +21,7 @@ class VideoResampleFilterTest extends TestCase
 
         $expected = array('-r', 54, '-b_strategy', '1', '-bf', '3', '-g', 42);
 
-        $filter = new VideoResampleFilter($framerate, $gop);
+        $filter = new FrameRateFilter($framerate, $gop);
         $this->assertEquals($expected, $filter->apply($video, $format));
     }
 
@@ -38,7 +38,7 @@ class VideoResampleFilterTest extends TestCase
 
         $expected = array('-r', 54);
 
-        $filter = new VideoResampleFilter($framerate, $gop);
+        $filter = new FrameRateFilter($framerate, $gop);
         $this->assertEquals($expected, $filter->apply($video, $format));
     }
 }

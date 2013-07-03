@@ -7,11 +7,11 @@ use FFMpeg\Filters\Audio\AudioResamplableFilter;
 
 class AudioFilters
 {
-    private $audio;
+    protected $media;
 
-    public function __construct(Audio $audio)
+    public function __construct(Audio $media)
     {
-        $this->audio = $audio;
+        $this->media = $media;
     }
 
     /**
@@ -23,7 +23,7 @@ class AudioFilters
      */
     public function resample($rate)
     {
-        $this->audio->addFilter(new AudioResamplableFilter($rate));
+        $this->media->addFilter(new AudioResamplableFilter($rate));
 
         return $this;
     }
