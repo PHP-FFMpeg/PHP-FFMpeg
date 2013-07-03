@@ -56,9 +56,9 @@ class FrameTest extends AbstractMediaTestCase
     }
 
     /**
-     * @dataProvider provideSaveAsOptions
+     * @dataProvider provideSaveOptions
      */
-    public function testSaveAs($accurate, $commands)
+    public function testSave($accurate, $commands)
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
@@ -76,10 +76,10 @@ class FrameTest extends AbstractMediaTestCase
             ->with($commands);
 
         $frame = new Frame(__FILE__, $driver, $ffprobe, $timecode);
-        $this->assertSame($frame, $frame->saveAs($pathfile, $accurate));
+        $this->assertSame($frame, $frame->save($pathfile, $accurate));
     }
 
-    public function provideSaveAsOptions()
+    public function provideSaveOptions()
     {
         return array(
             array(false, array(

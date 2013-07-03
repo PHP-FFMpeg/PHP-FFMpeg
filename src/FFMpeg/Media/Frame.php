@@ -72,7 +72,7 @@ class Frame extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function saveAs($pathfile, $accurate = false)
+    public function save($pathfile, $accurate = false)
     {
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
