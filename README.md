@@ -61,6 +61,9 @@ A third type, `FFMpeg\Media\Frame`, is available through videos.
 
 #### Video
 
+`FFMpeg\Media\Video` can be transcoded, ie : change codec, isolate audio or
+video. Frames can be extracted.
+
 ##### Transcoding
 
 You can transcode videos using the `FFMpeg\Media\Video:save` method. You will
@@ -109,7 +112,6 @@ $video
     ->resample($framerate, $gop)
     ->synchronize();
 
-
 ###### Resize
 
 Resizes a video to a given size.
@@ -150,13 +152,59 @@ $video->filters()->synchronize();
 
 #### Audio
 
+`FFMpeg\Media\Audio` can be transcoded, ie : change codec, isolate audio or
+video. Frames can be extracted.
+
 ##### Transcoding
 
+You can transcode audios using the `FFMpeg\Media\Audio:save` method. You will
+pass a `FFMpeg\Format\FormatInterface` for that.
+
+```php
+$format = new Format\Audio\Flac();
+$format->on('progress', function ($$audio, $format, $percentage) {
+    echo "$percentage % transcoded";
+});
+
+$audio->save($format, 'track.flac');
+```
+
+Transcoding progress can be monitored in realtime, see Format documentation
+below for more informations.
+
 ##### Filters
+
+You can apply filters on `FFMpeg\Media\Audio` with the `FFMpeg\Media\Audio::addFilter`
+method. It only accepts audio filters.
+
+You can build your own filters and some are bundled in PHP-FFMpeg - they are
+accessible through the `FFMpeg\Media\Audio::filters` method.
+
+###### Resample
+
+Resamples an audio file.
+
+```php
+$audio->filters()->resample($rate);
+```
+
+The resample filter takes two parameters :
+
+- `$rate`, a valid audio sample rate value (integer)
 
 #### Frame
 
-##### Filters
+A frame is a image at a timecode of a video ; see documentation above about
+frame extraction.
+
+You can save frames using the `FFMpeg\Media\Frame::save` method.
+
+```php
+$frame->save('target.jpg');
+```
+
+This method has a second optional boolean parameter. Set it to true to get
+accurate images ; it takes more time to execute.
 
 #### Formats
 
