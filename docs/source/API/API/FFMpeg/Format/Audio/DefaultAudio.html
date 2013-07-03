@@ -22,13 +22,9 @@
     <h1><a href="../../../FFMpeg/Format/Audio.html">FFMpeg\Format\Audio</a>\DefaultAudio</h1>
     </div>
         <div class="content">
-                <p>abstract class    <strong>DefaultAudio</strong>        implements
-        <a href="../../../FFMpeg/Format/Audio/Resamplable.html"><abbr title="FFMpeg\Format\Audio\Resamplable">Resamplable</abbr></a>, <a href="../../../FFMpeg/Format/Audio/Interactive.html"><abbr title="FFMpeg\Format\Audio\Interactive">Interactive</abbr></a></p>
+                <p>abstract class    <strong>DefaultAudio</strong>        extends <abbr title="Evenement\EventEmitter">EventEmitter</abbr>        implements
+        <a href="../../../FFMpeg/Format/AudioInterface.html"><abbr title="FFMpeg\Format\AudioInterface">AudioInterface</abbr></a>, <a href="../../../FFMpeg/Format/ProgressableInterface.html"><abbr title="FFMpeg\Format\ProgressableInterface">ProgressableInterface</abbr></a></p>
 
-            <div class="description">
-            <p>The abstract default Audio format</p>
-            <p></p>
-        </div>
     
     
     
@@ -37,21 +33,21 @@
             <table>
                     <tr>
                 <td class="type">
-                    string
+                    <abbr title="FFMpeg\Format\array()">array()</abbr>
                 </td>
                 <td class="last">
                     <a href="#method_getExtraParams">getExtraParams</a>()
-                    <p>Returns extra parameters for the encoding</p>
+                    <p>Returns an array of extra parameters to add to ffmpeg commandline.</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    string
                 </td>
                 <td class="last">
                     <a href="#method_getAudioCodec">getAudioCodec</a>()
-                    <p>{@inheritdoc}</p>
+                    <p>Returns the audio codec.</p>
                 </td>
                 <td></td>
             </tr>
@@ -61,7 +57,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_setAudioCodec">setAudioCodec</a>(string $audioCodec)
-                    <p>Set the audio codec, Should be in the available ones, otherwise an exception is thrown</p>
+                    <p>Sets the audio codec, Should be in the available ones, otherwise an exception is thrown.</p>
                 </td>
                 <td></td>
             </tr>
@@ -70,8 +66,8 @@
                     integer
                 </td>
                 <td class="last">
-                    <a href="#method_getAudioSampleRate">getAudioSampleRate</a>()
-                    <p>Get the audio sample rate</p>
+                    <a href="#method_getAudioKiloBitrate">getAudioKiloBitrate</a>()
+                    <p>Gets the audio kiloBitrate value.</p>
                 </td>
                 <td></td>
             </tr>
@@ -80,28 +76,18 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_setAudioSampleRate">setAudioSampleRate</a>(integer $audioSampleRate)
-                    <p>Set the audio sample rate</p>
+                    <a href="#method_setAudioKiloBitrate">setAudioKiloBitrate</a>(integer $kiloBitrate)
+                    <p>Sets the kiloBitrate value.</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    array
                 </td>
                 <td class="last">
-                    <a href="#method_getKiloBitrate">getKiloBitrate</a>()
-                    <p>{@inheritdoc}</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_setKiloBitrate">setKiloBitrate</a>(int $kiloBitrate)
-                    <p>Set the kiloBitrate value</p>
+                    <a href="#method_createProgressListener">createProgressListener</a>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total)
+                    <p>Creates the progress listener.</p>
                 </td>
                 <td></td>
             </tr>
@@ -111,12 +97,36 @@
         <h2>Details</h2>
 
                         <h3 id="method_getExtraParams">
-        <div class="location">at line 32</div>
-        <code>            public            string
+        <div class="location">at line 33</div>
+        <code>            public            <abbr title="FFMpeg\Format\array()">array()</abbr>
     <strong>getExtraParams</strong>()</code>
     </h3>
     <div class="details">
-        <p>Returns extra parameters for the encoding</p>
+        <p>Returns an array of extra parameters to add to ffmpeg commandline.</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="FFMpeg\Format\array()">array()</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAudioCodec">
+        <div class="location">at line 41</div>
+        <code>            public            string
+    <strong>getAudioCodec</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the audio codec.</p>
         <p></p>
         <div class="tags">
             
@@ -134,28 +144,13 @@
                     </div>
     </div>
 
-                <h3 id="method_getAudioCodec">
-        <div class="location">at line 40</div>
-        <code>            public            
-    <strong>getAudioCodec</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>{@inheritdoc}</p>
-        <p></p>
-        <div class="tags">
-            
-            
-            
-                    </div>
-    </div>
-
                 <h3 id="method_setAudioCodec">
-        <div class="location">at line 52</div>
+        <div class="location">at line 54</div>
         <code>            public            
     <strong>setAudioCodec</strong>(string $audioCodec)</code>
     </h3>
     <div class="details">
-        <p>Set the audio codec, Should be in the available ones, otherwise an exception is thrown</p>
+        <p>Sets the audio codec, Should be in the available ones, otherwise an exception is thrown.</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
@@ -183,13 +178,13 @@
                     </div>
     </div>
 
-                <h3 id="method_getAudioSampleRate">
-        <div class="location">at line 69</div>
+                <h3 id="method_getAudioKiloBitrate">
+        <div class="location">at line 71</div>
         <code>            public            integer
-    <strong>getAudioSampleRate</strong>()</code>
+    <strong>getAudioKiloBitrate</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the audio sample rate</p>
+        <p>Gets the audio kiloBitrate value.</p>
         <p></p>
         <div class="tags">
             
@@ -207,13 +202,13 @@
                     </div>
     </div>
 
-                <h3 id="method_setAudioSampleRate">
-        <div class="location">at line 80</div>
+                <h3 id="method_setAudioKiloBitrate">
+        <div class="location">at line 82</div>
         <code>            public            
-    <strong>setAudioSampleRate</strong>(integer $audioSampleRate)</code>
+    <strong>setAudioKiloBitrate</strong>(integer $kiloBitrate)</code>
     </h3>
     <div class="details">
-        <p>Set the audio sample rate</p>
+        <p>Sets the kiloBitrate value.</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
@@ -221,7 +216,7 @@
                     <table>
                     <tr>
                 <td>integer</td>
-                <td>$audioSampleRate</td>
+                <td>$kiloBitrate</td>
                 <td></td>
             </tr>
             </table>
@@ -241,51 +236,51 @@
                     </div>
     </div>
 
-                <h3 id="method_getKiloBitrate">
-        <div class="location">at line 94</div>
-        <code>            public            
-    <strong>getKiloBitrate</strong>()</code>
+                <h3 id="method_createProgressListener">
+        <div class="location">at line 96</div>
+        <code>            public            array
+    <strong>createProgressListener</strong>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total)</code>
     </h3>
     <div class="details">
-        <p>{@inheritdoc}</p>
-        <p></p>
-        <div class="tags">
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_setKiloBitrate">
-        <div class="location">at line 105</div>
-        <code>            public            
-    <strong>setKiloBitrate</strong>(int $kiloBitrate)</code>
-    </h3>
-    <div class="details">
-        <p>Set the kiloBitrate value</p>
+        <p>Creates the progress listener.</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td>int</td>
-                <td>$kiloBitrate</td>
-                <td>integer               $kiloBitrate</td>
-            </tr>
-            </table>
-
-            
-            
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td><a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+                <td>$media</td>
                 <td></td>
             </tr>
+                    <tr>
+                <td><a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>Integer</td>
+                <td>$pass</td>
+                <td>The current pas snumber</td>
+            </tr>
+                    <tr>
+                <td>Integer</td>
+                <td>$total</td>
+                <td>The total pass number</td>
+            </tr>
             </table>
 
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>An array of listeners</td>
+        </tr>
+    </table>
+
+            
             
                     </div>
     </div>

@@ -22,12 +22,8 @@
     <h1><a href="../FFMpeg.html">FFMpeg</a>\FFMpeg</h1>
     </div>
         <div class="content">
-                <p>class    <strong>FFMpeg</strong>        extends <a href="../FFMpeg/Binary.html"><abbr title="FFMpeg\Binary">Binary</abbr></a></p>
+                <p>class    <strong>FFMpeg</strong></p>
 
-            <div class="description">
-            <p>FFMpeg driver</p>
-            <p></p>
-        </div>
     
     
     
@@ -39,47 +35,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<abbr title="FFMpeg\type">type</abbr> $binary, <abbr title="Monolog\Logger">Logger</abbr> $logger)
-                    <p>Binary constructor</p>
-                </td>
-                <td><small>from&nbsp;<a href="../FFMpeg/Binary.html#method___construct"><abbr title="FFMpeg\Binary">Binary</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method___destruct">__destruct</a>()
-                    <p>Destructor</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    static&nbsp;<a href="../FFMpeg/Binary.html"><abbr title="FFMpeg\Binary">Binary</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_load">load</a>(<abbr title="Monolog\Logger">Logger</abbr> $logger)
-                    <p>Loads the adapter</p>
-                </td>
-                <td><small>from&nbsp;<a href="../FFMpeg/Binary.html#method_load"><abbr title="FFMpeg\Binary">Binary</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_setThreads">setThreads</a>($threads)
-                    <p></p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_getThreads">getThreads</a>()
+                    <a href="#method___construct">__construct</a>(<a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $ffmpeg, <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
                     <p></p>
                 </td>
                 <td></td>
@@ -87,50 +43,60 @@
                     <tr>
                 <td class="type">
                     <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setFFProbe">setFFProbe</a>(<a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
+                    <p>Sets FFProbe.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getFFProbe">getFFProbe</a>()
+                    <p>Gets FFProbe.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setFFMpegDriver">setFFMpegDriver</a>(<a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $ffmpeg)
+                    <p>Sets the ffmpeg driver.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getFFMpegDriver">getFFMpegDriver</a>()
+                    <p>Gets the ffmpeg driver.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a>|<a href="../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_open">open</a>(string $pathfile)
-                    <p>Opens a file in order to be processed</p>
+                    <p>Opens a file in order to be processed.</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+                    static&nbsp;<a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_setProber">setProber</a>(<a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $prober)
-                    <p>Set a prober</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_close">close</a>()
-                    <p>Close a file</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_extractImage">extractImage</a>(integer $time, string $output)
-                    <p>Extract an image from a media file</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_encode">encode</a>(<a href="../FFMpeg/Format/Audio.html"><abbr title="FFMpeg\Format\Audio">Audio</abbr></a> $format, string $outputPathfile)
-                    <p>Encode the file to the specified format</p>
+                    <a href="#method_create">create</a>(array|<abbr title="Alchemy\BinaryDriver\ConfigurationInterface">ConfigurationInterface</abbr> $configuration = array(), <abbr title="Psr\Log\LoggerInterface">LoggerInterface</abbr> $logger = null, <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $probe = null)
+                    <p>Creates a new FFMpeg instance.</p>
                 </td>
                 <td></td>
             </tr>
@@ -140,26 +106,26 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">in <a href="../FFMpeg/Binary.html#method___construct"><abbr title="FFMpeg\Binary">Binary</abbr></a> at line 39</div>
+        <div class="location">at line 28</div>
         <code>            public            
-    <strong>__construct</strong>(<abbr title="FFMpeg\type">type</abbr> $binary, <abbr title="Monolog\Logger">Logger</abbr> $logger)</code>
+    <strong>__construct</strong>(<a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $ffmpeg, <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)</code>
     </h3>
     <div class="details">
-        <p>Binary constructor</p>
+        <p></p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td><abbr title="FFMpeg\type">type</abbr></td>
-                <td>$binary</td>
-                <td>The path file to the binary</td>
+                <td><a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+                <td>$ffmpeg</td>
+                <td></td>
             </tr>
                     <tr>
-                <td><abbr title="Monolog\Logger">Logger</abbr></td>
-                <td>$logger</td>
-                <td>A logger</td>
+                <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td></td>
             </tr>
             </table>
 
@@ -169,37 +135,22 @@
                     </div>
     </div>
 
-                <h3 id="method___destruct">
-        <div class="location">at line 40</div>
-        <code>            public            
-    <strong>__destruct</strong>()</code>
+                <h3 id="method_setFFProbe">
+        <div class="location">at line 41</div>
+        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+    <strong>setFFProbe</strong>(<a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)</code>
     </h3>
     <div class="details">
-        <p>Destructor</p>
-        <p></p>
-        <div class="tags">
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_load">
-        <div class="location">in <a href="../FFMpeg/Binary.html#method_load"><abbr title="FFMpeg\Binary">Binary</abbr></a> at line 65</div>
-        <code>        static    public            <a href="../FFMpeg/Binary.html"><abbr title="FFMpeg\Binary">Binary</abbr></a>
-    <strong>load</strong>(<abbr title="Monolog\Logger">Logger</abbr> $logger)</code>
-    </h3>
-    <div class="details">
-        <p>Loads the adapter</p>
+        <p>Sets FFProbe.</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td><abbr title="Monolog\Logger">Logger</abbr></td>
-                <td>$logger</td>
-                <td>A logger</td>
+                <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td></td>
             </tr>
             </table>
 
@@ -208,8 +159,8 @@
 
                     <table>
         <tr>
-            <td><a href="../FFMpeg/Binary.html"><abbr title="FFMpeg\Binary">Binary</abbr></a></td>
-            <td>The binary</td>
+            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
+            <td></td>
         </tr>
     </table>
 
@@ -218,53 +169,95 @@
                     </div>
     </div>
 
-                <h3 id="method_setThreads">
-        <div class="location">at line 46</div>
-        <code>            public            
-    <strong>setThreads</strong>($threads)</code>
+                <h3 id="method_getFFProbe">
+        <div class="location">at line 53</div>
+        <code>            public            <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>getFFProbe</strong>()</code>
     </h3>
     <div class="details">
+        <p>Gets FFProbe.</p>
         <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setFFMpegDriver">
+        <div class="location">at line 63</div>
+        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+    <strong>setFFMpegDriver</strong>(<a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $ffmpeg)</code>
+    </h3>
+    <div class="details">
+        <p>Sets the ffmpeg driver.</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
                     <tr>
-                <td></td>
-                <td>$threads</td>
+                <td><a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+                <td>$ffmpeg</td>
                 <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
-                <h3 id="method_getThreads">
-        <div class="location">at line 57</div>
-        <code>            public            
-    <strong>getThreads</strong>()</code>
+                <h3 id="method_getFFMpegDriver">
+        <div class="location">at line 75</div>
+        <code>            public            <a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+    <strong>getFFMpegDriver</strong>()</code>
     </h3>
     <div class="details">
-        <p></p>
+        <p>Gets the ffmpeg driver.</p>
         <p></p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_open">
-        <div class="location">at line 69</div>
-        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+        <div class="location">at line 89</div>
+        <code>            public            <a href="../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a>|<a href="../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a>
     <strong>open</strong>(string $pathfile)</code>
     </h3>
     <div class="details">
-        <p>Opens a file in order to be processed</p>
+        <p>Opens a file in order to be processed.</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
@@ -282,7 +275,7 @@
 
                     <table>
         <tr>
-            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
+            <td><a href="../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a>|<a href="../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a></td>
             <td></td>
         </tr>
     </table>
@@ -301,21 +294,31 @@
                     </div>
     </div>
 
-                <h3 id="method_setProber">
-        <div class="location">at line 89</div>
-        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
-    <strong>setProber</strong>(<a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $prober)</code>
+                <h3 id="method_create">
+        <div class="location">at line 115</div>
+        <code>        static    public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
+    <strong>create</strong>(array|<abbr title="Alchemy\BinaryDriver\ConfigurationInterface">ConfigurationInterface</abbr> $configuration = array(), <abbr title="Psr\Log\LoggerInterface">LoggerInterface</abbr> $logger = null, <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $probe = null)</code>
     </h3>
     <div class="details">
-        <p>Set a prober</p>
+        <p>Creates a new FFMpeg instance.</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
                     <table>
+                    <tr>
+                <td>array|<abbr title="Alchemy\BinaryDriver\ConfigurationInterface">ConfigurationInterface</abbr></td>
+                <td>$configuration</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Log\LoggerInterface">LoggerInterface</abbr></td>
+                <td>$logger</td>
+                <td></td>
+            </tr>
                     <tr>
                 <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
-                <td>$prober</td>
+                <td>$probe</td>
                 <td></td>
             </tr>
             </table>
@@ -331,134 +334,6 @@
     </table>
 
             
-            
-                    </div>
-    </div>
-
-                <h3 id="method_close">
-        <div class="location">at line 101</div>
-        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
-    <strong>close</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>Close a file</p>
-        <p></p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
-            <td></td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_extractImage">
-        <div class="location">at line 119</div>
-        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
-    <strong>extractImage</strong>(integer $time, string $output)</code>
-    </h3>
-    <div class="details">
-        <p>Extract an image from a media file</p>
-        <p></p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>integer</td>
-                <td>$time</td>
-                <td>The time in second where to take the snapshot</td>
-            </tr>
-                    <tr>
-                <td>string</td>
-                <td>$output</td>
-                <td>The pathfile where to write</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
-            <td></td>
-        </tr>
-    </table>
-
-            
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
-                <td></td>
-            </tr>
-            </table>
-
-            
-                    </div>
-    </div>
-
-                <h3 id="method_encode">
-        <div class="location">at line 162</div>
-        <code>            public            <a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a>
-    <strong>encode</strong>(<a href="../FFMpeg/Format/Audio.html"><abbr title="FFMpeg\Format\Audio">Audio</abbr></a> $format, string $outputPathfile)</code>
-    </h3>
-    <div class="details">
-        <p>Encode the file to the specified format</p>
-        <p></p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../FFMpeg/Format/Audio.html"><abbr title="FFMpeg\Format\Audio">Audio</abbr></a></td>
-                <td>$format</td>
-                <td>The output format</td>
-            </tr>
-                    <tr>
-                <td>string</td>
-                <td>$outputPathfile</td>
-                <td>The pathfile where to write</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../FFMpeg/FFMpeg.html"><abbr title="FFMpeg\FFMpeg">FFMpeg</abbr></a></td>
-            <td></td>
-        </tr>
-    </table>
-
-            
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
-                <td></td>
-            </tr>
-            </table>
-
             
                     </div>
     </div>
