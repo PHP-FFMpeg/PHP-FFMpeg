@@ -108,7 +108,7 @@ documentation below for more information.
 
 ```php
 $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(42));
-$frame->saveAs('image.jpg');
+$frame->save('image.jpg');
 ```
 
 ##### Filters
@@ -125,7 +125,7 @@ Filters are chainable
 $video
     ->filters()
     ->resize($dimension, $mode, $useStandards)
-    ->resample($framerate, $gop)
+    ->framerate($framerate, $gop)
     ->synchronize();
 ```
 
@@ -143,15 +143,15 @@ The resize filter takes three parameters :
 - `$mode`, one of the constants `FFMpeg\Filters\Video\ResizeFilter::RESIZEMODE_*` constants
 - `$useStandards`, a boolean to force the use of the nearest aspect ratio standard.
 
-###### Resample
+###### Framerate
 
-Resample the video frame rate.
+Change the frame rate of the video.
 
 ```php
-$video->filters()->resample($framerate, $gop);
+$video->filters()->framerate($framerate, $gop);
 ```
 
-The resample filter takes two parameters :
+The framerate filter takes two parameters :
 
 - `$framerate`, an instance of `FFMpeg\Coordinate\Framerate`
 - `$gop`, a [GOP](https://wikipedia.org/wiki/Group_of_pictures) value (integer)
@@ -244,6 +244,39 @@ $video->save($format, 'video.avi');
 ```
 
 The callback provided for the event can be any callable.
+
+##### Create your own format
+
+The easiest way to create a format is to extend the abstract
+`FFMpeg\Format\Video\DefaultVideo` and `FFMpeg\Format\Audio\DefaultAudio`.
+and implement the following methods.
+
+```php
+class CustomWMVFormat extends FFMpeg\Format\Video\DefaultVideo
+{
+    public function __construct($audioCodec = 'wmav2', $videoCodec = 'wmv2')
+    {
+        $this
+            ->setAudioCodec($audioCodec)
+            ->setVideoCodec($videoCodec);
+    }
+
+    public function supportBFrames()
+    {
+        return false;
+    }
+
+    public function getAvailableAudioCodecs()
+    {
+        return array('wmav2');
+    }
+
+    public function getAvailableVideoCodecs()
+    {
+        return array('wmv2');
+    }
+}
+```
 
 #### Coordinates
 
