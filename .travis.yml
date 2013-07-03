@@ -13,5 +13,4 @@ php:
   - 5.5
 
 script:
-  - phpunit
-  - sh -c "cd docs && make clean && make html"
+  - vendor/bin/phpunit
