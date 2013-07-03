@@ -16,7 +16,6 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Media\Audio;
 use FFMpeg\Media\Video;
-use Alchemy\BinaryDriver\Configuration;
 use Psr\Log\LoggerInterface;
 
 class FFMpeg
