@@ -20,6 +20,22 @@ The recommended way to install PHP-FFMpeg is through [Composer](https://getcompo
 
 ## Basic Usage
 
+```php
+$ffmpeg = FFMpeg\FFMpeg::create();
+$video = $ffmpeg->open('video.mpg');
+$video
+    ->filters()
+    ->resize(new FFMpeg\Coordinate\Dimension(320, 240))
+    ->synchronize();
+$video
+    ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(10))
+    ->save('frame.jpg');
+$video
+    ->save(new FFMpeg\Format\Video\X264(), 'export-x264.mp4')
+    ->save(new FFMpeg\Format\Video\WMV(), 'export-wmv.wmv')
+    ->save(new FFMpeg\Format\Video\WebM(), 'export-webm.webm');
+```
+
 ## Documentation
 
 This documentation is an introduction to discover the API. It's recommended
@@ -111,6 +127,7 @@ $video
     ->resize($dimension, $mode, $useStandards)
     ->resample($framerate, $gop)
     ->synchronize();
+```
 
 ###### Resize
 
@@ -232,52 +249,37 @@ The callback provided for the event can be any callable.
 
 FFMpeg use many units for time and space coordinates.
 
-##### `FFMpeg\Coordinate\AspectRatio`
+- `FFMpeg\Coordinate\AspectRatio` represents an aspect ratio.
+- `FFMpeg\Coordinate\Dimension` represent a dimension.
+- `FFMpeg\Coordinate\FrameRate` represent a framerate.
+- `FFMpeg\Coordinate\Point` represent a point.
+- `FFMpeg\Coordinate\TimeCode` represent a timecode.
 
-##### `FFMpeg\Coordinate\Dimension`
-
-##### `FFMpeg\Coordinate\FrameRate`
-
-##### `FFMpeg\Coordinate\Point`
-
-##### `FFMpeg\Coordinate\TimeCode`
-
-##Usage Example
-
-```php
-$x264 = new X264();
-$x264->setDimensions(320, 240);
-
-$ffmpeg->open('Video.mpeg')
-    ->encode($new WebM(), 'file.webm')
-    ->encode($x264, 'file.mp4')
-    ->encode($new Ogg(), 'file.ogv')
-    ->close();
-```
-
-##Getting progress information
-
-
-```php
-$progressHelper = new FFMpeg\Helper\AudioProgressHelper(function($percent, $remaining, $rate) {
-	echo "Current progress: " . $percent "%\n";
-	echo "Remaining time: " . $remaining " seconds\n";
-});
-
-$ffmpeg->open('Audio.wav')
-	->attachHelper($progressHelper)
-    ->encode(new Mp3(), 'file.mp3')
-    ->close();
-```
 
 ##Using with Silex Microframework
 
-```php
-use FFMpeg\SilexServiceProvider;
-use Silex\Application;
+Service provider is easy to set up :
 
-$app = new Application();
-$app->register(new FFMpegServiceProvider());
+```php
+$app = new Silex\Application();
+$app->register(new FFMpeg\FFMpegServiceProvider());
+
+$video = $app['ffmpeg']->open('video.mpeg');
+```
+
+Available options are as follow :
+
+```php
+$app->register(new FFMpeg\FFMpegServiceProvider(), array(
+    'ffmpeg.configuration' => array(
+        'ffmpeg.threads'   => 4,
+        'ffmpeg.timeout'   => 300,
+        'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
+        'ffprobe.timeout'  => 30,
+        'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
+    ),
+    'ffmpeg.logger' => $logger,
+));
 ```
 
 ## API Browser
