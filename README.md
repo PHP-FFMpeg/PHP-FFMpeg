@@ -145,7 +145,7 @@ The resize filter takes three parameters :
 
 ###### Framerate
 
-Change the frame rate of the video.
+Changes the frame rate of the video.
 
 ```php
 $video->filters()->framerate($framerate, $gop);
