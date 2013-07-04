@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.3.0 (07-04-2013)
+
+  * Complete rewrite of the library, lots of BC breaks, check the doc.
+
 * 0.2.4 (05-10-2013)
 
   * Add Video\ResizableInterface::getModulus method for better output scaling (@retrojunk)
