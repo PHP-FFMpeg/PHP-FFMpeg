@@ -404,6 +404,98 @@ class VideoTest extends AbstractStreamableTestCase
         );
     }
 
+    public function testSaveShouldNotStoreCodecFiltersInTheMedia()
+    {
+        $driver = $this->getFFMpegDriverMock();
+        $ffprobe = $this->getFFProbeMock();
+
+        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+
+        $driver->expects($this->any())
+            ->method('getConfiguration')
+            ->will($this->returnValue($configuration));
+
+        $configuration->expects($this->any())
+            ->method('has')
+            ->with($this->equalTo('ffmpeg.threads'))
+            ->will($this->returnValue(true));
+
+        $configuration->expects($this->any())
+            ->method('get')
+            ->with($this->equalTo('ffmpeg.threads'))
+            ->will($this->returnValue(24));
+
+        $capturedCommands = array();
+
+        $driver->expects($this->exactly(4))
+            ->method('command')
+            ->with($this->isType('array'), false, $this->anything())
+            ->will($this->returnCallback(function ($commands, $errors, $listeners) use (&$capturedCommands, &$capturedListeners) {
+                $capturedCommands[] = $commands;
+            }));
+
+        $outputPathfile = '/target/file';
+
+        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array('param')));
+
+        $video = new Video(__FILE__, $driver, $ffprobe);
+        $video->save($format, $outputPathfile);
+        $video->save($format, $outputPathfile);
+
+        $expectedPass1 = array(
+            '-y', '-i', __FILE__, 'param', '-threads', 24, '-b:v', 'k', '-refs',
+            '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+            '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71',
+            '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1',
+            '-pass', '1', '-passlogfile', '/target/file',
+        );
+        $expectedPass2 = array(
+            '-y', '-i', __FILE__, 'param', '-threads', 24, '-b:v', 'k', '-refs',
+            '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+            '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71',
+            '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1',
+            '-pass', '2', '-passlogfile', '/target/file',
+        );
+
+        $n = 1;
+        foreach ($capturedCommands as $capturedCommand) {
+            foreach ($capturedCommand as $command) {
+                if (0 === strpos($command, 'pass-')) {
+                    $prefix = $command;
+                    break;
+                }
+            }
+
+            if (null === $prefix) {
+                $this->fail('Unable to find pass prefix command.');
+            }
+
+            $found = false;
+            foreach ($capturedCommand as $key => $command) {
+                if ($command === $prefix) {
+                    $found = true;
+                    unset($capturedCommand[$key]);
+                    $capturedCommand = array_values($capturedCommand);
+                    break;
+                }
+            }
+
+            if (!$found) {
+                $this->fail('Unable to find pass prefix command back.');
+            }
+
+            if (0 === $n % 2) {
+                $this->assertEquals($expectedPass2, $capturedCommand);
+            } else {
+                $this->assertEquals($expectedPass1, $capturedCommand);
+            }
+            $n++;
+        }
+    }
+
     public function getClassName()
     {
         return 'FFMpeg\Media\Video';

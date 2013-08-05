@@ -278,6 +278,56 @@ class AudioTest extends AbstractStreamableTestCase
         );
     }
 
+    public function testSaveShouldNotStoreCodecFiltersInTheMedia()
+    {
+        $driver = $this->getFFMpegDriverMock();
+        $ffprobe = $this->getFFProbeMock();
+
+        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+
+        $driver->expects($this->any())
+            ->method('getConfiguration')
+            ->will($this->returnValue($configuration));
+
+        $configuration->expects($this->any())
+            ->method('has')
+            ->with($this->equalTo('ffmpeg.threads'))
+            ->will($this->returnValue(true));
+
+        $configuration->expects($this->any())
+            ->method('get')
+            ->with($this->equalTo('ffmpeg.threads'))
+            ->will($this->returnValue(24));
+
+        $capturedCommands = array();
+
+        $driver->expects($this->exactly(2))
+            ->method('command')
+            ->with($this->isType('array'), false, $this->anything())
+            ->will($this->returnCallback(function ($commands, $errors, $listeners) use (&$capturedCommands, &$capturedListeners) {
+                $capturedCommands[] = $commands;
+            }));
+
+        $outputPathfile = '/target/file';
+
+        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array('param')));
+
+        $audio = new Audio(__FILE__, $driver, $ffprobe);
+        $audio->save($format, $outputPathfile);
+        $audio->save($format, $outputPathfile);
+
+        $expected = array(
+            '-y', '-i', __FILE__, 'param', '-threads', 24, '/target/file',
+        );
+
+        foreach ($capturedCommands as $capturedCommand) {
+            $this->assertEquals($expected, $capturedCommand);
+        }
+    }
+
     public function getClassName()
     {
         return 'FFMpeg\Media\Audio';

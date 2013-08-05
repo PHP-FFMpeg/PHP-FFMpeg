@@ -4,6 +4,7 @@ CHANGELOG
 * 0.3.1 (xx-xx-2013)
 
   * Allow use of FFProbe on remote URIs.
+  * Fix #47 : MediaTypeInterface::save adds filters depending on the codec.
 
 * 0.3.0 (07-04-2013)
 
