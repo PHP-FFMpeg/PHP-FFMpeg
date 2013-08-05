@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.3.1 (xx-xx-2013)
+
+  * Allow use of FFProbe on remote URIs.
+
 * 0.3.0 (07-04-2013)
 
   * Complete rewrite of the library, lots of BC breaks, check the doc.
