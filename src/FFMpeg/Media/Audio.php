@@ -69,21 +69,24 @@ class Audio extends AbstractStreamableMedia
 
         $commands = array('-y', '-i', $this->pathfile);
 
-        $this->addFilter(new SimpleFilter($format->getExtraParams(), 10));
+        $filters = clone $this->filters;
+        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $this->addFilter(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
         }
         if (null !== $format->getAudioCodec()) {
-            $this->addFilter(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+            $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
         }
 
-        foreach ($this->filters as $filter) {
+        foreach ($filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        $commands[] = '-b:a';
-        $commands[] = $format->getAudioKiloBitrate() . 'k';
+        if (null !== $format->getAudioKiloBitrate()) {
+            $commands[] = '-b:a';
+            $commands[] = $format->getAudioKiloBitrate() . 'k';
+        }
         $commands[] = $outputPathfile;
 
         try {
