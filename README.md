@@ -288,6 +288,19 @@ FFMpeg use many units for time and space coordinates.
 - `FFMpeg\Coordinate\Point` represent a point.
 - `FFMpeg\Coordinate\TimeCode` represent a timecode.
 
+### FFProbe
+
+`FFMpeg\FFProbe` is used internally by `FFMpeg\FFMpeg` to probe medias. You can
+also use it to extract media metadata.
+
+```php
+$ffprobe = FFMpeg\FFProbe::create();
+$ffprobe
+    ->streams('/path/to/video/mp4') // extracts streams informations
+    ->videos()                      // filters video streams
+    ->first()                       // returns the first video stream
+    ->get('duration');              // returns the duration property
+```
 
 ##Using with Silex Microframework
 

@@ -228,18 +228,6 @@ class FFProbeTest extends TestCase
         $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
     }
 
-    /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
-     * @dataProvider provideProbeMethod
-     */
-    public function testProbeWithInvalidFile($method)
-    {
-        $pathfile = '/path/to/nofile';
-
-        $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
-        call_user_func(array($ffprobe, $method), $pathfile);
-    }
-
     public function provideProbeMethod()
     {
         return array(
