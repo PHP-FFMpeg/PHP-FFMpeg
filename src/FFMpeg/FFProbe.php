@@ -12,6 +12,7 @@
 namespace FFMpeg;
 
 use Alchemy\BinaryDriver\ConfigurationInterface;
+use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
@@ -207,12 +208,6 @@ class FFProbe
 
     private function probe($pathfile, $command, $type, $allowJson = true)
     {
-        if (!is_file($pathfile)) {
-            throw new InvalidArgumentException(sprintf(
-                'Invalid filepath %s, unable to read.', $pathfile
-            ));
-        }
-
         $id = sprintf('%s-%s', $command, $pathfile);
 
         if ($this->cache->contains($id)) {
@@ -237,7 +232,11 @@ class FFProbe
             $parseIsToDo = true;
         }
 
-        $output = $this->ffprobe->command($commands);
+        try {
+            $output = $this->ffprobe->command($commands);
+        } catch (ExecutionFailureException $e) {
+            throw new RuntimeException(sprintf('Unable to probe %s', $pathfile), $e->getCode(), $e);
+        }
 
         if ($parseIsToDo) {
             $data = $this->parser->parse($type, $output);
