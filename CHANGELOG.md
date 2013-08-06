@@ -1,6 +1,8 @@
 CHANGELOG
 ---------
 
+* 0.4.0 (xx-xx-xxxx)
+
 * 0.3.1 (xx-xx-2013)
 
   * Allow use of FFProbe on remote URIs.
