@@ -83,13 +83,13 @@ class FrameTest extends AbstractMediaTestCase
     {
         return array(
             array(false, array(
-                '-ss', 'timecode',
+                '-y', '-ss', 'timecode',
                 '-i', __FILE__,
                 '-vframes', '1',
                 '-f', 'image2')
             ),
             array(true, array(
-                '-i', __FILE__,
+                '-y', '-i', __FILE__,
                 '-vframes', '1', '-ss', 'timecode',
                 '-f', 'image2'
             )),

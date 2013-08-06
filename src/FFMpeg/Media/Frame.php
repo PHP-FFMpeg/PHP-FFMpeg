@@ -80,14 +80,14 @@ class Frame extends AbstractMediaType
          */
         if (!$accurate) {
             $commands = array(
-                '-ss', (string) $this->timecode,
+                '-y', '-ss', (string) $this->timecode,
                 '-i', $this->pathfile,
                 '-vframes', '1',
                 '-f', 'image2', $pathfile
             );
         } else {
             $commands = array(
-                '-i', $this->pathfile,
+                '-y', '-i', $this->pathfile,
                 '-vframes', '1', '-ss', (string) $this->timecode,
                 '-f', 'image2', $pathfile
             );
