@@ -3,6 +3,10 @@ CHANGELOG
 
 * 0.4.0 (xx-xx-xxxx)
 
+* 0.3.2 (xx-08-2013)
+
+  * Fix A/V synchronization over flash and HTML5 players.
+
 * 0.3.1 (06-08-2013)
 
   * Allow use of FFProbe on remote URIs.
