@@ -3,7 +3,7 @@ CHANGELOG
 
 * 0.4.0 (xx-xx-xxxx)
 
-* 0.3.2 (xx-08-2013)
+* 0.3.2 (08-08-2013)
 
   * Fix A/V synchronization over flash and HTML5 players.
 
