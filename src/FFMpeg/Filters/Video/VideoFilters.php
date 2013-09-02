@@ -15,6 +15,8 @@ use FFMpeg\Media\Video;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\FrameRate;
 use FFMpeg\Filters\Audio\AudioResamplableFilter;
+use FFMpeg\Filters\Audio\AudioMonoFilter;
+use FFMpeg\Filters\Audio\AudioVolumeFilter;
 use FFMpeg\Filters\Audio\AudioFilters;
 
 class VideoFilters extends AudioFilters
@@ -104,6 +106,33 @@ class VideoFilters extends AudioFilters
     public function faststart()
     {
         $this->media->addFilter(new FaststartFilter());
+
+        return $this;
+    }
+    
+    /**
+     * Up/Down the audio volume
+     *
+     * @param Integer $volume
+     *
+     * @return AudioFilters
+     */
+    public function audioVolume($volume)
+    {
+        $this->media->addFilter(new AudioVolumeFilter($volume));
+
+        return $this;
+    }
+    
+    
+    /**
+     * Force mono output
+     *
+     * @return AudioFilters
+     */
+    public function audioMono()
+    {
+        $this->media->addFilter(new AudioMonoFilter());
 
         return $this;
     }
