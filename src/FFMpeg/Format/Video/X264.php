@@ -16,11 +16,17 @@ namespace FFMpeg\Format\Video;
  */
 class X264 extends DefaultVideo
 {
+    private $pass;
+    private $preset;
+    
     public function __construct($audioCodec = 'libfaac', $videoCodec = 'libx264')
     {
         $this
             ->setAudioCodec($audioCodec)
             ->setVideoCodec($videoCodec);
+        
+        $this->pass = 2;
+        $this->presets = null;
     }
 
     /**
@@ -52,11 +58,33 @@ class X264 extends DefaultVideo
      */
     public function getPasses()
     {
-        return 2;
+        return $this->pass;
     }
 
     public function getModulus()
     {
         return 2;
+    }
+    
+    /**
+     * Force one pass
+     */
+    public function onlyOnePass()
+    {
+        $this->pass = 1;
+    }
+    
+    /**
+     * specify a preset for encoding
+     * @param string $presets
+     */
+    public function setPreset($preset)
+    {
+        $this->preset = $preset;
+    }
+    
+    public function getPreset()
+    {
+        return $this->preset;
     }
 }

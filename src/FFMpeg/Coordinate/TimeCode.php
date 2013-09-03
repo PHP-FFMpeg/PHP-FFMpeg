@@ -33,6 +33,11 @@ class TimeCode
     {
         return sprintf('%02d:%02d:%02d.%02d', $this->hours, $this->minutes, $this->seconds, $this->frames);
     }
+    
+    public function toInt()
+    {
+        return isset($this->seconds) ? $this->hours * 3600 + $this->minutes * 60 + $this->seconds : $this->hours * 60 + $this->minutes;
+    }
 
     /**
      * Creates timecode from string.

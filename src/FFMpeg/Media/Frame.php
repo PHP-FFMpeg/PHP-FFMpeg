@@ -18,6 +18,7 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Format\Frame\NullFrame;
 
 class Frame extends AbstractMediaType
 {
@@ -80,18 +81,23 @@ class Frame extends AbstractMediaType
          */
         if (!$accurate) {
             $commands = array(
-                '-y', '-ss', (string) $this->timecode,
-                '-i', $this->pathfile,
-                '-vframes', '1',
-                '-f', 'image2', $pathfile
+                '-y', '-i', $this->pathfile,
             );
         } else {
             $commands = array(
-                '-y', '-i', $this->pathfile,
-                '-vframes', '1', '-ss', (string) $this->timecode,
-                '-f', 'image2', $pathfile
+                '-y', '-i', $this->pathfile
             );
         }
+        
+        $filters = clone $this->filters;
+        foreach($filters as $filter)
+        {
+            $commands = array_merge($commands, $filter->apply($this, new NullFrame()));
+        }
+        
+        $commands[] = '-ss';
+        $commands[] = (string) $this->timecode;
+        $commands[] = $pathfile;
 
         try {
             $this->driver->command($commands);
