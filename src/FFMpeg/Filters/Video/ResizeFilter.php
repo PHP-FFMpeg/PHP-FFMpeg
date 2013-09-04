@@ -88,6 +88,7 @@ class ResizeFilter implements VideoFilterInterface
             if ($stream->isVideo()) {
                 try {
                     $dimensions = $stream->getDimensions();
+                    break;
                 } catch (RuntimeException $e) {
 
                 }
