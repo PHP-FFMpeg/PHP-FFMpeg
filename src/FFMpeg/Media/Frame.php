@@ -18,16 +18,30 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Media\Video;
 
 class Frame extends AbstractMediaType
 {
     /** @var TimeCode */
     private $timecode;
+    /** @var Video */
+    private $video;
 
-    public function __construct($pathfile, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode)
+    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode)
     {
-        parent::__construct($pathfile, $driver, $ffprobe);
+        parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;
+        $this->video = $video;
+    }
+
+    /**
+     * Returns the video related to the frame.
+     *
+     * @return Video
+     */
+    public function getVideo()
+    {
+        return $this->video;
     }
 
     /**

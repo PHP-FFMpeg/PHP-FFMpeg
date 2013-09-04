@@ -122,10 +122,16 @@ class TestCase extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
-    protected function getVideoMock()
+    protected function getVideoMock($filename = null)
     {
-        return $this->getMockBuilder('FFMpeg\Media\Video')
+        $video = $this->getMockBuilder('FFMpeg\Media\Video')
             ->disableOriginalConstructor()
             ->getMock();
+
+        $video->expects($this->any())
+            ->method('getFilename')
+            ->will($this->returnValue($filename));
+
+        return $video;
     }
 }
