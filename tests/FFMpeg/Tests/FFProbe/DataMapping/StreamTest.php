@@ -2,6 +2,7 @@
 
 namespace FFMpeg\Tests\FFProbe\DataMapping;
 
+use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Tests\TestCase;
 use FFMpeg\FFProbe\DataMapping\Stream;
 
@@ -39,5 +40,46 @@ class StreamTest extends TestCase
             array(true, array('codec_type' => 'video')),
             array(false, array('codec_type' => 'audio')),
         );
+    }
+
+    /**
+     * @expectedException FFMpeg\Exception\LogicException
+     * @expectedExceptionMessage Dimensions can only be retrieved from video streams.
+     */
+    public function testGetDimensionsFromAudio()
+    {
+        $stream = new Stream(array('codec_type' => 'audio'));
+        $stream->getDimensions();
+    }
+
+    public function testGetDimensionsFromVideo()
+    {
+        $stream = new Stream(array('codec_type' => 'video', 'width' => 960, 'height' => 720));
+        $this->assertEquals(new Dimension(960, 720), $stream->getDimensions());
+    }
+
+    /**
+     * @dataProvider provideInvalidPropertiesForDimensionsExtraction
+     * @expectedException FFMpeg\Exception\RuntimeException
+     * @expectedExceptionMessage Unable to extract dimensions.
+     */
+    public function testUnableToGetDimensionsFromVideo($properties)
+    {
+        $stream = new Stream(array('codec_type' => 'video', 'width' => 960));
+        $stream->getDimensions();
+    }
+
+    public function provideInvalidPropertiesForDimensionsExtraction()
+    {
+        return array(
+            array('codec_type' => 'video', 'width' => 960),
+            array('codec_type' => 'video', 'height' => 960),
+        );
+    }
+
+    public function testGetDimensionsFromVideoWithDisplayRatio()
+    {
+        $stream = new Stream(array('codec_type' => 'video', 'width' => 960, 'height' => 720, 'sample_aspect_ratio' => '4:3', 'display_aspect_ratio' => '16:9'));
+        $this->assertEquals(new Dimension(1280, 720), $stream->getDimensions());
     }
 }
