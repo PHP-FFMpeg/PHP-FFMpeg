@@ -11,7 +11,7 @@ class FrameTest extends AbstractMediaTestCase
      */
     public function testWithInvalidFile()
     {
-        new Frame('/No/file', $this->getFFMpegDriverMock(), $this->getFFProbeMock(), $this->getTimeCodeMock());
+        new Frame($this->getVideoMock('/No/file'), $this->getFFMpegDriverMock(), $this->getFFProbeMock(), $this->getTimeCodeMock());
     }
 
     public function testGetTimeCode()
