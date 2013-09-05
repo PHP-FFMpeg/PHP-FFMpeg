@@ -47,8 +47,12 @@ class FiltersCollection implements \Countable, \IteratorAggregate
     public function getIterator()
     {
         if (null === $this->sorted) {
-            krsort($this->filters);
-            $this->sorted = call_user_func_array('array_merge', $this->filters);
+            if (0 === count($this->filters)) {
+                $this->sorted = $this->filters;
+            } else {
+                krsort($this->filters);
+                $this->sorted = call_user_func_array('array_merge', $this->filters);
+            }
         }
 
         return new \ArrayIterator($this->sorted);

@@ -40,6 +40,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
+    public function getFrameMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Media\Frame')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function getFFMpegDriverMock()
     {
         return $this->getMockBuilder('FFMpeg\Driver\FFMpegDriver')
@@ -122,10 +129,16 @@ class TestCase extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
-    protected function getVideoMock()
+    protected function getVideoMock($filename = null)
     {
-        return $this->getMockBuilder('FFMpeg\Media\Video')
+        $video = $this->getMockBuilder('FFMpeg\Media\Video')
             ->disableOriginalConstructor()
             ->getMock();
+
+        $video->expects($this->any())
+            ->method('getPathfile')
+            ->will($this->returnValue($filename));
+
+        return $video;
     }
 }
