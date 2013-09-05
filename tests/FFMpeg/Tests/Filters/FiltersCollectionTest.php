@@ -30,6 +30,12 @@ class FiltersCollectionTest extends TestCase
         $this->assertCount(2, $coll->getIterator());
     }
 
+    public function testEmptyIterator()
+    {
+        $coll = new FiltersCollection();
+        $this->assertInstanceOf('\ArrayIterator', $coll->getIterator());
+    }
+
     public function testIteratorSort()
     {
         $coll = new FiltersCollection();
