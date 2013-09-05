@@ -89,7 +89,12 @@ class Stream extends AbstractData
         if ($stream->has($name)) {
             $ratio = $stream->get($name);
             if (preg_match('/\d+:\d+/', $ratio)) {
-                return array_map(function ($int) { return (int) $int; }, explode(':', $ratio));
+                $data = array_filter(explode(':', $ratio), function ($int) {
+                    return $int > 0;
+                });
+                if (2 === count($data)) {
+                    return array_map(function ($int) { return (int) $int; }, $data);
+                }
             }
         }
 
