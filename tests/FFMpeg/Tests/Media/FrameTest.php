@@ -11,7 +11,7 @@ class FrameTest extends AbstractMediaTestCase
      */
     public function testWithInvalidFile()
     {
-        new Frame('/No/file', $this->getFFMpegDriverMock(), $this->getFFProbeMock(), $this->getTimeCodeMock());
+        new Frame($this->getVideoMock('/No/file'), $this->getFFMpegDriverMock(), $this->getFFProbeMock(), $this->getTimeCodeMock());
     }
 
     public function testGetTimeCode()
@@ -20,7 +20,7 @@ class FrameTest extends AbstractMediaTestCase
         $ffprobe = $this->getFFProbeMock();
         $timecode = $this->getTimeCodeMock();
 
-        $frame = new Frame(__FILE__, $driver, $ffprobe, $timecode);
+        $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
         $this->assertSame($timecode, $frame->getTimeCode());
     }
 
@@ -30,7 +30,7 @@ class FrameTest extends AbstractMediaTestCase
         $ffprobe = $this->getFFProbeMock();
         $timecode = $this->getTimeCodeMock();
 
-        $frame = new Frame(__FILE__, $driver, $ffprobe, $timecode);
+        $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
         $this->assertInstanceOf('FFMpeg\Filters\Frame\FrameFilters', $frame->filters());
     }
 
@@ -50,7 +50,7 @@ class FrameTest extends AbstractMediaTestCase
             ->method('add')
             ->with($filter);
 
-        $frame = new Frame(__FILE__, $driver, $ffprobe, $timecode);
+        $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
         $frame->setFiltersCollection($filters);
         $frame->addFilter($filter);
     }
@@ -75,7 +75,7 @@ class FrameTest extends AbstractMediaTestCase
             ->method('command')
             ->with($commands);
 
-        $frame = new Frame(__FILE__, $driver, $ffprobe, $timecode);
+        $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
         $this->assertSame($frame, $frame->save($pathfile, $accurate));
     }
 

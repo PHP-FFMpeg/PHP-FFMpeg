@@ -21,4 +21,19 @@ class FrameFilters
     {
         $this->frame = $frame;
     }
+
+    /**
+     * Fixes the display ratio of the output frame.
+     * 
+     * In case the sample ratio and display ratio are different, image may be
+     * anamorphozed. This filter fixes this by specifying the output size.
+     * 
+     * @return FrameFilters
+     */
+    public function fixDisplayRatio()
+    {
+        $this->frame->addFilter(new DisplayRatioFixerFilter());
+
+        return $this;
+    }
 }

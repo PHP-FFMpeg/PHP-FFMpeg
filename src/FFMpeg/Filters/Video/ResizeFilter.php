@@ -12,6 +12,7 @@
 namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 
@@ -80,23 +81,22 @@ class ResizeFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        $originalWidth = $originalHeight = null;
+        $dimensions = null;
+        $commands = array();
 
         foreach ($video->getStreams() as $stream) {
             if ($stream->isVideo()) {
-                if ($stream->has('width')) {
-                    $originalWidth = $stream->get('width');
-                }
-                if ($stream->has('height')) {
-                    $originalHeight = $stream->get('height');
+                try {
+                    $dimensions = $stream->getDimensions();
+                    break;
+                } catch (RuntimeException $e) {
+
                 }
             }
         }
 
-        $commands = array();
-
-        if ($originalHeight !== null && $originalWidth !== null) {
-            $dimensions = $this->getComputedDimensions(new Dimension($originalWidth, $originalHeight), $format->getModulus());
+        if (null !== $dimensions) {
+            $dimensions = $this->getComputedDimensions($dimensions, $format->getModulus());
 
             $commands[] = '-s';
             $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
