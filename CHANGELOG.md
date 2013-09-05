@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.3.3 (xx-xx-2013)
+
+  * Add convenient Stream::getDimensions method to extract video dimension.
+
 * 0.3.2 (08-08-2013)
 
   * Fix A/V synchronization over flash and HTML5 players.
