@@ -159,6 +159,6 @@ class Video extends Audio
      */
     public function frame(TimeCode $at)
     {
-        return new Frame($this->pathfile, $this->driver, $this->ffprobe, $at);
+        return new Frame($this, $this->driver, $this->ffprobe, $at);
     }
 }
