@@ -3,6 +3,10 @@ CHANGELOG
 
 * 0.4.0 (xx-xx-xxxx)
 
+* 0.3.4 (05-09-2013)
+
+  * Fix Invalid ratio computing.
+
 * 0.3.3 (05-09-2013)
 
   * Add convenient Stream::getDimensions method to extract video dimension.
