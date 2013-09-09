@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.3.5 (xx-xx-2013)
+
+  * Add vorbis audio format (@jacobbudin).
+
 * 0.3.4 (05-09-2013)
 
   * Fix Invalid ratio computing.
