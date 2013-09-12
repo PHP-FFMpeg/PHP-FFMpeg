@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.5.0 (12-09-2013)
+
+  * Add QtFaststart driver
+
 * 0.4.1 (12-09-2013)
 
   * Add support for old ffmpeg version that no support -b:a and -b:v options
