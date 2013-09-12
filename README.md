@@ -12,7 +12,7 @@ The recommended way to install PHP-FFMpeg is through [Composer](https://getcompo
 ```json
 {
     "require": {
-        "iakumai/php-ffmpeg": "0.3.x-dev@dev"
+        "iakumai/php-ffmpeg": "0.5.*@dev"
     }
 }
 ```
@@ -39,6 +39,23 @@ $video
 
 This documentation is an introduction to discover the API. It's recommended
 to browse the source code as it is self-documented.
+
+### Qt-Faststart
+
+`FFMpeg\QtFaststart` can make MP4 files progressive. This helps the video to playback as early as possible.
+
+```php
+$qtfaststart = FFMpeg\QtFaststart::create();
+$qtfaststart->process('path/to/file.mp4');
+```
+
+If you want to give binary paths explicitely, you can pass an array as configuration.
+
+```php
+$qtfaststart = FFMpeg\QtFaststart::create(array(
+    'qtfaststart.binaries' => '/opt/local/ffmpeg/bin/qt-faststart'
+));
+```
 
 ### FFMpeg
 
