@@ -1,6 +1,5 @@
-#PHP FFmpeg
+#PHP FFmpeg (Fork)
 
-[![Build Status](https://secure.travis-ci.org/alchemy-fr/PHP-FFmpeg.png?branch=master)](http://travis-ci.org/alchemy-fr/PHP-FFmpeg)
 
 An Object Oriented library to convert video/audio files with FFmpeg / AVConv.
 
@@ -13,7 +12,7 @@ The recommended way to install PHP-FFMpeg is through [Composer](https://getcompo
 ```json
 {
     "require": {
-        "php-ffmpeg/php-ffmpeg": "0.3.x-dev@dev"
+        "iakumai/php-ffmpeg": "0.3.x-dev@dev"
     }
 }
 ```

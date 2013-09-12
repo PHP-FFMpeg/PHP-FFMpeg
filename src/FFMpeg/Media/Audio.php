@@ -84,7 +84,7 @@ class Audio extends AbstractStreamableMedia
         }
 
         if (null !== $format->getAudioKiloBitrate()) {
-            $commands[] = '-b:a';
+            $commands[] = '-ab';
             $commands[] = $format->getAudioKiloBitrate() . 'k';
         }
         $commands[] = $outputPathfile;

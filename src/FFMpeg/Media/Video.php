@@ -76,7 +76,7 @@ class Video extends Audio
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        $commands[] = '-b:v';
+        $commands[] = '-b';
         $commands[] = $format->getKiloBitrate() . 'k';
         $commands[] = '-refs';
         $commands[] = '6';
@@ -100,7 +100,7 @@ class Video extends Audio
         $commands[] = '1';
 
         if (null !== $format->getAudioKiloBitrate()) {
-            $commands[] = '-b:a';
+            $commands[] = '-ab';
             $commands[] = $format->getAudioKiloBitrate() . 'k';
         }
 
