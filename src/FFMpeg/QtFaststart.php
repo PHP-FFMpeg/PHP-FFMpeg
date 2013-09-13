@@ -108,6 +108,6 @@ class QtFaststart
      */
     public static function create($configuration = array(), LoggerInterface $logger = null)
     {
-        return new static(QtFaststartDriver::create($logger, $configuration));
+        return new static(QtFaststartDriver::create($configuration, $logger));
     }
 }

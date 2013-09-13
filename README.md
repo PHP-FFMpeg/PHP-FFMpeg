@@ -113,6 +113,13 @@ $video->save($format, 'video.avi');
 Transcoding progress can be monitored in realtime, see Format documentation
 below for more informations.
 
+You can use an extra parameters in save() method.
+
+```php
+$format = new Format\Video\X264();
+$video->save($format, 'video.avi', array('-qdiff', '4'));
+```
+
 ##### Extracting image
 
 You can extract a frame at any timecode using the `FFMpeg\Media\Video::frame`

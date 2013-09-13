@@ -55,7 +55,7 @@ class Video extends Audio
      *
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, $outputPathfile, $advCommands = array())
     {
         $commands = array('-y', '-i', $this->pathfile);
 
@@ -94,14 +94,18 @@ class Video extends Audio
         $commands[] = '0.71';
         $commands[] = '-qcomp';
         $commands[] = '0.6';
-        $commands[] = '-qdiff';
-        $commands[] = '4';
+        // $commands[] = '-qdiff';
+        // $commands[] = '4';
         $commands[] = '-trellis';
         $commands[] = '1';
 
         if (null !== $format->getAudioKiloBitrate()) {
             $commands[] = '-ab';
             $commands[] = $format->getAudioKiloBitrate() . 'k';
+        }
+
+        foreach($advCommands as $cmd) {
+            $commands[] = $cmd;
         }
 
         $passPrefix = uniqid('pass-');
