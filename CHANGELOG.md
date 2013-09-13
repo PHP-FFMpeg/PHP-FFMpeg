@@ -1,5 +1,9 @@
 CHANGELOG
 ---------
+* 0.5.2 (13-09-2013)
+
+  * Add custom commands to save methods for video and audio
+  * Remove -qdiff option from video convertation (Too large files)
 
 * 0.5.0 (12-09-2013)
 
