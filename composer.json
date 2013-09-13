@@ -1,7 +1,7 @@
 {
     "name": "iakumai/php-ffmpeg",
     "type": "library",
-    "description": "FFMpeg PHP, an Object Oriented library to communicate with AVconv / ffmpeg",
+    "description": "FFMpeg PHP, an Object Oriented library to communicate with AVconv / ffmpeg. Now supports Qt-faststart",
     "keywords": ["video processing", "video", "audio processing", "audio", "avconv", "ffmpeg", "avprobe", "ffprobe"],
     "license": "MIT",
     "authors": [
@@ -41,7 +41,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.4.1-dev"
+            "dev-master": "0.5-dev"
         }
     }
 }
