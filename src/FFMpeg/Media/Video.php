@@ -145,8 +145,9 @@ class Video extends Audio
 
         $this
             ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log')
-            ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log')
-            ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log.mbtree');
+            ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log.mbtree')
+            ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix)
+            ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '.mbtree');
 
         if (null !== $failure) {
             throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
