@@ -1,5 +1,10 @@
 CHANGELOG
 ---------
+
+* 0.5.3 (17-09-2013)
+
+  * Fixed removing temporary files
+
 * 0.5.2 (13-09-2013)
 
   * Add custom commands to save methods for video and audio
