@@ -106,7 +106,7 @@ class Video extends Audio
         
         //Experimental codec
         if ('aac' == $format->getAudioCodec()) {
-            $commands = array_merge($commands, array('-strict', '-2'));
+            $commands = array_merge($commands, array('-strict', '-2', '-ar', '22050'));
         }
 
         $passPrefix = uniqid('pass-');
