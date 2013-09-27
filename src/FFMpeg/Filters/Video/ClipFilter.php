@@ -26,8 +26,8 @@ class ClipFilter implements VideoFilterInterface
 
     public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0)
     {
-    	$this->start = $start;
-    	$this->duration = $duration;
+        $this->start = $start;
+        $this->duration = $duration;
         $this->priority = $priority;
     }
 
@@ -60,13 +60,13 @@ class ClipFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-    	$commands = array('-ss', (string) $this->start);
-    	
-    	if($this->duration !== null) {
-    	  $commands[] = '-t';
-    	  $commands[] = (string) $this->duration;
-    	}
-    	
-    	return $commands;
+        $commands = array('-ss', (string) $this->start);
+
+        if ($this->duration !== null) {
+          $commands[] = '-t';
+          $commands[] = (string) $this->duration;
+        }
+
+        return $commands;
     }
 }

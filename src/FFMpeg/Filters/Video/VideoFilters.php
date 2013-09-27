@@ -66,7 +66,7 @@ class VideoFilters extends AudioFilters
 
         return $this;
     }
-    
+
     /**
      * Clips (cuts) the video.
      *
