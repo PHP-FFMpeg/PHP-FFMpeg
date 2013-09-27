@@ -75,7 +75,7 @@ class VideoFilters extends AudioFilters
      *
      * @return VideoFilters
      */
-    public function clip($start, $duration)
+    public function clip($start, $duration = null)
     {
         $this->media->addFilter(new ClipFilter($start, $duration));
 
