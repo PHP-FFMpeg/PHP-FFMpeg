@@ -167,6 +167,19 @@ filters solves this issue.
 $video->filters()->synchronize();
 ```
 
+###### Clip
+
+Cuts the video at a desired point.
+
+```php
+$video->filters()->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
+```
+
+The clip filter takes two parameters:
+
+- `$start`, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the start point of the clip
+- `$duration`, optional, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the duration of the clip
+
 #### Audio
 
 `FFMpeg\Media\Audio` can be transcoded, ie : change codec, isolate audio or
