@@ -6,6 +6,14 @@ An Object Oriented library to convert video/audio files with FFmpeg / AVConv.
 
 Check another amazing repo : [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
 
+## Your attention please
+
+This library requires a working FFMpeg install. You will need both FFMpeg and FFProbe binaries to use it.
+Be sure that these binaries can be located with system PATH to get the benefit of the binary detection, 
+otherwise you should have to explicitely give the binaries path on load.
+
+For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
+
 ## Installation
 
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
