@@ -1,6 +1,23 @@
 CHANGELOG
 ---------
 
+* 0.5.3 (17-09-2013)
+
+  * Fixed removing temporary files
+
+* 0.5.2 (13-09-2013)
+
+  * Add custom commands to save methods for video and audio
+  * Remove -qdiff option from video convertation (Too large files)
+
+* 0.5.0 (12-09-2013)
+
+  * Add QtFaststart driver
+
+* 0.4.1 (12-09-2013)
+
+  * Add support for old ffmpeg version that no support -b:a and -b:v options
+
 * 0.4.0 (xx-xx-xxxx)
 
 * 0.3.5 (xx-xx-2013)

@@ -59,7 +59,7 @@ class Audio extends AbstractStreamableMedia
      *
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, $outputPathfile, $advCommands = array())
     {
         $listeners = null;
 
@@ -84,9 +84,14 @@ class Audio extends AbstractStreamableMedia
         }
 
         if (null !== $format->getAudioKiloBitrate()) {
-            $commands[] = '-b:a';
+            $commands[] = '-ab';
             $commands[] = $format->getAudioKiloBitrate() . 'k';
         }
+
+        foreach($advCommands as $cmd) {
+            $commands[] = $cmd;
+        }
+
         $commands[] = $outputPathfile;
 
         try {

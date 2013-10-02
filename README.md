@@ -1,10 +1,9 @@
-#PHP FFmpeg
+#PHP FFmpeg (Fork)
 
-[![Build Status](https://secure.travis-ci.org/alchemy-fr/PHP-FFmpeg.png?branch=master)](http://travis-ci.org/alchemy-fr/PHP-FFmpeg)
 
 An Object Oriented library to convert video/audio files with FFmpeg / AVConv.
 
-Check another amazing repo : [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
+Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
 
 ## Your attention please
 
@@ -21,7 +20,7 @@ The recommended way to install PHP-FFMpeg is through [Composer](https://getcompo
 ```json
 {
     "require": {
-        "php-ffmpeg/php-ffmpeg": "0.3.x-dev@dev"
+        "iakumai/php-ffmpeg": "0.5.*@dev"
     }
 }
 ```
@@ -48,6 +47,23 @@ $video
 
 This documentation is an introduction to discover the API. It's recommended
 to browse the source code as it is self-documented.
+
+### Qt-Faststart
+
+`FFMpeg\QtFaststart` can make MP4 files progressive. This helps the video to playback as early as possible.
+
+```php
+$qtfaststart = FFMpeg\QtFaststart::create();
+$qtfaststart->process('path/to/file.mp4');
+```
+
+If you want to give binary paths explicitely, you can pass an array as configuration.
+
+```php
+$qtfaststart = FFMpeg\QtFaststart::create(array(
+    'qtfaststart.binaries' => '/opt/local/ffmpeg/bin/qt-faststart'
+));
+```
 
 ### FFMpeg
 
@@ -104,6 +120,13 @@ $video->save($format, 'video.avi');
 
 Transcoding progress can be monitored in realtime, see Format documentation
 below for more informations.
+
+You can use an extra parameters in save() method.
+
+```php
+$format = new Format\Video\X264();
+$video->save($format, 'video.avi', array('-qdiff', '4'));
+```
 
 ##### Extracting image
 
