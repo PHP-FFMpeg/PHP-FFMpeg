@@ -221,7 +221,7 @@ class FFProbe
             ));
         }
 
-        $commands = array($pathfile, $command);
+        $commands = array($pathfile, '-loglevel', 'quiet', $command);
 
         $parseIsToDo = false;
 
