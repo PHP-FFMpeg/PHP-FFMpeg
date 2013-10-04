@@ -61,10 +61,10 @@ class FFProbeTest extends TestCase
         $format = $this->getFormatMock();
 
         return array(
-            array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json'), false),
-            array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json'), false),
-            array($stream, 'streams', array('-show_streams'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams'), true),
-            array($format, 'format', array('-show_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format'), true),
+            array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-loglevel', 'quiet', '-show_streams', '-print_format', 'json'), false),
+            array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-loglevel', 'quiet', '-show_format', '-print_format', 'json'), false),
+            array($stream, 'streams', array('-show_streams'), FFProbe::TYPE_STREAMS, array(__FILE__, '-loglevel', 'quiet', '-show_streams'), true),
+            array($format, 'format', array('-show_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-loglevel', 'quiet', '-show_format'), true),
         );
     }
 
