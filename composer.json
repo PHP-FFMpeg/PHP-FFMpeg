@@ -17,10 +17,11 @@
     }
     ],
     "require": {
-        "php"                      : ">=5.3.3",
-        "alchemy/binary-driver"    : "~1.5",
-        "doctrine/cache"           : "~1.0",
-        "evenement/evenement"      : "~1.0"
+        "php"                          : ">=5.3.3",
+        "alchemy/binary-driver"        : "~1.5",
+        "doctrine/cache"               : "~1.0",
+        "evenement/evenement"          : "~1.0",
+        "neutron/temporary-filesystem" : "~2.1, >=2.1.1"
     },
     "suggest": {
         "php-ffmpeg/extras"        : "A compilation of common audio & video drivers for PHP-FFMpeg"
