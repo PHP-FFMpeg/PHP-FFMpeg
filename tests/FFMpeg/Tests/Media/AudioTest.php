@@ -333,7 +333,3 @@ class AudioTest extends AbstractStreamableTestCase
         return 'FFMpeg\Media\Audio';
     }
 }
-
-abstract class AudioProg implements ProgressableInterface, AudioInterface
-{
-}

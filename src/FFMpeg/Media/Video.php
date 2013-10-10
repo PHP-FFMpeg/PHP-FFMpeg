@@ -20,6 +20,8 @@ use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
+use FFMpeg\Format\AudioInterface;
+use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Frame;
 use Neutron\TemporaryFilesystem\Manager as FsManager;
 
@@ -67,43 +69,51 @@ class Video extends Audio
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
         }
-        if (null !== $format->getVideoCodec()) {
-            $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+        if ($format instanceOf VideoInterface) {
+            if (null !== $format->getVideoCodec()) {
+                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+            }
         }
-        if (null !== $format->getAudioCodec()) {
-            $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+        if ($format instanceOf AudioInterface) {
+            if (null !== $format->getAudioCodec()) {
+                $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+            }
         }
 
         foreach ($filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        $commands[] = '-b:v';
-        $commands[] = $format->getKiloBitrate() . 'k';
-        $commands[] = '-refs';
-        $commands[] = '6';
-        $commands[] = '-coder';
-        $commands[] = '1';
-        $commands[] = '-sc_threshold';
-        $commands[] = '40';
-        $commands[] = '-flags';
-        $commands[] = '+loop';
-        $commands[] = '-me_range';
-        $commands[] = '16';
-        $commands[] = '-subq';
-        $commands[] = '7';
-        $commands[] = '-i_qfactor';
-        $commands[] = '0.71';
-        $commands[] = '-qcomp';
-        $commands[] = '0.6';
-        $commands[] = '-qdiff';
-        $commands[] = '4';
-        $commands[] = '-trellis';
-        $commands[] = '1';
+        if ($format instanceOf VideoInterface) {
+            $commands[] = '-b:v';
+            $commands[] = $format->getKiloBitrate() . 'k';
+            $commands[] = '-refs';
+            $commands[] = '6';
+            $commands[] = '-coder';
+            $commands[] = '1';
+            $commands[] = '-sc_threshold';
+            $commands[] = '40';
+            $commands[] = '-flags';
+            $commands[] = '+loop';
+            $commands[] = '-me_range';
+            $commands[] = '16';
+            $commands[] = '-subq';
+            $commands[] = '7';
+            $commands[] = '-i_qfactor';
+            $commands[] = '0.71';
+            $commands[] = '-qcomp';
+            $commands[] = '0.6';
+            $commands[] = '-qdiff';
+            $commands[] = '4';
+            $commands[] = '-trellis';
+            $commands[] = '1';
+        }
 
-        if (null !== $format->getAudioKiloBitrate()) {
-            $commands[] = '-b:a';
-            $commands[] = $format->getAudioKiloBitrate() . 'k';
+        if ($format instanceOf AudioInterface) {
+            if (null !== $format->getAudioKiloBitrate()) {
+                $commands[] = '-b:a';
+                $commands[] = $format->getAudioKiloBitrate() . 'k';
+            }
         }
 
         $fs = FsManager::create();

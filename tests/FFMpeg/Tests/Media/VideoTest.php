@@ -259,6 +259,20 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getPasses')
             ->will($this->returnValue(2));
 
+        $audioFormat = $this->getMock('FFMpeg\Format\AudioInterface');
+        $audioFormat->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array()));
+        $audioFormat->expects($this->any())
+            ->method('getAudioCodec')
+            ->will($this->returnValue('patati-patata-audio'));
+        $audioFormat->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
+        $audioFormat->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(1));
+
         $audioVideoFormat = $this->getMock('FFMpeg\Format\VideoInterface');
         $audioVideoFormat->expects($this->any())
             ->method('getExtraParams')
@@ -332,6 +346,24 @@ class VideoTest extends AbstractStreamableTestCase
         $progressableFormat->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+
+        $progressableAudioFormat = $this->getMockBuilder('FFMpeg\Tests\Media\AudioProg')
+            ->disableOriginalConstructor()->getMock();
+        $progressableAudioFormat->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array()));
+        $progressableAudioFormat->expects($this->any())
+            ->method('getAudioCodec')
+            ->will($this->returnValue('patati-patata-audio'));
+        $progressableAudioFormat->expects($this->any())
+            ->method('createProgressListener')
+            ->will($this->returnValue($listeners));
+        $progressableAudioFormat->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
+        $progressableAudioFormat->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(1));
 
         return array(
             array(false, array(array(
@@ -451,6 +483,18 @@ class VideoTest extends AbstractStreamableTestCase
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
                     '/target/file',
                 )), $listeners, $progressableFormat),
+            array(true, array(array(
+                    '-y', '-i', __FILE__,
+                    '-threads', 24, '-acodec', 'patati-patata-audio',
+                    '-b:a', '92k',
+                    '/target/file',
+                )), null, $audioFormat),
+            array(true, array(array(
+                    '-y', '-i', __FILE__,
+                    '-threads', 24, '-acodec', 'patati-patata-audio',
+                    '-b:a', '92k',
+                    '/target/file',
+                )), $listeners, $progressableAudioFormat),
         );
     }
 
@@ -554,8 +598,4 @@ class VideoTest extends AbstractStreamableTestCase
     {
         return 'FFMpeg\Media\Video';
     }
-}
-
-abstract class Prog implements ProgressableInterface, VideoInterface
-{
 }
