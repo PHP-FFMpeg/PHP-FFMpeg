@@ -14,12 +14,14 @@ namespace FFMpeg\Media;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Filters\Audio\SimpleFilter;
+use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Media\Frame;
+use Neutron\TemporaryFilesystem\Manager as FsManager;
 
 class Video extends Audio
 {
@@ -104,32 +106,40 @@ class Video extends Audio
             $commands[] = $format->getAudioKiloBitrate() . 'k';
         }
 
-        $passPrefix = uniqid('pass-');
+        $fs = FsManager::create();
+        $fsId = uniqid('ffmpeg-passes');
+        $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');
+        $passes = array();
+        $totalPasses = $format->getPasses();
 
-        $pass1 = $commands;
-        $pass2 = $commands;
+        if (1 > $totalPasses) {
+            throw new InvalidArgumentException('Pass number should be a positive value.');
+        }
 
-        $pass1[] = '-pass';
-        $pass1[] = '1';
-        $pass1[] = '-passlogfile';
-        $pass1[] = $passPrefix;
-        $pass1[] = $outputPathfile;
+        for ($i = 1; $i <= $totalPasses; $i++) {
+            $pass = $commands;
 
-        $pass2[] = '-pass';
-        $pass2[] = '2';
-        $pass2[] = '-passlogfile';
-        $pass2[] = $passPrefix;
-        $pass2[] = $outputPathfile;
+            if ($totalPasses > 1) {
+                $pass[] = '-pass';
+                $pass[] = $i;
+                $pass[] = '-passlogfile';
+                $pass[] = $passPrefix;
+            }
+
+            $pass[] = $outputPathfile;
+
+            $passes[] = $pass;
+        }
 
         $failure = null;
 
-        foreach (array($pass1, $pass2) as $pass => $passCommands) {
+        foreach ($passes as $pass => $passCommands) {
             try {
                 /** add listeners here */
                 $listeners = null;
 
                 if ($format instanceof ProgressableInterface) {
-                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, 2);
+                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses);
                 }
 
                 $this->driver->command($passCommands, false, $listeners);
@@ -139,10 +149,7 @@ class Video extends Audio
             }
         }
 
-        $this
-            ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log')
-            ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log')
-            ->cleanupTemporaryFile(getcwd() . '/' . $passPrefix . '-0.log.mbtree');
+        $fs->clean($fsId);
 
         if (null !== $failure) {
             throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
