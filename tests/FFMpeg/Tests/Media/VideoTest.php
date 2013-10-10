@@ -93,6 +93,9 @@ class VideoTest extends AbstractStreamableTestCase
         $outputPathfile = '/target/file';
         $format = $this->getMock('FFMpeg\Format\VideoInterface');
         $format->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(1));
+        $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
 
@@ -121,6 +124,9 @@ class VideoTest extends AbstractStreamableTestCase
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
+        $format->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
 
         $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
 
@@ -205,7 +211,8 @@ class VideoTest extends AbstractStreamableTestCase
 
         foreach ($capturedCommands as $passKey => $pass) {
             foreach ($pass as $command) {
-                if (0 === strpos($command, 'pass-')) {
+                $prefix = null;
+                if (false !== strpos($command, '/pass-')) {
                     $prefix = $command;
                     break;
                 }
@@ -246,6 +253,9 @@ class VideoTest extends AbstractStreamableTestCase
         $format->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(92));
+        $format->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
 
         $audioVideoFormat = $this->getMock('FFMpeg\Format\VideoInterface');
         $audioVideoFormat->expects($this->any())
@@ -263,6 +273,9 @@ class VideoTest extends AbstractStreamableTestCase
         $audioVideoFormat->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(92));
+        $audioVideoFormat->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
 
         $formatExtra = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra->expects($this->any())
@@ -274,6 +287,9 @@ class VideoTest extends AbstractStreamableTestCase
         $formatExtra->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(92));
+        $formatExtra->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
 
         $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
 
@@ -291,6 +307,9 @@ class VideoTest extends AbstractStreamableTestCase
         $progressableFormat->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(92));
+        $progressableFormat->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
 
         return array(
             array(false, array(array(
@@ -440,6 +459,9 @@ class VideoTest extends AbstractStreamableTestCase
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array('param')));
+        $format->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
 
         $video = new Video(__FILE__, $driver, $ffprobe);
         $video->save($format, $outputPathfile);
@@ -462,8 +484,9 @@ class VideoTest extends AbstractStreamableTestCase
 
         $n = 1;
         foreach ($capturedCommands as $capturedCommand) {
+            $prefix = null;
             foreach ($capturedCommand as $command) {
-                if (0 === strpos($command, 'pass-')) {
+                if (false !== strpos($command, '/pass-')) {
                     $prefix = $command;
                     break;
                 }
