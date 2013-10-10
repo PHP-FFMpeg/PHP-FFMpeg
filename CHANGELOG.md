@@ -3,6 +3,9 @@ CHANGELOG
 
 * 0.4.0 (xx-xx-xxxx)
 
+  * Add support for video to audio transcoding
+  * BC Break : Add FormatInterface::getPasses and FormatInterface::getExtraParams
+
 * 0.3.5 (xx-xx-2013)
 
   * Add vorbis audio format (@jacobbudin).
