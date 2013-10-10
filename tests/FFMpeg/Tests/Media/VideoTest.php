@@ -194,7 +194,7 @@ class VideoTest extends AbstractStreamableTestCase
         $capturedCommands = array();
         $capturedListeners = null;
 
-        $driver->expects($this->exactly(2))
+        $driver->expects($this->exactly(count($expectedCommands)))
             ->method('command')
             ->with($this->isType('array'), false, $this->anything())
             ->will($this->returnCallback(function ($commands, $errors, $listeners) use (&$capturedCommands, &$capturedListeners) {
@@ -207,22 +207,24 @@ class VideoTest extends AbstractStreamableTestCase
         $video = new Video(__FILE__, $driver, $ffprobe);
         $video->save($format, $outputPathfile);
 
-        $prefix = null;
-
         foreach ($capturedCommands as $passKey => $pass) {
-            foreach ($pass as $command) {
-                $prefix = null;
-                if (false !== strpos($command, '/pass-')) {
-                    $prefix = $command;
-                    break;
+            $prefix = null;
+            if (count($expectedCommands) > 1) {
+                // look for pass commands only in multipass cases
+                foreach ($pass as $command) {
+                    $prefix = null;
+                    if (false !== strpos($command, '/pass-')) {
+                        $prefix = $command;
+                        break;
+                    }
+                }
+
+                if (null === $prefix) {
+                    $this->fail('Unable to find pass prefix command.');
                 }
             }
 
-            if (null === $prefix) {
-                $this->fail('Unable to find pass prefix command.');
-            }
-
-            $found = false;
+            $found = false || (null === $prefix);
             foreach ($pass as $key => $command) {
                 if ($command === $prefix) {
                     $found = true;
@@ -276,6 +278,26 @@ class VideoTest extends AbstractStreamableTestCase
         $audioVideoFormat->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+
+        $audioVideoFormatSinglePass = $this->getMock('FFMpeg\Format\VideoInterface');
+        $audioVideoFormatSinglePass->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array()));
+        $audioVideoFormatSinglePass->expects($this->any())
+            ->method('getVideoCodec')
+            ->will($this->returnValue('gloubi-boulga-video'));
+        $audioVideoFormatSinglePass->expects($this->any())
+            ->method('getAudioCodec')
+            ->will($this->returnValue('patati-patata-audio'));
+        $audioVideoFormatSinglePass->expects($this->any())
+            ->method('getKiloBitrate')
+            ->will($this->returnValue(664));
+        $audioVideoFormatSinglePass->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
+        $audioVideoFormatSinglePass->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(1));
 
         $formatExtra = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra->expects($this->any())
@@ -344,6 +366,15 @@ class VideoTest extends AbstractStreamableTestCase
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-pass', '2', '-passlogfile',
                     '/target/file',
                 )), null, $audioVideoFormat),
+            array(false, array(array(
+                    '-y', '-i', __FILE__,
+                    '-vcodec', 'gloubi-boulga-video',
+                    '-acodec', 'patati-patata-audio', '-b:v', '664k',
+                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k',
+                    '/target/file',
+                )), null, $audioVideoFormatSinglePass),
             array(false, array(array(
                     '-y', '-i', __FILE__,
                     'extra', 'param','-b:v', '665k',

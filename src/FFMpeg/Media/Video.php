@@ -124,8 +124,9 @@ class Video extends Audio
                 $pass[] = $i;
                 $pass[] = '-passlogfile';
                 $pass[] = $passPrefix;
-                $pass[] = $outputPathfile;
             }
+
+            $pass[] = $outputPathfile;
 
             $passes[] = $pass;
         }
