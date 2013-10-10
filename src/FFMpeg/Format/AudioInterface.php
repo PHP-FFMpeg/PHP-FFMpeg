@@ -20,13 +20,6 @@ interface AudioInterface extends FormatInterface
     public function getAudioKiloBitrate();
 
     /**
-     * Returns an array of extra parameters to add to ffmpeg commandline.
-     *
-     * @return array()
-     */
-    public function getExtraParams();
-
-    /**
      * Returns the audio codec.
      *
      * @return string
