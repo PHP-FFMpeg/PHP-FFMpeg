@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-* 0.3.5 (xx-xx-2013)
+* 0.3.5 (10-21-2013)
 
   * Add vorbis audio format (@jacobbudin).
   * Fix #66 : Allow single pass encodings.
