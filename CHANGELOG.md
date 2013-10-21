@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-* 0.4.0 (xx-xx-xxxx)
+* 0.4.0 (10-21-2013)
 
   * Add support for video to audio transcoding
   * BC Break : Add FormatInterface::getPasses and FormatInterface::getExtraParams
