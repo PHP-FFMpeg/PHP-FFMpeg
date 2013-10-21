@@ -6,11 +6,11 @@ CHANGELOG
   * Add vorbis audio format (@jacobbudin).
   * Fix #66 : Allow single pass encodings.
 
-* 0.3.4 (05-09-2013)
+* 0.3.4 (09-05-2013)
 
   * Fix Invalid ratio computing.
 
-* 0.3.3 (05-09-2013)
+* 0.3.3 (09-05-2013)
 
   * Add convenient Stream::getDimensions method to extract video dimension.
   * Add DisplayRatioFixer Frame filter.
@@ -19,7 +19,7 @@ CHANGELOG
 
   * Fix A/V synchronization over flash and HTML5 players.
 
-* 0.3.1 (06-08-2013)
+* 0.3.1 (08-06-2013)
 
   * Allow use of FFProbe on remote URIs.
   * Fix #47 : MediaTypeInterface::save adds filters depending on the codec.
