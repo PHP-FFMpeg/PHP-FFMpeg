@@ -105,6 +105,11 @@ class Video extends Audio
             $commands[] = '-b:a';
             $commands[] = $format->getAudioKiloBitrate() . 'k';
         }
+        
+        //Experimental codec
+        if ('aac' == $format->getAudioCodec()) {
+            $commands = array_merge($commands, array('-strict', '-2', '-ar', '22050'));
+        }
 
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
