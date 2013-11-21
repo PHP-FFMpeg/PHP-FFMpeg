@@ -95,11 +95,17 @@ video. Frames can be extracted.
 You can transcode videos using the `FFMpeg\Media\Video:save` method. You will
 pass a `FFMpeg\Format\FormatInterface` for that.
 
+Please note that audio and video bitrate are set on the format.
+
 ```php
 $format = new Format\Video\X264();
 $format->on('progress', function ($video, $format, $percentage) {
     echo "$percentage % transcoded";
 });
+
+$format
+    -> setKiloBitrate(1000)
+    -> setAudioKiloBitrate(256);
 
 $video->save($format, 'video.avi');
 ```
@@ -200,11 +206,16 @@ video. Frames can be extracted.
 You can transcode audios using the `FFMpeg\Media\Audio:save` method. You will
 pass a `FFMpeg\Format\FormatInterface` for that.
 
+Please note that audio kilobitrate is set on the audio format.
+
 ```php
 $format = new Format\Audio\Flac();
 $format->on('progress', function ($$audio, $format, $percentage) {
     echo "$percentage % transcoded";
 });
+
+$format
+    -> setAudioKiloBitrate(256);
 
 $audio->save($format, 'track.flac');
 ```
