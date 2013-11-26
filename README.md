@@ -23,7 +23,7 @@ The recommended way to install PHP-FFMpeg is through [Composer](https://getcompo
 ```json
 {
     "require": {
-        "php-ffmpeg/php-ffmpeg": "0.3.x-dev@dev"
+        "php-ffmpeg/php-ffmpeg": "~0.4"
     }
 }
 ```
