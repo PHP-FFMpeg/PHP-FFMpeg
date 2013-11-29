@@ -11,7 +11,7 @@ Check another amazing repo : [PHP FFMpeg extras](https://github.com/alchemy-fr/P
 ## Your attention please
 
 This library requires a working FFMpeg install. You will need both FFMpeg and FFProbe binaries to use it.
-Be sure that these binaries can be located with system PATH to get the benefit of the binary detection, 
+Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
 otherwise you should have to explicitely give the binaries path on load.
 
 For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
@@ -75,8 +75,17 @@ $ffmpeg = FFMpeg\FFMpeg::create(array(
 
 ### Manipulate media
 
-`FFMpeg\FFMpeg` creates media based on file paths. To open a file path, use the
-`FFMpeg\FFMpeg::open` method.
+`FFMpeg\FFMpeg` creates media based on URIs. URIs could be either a pointer to a
+local filesystem resource, an HTTP resource or any resource supported by FFmpeg.
+
+**Note** : To list all supported resource type of your FFmpeg build, use the
+`-protocols` command :
+
+```
+ffmpeg -protocols
+```
+
+To open a resource, use the `FFMpeg\FFMpeg::open` method.
 
 ```php
 $ffmpeg->open('video.mpeg');
@@ -144,6 +153,20 @@ $video
     ->framerate($framerate, $gop)
     ->synchronize();
 ```
+
+###### Rotate
+
+Rotates a video to a given angle.
+
+```php
+$video->filters()->rotate($angle);
+```
+
+The `$angle` parameter must be one of the following constants :
+
+- `FFMpeg\Filters\Video\RotateFilter::ROTATE_90` : 90° clockwise
+- `FFMpeg\Filters\Video\RotateFilter::ROTATE_180` : 180°
+- `FFMpeg\Filters\Video\RotateFilter::ROTATE_270` : 90° counterclockwise
 
 ###### Resize
 
