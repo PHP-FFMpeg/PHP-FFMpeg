@@ -9,17 +9,6 @@ use FFMpeg\Format\AudioInterface;
 
 class AudioTest extends AbstractStreamableTestCase
 {
-    /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
-     */
-    public function testWithInvalidFile()
-    {
-        $driver = $this->getFFMpegDriverMock();
-        $ffprobe = $this->getFFProbeMock();
-
-        new Audio('/no/file', $driver, $ffprobe);
-    }
-
     public function testFiltersReturnsAudioFilters()
     {
         $driver = $this->getFFMpegDriverMock();

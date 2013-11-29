@@ -14,6 +14,7 @@ namespace FFMpeg;
 use Alchemy\BinaryDriver\ConfigurationInterface;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Audio;
 use FFMpeg\Media\Video;
 use Psr\Log\LoggerInterface;
@@ -88,11 +89,9 @@ class FFMpeg
      */
     public function open($pathfile)
     {
-        if (!file_exists($pathfile)) {
-            throw new InvalidArgumentException(sprintf('File %s does not exists', $pathfile));
+        if (null === $streams = $this->ffprobe->streams($pathfile)) {
+            throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
-
-        $streams = $this->ffprobe->streams($pathfile);
 
         if (0 < count($streams->videos())) {
             return new Video($pathfile, $this->driver, $this->ffprobe);
