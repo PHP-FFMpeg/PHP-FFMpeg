@@ -1,6 +1,12 @@
 CHANGELOG
 ---------
 
+* 0.4.2 (xx-xx-xx)
+
+  * Add Rotate filter.
+  * Remove time_start metadata when using synchronize filter
+  * Remove restriction on filesystem resources.
+
 * 0.4.1 (11-26-2013)
 
   * Add Clip filter (@guimeira)

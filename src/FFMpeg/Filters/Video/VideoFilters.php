@@ -95,4 +95,11 @@ class VideoFilters extends AudioFilters
 
         return $this;
     }
+
+    public function rotate($angle, $priority = 0)
+    {
+        $this->media->addFilter(new RotateFilter($angle, $priority));
+
+        return $this;
+    }
 }

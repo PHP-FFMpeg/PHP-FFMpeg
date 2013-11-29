@@ -6,14 +6,6 @@ use FFMpeg\Media\Frame;
 
 class FrameTest extends AbstractMediaTestCase
 {
-    /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
-     */
-    public function testWithInvalidFile()
-    {
-        new Frame($this->getVideoMock('/No/file'), $this->getFFMpegDriverMock(), $this->getFFProbeMock(), $this->getTimeCodeMock());
-    }
-
     public function testGetTimeCode()
     {
         $driver = $this->getFFMpegDriverMock();

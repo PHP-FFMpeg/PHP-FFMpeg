@@ -30,8 +30,6 @@ abstract class AbstractMediaType implements MediaTypeInterface
 
     public function __construct($pathfile, FFMpegDriver $driver, FFProbe $ffprobe)
     {
-        $this->ensureFileIsPresent($pathfile);
-
         $this->pathfile = $pathfile;
         $this->driver = $driver;
         $this->ffprobe = $ffprobe;
@@ -104,15 +102,6 @@ abstract class AbstractMediaType implements MediaTypeInterface
     public function getFiltersCollection()
     {
         return $this->filters;
-    }
-
-    protected function ensureFileIsPresent($filename)
-    {
-        if (!is_file($filename) || !is_readable($filename)) {
-            throw new InvalidArgumentException(sprintf(
-                '%s is not present or not readable', $filename
-            ));
-        }
     }
 
     protected function cleanupTemporaryFile($filename)
