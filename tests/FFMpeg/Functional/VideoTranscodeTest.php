@@ -3,6 +3,7 @@
 namespace FFMpeg\Functional;
 
 use FFMpeg\Format\Video\X264;
+use FFMpeg\Media\Video;
 
 class VideoTranscodeTest extends FunctionalTestCase
 {
@@ -34,5 +35,23 @@ class VideoTranscodeTest extends FunctionalTestCase
         $video->save($codec, $filename);
         $this->assertFileExists($filename);
         unlink($filename);
+    }
+
+    /**
+     * @expectedException \FFMpeg\Exception\RuntimeException
+     */
+    public function testTranscodeInvalidFile()
+    {
+        $ffmpeg = $this->getFFMpeg();
+        $ffmpeg->open(__DIR__ . '/../../files/UnknownFileTest.ogv');
+    }
+
+    public function testSaveInvalidForgedVideo()
+    {
+        $ffmpeg = $this->getFFMpeg();
+        $video = new Video(__DIR__ . '/../../files/UnknownFileTest.ogv', $ffmpeg->getFFMpegDriver(), $ffmpeg->getFFProbe());
+
+        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
+        $video->save(new X264('libvo_aacenc'), __DIR__ . '/output/output-x264.mp4');
     }
 }

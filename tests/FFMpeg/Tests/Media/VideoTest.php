@@ -9,17 +9,6 @@ use FFMpeg\Format\VideoInterface;
 
 class VideoTest extends AbstractStreamableTestCase
 {
-    /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
-     */
-    public function testWithInvalidFile()
-    {
-        $driver = $this->getFFMpegDriverMock();
-        $ffprobe = $this->getFFProbeMock();
-
-        new Video('/no/file', $driver, $ffprobe);
-    }
-
     public function testFiltersReturnsVideoFilters()
     {
         $driver = $this->getFFMpegDriverMock();

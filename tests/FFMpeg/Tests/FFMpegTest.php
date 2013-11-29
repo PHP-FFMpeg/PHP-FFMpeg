@@ -10,7 +10,8 @@ use FFMpeg\FFProbe\DataMapping\Stream;
 class FFMpegTest Extends TestCase
 {
     /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
+     * @expectedException \FFMpeg\Exception\RuntimeException
+     * @expectedExceptionMessage Unable to probe "/path/to/unknown/file".
      */
     public function testOpenInvalid()
     {
@@ -58,7 +59,7 @@ class FFMpegTest Extends TestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
+     * @expectedException \FFMpeg\Exception\InvalidArgumentException
      */
     public function testOpenUnknown()
     {
