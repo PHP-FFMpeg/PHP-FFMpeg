@@ -2,6 +2,9 @@
 
 namespace FFMpeg\Functional;
 
+use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Filters\Video\ResizeFilter;
+use FFMpeg\Filters\Video\RotateFilter;
 use FFMpeg\Format\Video\X264;
 use FFMpeg\Media\Video;
 
@@ -53,5 +56,33 @@ class VideoTranscodeTest extends FunctionalTestCase
 
         $this->setExpectedException('FFMpeg\Exception\RuntimeException');
         $video->save(new X264('libvo_aacenc'), __DIR__ . '/output/output-x264.mp4');
+    }
+
+    public function testTranscodePortraitVideo()
+    {
+        $filename = __DIR__ . '/output/output-x264.mp4';
+        if (is_file($filename)) {
+            unlink(__DIR__ . '/output/output-x264.mp4');
+        }
+
+        $ffmpeg = $this->getFFMpeg();
+        $video = $ffmpeg->open(__DIR__ . '/../../files/portrait.MOV');
+
+        $video->filters()
+            ->resize(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET)
+            ->rotate(RotateFilter::ROTATE_90);
+        $video->save(new X264('libvo_aacenc'), $filename);
+
+        $dimension = $ffmpeg->getFFProbe()
+            ->streams($filename)
+            ->videos()
+            ->first()
+            ->getDimensions();
+
+        $this->assertLessThan(1, $dimension->getRatio(false)->getValue());
+        $this->assertEquals(240, $dimension->getHeight());
+
+        $this->assertFileExists($filename);
+        unlink($filename);
     }
 }

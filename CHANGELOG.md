@@ -1,7 +1,11 @@
 CHANGELOG
 ---------
 
-* 0.4.2 (xx-xx-xx)
+* 0.4.3 (11-xx-2013)
+
+  * Fix using rotate and resize filters at the same time (#78)
+
+* 0.4.2 (11-29-2013)
 
   * Add Rotate filter.
   * Remove time_start metadata when using synchronize filter

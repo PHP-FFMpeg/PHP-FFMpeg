@@ -16,12 +16,18 @@ use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
 abstract class AbstractStreamableMedia extends AbstractMediaType
 {
+    private $streams;
+
     /**
      * @return StreamCollection
      */
     public function getStreams()
     {
-        return $this->ffprobe->streams($this->pathfile);
+        if (null === $this->streams) {
+            $this->streams = $this->ffprobe->streams($this->pathfile);
+        }
+
+        return $this->streams;
     }
 
     /**
