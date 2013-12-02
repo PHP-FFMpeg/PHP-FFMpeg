@@ -10,11 +10,19 @@ Check another amazing repo : [PHP FFMpeg extras](https://github.com/alchemy-fr/P
 
 ## Your attention please
 
+### How this library works :
+
 This library requires a working FFMpeg install. You will need both FFMpeg and FFProbe binaries to use it.
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
 otherwise you should have to explicitely give the binaries path on load.
 
 For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
+
+### Known issues :
+
+- Using rotate and resize will produce a corrupted output when using 
+[libav](http://libav.org/) 0.8. The bug is fixed in version 9. This bug does not 
+appear in latest ffmpeg version.
 
 ## Installation
 

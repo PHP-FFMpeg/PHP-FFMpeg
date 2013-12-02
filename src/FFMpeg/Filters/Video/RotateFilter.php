@@ -55,6 +55,16 @@ class RotateFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
+        if (in_array($this->angle, array(self::ROTATE_90, self::ROTATE_270), true)) {
+            foreach ($video->getStreams()->videos() as $stream) {
+                if ($stream->has('width') && $stream->has('height')) {
+                    $width = $stream->get('width');
+                    $stream->set('width', $stream->get('height'));
+                    $stream->set('height', $width);
+                }
+            }
+        }
+
         return array('-vf', $this->angle, '-metadata:s:v:0', 'rotate=0');
     }
 
