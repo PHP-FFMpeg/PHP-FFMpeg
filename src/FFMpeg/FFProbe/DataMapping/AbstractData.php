@@ -51,6 +51,21 @@ abstract class AbstractData implements \Countable
     }
 
     /**
+     * Sets the property value given its name.
+     *
+     * @param  string $property
+     * @param  mixed  $value
+     *
+     * @return AbstractData
+     */
+    public function set($property, $value)
+    {
+        $this->properties[$property] = $value;
+
+        return $this;
+    }
+
+    /**
      * Returns all property names.
      *
      * @return array
