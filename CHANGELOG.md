@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-* 0.4.3 (11-xx-2013)
+* 0.4.3 (12-02-2013)
 
   * Fix using rotate and resize filters at the same time (#78)
 
