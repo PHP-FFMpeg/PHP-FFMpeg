@@ -71,7 +71,9 @@ class Stream extends AbstractData
         }
 
         if (null !== $displayRatio && null !== $sampleRatio) {
-            $width = round($width / $sampleRatio[0] * $sampleRatio[1] * $displayRatio[0] / $displayRatio[1]);
+            if ($sampleRatio[0] !== 1 && $sampleRatio[1] !== 1) {
+                $width = round($width / $sampleRatio[0] * $sampleRatio[1] * $displayRatio[0] / $displayRatio[1]);
+            }
         }
 
         return new Dimension($width, $height);
