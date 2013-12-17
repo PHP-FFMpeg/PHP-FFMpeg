@@ -4,7 +4,6 @@ namespace FFMpeg\Tests\Media;
 
 use FFMpeg\Media\Audio;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\AudioInterface;
 
 class AudioTest extends AbstractStreamableTestCase

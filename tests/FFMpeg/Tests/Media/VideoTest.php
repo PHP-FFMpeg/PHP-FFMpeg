@@ -4,7 +4,6 @@ namespace FFMpeg\Tests\Media;
 
 use FFMpeg\Media\Video;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\VideoInterface;
 
 class VideoTest extends AbstractStreamableTestCase

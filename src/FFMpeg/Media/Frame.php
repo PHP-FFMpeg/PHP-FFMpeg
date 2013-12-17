@@ -110,7 +110,7 @@ class Frame extends AbstractMediaType
         foreach ($this->filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this));
         }
-        
+
         $commands = array_merge($commands, array($pathfile));
 
         try {
