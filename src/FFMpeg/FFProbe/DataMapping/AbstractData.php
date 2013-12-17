@@ -53,8 +53,8 @@ abstract class AbstractData implements \Countable
     /**
      * Sets the property value given its name.
      *
-     * @param  string $property
-     * @param  mixed  $value
+     * @param string $property
+     * @param mixed  $value
      *
      * @return AbstractData
      */

@@ -12,7 +12,6 @@
 namespace FFMpeg\Media;
 
 use FFMpeg\Driver\FFMpegDriver;
-use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\FFProbe;
 use FFMpeg\Filters\FiltersCollection;
 use FFMpeg\Media\MediaTypeInterface;

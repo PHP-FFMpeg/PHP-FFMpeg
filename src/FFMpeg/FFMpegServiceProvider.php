@@ -35,7 +35,7 @@ class FFMpegServiceProvider implements ServiceProviderInterface
             return array_replace($app['ffmpeg.default.configuration'], $app['ffmpeg.configuration']);
         });
 
-        $app['ffmpeg'] = $app['ffmpeg.ffmpeg'] = $app->share(function(Application $app) {
+        $app['ffmpeg'] = $app['ffmpeg.ffmpeg'] = $app->share(function (Application $app) {
             $configuration = $app['ffmpeg.configuration.build'];
 
             if (isset($configuration['ffmpeg.timeout'])) {
@@ -49,7 +49,7 @@ class FFMpegServiceProvider implements ServiceProviderInterface
             return new ArrayCache();
         });
 
-        $app['ffmpeg.ffprobe'] = $app->share(function(Application $app) {
+        $app['ffmpeg.ffprobe'] = $app->share(function (Application $app) {
             $configuration = $app['ffmpeg.configuration.build'];
 
             if (isset($configuration['ffmpeg.timeout'])) {

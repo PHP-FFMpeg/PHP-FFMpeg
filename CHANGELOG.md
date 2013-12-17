@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.4.4 (12-17-2013)
+
+  * Fix width / height dimensions extraction.
+
 * 0.4.3 (12-02-2013)
 
   * Fix using rotate and resize filters at the same time (#78)

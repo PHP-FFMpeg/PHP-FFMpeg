@@ -9,7 +9,7 @@ use FFMpeg\Format\Video\X264;
 use FFMpeg\Media\Video;
 
 class VideoTranscodeTest extends FunctionalTestCase
-{    
+{
     public function testSimpleTranscodeX264()
     {
         $filename = __DIR__ . '/output/output-x264.mp4';
@@ -65,7 +65,7 @@ class VideoTranscodeTest extends FunctionalTestCase
         if ($info['name'] === 'avconv' && version_compare($info['version'], '0.9', '<')) {
             $this->markTestSkipped('This version of avconv is buggy and does not support this test.');
         }
-        
+
         $filename = __DIR__ . '/output/output-x264.mp4';
         if (is_file($filename)) {
             unlink(__DIR__ . '/output/output-x264.mp4');
@@ -91,7 +91,7 @@ class VideoTranscodeTest extends FunctionalTestCase
         $this->assertFileExists($filename);
         unlink($filename);
     }
-    
+
     private function getNameAndVersion()
     {
         $binary = $this
@@ -99,20 +99,20 @@ class VideoTranscodeTest extends FunctionalTestCase
             ->getFFMpegDriver()
             ->getProcessBuilderFactory()
             ->getBinary();
-        
+
         $output = $matches = null;
         exec($binary . ' -version 2>&1', $output);
 
         if (!isset($output[0])) {
             return array('name' => null, 'version' => null);
         }
-        
+
         preg_match('/^([a-z]+)\s+version\s+([0-9\.]+)/i', $output[0], $matches);
 
         if (count($matches) > 0) {
             return array('name' => $matches[1], 'version' => $matches[2]);
         }
-        
+
         return array('name' => null, 'version' => null);
     }
 }
