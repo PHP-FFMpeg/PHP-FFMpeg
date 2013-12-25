@@ -2,7 +2,6 @@ language: php
 
 before_script:
   - sudo apt-get update
-  - sudo easy_install sphinx
   - sudo apt-get install -y ffmpeg libavcodec-extra-53
   - composer self-update
   - composer install --dev --prefer-source
