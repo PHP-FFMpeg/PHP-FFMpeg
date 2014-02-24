@@ -4,13 +4,15 @@ before_script:
   - sudo apt-get update
   - sudo apt-get install -y ffmpeg libavcodec-extra-53
   - composer self-update
-  - composer install --dev --prefer-source
+  - composer install --no-interaction --prefer-source --dev
 
 php:
+  - 5.3.3
   - 5.3
   - 5.4
   - 5.5
+  - 5.6
 
 script:
-  - vendor/bin/phpunit
-  - vendor/bin/phpunit -c phpunit-functional.xml.dist
+  - vendor/bin/phpunit --verbose
+  - vendor/bin/phpunit --verbose -c phpunit-functional.xml.dist
