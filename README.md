@@ -1,6 +1,6 @@
 #PHP FFmpeg
 
-[![Build Status](https://secure.travis-ci.org/PHP-FFmpeg/PHP-FFmpeg.png?branch=master)](http://travis-ci.org/PHP-FFmpeg/PHP-FFmpeg)
+[![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983/big.png)](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983)
 
