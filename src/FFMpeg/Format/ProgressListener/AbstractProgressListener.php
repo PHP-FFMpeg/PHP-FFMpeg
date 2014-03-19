@@ -238,7 +238,6 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
         if (false === $format->has('size') || false === $format->has('duration')) {
             return;
-            throw new RuntimeException(sprintf('Unable to probe format for %s', $this->pathfile));
         }
 
         $this->totalSize = $format->get('size') / 1024;
