@@ -364,7 +364,14 @@ $ffprobe
     ->streams('/path/to/video/mp4') // extracts streams informations
     ->videos()                      // filters video streams
     ->first()                       // returns the first video stream
-    ->get('duration');              // returns the duration property
+    ->get('codec_name');            // returns the codec_name property
+```
+
+```php
+$ffprobe = FFMpeg\FFProbe::create();
+$ffprobe
+    ->format('/path/to/video/mp4') // extracts file informations
+    ->get('duration');             // returns the duration property
 ```
 
 ##Using with Silex Microframework
