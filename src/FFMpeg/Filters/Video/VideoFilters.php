@@ -12,6 +12,7 @@
 namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Media\Video;
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\FrameRate;
 use FFMpeg\Filters\Audio\AudioResamplableFilter;
