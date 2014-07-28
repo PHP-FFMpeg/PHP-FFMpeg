@@ -103,4 +103,17 @@ class VideoFilters extends AudioFilters
 
         return $this;
     }
+
+    /**
+     * @param string $imagePath
+     * @param array $coordinates
+     *
+     * @return $this
+     */
+    public function watermark($imagePath, array $coordinates = array())
+    {
+        $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates));
+
+        return $this;
+    }
 }
