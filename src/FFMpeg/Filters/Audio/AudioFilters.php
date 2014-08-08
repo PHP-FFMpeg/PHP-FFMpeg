@@ -3,7 +3,6 @@
 namespace FFMpeg\Filters\Audio;
 
 use FFMpeg\Media\Audio;
-use FFMpeg\Filters\Audio\AudioResamplableFilter;
 
 class AudioFilters
 {

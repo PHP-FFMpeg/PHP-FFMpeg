@@ -93,15 +93,15 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
         return $this;
     }
 
-	/**
+    /**
 	 * {@inheritdoc}
 	 */
-	public function getAudioChannels()
-	{
-		return $this->audioChannels;
-	}
+    public function getAudioChannels()
+    {
+        return $this->audioChannels;
+    }
 
-	/**
+    /**
      * Sets the channels value.
      *
      * @param  integer                  $channels
