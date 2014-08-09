@@ -3,11 +3,10 @@
 namespace FFMpeg\Tests;
 
 use FFMpeg\FFMpeg;
-use FFMpeg\Tests\TestCase;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use FFMpeg\FFProbe\DataMapping\Stream;
 
-class FFMpegTest Extends TestCase
+class FFMpegTest extends TestCase
 {
     /**
      * @expectedException \FFMpeg\Exception\RuntimeException

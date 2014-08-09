@@ -198,7 +198,7 @@ class AudioTest extends AbstractStreamableTestCase
         $audioFormat->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(664));
-	    $audioFormat->expects($this->any())
+        $audioFormat->expects($this->any())
             ->method('getAudioChannels')
             ->will($this->returnValue(5));
         $audioFormat->expects($this->any())
@@ -244,21 +244,21 @@ class AudioTest extends AbstractStreamableTestCase
                     '-y', '-i', __FILE__,
                     '-acodec', 'patati-patata-audio',
                     '-b:a', '664k',
-		            '-ac', '5',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $audioFormat),
             array(false, array(
                     '-y', '-i', __FILE__,
                     'extra', 'param',
                     '-b:a', '665k',
-		            '-ac', '5',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $formatExtra),
             array(true, array(
                     '-y', '-i', __FILE__,
                     '-threads', 24,
                     '-b:a', '663k',
-		            '-ac', '5',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $format),
             array(true, array(
@@ -266,20 +266,20 @@ class AudioTest extends AbstractStreamableTestCase
                     'extra', 'param',
                     '-threads', 24,
                     '-b:a', '665k',
-		            '-ac', '5',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $formatExtra),
             array(false, array(
                     '-y', '-i', __FILE__,
                     '-b:a', '666k',
-		            '-ac', '5',
+                    '-ac', '5',
                     '/target/file',
                 ), $listeners, $progressableFormat),
             array(true, array(
                     '-y', '-i', __FILE__,
                     '-threads', 24,
                     '-b:a', '666k',
-		            '-ac', '5',
+                    '-ac', '5',
                     '/target/file',
                 ), $listeners, $progressableFormat),
         );
