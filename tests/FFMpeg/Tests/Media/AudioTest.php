@@ -187,6 +187,9 @@ class AudioTest extends AbstractStreamableTestCase
         $format->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(663));
+        $format->expects($this->any())
+            ->method('getAudioChannels')
+            ->will($this->returnValue(5));
 
         $audioFormat = $this->getMock('FFMpeg\Format\AudioInterface');
         $audioFormat->expects($this->any())
@@ -195,6 +198,9 @@ class AudioTest extends AbstractStreamableTestCase
         $audioFormat->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(664));
+        $audioFormat->expects($this->any())
+            ->method('getAudioChannels')
+            ->will($this->returnValue(5));
         $audioFormat->expects($this->any())
             ->method('getAudioCodec')
             ->will($this->returnValue('patati-patata-audio'));
@@ -206,6 +212,9 @@ class AudioTest extends AbstractStreamableTestCase
         $formatExtra->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(665));
+        $formatExtra->expects($this->any())
+            ->method('getAudioChannels')
+            ->will($this->returnValue(5));
 
         $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
 
@@ -220,29 +229,36 @@ class AudioTest extends AbstractStreamableTestCase
         $progressableFormat->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(666));
+        $progressableFormat->expects($this->any())
+            ->method('getAudioChannels')
+            ->will($this->returnValue(5));
 
         return array(
             array(false, array(
                     '-y', '-i', __FILE__,
                     '-b:a', '663k',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $format),
             array(false, array(
                     '-y', '-i', __FILE__,
                     '-acodec', 'patati-patata-audio',
                     '-b:a', '664k',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $audioFormat),
             array(false, array(
                     '-y', '-i', __FILE__,
                     'extra', 'param',
                     '-b:a', '665k',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $formatExtra),
             array(true, array(
                     '-y', '-i', __FILE__,
                     '-threads', 24,
                     '-b:a', '663k',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $format),
             array(true, array(
@@ -250,17 +266,20 @@ class AudioTest extends AbstractStreamableTestCase
                     'extra', 'param',
                     '-threads', 24,
                     '-b:a', '665k',
+                    '-ac', '5',
                     '/target/file',
                 ), null, $formatExtra),
             array(false, array(
                     '-y', '-i', __FILE__,
                     '-b:a', '666k',
+                    '-ac', '5',
                     '/target/file',
                 ), $listeners, $progressableFormat),
             array(true, array(
                     '-y', '-i', __FILE__,
                     '-threads', 24,
                     '-b:a', '666k',
+                    '-ac', '5',
                     '/target/file',
                 ), $listeners, $progressableFormat),
         );

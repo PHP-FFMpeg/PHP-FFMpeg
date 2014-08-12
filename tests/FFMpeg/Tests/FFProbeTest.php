@@ -2,7 +2,6 @@
 
 namespace FFMpeg\Tests;
 
-use FFMpeg\Tests\TestCase;
 use FFMpeg\FFProbe;
 use Symfony\Component\Process\ExecutableFinder;
 use Alchemy\BinaryDriver\ConfigurationInterface;
