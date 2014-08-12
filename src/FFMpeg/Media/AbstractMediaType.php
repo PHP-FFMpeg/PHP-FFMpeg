@@ -14,7 +14,6 @@ namespace FFMpeg\Media;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Filters\FiltersCollection;
-use FFMpeg\Media\MediaTypeInterface;
 
 abstract class AbstractMediaType implements MediaTypeInterface
 {

@@ -106,7 +106,7 @@ class VideoFilters extends AudioFilters
 
     /**
      * @param string $imagePath
-     * @param array $coordinates
+     * @param array  $coordinates
      *
      * @return $this
      */

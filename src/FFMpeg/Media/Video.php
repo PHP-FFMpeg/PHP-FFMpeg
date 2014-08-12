@@ -22,7 +22,6 @@ use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
-use FFMpeg\Media\Frame;
 use Neutron\TemporaryFilesystem\Manager as FsManager;
 
 class Video extends Audio
@@ -69,12 +68,12 @@ class Video extends Audio
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
         }
-        if ($format instanceOf VideoInterface) {
+        if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
                 $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
             }
         }
-        if ($format instanceOf AudioInterface) {
+        if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioCodec()) {
                 $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
             }
@@ -84,7 +83,7 @@ class Video extends Audio
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        if ($format instanceOf VideoInterface) {
+        if ($format instanceof VideoInterface) {
             $commands[] = '-b:v';
             $commands[] = $format->getKiloBitrate() . 'k';
             $commands[] = '-refs';
@@ -109,7 +108,7 @@ class Video extends Audio
             $commands[] = '1';
         }
 
-        if ($format instanceOf AudioInterface) {
+        if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioKiloBitrate()) {
                 $commands[] = '-b:a';
                 $commands[] = $format->getAudioKiloBitrate() . 'k';

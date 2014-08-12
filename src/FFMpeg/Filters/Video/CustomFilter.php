@@ -24,7 +24,7 @@ class CustomFilter implements VideoFilterInterface
      * A custom filter, useful if you want to build complex filters
      *
      * @param string $filter
-     * @param int $priority
+     * @param int    $priority
      */
     public function __construct($filter, $priority = 0)
     {
@@ -46,6 +46,7 @@ class CustomFilter implements VideoFilterInterface
     public function apply(Video $video, VideoInterface $format)
     {
         $commands = array('-vf', $this->filter);
+
         return $commands;
     }
 }

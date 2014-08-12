@@ -13,7 +13,6 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
-use FFMpeg\Coordinate\TimeCode;
 
 class WatermarkFilter implements VideoFilterInterface
 {
@@ -23,7 +22,6 @@ class WatermarkFilter implements VideoFilterInterface
     private $coordinates;
     /** @var integer */
     private $priority;
-
 
     public function __construct($watermarkPath, array $coordinates = array(), $priority = 0)
     {
@@ -47,25 +45,21 @@ class WatermarkFilter implements VideoFilterInterface
     {
         $position = isset($this->coordinates['position']) ? $this->coordinates['position'] : 'absolute';
 
-        switch($position) {
+        switch ($position) {
             case 'relative':
                 if (isset($this->coordinates['top'])) {
                     $y = $this->coordinates['top'];
-                }
-                elseif (isset($this->coordinates['bottom'])) {
+                } elseif (isset($this->coordinates['bottom'])) {
                     $y = sprintf('main_h - %d - overlay_h', $this->coordinates['bottom']);
-                }
-                else {
+                } else {
                     $y = 0;
                 }
 
                 if (isset($this->coordinates['left'])) {
                     $x = $this->coordinates['left'];
-                }
-                elseif (isset($this->coordinates['right'])) {
+                } elseif (isset($this->coordinates['right'])) {
                     $x = sprintf('main_w - %d - overlay_w', $this->coordinates['right']);
-                }
-                else {
+                } else {
                     $x = 0;
                 }
 

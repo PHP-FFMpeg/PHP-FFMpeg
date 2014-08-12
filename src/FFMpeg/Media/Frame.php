@@ -18,7 +18,6 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Media\Video;
 
 class Frame extends AbstractMediaType
 {
