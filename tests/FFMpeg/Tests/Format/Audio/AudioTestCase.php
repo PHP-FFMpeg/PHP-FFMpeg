@@ -71,6 +71,34 @@ abstract class AudioTestCase extends TestCase
         $this->getFormat()->setAudioKiloBitrate(-10);
     }
 
+    public function testGetAudioChannels()
+    {
+        $this->assertInternalType('null', $this->getFormat()->getAudioChannels());
+    }
+
+    public function testSetAudioChannels()
+    {
+        $format = $this->getFormat();
+        $format->setAudioChannels(2);
+        $this->assertEquals(2, $format->getAudioChannels());
+    }
+
+    /**
+     * @expectedException FFMpeg\Exception\InvalidArgumentException
+     */
+    public function testSetInvalidChannels()
+    {
+        $this->getFormat()->setAudioChannels(0);
+    }
+
+    /**
+     * @expectedException FFMpeg\Exception\InvalidArgumentException
+     */
+    public function testSetNegativeChannels()
+    {
+        $this->getFormat()->setAudioChannels(-10);
+    }
+
     public function testCreateProgressListener()
     {
         $media = $this->getMock('FFMpeg\Media\MediaTypeInterface');
