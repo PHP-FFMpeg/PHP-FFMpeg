@@ -5,6 +5,7 @@ CHANGELOG
 
   * Add support for Wav and AAC audio formats (@MrHash).
   * Add watermark filter (@sylvainv).
+  * Add configuration for audio channels (@SimonSimCity).
 
 * 0.4.4 (12-17-2013)
 
