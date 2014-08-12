@@ -12,8 +12,6 @@
 namespace FFMpeg;
 
 use Doctrine\Common\Cache\ArrayCache;
-use FFMpeg\FFMpeg;
-use FFMpeg\FFProbe;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 

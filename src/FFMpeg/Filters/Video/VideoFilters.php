@@ -12,6 +12,7 @@
 namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Media\Video;
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\FrameRate;
 use FFMpeg\Filters\Audio\AudioResamplableFilter;
@@ -99,6 +100,19 @@ class VideoFilters extends AudioFilters
     public function rotate($angle)
     {
         $this->media->addFilter(new RotateFilter($angle, 30));
+
+        return $this;
+    }
+
+    /**
+     * @param string $imagePath
+     * @param array  $coordinates
+     *
+     * @return $this
+     */
+    public function watermark($imagePath, array $coordinates = array())
+    {
+        $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates));
 
         return $this;
     }

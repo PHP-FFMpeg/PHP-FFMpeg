@@ -16,6 +16,9 @@ namespace FFMpeg\Format\Video;
  */
 class X264 extends DefaultVideo
 {
+    /** @var boolean */
+    private $bframesSupport = true;
+
     public function __construct($audioCodec = 'libfaac', $videoCodec = 'libx264')
     {
         $this
@@ -28,7 +31,19 @@ class X264 extends DefaultVideo
      */
     public function supportBFrames()
     {
-        return true;
+        return $this->bframesSupport;
+    }
+
+    /**
+     * @param $support
+     *
+     * @return X264
+     */
+    public function setBFramesSupport($support)
+    {
+        $this->bframesSupport = $support;
+
+        return $this;
     }
 
     /**
@@ -55,6 +70,9 @@ class X264 extends DefaultVideo
         return 2;
     }
 
+    /**
+     * @return int
+     */
     public function getModulus()
     {
         return 2;

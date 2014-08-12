@@ -40,7 +40,7 @@ class Dimension
     /**
      * Returns width.
      *
-     * @return width
+     * @return integer
      */
     public function getWidth()
     {
