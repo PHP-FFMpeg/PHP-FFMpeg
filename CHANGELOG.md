@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-* 0.4.5 (xx-xx-2014)
+* 0.4.5 (08-12-2014)
 
   * Add support for Wav and AAC audio formats (@MrHash).
   * Add watermark filter (@sylvainv).
