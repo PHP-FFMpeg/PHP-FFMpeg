@@ -25,6 +25,7 @@ use FFMpeg\FFProbe\OutputParser;
 use FFMpeg\FFProbe\OutputParserInterface;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
+use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use Psr\Log\LoggerInterface;
 
 class FFProbe
