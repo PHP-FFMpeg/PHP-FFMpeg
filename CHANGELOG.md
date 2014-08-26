@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.5.1 (08-26-2014)
+
+  * Fix video aspect ratio calculation (@nlegoff).
+
 * 0.5.0 (08-12-2014)
 
   * Add support for Wav and AAC audio formats (@MrHash).
