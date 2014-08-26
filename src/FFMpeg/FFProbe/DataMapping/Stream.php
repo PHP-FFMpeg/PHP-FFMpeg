@@ -72,7 +72,12 @@ class Stream extends AbstractData
 
         if (null !== $displayRatio && null !== $sampleRatio) {
             if ($sampleRatio[0] !== 1 && $sampleRatio[1] !== 1) {
-                $width = round($width / $sampleRatio[0] * $sampleRatio[1] * $displayRatio[0] / $displayRatio[1]);
+                if (null !== $width && null !== $height) {
+                    // stretch video according to pixel sample aspect ratio
+                    $width = round($width * ($sampleRatio[0] / $sampleRatio[1]));
+                    // set height according to display aspect ratio
+                    $height = round($width * ($displayRatio[1] / $displayRatio[0]));
+                }
             }
         }
 
