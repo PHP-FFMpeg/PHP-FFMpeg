@@ -29,7 +29,7 @@ class ThumbnailFilter implements VideoFilterInterface
      */
     public function __construct(array $params, $priority = 0)
     {
-        $this->params = $params;
+        $this->params   = $params;
         $this->priority = $priority;
     }
 
@@ -55,7 +55,6 @@ class ThumbnailFilter implements VideoFilterInterface
             $this->params['thumbnail_times'],
             $this->getIntervalsOrNumber($videoDuration)
         ));
-
         $commandArguments = [];
 
         // Since array_unique preserves the keys, we need 
@@ -63,7 +62,15 @@ class ThumbnailFilter implements VideoFilterInterface
         foreach (array_values($times) as $index => $time) {
             $commandArguments = array_merge(
                 $commandArguments, 
-                ['-ss', $time, '-f', 'image2', '-vframes', '1', 'thumb'.$index.'.png']
+                [
+                    '-ss', 
+                    $time, 
+                    '-f', 
+                    'image2', 
+                    '-vframes', 
+                    '1', 
+                    'thumb'.$index.'.png',
+                ]
             );
         }
 
@@ -76,7 +83,6 @@ class ThumbnailFilter implements VideoFilterInterface
      */
     protected function getIntervalsOrNumber($videoDuration)
     {
-        // TODO later we will allow both 
         return (isset($this->params['thumbnail_interval']))
             ? $this->getIntervals($videoDuration)
             : $this->getNumber($videoDuration)
