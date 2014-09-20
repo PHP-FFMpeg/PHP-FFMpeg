@@ -23,6 +23,7 @@ use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
 use Neutron\TemporaryFilesystem\Manager as FsManager;
+use FFMpeg\Format\ProgressListener\VideoProgressListener;
 
 class Video extends Audio
 {
@@ -60,8 +61,6 @@ class Video extends Audio
      */
     public function save(FormatInterface $format, $outputPathfile)
     {
-        $commands = array('-y', '-i', $this->pathfile);
-
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
@@ -79,96 +78,126 @@ class Video extends Audio
             }
         }
 
+        $encodingOptions = array();
         foreach ($filters as $filter) {
-            $commands = array_merge($commands, $filter->apply($this, $format));
+            $encodingOptions = array_merge($encodingOptions, $filter->apply($this, $format));
         }
 
         if ($format instanceof VideoInterface) {
-            $commands[] = '-b:v';
-            $commands[] = $format->getKiloBitrate() . 'k';
-            $commands[] = '-refs';
-            $commands[] = '6';
-            $commands[] = '-coder';
-            $commands[] = '1';
-            $commands[] = '-sc_threshold';
-            $commands[] = '40';
-            $commands[] = '-flags';
-            $commands[] = '+loop';
-            $commands[] = '-me_range';
-            $commands[] = '16';
-            $commands[] = '-subq';
-            $commands[] = '7';
-            $commands[] = '-i_qfactor';
-            $commands[] = '0.71';
-            $commands[] = '-qcomp';
-            $commands[] = '0.6';
-            $commands[] = '-qdiff';
-            $commands[] = '4';
-            $commands[] = '-trellis';
-            $commands[] = '1';
+            $encodingOptions[] = '-b:v';
+            $encodingOptions[] = $format->getKiloBitrate() . 'k';
+            $encodingOptions[] = '-refs';
+            $encodingOptions[] = '6';
+            $encodingOptions[] = '-coder';
+            $encodingOptions[] = '1';
+            $encodingOptions[] = '-sc_threshold';
+            $encodingOptions[] = '40';
+            $encodingOptions[] = '-flags';
+            $encodingOptions[] = '+loop';
+            $encodingOptions[] = '-me_range';
+            $encodingOptions[] = '16';
+            $encodingOptions[] = '-subq';
+            $encodingOptions[] = '7';
+            $encodingOptions[] = '-i_qfactor';
+            $encodingOptions[] = '0.71';
+            $encodingOptions[] = '-qcomp';
+            $encodingOptions[] = '0.6';
+            $encodingOptions[] = '-qdiff';
+            $encodingOptions[] = '4';
+            $encodingOptions[] = '-trellis';
+            $encodingOptions[] = '1';
         }
 
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioKiloBitrate()) {
-                $commands[] = '-b:a';
-                $commands[] = $format->getAudioKiloBitrate() . 'k';
+                $encodingOptions[] = '-b:a';
+                $encodingOptions[] = $format->getAudioKiloBitrate() . 'k';
             }
             if (null !== $format->getAudioChannels()) {
-                $commands[] = '-ac';
-                $commands[] = $format->getAudioChannels();
+                $encodingOptions[] = '-ac';
+                $encodingOptions[] = $format->getAudioChannels();
             }
         }
 
-        $fs = FsManager::create();
-        $fsId = uniqid('ffmpeg-passes');
-        $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');
-        $passes = array();
-        $totalPasses = $format->getPasses();
+        return $this->transcode($outputPathfile, $encodingOptions, $format->getPasses(), $format);
+    }
 
-        if (1 > $totalPasses) {
+    /**
+     * Exports the video using manually provided encoding options
+     *
+     * @param string                     $outputPathfile
+     * @param array                      $encodingOptions
+     * @param number                     $totalPasses
+     * @param FormatInterface|callable   $progressable
+     *
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     *
+     * @return Video
+     */
+    public function transcode($outputPathfile, array $encodingOptions, $totalPasses = 1, $progressable = null)
+    {
+        $options = array_merge(array('-y', '-i', $this->pathfile), $encodingOptions);
+
+        if ($totalPasses < 1) {
             throw new InvalidArgumentException('Pass number should be a positive value.');
         }
 
-        for ($i = 1; $i <= $totalPasses; $i++) {
-            $pass = $commands;
-
-            if ($totalPasses > 1) {
-                $pass[] = '-pass';
-                $pass[] = $i;
-                $pass[] = '-passlogfile';
-                $pass[] = $passPrefix;
-            }
-
-            $pass[] = $outputPathfile;
-
-            $passes[] = $pass;
+        $commands = array();
+        if ($totalPasses > 1) {
+            $fs = FsManager::create();
+            $fsId = uniqid('ffmpeg-passes');
+            $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');
         }
 
         $failure = null;
+        for ($i = 0; $i < $totalPasses; $i++) {
+            $passNumber = $i + 1;
+            $command = $options;
+            if ($totalPasses > 1) {
+                $command = array_merge($command, array(
+                    '-pass', "$passNumber", '-passlogfile', $passPrefix
+                ));
+            }
+            $command[] = $outputPathfile;
 
-        foreach ($passes as $pass => $passCommands) {
             try {
-                /** add listeners here */
-                $listeners = null;
+                $listeners = $this->getListeners($progressable, $passNumber, $totalPasses);
+                $this->driver->command($command, false, $listeners);
 
-                if ($format instanceof ProgressableInterface) {
-                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses);
-                }
-
-                $this->driver->command($passCommands, false, $listeners);
             } catch (ExecutionFailureException $e) {
                 $failure = $e;
                 break;
             }
         }
 
-        $fs->clean($fsId);
+        if ($totalPasses > 1) {
+            $fs->clean($fsId);
+        }
 
-        if (null !== $failure) {
+        if ($failure) {
             throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
         }
 
         return $this;
+    }
+
+    private function getListeners($progressable, $passNumber, $totalPasses)
+    {
+        if ($progressable instanceof ProgressableInterface) {
+            return $progressable->createProgressListener($this, $this->ffprobe, $passNumber, $totalPasses);
+
+        } elseif (is_callable($progressable)) {
+            $media = $this;
+            $listener = new VideoProgressListener($this->ffprobe, $this->pathfile, $passNumber, $totalPasses);
+            $listener->on('progress', function() use ($progressable, $media) {
+                call_user_func_array($progressable, array_merge(array($media), func_get_args()));
+            });
+
+            return array($listener);
+        }
+
+        return null;
     }
 
     /**
