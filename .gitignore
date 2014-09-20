@@ -3,5 +3,4 @@
 /docs/build
 composer.phar
 composer.lock
-phpunit.xml
-
+phpunit*.xml
