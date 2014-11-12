@@ -11,7 +11,7 @@
 
 namespace FFMpeg\Media;
 
-use FFMpeg\FFProbe\DataMapping\Stream;
+use FFMpeg\FFProbe\DataMapping\Format;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
 abstract class AbstractStreamableMedia extends AbstractMediaType
@@ -31,7 +31,7 @@ abstract class AbstractStreamableMedia extends AbstractMediaType
     }
 
     /**
-     * @return Stream
+     * @return Format
      */
     public function getFormat()
     {
