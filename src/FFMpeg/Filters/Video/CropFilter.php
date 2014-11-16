@@ -44,6 +44,13 @@ class CropFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
+        foreach ($video->getStreams()->videos() as $stream) {
+            if ($stream->has('width') && $stream->has('height')) {
+                $stream->set('width', $this->dimension->getWidth());
+                $stream->set('height', $this->dimension->getHeight());
+            }
+        }
+
         return array(
             '-filter:v',
             'crop=' .
