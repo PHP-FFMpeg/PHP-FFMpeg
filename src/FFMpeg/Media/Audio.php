@@ -20,6 +20,7 @@ use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Filters\Audio\AudioFilterInterface;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\ProgressableInterface;
+use FFMpeg\Format\ProgressListener\AudioProgressListener;
 
 class Audio extends AbstractStreamableMedia
 {
@@ -101,5 +102,60 @@ class Audio extends AbstractStreamableMedia
         }
 
         return $this;
+    }
+
+    /**
+     * Exports the audio using manually provided encoding options
+     *
+     * @param string                     $outputPathfile
+     * @param array                      $encodingOptions
+     * @param number                     $totalPasses
+     * @param FormatInterface|callable   $progressable
+     *
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     *
+     * @return Video
+     */
+    public function transcode($outputPathfile, array $encodingOptions, $progressable = null)
+    {
+        $options = array_merge(array('-y', '-i', $this->pathfile), $encodingOptions);
+
+        $failure = null;
+        $command = $options;
+        $command[] = $outputPathfile;
+
+        try {
+            $listeners = $this->getListeners($progressable);
+            $this->driver->command($command, false, $listeners);
+
+        } catch (ExecutionFailureException $e) {
+            $failure = $e;
+            break;
+        }
+
+        if ($failure) {
+            throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
+        }
+
+        return $this;
+    }
+
+    private function getListeners($progressable)
+    {
+        if ($progressable instanceof ProgressableInterface) {
+            return $progressable->createProgressListener($this, $this->ffprobe, 1, 1);
+
+        } elseif (is_callable($progressable)) {
+            $media = $this;
+            $listener = new AudioProgressListener($this->ffprobe, $this->pathfile, 1, 1);
+            $listener->on('progress', function() use ($progressable, $media) {
+                call_user_func_array($progressable, array_merge(array($media), func_get_args()));
+            });
+
+            return array($listener);
+        }
+
+        return null;
     }
 }
