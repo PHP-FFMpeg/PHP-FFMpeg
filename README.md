@@ -241,8 +241,11 @@ pass a `FFMpeg\Format\FormatInterface` for that.
 Please note that audio kilobitrate is set on the audio format.
 
 ```php
-$format = new Format\Audio\Flac();
-$format->on('progress', function ($$audio, $format, $percentage) {
+$ffmpeg = FFMpeg\FFMpeg::create();
+$audio = $ffmpeg->open('track.mp3');
+
+$format = new FFMpeg\Format\Audio\Flac();
+$format->on('progress', function ($audio, $format, $percentage) {
     echo "$percentage % transcoded";
 });
 
