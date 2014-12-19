@@ -8,13 +8,13 @@ use FFMpeg\Format\VideoInterface;
 
 class VideoTest extends AbstractStreamableTestCase
 {
-    public function testFiltersReturnsVideoFilters()
+    public function testFiltersReturnsVideoOptions()
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Filters\Video\VideoFilters', $video->filters());
+        $this->assertInstanceOf('FFMpeg\Options\Video\VideoOptions', $video->options());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -22,20 +22,20 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $options = $this->getMockBuilder('FFMpeg\Options\OptionsCollection')
             ->disableOriginalConstructor()
             ->getMock();
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $video->setFiltersCollection($filters);
+        $video->setOptionsCollection($options);
 
-        $filter = $this->getMock('FFMpeg\Filters\Video\VideoFilterInterface');
+        $option = $this->getMock('FFMpeg\Options\Video\VideoOptionInterface');
 
-        $filters->expects($this->once())
+        $options->expects($this->once())
             ->method('add')
-            ->with($filter);
+            ->with($option);
 
-        $video->addFilter($filter);
+        $video->addOption($option);
     }
 
     public function testAddAudioFilterAddsAFilter()
@@ -43,20 +43,20 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $options = $this->getMockBuilder('FFMpeg\Options\OptionsCollection')
             ->disableOriginalConstructor()
             ->getMock();
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $video->setFiltersCollection($filters);
+        $video->setOptionsCollection($options);
 
-        $filter = $this->getMock('FFMpeg\Filters\Audio\AudioFilterInterface');
+        $option = $this->getMock('FFMpeg\Options\Audio\AudioOptionInterface');
 
-        $filters->expects($this->once())
+        $options->expects($this->once())
             ->method('add')
-            ->with($filter);
+            ->with($option);
 
-        $video->addFilter($filter);
+        $video->addOption($option);
     }
 
     public function testFrameShouldReturnAFrame()
@@ -124,8 +124,8 @@ class VideoTest extends AbstractStreamableTestCase
 
         $video = new Video(__FILE__, $driver, $ffprobe);
 
-        $filter = $this->getMock('FFMpeg\Filters\Video\VideoFilterInterface');
-        $filter->expects($this->once())
+        $option = $this->getMock('FFMpeg\Options\Video\VideoOptionInterface');
+        $option->expects($this->once())
             ->method('apply')
             ->with($video, $format)
             ->will($this->returnValue(array('extra-filter-command')));
@@ -139,7 +139,7 @@ class VideoTest extends AbstractStreamableTestCase
                 $capturedCommands[] = $commands;
             }));
 
-        $video->addFilter($filter);
+        $video->addOption($option);
         $video->save($format, $outputPathfile);
 
         foreach ($capturedCommands as $commands) {

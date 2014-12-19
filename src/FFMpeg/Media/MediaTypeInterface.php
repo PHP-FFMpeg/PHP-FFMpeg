@@ -14,9 +14,9 @@ namespace FFMpeg\Media;
 interface MediaTypeInterface
 {
     /**
-     * Returns the available filters.
+     * Returns the available options.
      */
-    public function filters();
+    public function options();
 
     /**
      * @return string

@@ -14,6 +14,7 @@ namespace FFMpeg\Media;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Filters\FiltersCollection;
+use FFMpeg\Options\OptionsCollection;
 
 abstract class AbstractMediaType implements MediaTypeInterface
 {
@@ -23,15 +24,15 @@ abstract class AbstractMediaType implements MediaTypeInterface
     protected $driver;
     /** @var FFProbe */
     protected $ffprobe;
-    /** @var FiltersCollection */
-    protected $filters;
+    /** @var OptionsCollection */
+    protected $options;
 
     public function __construct($pathfile, FFMpegDriver $driver, FFProbe $ffprobe)
     {
         $this->pathfile = $pathfile;
         $this->driver = $driver;
         $this->ffprobe = $ffprobe;
-        $this->filters = new FiltersCollection();
+        $this->options = new OptionsCollection();
     }
 
     /**
@@ -83,23 +84,23 @@ abstract class AbstractMediaType implements MediaTypeInterface
     }
 
     /**
-     * @param FiltersCollection $filters
+     * @param OptionsCollection $options
      *
      * @return MediaTypeInterface
      */
-    public function setFiltersCollection(FiltersCollection $filters)
+    public function setOptionsCollection(OptionsCollection $options)
     {
-        $this->filters = $filters;
+        $this->options = $options;
 
         return $this;
     }
 
     /**
-     * @return MediaTypeInterface
+     * @return OptionsCollection
      */
-    public function getFiltersCollection()
+    public function getOptionsCollection()
     {
-        return $this->filters;
+        return $this->options;
     }
 
     protected function cleanupTemporaryFile($filename)

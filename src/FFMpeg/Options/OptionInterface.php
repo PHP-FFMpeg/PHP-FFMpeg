@@ -9,10 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace FFMpeg\Filters;
+namespace FFMpeg\Options;
 
-interface FilterInterface
+interface OptionInterface
 {
-    public function getName();
-    public function __toString();
+    /**
+     * Returns the priority of the option.
+     *
+     * @return integer
+     */
+    public function getPriority();
 }

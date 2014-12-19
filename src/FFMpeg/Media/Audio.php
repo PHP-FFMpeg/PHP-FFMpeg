@@ -12,25 +12,25 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Format\FormatInterface;
-use FFMpeg\Filters\Audio\SimpleFilter;
+use FFMpeg\Options\Audio\AudioOptionInterface;
+use FFMpeg\Options\Audio\AudioOptions;
+use FFMpeg\Options\Audio\SimpleOption;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Exception\InvalidArgumentException;
-use FFMpeg\Filters\Audio\AudioFilterInterface;
-use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\ProgressableInterface;
+use FFMpeg\Options\OptionInterface;
 
 class Audio extends AbstractStreamableMedia
 {
     /**
      * {@inheritdoc}
      *
-     * @return AudioFilters
+     * @return AudioOptions
      */
-    public function filters()
+    public function options()
     {
-        return new AudioFilters($this);
+        return new AudioOptions($this);
     }
 
     /**
@@ -38,13 +38,13 @@ class Audio extends AbstractStreamableMedia
      *
      * @return Audio
      */
-    public function addFilter(FilterInterface $filter)
+    public function addOption(OptionInterface $option)
     {
-        if (!$filter instanceof AudioFilterInterface) {
+        if (!$option instanceof AudioOptionInterface) {
             throw new InvalidArgumentException('Audio only accepts AudioFilterInterface filters');
         }
 
-        $this->filters->add($filter);
+        $this->options->add($option);
 
         return $this;
     }
@@ -69,18 +69,18 @@ class Audio extends AbstractStreamableMedia
 
         $commands = array('-y', '-i', $this->pathfile);
 
-        $filters = clone $this->filters;
-        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
+        $options = clone $this->options;
+        $options->add(new SimpleOption($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $options->add(new SimpleOption(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
         }
         if (null !== $format->getAudioCodec()) {
-            $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+            $options->add(new SimpleOption(array('-acodec', $format->getAudioCodec())));
         }
 
-        foreach ($filters as $filter) {
-            $commands = array_merge($commands, $filter->apply($this, $format));
+        foreach ($options as $option) {
+            $commands = array_merge($commands, $option->apply($this, $format));
         }
 
         if (null !== $format->getAudioKiloBitrate()) {

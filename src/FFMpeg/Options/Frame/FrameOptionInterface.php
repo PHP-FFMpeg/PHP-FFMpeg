@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace FFMpeg\Filters;
+namespace FFMpeg\Options\Frame;
 
-interface FilterInterface
+use FFMpeg\Options\OptionInterface;
+use FFMpeg\Media\Frame;
+
+interface FrameOptionInterface extends OptionInterface
 {
-    public function getName();
-    public function __toString();
+    public function apply(Frame $frame);
 }

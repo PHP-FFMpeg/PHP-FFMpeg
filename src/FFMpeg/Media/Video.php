@@ -13,15 +13,15 @@ namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Filters\Video\VideoFilters;
-use FFMpeg\Filters\FilterInterface;
+use FFMpeg\Options\OptionInterface;
+use FFMpeg\Options\Video\VideoOptions;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Options\Audio\SimpleOption;
 use Neutron\TemporaryFilesystem\Manager as FsManager;
 
 class Video extends Audio
@@ -29,11 +29,11 @@ class Video extends Audio
     /**
      * {@inheritdoc}
      *
-     * @return VideoFilters
+     * @return VideoOptions
      */
-    public function filters()
+    public function options()
     {
-        return new VideoFilters($this);
+        return new VideoOptions($this);
     }
 
     /**
@@ -41,9 +41,9 @@ class Video extends Audio
      *
      * @return Video
      */
-    public function addFilter(FilterInterface $filter)
+    public function addOption(OptionInterface $option)
     {
-        $this->filters->add($filter);
+        $this->options->add($option);
 
         return $this;
     }
@@ -62,25 +62,25 @@ class Video extends Audio
     {
         $commands = array('-y', '-i', $this->pathfile);
 
-        $filters = clone $this->filters;
-        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
+        $options = clone $this->options;
+        $options->add(new SimpleOption($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $options->add(new SimpleOption(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
         }
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+                $options->add(new SimpleOption(array('-vcodec', $format->getVideoCodec())));
             }
         }
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+                $options->add(new SimpleOption(array('-acodec', $format->getAudioCodec())));
             }
         }
 
-        foreach ($filters as $filter) {
-            $commands = array_merge($commands, $filter->apply($this, $format));
+        foreach ($options as $options) {
+            $commands = array_merge($commands, $options->apply($this, $format));
         }
 
         if ($format instanceof VideoInterface) {

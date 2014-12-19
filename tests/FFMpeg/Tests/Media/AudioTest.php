@@ -8,13 +8,13 @@ use FFMpeg\Format\AudioInterface;
 
 class AudioTest extends AbstractStreamableTestCase
 {
-    public function testFiltersReturnsAudioFilters()
+    public function testFiltersReturnsAudioOptions()
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Filters\Audio\AudioFilters', $audio->filters());
+        $this->assertInstanceOf('FFMpeg\Options\Audio\AudioOptions', $audio->options());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -22,20 +22,20 @@ class AudioTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $options = $this->getMockBuilder('FFMpeg\Options\OptionsCollection')
             ->disableOriginalConstructor()
             ->getMock();
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
-        $audio->setFiltersCollection($filters);
+        $audio->setOptionsCollection($options);
 
-        $filter = $this->getMock('FFMpeg\Filters\Audio\AudioFilterInterface');
+        $option = $this->getMock('FFMpeg\Options\Audio\AudioOptionInterface');
 
-        $filters->expects($this->once())
+        $options->expects($this->once())
             ->method('add')
-            ->with($filter);
+            ->with($option);
 
-        $audio->addFilter($filter);
+        $audio->addOption($option);
     }
 
     public function testAddAVideoFilterThrowsException()
@@ -43,20 +43,20 @@ class AudioTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $options = $this->getMockBuilder('FFMpeg\Options\OptionsCollection')
             ->disableOriginalConstructor()
             ->getMock();
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
-        $audio->setFiltersCollection($filters);
+        $audio->setOptionsCollection($options);
 
-        $filter = $this->getMock('FFMpeg\Filters\Video\VideoFilterInterface');
+        $option = $this->getMock('FFMpeg\Options\Video\VideoOptionInterface');
 
-        $filters->expects($this->never())
+        $options->expects($this->never())
             ->method('add');
 
         $this->setExpectedException('FFMpeg\Exception\InvalidArgumentException');
-        $audio->addFilter($filter);
+        $audio->addOption($option);
     }
 
     public function testSaveWithFailure()
@@ -104,8 +104,8 @@ class AudioTest extends AbstractStreamableTestCase
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
 
-        $filter = $this->getMock('FFMpeg\Filters\Audio\AudioFilterInterface');
-        $filter->expects($this->once())
+        $option = $this->getMock('FFMpeg\Options\Audio\AudioOptionInterface');
+        $option->expects($this->once())
             ->method('apply')
             ->with($audio, $format)
             ->will($this->returnValue(array('extra-filter-command')));
@@ -119,7 +119,7 @@ class AudioTest extends AbstractStreamableTestCase
                 $capturedCommands[] = $commands;
             }));
 
-        $audio->addFilter($filter);
+        $audio->addOption($option);
         $audio->save($format, $outputPathfile);
 
         foreach ($capturedCommands as $commands) {

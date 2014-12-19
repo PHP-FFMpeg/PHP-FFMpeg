@@ -12,7 +12,10 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Filters\AbstractFilter;
 
-class CustomFilter extends AbstractFilter implements VideoFilterInterface
+class CropFilter extends AbstractFilter implements VideoFilterInterface
 {
-
+    public function __construct($w, $h, $x, $y, $keepAspect = 0)
+    {
+        parent::__construct('crop', array($w, $h, $x, $y, $keepAspect));
+    }
 }

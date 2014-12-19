@@ -12,12 +12,12 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Filters\Frame\FrameFilterInterface;
-use FFMpeg\Filters\Frame\FrameFilters;
+use FFMpeg\Options\Frame\FrameOptionInterface;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Options\Frame\FrameOptions;
 
 class Frame extends AbstractMediaType
 {
@@ -46,11 +46,11 @@ class Frame extends AbstractMediaType
     /**
      * {@inheritdoc}
      *
-     * @return FrameFilters
+     * @return FrameOptions
      */
-    public function filters()
+    public function options()
     {
-        return new FrameFilters($this);
+        return new FrameOptions($this);
     }
 
     /**
@@ -58,9 +58,9 @@ class Frame extends AbstractMediaType
      *
      * @return Frame
      */
-    public function addFilter(FrameFilterInterface $filter)
+    public function addOption(FrameOptionInterface $filter)
     {
-        $this->filters->add($filter);
+        $this->options->add($filter);
 
         return $this;
     }
@@ -106,8 +106,8 @@ class Frame extends AbstractMediaType
             );
         }
 
-        foreach ($this->filters as $filter) {
-            $commands = array_merge($commands, $filter->apply($this));
+        foreach ($this->options as $option) {
+            $commands = array_merge($commands, $option->apply($this));
         }
 
         $commands = array_merge($commands, array($pathfile));
