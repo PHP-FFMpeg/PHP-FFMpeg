@@ -51,7 +51,7 @@ class X264 extends DefaultVideo
      */
     public function getAvailableAudioCodecs()
     {
-        return array('libvo_aacenc', 'libfaac', 'libmp3lame');
+        return array('libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac');
     }
 
     /**
