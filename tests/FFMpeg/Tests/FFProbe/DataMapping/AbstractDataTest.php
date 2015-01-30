@@ -25,14 +25,10 @@ class AbstractDataTest extends TestCase
         $this->assertEquals('value2', $imp->get('key2'));
     }
 
-    /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
-     */
-    public function testGetInvalid()
+    public function testGetDefault()
     {
         $imp = new Implementation(array('key1' => 'value1', 'key2' => 'value2'));
-
-        $imp->get('key3');
+        $this->assertSame('yololo', $imp->get('key3', 'yololo'));
     }
 
     public function testKeys()

@@ -37,18 +37,14 @@ abstract class AbstractData implements \Countable
      * Returns the property value given its name.
      *
      * @param  string $property
-     * @param  mixed  $default [optional]
-     * @return mixed
+     * @param  mixed  $default
      *
-     * @throws InvalidArgumentException In case the data does not have the property
+     * @return mixed
      */
     public function get($property, $default = null)
     {
         if (!isset($this->properties[$property])) {
-            if(!is_null($default)){
-                return $default;
-            }
-            throw new InvalidArgumentException(sprintf('Invalid property `%s`.', $property));
+            return $default;
         }
 
         return $this->properties[$property];

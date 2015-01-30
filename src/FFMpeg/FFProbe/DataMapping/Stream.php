@@ -24,7 +24,7 @@ class Stream extends AbstractData
      */
     public function isAudio()
     {
-        return $this->has('codec_type') ? 'audio' === $this->get('codec_type') : false;
+        return $this->get('codec_type') === 'audio';
     }
 
     /**
@@ -34,7 +34,7 @@ class Stream extends AbstractData
      */
     public function isVideo()
     {
-        return $this->has('codec_type') ? 'video' === $this->get('codec_type') : false;
+        return $this->get('codec_type') === 'video';
     }
 
     /**
@@ -51,14 +51,11 @@ class Stream extends AbstractData
             throw new LogicException('Dimensions can only be retrieved from video streams.');
         }
 
-        $width = $height = $sampleRatio = $displayRatio = null;
+        $sampleRatio = $displayRatio = null;
 
-        if ($this->has('width')) {
-            $width = $this->get('width');
-        }
-        if ($this->has('height')) {
-            $height = $this->get('height');
-        }
+        $width = $this->get('width');
+        $height = $this->get('height');
+
         if (null !== $ratio = $this->extractRatio($this, 'sample_aspect_ratio')) {
             $sampleRatio = $ratio;
         }
@@ -93,18 +90,18 @@ class Stream extends AbstractData
      */
     private function extractRatio(Stream $stream, $name)
     {
-        if ($stream->has($name)) {
-            $ratio = $stream->get($name);
-            if (preg_match('/\d+:\d+/', $ratio)) {
-                $data = array_filter(explode(':', $ratio), function ($int) {
-                    return $int > 0;
-                });
-                if (2 === count($data)) {
-                    return array_map(function ($int) { return (int) $int; }, $data);
-                }
-            }
+        if (!$stream->has($name)) {
+            return;
         }
 
-        return null;
+        $ratio = $stream->get($name);
+        if (preg_match('/\d+:\d+/', $ratio)) {
+            $data = array_filter(explode(':', $ratio), function ($int) {
+                return $int > 0;
+            });
+            if (2 === count($data)) {
+                return array_map(function ($int) { return (int) $int; }, $data);
+            }
+        }
     }
 }
