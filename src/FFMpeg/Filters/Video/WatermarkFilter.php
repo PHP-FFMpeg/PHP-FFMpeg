@@ -11,6 +11,7 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
@@ -25,6 +26,10 @@ class WatermarkFilter implements VideoFilterInterface
 
     public function __construct($watermarkPath, array $coordinates = array(), $priority = 0)
     {
+        if (!file_exists($watermarkPath)) {
+            throw new InvalidArgumentException(sprintf('File %s does not exist', $watermarkPath));
+        }
+
         $this->watermarkPath = $watermarkPath;
         $this->coordinates = $coordinates;
         $this->priority = $priority;
