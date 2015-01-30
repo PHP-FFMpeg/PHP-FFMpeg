@@ -1,6 +1,12 @@
 CHANGELOG
 ---------
 
+* 0.6.0 (xx-xx-2015)
+
+ * AbstractData::get no longer throws exceptions (@sujayjaju).
+ * Add crop filter (@cangelis).
+ * Fix watermark (@sujayjaju).
+
 * 0.5.1 (08-26-2014)
 
   * Fix video aspect ratio calculation (@nlegoff).
