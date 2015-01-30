@@ -70,6 +70,6 @@ class WatermarkFilter implements VideoFilterInterface
                 break;
         }
 
-        return array('-vf', sprintf('overlay %s:%s', $x, $y));
+        return array('-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s [out]', $this->watermarkPath, $x, $y));
     }
 }
