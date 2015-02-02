@@ -36,7 +36,7 @@ class WebM extends DefaultVideo
      */
     public function getExtraParams()
     {
-        return array('-f', 'webm');
+        return array_merge(parent::getExtraParams(), array('-f', 'webm'));
     }
 
     /**

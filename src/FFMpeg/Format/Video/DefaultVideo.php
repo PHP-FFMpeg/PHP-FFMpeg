@@ -110,4 +110,32 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
 
         return $listeners;
     }
+
+    public function getExtraParams()
+    {
+        $params = parent::getExtraParams();
+
+        $params[] = '-refs';
+        $params[] = '6';
+        $params[] = '-coder';
+        $params[] = '1';
+        $params[] = '-sc_threshold';
+        $params[] = '40';
+        $params[] = '-flags';
+        $params[] = '+loop';
+        $params[] = '-me_range';
+        $params[] = '16';
+        $params[] = '-subq';
+        $params[] = '7';
+        $params[] = '-i_qfactor';
+        $params[] = '0.71';
+        $params[] = '-qcomp';
+        $params[] = '0.6';
+        $params[] = '-qdiff';
+        $params[] = '4';
+        $params[] = '-trellis';
+        $params[] = '1';
+
+        return $params;
+    }
 }

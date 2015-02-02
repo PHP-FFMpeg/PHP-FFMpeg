@@ -53,70 +53,45 @@ class Video extends Audio
      *
      * @param FormatInterface $format
      * @param string          $outputPathfile
+     * @param array           $additionalOptions
      *
      * @return Video
      *
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, $outputPathfile, array $additionalOptions = array())
     {
         $commands = array('-y', '-i', $this->pathfile);
 
         $filters = clone $this->filters;
-        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
-        }
-        if ($format instanceof VideoInterface) {
-            if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
-            }
         }
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioCodec()) {
                 $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
             }
+            if (null !== $format->getAudioKiloBitrate()) {
+                $filters->add(new SimpleFilter(array('-b:a', $format->getAudioKiloBitrate().'k')));
+            }
+            if (null !== $format->getAudioChannels()) {
+                $filters->add(new SimpleFilter(array('-ac', $format->getAudioChannels())));
+            }
         }
+        if ($format instanceof VideoInterface) {
+            if (null !== $format->getVideoCodec()) {
+                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+            }
+            if (null !== $format->getKiloBitrate()) {
+                $filters->add(new SimpleFilter(array('-b:v', $format->getKiloBitrate().'k')));
+            }
+        }
+        $filters->add(new SimpleFilter($additionalOptions));
+        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         foreach ($filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this, $format));
-        }
-
-        if ($format instanceof VideoInterface) {
-            $commands[] = '-b:v';
-            $commands[] = $format->getKiloBitrate() . 'k';
-            $commands[] = '-refs';
-            $commands[] = '6';
-            $commands[] = '-coder';
-            $commands[] = '1';
-            $commands[] = '-sc_threshold';
-            $commands[] = '40';
-            $commands[] = '-flags';
-            $commands[] = '+loop';
-            $commands[] = '-me_range';
-            $commands[] = '16';
-            $commands[] = '-subq';
-            $commands[] = '7';
-            $commands[] = '-i_qfactor';
-            $commands[] = '0.71';
-            $commands[] = '-qcomp';
-            $commands[] = '0.6';
-            $commands[] = '-qdiff';
-            $commands[] = '4';
-            $commands[] = '-trellis';
-            $commands[] = '1';
-        }
-
-        if ($format instanceof AudioInterface) {
-            if (null !== $format->getAudioKiloBitrate()) {
-                $commands[] = '-b:a';
-                $commands[] = $format->getAudioKiloBitrate() . 'k';
-            }
-            if (null !== $format->getAudioChannels()) {
-                $commands[] = '-ac';
-                $commands[] = $format->getAudioChannels();
-            }
         }
 
         $fs = FsManager::create();
