@@ -1,5 +1,6 @@
 /nbproject/
 /vendor/
+/.idea/*
 /docs/build
 composer.phar
 phpunit.xml
