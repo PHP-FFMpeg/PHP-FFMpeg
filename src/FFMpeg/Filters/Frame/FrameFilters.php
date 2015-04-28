@@ -11,6 +11,7 @@
 
 namespace FFMpeg\Filters\Frame;
 
+use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Media\Frame;
 
 class FrameFilters
@@ -33,6 +34,22 @@ class FrameFilters
     public function fixDisplayRatio()
     {
         $this->frame->addFilter(new DisplayRatioFixerFilter());
+
+        return $this;
+    }
+
+    /**
+     * Resizes a frame to a given dimension.
+     *
+     * @param Dimension $dimension
+     * @param string    $mode
+     * @param Boolean   $forceStandards
+     *
+     * @return FrameFilters
+     */
+    public function resize(Dimension $dimension, $mode = ResizeFilter::RESIZEMODE_FIT, $forceStandards = true)
+    {
+        $this->frame->addFilter(new ResizeFilter($dimension, $mode, $forceStandards));
 
         return $this;
     }
