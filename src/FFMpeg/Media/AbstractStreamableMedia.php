@@ -24,7 +24,7 @@ abstract class AbstractStreamableMedia extends AbstractMediaType
     public function getStreams()
     {
         if (null === $this->streams) {
-            $this->streams = $this->ffprobe->streams($this->pathfile);
+            $this->streams = $this->ffprobe->streams($this->filePath);
         }
 
         return $this->streams;
@@ -35,6 +35,6 @@ abstract class AbstractStreamableMedia extends AbstractMediaType
      */
     public function getFormat()
     {
-        return $this->ffprobe->format($this->pathfile);
+        return $this->ffprobe->format($this->filePath);
     }
 }

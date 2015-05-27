@@ -28,7 +28,7 @@ class Frame extends AbstractMediaType
 
     public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode)
     {
-        parent::__construct($video->getPathfile(), $driver, $ffprobe);
+        parent::__construct($video->getFilePath(), $driver, $ffprobe);
         $this->timecode = $timecode;
         $this->video = $video;
     }
@@ -94,13 +94,13 @@ class Frame extends AbstractMediaType
         if (!$accurate) {
             $commands = array(
                 '-y', '-ss', (string) $this->timecode,
-                '-i', $this->pathfile,
+                '-i', $this->filePath,
                 '-vframes', '1',
                 '-f', 'image2'
             );
         } else {
             $commands = array(
-                '-y', '-i', $this->pathfile,
+                '-y', '-i', $this->filePath,
                 '-vframes', '1', '-ss', (string) $this->timecode,
                 '-f', 'image2'
             );

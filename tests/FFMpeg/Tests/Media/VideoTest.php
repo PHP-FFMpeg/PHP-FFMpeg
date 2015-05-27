@@ -71,7 +71,7 @@ class VideoTest extends AbstractStreamableTestCase
 
         $this->assertInstanceOf('FFMpeg\Media\Frame', $frame);
         $this->assertSame($at, $frame->getTimeCode());
-        $this->assertSame(__FILE__, $frame->getPathfile());
+        $this->assertSame(__FILE__, $frame->getFilePath());
     }
 
     public function testSaveWithFailure()

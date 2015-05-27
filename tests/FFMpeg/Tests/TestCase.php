@@ -136,7 +136,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $video->expects($this->any())
-            ->method('getPathfile')
+            ->method('getFilePath')
             ->will($this->returnValue($filename));
 
         return $video;

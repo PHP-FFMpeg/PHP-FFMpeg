@@ -52,15 +52,15 @@ class Video extends Audio
      * Exports the video in the desired format, applies registered filters.
      *
      * @param FormatInterface $format
-     * @param string          $outputPathfile
+     * @param string          $outputFilePath
      *
      * @return Video
      *
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, $outputFilePath)
     {
-        $commands = array('-y', '-i', $this->pathfile);
+        $commands = array('-y', '-i', $this->filePath);
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
@@ -139,7 +139,7 @@ class Video extends Audio
                 $pass[] = $passPrefix;
             }
 
-            $pass[] = $outputPathfile;
+            $pass[] = $outputFilePath;
 
             $passes[] = $pass;
         }

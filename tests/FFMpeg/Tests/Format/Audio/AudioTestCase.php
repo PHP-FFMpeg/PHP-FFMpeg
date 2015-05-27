@@ -103,7 +103,7 @@ abstract class AudioTestCase extends TestCase
     {
         $media = $this->getMock('FFMpeg\Media\MediaTypeInterface');
         $media->expects($this->any())
-            ->method('getPathfile')
+            ->method('getFilePath')
             ->will($this->returnValue(__FILE__));
         $format = $this->getFormat();
         $ffprobe = $this->getFFProbeMock();
