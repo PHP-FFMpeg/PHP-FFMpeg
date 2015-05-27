@@ -67,7 +67,7 @@ class Audio extends AbstractStreamableMedia
             $listeners = $format->createProgressListener($this, $this->ffprobe, 1, 1);
         }
 
-        $commands = array('-y', '-i', $this->pathfile);
+        $commands = array('-y', '-i', $this->filePath);
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));

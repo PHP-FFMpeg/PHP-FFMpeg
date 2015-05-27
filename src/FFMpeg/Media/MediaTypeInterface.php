@@ -21,5 +21,5 @@ interface MediaTypeInterface
     /**
      * @return string
      */
-    public function getPathfile();
+    public function getFilePath();
 }

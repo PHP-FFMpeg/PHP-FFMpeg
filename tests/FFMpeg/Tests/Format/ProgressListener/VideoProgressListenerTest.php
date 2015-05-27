@@ -37,8 +37,8 @@ class VideoProgressListenerTest extends TestCase
             } elseif (1 === $n) {
                 $phpunit->assertEquals($expectedPercent2, $percent);
                 $phpunit->assertEquals($expectedRemaining2, $remaining);
-                $phpunit->assertLessThan($expectedRate2 + 10, $rate);
-                $phpunit->assertGreaterThan($expectedRate2 - 10, $rate);
+                $phpunit->assertLessThan($expectedRate2 + (3 * $expectedRate2 / 100), $rate);
+                $phpunit->assertGreaterThan($expectedRate2 - (3 * $expectedRate2 / 100), $rate);
             }
             $n++;
         });

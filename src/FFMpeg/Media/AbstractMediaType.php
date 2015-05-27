@@ -18,7 +18,7 @@ use FFMpeg\Filters\FiltersCollection;
 abstract class AbstractMediaType implements MediaTypeInterface
 {
     /** @var string */
-    protected $pathfile;
+    protected $filePath;
     /** @var FFMpegDriver */
     protected $driver;
     /** @var FFProbe */
@@ -26,9 +26,13 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /** @var FiltersCollection */
     protected $filters;
 
-    public function __construct($pathfile, FFMpegDriver $driver, FFProbe $ffprobe)
+    public function __construct(
+        $filePath,
+        FFMpegDriver $driver,
+        FFProbe $ffprobe
+    )
     {
-        $this->pathfile = $pathfile;
+        $this->filePath = $filePath;
         $this->driver = $driver;
         $this->ffprobe = $ffprobe;
         $this->filters = new FiltersCollection();
@@ -77,9 +81,9 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /**
      * @return string
      */
-    public function getPathfile()
+    public function getFilePath()
     {
-        return $this->pathfile;
+        return $this->filePath;
     }
 
     /**

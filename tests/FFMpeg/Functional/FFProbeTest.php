@@ -13,7 +13,7 @@ class FFProbeTest extends FunctionalTestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\RuntimeException
+     * @expectedException \FFMpeg\Exception\RuntimeException
      */
     public function testProbeOnUnexistantFile()
     {

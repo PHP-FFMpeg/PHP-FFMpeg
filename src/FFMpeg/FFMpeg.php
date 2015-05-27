@@ -35,7 +35,7 @@ class FFMpeg
     /**
      * Sets FFProbe.
      *
-     * @param FFProbe
+     * @param FFProbe $ffprobe
      *
      * @return FFMpeg
      */
@@ -59,6 +59,8 @@ class FFMpeg
     /**
      * Sets the ffmpeg driver.
      *
+     * @param FFMpegDriver $ffmpeg
+     *
      * @return FFMpeg
      */
     public function setFFMpegDriver(FFMpegDriver $ffmpeg)
@@ -81,22 +83,20 @@ class FFMpeg
     /**
      * Opens a file in order to be processed.
      *
-     * @param string $pathfile A pathfile
+     * @param string $filePath A file path
      *
      * @return Audio|Video
-     *
-     * @throws InvalidArgumentException
      */
-    public function open($pathfile)
+    public function open($filePath)
     {
-        if (null === $streams = $this->ffprobe->streams($pathfile)) {
-            throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
+        if (null === $streams = $this->ffprobe->streams($filePath)) {
+            throw new RuntimeException(sprintf('Unable to probe "%s".', $filePath));
         }
 
         if (0 < count($streams->videos())) {
-            return new Video($pathfile, $this->driver, $this->ffprobe);
+            return new Video($filePath, $this->driver, $this->ffprobe);
         } elseif (0 < count($streams->audios())) {
-            return new Audio($pathfile, $this->driver, $this->ffprobe);
+            return new Audio($filePath, $this->driver, $this->ffprobe);
         }
 
         throw new InvalidArgumentException('Unable to detect file format, only audio and video supported');

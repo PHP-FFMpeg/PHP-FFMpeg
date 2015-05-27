@@ -40,7 +40,7 @@ abstract class VideoTestCase extends AudioTestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
+     * @expectedException \FFMpeg\Exception\InvalidArgumentException
      */
     public function testSetInvalidVideoCodec()
     {
@@ -56,7 +56,7 @@ abstract class VideoTestCase extends AudioTestCase
     {
         $media = $this->getMock('FFMpeg\Media\MediaTypeInterface');
         $media->expects($this->any())
-            ->method('getPathfile')
+            ->method('getFilePath')
             ->will($this->returnValue(__FILE__));
         $format = $this->getFormat();
         $ffprobe = $this->getFFProbeMock();

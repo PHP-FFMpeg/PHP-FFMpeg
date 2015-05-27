@@ -132,4 +132,17 @@ class VideoFilters extends AudioFilters
 
         return $this;
     }
+
+    /**
+     * Merges the inputs and additional inputs together
+     *
+     * @param array $additionalInputFiles Additional input files paths
+     *
+     * @return $this
+     */
+    public function merge($additionalInputFiles){
+        $this->media->addFilter(new MergeFilter($additionalInputFiles));
+
+        return $this;
+    }
 }
