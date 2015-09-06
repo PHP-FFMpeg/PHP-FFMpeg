@@ -121,6 +121,14 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
+     * @return int
+     */
+    public function getCurrentTime()
+    {
+        return $this->currentTime;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function handle($type, $data)
