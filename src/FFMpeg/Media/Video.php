@@ -154,7 +154,7 @@ class Video extends Audio
         $commands[] = '-r';
         $commands[] = 30;
         $commands[] = '-s';
-        $commands[] = '480x480';
+        $commands[] = '680x680';
         $commands[] = '-coder';
         $commands[] = 1;
         $commands[] = '-flags';
