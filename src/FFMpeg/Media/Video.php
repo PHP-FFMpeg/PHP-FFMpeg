@@ -84,7 +84,7 @@ class Video extends Audio
         }
 
         if ($format instanceof VideoInterface) {
-            $commands[] = '-b:v';
+            $commands[] = '-vb';
             $commands[] = $format->getKiloBitrate() . 'k';
             $commands[] = '-refs';
             $commands[] = '6';
@@ -110,7 +110,7 @@ class Video extends Audio
 
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioKiloBitrate()) {
-                $commands[] = '-b:a';
+                $commands[] = '-ab';
                 $commands[] = $format->getAudioKiloBitrate() . 'k';
             }
             if (null !== $format->getAudioChannels()) {
