@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": "^5.3.9 || ^7.0",
         "alchemy/binary-driver": "^1.5",
         "doctrine/cache": "^1.0",
         "evenement/evenement": "^2.0 || ^1.0",
@@ -34,11 +34,16 @@
     "require-dev": {
         "sami/sami": "~1.0",
         "silex/silex": "~1.0",
-        "phpunit/phpunit": "~3.7"
+        "phpunit/phpunit": "^4.8"
     },
     "autoload": {
         "psr-0": {
             "FFMpeg": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\FFMpeg\\": "tests"
         }
     },
     "extra": {
