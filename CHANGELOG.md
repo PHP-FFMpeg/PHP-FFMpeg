@@ -1,7 +1,14 @@
 CHANGELOG
 ---------
 
-* 0.6.0 (xx-xx-2015)
+* 0.6.1 (2016-03-08)
+
+ * Support PHP 7 and test against
+ * Unused code cleanup (@haphan)
+ * Composer and tests cleanup (PSR-4 autoloading)
+ * Allow usage of evenement v2.0
+
+* 0.6.0 (2016-01-30)
 
  * AbstractData::get no longer throws exceptions (@sujayjaju).
  * Add crop filter (@cangelis).
