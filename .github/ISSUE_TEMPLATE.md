@@ -1,16 +1,18 @@
-| Q            | A
-| ------------ | ---
-| Bug?         | no
-| Version Used | Specific tag or commit sha
-| New Feature? | no
+| Q              | A
+| -------------- | ---
+| Bug?           | no
+| New Feature?   | no
+| Version Used   | Specific tag or commit sha
+| FFmpeg Version | FFmpeg or AVConv and version
+| OS             | Your OS and version
+
+#### Actual Behavior
+
+How does PHP-FFMpeg behave at the moment?
 
 #### Expected Behavior
 
 What is the behavior you expect?
-
-#### Actual Behavior
-
-How does Sulu behave at the moment? 
 
 #### Steps to Reproduce
 

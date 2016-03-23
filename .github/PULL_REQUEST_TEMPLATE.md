@@ -1,9 +1,9 @@
 | Q                  | A
 | ------------------ | ---
-| Bug fix?           | yes
-| New feature?       | yes
-| BC breaks?         | yes
-| Deprecations?      | yes
+| Bug fix?           | no
+| New feature?       | no
+| BC breaks?         | no
+| Deprecations?      | no
 | Fixed tickets      | fixes #issuenum
 | Related issues/PRs | #issuenum
 | License            | MIT
@@ -18,7 +18,7 @@ Which problem does the PR fix?
 
 #### Example Usage
 
-~~~php
+```php
 $foo = new Foo();
 
 // Now we can do
