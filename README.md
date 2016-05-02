@@ -196,24 +196,28 @@ The resize filter takes three parameters :
 Watermark a video with a given image.
 
 ```php
-$video->filters()->watermark($watermarkPath, [
+$video
+    ->filters()
+    ->watermark($watermarkPath, array(
         'position' => 'relative',
         'bottom' => 50,
         'right' => 50,
-      ])
+    ));
 ```
 
 The watermark filter takes two parameters:
 
-$watermarkPath, the path to your watermark file.
-$coordinates, an array defining how you want your watermark positioned. You can use relative positioning as demonstrated above or absolute as such:
+`$watermarkPath`, the path to your watermark file.
+`$coordinates`, an array defining how you want your watermark positioned. You can use relative positioning as demonstrated above or absolute as such:
 
 ```php
-$video->filters()->watermark($watermarkPath, [
+$video
+    ->filters()
+    ->watermark($watermarkPath, array(
         'position' => 'absolute',
         'x' => 1180,
         'y' => 620,
-      ])
+    ));
 ```
 
 ###### Framerate
