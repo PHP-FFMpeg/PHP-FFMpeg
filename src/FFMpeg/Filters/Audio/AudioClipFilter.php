@@ -1,4 +1,5 @@
-s file is part of PHP-FFmpeg.
+/*
+ * This file is part of PHP-FFmpeg.
  *
  * (c) Alchemy <dev.team@alchemy.fr>
  *
