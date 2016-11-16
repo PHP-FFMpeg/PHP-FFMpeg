@@ -23,16 +23,15 @@ class WaveformFilters
     }
 
     /**
-     * Fixes the display ratio of the output waveform.
+     * Sets the downmix of the output waveform.
      *
-     * In case the sample ratio and display ratio are different, image may be
-     * anamorphozed. This filter fixes this by specifying the output size.
+     * If you want a simpler waveform, sets the downmix to TRUE.
      *
      * @return WaveformFilters
      */
-    public function fixDisplayRatio()
+    public function setDownmix()
     {
-        $this->waveform->addFilter(new DisplayRatioFixerFilter());
+        $this->waveform->addFilter(new DownmixFilter());
 
         return $this;
     }

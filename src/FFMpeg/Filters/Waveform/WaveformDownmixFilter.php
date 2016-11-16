@@ -14,15 +14,19 @@ namespace FFMpeg\Filters\Waveform;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Waveform;
 
-class WaveformRatioFixerFilter implements WaveformFilterInterface
+class WaveformDownmixFilter implements WaveformFilterInterface
 {
+
     /** @var boolean */
     private $downmix;
+    /** @var integer */
+    private $priority;
 
     // By default, the downmix value is set to FALSE.
-    public function __construct($downmix = FALSE)
+    public function __construct($downmix = FALSE, $priority = 0)
     {
         $this->downmix = $downmix;
+        $this->priority = $priority;
     }
 
     /**
@@ -31,6 +35,14 @@ class WaveformRatioFixerFilter implements WaveformFilterInterface
     public function getDownmix()
     {
         return $this->downmix;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 
     /**

@@ -12,7 +12,7 @@ class WaveformTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $waveform = new Waveform($this->getVideoMock(__FILE__), $driver, $ffprobe);
+        $waveform = new Waveform($this->getAudioMock(__FILE__), $driver, $ffprobe, 640, 120);
         $this->assertInstanceOf('FFMpeg\Filters\Waveform\WaveformFilters', $waveform->filters());
     }
 
@@ -31,7 +31,7 @@ class WaveformTest extends AbstractMediaTestCase
             ->method('add')
             ->with($filter);
 
-        $waveform = new Waveform($this->getVideoMock(__FILE__), $driver, $ffprobe);
+        $waveform = new Waveform($this->getAudioMock(__FILE__), $driver, $ffprobe, 640, 120);
         $waveform->setFiltersCollection($filters);
         $waveform->addFilter($filter);
     }
@@ -44,7 +44,7 @@ class WaveformTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $pathfile = '/target/destination';
+        $pathfile = '/tests/files/Audio.mp3';
 
         array_push($commands, $pathfile);
 
@@ -52,7 +52,7 @@ class WaveformTest extends AbstractMediaTestCase
             ->method('command')
             ->with($commands);
 
-        $waveform = new Waveform($this->getVideoMock(__FILE__), $driver, $ffprobe);
+        $waveform = new Waveform($this->getAudioMock(__FILE__), $driver, $ffprobe, 640, 120);
         $this->assertSame($waveform, $waveform->save($pathfile));
     }
 
@@ -61,9 +61,9 @@ class WaveformTest extends AbstractMediaTestCase
         return array(
             array(
                 array(
-                    '-i', 'input', '-filter_complex',
+                    '-i', NULL, '-filter_complex',
+                    'showwavespic=s=640x120',
                     '-frames:v', '1',
-                    __FILE__
                 ),
             ),
         );
