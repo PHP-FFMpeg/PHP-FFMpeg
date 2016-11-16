@@ -31,7 +31,7 @@ class WaveformFilters
      */
     public function setDownmix()
     {
-        $this->waveform->addFilter(new DownmixFilter());
+        $this->waveform->addFilter(new WaveformDownmixFilter());
 
         return $this;
     }

@@ -9,7 +9,7 @@ class WaveformFiltersTest extends TestCase
 {
     public function testResize()
     {
-        $Waveform = $this->createMock(Waveform::class);
+        $Waveform = $this->getWaveformMock();
         $filters = new WaveformFilters($Waveform);
 
         $Waveform->expects($this->once())
