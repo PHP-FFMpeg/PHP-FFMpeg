@@ -82,10 +82,9 @@ class Waveform extends AbstractMediaType
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
         $commands = array(
-            '-i', 'input', '-filter_complex',
+            '-i', $this->pathfile, '-filter_complex',
             'showwavespic=s='.$this->width.'x'.$this->height,
-            '-frames:v', '1',
-            $this->pathfile
+            '-frames:v', '1'
         );
 
         foreach ($this->filters as $filter) {
