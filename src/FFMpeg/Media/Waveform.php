@@ -22,26 +22,26 @@ use FFMpeg\Coordinate\TimeCode;
 class Waveform extends AbstractMediaType
 {
     /** @var Video */
-    private $video;
+    private $audio;
     private $width;
     private $height;
 
     public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height)
     {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
-        $this->video = $video;
+        $this->audio = $audio;
         $this->width = $width;
         $this->height = $height;
     }
 
     /**
-     * Returns the video related to the waveform.
+     * Returns the audio related to the waveform.
      *
-     * @return Video
+     * @return Audio
      */
-    public function getVideo()
+    public function getAudio()
     {
-        return $this->video;
+        return $this->audio;
     }
 
     /**
