@@ -181,4 +181,14 @@ class Video extends Audio
     {
         return new Frame($this, $this->driver, $this->ffprobe, $at);
     }
+
+    /**
+     * Gets the waveform of the video.
+     *
+     * @return Waveform
+     */
+    public function waveform()
+    {
+        return new Waveform($this, $this->driver, $this->ffprobe);
+    }
 }
