@@ -23,11 +23,15 @@ class Waveform extends AbstractMediaType
 {
     /** @var Video */
     private $video;
+    private $width;
+    private $height;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe)
+    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height)
     {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->video = $video;
+        $this->width = $width;
+        $this->height = $height;
     }
 
     /**
@@ -79,6 +83,7 @@ class Waveform extends AbstractMediaType
          */
         $commands = array(
             '-i', 'input', '-filter_complex',
+            'showwavespic=s='.$this->width.'x'.$this->height,
             '-frames:v', '1',
             $this->pathfile
         );
