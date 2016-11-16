@@ -26,7 +26,7 @@ class Waveform extends AbstractMediaType
     private $width;
     private $height;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height)
+    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height)
     {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->video = $video;

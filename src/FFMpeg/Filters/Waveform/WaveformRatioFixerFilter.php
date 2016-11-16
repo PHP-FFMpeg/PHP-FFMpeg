@@ -41,19 +41,13 @@ class WaveformRatioFixerFilter implements WaveformFilterInterface
         $dimensions = null;
         $commands = array();
 
-        foreach ($waveform->getVideo()->getStreams() as $stream) {
-            if ($stream->isVideo()) {
+        foreach ($waveform->getAudio()->getStreams() as $stream) {
+            if ($stream->isAudio()) {
                 try {
                     
-                    // Get the dimensions of the video
-                    $dimensions = $stream->getDimensions();
-                    
                     // If the downmix parameter is set to TRUE, we add an option to the FFMPEG command
-                    if(!$this->downmix) {
-                        $commands[] = '"showwavespic=s=' . $dimensions->getWidth() . 'x' . $dimensions->getHeight().'"';
-                    }
-                    else {
-                        $commands[] = '"aformat=channel_layouts=mono,showwavespic=s=' . $dimensions->getWidth() . 'x' . $dimensions->getHeight().'"';
+                    if($this->downmix == TRUE) {
+                        $commands[] = '"aformat=channel_layouts=mono"';
                     }
                     
                     break;
