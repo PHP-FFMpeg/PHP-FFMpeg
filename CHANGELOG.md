@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Add pull request and issue templates.
+- Usage of new codec "aac" of ffmpeg 3
 
 ### Changed
 
