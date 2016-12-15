@@ -102,4 +102,16 @@ class Audio extends AbstractStreamableMedia
 
         return $this;
     }
+
+    /**
+     * Gets the waveform of the video.
+     *
+     * @param  integer $width
+     * @param  integer $height
+     * @return Waveform
+     */
+    public function waveform($width = 640, $height = 120)
+    {
+        return new Waveform($this, $this->driver, $this->ffprobe, $width, $height);
+    }
 }
