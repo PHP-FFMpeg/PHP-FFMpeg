@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Updated changelog to follow [keepachangelog.com](http://keepachangelog.com/)
   style you see now here.
 
-[0.7.0] - 2016-xx-xx
+[0.7.0] - 2016-12-15
 --------------------
 
 - Add support for FFMpeg 3 aac codec (@Nek-)
