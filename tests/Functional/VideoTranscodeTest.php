@@ -25,7 +25,37 @@ class VideoTranscodeTest extends FunctionalTestCase
         $lastPercentage = null;
         $phpunit = $this;
 
-        $codec = new X264('libvo_aacenc');
+        $codec = new X264('aac');
+        $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit, &$lastPercentage) {
+            if (null !== $lastPercentage) {
+                $phpunit->assertGreaterThanOrEqual($lastPercentage, $percentage);
+            }
+            $lastPercentage = $percentage;
+            $phpunit->assertGreaterThanOrEqual(0, $percentage);
+            $phpunit->assertLessThanOrEqual(100, $percentage);
+        });
+
+        $video->save($codec, $filename);
+        $this->assertFileExists($filename);
+        unlink($filename);
+    }
+
+    public function testAacTranscodeX264()
+    {
+        $filename = __DIR__ . '/output/output-x264_2.mp4';
+        if (is_file($filename)) {
+            unlink(__DIR__ . '/output/output-x264_2.mp4');
+        }
+
+        $ffmpeg = $this->getFFMpeg();
+        $video = $ffmpeg->open(__DIR__ . '/../files/sample.3gp');
+
+        $this->assertInstanceOf('FFMpeg\Media\Video', $video);
+
+        $lastPercentage = null;
+        $phpunit = $this;
+
+        $codec = new X264('aac');
         $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit, &$lastPercentage) {
             if (null !== $lastPercentage) {
                 $phpunit->assertGreaterThanOrEqual($lastPercentage, $percentage);
@@ -55,7 +85,7 @@ class VideoTranscodeTest extends FunctionalTestCase
         $video = new Video(__DIR__ . '/../files/UnknownFileTest.ogv', $ffmpeg->getFFMpegDriver(), $ffmpeg->getFFProbe());
 
         $this->setExpectedException('FFMpeg\Exception\RuntimeException');
-        $video->save(new X264('libvo_aacenc'), __DIR__ . '/output/output-x264.mp4');
+        $video->save(new X264('aac'), __DIR__ . '/output/output-x264.mp4');
     }
 
     public function testTranscodePortraitVideo()
@@ -77,7 +107,7 @@ class VideoTranscodeTest extends FunctionalTestCase
         $video->filters()
             ->resize(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET)
             ->rotate(RotateFilter::ROTATE_90);
-        $video->save(new X264('libvo_aacenc'), $filename);
+        $video->save(new X264('aac'), $filename);
 
         $dimension = $ffmpeg->getFFProbe()
             ->streams($filename)

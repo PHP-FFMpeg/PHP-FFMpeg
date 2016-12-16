@@ -136,13 +136,49 @@ below for more informations.
 You can extract a frame at any timecode using the `FFMpeg\Media\Video::frame`
 method.
 
-This code return a `FFMpeg\Media\Frame` instance corresponding to the second 42.
+This code returns a `FFMpeg\Media\Frame` instance corresponding to the second 42.
 You can pass any `FFMpeg\Coordinate\TimeCode` as argument, see dedicated
 documentation below for more information.
 
 ```php
 $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(42));
 $frame->save('image.jpg');
+```
+
+##### Generate a waveform
+
+You can generate a waveform of an audio file using the `FFMpeg\Media\Audio::waveform`
+method.
+
+This code returns a `FFMpeg\Media\Waveform` instance.
+You can optionally pass dimensions as arguments, see dedicated
+documentation below for more information.
+
+The ouput file MUST use the PNG extension.
+
+```php
+$waveform = $audio->waveform(640, 120);
+$waveform->save('waveform.png');
+```
+
+If you want to get a waveform from a video, convert it in an audio file first.
+
+```php
+// Open your video file
+$video = $ffmpeg->open( 'video.mp4' );
+
+// Set an audio format
+$audio_format = new FFMpeg\Format\Audio\Mp3();
+
+// Extract the audio into a new file
+$video->save('audio.mp3');
+
+// Set the audio file
+$audio = $ffmpeg->open( 'audio.mp3' );
+
+// Create the waveform
+$waveform = $audio->waveform();
+$waveform->save( 'waveform.png' );
 ```
 
 ##### Filters

@@ -10,11 +10,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Add pull request and issue templates.
+- Usage of new codec "aac" of ffmpeg 3
 
 ### Changed
 
 - Updated changelog to follow [keepachangelog.com](http://keepachangelog.com/)
   style you see now here.
+
+[0.7.0] - 2016-12-15
+--------------------
+
+- Add support for FFMpeg 3 aac codec (@Nek-)
+- Add a waveform filter to extract audio waveform images (@Romain)
 
 [0.6.1] - 2016-03-08
 --------------------

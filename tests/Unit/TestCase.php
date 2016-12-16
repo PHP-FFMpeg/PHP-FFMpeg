@@ -47,6 +47,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
+    public function getWaveformMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Media\Waveform')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function getFFMpegDriverMock()
     {
         return $this->getMockBuilder('FFMpeg\Driver\FFMpegDriver')
