@@ -136,13 +136,49 @@ below for more informations.
 You can extract a frame at any timecode using the `FFMpeg\Media\Video::frame`
 method.
 
-This code return a `FFMpeg\Media\Frame` instance corresponding to the second 42.
+This code returns a `FFMpeg\Media\Frame` instance corresponding to the second 42.
 You can pass any `FFMpeg\Coordinate\TimeCode` as argument, see dedicated
 documentation below for more information.
 
 ```php
 $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(42));
 $frame->save('image.jpg');
+```
+
+##### Generate a waveform
+
+You can generate a waveform of an audio file using the `FFMpeg\Media\Audio::waveform`
+method.
+
+This code returns a `FFMpeg\Media\Waveform` instance.
+You can optionally pass dimensions as arguments, see dedicated
+documentation below for more information.
+
+The ouput file MUST use the PNG extension.
+
+```php
+$waveform = $audio->waveform(640, 120);
+$waveform->save('waveform.png');
+```
+
+If you want to get a waveform from a video, convert it in an audio file first.
+
+```php
+// Open your video file
+$video = $ffmpeg->open( 'video.mp4' );
+
+// Set an audio format
+$audio_format = new FFMpeg\Format\Audio\Mp3();
+
+// Extract the audio into a new file
+$video->save('audio.mp3');
+
+// Set the audio file
+$audio = $ffmpeg->open( 'audio.mp3' );
+
+// Create the waveform
+$waveform = $audio->waveform();
+$waveform->save( 'waveform.png' );
 ```
 
 ##### Filters
@@ -190,6 +226,35 @@ The resize filter takes three parameters :
 - `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`
 - `$mode`, one of the constants `FFMpeg\Filters\Video\ResizeFilter::RESIZEMODE_*` constants
 - `$useStandards`, a boolean to force the use of the nearest aspect ratio standard.
+
+###### Watermark
+
+Watermark a video with a given image.
+
+```php
+$video
+    ->filters()
+    ->watermark($watermarkPath, array(
+        'position' => 'relative',
+        'bottom' => 50,
+        'right' => 50,
+    ));
+```
+
+The watermark filter takes two parameters:
+
+`$watermarkPath`, the path to your watermark file.
+`$coordinates`, an array defining how you want your watermark positioned. You can use relative positioning as demonstrated above or absolute as such:
+
+```php
+$video
+    ->filters()
+    ->watermark($watermarkPath, array(
+        'position' => 'absolute',
+        'x' => 1180,
+        'y' => 620,
+    ));
+```
 
 ###### Framerate
 
@@ -241,8 +306,11 @@ pass a `FFMpeg\Format\FormatInterface` for that.
 Please note that audio kilobitrate is set on the audio format.
 
 ```php
-$format = new Format\Audio\Flac();
-$format->on('progress', function ($$audio, $format, $percentage) {
+$ffmpeg = FFMpeg\FFMpeg::create();
+$audio = $ffmpeg->open('track.mp3');
+
+$format = new FFMpeg\Format\Audio\Flac();
+$format->on('progress', function ($audio, $format, $percentage) {
     echo "$percentage % transcoded";
 });
 

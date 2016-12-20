@@ -11,6 +11,7 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Coordinate\Point;
 use FFMpeg\Media\Video;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
@@ -100,6 +101,21 @@ class VideoFilters extends AudioFilters
     public function rotate($angle)
     {
         $this->media->addFilter(new RotateFilter($angle, 30));
+
+        return $this;
+    }
+
+    /**
+     * Crops the video
+     *
+     * @param Point $point
+     * @param Dimension $dimension
+     *
+     * @return VideoFilters
+     */
+    public function crop(Point $point, Dimension $dimension)
+    {
+        $this->media->addFilter(new CropFilter($point, $dimension));
 
         return $this;
     }
