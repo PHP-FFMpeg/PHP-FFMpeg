@@ -221,11 +221,27 @@ Resizes a video to a given size.
 $video->filters()->resize($dimension, $mode, $useStandards);
 ```
 
-The resize filter takes three parameters :
+The resize filter takes three parameters:
 
 - `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`
 - `$mode`, one of the constants `FFMpeg\Filters\Video\ResizeFilter::RESIZEMODE_*` constants
 - `$useStandards`, a boolean to force the use of the nearest aspect ratio standard.
+
+If you want a video in a non-standard ratio, you can use the padding filter to resize your video in the desired size, and wrap it into black bars.
+
+```php
+$video->filters()->pad($dimension);
+```
+
+The pad filter takes one parameter:
+
+- `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`
+
+Don't forget to save it afterwards.
+
+```php
+$video->save(new FFMpeg\Format\Video\X264(), $new_file);
+```
 
 ###### Watermark
 
