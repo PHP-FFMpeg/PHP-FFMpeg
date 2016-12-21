@@ -18,7 +18,7 @@ class PadFilterTest extends TestCase
         $video = $this->getVideoMock();
         $pathfile = '/path/to/file'.mt_rand();
 
-        $format = $this->createMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMock('FFMpeg\Format\VideoInterface');
 
         $streams = new StreamCollection(array(
             new Stream(array(
