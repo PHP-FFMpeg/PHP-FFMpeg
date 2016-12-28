@@ -134,7 +134,7 @@ class VideoFilters extends AudioFilters
     }
 
     /**
-     * Resizes a video to a given dimension.
+     * Applies a custom filter: -vf foo bar
      *
      * @param string    $parameters
      *
