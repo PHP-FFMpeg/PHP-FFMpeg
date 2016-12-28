@@ -132,4 +132,18 @@ class VideoFilters extends AudioFilters
 
         return $this;
     }
+
+    /**
+     * Resizes a video to a given dimension.
+     *
+     * @param string    $parameters
+     *
+     * @return VideoFilters
+     */
+    public function custom($parameters)
+    {
+        $this->media->addFilter(new CustomFilter($parameters));
+
+        return $this;
+    }
 }
