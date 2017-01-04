@@ -28,12 +28,8 @@ appear in latest ffmpeg version.
 
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
-```json
-{
-    "require": {
-        "php-ffmpeg/php-ffmpeg": "~0.5"
-    }
-}
+```bash
+$ composer require php-ffmpeg/php-ffmpeg
 ```
 
 ## Basic Usage
