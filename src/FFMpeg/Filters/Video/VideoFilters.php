@@ -132,4 +132,17 @@ class VideoFilters extends AudioFilters
 
         return $this;
     }
+
+
+    /**
+     * Removes the audio track from a video file
+     *
+     * @return $this
+     */
+    public function removeAudio()
+    {
+        $this->media->addFilter(new RemoveAudioFilter());
+
+        return $this;
+    }
 }
