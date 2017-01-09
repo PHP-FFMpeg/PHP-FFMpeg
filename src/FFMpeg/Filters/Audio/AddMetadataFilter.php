@@ -9,16 +9,19 @@ class AddMetadataFilter implements AudioFilterInterface
 {	
 	/** @var Array */
 	private $metaArr;
+	/** @var Integer */
+	private $priority;
 
-	function __construct($data = null)
+	function __construct($data = null, $priority = 9)
 	{
 		$this->metaArr = $data;
+		$this->priority = $priority;
 	}
 
 	public function getPriority()
 	{
 		//must be of high priority in case theres a second input stream (artwork) to register with audio
-		return 9;
+		return $this->priority;
 	}
 
 	public function apply(Audio $audio, AudioInterface $format)
