@@ -328,7 +328,7 @@ method. It only accepts audio filters.
 You can build your own filters and some are bundled in PHP-FFMpeg - they are
 accessible through the `FFMpeg\Media\Audio::filters` method.
 
-#### Metadata
+###### Metadata
 
 Add metadata to audio files. Just pass an array of key=value pairs of all
 metadata you would like to add. If no arguments are passed into the filter
