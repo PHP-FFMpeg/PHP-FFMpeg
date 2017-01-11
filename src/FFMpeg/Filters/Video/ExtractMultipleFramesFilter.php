@@ -104,9 +104,14 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             }
 
             // Set the number of digits to use in the exported filenames
-            $nbDigitsInFileNames = ceil( $duration * $nbFramesPerSecond );
-            if($nbDigitsInFileNames < 10)
-                $nbDigitsInFileNames = '0' . (string)$nbDigitsInFileNames;
+            $nbImages = ceil( $duration * $nbFramesPerSecond );
+            
+            if($nbImages < 100)
+                $nbDigitsInFileNames = "02";
+            elseif($nbImages < 1000)
+                $nbDigitsInFileNames = "03";
+            else
+                $nbDigitsInFileNames = "06";
 
             // Set the parameters
             $commands[] = '-vf';
