@@ -81,7 +81,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
 
         try {
             // Get the duration of the video
-            $duration = $this->getFormat()->get('duration');
+            $duration = $format()->get('duration');
 
             // Get the number of frames per second we have to extract.
             if(preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== FALSE){
