@@ -11,6 +11,7 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
@@ -81,7 +82,11 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
 
         try {
             // Get the duration of the video
-            $duration = $format()->get('duration');
+            foreach ($video->getStreams()->videos() as $stream) {
+                if ($stream->has('duration')) {
+                    $duration = $stream->get('duration');
+                }
+            }
 
             // Get the number of frames per second we have to extract.
             if(preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== FALSE){
