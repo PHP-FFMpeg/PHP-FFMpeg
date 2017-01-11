@@ -36,19 +36,4 @@ class FrameFilters
 
         return $this;
     }
-
-    /**
-     * Fixes the display ratio of the output frame.
-     *
-     * In case the sample ratio and display ratio are different, image may be
-     * anamorphozed. This filter fixes this by specifying the output size.
-     *
-     * @return FrameFilters
-     */
-    public function extractMultipleFrames($frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, $destinationFolder = __DIR__)
-    {
-        $this->frame->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
-
-        return $this;
-    }
 }

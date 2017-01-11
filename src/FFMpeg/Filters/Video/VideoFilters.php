@@ -132,4 +132,17 @@ class VideoFilters extends AudioFilters
 
         return $this;
     }
+
+    /**
+     * @param string $frameRate
+     * @param string  $destinationFolder
+     *
+     * @return $this
+     */
+    public function extractMultipleFrames($frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, $destinationFolder = __DIR__)
+    {
+        $this->frame->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
+
+        return $this;
+    }
 }
