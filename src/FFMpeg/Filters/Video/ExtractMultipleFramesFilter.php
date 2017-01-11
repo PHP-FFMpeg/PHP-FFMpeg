@@ -105,11 +105,13 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
 
             // Set the number of digits to use in the exported filenames
             $nbDigitsInFileNames = ceil( $duration * $nbFramesPerSecond );
+            if($nbDigitsInFileNames < 10)
+                $nbDigitsInFileNames = '0' . (string)$nbDigitsInFileNames;
 
             // Set the parameters
             $commands[] = '-vf';
             $commands[] = 'fps=' . $this->frameRate;
-            $commands[] = $this->destinationFolder . 'frame-%0'.$nbDigitsInFileNames.'d.jpg';
+            $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.jpg';
         }
         catch (RuntimeException $e) {
             throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode());
