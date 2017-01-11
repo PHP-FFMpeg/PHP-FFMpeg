@@ -107,7 +107,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             break;
         }
         catch (RuntimeException $e) {
-            throw new RuntimeException('An error occured while extracting the frames: ' . $e->getCode() . ' The message: '$e->getMessage());
+            throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode());
         }
 
         return $commands;
