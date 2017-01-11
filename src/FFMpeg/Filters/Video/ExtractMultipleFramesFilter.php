@@ -12,6 +12,8 @@
 namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Media\Video;
+use FFMpeg\Format\VideoInterface;
 
 class ExtractMultipleFramesFilter implements VideoFilterInterface
 {

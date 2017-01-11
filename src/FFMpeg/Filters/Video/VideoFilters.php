@@ -58,6 +58,21 @@ class VideoFilters extends AudioFilters
     }
 
     /**
+     * Extract multiple frames from the video
+     *
+     * @param string $frameRate
+     * @param string  $destinationFolder
+     *
+     * @return $this
+     */
+    public function extractMultipleFrames($frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, $destinationFolder = __DIR__)
+    {
+        $this->media->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
+
+        return $this;
+    }
+
+    /**
      * Synchronizes audio and video.
      *
      * @return VideoFilters
@@ -129,19 +144,6 @@ class VideoFilters extends AudioFilters
     public function watermark($imagePath, array $coordinates = array())
     {
         $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates));
-
-        return $this;
-    }
-
-    /**
-     * @param string $frameRate
-     * @param string  $destinationFolder
-     *
-     * @return $this
-     */
-    public function extractMultipleFrames($frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, $destinationFolder = __DIR__)
-    {
-        $this->frame->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
 
         return $this;
     }
