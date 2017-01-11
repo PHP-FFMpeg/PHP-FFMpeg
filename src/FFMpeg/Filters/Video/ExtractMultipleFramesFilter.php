@@ -37,6 +37,12 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     {
         $this->priority = $priority;
         $this->frameRate = $frameRate;
+
+        // Make sure that the destination folder has a trailing slash
+        if(strcmp( substr($destinationFolder, -1), "/") != 0)
+            $destinationFolder .= "/";
+
+        // Set the destination folder
         $this->destinationFolder = $destinationFolder;
     }
 
