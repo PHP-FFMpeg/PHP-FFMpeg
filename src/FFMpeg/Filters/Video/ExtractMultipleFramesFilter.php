@@ -27,7 +27,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     const FRAMERATE_EVERY_10SEC = '1/30';
     /** will extract a frame every minute */
     const FRAMERATE_EVERY_10SEC = '1/60';
-{
+
     /** @var integer */
     private $priority;
     private $frameRate;
