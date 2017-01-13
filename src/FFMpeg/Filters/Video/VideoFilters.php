@@ -113,6 +113,20 @@ class VideoFilters extends AudioFilters
         return $this;
     }
 
+    /**
+     * Adds padding (black bars) to a video.
+     *
+     * @param Dimension $dimension
+     *
+     * @return VideoFilters
+     */
+    public function pad(Dimension $dimension)
+    {
+        $this->media->addFilter(new PadFilter($dimension));
+
+        return $this;
+    }
+
     public function rotate($angle)
     {
         $this->media->addFilter(new RotateFilter($angle, 30));
@@ -144,6 +158,20 @@ class VideoFilters extends AudioFilters
     public function watermark($imagePath, array $coordinates = array())
     {
         $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates));
+
+        return $this;
+    }
+
+    /**
+     * Applies a custom filter: -vf foo bar
+     *
+     * @param string    $parameters
+     *
+     * @return VideoFilters
+     */
+    public function custom($parameters)
+    {
+        $this->media->addFilter(new CustomFilter($parameters));
 
         return $this;
     }

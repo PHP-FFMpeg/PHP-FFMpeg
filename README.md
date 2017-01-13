@@ -14,7 +14,7 @@ Check another amazing repo : [PHP FFMpeg extras](https://github.com/alchemy-fr/P
 
 This library requires a working FFMpeg install. You will need both FFMpeg and FFProbe binaries to use it.
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
-otherwise you should have to explicitely give the binaries path on load.
+otherwise you should have to explicitly give the binaries path on load.
 
 For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
 
@@ -28,12 +28,8 @@ appear in latest ffmpeg version.
 
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
-```json
-{
-    "require": {
-        "php-ffmpeg/php-ffmpeg": "~0.5"
-    }
-}
+```bash
+$ composer require php-ffmpeg/php-ffmpeg
 ```
 
 ## Basic Usage
@@ -69,7 +65,7 @@ $ffmpeg = FFMpeg\FFMpeg::create();
 ```
 
 FFMpeg will autodetect ffmpeg and ffprobe binaries. If you want to give binary
-paths explicitely, you can pass an array as configuration. A `Psr\Logger\LoggerInterface`
+paths explicitly, you can pass an array as configuration. A `Psr\Logger\LoggerInterface`
 can also be passed to log binary executions.
 
 ```php
@@ -233,11 +229,27 @@ Resizes a video to a given size.
 $video->filters()->resize($dimension, $mode, $useStandards);
 ```
 
-The resize filter takes three parameters :
+The resize filter takes three parameters:
 
 - `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`
 - `$mode`, one of the constants `FFMpeg\Filters\Video\ResizeFilter::RESIZEMODE_*` constants
 - `$useStandards`, a boolean to force the use of the nearest aspect ratio standard.
+
+If you want a video in a non-standard ratio, you can use the padding filter to resize your video in the desired size, and wrap it into black bars.
+
+```php
+$video->filters()->pad($dimension);
+```
+
+The pad filter takes one parameter:
+
+- `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`
+
+Don't forget to save it afterwards.
+
+```php
+$video->save(new FFMpeg\Format\Video\X264(), $new_file);
+```
 
 ###### Watermark
 
@@ -343,6 +355,27 @@ method. It only accepts audio filters.
 
 You can build your own filters and some are bundled in PHP-FFMpeg - they are
 accessible through the `FFMpeg\Media\Audio::filters` method.
+
+###### Metadata
+
+Add metadata to audio files. Just pass an array of key=value pairs of all
+metadata you would like to add. If no arguments are passed into the filter
+all metadata will be removed from input file. Currently supported data is
+title, artist, album, artist, composer, track, year, description, artwork
+
+```php
+$audio->filters()->addMetadata(["title" => "Some Title", "track" => 1]);
+
+//remove all metadata and video streams from audio file
+$audio->filters()->addMetadata();
+```
+
+Add artwork to the audio file
+```php
+$audio->filters()->addMetadata(["artwork" => "/path/to/image/file.jpg"]);
+```
+NOTE: at present ffmpeg (version 3.2.2) only supports artwork output for .mp3
+files
 
 ###### Resample
 
