@@ -344,6 +344,27 @@ method. It only accepts audio filters.
 You can build your own filters and some are bundled in PHP-FFMpeg - they are
 accessible through the `FFMpeg\Media\Audio::filters` method.
 
+###### Metadata
+
+Add metadata to audio files. Just pass an array of key=value pairs of all
+metadata you would like to add. If no arguments are passed into the filter
+all metadata will be removed from input file. Currently supported data is
+title, artist, album, artist, composer, track, year, description, artwork
+
+```php
+$audio->filters()->addMetadata(["title" => "Some Title", "track" => 1]);
+
+//remove all metadata and video streams from audio file
+$audio->filters()->addMetadata();
+```
+
+Add artwork to the audio file
+```php
+$audio->filters()->addMetadata(["artwork" => "/path/to/image/file.jpg"]);
+```
+NOTE: at present ffmpeg (version 3.2.2) only supports artwork output for .mp3
+files
+
 ###### Resample
 
 Resamples an audio file.
