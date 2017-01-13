@@ -14,7 +14,7 @@ Check another amazing repo : [PHP FFMpeg extras](https://github.com/alchemy-fr/P
 
 This library requires a working FFMpeg install. You will need both FFMpeg and FFProbe binaries to use it.
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
-otherwise you should have to explicitely give the binaries path on load.
+otherwise you should have to explicitly give the binaries path on load.
 
 For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
 
@@ -28,12 +28,8 @@ appear in latest ffmpeg version.
 
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
-```json
-{
-    "require": {
-        "php-ffmpeg/php-ffmpeg": "~0.5"
-    }
-}
+```bash
+$ composer require php-ffmpeg/php-ffmpeg
 ```
 
 ## Basic Usage
@@ -69,7 +65,7 @@ $ffmpeg = FFMpeg\FFMpeg::create();
 ```
 
 FFMpeg will autodetect ffmpeg and ffprobe binaries. If you want to give binary
-paths explicitely, you can pass an array as configuration. A `Psr\Logger\LoggerInterface`
+paths explicitly, you can pass an array as configuration. A `Psr\Logger\LoggerInterface`
 can also be passed to log binary executions.
 
 ```php

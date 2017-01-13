@@ -146,4 +146,18 @@ class VideoFilters extends AudioFilters
 
         return $this;
     }
+
+    /**
+     * Applies a custom filter: -vf foo bar
+     *
+     * @param string    $parameters
+     *
+     * @return VideoFilters
+     */
+    public function custom($parameters)
+    {
+        $this->media->addFilter(new CustomFilter($parameters));
+
+        return $this;
+    }
 }
