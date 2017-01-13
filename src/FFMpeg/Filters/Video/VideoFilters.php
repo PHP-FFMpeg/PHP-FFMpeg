@@ -98,6 +98,20 @@ class VideoFilters extends AudioFilters
         return $this;
     }
 
+    /**
+     * Adds padding (black bars) to a video.
+     *
+     * @param Dimension $dimension
+     *
+     * @return VideoFilters
+     */
+    public function pad(Dimension $dimension)
+    {
+        $this->media->addFilter(new PadFilter($dimension));
+
+        return $this;
+    }
+
     public function rotate($angle)
     {
         $this->media->addFilter(new RotateFilter($angle, 30));
