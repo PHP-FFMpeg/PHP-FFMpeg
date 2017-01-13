@@ -58,6 +58,21 @@ class VideoFilters extends AudioFilters
     }
 
     /**
+     * Extract multiple frames from the video
+     *
+     * @param string $frameRate
+     * @param string  $destinationFolder
+     *
+     * @return $this
+     */
+    public function extractMultipleFrames($frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, $destinationFolder = __DIR__)
+    {
+        $this->media->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
+
+        return $this;
+    }
+
+    /**
      * Synchronizes audio and video.
      *
      * @return VideoFilters
