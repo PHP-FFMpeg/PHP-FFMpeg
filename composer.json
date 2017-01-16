@@ -19,6 +19,11 @@
             "name": "Patrik Karisch",
             "email": "patrik@karisch.guru",
             "homepage": "http://www.karisch.guru"
+        },
+        {
+            "name": "Romain Biard",
+            "email": "romain.biard@gmail.com",
+            "homepage": "https://www.strime.io/"
         }
     ],
     "require": {
