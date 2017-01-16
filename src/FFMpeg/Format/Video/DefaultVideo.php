@@ -108,13 +108,13 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * Sets additional parameters.
      *
-     * @param  array $additionalParamaters
+     * @param  array                    $additionalParamaters
      * @throws InvalidArgumentException
      */
     public function setAdditionalParameters($additionalParamaters)
     {
         if (!is_array($additionalParamaters)) {
-            throw new InvalidArgumentException('Wrong kiloBitrate value');
+            throw new InvalidArgumentException('Wrong additionalParamaters value');
         }
 
         $this->additionalParamaters = $additionalParamaters;
