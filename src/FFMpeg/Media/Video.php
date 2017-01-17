@@ -181,4 +181,17 @@ class Video extends Audio
     {
         return new Frame($this, $this->driver, $this->ffprobe, $at);
     }
+
+    /**
+     * Extracts a gif from a sequence of the video.
+     *
+     * @param  TimeCode $at
+     * @param  Dimension $dimension
+     * @param  integer $duration
+     * @return Gif
+     */
+    public function gif(TimeCode $at)
+    {
+        return new Frame($this, $this->driver, $this->ffprobe, $at, $dimension, $duration = null);
+    }
 }
