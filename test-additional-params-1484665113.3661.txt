@@ -1,0 +1,1 @@
+-y -i /Users/bobby/Dropbox/Sites/OpenSource/PHP-FFMpeg/tests/Unit/Media/VideoTest.php extra param -threads 24 -b:v 665k -refs 6 -coder 1 -sc_threshold 40 -flags +loop -me_range 16 -subq 7 -i_qfactor 0.71 -qcomp 0.6 -qdiff 4 -trellis 1 -b:a 92k -ac 2

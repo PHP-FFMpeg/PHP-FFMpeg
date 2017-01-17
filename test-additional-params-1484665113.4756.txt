@@ -1,0 +1,1 @@
+-y -i /Users/bobby/Dropbox/Sites/OpenSource/PHP-FFMpeg/tests/Unit/Media/VideoTest.php -threads 24 -acodec patati-patata-audio -b:a 92k -ac 2

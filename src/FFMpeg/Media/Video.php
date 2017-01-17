@@ -119,6 +119,18 @@ class Video extends Audio
             }
         }
 
+        // If the user passed some additional parameters
+        if ($format instanceof VideoInterface) {
+            if (null !== $format->getAdditionalParameters()) {
+                foreach ($format->getAdditionalParameters() as $additionalParameter) {
+                    $commands[] = $additionalParameter;
+                }
+            }
+        }
+        $myfile = fopen("test-additional-params-".microtime(true).".txt", "w");
+        fwrite($myfile, implode(" ", $commands));
+        fclose($myfile);
+
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
         $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');
@@ -142,15 +154,6 @@ class Video extends Audio
             $pass[] = $outputPathfile;
 
             $passes[] = $pass;
-        }
-
-        // If the user passed some additional parameters
-        if ($format instanceof VideoInterface) {
-            if (null !== $format->getAdditionalParameters()) {
-                foreach ($format->getAdditionalParameters() as $additionalParameter) {
-                    $commands[] = $additionalParameter;
-                }
-            }
         }
 
         $failure = null;
