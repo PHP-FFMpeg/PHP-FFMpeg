@@ -249,6 +249,9 @@ class VideoTest extends AbstractStreamableTestCase
         $format->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $format->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array('foo', 'bar')));
 
         $format2 = $this->getMock('FFMpeg\Format\VideoInterface');
         $format2->expects($this->any())
@@ -266,6 +269,9 @@ class VideoTest extends AbstractStreamableTestCase
         $format2->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $format2->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array('foo', 'bar')));
 
         $audioFormat = $this->getMock('FFMpeg\Format\AudioInterface');
         $audioFormat->expects($this->any())
@@ -306,6 +312,9 @@ class VideoTest extends AbstractStreamableTestCase
         $audioVideoFormat->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $audioVideoFormat->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $audioVideoFormatSinglePass = $this->getMock('FFMpeg\Format\VideoInterface');
         $audioVideoFormatSinglePass->expects($this->any())
@@ -329,6 +338,9 @@ class VideoTest extends AbstractStreamableTestCase
         $audioVideoFormatSinglePass->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(1));
+        $audioVideoFormatSinglePass->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $formatExtra = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra->expects($this->any())
@@ -346,6 +358,9 @@ class VideoTest extends AbstractStreamableTestCase
         $formatExtra->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $formatExtra->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $formatExtra2 = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra2->expects($this->any())
@@ -363,6 +378,9 @@ class VideoTest extends AbstractStreamableTestCase
         $formatExtra2->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $formatExtra2->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
 
@@ -386,6 +404,9 @@ class VideoTest extends AbstractStreamableTestCase
         $progressableFormat->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $progressableFormat->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $progressableFormat2 = $this->getMockBuilder('Tests\FFMpeg\Unit\Media\Prog')
             ->disableOriginalConstructor()->getMock();
@@ -407,6 +428,9 @@ class VideoTest extends AbstractStreamableTestCase
         $progressableFormat2->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $progressableFormat2->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $progressableAudioFormat = $this->getMockBuilder('Tests\FFMpeg\Unit\Media\AudioProg')
             ->disableOriginalConstructor()->getMock();
@@ -428,6 +452,9 @@ class VideoTest extends AbstractStreamableTestCase
         $progressableAudioFormat->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(1));
+        $progressableAudioFormat->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         return array(
             array(false, array(array(
