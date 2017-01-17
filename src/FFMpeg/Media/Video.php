@@ -144,6 +144,15 @@ class Video extends Audio
             $passes[] = $pass;
         }
 
+        // If the user passed some additional parameters
+        if ($format instanceof VideoInterface) {
+            if (null !== $format->getAdditionalParameters()) {
+                foreach ($format->getAdditionalParameters() as $additionalParameter) {
+                    $commands[] = $additionalParameter;
+                }
+            }
+        }
+
         $failure = null;
 
         foreach ($passes as $pass => $passCommands) {
@@ -163,15 +172,6 @@ class Video extends Audio
         }
 
         $fs->clean($fsId);
-
-        // If the user passed some additional parameters
-        if ($format instanceof VideoInterface) {
-            if (null !== $format->getAdditionalParameters()) {
-                foreach ($format->getAdditionalParameters() as $additionalParameter) {
-                    $commands[] = $additionalParameter;
-                }
-            }
-        }
 
         if (null !== $failure) {
             throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
