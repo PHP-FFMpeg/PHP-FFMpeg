@@ -410,7 +410,7 @@ A gif is an animated image extracted from a sequence of the video ;.
 You can save gif files using the `FFMpeg\Media\Gif::save` method.
 
 ```php
-$video = $ffmpeg->open( __DIR__ . '/../../../web/tests/test.mp4' );
+$video = $ffmpeg->open( '/path/to/video' );
 $video
     ->gif(FFMpeg\Coordinate\TimeCode::fromSeconds(2), new FFMpeg\Coordinate\Dimension(640, 480), 3)
     ->save($new_file);
