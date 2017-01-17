@@ -13,6 +13,7 @@ namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
