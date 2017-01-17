@@ -535,14 +535,14 @@ class VideoTest extends AbstractStreamableTestCase
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
-                    '/target/file', 'foo', 'bar',
+                    '/target/file',
                 ), array(
                     '-y', '-i', __FILE__,
                     'extra', 'param', '-threads', 24, '-b:v', '665k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
-                    '/target/file', 'foo', 'bar',
+                    '/target/file',
                 )), null, $formatExtra2),
             array(false, array(array(
                     '-y', '-i', __FILE__, '-b:v', '666k',
