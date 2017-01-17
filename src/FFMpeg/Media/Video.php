@@ -127,9 +127,6 @@ class Video extends Audio
                 }
             }
         }
-        $myfile = fopen("test-additional-params-".microtime(true).".txt", "w");
-        fwrite($myfile, implode(" ", $commands));
-        fclose($myfile);
 
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
