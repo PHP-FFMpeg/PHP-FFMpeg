@@ -190,7 +190,7 @@ class Video extends Audio
      * @param  integer $duration
      * @return Gif
      */
-    public function gif(TimeCode $at)
+    public function gif(TimeCode $at, $dimension, $duration)
     {
         return new Frame($this, $this->driver, $this->ffprobe, $at, $dimension, $duration = null);
     }
