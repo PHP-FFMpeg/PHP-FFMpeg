@@ -50,7 +50,6 @@ class WaveformDownmixFilter implements WaveformFilterInterface
      */
     public function apply(Waveform $waveform)
     {
-        $dimensions = null;
         $commands = array();
 
         foreach ($waveform->getAudio()->getStreams() as $stream) {

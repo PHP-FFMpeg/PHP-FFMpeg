@@ -11,8 +11,8 @@
 
 namespace FFMpeg\Filters\Video;
 
-use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 
