@@ -17,7 +17,6 @@ use FFMpeg\Filters\Waveform\WaveformFilters;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Coordinate\TimeCode;
 
 class Waveform extends AbstractMediaType
 {
