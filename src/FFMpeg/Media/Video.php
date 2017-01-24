@@ -120,6 +120,15 @@ class Video extends Audio
             }
         }
 
+        // If the user passed some additional parameters
+        if ($format instanceof VideoInterface) {
+            if (null !== $format->getAdditionalParameters()) {
+                foreach ($format->getAdditionalParameters() as $additionalParameter) {
+                    $commands[] = $additionalParameter;
+                }
+            }
+        }
+
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
         $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');

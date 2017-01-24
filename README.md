@@ -441,6 +441,18 @@ $video->save($format, 'video.avi');
 
 The callback provided for the event can be any callable.
 
+##### Add additional parameters
+
+You can add additional parameters to your encoding requests based on your video format.
+
+The argument of the setAdditionalParameters method is an array.
+
+```php
+$format = new Format\Video\X264();
+$format->setAdditionalParameters(array('foo', 'bar'));
+$video->save($format, 'video.avi');
+```
+
 ##### Create your own format
 
 The easiest way to create a format is to extend the abstract
