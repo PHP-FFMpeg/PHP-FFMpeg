@@ -403,6 +403,22 @@ $frame->save('target.jpg');
 This method has a second optional boolean parameter. Set it to true to get
 accurate images ; it takes more time to execute.
 
+#### Gif
+
+A gif is an animated image extracted from a sequence of the video ;.
+
+You can save gif files using the `FFMpeg\Media\Gif::save` method.
+
+```php
+$video = $ffmpeg->open( '/path/to/video' );
+$video
+    ->gif(FFMpeg\Coordinate\TimeCode::fromSeconds(2), new FFMpeg\Coordinate\Dimension(640, 480), 3)
+    ->save($new_file);
+```
+
+This method has a third optional boolean parameter, which is the duration of the animation.
+If you don't set it, you will get a fixed gif image.
+
 #### Formats
 
 A format implements `FFMpeg\Format\FormatInterface`. To save to a video file,
