@@ -473,6 +473,8 @@ $video
     ->saveFromDifferentCodecs($format, '/path/to/new_file');
 ```
 
+More details about concatenation in FFMPEG can be found [here](https://trac.ffmpeg.org/wiki/Concatenate), [here](https://ffmpeg.org/ffmpeg-formats.html#concat-1) and [here](https://ffmpeg.org/ffmpeg.html#Stream-copy).
+
 #### Formats
 
 A format implements `FFMpeg\Format\FormatInterface`. To save to a video file,
