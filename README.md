@@ -448,12 +448,12 @@ Please refer to the [documentation](https://trac.ffmpeg.org/wiki/Concatenate) fo
 To concatenate videos encoded with the same codec, do as follow:
 
 ```php
-// In order to instantiate the video object, you HAVE TO pass a path to a valid file.
+// In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
 // We recommand that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 $video
-    ->concat(__DIR__ . '/../../../web/tests/concat-list.txt')
-    ->saveFromSameCodecs($new_file, TRUE);
+    ->concat('/path/to/list.txt')
+    ->saveFromSameCodecs('/path/to/new_file', TRUE);
 ```
 
 The boolean parameter of the save function allows you to use the copy parameter which accelerates drastically the generation of the encoded file.
@@ -461,7 +461,7 @@ The boolean parameter of the save function allows you to use the copy parameter 
 To concatenate videos encoded with the same codec, do as follow:
 
 ```php
-// In order to instantiate the video object, you HAVE TO pass a path to a valid file.
+// In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
 // We recommand that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 
@@ -469,7 +469,7 @@ $format = new FFMpeg\Format\Video\X264();
 $format->setAudioCodec("libmp3lame");
 
 $video
-    ->concat(__DIR__ . '/../../../web/tests/concat-list.txt')
+    ->concat('/path/to/list.txt')
     ->saveFromDifferentCodecs($format, '/path/to/new_file');
 ```
 
