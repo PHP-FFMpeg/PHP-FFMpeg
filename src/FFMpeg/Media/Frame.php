@@ -85,25 +85,30 @@ class Frame extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function save($pathfile, $accurate = false)
+    public function save($pathfile, $accurate = false, $returnBase64 = false)
     {
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
+        $outputFormat = $returnBase64 ? "image2pipe" : "image2";
         if (!$accurate) {
             $commands = array(
                 '-y', '-ss', (string) $this->timecode,
                 '-i', $this->pathfile,
                 '-vframes', '1',
-                '-f', 'image2'
+                '-f', $outputFormat
             );
         } else {
             $commands = array(
                 '-y', '-i', $this->pathfile,
                 '-vframes', '1', '-ss', (string) $this->timecode,
-                '-f', 'image2'
+                '-f', $outputFormat
             );
+        }
+        
+        if($returnBase64) {
+            array_push($commands, "-");
         }
 
         foreach ($this->filters as $filter) {
@@ -120,47 +125,5 @@ class Frame extends AbstractMediaType
         }
 
         return $this;
-    }
-    
-    /**
-     * Return the frame encoded in base64 as a string.
-     *
-     * @param string  $pathfile
-     * @param Boolean $accurate
-     *
-     * @return string
-     *
-     * @throws RuntimeException
-     */
-    public function getAsBase64($accurate=true)
-    {
-        if (!$accurate) {
-            $commands = array(
-                    '-y', '-ss', (string) $this->timecode,
-                    '-i', $this->pathfile,
-                    '-vframes', '1',
-                    '-f', 'image2pipe',
-                    '-'
-            );
-        } else {
-            $commands = array(
-                    '-y', '-i', $this->pathfile,
-                    '-vframes', '1', '-ss', (string) $this->timecode,
-                    '-f', 'image2pipe',
-                    '-'
-            );
-        }
-        
-        foreach ($this->filters as $filter) {
-            $commands = array_merge($commands, $filter->apply($this));
-        }
-        
-        try {
-            $frameBytes = $this->driver->command($commands);
-        } catch (ExecutionFailureException $e) {
-            $this->cleanupTemporaryFile($pathfile);
-            throw new RuntimeException('Unable to retrieve frame as base64', $e->getCode(), $e);
-        }
-        return base64_encode($frameBytes);
     }
 }
