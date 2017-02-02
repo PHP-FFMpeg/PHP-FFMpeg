@@ -121,4 +121,46 @@ class Frame extends AbstractMediaType
 
         return $this;
     }
+    
+    /**
+     * Return the frame encoded in base64 as a string.
+     *
+     * @param string  $pathfile
+     * @param Boolean $accurate
+     *
+     * @return string
+     *
+     * @throws RuntimeException
+     */
+    public function getAsBase64($accurate=true)
+    {
+        if (!$accurate) {
+            $commands = array(
+                    '-y', '-ss', (string) $this->timecode,
+                    '-i', $this->pathfile,
+                    '-vframes', '1',
+                    '-f', 'image2pipe',
+                    '-'
+            );
+        } else {
+            $commands = array(
+                    '-y', '-i', $this->pathfile,
+                    '-vframes', '1', '-ss', (string) $this->timecode,
+                    '-f', 'image2pipe',
+                    '-'
+            );
+        }
+        
+        foreach ($this->filters as $filter) {
+            $commands = array_merge($commands, $filter->apply($this));
+        }
+        
+        try {
+            $frameBytes = $this->driver->command($commands);
+        } catch (ExecutionFailureException $e) {
+            $this->cleanupTemporaryFile($pathfile);
+            throw new RuntimeException('Unable to retrieve frame as base64', $e->getCode(), $e);
+        }
+        return base64_encode($frameBytes);
+    }
 }

@@ -70,7 +70,27 @@ class FrameTest extends AbstractMediaTestCase
         $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
         $this->assertSame($frame, $frame->save($pathfile, $accurate));
     }
-
+    
+    /**
+     * @dataProvider provideGetAsBase64Options
+     */
+    public function testGetAsBase64($accurate, $commands)
+    {
+        $driver = $this->getFFMpegDriverMock();
+        $ffprobe = $this->getFFProbeMock();
+        $timecode = $this->getTimeCodeMock();
+        $timecode->expects($this->once())
+        ->method('__toString')
+        ->will($this->returnValue('timecode'));
+        
+        $driver->expects($this->once())
+        ->method('command')
+        ->with($commands);
+        
+        $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
+        $frame->getAsBase64($accurate);
+    }
+    
     public function provideSaveOptions()
     {
         return array(
@@ -85,6 +105,23 @@ class FrameTest extends AbstractMediaTestCase
                 '-vframes', '1', '-ss', 'timecode',
                 '-f', 'image2'
             )),
+        );
+    }
+    
+    public function provideGetAsBase64Options()
+    {
+        return array(
+                array(false, array(
+                        '-y', '-ss', 'timecode',
+                        '-i', __FILE__,
+                        '-vframes', '1',
+                        '-f', 'image2pipe', '-')
+                ),
+                array(true, array(
+                        '-y', '-i', __FILE__,
+                        '-vframes', '1', '-ss', 'timecode',
+                        '-f', 'image2pipe', '-'
+                )),
         );
     }
 }
