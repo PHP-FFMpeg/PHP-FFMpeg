@@ -118,12 +118,16 @@ class Frame extends AbstractMediaType
         $commands = array_merge($commands, array($pathfile));
 
         try {
-            $this->driver->command($commands);
+            if(!$returnBase64) {
+                $this->driver->command($commands);
+                return $this
+            }
+            else {
+                return $this->driver->command($commands);
+            }
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($pathfile);
             throw new RuntimeException('Unable to save frame', $e->getCode(), $e);
         }
-
-        return $this;
     }
 }
