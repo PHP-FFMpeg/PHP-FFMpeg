@@ -120,7 +120,7 @@ class Frame extends AbstractMediaType
         try {
             if(!$returnBase64) {
                 $this->driver->command($commands);
-                return $this
+                return $this;
             }
             else {
                 return $this->driver->command($commands);
