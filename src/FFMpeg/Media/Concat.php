@@ -87,11 +87,11 @@ class Concat extends AbstractMediaType
          */
 
         // Set the file which will contain the list of videos
-        $sourcesFile = getcwd().'/tmp/concat.txt';
+        $sourcesFile = getcwd().'/tmp-phpffmpeg/concat.txt';
 
         // Check if the temporary folder exists, if not, create it.
-        if(!file_exists(getcwd().'/tmp')) {
-            mkdir(getcwd().'/tmp', 644);
+        if(!file_exists(getcwd().'/tmp-phpffmpeg')) {
+            mkdir(getcwd().'/tmp-phpffmpeg', 755);
         }
 
         // If a file remains from a previous task, delete it.
