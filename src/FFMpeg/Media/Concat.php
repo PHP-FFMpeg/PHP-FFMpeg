@@ -87,7 +87,7 @@ class Concat extends AbstractMediaType
          */
 
         // Create the file which will contain the list of videos
-        $sourcesFile = sys_get_temp_dir().'concat.txt';
+        $sourcesFile = './concat-tmp-videos-list.txt';
 
         // Set the content of this file
         $fileStream = fopen($sourcesFile, "w");
@@ -129,9 +129,11 @@ class Concat extends AbstractMediaType
             $this->driver->command($commands);
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($outputPathfile);
+            $this->cleanupTemporaryFile($sourcesFile);
             throw new RuntimeException('Unable to save concatenated video', $e->getCode(), $e);
         }
 
+        $this->cleanupTemporaryFile($sourcesFile);
         return $this;
     }
 
