@@ -87,7 +87,10 @@ class Concat extends AbstractMediaType
          */
 
         // Create the file which will contain the list of videos
-        $sourcesFile = './concat-tmp-videos-list.txt';
+        $sourcesFile = getcwd().'/tmp/concat.txt';
+        if(file_exists($sourcesFile)) {
+            unlink($sourcesFile);
+        }
 
         // Set the content of this file
         $fileStream = fopen($sourcesFile, "w");

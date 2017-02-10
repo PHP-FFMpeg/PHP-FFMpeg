@@ -72,7 +72,7 @@ class ConcatTest extends AbstractMediaTestCase
                 array(
                     '-f', 'concat',
                     '-safe', '0',
-                    '-i', './concat-tmp-videos-list.txt',
+                    '-i', getcwd().'/tmp/concat.txt',
                     '-c', 'copy'
                 ),
             ),
@@ -81,7 +81,7 @@ class ConcatTest extends AbstractMediaTestCase
                 array(
                     '-f', 'concat',
                     '-safe', '0',
-                    '-i', './concat-tmp-videos-list.txt'
+                    '-i', getcwd().'/tmp/concat.txt'
                 )
             ),
         );
