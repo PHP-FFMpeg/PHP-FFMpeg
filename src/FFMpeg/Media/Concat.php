@@ -86,25 +86,24 @@ class Concat extends AbstractMediaType
          * @see https://trac.ffmpeg.org/wiki/Concatenate
          */
 
-        // Set the file which will contain the list of videos
-        $sourcesFile = getcwd().'/tmp-phpffmpeg/concat.txt';
-
-        // Check if the temporary folder exists, if not, create it.
-        if(!file_exists(getcwd().'/tmp-phpffmpeg')) {
-            mkdir(getcwd().'/tmp-phpffmpeg', 755);
-        }
-
-        // If a file remains from a previous task, delete it.
-        if(file_exists($sourcesFile)) {
-            unlink($sourcesFile);
-        }
+        // Create the file which will contain the list of videos
+        $sourcesFile = getcwd().'/concat.txt';
 
         // Set the content of this file
-        $fileStream = fopen($sourcesFile, "w");
+        $fileStream = fopen($sourcesFile, 'w') or die("Cannot open file.");
+        $count_videos = 0;
         if(is_array($this->sources) && (count($this->sources) > 0)) {
             foreach ($this->sources as $videoPath) {
-                $line = $videoPath . "\n";
+                $line = "";
+                
+                if($count_videos != 0)
+                    $line .= "\n";
+                
+                $line .= "file ".$videoPath;
+                
                 fwrite($fileStream, $line);
+                
+                $count_videos++;
             }
         }
         else {
