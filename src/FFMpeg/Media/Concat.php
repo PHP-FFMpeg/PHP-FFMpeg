@@ -12,6 +12,7 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use Alchemy\BinaryDriver\Exception\InvalidArgumentException;
 use FFMpeg\Filters\Concat\ConcatFilterInterface;
 use FFMpeg\Filters\Concat\ConcatFilters;
 use FFMpeg\Driver\FFMpegDriver;
@@ -69,9 +70,9 @@ class Concat extends AbstractMediaType
     }
 
     /**
-     * Saves the concatenated video in the given filename, considering that the sources videos are all encoded with the same codec.
+     * Saves the concatenated video in the given array, considering that the sources videos are all encoded with the same codec.
      *
-     * @param string  $pathfile
+     * @param array   $outputPathfile
      * @param string  $streamCopy
      *
      * @return Concat
@@ -85,9 +86,26 @@ class Concat extends AbstractMediaType
          * @see https://trac.ffmpeg.org/wiki/Concatenate
          */
 
+        // Create the file which will contain the list of videos
+        $sourcesFile = sys_get_temp_dir().'concat.txt';
+
+        // Set the content of this file
+        $fileStream = fopen($sourcesFile, "w");
+        if(is_array($this->sources) && (count($this->sources) > 0)) {
+            foreach ($this->sources as $videoPath) {
+                $line = $videoPath . "\n";
+                fwrite($fileStream, $line);
+            }
+        }
+        else {
+            throw new InvalidArgumentException('The list of videos is not a valid array.');
+        }
+        fclose($fileStream);
+
+
         $commands = array(
             '-f', 'concat', '-safe', '0',
-            '-i', $this->sources
+            '-i', $sourcesFile
         );
 
         // Check if stream copy is activated
@@ -120,7 +138,7 @@ class Concat extends AbstractMediaType
     /**
      * Saves the concatenated video in the given filename, considering that the sources videos are all encoded with the same codec.
      *
-     * @param string  $pathfile
+     * @param string  $outputPathfile
      *
      * @return Concat
      *
@@ -133,6 +151,11 @@ class Concat extends AbstractMediaType
          * @see https://trac.ffmpeg.org/wiki/Concatenate
          */
 
+        // Check the validity of the parameter
+        if(!is_array($this->sources) || (count($this->sources) == 0)) {
+            throw new InvalidArgumentException('The list of videos is not a valid array.');
+        }
+
         // Create the commands variable
         $commands = array();
 
@@ -140,43 +163,12 @@ class Concat extends AbstractMediaType
         $nbSources = 0;
         $files = array();
 
-        // Get the list of files
-        if(file_exists($this->sources)) {
-            
-            $handle = fopen($this->sources, "r");
-
-            if($handle !== FALSE) {
-
-                // For each line, check if this is a legit file
-                // and prepare the parameters
-                while (($line = fgets($handle)) !== FALSE) {
-
-                    $line = trim($line);
-                    $line = str_replace('file ', '', $line);
-                    $line = str_replace("'", "", $line);
-                    
-                    if(strcmp(substr($line, 0, 1), '#') != 0) {
-                        $files[] = '-i';
-                        $files[] = $line;
-                        $nbSources++;
-                    }
-                }
-
-            }
-
-            else {
-
-                // Error opening the file.
-                throw new RuntimeException('Error opening the file with the sources.');
-            } 
-
-            fclose($handle);
-        }
-
-        // If the file with the sources cannot be found
-        else {
-
-            throw new RuntimeException('Error. The file with the sources cannot be found.');
+        // For each source, check if this is a legit file
+        // and prepare the parameters
+        foreach ($this->sources as $videoPath) {
+            $files[] = '-i';
+            $files[] = $videoPath;
+            $nbSources++;
         }
 
         $commands = array_merge($commands, $files);

@@ -11,8 +11,8 @@ class ConcatTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $concat = new Concat(__FILE__, $driver, $ffprobe);
-        $this->assertSame(__FILE__, $concat->getSources());
+        $concat = new Concat(array(__FILE__, __FILE__), $driver, $ffprobe);
+        $this->assertSame(array(__FILE__, __FILE__), $concat->getSources());
     }
 
     public function testFiltersReturnFilters()
@@ -20,7 +20,7 @@ class ConcatTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $concat = new Concat(__FILE__, $driver, $ffprobe);
+        $concat = new Concat(array(__FILE__, __FILE__), $driver, $ffprobe);
         $this->assertInstanceOf('FFMpeg\Filters\Concat\ConcatFilters', $concat->filters());
     }
 
@@ -39,7 +39,7 @@ class ConcatTest extends AbstractMediaTestCase
             ->method('add')
             ->with($filter);
 
-        $concat = new Concat(__FILE__, $driver, $ffprobe);
+        $concat = new Concat(array(__FILE__, __FILE__), $driver, $ffprobe);
         $concat->setFiltersCollection($filters);
         $concat->addFilter($filter);
     }
@@ -60,7 +60,7 @@ class ConcatTest extends AbstractMediaTestCase
             ->method('command')
             ->with($commands);
 
-        $concat = new Concat(__FILE__, $driver, $ffprobe);
+        $concat = new Concat(array(__FILE__, 'concat-2.mp4'), $driver, $ffprobe);
         $this->assertSame($concat, $concat->saveFromSameCodecs($pathfile, $streamCopy));
     }
 
@@ -72,7 +72,7 @@ class ConcatTest extends AbstractMediaTestCase
                 array(
                     '-f', 'concat',
                     '-safe', '0',
-                    '-i', __FILE__,
+                    '-i', sys_get_temp_dir().'concat.txt',
                     '-c', 'copy'
                 ),
             ),
@@ -81,7 +81,7 @@ class ConcatTest extends AbstractMediaTestCase
                 array(
                     '-f', 'concat',
                     '-safe', '0',
-                    '-i', __FILE__
+                    '-i', sys_get_temp_dir().'concat.txt'
                 )
             ),
         );
@@ -110,7 +110,7 @@ class ConcatTest extends AbstractMediaTestCase
             ->method('command')
             ->with($commands);
 
-        $concat = new Concat(__DIR__ . '/../../files/concat-list.txt', $driver, $ffprobe);
+        $concat = new Concat(array(__FILE__, 'concat-2.mp4'), $driver, $ffprobe);
         $this->assertSame($concat, $concat->saveFromDifferentCodecs($format, $pathfile));
     }
 
@@ -119,7 +119,7 @@ class ConcatTest extends AbstractMediaTestCase
         return array(
             array(
                 array(
-                    '-i', './concat-1.mp4',
+                    '-i', __FILE__,
                     '-i', 'concat-2.mp4',
                     '-filter_complex', 
                     '[0:v:0] [0:a:0] [1:v:0] [1:a:0] concat=n=2:v=1:a=1 [v] [a]',
