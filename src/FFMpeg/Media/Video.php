@@ -204,4 +204,15 @@ class Video extends Audio
     {
         return new Gif($this, $this->driver, $this->ffprobe, $at, $dimension, $duration);
     }
+
+    /**
+     * Concatenates a list of videos into one unique video.
+     *
+     * @param  string $sources
+     * @return Concat
+     */
+    public function concat($sources)
+    {
+        return new Concat($sources, $this->driver, $this->ffprobe);
+    }
 }
