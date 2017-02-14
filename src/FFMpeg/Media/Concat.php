@@ -28,7 +28,7 @@ use Neutron\TemporaryFilesystem\Manager as FsManager;
 
 class Concat extends AbstractMediaType
 {
-    /** @var string */
+    /** @var array */
     private $sources;
 
     public function __construct($sources, FFMpegDriver $driver, FFProbe $ffprobe)
@@ -87,7 +87,8 @@ class Concat extends AbstractMediaType
          */
 
         // Create the file which will contain the list of videos
-        $sourcesFile = getcwd().'/concat.txt';
+        $fs = FsManager::create();
+        $sourcesFile = $fs->createTemporaryFile('ffmpeg-concat');
 
         // Set the content of this file
         $fileStream = fopen($sourcesFile, 'w') or die("Cannot open file.");

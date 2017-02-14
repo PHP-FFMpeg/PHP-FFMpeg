@@ -3,6 +3,7 @@
 namespace Tests\FFMpeg\Unit\Media;
 
 use FFMpeg\Media\Concat;
+use Neutron\TemporaryFilesystem\Manager as FsManager;
 
 class ConcatTest extends AbstractMediaTestCase
 {
@@ -56,23 +57,37 @@ class ConcatTest extends AbstractMediaTestCase
 
         array_push($commands, $pathfile);
 
-        $driver->expects($this->once())
+        $driver->expects($this->exactly(1))
             ->method('command')
-            ->with($commands);
+            ->with($this->isType('array'), false, $this->anything())
+            ->will($this->returnCallback(function ($commands, $errors, $listeners) {}));
 
         $concat = new Concat(array(__FILE__, 'concat-2.mp4'), $driver, $ffprobe);
-        $this->assertSame($concat, $concat->saveFromSameCodecs($pathfile, $streamCopy));
+        $concat->saveFromSameCodecs($pathfile, $streamCopy);
+
+        $this->assertEquals('-f', $commands[0]);
+        $this->assertEquals('concat', $commands[1]);
+        $this->assertEquals('-safe', $commands[2]);
+        $this->assertEquals('0', $commands[3]);
+        $this->assertEquals('-i', $commands[4]);
+        if(isset($commands[6]) && (strcmp($commands[6], "-c") == 0)) {
+            $this->assertEquals('-c', $commands[6]);
+            $this->assertEquals('copy', $commands[7]);
+        }
     }
 
     public function provideSaveFromSameCodecsOptions()
     {
+        $fs = FsManager::create();
+        $tmpFile = $fs->createTemporaryFile('ffmpeg-concat');
+
         return array(
             array(
                 TRUE,
                 array(
                     '-f', 'concat',
                     '-safe', '0',
-                    '-i', getcwd().'/concat.txt',
+                    '-i', $tmpFile,
                     '-c', 'copy'
                 ),
             ),
@@ -81,7 +96,7 @@ class ConcatTest extends AbstractMediaTestCase
                 array(
                     '-f', 'concat',
                     '-safe', '0',
-                    '-i', getcwd().'/concat.txt'
+                    '-i', $tmpFile
                 )
             ),
         );
