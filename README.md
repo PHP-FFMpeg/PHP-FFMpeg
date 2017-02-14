@@ -405,7 +405,7 @@ accurate images ; it takes more time to execute.
 
 #### Gif
 
-A gif is an animated image extracted from a sequence of the video ;.
+A gif is an animated image extracted from a sequence of the video.
 
 You can save gif files using the `FFMpeg\Media\Gif::save` method.
 
@@ -418,6 +418,62 @@ $video
 
 This method has a third optional boolean parameter, which is the duration of the animation.
 If you don't set it, you will get a fixed gif image.
+
+#### Concatenation
+
+This feature allows you to generate one audio or video file, based on multiple sources.
+
+There are two ways to concatenate videos, depending on the codecs of the sources.
+If your sources have all been encoded with the same codec, you will want to use the `FFMpeg\Media\Concatenate::saveFromSameCodecs` which has way better performances.
+If your sources have been encoded with different codecs, you will want to use the `FFMpeg\Media\Concatenate::saveFromDifferentCodecs`.
+
+The first function will use the initial codec as the one for the generated file.
+With the second function, you will be able to choose which codec you want for the generated file.
+
+You also need to pay attention to the fact that, when using the saveFromDifferentCodecs method,
+your files MUST have video and audio streams.
+
+In both cases, you will have to provide a list of files in a TXT file.
+The TXT file will one path per line. Here is an example:
+
+`txt
+file './concat-1.mp4'
+file 'concat-2.mp4'
+#file 'concat-3.mp4'
+`
+
+In this example, the third file will be ignored.
+Please refer to the [documentation](https://trac.ffmpeg.org/wiki/Concatenate) for more details.
+
+To concatenate videos encoded with the same codec, do as follow:
+
+```php
+// In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
+// We recommand that you put there the path of any of the video you want to use in this concatenation.
+$video = $ffmpeg->open( '/path/to/video' );
+$video
+    ->concat('/path/to/list.txt')
+    ->saveFromSameCodecs('/path/to/new_file', TRUE);
+```
+
+The boolean parameter of the save function allows you to use the copy parameter which accelerates drastically the generation of the encoded file.
+
+To concatenate videos encoded with the same codec, do as follow:
+
+```php
+// In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
+// We recommand that you put there the path of any of the video you want to use in this concatenation.
+$video = $ffmpeg->open( '/path/to/video' );
+
+$format = new FFMpeg\Format\Video\X264();
+$format->setAudioCodec("libmp3lame");
+
+$video
+    ->concat('/path/to/list.txt')
+    ->saveFromDifferentCodecs($format, '/path/to/new_file');
+```
+
+More details about concatenation in FFMPEG can be found [here](https://trac.ffmpeg.org/wiki/Concatenate), [here](https://ffmpeg.org/ffmpeg-formats.html#concat-1) and [here](https://ffmpeg.org/ffmpeg.html#Stream-copy).
 
 #### Formats
 

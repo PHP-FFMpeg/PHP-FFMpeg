@@ -148,4 +148,24 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
         return $video;
     }
+
+    public function getConcatMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Media\Concat')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    public function getFormatInterfaceMock()
+    {
+        $FormatInterface = $this->getMockBuilder('FFMpeg\Format\FormatInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $FormatInterface->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array()));
+
+        return $FormatInterface;
+    }
 }
