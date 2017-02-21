@@ -91,7 +91,12 @@ class Concat extends AbstractMediaType
         $sourcesFile = $fs->createTemporaryFile('ffmpeg-concat');
 
         // Set the content of this file
-        $fileStream = fopen($sourcesFile, 'w') or throw new ExecutionFailureException('Cannot open the temporary file.');
+        try {
+            $fileStream = fopen($sourcesFile, 'w');
+        } catch (Exception $e) {
+            throw new ExecutionFailureException('Cannot open the temporary file.');
+        }
+
         $count_videos = 0;
         if(is_array($this->sources) && (count($this->sources) > 0)) {
             foreach ($this->sources as $videoPath) {
