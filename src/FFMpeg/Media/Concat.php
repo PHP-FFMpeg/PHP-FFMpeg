@@ -91,19 +91,24 @@ class Concat extends AbstractMediaType
         $sourcesFile = $fs->createTemporaryFile('ffmpeg-concat');
 
         // Set the content of this file
-        $fileStream = fopen($sourcesFile, 'w') or die("Cannot open file.");
+        $fileStream = @fopen($sourcesFile, 'w');
+
+        if($fileStream === false) {
+            throw new ExecutionFailureException('Cannot open the temporary file.');
+        }
+
         $count_videos = 0;
         if(is_array($this->sources) && (count($this->sources) > 0)) {
             foreach ($this->sources as $videoPath) {
                 $line = "";
-                
+
                 if($count_videos != 0)
                     $line .= "\n";
-                
+
                 $line .= "file ".$videoPath;
-                
+
                 fwrite($fileStream, $line);
-                
+
                 $count_videos++;
             }
         }
@@ -193,7 +198,7 @@ class Concat extends AbstractMediaType
             $complex_filter .= '['.$i.':v:0] ['.$i.':a:0] ';
         }
         $complex_filter .= 'concat=n='.$nbSources.':v=1:a=1 [v] [a]';
-        
+
         $commands[] = $complex_filter;
         $commands[] = '-map';
         $commands[] = '[v]';
