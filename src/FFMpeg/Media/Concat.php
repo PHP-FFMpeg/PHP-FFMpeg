@@ -91,9 +91,9 @@ class Concat extends AbstractMediaType
         $sourcesFile = $fs->createTemporaryFile('ffmpeg-concat');
 
         // Set the content of this file
-        try {
-            $fileStream = fopen($sourcesFile, 'w');
-        } catch (Exception $e) {
+        $fileStream = @fopen($sourcesFile, 'w');
+
+        if($fileStream === false) {
             throw new ExecutionFailureException('Cannot open the temporary file.');
         }
 
