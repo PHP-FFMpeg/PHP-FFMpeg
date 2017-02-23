@@ -249,6 +249,29 @@ class VideoTest extends AbstractStreamableTestCase
         $format->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $format->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array('foo', 'bar')));
+
+        $format2 = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format2->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array()));
+        $format2->expects($this->any())
+            ->method('getKiloBitrate')
+            ->will($this->returnValue(663));
+        $format2->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
+        $format2->expects($this->any())
+            ->method('getAudioChannels')
+            ->will($this->returnValue(2));
+        $format2->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
+        $format2->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array('foo', 'bar')));
 
         $audioFormat = $this->getMock('FFMpeg\Format\AudioInterface');
         $audioFormat->expects($this->any())
@@ -289,6 +312,9 @@ class VideoTest extends AbstractStreamableTestCase
         $audioVideoFormat->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $audioVideoFormat->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $audioVideoFormatSinglePass = $this->getMock('FFMpeg\Format\VideoInterface');
         $audioVideoFormatSinglePass->expects($this->any())
@@ -312,6 +338,9 @@ class VideoTest extends AbstractStreamableTestCase
         $audioVideoFormatSinglePass->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(1));
+        $audioVideoFormatSinglePass->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $formatExtra = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra->expects($this->any())
@@ -329,6 +358,29 @@ class VideoTest extends AbstractStreamableTestCase
         $formatExtra->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
+        $formatExtra->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
+
+        $formatExtra2 = $this->getMock('FFMpeg\Format\VideoInterface');
+        $formatExtra2->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array('extra', 'param')));
+        $formatExtra2->expects($this->any())
+            ->method('getKiloBitrate')
+            ->will($this->returnValue(665));
+        $formatExtra2->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
+        $formatExtra2->expects($this->any())
+            ->method('getAudioChannels')
+            ->will($this->returnValue(2));
+        $formatExtra2->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
+        $formatExtra2->expects($this->any())
+            ->method('getAdditionalParameters')
+            ->will($this->returnValue(array()));
 
         $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
 
@@ -350,6 +402,27 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getAudioChannels')
             ->will($this->returnValue(2));
         $progressableFormat->expects($this->any())
+            ->method('getPasses')
+            ->will($this->returnValue(2));
+
+        $progressableFormat2 = $this->getMockBuilder('Tests\FFMpeg\Unit\Media\Prog')
+            ->disableOriginalConstructor()->getMock();
+        $progressableFormat2->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array()));
+        $progressableFormat2->expects($this->any())
+            ->method('createProgressListener')
+            ->will($this->returnValue($listeners));
+        $progressableFormat2->expects($this->any())
+            ->method('getKiloBitrate')
+            ->will($this->returnValue(666));
+        $progressableFormat2->expects($this->any())
+            ->method('getAudioKiloBitrate')
+            ->will($this->returnValue(92));
+        $progressableFormat2->expects($this->any())
+            ->method('getAudioChannels')
+            ->will($this->returnValue(2));
+        $progressableFormat2->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
 
@@ -379,14 +452,14 @@ class VideoTest extends AbstractStreamableTestCase
                     '-y', '-i', __FILE__, '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
                     '/target/file',
                 ), array(
                     '-y', '-i', __FILE__,
                     '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
                     '/target/file',
                 )), null, $format),
             array(false, array(array(
@@ -436,7 +509,7 @@ class VideoTest extends AbstractStreamableTestCase
                     '-threads', 24, '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
                     '/target/file',
                 ), array(
                     '-y', '-i', __FILE__,
@@ -444,9 +517,9 @@ class VideoTest extends AbstractStreamableTestCase
                     '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
                     '/target/file',
-                )), null, $format),
+                )), null, $format2),
             array(true, array(array(
                     '-y', '-i', __FILE__,
                     'extra', 'param', '-threads', 24, '-b:v', '665k',
@@ -461,7 +534,7 @@ class VideoTest extends AbstractStreamableTestCase
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
                     '/target/file',
-                )), null, $formatExtra),
+                )), null, $formatExtra2),
             array(false, array(array(
                     '-y', '-i', __FILE__, '-b:v', '666k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
@@ -475,7 +548,7 @@ class VideoTest extends AbstractStreamableTestCase
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                     '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
                     '/target/file',
-                )), $listeners, $progressableFormat),
+                )), $listeners, $progressableFormat2),
             array(true, array(array(
                     '-y', '-i', __FILE__,
                     '-threads', 24, '-b:v', '666k',

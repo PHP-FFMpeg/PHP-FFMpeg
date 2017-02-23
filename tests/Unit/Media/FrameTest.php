@@ -50,7 +50,7 @@ class FrameTest extends AbstractMediaTestCase
     /**
      * @dataProvider provideSaveOptions
      */
-    public function testSave($accurate, $commands)
+    public function testSave($accurate, $base64, $commands)
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
@@ -67,24 +67,41 @@ class FrameTest extends AbstractMediaTestCase
             ->method('command')
             ->with($commands);
 
-        $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
-        $this->assertSame($frame, $frame->save($pathfile, $accurate));
+        if(!$base64) {
+            $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
+            $this->assertSame($frame, $frame->save($pathfile, $accurate, $base64));
+        }
+        else {
+            $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
+            $frame->save($pathfile, $accurate, $base64);
+        }
     }
-
+    
     public function provideSaveOptions()
     {
         return array(
-            array(false, array(
+            array(false, false, array(
                 '-y', '-ss', 'timecode',
                 '-i', __FILE__,
                 '-vframes', '1',
                 '-f', 'image2')
             ),
-            array(true, array(
+            array(true, false, array(
                 '-y', '-i', __FILE__,
                 '-vframes', '1', '-ss', 'timecode',
-                '-f', 'image2'
-            )),
+                '-f', 'image2')
+            ),
+            array(false, true, array(
+                    '-y', '-ss', 'timecode',
+                    '-i', __FILE__,
+                    '-vframes', '1',
+                    '-f', 'image2pipe', '-')
+            ),
+            array(true, true, array(
+                    '-y', '-i', __FILE__,
+                    '-vframes', '1', '-ss', 'timecode',
+                    '-f', 'image2pipe', '-')
+            )
         );
     }
 }

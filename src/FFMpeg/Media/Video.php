@@ -13,6 +13,7 @@ namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
@@ -119,6 +120,15 @@ class Video extends Audio
             }
         }
 
+        // If the user passed some additional parameters
+        if ($format instanceof VideoInterface) {
+            if (null !== $format->getAdditionalParameters()) {
+                foreach ($format->getAdditionalParameters() as $additionalParameter) {
+                    $commands[] = $additionalParameter;
+                }
+            }
+        }
+
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
         $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');
@@ -180,5 +190,29 @@ class Video extends Audio
     public function frame(TimeCode $at)
     {
         return new Frame($this, $this->driver, $this->ffprobe, $at);
+    }
+
+    /**
+     * Extracts a gif from a sequence of the video.
+     *
+     * @param  TimeCode $at
+     * @param  Dimension $dimension
+     * @param  integer $duration
+     * @return Gif
+     */
+    public function gif(TimeCode $at, Dimension $dimension, $duration = null)
+    {
+        return new Gif($this, $this->driver, $this->ffprobe, $at, $dimension, $duration);
+    }
+
+    /**
+     * Concatenates a list of videos into one unique video.
+     *
+     * @param  string $sources
+     * @return Concat
+     */
+    public function concat($sources)
+    {
+        return new Concat($sources, $this->driver, $this->ffprobe);
     }
 }
