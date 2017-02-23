@@ -67,6 +67,9 @@ class AudioClipFilter implements AudioFilterInterface
           $commands[] = (string) $this->duration;
         }
 
+        $commands[] = '-acodec';
+        $commands[] = 'copy';
+        
         return $commands;
     }
 }
