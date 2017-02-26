@@ -13,6 +13,7 @@ namespace FFMpeg\Filters\Audio;
 
 use FFMpeg\Filters\Audio\AddMetadataFilter;
 use FFMpeg\Media\Audio;
+use FFMpeg\Coordinate\TimeCode;
 
 class AudioFilters
 {
@@ -54,6 +55,19 @@ class AudioFilters
     public function addMetadata($data = null)
     {
         $this->media->addFilter(new AddMetadataFilter($data));
+
+        return $this;
+    }
+
+    /**
+     * Cuts the audio at `$start`, optionally define the end
+     *
+     * @param   TimeCode    $start      Where the clipping starts(seek to time)
+     * @param   TimeCode    $duration   How long the clipped audio should be
+     * @return AudioFilters
+     */
+    public function clip($start, $duration = null) {
+        $this->media->addFilter(new AudioClipFilter($start, $duration));
 
         return $this;
     }
