@@ -9,6 +9,8 @@ use Tests\FFMpeg\Unit\TestCase;
 class AudioClipTest extends TestCase {
 
     public function testClipping() {
+        $capturedFilter = null;
+
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
@@ -25,6 +27,8 @@ class AudioClipTest extends TestCase {
     }
 
     public function testClippingWithDuration() {
+        $capturedFilter = null;
+        
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
