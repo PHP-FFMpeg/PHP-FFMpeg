@@ -23,12 +23,12 @@ class AudioClipTest extends TestCase {
         $filters = new AudioFilters($audio);
 
         $filters->clip(TimeCode::fromSeconds(5));
-        $this->assertEquals(array(0 => '-ss', 1 => '00:00:05.00'), $capturedFilter->apply($audio, $format));
+        $this->assertEquals(array(0 => '-ss', 1 => '00:00:05.00', 2 => '-acodec', 3 => 'copy'), $capturedFilter->apply($audio, $format));
     }
 
     public function testClippingWithDuration() {
         $capturedFilter = null;
-        
+
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
@@ -41,7 +41,7 @@ class AudioClipTest extends TestCase {
         $filters = new AudioFilters($audio);
 
         $filters->clip(TimeCode::fromSeconds(5), TimeCode::fromSeconds(5));
-        $this->assertEquals(array(0 => '-ss', 1 => '00:00:05.00', 2 => '-t', 3 => '00:00:05.00'), $capturedFilter->apply($audio, $format));
+        $this->assertEquals(array(0 => '-ss', 1 => '00:00:05.00', 2 => '-t', 3 => '00:00:05.00', 4 => '-acodec', 5 => 'copy'), $capturedFilter->apply($audio, $format));
     }
 
 }
