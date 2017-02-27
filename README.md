@@ -6,11 +6,11 @@
 
 An Object Oriented library to convert video/audio files with FFmpeg / AVConv.
 
-Check another amazing repo : [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
+Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
 
 ## Your attention please
 
-### How this library works :
+### How this library works:
 
 This library requires a working FFMpeg install. You will need both FFMpeg and FFProbe binaries to use it.
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
@@ -18,7 +18,7 @@ otherwise you should have to explicitly give the binaries path on load.
 
 For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
 
-### Known issues :
+### Known issues:
 
 - Using rotate and resize will produce a corrupted output when using 
 [libav](http://libav.org/) 0.8. The bug is fixed in version 9. This bug does not 
@@ -58,7 +58,7 @@ to browse the source code as it is self-documented.
 ### FFMpeg
 
 `FFMpeg\FFMpeg` is the main object to use to manipulate medias. To build it,
-use the static `FFMpeg\FFMpeg::create` :
+use the static `FFMpeg\FFMpeg::create`:
 
 ```php
 $ffmpeg = FFMpeg\FFMpeg::create();
@@ -82,8 +82,8 @@ $ffmpeg = FFMpeg\FFMpeg::create(array(
 `FFMpeg\FFMpeg` creates media based on URIs. URIs could be either a pointer to a
 local filesystem resource, an HTTP resource or any resource supported by FFmpeg.
 
-**Note** : To list all supported resource type of your FFmpeg build, use the
-`-protocols` command :
+**Note**: To list all supported resource type of your FFmpeg build, use the
+`-protocols` command:
 
 ```
 ffmpeg -protocols
@@ -95,12 +95,12 @@ To open a resource, use the `FFMpeg\FFMpeg::open` method.
 $ffmpeg->open('video.mpeg');
 ```
 
-Two types of media can be resolved : `FFMpeg\Media\Audio` and `FFMpeg\Media\Video`.
+Two types of media can be resolved: `FFMpeg\Media\Audio` and `FFMpeg\Media\Video`.
 A third type, `FFMpeg\Media\Frame`, is available through videos.
 
 #### Video
 
-`FFMpeg\Media\Video` can be transcoded, ie : change codec, isolate audio or
+`FFMpeg\Media\Video` can be transcoded, ie: change codec, isolate audio or
 video. Frames can be extracted.
 
 ##### Transcoding
@@ -146,7 +146,7 @@ If you want to extract multiple images from your video, you can use the followin
 ```php
 $video
     ->filters()
-    ->extractMultipleFrames(FFMpeg\Filters\Video\ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC, . '/path/to/destination/folder/')
+    ->extractMultipleFrames(FFMpeg\Filters\Video\ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC, '/path/to/destination/folder/')
     ->synchronize();
 
 $video
@@ -217,9 +217,9 @@ $video->filters()->rotate($angle);
 
 The `$angle` parameter must be one of the following constants :
 
-- `FFMpeg\Filters\Video\RotateFilter::ROTATE_90` : 90° clockwise
-- `FFMpeg\Filters\Video\RotateFilter::ROTATE_180` : 180°
-- `FFMpeg\Filters\Video\RotateFilter::ROTATE_270` : 90° counterclockwise
+- `FFMpeg\Filters\Video\RotateFilter::ROTATE_90`: 90° clockwise
+- `FFMpeg\Filters\Video\RotateFilter::ROTATE_180`: 180°
+- `FFMpeg\Filters\Video\RotateFilter::ROTATE_270`: 90° counterclockwise
 
 ###### Resize
 
@@ -288,7 +288,7 @@ Changes the frame rate of the video.
 $video->filters()->framerate($framerate, $gop);
 ```
 
-The framerate filter takes two parameters :
+The framerate filter takes two parameters:
 
 - `$framerate`, an instance of `FFMpeg\Coordinate\Framerate`
 - `$gop`, a [GOP](https://wikipedia.org/wiki/Group_of_pictures) value (integer)
@@ -319,7 +319,7 @@ The clip filter takes two parameters:
 
 #### Audio
 
-`FFMpeg\Media\Audio` can be transcoded, ie : change codec, isolate audio or
+`FFMpeg\Media\Audio` can be transcoded, ie: change codec, isolate audio or
 video. Frames can be extracted.
 
 ##### Transcoding
@@ -436,11 +436,11 @@ your files MUST have video and audio streams.
 In both cases, you will have to provide a list of files in a TXT file.
 The TXT file will one path per line. Here is an example:
 
-`txt
+```txt
 file './concat-1.mp4'
 file 'concat-2.mp4'
 #file 'concat-3.mp4'
-`
+```
 
 In this example, the third file will be ignored.
 Please refer to the [documentation](https://trac.ffmpeg.org/wiki/Concatenate) for more details.
@@ -575,7 +575,7 @@ $ffprobe
 
 ##Using with Silex Microframework
 
-Service provider is easy to set up :
+Service provider is easy to set up:
 
 ```php
 $app = new Silex\Application();
@@ -584,7 +584,7 @@ $app->register(new FFMpeg\FFMpegServiceProvider());
 $video = $app['ffmpeg']->open('video.mpeg');
 ```
 
-Available options are as follow :
+Available options are as follow:
 
 ```php
 $app->register(new FFMpeg\FFMpegServiceProvider(), array(
@@ -601,7 +601,7 @@ $app->register(new FFMpeg\FFMpegServiceProvider(), array(
 
 ## API Browser
 
-Browse the [API](http://readthedocs.org/docs/ffmpeg-php/en/latest/_static/API/)
+Browse the [API](https://ffmpeg-php.readthedocs.io/en/latest/_static/API/)
 
 ## License
 
