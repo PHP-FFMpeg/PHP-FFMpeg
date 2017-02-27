@@ -20,8 +20,8 @@ For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds
 
 ### Known issues:
 
-- Using rotate and resize will produce a corrupted output when using 
-[libav](http://libav.org/) 0.8. The bug is fixed in version 9. This bug does not 
+- Using rotate and resize will produce a corrupted output when using
+[libav](http://libav.org/) 0.8. The bug is fixed in version 9. This bug does not
 appear in latest ffmpeg version.
 
 ## Installation
@@ -433,17 +433,7 @@ With the second function, you will be able to choose which codec you want for th
 You also need to pay attention to the fact that, when using the saveFromDifferentCodecs method,
 your files MUST have video and audio streams.
 
-In both cases, you will have to provide a list of files in a TXT file.
-The TXT file will one path per line. Here is an example:
-
-```txt
-file './concat-1.mp4'
-file 'concat-2.mp4'
-#file 'concat-3.mp4'
-```
-
-In this example, the third file will be ignored.
-Please refer to the [documentation](https://trac.ffmpeg.org/wiki/Concatenate) for more details.
+In both cases, you will have to provide an array of files.
 
 To concatenate videos encoded with the same codec, do as follow:
 
@@ -452,7 +442,7 @@ To concatenate videos encoded with the same codec, do as follow:
 // We recommand that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 $video
-    ->concat('/path/to/list.txt')
+    ->concat(array('/path/to/video1', '/path/to/video2'))
     ->saveFromSameCodecs('/path/to/new_file', TRUE);
 ```
 
@@ -469,7 +459,7 @@ $format = new FFMpeg\Format\Video\X264();
 $format->setAudioCodec("libmp3lame");
 
 $video
-    ->concat('/path/to/list.txt')
+    ->concat(array('/path/to/video1', '/path/to/video2'))
     ->saveFromDifferentCodecs($format, '/path/to/new_file');
 ```
 
@@ -606,7 +596,3 @@ Browse the [API](https://ffmpeg-php.readthedocs.io/en/latest/_static/API/)
 ## License
 
 This project is licensed under the [MIT license](http://opensource.org/licenses/MIT).
-
-
-
-
