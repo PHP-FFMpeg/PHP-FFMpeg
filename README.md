@@ -117,9 +117,9 @@ $format->on('progress', function ($video, $format, $percentage) {
 });
 
 $format
-    -> setKiloBitrate(1000)
-    -> setAudioChannels(2)
-    -> setAudioKiloBitrate(256);
+    ->setKiloBitrate(1000)
+    ->setAudioChannels(2)
+    ->setAudioKiloBitrate(256);
 
 $video->save($format, 'video.avi');
 ```
@@ -339,8 +339,8 @@ $format->on('progress', function ($audio, $format, $percentage) {
 });
 
 $format
-    -> setAudioChannels(2)
-    -> setAudioKiloBitrate(256);
+    ->setAudioChannels(2)
+    ->setAudioKiloBitrate(256);
 
 $audio->save($format, 'track.flac');
 ```
