@@ -28,6 +28,22 @@ class AudioFilters
         return $this;
     }
 
+
+    /**
+     * Clips (cuts) the audio.
+     *
+     * @param TimeCode $start
+     * @param TimeCode $duration
+     *
+     * @return AudioFilters
+     */
+    public function clip($start, $duration = null)
+    {
+        $this->media->addFilter(new AudioClipFilter($start, $duration));
+
+        return $this;
+    }
+
     /**
      * Add metadata to an audio file. If no arguments are given then filter
      * will remove all metadata from the audio file
