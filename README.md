@@ -111,7 +111,7 @@ pass a `FFMpeg\Format\FormatInterface` for that.
 Please note that audio and video bitrate are set on the format.
 
 ```php
-$format = new Format\Video\X264();
+$format = new FFMpeg\Format\Video\X264();
 $format->on('progress', function ($video, $format, $percentage) {
     echo "$percentage % transcoded";
 });
@@ -477,7 +477,7 @@ informations about the transcoding.
 Predefined formats already provide progress informations as events.
 
 ```php
-$format = new Format\Video\X264();
+$format = new FFMpeg\Format\Video\X264();
 $format->on('progress', function ($video, $format, $percentage) {
     echo "$percentage % transcoded";
 });
@@ -494,7 +494,7 @@ You can add additional parameters to your encoding requests based on your video 
 The argument of the setAdditionalParameters method is an array.
 
 ```php
-$format = new Format\Video\X264();
+$format = new FFMpeg\Format\Video\X264();
 $format->setAdditionalParameters(array('foo', 'bar'));
 $video->save($format, 'video.avi');
 ```
