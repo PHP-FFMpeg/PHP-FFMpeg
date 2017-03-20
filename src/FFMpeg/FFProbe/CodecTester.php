@@ -63,7 +63,7 @@ class CodecTester implements OptionsTesterInterface
         try {
             $output = $this->ffprobe->command(array('-buildconf'));
         } catch (ExecutionFailureException $e) {
-            throw new RuntimeException('Your FFProbe version is too old and does not support `-help` option, please upgrade.', $e->getCode(), $e);
+            throw new RuntimeException('Your FFProbe version is too old and does not support `-buildconf` option, please upgrade.', $e->getCode(), $e);
         }
 
         $this->cache->save($id, $output);
