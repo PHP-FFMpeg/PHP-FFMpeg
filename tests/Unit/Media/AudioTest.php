@@ -169,6 +169,8 @@ class AudioTest extends AbstractStreamableTestCase
                 $capturedListeners = $listeners;
             }));
 
+        // TODO: Need help to fix this test, create mock for codectester?
+
         $outputPathfile = '/target/file';
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);

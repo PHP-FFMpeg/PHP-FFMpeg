@@ -70,13 +70,23 @@ class Video extends Audio
             $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
         }
         if ($format instanceof VideoInterface) {
-            if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+            $videoCodec = $format->getVideoCodec();
+            if (null !== $videoCodec) {
+                if(!$this->ffprobe->getCodecTester()->has($videoCodec)) {
+                    throw new \InvalidArgumentException('The given video codec ' . $videoCodec . ' is not supported by this machine!');
+                }
+
+                $filters->add(new SimpleFilter(array('-vcodec', $videoCodec)));
             }
         }
         if ($format instanceof AudioInterface) {
-            if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+            $audioCodec = $format->getAudioCodec();
+            if (null !== $audioCodec) {
+                if(!$this->ffprobe->getCodecTester()->has($audioCodec)) {
+                    throw new \InvalidArgumentException('The given audio codec ' . $audioCodec . ' is not supported by this machine!');
+                }
+
+                $filters->add(new SimpleFilter(array('-acodec', $audioCodec)));
             }
         }
 

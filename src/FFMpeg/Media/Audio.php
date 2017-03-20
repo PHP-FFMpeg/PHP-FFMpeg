@@ -75,8 +75,14 @@ class Audio extends AbstractStreamableMedia
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
         }
-        if (null !== $format->getAudioCodec()) {
-            $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+
+        $audioCodec = $format->getAudioCodec();
+        if (null !== $audioCodec) {
+            if(!$this->ffprobe->getCodecTester()->has($audioCodec)) {
+                throw new \InvalidArgumentException('The given audio codec ' . $audioCodec . ' is not supported by this machine!');
+            }
+
+            $filters->add(new SimpleFilter(array('-acodec', $audioCodec)));
         }
 
         foreach ($filters as $filter) {
@@ -104,7 +110,7 @@ class Audio extends AbstractStreamableMedia
     }
 
     /**
-     * Gets the waveform of the video.
+     * Gets the waveform of the media.
      *
      * @param  integer $width
      * @param  integer $height
