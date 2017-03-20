@@ -85,7 +85,6 @@ class QtFaststart
             }
         } catch (ExecutionFailureException $e) {
             $failure = $e;
-            break;
         }
 
         @unlink($tempfile);
