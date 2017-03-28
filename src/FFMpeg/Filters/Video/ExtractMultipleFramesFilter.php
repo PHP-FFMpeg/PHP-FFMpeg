@@ -79,6 +79,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     public function apply(Video $video, VideoInterface $format)
     {
         $commands = array();
+        $duration = 0;
 
         try {
             // Get the duration of the video
@@ -105,7 +106,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
 
             // Set the number of digits to use in the exported filenames
             $nbImages = ceil( $duration * $nbFramesPerSecond );
-            
+
             if($nbImages < 100)
                 $nbDigitsInFileNames = "02";
             elseif($nbImages < 1000)
