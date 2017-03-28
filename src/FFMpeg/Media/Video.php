@@ -72,6 +72,8 @@ class Video extends Audio
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
                 $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+                $filters->add(new SimpleFilter(array('-vprofile', $format->getProfile())));
+                $filters->add(new SimpleFilter(array('-level', $format->getLevel())));
             }
         }
         if ($format instanceof AudioInterface) {
