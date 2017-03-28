@@ -76,6 +76,14 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
+     * Returns the level
+     * @return float
+     */
+    public function getLevel() {
+        return $this->level;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getKiloBitrate()
