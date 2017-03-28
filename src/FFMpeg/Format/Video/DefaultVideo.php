@@ -16,6 +16,7 @@ use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Format\Audio\DefaultAudio;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\MediaTypeInterface;
+use FFMpeg\Format\Profile;
 use FFMpeg\Format\ProgressListener\VideoProgressListener;
 
 /**
