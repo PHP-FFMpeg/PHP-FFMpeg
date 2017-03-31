@@ -1,4 +1,4 @@
-#PHP FFmpeg
+# PHP FFmpeg
 
 [![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
 
