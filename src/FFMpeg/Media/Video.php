@@ -135,13 +135,23 @@ class Video extends Audio
             $command = $commands[$i];
             if ( $command == '-vf' ) {
                 $commandSplits = explode(";", $commands[$i + 1]);
-                foreach($commandSplits as $commandSplit) {
+                if ( count($commandSplits) == 1 ) {
+                    $commandSplit = $commandSplits[0];
                     $command = trim($commandSplit);
-                    if ( preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match) ) {
+                    if ( !preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
                         $videoFilterProcesses[] = $match[1];
                     } else {
-                        $videoFilterVars[] = $command;
-                    }                
+                        $videoFilterProcesses[] = $command;   
+                    }
+                } else {
+                    foreach($commandSplits as $commandSplit) {
+                        $command = trim($commandSplit);
+                        if ( preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match) ) {
+                            $videoFilterProcesses[] = $match[1];
+                        } else {
+                            $videoFilterVars[] = $command;
+                        }                
+                    }
                 }
                 unset($commands[$i]);
                 unset($commands[$i + 1]);
