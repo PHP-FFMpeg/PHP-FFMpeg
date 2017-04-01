@@ -138,7 +138,7 @@ class Video extends Audio
                 if ( count($commandSplits) == 1 ) {
                     $commandSplit = $commandSplits[0];
                     $command = trim($commandSplit);
-                    if ( !preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
+                    if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
                         $videoFilterProcesses[] = $match[1];
                     } else {
                         $videoFilterProcesses[] = $command;   
