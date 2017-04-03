@@ -62,8 +62,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * Returns the current profile
-     * @return string
+     * @inheritDoc
      */
     public function getProfile() {
         return $this->profile;
@@ -79,8 +78,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * Returns the level
-     * @return float
+     * @inheritDoc
      */
     public function getLevel() {
         return $this->level;
@@ -159,7 +157,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * Sets additional parameters.
      *
-     * @param  array                    $additionalParamaters
+     * @param  array                    $additionalParameter
      * @throws InvalidArgumentException
      */
     public function setAdditionalParameters($additionalParamaters)

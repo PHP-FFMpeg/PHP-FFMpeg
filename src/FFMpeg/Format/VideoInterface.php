@@ -61,4 +61,16 @@ interface VideoInterface extends AudioInterface
      * @return array
      */
     public function getAdditionalParameters();
+
+    /**
+     * Returns the current profile
+     * @return string
+     */
+    public function getProfile();
+
+    /**
+     * Returns the level
+     * @return float
+     */
+    public function getLevel();
 }
