@@ -69,8 +69,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * Returns an array with the supported video codecs for this format
-     * @return string[]
+     * @inheritDoc
      */
     abstract public function getAvailableVideoCodecs();
 

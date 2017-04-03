@@ -47,8 +47,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * Returns an array with the supported audio codecs for this format
-     * @return string[]
+     * @inheritDoc
      */
     abstract public function getAvailableAudioCodecs();
 

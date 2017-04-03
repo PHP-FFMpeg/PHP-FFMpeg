@@ -182,6 +182,17 @@ class VideoTest extends AbstractStreamableTestCase
         $capturedCommands = array();
         $capturedListeners = null;
 
+        $codecTester = $this->getCodecTesterMock();
+
+        $ffprobe->expects($this->any())
+            ->method('getCodecTester')
+            ->will($this->returnValue($codecTester));
+
+        // We're in test, of course the codecs won't be available at all
+        $codecTester->expects($this->any())
+            ->method('has')
+            ->will($this->returnValue(true));
+
         $driver->expects($this->exactly(count($expectedCommands)))
             ->method('command')
             ->with($this->isType('array'), false, $this->anything())

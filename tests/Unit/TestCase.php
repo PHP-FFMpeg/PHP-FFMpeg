@@ -168,4 +168,10 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
         return $FormatInterface;
     }
+
+    public function getCodecTesterMock() {
+        return $this->getMockBuilder('FFMpeg\FFProbe\CodecTester')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
 }

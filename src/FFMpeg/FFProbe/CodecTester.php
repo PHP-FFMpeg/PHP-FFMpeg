@@ -19,7 +19,7 @@ use FFMpeg\Exception\RuntimeException;
 /**
  * Ensures that the wanted codec is supported by the system
  */
-class CodecTester implements OptionsTesterInterface
+class CodecTester implements CodecTesterInterface
 {
     /** @var FFProbeDriver */
     private $ffprobe;

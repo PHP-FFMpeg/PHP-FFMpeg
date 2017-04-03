@@ -49,9 +49,8 @@ interface VideoInterface extends AudioInterface
     public function supportBFrames();
 
     /**
-     * Returns the list of available video codecs for this format.
-     *
-     * @return array
+     * Returns an array with the supported video codecs for this format
+     * @return string[]
      */
     public function getAvailableVideoCodecs();
 
@@ -61,4 +60,10 @@ interface VideoInterface extends AudioInterface
      * @return array
      */
     public function getAdditionalParameters();
+
+    /**
+     * Returns an array with the supported audio codecs for this format
+     * @return string[]
+     */
+    public function getAvailableAudioCodecs();
 }
