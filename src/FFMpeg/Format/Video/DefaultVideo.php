@@ -39,8 +39,8 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /** @var float */
     private $level = 3.1;
 
-    /** @var Array */
-    protected $additionalParamaters;
+    /** @var string[] */
+    protected $additionalParameters;
 
     /**
      * Sets the profile of this video
@@ -151,22 +151,22 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      */
     public function getAdditionalParameters()
     {
-        return $this->additionalParamaters;
+        return $this->additionalParameters;
     }
 
     /**
      * Sets additional parameters.
      *
-     * @param  array                    $additionalParameter
+     * @param  array                    $additionalParameters
      * @throws InvalidArgumentException
      */
-    public function setAdditionalParameters($additionalParamaters)
+    public function setAdditionalParameters($additionalParameters)
     {
-        if (!is_array($additionalParamaters)) {
+        if (!is_array($additionalParameters)) {
             throw new InvalidArgumentException('Wrong additionalParamaters value');
         }
 
-        $this->additionalParamaters = $additionalParamaters;
+        $this->additionalParameters = $additionalParameters;
 
         return $this;
     }
