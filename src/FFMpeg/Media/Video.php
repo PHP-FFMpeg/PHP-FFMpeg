@@ -123,11 +123,9 @@ class Video extends Audio
         }
 
         // If the user passed some additional parameters
-        if ($format instanceof VideoInterface) {
-            if (null !== $format->getAdditionalParameters()) {
-                foreach ($format->getAdditionalParameters() as $additionalParameter) {
-                    $commands[] = $additionalParameter;
-                }
+        if (null !== $format->getAdditionalParameters()) {
+            foreach ($format->getAdditionalParameters() as $additionalParameter) {
+                $commands[] = $additionalParameter;
             }
         }
 

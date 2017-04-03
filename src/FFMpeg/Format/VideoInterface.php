@@ -56,13 +56,6 @@ interface VideoInterface extends AudioInterface
     public function getAvailableVideoCodecs();
 
     /**
-     * Returns the list of available video codecs for this format.
-     *
-     * @return array
-     */
-    public function getAdditionalParameters();
-
-    /**
      * Returns the current profile
      * @return string
      */
