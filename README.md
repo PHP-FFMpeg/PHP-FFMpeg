@@ -1,4 +1,4 @@
-#PHP FFmpeg
+# PHP FFmpeg
 
 [![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
 
@@ -98,7 +98,7 @@ $ffmpeg->open('video.mpeg');
 Two types of media can be resolved: `FFMpeg\Media\Audio` and `FFMpeg\Media\Video`.
 A third type, `FFMpeg\Media\Frame`, is available through videos.
 
-#### Video
+### Video
 
 `FFMpeg\Media\Video` can be transcoded, ie: change codec, isolate audio or
 video. Frames can be extracted.
@@ -317,9 +317,9 @@ The clip filter takes two parameters:
 - `$start`, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the start point of the clip
 - `$duration`, optional, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the duration of the clip
 
-#### Audio
+### Audio
 
-`FFMpeg\Media\Audio` can be transcoded, ie: change codec, isolate audio or
+`FFMpeg\Media\Audio` can be transcoded too, ie: change codec, isolate audio or
 video. Frames can be extracted.
 
 ##### Transcoding
@@ -355,6 +355,14 @@ method. It only accepts audio filters.
 
 You can build your own filters and some are bundled in PHP-FFMpeg - they are
 accessible through the `FFMpeg\Media\Audio::filters` method.
+
+##### Clipping
+Cuts the audio at a desired point.
+
+```php
+$audio->filters()->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
+```
+
 
 ###### Metadata
 
