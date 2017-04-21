@@ -47,6 +47,24 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * {@inheritdoc}
      */
+    public function getEnableVbrEncoding()
+    {
+        return $this->vbrEncodingQuality;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnableVbrEncoding($value)
+    {
+        $this->enableVbrEncoding = (bool) $value;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getVbrEncodingQuality()
     {
         return $this->vbrEncodingQuality;
