@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace FFMpeg\Filters\Audio;
 
 use FFMpeg\Filters\Audio\AudioFilterInterface;
@@ -16,7 +16,7 @@ use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
 class AddMetadataFilter implements AudioFilterInterface
-{	
+{
 	/** @var Array */
 	private $metaArr;
 	/** @var Integer */
@@ -36,17 +36,20 @@ class AddMetadataFilter implements AudioFilterInterface
 
 	public function apply(Audio $audio, AudioInterface $format)
 	{
-		if (is_null($this->metaArr))
+		$meta = $this->metaArr;
+
+		if (is_null($meta)) {
 			return ['-map_metadata', '-1', '-vn'];
+		}
 
 		$metadata = [];
 
-		if (array_key_exists("artwork", $this->metaArr)) {
-			array_push($metadata, "-i", $this->metaArr['artwork'], "-map", "0", "-map", "1");
-			unset($this->metaArr['artwork']);
+		if (array_key_exists("artwork", $meta)) {
+			array_push($metadata, "-i", $meta['artwork'], "-map", "0", "-map", "1");
+			unset($meta['artwork']);
 		}
 
-		foreach ($this->metaArr as $k => $v) {
+		foreach ($meta as $k => $v) {
 			array_push($metadata, "-metadata", "$k=$v");
 		}
 
