@@ -571,7 +571,7 @@ $ffprobe
     ->get('duration');             // returns the duration property
 ```
 
-##Using with Silex Microframework
+## Using with Silex Microframework
 
 Service provider is easy to set up:
 
