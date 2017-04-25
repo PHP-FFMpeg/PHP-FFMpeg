@@ -41,6 +41,7 @@ class AudioMetadataTest extends TestCase
         $filters = new AudioFilters($audio);
         $filters->addMetadata(array('genre' => 'Some Genre', 'artwork' => "/path/to/file.jpg"));
         $this->assertEquals(array(0 => "-i", 1 => "/path/to/file.jpg", 2 => "-map", 3 => "0", 4 => "-map", 5 => "1", 6 => "-metadata", 7 => "genre=Some Genre"), $capturedFilter->apply($audio, $format));
+        $this->assertEquals(array(0 => "-i", 1 => "/path/to/file.jpg", 2 => "-map", 3 => "0", 4 => "-map", 5 => "1", 6 => "-metadata", 7 => "genre=Some Genre"), $capturedFilter->apply($audio, $format));
     }
 
     public function testRemoveMetadata()
