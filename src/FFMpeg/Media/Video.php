@@ -59,7 +59,7 @@ class Video extends Audio
      *
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, $outputPathfile, $additionalCommands = [])
     {
         $commands = array('-y', '-i', $this->pathfile);
 
@@ -108,6 +108,8 @@ class Video extends Audio
             $commands[] = '-trellis';
             $commands[] = '1';
         }
+        
+        array_push($commands, $additionalCommands);
 
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioKiloBitrate()) {
