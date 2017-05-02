@@ -50,16 +50,13 @@ class Video extends Audio
     }
 
     /**
-     * Exports the video in the desired format, applies registered filters.
+     * Get ffmpeg commands used to export the video.
      *
-     * @param FormatInterface $format
-     * @param string          $outputPathfile
+     * @param  FormatInterface $format
      *
-     * @return Video
-     *
-     * @throws RuntimeException
+     * @return array
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    private function getCommands(FormatInterface $format)
     {
         $commands = array('-y', '-i', $this->pathfile);
 
@@ -128,6 +125,38 @@ class Video extends Audio
                 }
             }
         }
+
+        return $commands;
+    }
+
+    /**
+     * Return a popen stream that exports the video in the desired format.
+     *
+     * @param  FormatInterface $format
+     *
+     * @return resource
+     */
+    public function getStream(FormatInterface $format)
+    {
+        $commands = $this->getCommands($format);
+        $commands[] = 'pipe:1';
+
+        return popen($this->driver->getProcessBuilderFactory()->create($commands)->getCommandLine(), 'r');
+    }
+
+    /**
+     * Exports the video in the desired format, applies registered filters.
+     *
+     * @param FormatInterface $format
+     * @param string          $outputPathfile
+     *
+     * @return Video
+     *
+     * @throws RuntimeException
+     */
+    public function save(FormatInterface $format, $outputPathfile)
+    {
+        $commands = $this->getCommands($format);
 
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
