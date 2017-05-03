@@ -264,7 +264,12 @@ class FFProbe
 
     private function parseJson($data)
     {
-        $ret = @json_decode($data, true);
+        try{
+            $ret = json_decode($data, true);
+        }catch(\Exception $error)
+        {
+            $ret = null;
+        }
 
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new RuntimeException(sprintf('Unable to parse json %s', $ret));
