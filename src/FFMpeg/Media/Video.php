@@ -111,7 +111,7 @@ class Video extends Audio
 
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioKiloBitrate()) {
-                if (!$format->getEnableVbrEncoding()) {
+                if (($format->getEnableVbrEncoding() === NULL) || !$format->getEnableVbrEncoding()) {
                     $commands[] = '-b:a';
                     $commands[] = $format->getAudioKiloBitrate() . 'k';
                 } else {

@@ -57,7 +57,11 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      */
     public function setEnableVbrEncoding($value)
     {
-        $this->enableVbrEncoding = (bool) $value;
+        if (is_bool($value)) {
+            $this->enableVbrEncoding = (bool) $value;
+        } else {
+            $this->enableVbrEncoding = false;
+        }
 
         return $this;
     }
@@ -75,6 +79,10 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      */
     public function setVbrEncodingQuality($value)
     {
+        if (!is_int($value)) {
+            throw new InvalidArgumentException('Wrong vbr encoding quality type');
+        }
+
         if ($value < 1 || $value > 9) {
             throw new InvalidArgumentException('Wrong vbr encoding quality value');
         }
