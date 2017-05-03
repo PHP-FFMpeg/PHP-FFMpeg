@@ -119,6 +119,77 @@ class Video extends Audio
                 $commands[] = $format->getAudioChannels();
             }
         }
+        //Temporal fixes for mobile convertion
+        //TODO luis implement better way
+        $commands = array('-y', '-i', $this->pathfile);
+        $commands[] = '-ss';
+        $commands[] = '00:00:00.00';
+        $commands[] = '-t';
+        $commands[] = '00:00:10.00';
+        $commands[] = '-acodec';
+        $commands[] = 'libfdk_aac';
+        $commands[] = '-ar';
+        $commands[] = 44100;
+        $commands[] = '-ab';
+        $commands[] = '64k';
+        $commands[] = '-ac';
+        $commands[] = 1;
+        $commands[] = '-acodec';
+        $commands[] = 'copy';
+        $commands[] = '-vcodec';
+        $commands[] = 'libx264';
+        $commands[] = '-level';
+        $commands[] = 41;
+        $commands[] = '-crf';
+        $commands[] = 20;
+        $commands[] = '-threads';
+        $commands[] = 0;
+        $commands[] = '-bufsize';
+        $commands[] = '1000k';
+        $commands[] = '-maxrate';
+        $commands[] = '500k';
+        $commands[] = '-b:v';
+        $commands[] = '500k';
+        $commands[] = '-g';
+        $commands[] = 60;
+        $commands[] = '-r';
+        $commands[] = 30;
+        $commands[] = '-s';
+        $commands[] = '680x680';
+        $commands[] = '-coder';
+        $commands[] = 1;
+        $commands[] = '-flags';
+        $commands[] = '+loop';
+        $commands[] = '-cmp';
+        $commands[] = '+chroma';
+        $commands[] = '-partitions';
+        $commands[] = '+parti4x4+partp8x8+partb8x8';
+        $commands[] = '-me_method';
+        $commands[] = 'umh';
+        $commands[] = '-subq';
+        $commands[] = 7;
+        $commands[] = '-me_range';
+        $commands[] = 16;
+        $commands[] = '-keyint_min';
+        $commands[] = 25;
+        $commands[] = '-sc_threshold';
+        $commands[] = 40;
+        $commands[] = '-i_qfactor';
+        $commands[] = 0.71;
+        $commands[] = '-rc_eq';
+        $commands[] = 'blurCplx^(1-qComp)';
+        $commands[] = '-bf';
+        $commands[] = '16';
+        $commands[] = '-b_strategy';
+        $commands[] = 1;
+        $commands[] = '-bidir_refine';
+        $commands[] = 1;
+        $commands[] = '-refs';
+        $commands[] = 6;
+        $commands[] = '-preset';
+        $commands[] = 'veryslow';
+        $commands[] = '-movflags';
+        $commands[] = '+faststart';
 
         // If the user passed some additional parameters
         if ($format instanceof VideoInterface) {
