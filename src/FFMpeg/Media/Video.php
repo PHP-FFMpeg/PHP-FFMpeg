@@ -208,7 +208,7 @@ class Video extends Audio
     /**
      * Concatenates a list of videos into one unique video.
      *
-     * @param  string $sources
+     * @param  array $sources
      * @return Concat
      */
     public function concat($sources)
