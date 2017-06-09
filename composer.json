@@ -54,7 +54,7 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.7-dev",
-            "dev-filter": "filter"
+            "dev-filter": "test-filter"
         }
     }
 }
