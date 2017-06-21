@@ -46,7 +46,7 @@ class VideoFilters extends AudioFilters
      * Changes the video framerate.
      *
      * @param FrameRate $framerate
-     * @param type      $gop
+     * @param Integer      $gop
      *
      * @return VideoFilters
      */
