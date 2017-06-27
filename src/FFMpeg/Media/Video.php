@@ -72,6 +72,8 @@ class Video extends Audio
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
                 $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+                $filters->add(new SimpleFilter(array('-vprofile', $format->getProfile())));
+                $filters->add(new SimpleFilter(array('-level', $format->getLevel())));
             }
         }
         if ($format instanceof AudioInterface) {
@@ -121,11 +123,9 @@ class Video extends Audio
         }
 
         // If the user passed some additional parameters
-        if ($format instanceof VideoInterface) {
-            if (null !== $format->getAdditionalParameters()) {
-                foreach ($format->getAdditionalParameters() as $additionalParameter) {
-                    $commands[] = $additionalParameter;
-                }
+        if (null !== $format->getAdditionalParameters()) {
+            foreach ($format->getAdditionalParameters() as $additionalParameter) {
+                $commands[] = $additionalParameter;
             }
         }
 
