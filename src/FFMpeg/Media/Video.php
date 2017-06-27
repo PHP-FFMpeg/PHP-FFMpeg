@@ -129,6 +129,56 @@ class Video extends Audio
             }
         }
 
+        // Merge Filters into one command
+        $videoFilterVars = $videoFilterProcesses = [];
+        for($i=0;$i<count($commands);$i++) {
+            $command = $commands[$i];
+            if ( $command == '-vf' ) {
+                $commandSplits = explode(";", $commands[$i + 1]);
+                if ( count($commandSplits) == 1 ) {
+                    $commandSplit = $commandSplits[0];
+                    $command = trim($commandSplit);
+                    if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
+                        $videoFilterProcesses[] = $match[1];
+                    } else {
+                        $videoFilterProcesses[] = $command;   
+                    }
+                } else {
+                    foreach($commandSplits as $commandSplit) {
+                        $command = trim($commandSplit);
+                        if ( preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match) ) {
+                            $videoFilterProcesses[] = $match[1];
+                        } else {
+                            $videoFilterVars[] = $command;
+                        }                
+                    }
+                }
+                unset($commands[$i]);
+                unset($commands[$i + 1]);
+                $i++;
+            }
+        }
+        $videoFilterCommands = $videoFilterVars;
+        $lastInput = 'in';
+        foreach($videoFilterProcesses as $i => $process) {
+            $command = '[' . $lastInput .']';
+            $command .= $process;
+            $lastInput = 'p' . $i;
+            if ( $i == count($videoFilterProcesses) - 1 ) {
+                $command .= '[out]';
+            } else {
+                $command .= '[' . $lastInput . ']';
+            }
+            
+            $videoFilterCommands[] = $command;
+        }
+        $videoFilterCommand = implode(";", $videoFilterCommands);
+        
+        if ( $videoFilterCommand ) {
+            $commands[] = '-vf';
+            $commands[] = $videoFilterCommand;
+        }
+        
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
         $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');
