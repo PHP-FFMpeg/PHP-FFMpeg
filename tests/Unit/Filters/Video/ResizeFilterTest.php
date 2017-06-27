@@ -42,34 +42,34 @@ class ResizeFilterTest extends TestCase
     public function provideDimensions()
     {
         return array(
-            array(new Dimension(320, 240), ResizeFilter::RESIZEMODE_FIT, 640, 480, 2, array('-s', '320x240')),
-            array(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET, 640, 480, 2, array('-s', '320x240')),
-            array(new Dimension(320, 240), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 640, 480, 2, array('-s', '320x240')),
-            array(new Dimension(320, 240), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 640, 480, 2, array('-s', '320x240')),
+            array(new Dimension(320, 240), ResizeFilter::RESIZEMODE_FIT, 640, 480, 2, array('-vf', '[in]scale=320:240 [out]')),
+            array(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET, 640, 480, 2, array('-vf', '[in]scale=320:240 [out]')),
+            array(new Dimension(320, 240), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 640, 480, 2, array('-vf', '[in]scale=320:240 [out]')),
+            array(new Dimension(320, 240), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 640, 480, 2, array('-vf', '[in]scale=320:240 [out]')),
 
-            array(new Dimension(640, 480), ResizeFilter::RESIZEMODE_FIT, 320, 240, 2, array('-s', '640x480')),
-            array(new Dimension(640, 480), ResizeFilter::RESIZEMODE_INSET, 320, 240, 2, array('-s', '640x480')),
-            array(new Dimension(640, 480), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 320, 240, 2, array('-s', '640x480')),
-            array(new Dimension(640, 480), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 320, 240, 2, array('-s', '640x480')),
+            array(new Dimension(640, 480), ResizeFilter::RESIZEMODE_FIT, 320, 240, 2, array('-vf', '[in]scale=640:480 [out]')),
+            array(new Dimension(640, 480), ResizeFilter::RESIZEMODE_INSET, 320, 240, 2, array('-vf', '[in]scale=640:480 [out]')),
+            array(new Dimension(640, 480), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 320, 240, 2, array('-vf', '[in]scale=640:480 [out]')),
+            array(new Dimension(640, 480), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 320, 240, 2, array('-vf', '[in]scale=640:480 [out]')),
 
-            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_FIT, 1280, 720, 2, array('-s', '640x360')),
-            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_INSET, 1280, 720, 2, array('-s', '640x360')),
-            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 1280, 720, 2, array('-s', '640x360')),
-            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 1280, 720, 2, array('-s', '640x360')),
+            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_FIT, 1280, 720, 2, array('-vf', '[in]scale=640:360 [out]')),
+            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_INSET, 1280, 720, 2, array('-vf', '[in]scale=640:360 [out]')),
+            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 1280, 720, 2, array('-vf', '[in]scale=640:360 [out]')),
+            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 1280, 720, 2, array('-vf', '[in]scale=640:360 [out]')),
 
-            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_FIT, 1280, 720, 2, array('-s', '640x360')),
-            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_INSET, 1280, 720, 2, array('-s', '640x360')),
-            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 1280, 720, 2, array('-s', '640x360')),
-            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 1280, 720, 2, array('-s', '640x360')),
+            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_FIT, 1280, 720, 2, array('-vf', '[in]scale=640:360 [out]')),
+            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_INSET, 1280, 720, 2, array('-vf', '[in]scale=640:360 [out]')),
+            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 1280, 720, 2, array('-vf', '[in]scale=640:360 [out]')),
+            array(new Dimension(640, 360), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 1280, 720, 2, array('-vf', '[in]scale=640:360 [out]')),
 
             // test non standard dimension
-            array(new Dimension(700, 150), ResizeFilter::RESIZEMODE_INSET, 123, 456, 2, array('-s', '62x150'), true),
-            array(new Dimension(700, 150), ResizeFilter::RESIZEMODE_INSET, 123, 456, 2, array('-s', '40x150'), false),
+            array(new Dimension(700, 150), ResizeFilter::RESIZEMODE_INSET, 123, 456, 2, array('-vf', '[in]scale=62:150 [out]'), true),
+            array(new Dimension(700, 150), ResizeFilter::RESIZEMODE_INSET, 123, 456, 2, array('-vf', '[in]scale=40:150 [out]'), false),
 
-            array(new Dimension(320, 320), ResizeFilter::RESIZEMODE_FIT, 640, 480, 2, array('-s', '320x320')),
-            array(new Dimension(320, 320), ResizeFilter::RESIZEMODE_INSET, 640, 480, 2, array('-s', '320x240')),
-            array(new Dimension(320, 320), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 640, 480, 2, array('-s', '320x240')),
-            array(new Dimension(320, 320), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 640, 480, 2, array('-s', '426x320')),
+            array(new Dimension(320, 320), ResizeFilter::RESIZEMODE_FIT, 640, 480, 2, array('-vf', '[in]scale=320:320 [out]')),
+            array(new Dimension(320, 320), ResizeFilter::RESIZEMODE_INSET, 640, 480, 2, array('-vf', '[in]scale=320:240 [out]')),
+            array(new Dimension(320, 320), ResizeFilter::RESIZEMODE_SCALE_HEIGHT, 640, 480, 2, array('-vf', '[in]scale=320:240 [out]')),
+            array(new Dimension(320, 320), ResizeFilter::RESIZEMODE_SCALE_WIDTH, 640, 480, 2, array('-vf', '[in]scale=426:320 [out]')),
         );
     }
 }

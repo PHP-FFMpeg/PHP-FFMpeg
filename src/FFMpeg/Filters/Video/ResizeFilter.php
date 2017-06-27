@@ -98,8 +98,10 @@ class ResizeFilter implements VideoFilterInterface
         if (null !== $dimensions) {
             $dimensions = $this->getComputedDimensions($dimensions, $format->getModulus());
 
-            $commands[] = '-s';
-            $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
+            // Using Filter to have ordering
+            $commands[] = '-vf';
+            $commands[] = '[in]scale=' . $dimensions->getWidth() . ':' . $dimensions->getHeight() . ' [out]';
+            
         }
 
         return $commands;
