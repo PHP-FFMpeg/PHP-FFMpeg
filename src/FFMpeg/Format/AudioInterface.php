@@ -25,6 +25,13 @@ interface AudioInterface extends FormatInterface
      * @return integer
      */
     public function getAudioChannels();
+    
+    /**
+     * Returns the list of available video codecs for this format.
+     *
+     * @return array
+     */
+    public function getAdditionalParameters();
 
     /**
      * Returns the audio codec.

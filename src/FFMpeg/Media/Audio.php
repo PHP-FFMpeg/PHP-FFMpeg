@@ -91,6 +91,13 @@ class Audio extends AbstractStreamableMedia
             $commands[] = '-ac';
             $commands[] = $format->getAudioChannels();
         }
+        // If the user passed some additional parameters
+        if (null !== $format->getAdditionalParameters()) {
+            foreach ($format->getAdditionalParameters() as $additionalParameter) {
+                $commands[] = $additionalParameter;
+            }
+        }
+
         $commands[] = $outputPathfile;
 
         try {
