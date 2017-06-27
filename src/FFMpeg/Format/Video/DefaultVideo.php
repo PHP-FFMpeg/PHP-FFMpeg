@@ -16,6 +16,7 @@ use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Format\Audio\DefaultAudio;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\MediaTypeInterface;
+use FFMpeg\Format\Profile;
 use FFMpeg\Format\ProgressListener\VideoProgressListener;
 
 /**
@@ -32,8 +33,56 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /** @var Integer */
     protected $modulus = 16;
 
-    /** @var Array */
-    protected $additionalParamaters;
+    /** @var string */
+    private $profile = Profile::MAIN;
+
+    /** @var float */
+    private $level = 3.1;
+
+    /** @var string[] */
+    protected $additionalParameters;
+
+    /**
+     * Sets the profile of this video
+     * @var string  $profile    must be one of `baseline`, `main` or `high`
+     * @throws \InvalidArgumentException
+     */
+    public function setProfile(string $profile) {
+        switch($profile) {
+            case Profile::BASELINE:
+            case Profile::MAIN:
+            case Profile::HIGH:
+            // these are fine
+            break;
+            default:
+                throw new \InvalidArgumentException('Invalid profile given! Must be one of `baseline`, `main` or `high`!');
+        }
+        $this->profile = $profile;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getProfile() {
+        return $this->profile;
+    }
+
+    /**
+     * Sets the given level
+     * @param   float   $level  The level(for example: 3.0, 3.1, 4.0, 4.1)
+     */
+    public function setLevel(float $level) {
+        $this->level = $level;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getLevel() {
+        return $this->level;
+    }
 
     /**
      * {@inheritdoc}
@@ -95,31 +144,6 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     public function getModulus()
     {
         return $this->modulus;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAdditionalParameters()
-    {
-        return $this->additionalParamaters;
-    }
-
-    /**
-     * Sets additional parameters.
-     *
-     * @param  array                    $additionalParamaters
-     * @throws InvalidArgumentException
-     */
-    public function setAdditionalParameters($additionalParamaters)
-    {
-        if (!is_array($additionalParamaters)) {
-            throw new InvalidArgumentException('Wrong additionalParamaters value');
-        }
-
-        $this->additionalParamaters = $additionalParamaters;
-
-        return $this;
     }
 
     /**
