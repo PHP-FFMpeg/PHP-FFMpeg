@@ -149,6 +149,31 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * {@inheritdoc}
      */
+    public function getAdditionalParameters()
+    {
+        return $this->additionalParameters;
+    }
+
+    /**
+     * Sets additional parameters.
+     *
+     * @param  array                    $additionalParameters
+     * @throws InvalidArgumentException
+     */
+    public function setAdditionalParameters($additionalParameters)
+    {
+        if (!is_array($additionalParameters)) {
+            throw new InvalidArgumentException('Wrong additionalParamaters value');
+        }
+
+        $this->additionalParameters = $additionalParameters;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
     {
         $format = $this;
