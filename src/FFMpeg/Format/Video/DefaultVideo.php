@@ -39,9 +39,6 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /** @var float */
     private $level = 3.1;
 
-    /** @var string[] */
-    protected $additionalParameters;
-
     /**
      * Sets the profile of this video
      * @var string  $profile    must be one of `baseline`, `main` or `high`
@@ -83,6 +80,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     public function getLevel() {
         return $this->level;
     }
+    
     /**
      * {@inheritdoc}
      */
