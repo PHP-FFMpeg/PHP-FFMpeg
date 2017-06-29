@@ -21,6 +21,9 @@ use FFMpeg\FFProbe;
 
 abstract class DefaultAudio extends EventEmitter implements AudioInterface, ProgressableInterface
 {
+    /** @var string[] */
+    protected $additionalParameters = array();
+
     /** @var string */
     protected $audioCodec;
 
