@@ -47,31 +47,6 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getAdditionalParameters()
-    {
-        return $this->additionalParameters;
-    }
-
-    /**
-     * Sets additional parameters.
-     *
-     * @param  array                    $additionalParameters
-     * @throws InvalidArgumentException
-     */
-    public function setAdditionalParameters($additionalParameters)
-    {
-        if (!is_array($additionalParameters)) {
-            throw new InvalidArgumentException('Wrong additionalParamaters value');
-        }
-
-        $this->additionalParameters = $additionalParameters;
-
-        return $this;
-    }
-
-    /**
      * Sets the audio codec, Should be in the available ones, otherwise an
      * exception is thrown.
      *
