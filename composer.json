@@ -30,7 +30,7 @@
         "php": "^5.3.9 || ^7.0",
         "alchemy/binary-driver": "^1.5",
         "doctrine/cache": "^1.0",
-        "evenement/evenement": "^2.0 || ^1.0",
+        "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
         "neutron/temporary-filesystem": "^2.1.1"
     },
     "suggest": {
