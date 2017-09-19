@@ -179,7 +179,7 @@ class FFProbe
      * @return bool
      * @since 0.10.0
      */
-    public function isValid(string $pathfile)
+    public function isValid($pathfile)
     {
         try {
             return $this->format($pathfile)->get('duration') > 0;
