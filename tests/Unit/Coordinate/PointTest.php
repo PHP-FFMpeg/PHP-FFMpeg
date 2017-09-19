@@ -13,4 +13,11 @@ class PointTest extends TestCase
         $this->assertEquals(4, $point->getX());
         $this->assertEquals(25, $point->getY());
     }
+
+    public function testDynamicPointGetters()
+    {
+        $point = new Point("t*100", "t", true);
+        $this->assertEquals("t*100", $point->getX());
+        $this->assertEquals("t", $point->getY());
+    }
 }
