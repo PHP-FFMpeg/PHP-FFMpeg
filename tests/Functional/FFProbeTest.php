@@ -12,10 +12,23 @@ class FFProbeTest extends FunctionalTestCase
         $this->assertGreaterThan(0, count($ffprobe->streams(__DIR__ . '/../files/Audio.mp3')));
     }
 
+    public function testValidateExistingFile()
+    {
+        $ffprobe = FFProbe::create();
+        $this->assertTrue($ffprobe->isValid(__DIR__ . '/../files/sample.3gp'));
+    }
+
+
+    public function testValidateNonExistingFile()
+    {
+        $ffprobe = FFProbe::create();
+        $this->assertFalse($ffprobe->isValid(__DIR__ . '/../files/WrongFile.mp4'));
+    }
+
     /**
      * @expectedException FFMpeg\Exception\RuntimeException
      */
-    public function testProbeOnUnexistantFile()
+    public function testProbeOnNonExistantFile()
     {
         $ffprobe = FFProbe::create();
         $ffprobe->streams('/path/to/no/file');
