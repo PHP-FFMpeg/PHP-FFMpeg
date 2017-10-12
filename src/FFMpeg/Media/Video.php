@@ -130,7 +130,7 @@ class Video extends Audio
         }
 
         // Merge Filters into one command
-        $videoFilterVars = $videoFilterProcesses = [];
+        $videoFilterVars = $videoFilterProcesses = array();
         for($i=0;$i<count($commands);$i++) {
             $command = $commands[$i];
             if ( $command == '-vf' ) {
