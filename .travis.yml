@@ -6,6 +6,11 @@ branches:
   only:
     - master
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.cache
+
 php:
   - 5.4
   - 5.5
@@ -29,7 +34,7 @@ before_install:
 
 install:
   - sudo apt-get install -y ffmpeg
-  - composer update --prefer-source $COMPOSER_FLAGS
+  - composer update --prefer-dist $COMPOSER_FLAGS
 
 script:
   - vendor/bin/phpunit --verbose
