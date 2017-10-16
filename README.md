@@ -317,6 +317,18 @@ The clip filter takes two parameters:
 - `$start`, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the start point of the clip
 - `$duration`, optional, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the duration of the clip
 
+###### Crop
+
+Crops the video based on a width and height(a `Point`)
+
+```php
+$video->filters()->crop(new FFMpeg\Coordinate\Point("t*100", 0, true), new FFMpeg\Coordinate\Dimension(200, 600));
+```
+
+It takes two parameters:
+- `$point`, an instance of `FFMpeg\Coordinate\Point`, specifies the point to crop
+- `$dimension`, an instance of `FFMPeg\Coordinate\Dimension`, specifies the dimension of the output video
+
 ### Audio
 
 `FFMpeg\Media\Audio` can be transcoded too, ie: change codec, isolate audio or
@@ -547,7 +559,7 @@ FFMpeg use many units for time and space coordinates.
 - `FFMpeg\Coordinate\AspectRatio` represents an aspect ratio.
 - `FFMpeg\Coordinate\Dimension` represent a dimension.
 - `FFMpeg\Coordinate\FrameRate` represent a framerate.
-- `FFMpeg\Coordinate\Point` represent a point.
+- `FFMpeg\Coordinate\Point` represent a point. (Supports dynamic points since v0.10.0)
 - `FFMpeg\Coordinate\TimeCode` represent a timecode.
 
 ### FFProbe
