@@ -571,6 +571,16 @@ $ffprobe
     ->get('duration');             // returns the duration property
 ```
 
+### Validating media files
+
+(since 0.10.0)
+You can validate media files using PHP-FFMpeg's FFProbe wrapper.
+
+```php
+$ffprobe = FFMPeg\FFProbe::create();
+$ffprobe->isValid('/path/to/file/to/check'); // returns bool
+```
+
 ## Using with Silex Microframework
 
 Service provider is easy to set up:
