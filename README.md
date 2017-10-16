@@ -607,10 +607,6 @@ $app->register(new FFMpeg\FFMpegServiceProvider(), array(
 ));
 ```
 
-## API Browser
-
-Browse the [API](https://ffmpeg-php.readthedocs.io/en/latest/_static/API/)
-
 ## License
 
 This project is licensed under the [MIT license](http://opensource.org/licenses/MIT).
