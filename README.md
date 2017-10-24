@@ -327,7 +327,7 @@ $video->filters()->crop(new FFMpeg\Coordinate\Point("t*100", 0, true), new FFMpe
 
 It takes two parameters:
 - `$point`, an instance of `FFMpeg\Coordinate\Point`, specifies the point to crop
-- `$dimension`, an instance of `FFMPeg\Coordinate\Dimension`, specifies the dimension of the output video
+- `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`, specifies the dimension of the output video
 
 ### Audio
 
@@ -589,7 +589,7 @@ $ffprobe
 You can validate media files using PHP-FFMpeg's FFProbe wrapper.
 
 ```php
-$ffprobe = FFMPeg\FFProbe::create();
+$ffprobe = FFMpeg\FFProbe::create();
 $ffprobe->isValid('/path/to/file/to/check'); // returns bool
 ```
 
