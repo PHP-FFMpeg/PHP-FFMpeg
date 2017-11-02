@@ -110,8 +110,8 @@ class Audio extends AbstractStreamableMedia
      * @param  integer $height
      * @return Waveform
      */
-    public function waveform($width = 640, $height = 120)
+    public function waveform($width = 640, $height = 120, $colors = [Waveform::DEFAULT_COLOR])
     {
-        return new Waveform($this, $this->driver, $this->ffprobe, $width, $height);
+        return new Waveform($this, $this->driver, $this->ffprobe, $width, $height, $colors);
     }
 }

@@ -62,7 +62,7 @@ class WaveformTest extends AbstractMediaTestCase
             array(
                 array(
                     '-i', NULL, '-filter_complex',
-                    'showwavespic=s=640x120',
+                    'showwavespic=colors=#000000:s=640x120',
                     '-frames:v', '1',
                 ),
             ),

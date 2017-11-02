@@ -20,17 +20,21 @@ use FFMpeg\Exception\RuntimeException;
 
 class Waveform extends AbstractMediaType
 {
+    const DEFAULT_COLOR = '#000000';
+
     /** @var Video */
     private $audio;
     private $width;
     private $height;
 
-    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height)
+    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height, $colors = [self::DEFAULT_COLOR])
     {
         parent::__construct($audio->getPathfile(), $driver, $ffprobe);
         $this->audio = $audio;
         $this->width = $width;
         $this->height = $height;
+
+        $this->setColors($colors);
     }
 
     /**
@@ -66,6 +70,50 @@ class Waveform extends AbstractMediaType
     }
 
     /**
+     * Parameter should be an array containing at least one valid color represented as a HTML color string. For
+     * example #FFFFFF or #000000. By default the color is set to black. Keep in mind that if you save the waveform
+     * as jpg file, it will appear completely black and to avoid this you can set the waveform color to white (#FFFFFF).
+     * Saving waveforms to png is strongly suggested.
+     * @param array $colors
+     */
+    public function setColors(array $colors)
+    {
+        foreach ($colors as $row => $value)
+        {
+            if ($value{0} != '#' || strlen($value) != 7)
+            {
+                //invalid color
+                unset($colors[$row]);
+            }
+        }
+
+        if (count($colors))
+        {
+            $this->colors = $colors;
+        }
+    }
+
+    /**
+     * Returns an array of colors that will be passed to ffmpeg to use for waveform generation. Colors are applied ONLY
+     * to the waveform. Background cannot be controlled that easily and it is probably easier to save the waveform
+     * as a transparent png file and then add background of choice.
+     * @return array
+     */
+    public function getColors()
+    {
+        return $this->colors;
+    }
+
+    /**
+     * Compiles the selected colors into a string, using a pipe separator.
+     * @return string
+     */
+    protected function compileColors()
+    {
+        return implode('|', $this->colors);
+    }
+
+    /**
      * Saves the waveform in the given filename.
      *
      * @param string  $pathfile
@@ -82,7 +130,7 @@ class Waveform extends AbstractMediaType
          */
         $commands = array(
             '-i', $this->pathfile, '-filter_complex',
-            'showwavespic=s='.$this->width.'x'.$this->height,
+            'showwavespic=colors='.$this->compileColors().':s='.$this->width.'x'.$this->height,
             '-frames:v', '1'
         );
 
