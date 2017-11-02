@@ -23,9 +23,14 @@ class Waveform extends AbstractMediaType
     const DEFAULT_COLOR = '#000000';
 
     /** @var Video */
-    private $audio;
-    private $width;
-    private $height;
+    protected $audio;
+    protected $width;
+    protected $height;
+
+    /**
+     * @var array
+     */
+    protected $colors;
 
     public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height, $colors = [self::DEFAULT_COLOR])
     {
