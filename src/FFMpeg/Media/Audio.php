@@ -52,14 +52,12 @@ class Audio extends AbstractStreamableMedia
     /**
      * Exports the audio in the desired format, applies registered filters.
      *
-     * @param FormatInterface $format
-     * @param string          $outputPathfile
-     *
+     * @param FormatInterface   $format
+     * @param string            $outputPathfile
      * @return Audio
-     *
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, string $outputPathfile)
     {
         $listeners = null;
 
@@ -67,6 +65,39 @@ class Audio extends AbstractStreamableMedia
             $listeners = $format->createProgressListener($this, $this->ffprobe, 1, 1);
         }
 
+        $commands = $this->buildCommand($format, $outputPathfile);
+
+        try {
+            $this->driver->command($commands, false, $listeners);
+        } catch (ExecutionFailureException $e) {
+            $this->cleanupTemporaryFile($outputPathfile);
+            throw new RuntimeException('Encoding failed', $e->getCode(), $e);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns the final command as a string, useful for debugging purposes.
+     *
+     * @param FormatInterface   $format
+     * @param string            $outputPathfile
+     * @return string
+     * @since 0.11.0
+     */
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile) {
+        return implode(' ', $this->buildCommand($format, $outputPathfile));
+    }
+
+    /**
+     * Builds the command which will be executed with the provided format
+     *
+     * @param FormatInterface   $format
+     * @param string            $outputPathfile
+     * @return string[] An array which are the components of the command
+     * @since 0.11.0
+     */
+    protected function buildCommand(FormatInterface $format, string $outputPathfile) {
         $commands = array('-y', '-i', $this->pathfile);
 
         $filters = clone $this->filters;
@@ -93,14 +124,7 @@ class Audio extends AbstractStreamableMedia
         }
         $commands[] = $outputPathfile;
 
-        try {
-            $this->driver->command($commands, false, $listeners);
-        } catch (ExecutionFailureException $e) {
-            $this->cleanupTemporaryFile($outputPathfile);
-            throw new RuntimeException('Encoding failed', $e->getCode(), $e);
-        }
-
-        return $this;
+        return $commands;
     }
 
     /**
