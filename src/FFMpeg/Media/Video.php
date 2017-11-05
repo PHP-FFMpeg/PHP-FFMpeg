@@ -28,8 +28,19 @@ use Neutron\TemporaryFilesystem\Manager as FsManager;
 class Video extends Audio
 {
     /**
-     * {@inheritdoc}
-     *
+     * FileSystem Manager instance
+     * @var Manager
+     */
+    protected $fs;
+
+    /**
+     * FileSystem Manager ID
+     * @var int
+     */
+    protected $fsId;
+
+    /**
+     * @inheritDoc
      * @return VideoFilters
      */
     public function filters()
@@ -38,8 +49,7 @@ class Video extends Audio
     }
 
     /**
-     * {@inheritdoc}
-     *
+     * @inheritDoc
      * @return Video
      */
     public function addFilter(FilterInterface $filter)
@@ -52,15 +62,66 @@ class Video extends Audio
     /**
      * Exports the video in the desired format, applies registered filters.
      *
-     * @param FormatInterface $format
-     * @param string          $outputPathfile
-     *
+     * @param FormatInterface   $format
+     * @param string            $outputPathfile
      * @return Video
-     *
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, string $outputPathfile)
     {
+        $passes = $this->buildCommand($format, $outputPathfile);
+
+        $failure = null;
+        $totalPasses = $format->getPasses();
+
+        foreach ($passes as $pass => $passCommands) {
+            try {
+                /** add listeners here */
+                $listeners = null;
+
+                if ($format instanceof ProgressableInterface) {
+                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses);
+                }
+
+                $this->driver->command($passCommands, false, $listeners);
+            } catch (ExecutionFailureException $e) {
+                $failure = $e;
+                break;
+            }
+        }
+
+        $this->fs->clean($this->fsId);
+
+        if (null !== $failure) {
+            throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
+        }
+
+        return $this;
+    }
+
+    /**
+     * NOTE: This method is different to the Audio's one, because Video is using passes.
+     * @inheritDoc
+     */
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile) {
+        $finalCommands = array();
+
+        foreach($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
+            $finalCommands[] = implode(' ', $passCommands);
+        }
+
+        $this->fs->clean($this->fsId);
+
+        return $finalCommands;
+    }
+
+    /**
+     * **NOTE:** This creates passes instead of a single command!
+     *
+     * @inheritDoc
+     * @return string[][]
+     */
+    protected function buildCommand(FormatInterface $format, string $outputPathfile) {
         $commands = array('-y', '-i', $this->pathfile);
 
         $filters = clone $this->filters;
@@ -141,7 +202,7 @@ class Video extends Audio
                     if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
                         $videoFilterProcesses[] = $match[1];
                     } else {
-                        $videoFilterProcesses[] = $command;   
+                        $videoFilterProcesses[] = $command;
                     }
                 } else {
                     foreach($commandSplits as $commandSplit) {
@@ -150,7 +211,7 @@ class Video extends Audio
                             $videoFilterProcesses[] = $match[1];
                         } else {
                             $videoFilterVars[] = $command;
-                        }                
+                        }
                     }
                 }
                 unset($commands[$i]);
@@ -164,32 +225,32 @@ class Video extends Audio
             $command = '[' . $lastInput .']';
             $command .= $process;
             $lastInput = 'p' . $i;
-            if ( $i == count($videoFilterProcesses) - 1 ) {
+            if($i === (count($videoFilterProcesses) - 1)) {
                 $command .= '[out]';
             } else {
                 $command .= '[' . $lastInput . ']';
             }
-            
+
             $videoFilterCommands[] = $command;
         }
-        $videoFilterCommand = implode(";", $videoFilterCommands);
-        
-        if ( $videoFilterCommand ) {
+        $videoFilterCommand = implode(';', $videoFilterCommands);
+
+        if($videoFilterCommand) {
             $commands[] = '-vf';
             $commands[] = $videoFilterCommand;
         }
-        
-        $fs = FsManager::create();
-        $fsId = uniqid('ffmpeg-passes');
-        $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');
+
+        $this->fs = FsManager::create();
+        $this->fsId = uniqid('ffmpeg-passes');
+        $passPrefix = $this->fs->createTemporaryDirectory(0777, 50, $this->fsId) . '/' . uniqid('pass-');
         $passes = array();
         $totalPasses = $format->getPasses();
 
-        if (1 > $totalPasses) {
+        if(!$totalPasses) {
             throw new InvalidArgumentException('Pass number should be a positive value.');
         }
 
-        for ($i = 1; $i <= $totalPasses; $i++) {
+        for($i = 1; $i <= $totalPasses; $i++) {
             $pass = $commands;
 
             if ($totalPasses > 1) {
@@ -204,31 +265,7 @@ class Video extends Audio
             $passes[] = $pass;
         }
 
-        $failure = null;
-
-        foreach ($passes as $pass => $passCommands) {
-            try {
-                /** add listeners here */
-                $listeners = null;
-
-                if ($format instanceof ProgressableInterface) {
-                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses);
-                }
-
-                $this->driver->command($passCommands, false, $listeners);
-            } catch (ExecutionFailureException $e) {
-                $failure = $e;
-                break;
-            }
-        }
-
-        $fs->clean($fsId);
-
-        if (null !== $failure) {
-            throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
-        }
-
-        return $this;
+        return $passes;
     }
 
     /**
