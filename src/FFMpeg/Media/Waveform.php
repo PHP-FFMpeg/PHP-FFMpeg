@@ -79,13 +79,14 @@ class Waveform extends AbstractMediaType
      * example #FFFFFF or #000000. By default the color is set to black. Keep in mind that if you save the waveform
      * as jpg file, it will appear completely black and to avoid this you can set the waveform color to white (#FFFFFF).
      * Saving waveforms to png is strongly suggested.
+     *
      * @param array $colors
      */
     public function setColors(array $colors)
     {
         foreach ($colors as $row => $value)
         {
-            if ($value{0} != '#' || strlen($value) != 7)
+            if (!preg_match_all('/^#(?:[0-9a-fA-F]{6})$/', $value))
             {
                 //invalid color
                 unset($colors[$row]);
@@ -102,6 +103,7 @@ class Waveform extends AbstractMediaType
      * Returns an array of colors that will be passed to ffmpeg to use for waveform generation. Colors are applied ONLY
      * to the waveform. Background cannot be controlled that easily and it is probably easier to save the waveform
      * as a transparent png file and then add background of choice.
+     *
      * @return array
      */
     public function getColors()
@@ -111,6 +113,7 @@ class Waveform extends AbstractMediaType
 
     /**
      * Compiles the selected colors into a string, using a pipe separator.
+     *
      * @return string
      */
     protected function compileColors()
