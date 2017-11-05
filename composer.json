@@ -24,6 +24,11 @@
             "name": "Romain Biard",
             "email": "romain.biard@gmail.com",
             "homepage": "https://www.strime.io/"
+        },
+        {
+            "name": "Jens Hausdorf",
+            "email": "hello@jens-hausdorf.de",
+            "homepage": "https://jens-hausdorf.de"
         }
     ],
     "require": {
