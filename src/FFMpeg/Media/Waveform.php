@@ -86,7 +86,7 @@ class Waveform extends AbstractMediaType
     {
         foreach ($colors as $row => $value)
         {
-            if (!preg_match_all('/^#(?:[0-9a-fA-F]{6})$/', $value))
+            if (!preg_match('/^#(?:[0-9a-fA-F]{6})$/', $value))
             {
                 //invalid color
                 unset($colors[$row]);
