@@ -12,6 +12,7 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Filters\Waveform\WaveformFilterInterface;
 use FFMpeg\Filters\Waveform\WaveformFilters;
 use FFMpeg\Driver\FFMpegDriver;
@@ -89,7 +90,9 @@ class Waveform extends AbstractMediaType
             if (!preg_match('/^#(?:[0-9a-fA-F]{6})$/', $value))
             {
                 //invalid color
-                unset($colors[$row]);
+                //unset($colors[$row]);
+
+                throw new InvalidArgumentException("The provided color '$value' is invalid");
             }
         }
 
