@@ -57,7 +57,7 @@ class Audio extends AbstractStreamableMedia
      * @return Audio
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, string $outputPathfile)
+    public function save(FormatInterface $format, $outputPathfile)
     {
         $listeners = null;
 
@@ -85,7 +85,7 @@ class Audio extends AbstractStreamableMedia
      * @return string
      * @since 0.11.0
      */
-    public function getFinalCommand(FormatInterface $format, string $outputPathfile) {
+    public function getFinalCommand(FormatInterface $format, $outputPathfile) {
         return implode(' ', $this->buildCommand($format, $outputPathfile));
     }
 
@@ -97,7 +97,7 @@ class Audio extends AbstractStreamableMedia
      * @return string[] An array which are the components of the command
      * @since 0.11.0
      */
-    protected function buildCommand(FormatInterface $format, string $outputPathfile) {
+    protected function buildCommand(FormatInterface $format, $outputPathfile) {
         $commands = array('-y', '-i', $this->pathfile);
 
         $filters = clone $this->filters;
