@@ -79,12 +79,14 @@ class VideoTranscodeTest extends FunctionalTestCase
         $ffmpeg->open(__DIR__ . '/../files/UnknownFileTest.ogv');
     }
 
+    /**
+     * @expectedException \FFMpeg\Exception\RuntimeException
+     */
     public function testSaveInvalidForgedVideo()
     {
         $ffmpeg = $this->getFFMpeg();
         $video = new Video(__DIR__ . '/../files/UnknownFileTest.ogv', $ffmpeg->getFFMpegDriver(), $ffmpeg->getFFProbe());
 
-        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
         $video->save(new X264('aac'), __DIR__ . '/output/output-x264.mp4');
     }
 
@@ -130,19 +132,16 @@ class VideoTranscodeTest extends FunctionalTestCase
             ->getProcessBuilderFactory()
             ->getBinary();
 
-        $output = $matches = null;
+        $output = $matches = $name = $version = null;
         exec($binary . ' -version 2>&1', $output);
-
-        if (!isset($output[0])) {
-            return array('name' => null, 'version' => null);
-        }
 
         preg_match('/^([a-z]+)\s+version\s+([0-9\.]+)/i', $output[0], $matches);
 
-        if (count($matches) > 0) {
-            return array('name' => $matches[1], 'version' => $matches[2]);
+        if (count($matches)) {
+            $name = $matches[1];
+            $version = $matches[2];
         }
 
-        return array('name' => null, 'version' => null);
+        return ['name' => $name, 'version' => $version];
     }
 }

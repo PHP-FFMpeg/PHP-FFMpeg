@@ -64,12 +64,12 @@ class Video extends Audio
     /**
      * Exports the video in the desired format, applies registered filters.
      *
-     * @param FormatInterface   $format
-     * @param string            $outputPathfile
+     * @param   FormatInterface   $format
+     * @param   string            $outputPathfile
      * @return Video
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, string $outputPathfile)
     {
         $passes = $this->buildCommand($format, $outputPathfile);
 

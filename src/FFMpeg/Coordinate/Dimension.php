@@ -29,7 +29,7 @@ class Dimension
      */
     public function __construct(int $width, int $height)
     {
-        if (!$width || !$height) {
+        if ($width <= 0 || $height <= 0) {
             throw new InvalidArgumentException('Both width and height should be positive numbers!');
         }
 

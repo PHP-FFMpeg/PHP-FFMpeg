@@ -2,103 +2,89 @@
 
 namespace Tests\FFMpeg\Unit;
 
-class TestCase extends \PHPUnit_Framework_TestCase
-{
-    public function assertScalar($value)
-    {
+use PHPUnit\Framework\TestCase as PhpUnitTestCase;
+
+class TestCase extends PhpUnitTestCase {
+
+    public function assertScalar($value) {
         $this->assertTrue(is_scalar($value));
     }
 
-    public function getLoggerMock()
-    {
+    public function getLoggerMock() {
         return $this->getMock('Psr\Log\LoggerInterface');
     }
 
-    public function getCacheMock()
-    {
+    public function getCacheMock() {
         return $this->getMock('Doctrine\Common\Cache\Cache');
     }
 
-    public function getTimeCodeMock()
-    {
+    public function getTimeCodeMock() {
         return $this->getMockBuilder('FFMpeg\Coordinate\TimeCode')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getDimensionMock()
-    {
+    public function getDimensionMock() {
         return $this->getMockBuilder('FFMpeg\Coordinate\Dimension')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getFramerateMock()
-    {
+    public function getFramerateMock() {
         return $this->getMockBuilder('FFMpeg\Coordinate\Framerate')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getFrameMock()
-    {
+    public function getFrameMock() {
         return $this->getMockBuilder('FFMpeg\Media\Frame')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getWaveformMock()
-    {
+    public function getWaveformMock() {
         return $this->getMockBuilder('FFMpeg\Media\Waveform')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getFFMpegDriverMock()
-    {
+    public function getFFMpegDriverMock() {
         return $this->getMockBuilder('FFMpeg\Driver\FFMpegDriver')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getFFProbeDriverMock()
-    {
+    public function getFFProbeDriverMock() {
         return $this->getMockBuilder('FFMpeg\Driver\FFProbeDriver')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getFFProbeMock()
-    {
+    public function getFFProbeMock() {
         return $this->getMockBuilder('FFMpeg\FFProbe')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getStreamMock()
-    {
+    public function getStreamMock() {
         return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\Stream')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getFFProbeParserMock()
-    {
+    public function getFFProbeParserMock() {
         return $this->getMock('FFMpeg\FFProbe\OutputParserInterface');
     }
 
-    public function getFFProbeOptionsTesterMock()
-    {
+    public function getFFProbeOptionsTesterMock() {
         return $this->getMock('FFMpeg\FFProbe\OptionsTesterInterface');
     }
 
-    public function getFFProbeMapperMock()
-    {
+    public function getFFProbeMapperMock() {
         return $this->getMock('FFMpeg\FFProbe\MapperInterface');
     }
 
-    public function getFFProbeOptionsTesterMockWithOptions(array $options)
-    {
+    public function getFFProbeOptionsTesterMockWithOptions(array $options) {
         $tester = $this->getFFProbeOptionsTesterMock();
 
         $tester->expects($this->any())
@@ -110,34 +96,29 @@ class TestCase extends \PHPUnit_Framework_TestCase
         return $tester;
     }
 
-    public function getConfigurationMock()
-    {
+    public function getConfigurationMock() {
         return $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
     }
 
-    public function getFormatMock()
-    {
+    public function getFormatMock() {
         return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\Format')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getStreamCollectionMock()
-    {
+    public function getStreamCollectionMock() {
         return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\StreamCollection')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    protected function getAudioMock()
-    {
+    protected function getAudioMock() {
         return $this->getMockBuilder('FFMpeg\Media\Audio')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    protected function getVideoMock($filename = null)
-    {
+    protected function getVideoMock($filename = null) {
         $video = $this->getMockBuilder('FFMpeg\Media\Video')
             ->disableOriginalConstructor()
             ->getMock();
@@ -149,15 +130,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
         return $video;
     }
 
-    public function getConcatMock()
-    {
+    public function getConcatMock() {
         return $this->getMockBuilder('FFMpeg\Media\Concat')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    public function getFormatInterfaceMock()
-    {
+    public function getFormatInterfaceMock() {
         $FormatInterface = $this->getMockBuilder('FFMpeg\Format\FormatInterface')
             ->disableOriginalConstructor()
             ->getMock();
