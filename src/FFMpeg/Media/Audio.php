@@ -135,7 +135,7 @@ class Audio extends AbstractStreamableMedia
      * @param array $colors Array of colors for ffmpeg to use. Color format is #000000 (RGB hex string with #)
      * @return Waveform
      */
-    public function waveform($width = 640, $height = 120, $colors = [Waveform::DEFAULT_COLOR])
+    public function waveform($width = 640, $height = 120, $colors = array(Waveform::DEFAULT_COLOR))
     {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height, $colors);
     }

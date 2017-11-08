@@ -33,7 +33,7 @@ class Waveform extends AbstractMediaType
      */
     protected $colors;
 
-    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height, $colors = [self::DEFAULT_COLOR])
+    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height, $colors = array(self::DEFAULT_COLOR))
     {
         parent::__construct($audio->getPathfile(), $driver, $ffprobe);
         $this->audio = $audio;

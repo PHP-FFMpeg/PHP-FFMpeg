@@ -165,7 +165,7 @@ documentation below for more information.
 The ouput file MUST use the PNG extension.
 
 ```php
-$waveform = $audio->waveform(640, 120, ['#00FF00']);
+$waveform = $audio->waveform(640, 120, array('#00FF00'));
 $waveform->save('waveform.png');
 ```
 
