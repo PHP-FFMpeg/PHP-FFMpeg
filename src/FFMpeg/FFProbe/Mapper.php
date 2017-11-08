@@ -20,7 +20,7 @@ use FFMpeg\Exception\InvalidArgumentException;
 class Mapper implements MapperInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function map($type, $data)
     {

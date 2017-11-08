@@ -33,7 +33,7 @@ class CustomFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -41,7 +41,7 @@ class CustomFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format)
     {

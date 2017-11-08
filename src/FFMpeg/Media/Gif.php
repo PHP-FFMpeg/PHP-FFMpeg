@@ -51,7 +51,7 @@ class Gif extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return GifFilters
      */
@@ -61,7 +61,7 @@ class Gif extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Gif
      */

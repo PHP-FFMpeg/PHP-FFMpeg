@@ -15,8 +15,14 @@ use Doctrine\Common\Cache\ArrayCache;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
+/**
+ * @deprecated 1.0.0
+ */
 class FFMpegServiceProvider implements ServiceProviderInterface
 {
+    /**
+     * @deprecated 1.0.0
+     */
     public function register(Application $app)
     {
         $app['ffmpeg.configuration'] = array();

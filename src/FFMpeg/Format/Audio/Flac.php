@@ -22,7 +22,7 @@ class Flac extends DefaultAudio
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableAudioCodecs()
     {

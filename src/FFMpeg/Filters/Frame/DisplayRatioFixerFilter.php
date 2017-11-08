@@ -25,7 +25,7 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -33,7 +33,7 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Frame $frame)
     {

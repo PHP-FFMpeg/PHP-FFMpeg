@@ -36,7 +36,7 @@ class WatermarkFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -44,7 +44,7 @@ class WatermarkFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format)
     {

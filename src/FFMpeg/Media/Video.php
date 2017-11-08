@@ -28,7 +28,7 @@ use Neutron\TemporaryFilesystem\Manager as FsManager;
 class Video extends Audio
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return VideoFilters
      */
@@ -38,7 +38,7 @@ class Video extends Audio
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Video
      */
@@ -141,7 +141,7 @@ class Video extends Audio
                     if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
                         $videoFilterProcesses[] = $match[1];
                     } else {
-                        $videoFilterProcesses[] = $command;   
+                        $videoFilterProcesses[] = $command;
                     }
                 } else {
                     foreach($commandSplits as $commandSplit) {
@@ -150,7 +150,7 @@ class Video extends Audio
                             $videoFilterProcesses[] = $match[1];
                         } else {
                             $videoFilterVars[] = $command;
-                        }                
+                        }
                     }
                 }
                 unset($commands[$i]);
@@ -169,16 +169,16 @@ class Video extends Audio
             } else {
                 $command .= '[' . $lastInput . ']';
             }
-            
+
             $videoFilterCommands[] = $command;
         }
         $videoFilterCommand = implode(";", $videoFilterCommands);
-        
+
         if ( $videoFilterCommand ) {
             $commands[] = '-vf';
             $commands[] = $videoFilterCommand;
         }
-        
+
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
         $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');

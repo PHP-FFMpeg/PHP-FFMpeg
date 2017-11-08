@@ -22,7 +22,7 @@ class Mp3 extends DefaultAudio
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableAudioCodecs()
     {

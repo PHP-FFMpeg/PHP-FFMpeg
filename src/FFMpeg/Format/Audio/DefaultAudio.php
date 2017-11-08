@@ -31,7 +31,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     protected $audioChannels = null;
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getExtraParams()
     {
@@ -39,7 +39,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getAudioCodec()
     {
@@ -69,7 +69,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getAudioKiloBitrate()
     {
@@ -94,7 +94,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
     public function getAudioChannels()
     {
@@ -119,7 +119,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
     {
@@ -133,7 +133,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getPasses()
     {

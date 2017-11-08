@@ -24,7 +24,7 @@ class WebM extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function supportBFrames()
     {
@@ -32,7 +32,7 @@ class WebM extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getExtraParams()
     {
@@ -40,7 +40,7 @@ class WebM extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableAudioCodecs()
     {
@@ -48,7 +48,7 @@ class WebM extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableVideoCodecs()
     {

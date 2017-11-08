@@ -44,7 +44,7 @@ class Frame extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return FrameFilters
      */
@@ -54,7 +54,7 @@ class Frame extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Frame
      */
@@ -106,7 +106,7 @@ class Frame extends AbstractMediaType
                 '-f', $outputFormat
             );
         }
-        
+
         if($returnBase64) {
             array_push($commands, "-");
         }

@@ -30,7 +30,7 @@ class FiltersCollection implements \Countable, \IteratorAggregate
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function count()
     {
@@ -42,7 +42,7 @@ class FiltersCollection implements \Countable, \IteratorAggregate
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getIterator()
     {

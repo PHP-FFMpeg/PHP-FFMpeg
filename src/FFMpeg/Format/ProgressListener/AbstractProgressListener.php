@@ -129,7 +129,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function handle($type, $data)
     {
@@ -139,7 +139,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function forwardedEvents()
     {

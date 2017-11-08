@@ -13,24 +13,42 @@ namespace FFMpeg\Coordinate;
 
 use FFMpeg\Exception\InvalidArgumentException;
 
-class FrameRate
-{
+/**
+ * Helper class for dealing with framerates
+ */
+class FrameRate {
+    /**
+     * @var float
+     */
     private $value;
 
-    public function __construct($value)
-    {
-        if ($value <= 0) {
-            throw new InvalidArgumentException('Invalid frame rate, must be positive value.');
+    /**
+     * Initalizes a new framerate object
+     *
+     * @param   float     $value
+     */
+    public function __construct(float $value) {
+        if(!$value) {
+            throw new InvalidArgumentException('Invalid frame rate, must be a positive integer.');
         }
 
         $this->value = $value;
     }
 
     /**
+     * Overwrites the value.
+     *
+     * @param   float   $value  The new value
+     * @return void
+     */
+    public function setValue(float $value) {
+        $this->value = $value;
+    }
+
+    /**
      * @return float
      */
-    public function getValue()
-    {
+    public function getValue() {
         return $this->value;
     }
 }

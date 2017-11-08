@@ -11,12 +11,23 @@
 
 namespace FFMpeg\FFProbe\DataMapping;
 
-class StreamCollection implements \Countable, \IteratorAggregate
-{
+/**
+ * Represents a collection of streams
+ */
+class StreamCollection implements \Countable, \IteratorAggregate {
+
+    /**
+     * Holds the streams
+     * @var Stream[]
+     */
     private $streams;
 
-    public function __construct(array $streams = array())
-    {
+    /**
+     * Creates a new collection of streams
+     *
+     * @param   Stream[]   $streams
+     */
+    public function __construct(array $streams = []) {
         $this->streams = array_values($streams);
     }
 
@@ -24,10 +35,9 @@ class StreamCollection implements \Countable, \IteratorAggregate
      * Returns the first stream of the collection, null if the collection is
      * empty.
      *
-     * @return null|Stream
+     * @return Stream|null
      */
-    public function first()
-    {
+    public function first() {
         $stream = reset($this->streams);
 
         return $stream ?: null;
@@ -36,15 +46,33 @@ class StreamCollection implements \Countable, \IteratorAggregate
     /**
      * Adds a stream to the collection.
      *
-     * @param Stream $stream
-     *
+     * @param   Stream  $stream
      * @return StreamCollection
      */
-    public function add(Stream $stream)
-    {
+    public function add(Stream $stream) {
         $this->streams[] = $stream;
 
         return $this;
+    }
+
+    /**
+     * Returns a new StreamCollection with unique streams
+     *
+     * @return StreamCollection
+     * @since 1.0.0
+     */
+    public function unique() {
+        $serializedStreams = array_map(function(Stream $stream) {
+            return serialize($stream);
+        }, $this->streams);
+
+        $serializedStreams = array_unique($serializedStreams);
+
+        $uniqueStreams = array_map(function(string $stream) {
+            return unserialize($stream);
+        }, $serializedStreams);
+
+        return new static($uniqueStreams);
     }
 
     /**
@@ -52,8 +80,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return StreamCollection
      */
-    public function videos()
-    {
+    public function videos() {
         return new static(array_filter($this->streams, function (Stream $stream) {
             return $stream->isVideo();
         }));
@@ -64,36 +91,32 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return StreamCollection
      */
-    public function audios()
-    {
+    public function audios() {
         return new static(array_filter($this->streams, function (Stream $stream) {
             return $stream->isAudio();
         }));
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function count()
-    {
+    public function count() {
         return count($this->streams);
     }
 
     /**
      * Returns the array of contained streams.
      *
-     * @return array
+     * @return Stream[]
      */
-    public function all()
-    {
+    public function all() {
         return $this->streams;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getIterator()
-    {
+    public function getIterator() {
         return new \ArrayIterator($this->streams);
     }
 }

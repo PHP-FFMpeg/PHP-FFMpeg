@@ -22,7 +22,7 @@ class Vorbis extends DefaultAudio
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getExtraParams()
     {
@@ -30,7 +30,7 @@ class Vorbis extends DefaultAudio
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableAudioCodecs()
     {

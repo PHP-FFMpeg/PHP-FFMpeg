@@ -30,7 +30,7 @@ class OptionsTester implements OptionsTesterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function has($name)
     {

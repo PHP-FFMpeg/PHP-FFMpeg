@@ -11,35 +11,66 @@
 
 namespace FFMpeg\Coordinate;
 
+/**
+ * Represents a point in a media
+ */
 class Point
 {
+    /**
+     * @var int|string
+     */
     private $x;
+
+    /**
+     * @var int|string
+     */
     private $y;
 
-    public function __construct($x, $y, $dynamic = false)
-    {
-        if ($dynamic) {
+    /**
+     * @var bool
+     */
+    private $isDynamic;
+
+    /**
+     * Creates a new Point
+     *
+     * @param   int|string  $x          X-coordinate / Math expression for X
+     * @param   int|string  $y          Y-coordinate / Math expression for Y
+     * @param   bool        $dynamic    Whether the point is dynamic based on a math expression
+     */
+    public function __construct($x, $y, $dynamic = false) {
+        if($dynamic) {
             $this->x = $x;
             $this->y = $y;
         } else {
-            $this->x = (int)$x;
-            $this->y = (int)$y;
+            $this->x = (int) $x;
+            $this->y = (int) $y;
         }
+
+        $this->isDynamic = $dynamic;
     }
 
     /**
-     * @return integer
+     * @return int|string
      */
-    public function getX()
-    {
+    public function getX() {
         return $this->x;
     }
 
     /**
-     * @return integer
+     * @return int|string
      */
-    public function getY()
-    {
+    public function getY() {
         return $this->y;
+    }
+
+    /**
+     * Returns whether this point was set dynamic
+     *
+     * @return bool
+     * @since 1.0.0
+     */
+    public function isDynamic() {
+        return $this->isDynamic;
     }
 }

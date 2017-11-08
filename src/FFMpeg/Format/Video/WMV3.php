@@ -24,7 +24,7 @@ class WMV3 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function supportBFrames()
     {
@@ -32,7 +32,7 @@ class WMV3 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableAudioCodecs()
     {
@@ -40,7 +40,7 @@ class WMV3 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableVideoCodecs()
     {

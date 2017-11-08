@@ -48,7 +48,7 @@ class Concat extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return ConcatFilters
      */
@@ -58,7 +58,7 @@ class Concat extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Concat
      */

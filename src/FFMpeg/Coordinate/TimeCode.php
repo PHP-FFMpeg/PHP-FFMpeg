@@ -13,38 +13,60 @@ namespace FFMpeg\Coordinate;
 
 use FFMpeg\Exception\InvalidArgumentException;
 
-class TimeCode
-{
-    //see http://www.dropframetimecode.org/
+class TimeCode {
+    /**
+     * @var float
+     */
     private $hours;
+
+    /**
+     * @var float
+     */
     private $minutes;
+
+    /**
+     * @var float
+     */
     private $seconds;
+
+    /**
+     * @var float
+     */
     private $frames;
 
-    public function __construct($hours, $minutes, $seconds, $frames)
-    {
+    /**
+     * Creates a new timecode based on absolutate numbers.
+     *
+     * @param   float   $hours      Absolute number of hours
+     * @param   float   $minutes    Absolute number of minutes
+     * @param   float   $seconds    Absolute number of seconds
+     * @param   float   $frames     Absolute number of frames
+     */
+    public function __construct(float $hours, float $minutes, float $seconds, float $frames) {
         $this->hours = $hours;
         $this->minutes = $minutes;
         $this->seconds = $seconds;
         $this->frames = $frames;
     }
 
-    public function __toString()
-    {
+    /**
+     * Prints out the TimeCode in the format
+     * `HH:MM:SS.FF`
+     *
+     * @return string
+     */
+    public function __toString() {
         return sprintf('%02d:%02d:%02d.%02d', $this->hours, $this->minutes, $this->seconds, $this->frames);
     }
 
     /**
      * Creates timecode from string.
      *
-     * @param string $timecode
-     *
+     * @param   string  $timecode
      * @return TimeCode
-     *
      * @throws InvalidArgumentException In case an invalid timecode is supplied
      */
-    public static function fromString($timecode)
-    {
+    public static function fromString($timecode) {
         $days = 0;
 
         if (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+\.[0-9]+$/', $timecode)) {
@@ -67,12 +89,10 @@ class TimeCode
     /**
      * Creates timecode from number of seconds.
      *
-     * @param float $quantity
-     *
+     * @param   float   $quantity
      * @return TimeCode
      */
-    public static function fromSeconds($quantity)
-    {
+    public static function fromSeconds($quantity) {
         $minutes = $hours = $frames = 0;
 
         $frames = round(100 * ($quantity - floor($quantity)));
@@ -92,6 +112,7 @@ class TimeCode
 
     /**
      * Returns this timecode in seconds
+     *
      * @return int
      */
     public function toSeconds() {

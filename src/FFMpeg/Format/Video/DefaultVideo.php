@@ -36,7 +36,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     protected $additionalParamaters;
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getKiloBitrate()
     {
@@ -61,7 +61,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getVideoCodec()
     {
@@ -98,7 +98,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getAdditionalParameters()
     {
@@ -123,7 +123,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
     {

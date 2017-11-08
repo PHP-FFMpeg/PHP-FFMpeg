@@ -32,7 +32,7 @@ class ClipFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -56,7 +56,7 @@ class ClipFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format)
     {

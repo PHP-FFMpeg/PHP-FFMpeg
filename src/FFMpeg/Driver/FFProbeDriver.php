@@ -18,10 +18,13 @@ use Alchemy\BinaryDriver\Exception\ExecutableNotFoundException as BinaryDriverEx
 use FFMpeg\Exception\ExecutableNotFoundException;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Driver responsible for FFProbe
+ */
 class FFProbeDriver extends AbstractBinary
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -31,8 +34,8 @@ class FFProbeDriver extends AbstractBinary
     /**
      * Creates an FFProbeDriver.
      *
-     * @param array|ConfigurationInterface $configuration
-     * @param LoggerInterface              $logger
+     * @param   array|ConfigurationInterface    $configuration
+     * @param   LoggerInterface                 $logger
      *
      * @return FFProbeDriver
      */

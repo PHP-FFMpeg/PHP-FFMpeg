@@ -30,7 +30,7 @@ class X264 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function supportBFrames()
     {
@@ -50,7 +50,7 @@ class X264 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableAudioCodecs()
     {
@@ -58,7 +58,7 @@ class X264 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableVideoCodecs()
     {
@@ -77,7 +77,7 @@ class X264 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getPasses()
     {

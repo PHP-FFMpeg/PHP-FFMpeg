@@ -50,7 +50,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -58,7 +58,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getFrameRate()
     {
@@ -66,7 +66,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getDestinationFolder()
     {
@@ -74,7 +74,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format)
     {

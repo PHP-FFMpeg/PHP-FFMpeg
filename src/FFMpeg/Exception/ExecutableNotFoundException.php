@@ -11,6 +11,7 @@
 
 namespace FFMpeg\Exception;
 
-class ExecutableNotFoundException extends RuntimeException
-{
-}
+/**
+ * Thrown when an exectuable(such as ffmpeg) couldn't be found
+ */
+class ExecutableNotFoundException extends RuntimeException {}

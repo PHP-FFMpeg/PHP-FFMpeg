@@ -26,7 +26,7 @@ class SimpleFilter implements AudioFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -34,7 +34,7 @@ class SimpleFilter implements AudioFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Audio $audio, AudioInterface $format)
     {

@@ -45,7 +45,7 @@ class ResizeFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -77,7 +77,7 @@ class ResizeFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format)
     {
@@ -101,7 +101,7 @@ class ResizeFilter implements VideoFilterInterface
             // Using Filter to have ordering
             $commands[] = '-vf';
             $commands[] = '[in]scale=' . $dimensions->getWidth() . ':' . $dimensions->getHeight() . ' [out]';
-            
+
         }
 
         return $commands;

@@ -11,6 +11,7 @@
 
 namespace FFMpeg\FFProbe\DataMapping;
 
-class Format extends AbstractData
-{
-}
+/**
+ * Represents format data
+ */
+class Format extends AbstractData {}

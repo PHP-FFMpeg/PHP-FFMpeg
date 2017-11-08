@@ -11,32 +11,36 @@
 
 namespace FFMpeg\FFProbe\DataMapping;
 
-abstract class AbstractData implements \Countable
-{
+/**
+ * Abstract implementation for data
+ */
+abstract class AbstractData implements \Countable {
+
+    /**
+     * Holds the properties
+     * @var mixed[]
+     */
     private $properties;
 
-    public function __construct(array $properties)
-    {
+    public function __construct(array $properties) {
         $this->properties = $properties;
     }
 
     /**
      * Returns true if data has property.
      *
-     * @param  string  $property
-     * @return Boolean
+     * @param   string  $property
+     * @return bool
      */
-    public function has($property)
-    {
+    public function has($property) {
         return isset($this->properties[$property]);
     }
 
     /**
      * Returns the property value given its name.
      *
-     * @param  string $property
-     * @param  mixed  $default
-     *
+     * @param   string  $property
+     * @param   mixed   $default
      * @return mixed
      */
     public function get($property, $default = null)
@@ -51,13 +55,11 @@ abstract class AbstractData implements \Countable
     /**
      * Sets the property value given its name.
      *
-     * @param string $property
-     * @param mixed  $value
-     *
+     * @param   string  $property
+     * @param   mixed   $value
      * @return AbstractData
      */
-    public function set($property, $value)
-    {
+    public function set($property, $value) {
         $this->properties[$property] = $value;
 
         return $this;
@@ -66,28 +68,25 @@ abstract class AbstractData implements \Countable
     /**
      * Returns all property names.
      *
-     * @return array
+     * @return string[]
      */
-    public function keys()
-    {
+    public function keys() {
         return array_keys($this->properties);
     }
 
     /**
      * Returns all properties and their values.
      *
-     * @return array
+     * @return mixed[][]
      */
-    public function all()
-    {
+    public function all() {
         return $this->properties;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function count()
-    {
+    public function count() {
         return count($this->properties);
     }
 }

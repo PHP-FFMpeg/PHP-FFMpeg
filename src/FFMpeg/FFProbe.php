@@ -28,8 +28,7 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use Psr\Log\LoggerInterface;
 
-class FFProbe
-{
+class FFProbe {
     const TYPE_STREAMS = 'streams';
     const TYPE_FORMAT = 'format';
 
@@ -44,8 +43,7 @@ class FFProbe
     /** @var MapperInterface */
     private $mapper;
 
-    public function __construct(FFProbeDriver $ffprobe, Cache $cache)
-    {
+    public function __construct(FFProbeDriver $ffprobe, Cache $cache) {
         $this->ffprobe = $ffprobe;
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
         $this->parser = new OutputParser();
