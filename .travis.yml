@@ -5,6 +5,7 @@ dist: trusty
 branches:
   only:
     - master
+    - v1.x
 
 cache:
   directories:
