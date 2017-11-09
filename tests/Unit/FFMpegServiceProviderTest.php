@@ -4,8 +4,9 @@ namespace Tests\FFMpeg\Unit;
 
 use FFMpeg\FFMpegServiceProvider;
 use Silex\Application;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
-class FFMpegServiceProviderTest extends \PHPUnit_Framework_TestCase
+class FFMpegServiceProviderTest extends BaseTestCase
 {
     public function testWithConfig()
     {
