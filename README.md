@@ -159,13 +159,13 @@ You can generate a waveform of an audio file using the `FFMpeg\Media\Audio::wave
 method.
 
 This code returns a `FFMpeg\Media\Waveform` instance.
-You can optionally pass dimensions as arguments, see dedicated
+You can optionally pass dimensions as the first two arguments and an array of hex string colors for ffmpeg to use for the waveform, see dedicated
 documentation below for more information.
 
 The ouput file MUST use the PNG extension.
 
 ```php
-$waveform = $audio->waveform(640, 120);
+$waveform = $audio->waveform(640, 120, array('#00FF00'));
 $waveform->save('waveform.png');
 ```
 
@@ -316,6 +316,18 @@ The clip filter takes two parameters:
 
 - `$start`, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the start point of the clip
 - `$duration`, optional, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the duration of the clip
+
+###### Crop
+
+Crops the video based on a width and height(a `Point`)
+
+```php
+$video->filters()->crop(new FFMpeg\Coordinate\Point("t*100", 0, true), new FFMpeg\Coordinate\Dimension(200, 600));
+```
+
+It takes two parameters:
+- `$point`, an instance of `FFMpeg\Coordinate\Point`, specifies the point to crop
+- `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`, specifies the dimension of the output video
 
 ### Audio
 
@@ -547,7 +559,7 @@ FFMpeg use many units for time and space coordinates.
 - `FFMpeg\Coordinate\AspectRatio` represents an aspect ratio.
 - `FFMpeg\Coordinate\Dimension` represent a dimension.
 - `FFMpeg\Coordinate\FrameRate` represent a framerate.
-- `FFMpeg\Coordinate\Point` represent a point.
+- `FFMpeg\Coordinate\Point` represent a point. (Supports dynamic points since v0.10.0)
 - `FFMpeg\Coordinate\TimeCode` represent a timecode.
 
 ### FFProbe
@@ -569,6 +581,16 @@ $ffprobe = FFMpeg\FFProbe::create();
 $ffprobe
     ->format('/path/to/video/mp4') // extracts file informations
     ->get('duration');             // returns the duration property
+```
+
+### Validating media files
+
+(since 0.10.0)
+You can validate media files using PHP-FFMpeg's FFProbe wrapper.
+
+```php
+$ffprobe = FFMpeg\FFProbe::create();
+$ffprobe->isValid('/path/to/file/to/check'); // returns bool
 ```
 
 ## Using with Silex Microframework
@@ -596,10 +618,6 @@ $app->register(new FFMpeg\FFMpegServiceProvider(), array(
     'ffmpeg.logger' => $logger,
 ));
 ```
-
-## API Browser
-
-Browse the [API](https://ffmpeg-php.readthedocs.io/en/latest/_static/API/)
 
 ## License
 
