@@ -35,6 +35,9 @@ $ composer require php-ffmpeg/php-ffmpeg
 ## Basic Usage
 
 ```php
+
+require 'vendor/autoload.php';
+
 $ffmpeg = FFMpeg\FFMpeg::create();
 $video = $ffmpeg->open('video.mpg');
 $video
