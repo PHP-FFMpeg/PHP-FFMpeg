@@ -11,8 +11,6 @@
 
 namespace FFMpeg\FFProbe\DataMapping;
 
-use FFMpeg\Exception\InvalidArgumentException;
-
 abstract class AbstractData implements \Countable
 {
     private $properties;

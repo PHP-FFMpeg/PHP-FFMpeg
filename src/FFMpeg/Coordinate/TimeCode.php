@@ -89,4 +89,32 @@ class TimeCode
 
         return new static($hours, $minutes, $seconds, $frames);
     }
+
+    /**
+     * Returns this timecode in seconds
+     * @return int
+     */
+    public function toSeconds() {
+        $seconds = 0;
+
+        $seconds += $this->hours * 60 * 60;
+        $seconds += $this->minutes * 60;
+        $seconds += $this->seconds;
+
+        // TODO: Handle frames?
+
+        return (int) $seconds;
+    }
+
+    /**
+     * Helper function wether `$timecode` is after this one
+     *
+     * @param   TimeCode    $timecode   The Timecode to compare
+     * @return bool
+     */
+    public function isAfter(TimeCode $timecode) {
+        // convert everything to seconds and compare
+        return ($this->toSeconds() > $timecode->toSeconds());
+    }
+
 }

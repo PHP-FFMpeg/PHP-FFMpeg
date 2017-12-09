@@ -173,6 +173,25 @@ class FFProbe
     /**
      * @api
      *
+     * Checks wether the given `$pathfile` is considered a valid media file.
+     *
+     * @param string $pathfile
+     * @return bool
+     * @since 0.10.0
+     */
+    public function isValid($pathfile)
+    {
+        try {
+            return $this->format($pathfile)->get('duration') > 0;
+        } catch(\Exception $e) {
+            // complete invalid data
+            return false;
+        }
+    }
+
+    /**
+     * @api
+     *
      * Probes the streams contained in a given file.
      *
      * @param string $pathfile
