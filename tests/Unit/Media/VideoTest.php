@@ -5,6 +5,7 @@ namespace Tests\FFMpeg\Unit\Media;
 use FFMpeg\Media\Video;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Exception\RuntimeException;
 
 class VideoTest extends AbstractStreamableTestCase
 {
@@ -99,7 +100,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->throwException($failure));
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $video->save($format, $outputPathfile);
     }
 
