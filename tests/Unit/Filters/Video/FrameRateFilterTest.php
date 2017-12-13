@@ -14,7 +14,7 @@ class FrameRateFilterTest extends TestCase
         $gop = 42;
 
         $video = $this->getVideoMock();
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
         $format->expects($this->any())
             ->method('supportBFrames')
             ->will($this->returnValue(true));
@@ -31,7 +31,7 @@ class FrameRateFilterTest extends TestCase
         $gop = 42;
 
         $video = $this->getVideoMock();
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
         $format->expects($this->any())
             ->method('supportBFrames')
             ->will($this->returnValue(false));
