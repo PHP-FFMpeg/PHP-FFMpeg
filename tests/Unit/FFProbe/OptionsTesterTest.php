@@ -50,7 +50,7 @@ class OptionsTesterTest extends TestCase
             ->will($this->returnValue($data));
 
         $tester = new OptionsTester($ffprobe, $cache);
-        $this->assertTrue($isPresent === $tester->has($optionName));
+        $this->assertSame($isPresent, $tester->has($optionName));
     }
 
     public function provideOptions()
@@ -90,7 +90,7 @@ class OptionsTesterTest extends TestCase
             ->method('command');
 
         $tester = new OptionsTester($ffprobe, $cache);
-        $this->assertTrue($isPresent === $tester->has($optionName));
+        $this->assertSame($isPresent, $tester->has($optionName));
     }
 
     /**
@@ -115,6 +115,6 @@ class OptionsTesterTest extends TestCase
             ->method('command');
 
         $tester = new OptionsTester($ffprobe, $cache);
-        $this->assertTrue($isPresent === $tester->has($optionName));
+        $this->assertSame($isPresent, $tester->has($optionName));
     }
 }

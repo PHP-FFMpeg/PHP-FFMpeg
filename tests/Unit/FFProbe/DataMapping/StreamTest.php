@@ -14,7 +14,7 @@ class StreamTest extends TestCase
     public function testIsAudio($isAudio, $properties)
     {
         $stream = new Stream($properties);
-        $this->assertTrue($isAudio === $stream->isAudio());
+        $this->assertSame($isAudio, $stream->isAudio());
     }
 
     public function provideAudioCases()
@@ -31,7 +31,7 @@ class StreamTest extends TestCase
     public function testIsVideo($isVideo, $properties)
     {
         $stream = new Stream($properties);
-        $this->assertTrue($isVideo === $stream->isVideo());
+        $this->assertSame($isVideo, $stream->isVideo());
     }
 
     public function provideVideoCases()
