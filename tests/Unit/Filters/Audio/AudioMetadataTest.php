@@ -18,7 +18,7 @@ class AudioMetadataTest extends TestCase
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
-        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
+        $format = $this->getMock('FFMpeg\Format\AudioInterface');
 
         $filters = new AudioFilters($audio);
         $filters->addMetadata(array('title' => "Hello World"));
@@ -36,7 +36,7 @@ class AudioMetadataTest extends TestCase
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
-        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
+        $format = $this->getMock('FFMpeg\Format\AudioInterface');
 
         $filters = new AudioFilters($audio);
         $filters->addMetadata(array('genre' => 'Some Genre', 'artwork' => "/path/to/file.jpg"));
@@ -55,7 +55,7 @@ class AudioMetadataTest extends TestCase
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
-        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
+        $format = $this->getMock('FFMpeg\Format\AudioInterface');
 
         $filters = new AudioFilters($audio);
         $filters->addMetadata();

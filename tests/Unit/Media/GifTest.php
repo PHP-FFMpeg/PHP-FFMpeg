@@ -51,7 +51,7 @@ class GifTest extends AbstractMediaTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $filter = $this->getMockBuilder('FFMpeg\Filters\Gif\GifFilterInterface')->getMock();
+        $filter = $this->getMock('FFMpeg\Filters\Gif\GifFilterInterface');
 
         $filters->expects($this->once())
             ->method('add')
