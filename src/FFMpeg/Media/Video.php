@@ -105,7 +105,7 @@ class Video extends Audio
      * NOTE: This method is different to the Audio's one, because Video is using passes.
      * @inheritDoc
      */
-    public function getFinalCommand(FormatInterface $format, $outputPathfile) {
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile) {
         $finalCommands = array();
 
         foreach($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
@@ -123,7 +123,7 @@ class Video extends Audio
      * @inheritDoc
      * @return string[][]
      */
-    protected function buildCommand(FormatInterface $format, $outputPathfile) {
+    protected function buildCommand(FormatInterface $format, string $outputPathfile) {
         $commands = array('-y', '-i', $this->pathfile);
 
         $filters = clone $this->filters;

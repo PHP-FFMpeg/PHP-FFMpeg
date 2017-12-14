@@ -5,6 +5,8 @@ namespace Tests\FFMpeg\Unit\Media;
 use FFMpeg\Media\Audio;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\AudioInterface;
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Exception\InvalidArgumentException;
 
 class AudioTest extends AbstractStreamableTestCase
 {
@@ -29,7 +31,7 @@ class AudioTest extends AbstractStreamableTestCase
         $audio = new Audio(__FILE__, $driver, $ffprobe);
         $audio->setFiltersCollection($filters);
 
-        $filter = $this->getMock('FFMpeg\Filters\Audio\AudioFilterInterface');
+        $filter = $this->getMockBuilder('FFMpeg\Filters\Audio\AudioFilterInterface')->getMock();
 
         $filters->expects($this->once())
             ->method('add')
@@ -50,12 +52,12 @@ class AudioTest extends AbstractStreamableTestCase
         $audio = new Audio(__FILE__, $driver, $ffprobe);
         $audio->setFiltersCollection($filters);
 
-        $filter = $this->getMock('FFMpeg\Filters\Video\VideoFilterInterface');
+        $filter = $this->getMockBuilder('FFMpeg\Filters\Video\VideoFilterInterface')->getMock();
 
         $filters->expects($this->never())
             ->method('add');
 
-        $this->setExpectedException('FFMpeg\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $audio->addFilter($filter);
     }
 
@@ -65,12 +67,12 @@ class AudioTest extends AbstractStreamableTestCase
         $ffprobe = $this->getFFProbeMock();
         $outputPathfile = '/target/file';
 
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
 
-        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -82,7 +84,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->will($this->throwException($failure));
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
-        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $audio->save($format, $outputPathfile);
     }
 
@@ -91,12 +93,12 @@ class AudioTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
         $outputPathfile = '/target/file';
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
 
-        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -104,7 +106,7 @@ class AudioTest extends AbstractStreamableTestCase
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
 
-        $filter = $this->getMock('FFMpeg\Filters\Audio\AudioFilterInterface');
+        $filter = $this->getMockBuilder('FFMpeg\Filters\Audio\AudioFilterInterface')->getMock();
         $filter->expects($this->once())
             ->method('apply')
             ->with($audio, $format)
@@ -138,7 +140,7 @@ class AudioTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -180,7 +182,7 @@ class AudioTest extends AbstractStreamableTestCase
 
     public function provideSaveData()
     {
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
@@ -191,7 +193,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getAudioChannels')
             ->will($this->returnValue(5));
 
-        $audioFormat = $this->getMock('FFMpeg\Format\AudioInterface');
+        $audioFormat = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
         $audioFormat->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
@@ -205,7 +207,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getAudioCodec')
             ->will($this->returnValue('patati-patata-audio'));
 
-        $formatExtra = $this->getMock('FFMpeg\Format\AudioInterface');
+        $formatExtra = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
         $formatExtra->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array('extra', 'param')));
@@ -216,7 +218,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getAudioChannels')
             ->will($this->returnValue(5));
 
-        $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
+        $listeners = array($this->getMockBuilder('Alchemy\BinaryDriver\Listeners\ListenerInterface')->getMock());
 
         $progressableFormat = $this->getMockBuilder('Tests\FFMpeg\Unit\Media\AudioProg')
             ->disableOriginalConstructor()->getMock();
@@ -290,7 +292,7 @@ class AudioTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -317,7 +319,7 @@ class AudioTest extends AbstractStreamableTestCase
 
         $outputPathfile = '/target/file';
 
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array('param')));
