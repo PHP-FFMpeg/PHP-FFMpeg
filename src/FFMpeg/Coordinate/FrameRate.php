@@ -28,7 +28,7 @@ class FrameRate {
      * @param   float     $value
      */
     public function __construct(float $value) {
-        if(!$value) {
+        if($value <= 0) {
             throw new InvalidArgumentException('Invalid frame rate, must be a positive integer.');
         }
 
