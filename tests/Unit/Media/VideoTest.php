@@ -5,7 +5,6 @@ namespace Tests\FFMpeg\Unit\Media;
 use FFMpeg\Media\Video;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\VideoInterface;
-use FFMpeg\Exception\RuntimeException;
 
 class VideoTest extends AbstractStreamableTestCase
 {
@@ -30,7 +29,7 @@ class VideoTest extends AbstractStreamableTestCase
         $video = new Video(__FILE__, $driver, $ffprobe);
         $video->setFiltersCollection($filters);
 
-        $filter = $this->getMockBuilder('FFMpeg\Filters\Video\VideoFilterInterface')->getMock();
+        $filter = $this->getMock('FFMpeg\Filters\Video\VideoFilterInterface');
 
         $filters->expects($this->once())
             ->method('add')
@@ -51,7 +50,7 @@ class VideoTest extends AbstractStreamableTestCase
         $video = new Video(__FILE__, $driver, $ffprobe);
         $video->setFiltersCollection($filters);
 
-        $filter = $this->getMockBuilder('FFMpeg\Filters\Audio\AudioFilterInterface')->getMock();
+        $filter = $this->getMock('FFMpeg\Filters\Audio\AudioFilterInterface');
 
         $filters->expects($this->once())
             ->method('add')
@@ -80,7 +79,7 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
         $outputPathfile = '/target/file';
-        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $format = $this->getMock('FFMpeg\Format\VideoInterface');
         $format->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(1));
@@ -88,7 +87,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
 
-        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
+        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -100,7 +99,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->throwException($failure));
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $this->expectException(RuntimeException::class);
+        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
         $video->save($format, $outputPathfile);
     }
 
@@ -109,7 +108,7 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
         $outputPathfile = '/target/file';
-        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $format = $this->getMock('FFMpeg\Format\VideoInterface');
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
@@ -117,7 +116,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getPasses')
             ->will($this->returnValue(2));
 
-        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
+        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -125,7 +124,7 @@ class VideoTest extends AbstractStreamableTestCase
 
         $video = new Video(__FILE__, $driver, $ffprobe);
 
-        $filter = $this->getMockBuilder('FFMpeg\Filters\Video\VideoFilterInterface')->getMock();
+        $filter = $this->getMock('FFMpeg\Filters\Video\VideoFilterInterface');
         $filter->expects($this->once())
             ->method('apply')
             ->with($video, $format)
@@ -159,7 +158,7 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
+        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -234,7 +233,7 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function provideSaveData()
     {
-        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $format = $this->getMock('FFMpeg\Format\VideoInterface');
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
@@ -254,7 +253,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getAdditionalParameters')
             ->will($this->returnValue(array('foo', 'bar')));
 
-        $format2 = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $format2 = $this->getMock('FFMpeg\Format\VideoInterface');
         $format2->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
@@ -274,7 +273,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getAdditionalParameters')
             ->will($this->returnValue(array('foo', 'bar')));
 
-        $audioFormat = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
+        $audioFormat = $this->getMock('FFMpeg\Format\AudioInterface');
         $audioFormat->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
@@ -291,7 +290,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getPasses')
             ->will($this->returnValue(1));
 
-        $audioVideoFormat = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $audioVideoFormat = $this->getMock('FFMpeg\Format\VideoInterface');
         $audioVideoFormat->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
@@ -317,7 +316,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getAdditionalParameters')
             ->will($this->returnValue(array()));
 
-        $audioVideoFormatSinglePass = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $audioVideoFormatSinglePass = $this->getMock('FFMpeg\Format\VideoInterface');
         $audioVideoFormatSinglePass->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
@@ -343,7 +342,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getAdditionalParameters')
             ->will($this->returnValue(array()));
 
-        $formatExtra = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $formatExtra = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array('extra', 'param')));
@@ -363,7 +362,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getAdditionalParameters')
             ->will($this->returnValue(array()));
 
-        $formatExtra2 = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $formatExtra2 = $this->getMock('FFMpeg\Format\VideoInterface');
         $formatExtra2->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array('extra', 'param')));
@@ -383,7 +382,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getAdditionalParameters')
             ->will($this->returnValue(array()));
 
-        $listeners = array($this->getMockBuilder('Alchemy\BinaryDriver\Listeners\ListenerInterface')->getMock());
+        $listeners = array($this->getMock('Alchemy\BinaryDriver\Listeners\ListenerInterface'));
 
         $progressableFormat = $this->getMockBuilder('Tests\FFMpeg\Unit\Media\Prog')
             ->disableOriginalConstructor()->getMock();
@@ -586,7 +585,7 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
+        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -613,7 +612,7 @@ class VideoTest extends AbstractStreamableTestCase
 
         $outputPathfile = '/target/file';
 
-        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $format = $this->getMock('FFMpeg\Format\VideoInterface');
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue(array('param')));

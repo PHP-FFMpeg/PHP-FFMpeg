@@ -11,11 +11,11 @@ class TestCase extends PhpUnitTestCase {
     }
 
     public function getLoggerMock() {
-        return $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+        return $this->getMock('Psr\Log\LoggerInterface');
     }
 
     public function getCacheMock() {
-        return $this->getMockBuilder('Doctrine\Common\Cache\Cache')->getMock();
+        return $this->getMock('Doctrine\Common\Cache\Cache');
     }
 
     public function getTimeCodeMock() {
@@ -73,15 +73,15 @@ class TestCase extends PhpUnitTestCase {
     }
 
     public function getFFProbeParserMock() {
-        return $this->getMockBuilder('FFMpeg\FFProbe\OutputParserInterface')->getMock();
+        return $this->getMock('FFMpeg\FFProbe\OutputParserInterface');
     }
 
     public function getFFProbeOptionsTesterMock() {
-        return $this->getMockBuilder('FFMpeg\FFProbe\OptionsTesterInterface')->getMock();
+        return $this->getMock('FFMpeg\FFProbe\OptionsTesterInterface');
     }
 
     public function getFFProbeMapperMock() {
-        return $this->getMockBuilder('FFMpeg\FFProbe\MapperInterface')->getMock();
+        return $this->getMock('FFMpeg\FFProbe\MapperInterface');
     }
 
     public function getFFProbeOptionsTesterMockWithOptions(array $options) {
@@ -97,7 +97,7 @@ class TestCase extends PhpUnitTestCase {
     }
 
     public function getConfigurationMock() {
-        return $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
+        return $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
     }
 
     public function getFormatMock() {

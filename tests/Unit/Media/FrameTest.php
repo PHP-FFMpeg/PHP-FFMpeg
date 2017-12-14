@@ -36,7 +36,7 @@ class FrameTest extends AbstractMediaTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $filter = $this->getMockBuilder('FFMpeg\Filters\Frame\FrameFilterInterface')->getMock();
+        $filter = $this->getMock('FFMpeg\Filters\Frame\FrameFilterInterface');
 
         $filters->expects($this->once())
             ->method('add')
@@ -76,7 +76,7 @@ class FrameTest extends AbstractMediaTestCase
             $frame->save($pathfile, $accurate, $base64);
         }
     }
-
+    
     public function provideSaveOptions()
     {
         return array(
