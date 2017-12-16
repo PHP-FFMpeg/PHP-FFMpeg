@@ -55,7 +55,7 @@ class AudioTest extends AbstractStreamableTestCase
         $filters->expects($this->never())
             ->method('add');
 
-        $this->setExpectedException('FFMpeg\Exception\InvalidArgumentException');
+        $this->expectException(\FFMpeg\Exception\InvalidArgumentException::class);
         $audio->addFilter($filter);
     }
 
@@ -82,7 +82,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->will($this->throwException($failure));
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
-        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
+        $this->expectException(\FFMpeg\Exception\RuntimeException::class);
         $audio->save($format, $outputPathfile);
     }
 

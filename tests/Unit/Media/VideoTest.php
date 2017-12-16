@@ -99,7 +99,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->throwException($failure));
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
+        $this->expectException(\FFMpeg\Exception\RuntimeException::class);
         $video->save($format, $outputPathfile);
     }
 
