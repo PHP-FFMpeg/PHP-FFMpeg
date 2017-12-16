@@ -50,7 +50,8 @@ class FFMpegServiceProviderTest extends TestCase
             )
         ));
 
-        $this->setExpectedException('FFMpeg\Exception\ExecutableNotFoundException', 'Unable to load FFMpeg');
+        $this->expectException(\FFMpeg\Exception\ExecutableNotFoundException::class);
+        $this->expectExceptionMessage('Unable to load FFMpeg');
         $app['ffmpeg'];
     }
 
@@ -63,7 +64,8 @@ class FFMpegServiceProviderTest extends TestCase
             )
         ));
 
-        $this->setExpectedException('FFMpeg\Exception\ExecutableNotFoundException', 'Unable to load FFProbe');
+        $this->expectException(\FFMpeg\Exception\ExecutableNotFoundException::class);
+        $this->expectExceptionMessage('Unable to load FFProbe');
         $app['ffmpeg.ffprobe'];
     }
 }
