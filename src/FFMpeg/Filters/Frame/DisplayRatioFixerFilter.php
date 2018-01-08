@@ -38,7 +38,7 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
     public function apply(Frame $frame)
     {
         $dimensions = null;
-        $commands = array();
+        $commands = [];
 
         foreach ($frame->getVideo()->getStreams() as $stream) {
             if ($stream->isVideo()) {

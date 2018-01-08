@@ -174,11 +174,11 @@ class Concat extends AbstractMediaType
         }
 
         // Create the commands variable
-        $commands = array();
+        $commands = [];
 
         // Prepare the parameters
         $nbSources = 0;
-        $files = array();
+        $files = [];
 
         // For each source, check if this is a legit file
         // and prepare the parameters

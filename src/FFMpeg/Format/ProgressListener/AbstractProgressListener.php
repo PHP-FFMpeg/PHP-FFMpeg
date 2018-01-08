@@ -143,7 +143,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      */
     public function forwardedEvents()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -166,7 +166,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
             return;
         }
 
-        $matches = array();
+        $matches = [];
 
         if (preg_match($this->getPattern(), $progress, $matches) !== 1) {
             return null;

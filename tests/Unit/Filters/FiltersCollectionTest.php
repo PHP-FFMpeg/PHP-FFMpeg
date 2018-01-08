@@ -49,7 +49,7 @@ class FiltersCollectionTest extends TestCase
         $coll->add(new SimpleFilter(array('4'), -2));
         $coll->add(new SimpleFilter(array('e')));
 
-        $data = array();
+        $data = [];
         $video = $this->getVideoMock();
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 

@@ -25,7 +25,7 @@ class FFMpegServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['ffmpeg.configuration'] = array();
+        $app['ffmpeg.configuration'] = [];
         $app['ffmpeg.default.configuration'] = array(
             'ffmpeg.threads'   => 4,
             'ffmpeg.timeout'   => 300,

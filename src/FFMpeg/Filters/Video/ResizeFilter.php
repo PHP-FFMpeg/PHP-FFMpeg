@@ -82,7 +82,7 @@ class ResizeFilter implements VideoFilterInterface
     public function apply(Video $video, VideoInterface $format)
     {
         $dimensions = null;
-        $commands = array();
+        $commands = [];
 
         foreach ($video->getStreams() as $stream) {
             if ($stream->isVideo()) {

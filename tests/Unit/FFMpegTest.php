@@ -23,10 +23,10 @@ class FFMpegTest extends TestCase
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('audios')
-            ->will($this->returnValue(new StreamCollection(array(new Stream(array())))));
+            ->will($this->returnValue(new StreamCollection(array(new Stream([])))));
         $streams->expects($this->once())
             ->method('videos')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
@@ -43,7 +43,7 @@ class FFMpegTest extends TestCase
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('videos')
-            ->will($this->returnValue(new StreamCollection(array(new Stream(array())))));
+            ->will($this->returnValue(new StreamCollection(array(new Stream([])))));
         $streams->expects($this->never())
             ->method('audios');
 

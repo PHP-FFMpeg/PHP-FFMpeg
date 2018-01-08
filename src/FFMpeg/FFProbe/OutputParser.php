@@ -35,7 +35,7 @@ class OutputParser implements OutputParserInterface
 
     private function parseFormat($data)
     {
-        $ret = array();
+        $ret = [];
 
         foreach (explode(PHP_EOL, $data) as $line) {
 
@@ -58,7 +58,7 @@ class OutputParser implements OutputParserInterface
 
             if (0 === strpos($key, 'TAG:')) {
                 if (!isset($ret['tags'])) {
-                    $ret['tags'] = array();
+                    $ret['tags'] = [];
                 }
                 $ret['tags'][substr($key, 4)] = $value;
             } else {
@@ -71,14 +71,14 @@ class OutputParser implements OutputParserInterface
 
     private function parseStreams($data)
     {
-        $ret = array();
+        $ret = [];
         $n = -1;
 
         foreach (explode(PHP_EOL, $data) as $line) {
 
             if ($line == '[STREAM]') {
                 $n ++;
-                $ret[$n] = array();
+                $ret[$n] = [];
                 continue;
             }
             if ($line == '[/STREAM]') {
@@ -107,12 +107,12 @@ class OutputParser implements OutputParserInterface
 
             if (0 === strpos($key, 'TAG:')) {
                 if (!isset($ret[$n]['tags'])) {
-                    $ret[$n]['tags'] = array();
+                    $ret[$n]['tags'] = [];
                 }
                 $ret[$n]['tags'][substr($key, 4)] = $value;
             } elseif (0 === strpos($key, 'DISPOSITION:')) {
                 if (!isset($ret[$n]['disposition'])) {
-                    $ret[$n]['disposition'] = array();
+                    $ret[$n]['disposition'] = [];
                 }
                 $ret[$n]['disposition'][substr($key, 12)] = $value;
             } else {

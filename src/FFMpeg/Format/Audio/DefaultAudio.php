@@ -35,7 +35,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      */
     public function getExtraParams()
     {
-        return array();
+        return [];
     }
 
     /**

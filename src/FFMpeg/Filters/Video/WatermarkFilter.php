@@ -24,7 +24,7 @@ class WatermarkFilter implements VideoFilterInterface
     /** @var integer */
     private $priority;
 
-    public function __construct($watermarkPath, array $coordinates = array(), $priority = 0)
+    public function __construct($watermarkPath, array $coordinates = [], $priority = 0)
     {
         if (!file_exists($watermarkPath)) {
             throw new InvalidArgumentException(sprintf('File %s does not exist', $watermarkPath));
