@@ -25,8 +25,8 @@ use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
 use Neutron\TemporaryFilesystem\Manager as FsManager;
 
-class Video extends Audio
-{
+class Video extends Audio {
+
     /**
      * FileSystem Manager instance
      * @var Manager
@@ -44,8 +44,7 @@ class Video extends Audio
      *
      * @return VideoFilters
      */
-    public function filters()
-    {
+    public function filters() {
         return new VideoFilters($this);
     }
 
@@ -54,8 +53,7 @@ class Video extends Audio
      *
      * @return Video
      */
-    public function addFilter(FilterInterface $filter)
-    {
+    public function addFilter(FilterInterface $filter) {
         $this->filters->add($filter);
 
         return $this;
@@ -69,8 +67,7 @@ class Video extends Audio
      * @return Video
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, string $outputPathfile)
-    {
+    public function save(FormatInterface $format, string $outputPathfile) {
         $passes = $this->buildCommand($format, $outputPathfile);
 
         $failure = null;
@@ -106,7 +103,7 @@ class Video extends Audio
      * @inheritDoc
      */
     public function getFinalCommand(FormatInterface $format, $outputPathfile) {
-        $finalCommands = array();
+        $finalCommands = [];
 
         foreach($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
             $finalCommands[] = implode(' ', $passCommands);
@@ -193,7 +190,7 @@ class Video extends Audio
         }
 
         // Merge Filters into one command
-        $videoFilterVars = $videoFilterProcesses = array();
+        $videoFilterVars = $videoFilterProcesses = [];
         for($i=0;$i<count($commands);$i++) {
             $command = $commands[$i];
             if ( $command == '-vf' ) {
@@ -245,7 +242,7 @@ class Video extends Audio
         $this->fs = FsManager::create();
         $this->fsId = uniqid('ffmpeg-passes');
         $passPrefix = $this->fs->createTemporaryDirectory(0777, 50, $this->fsId) . '/' . uniqid('pass-');
-        $passes = array();
+        $passes = [];
         $totalPasses = $format->getPasses();
 
         if(!$totalPasses) {
@@ -276,8 +273,7 @@ class Video extends Audio
      * @param  TimeCode $at
      * @return Frame
      */
-    public function frame(TimeCode $at)
-    {
+    public function frame(TimeCode $at) {
         return new Frame($this, $this->driver, $this->ffprobe, $at);
     }
 
@@ -289,8 +285,7 @@ class Video extends Audio
      * @param  integer $duration
      * @return Gif
      */
-    public function gif(TimeCode $at, Dimension $dimension, $duration = null)
-    {
+    public function gif(TimeCode $at, Dimension $dimension, $duration = null) {
         return new Gif($this, $this->driver, $this->ffprobe, $at, $dimension, $duration);
     }
 
@@ -300,8 +295,7 @@ class Video extends Audio
      * @param  array $sources
      * @return Concat
      */
-    public function concat($sources)
-    {
+    public function concat($sources) {
         return new Concat($sources, $this->driver, $this->ffprobe);
     }
 }
