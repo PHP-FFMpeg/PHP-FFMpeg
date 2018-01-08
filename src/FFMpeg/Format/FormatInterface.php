@@ -22,7 +22,7 @@ interface FormatInterface
     /**
      * Returns an array of extra parameters to add to ffmpeg commandline.
      *
-     * @return []
+     * @return string[]
      */
     public function getExtraParams();
 }
