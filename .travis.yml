@@ -13,15 +13,15 @@ cache:
     - $HOME/.cache
 
 php:
-  - '7.0'
   - '7.1'
   - '7.2'
+  - 'nightly'
 
 matrix:
   allow_failures:
     - php: '7.2'
   include:
-    - php: '7.0'
+    - php: '7.1'
       env: COMPOSER_FLAGS="--prefer-lowest"
 
 before_install:
