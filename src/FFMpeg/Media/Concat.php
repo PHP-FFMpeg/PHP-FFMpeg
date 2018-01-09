@@ -169,7 +169,7 @@ class Concat extends AbstractMediaType
          */
 
         // Check the validity of the parameter
-        if(!is_array($this->sources) || (count($this->sources) == 0)) {
+        if(!is_array($this->sources) || (count($this->sources) === 0)) {
             throw new InvalidArgumentException('The list of videos is not a valid array.');
         }
 

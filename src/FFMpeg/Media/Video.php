@@ -193,9 +193,9 @@ class Video extends Audio {
         $videoFilterVars = $videoFilterProcesses = [];
         for($i=0;$i<count($commands);$i++) {
             $command = $commands[$i];
-            if ( $command == '-vf' ) {
+            if ( $command === '-vf' ) {
                 $commandSplits = explode(";", $commands[$i + 1]);
-                if ( count($commandSplits) == 1 ) {
+                if ( count($commandSplits) === 1 ) {
                     $commandSplit = $commandSplits[0];
                     $command = trim($commandSplit);
                     if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
