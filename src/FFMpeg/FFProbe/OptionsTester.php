@@ -24,7 +24,7 @@ class OptionsTester implements OptionsTesterInterface
     private $cache;
 
     /**
-     * The cache key used for the (parsed) output of `ffmpeg -help -loglevel quiet`
+     * The cache key used for the (parsed) output of `ffprobe -help -loglevel quiet`
      */
     protected const HELP_OUTPUT_CACHE_ID = 'helpOutput';
 
@@ -55,9 +55,9 @@ class OptionsTester implements OptionsTesterInterface
     }
 
     /**
-     * Undocumented function
+     * Returns the output of `ffprobe -help -loglevel quiet`.
      *
-     * @return void
+     * @return string
      */
     private function retrieveHelpOutput() {
         if ($this->cache->contains(static::HELP_OUTPUT_CACHE_ID)) {
