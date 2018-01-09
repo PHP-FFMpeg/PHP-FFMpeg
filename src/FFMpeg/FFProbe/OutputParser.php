@@ -39,7 +39,7 @@ class OutputParser implements OutputParserInterface
 
         foreach (explode(PHP_EOL, $data) as $line) {
 
-            if (in_array($line, array('[FORMAT]', '[/FORMAT]'))) {
+            if (in_array($line, ['[FORMAT]', '[/FORMAT]'])) {
                 continue;
             }
 
@@ -66,7 +66,7 @@ class OutputParser implements OutputParserInterface
             }
         }
 
-        return array('format' => $ret);
+        return ['format' => $ret];
     }
 
     private function parseStreams($data)
@@ -76,12 +76,12 @@ class OutputParser implements OutputParserInterface
 
         foreach (explode(PHP_EOL, $data) as $line) {
 
-            if ($line == '[STREAM]') {
+            if ($line === '[STREAM]') {
                 $n ++;
                 $ret[$n] = [];
                 continue;
             }
-            if ($line == '[/STREAM]') {
+            if ($line === '[/STREAM]') {
                 continue;
             }
 
@@ -120,6 +120,6 @@ class OutputParser implements OutputParserInterface
             }
         }
 
-        return array('streams' => $ret);
+        return ['streams' => $ret];
     }
 }

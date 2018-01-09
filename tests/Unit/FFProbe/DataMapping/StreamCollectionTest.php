@@ -25,7 +25,7 @@ class StreamCollectionTest extends TestCase
         $collection = new StreamCollection;
         $this->assertEquals([], $collection->all());
         $collection->add($stream);
-        $this->assertEquals([], $collection->all());
+        $this->assertEquals([$stream], $collection->all());
         $collection->add($stream);
         $this->assertEquals([$stream, $stream], $collection->all());
     }

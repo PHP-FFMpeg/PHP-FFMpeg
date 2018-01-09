@@ -1,7 +1,62 @@
-#/nbproject/
+# Linux
+# backup files
+*~
+
+# Windows
+# thumbnails
+Thumbs.db
+
+# Mac OS X
+# metadata
+.DS_Store
+# thumbnails
+._*
+
+# Visual Studio PHP
+*.sln
+*.phpproj
+*.puo
+*.suo
+*.cache
+
+# Netbeans
+nbproject/
+catalog.xml
+nbactions.xml
+
+# Eclipse
+.settings/
+.buildpath
+.classpath
+.project
+
+# SVN
+# svn folders
+.svn/
+
+# PHPStorm
+.idea/
+.nameencodings
+.xmlmisc
+.xmlmodules
+.xmlprojectCodeStyle
+.xmlvcs.xml
+*.imlworkspace
+.xml
+
+# Sublime Text 2
+*.sublime-*
+
+# Textmate
+*.tmproj
+
+# Visual Studio Code
+.vscode/
+
+# Composer related unwanted files
 /vendor/
-/docs/build
 composer.phar
 composer.lock
+
+# PHPUnit files
 phpunit.xml
-sami.phar

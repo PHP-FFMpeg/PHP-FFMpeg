@@ -9,6 +9,10 @@ abstract class AudioTestCase extends TestCase
 {
     public function testExtraParams()
     {
+        if(empty($this->getFormat()->getExtraParams())) {
+            $this->markTestSkipped('No extra parameters set in this format!');
+        }
+
         foreach ($this->getFormat()->getExtraParams() as $param) {
             $this->assertScalar($param);
         }
@@ -109,7 +113,7 @@ abstract class AudioTestCase extends TestCase
         $ffprobe = $this->getFFProbeMock();
 
         foreach ($format->createProgressListener($media, $ffprobe, 1, 3) as $listener) {
-            $this->assertInstanceOf('FFMpeg\Format\ProgressListener\AudioProgressListener', $listener);
+            $this->assertInstanceOf(\FFMpeg\Format\ProgressListener\AudioProgressListener::class, $listener);
             $this->assertSame($ffprobe, $listener->getFFProbe());
             $this->assertSame(__FILE__, $listener->getPathfile());
             $this->assertSame(1, $listener->getCurrentPass());

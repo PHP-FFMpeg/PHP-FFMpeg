@@ -26,7 +26,7 @@ class OptionsTester implements OptionsTesterInterface
     /**
      * The cache key used for the (parsed) output of `ffmpeg -help -loglevel quiet`
      */
-    protected const CACHE_ID = 'helpOutput';
+    protected const HELP_OUTPUT_CACHE_ID = 'helpOutput';
 
     public function __construct(FFProbeDriver $ffprobe, Cache $cache)
     {
@@ -54,11 +54,14 @@ class OptionsTester implements OptionsTesterInterface
         return $ret;
     }
 
-    private function retrieveHelpOutput()
-    {
-
-        if ($this->cache->contains(static::CACHE_ID)) {
-            return $this->cache->fetch(static::CACHE_ID);
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    private function retrieveHelpOutput() {
+        if ($this->cache->contains(static::HELP_OUTPUT_CACHE_ID)) {
+            return $this->cache->fetch(static::HELP_OUTPUT_CACHE_ID);
         }
 
         try {
@@ -67,8 +70,7 @@ class OptionsTester implements OptionsTesterInterface
             throw new RuntimeException('Your FFProbe version is too old and does not support `-help` option, please upgrade.', $e->getCode(), $e);
         }
 
-        $this->cache->save(static::CACHE_ID, $output);
-
+        $this->cache->save(static::HELP_OUTPUT_CACHE_ID, $output);
         return $output;
     }
 }
