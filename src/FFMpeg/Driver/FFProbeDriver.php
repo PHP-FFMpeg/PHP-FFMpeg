@@ -21,13 +21,11 @@ use Psr\Log\LoggerInterface;
 /**
  * Driver responsible for FFProbe
  */
-class FFProbeDriver extends AbstractBinary
-{
+class FFProbeDriver extends AbstractBinary {
     /**
      * @inheritDoc
      */
-    public function getName()
-    {
+    public function getName() {
         return 'ffprobe';
     }
 
@@ -39,17 +37,16 @@ class FFProbeDriver extends AbstractBinary
      *
      * @return FFProbeDriver
      */
-    public static function create($configuration, LoggerInterface $logger = null)
-    {
-        if (!$configuration instanceof ConfigurationInterface) {
+    public static function create($configuration, LoggerInterface $logger = null) {
+        if(!($configuration instanceof ConfigurationInterface)) {
             $configuration = new Configuration($configuration);
         }
 
-        $binaries = $configuration->get('ffprobe.binaries', array('avprobe', 'ffprobe'));
+        $binaries = $configuration->get('ffprobe.binaries', ['ffprobe', 'avprobe']);
 
         try {
             return static::load($binaries, $logger, $configuration);
-        } catch (BinaryDriverExecutableNotFound $e) {
+        } catch(BinaryDriverExecutableNotFound $e) {
             throw new ExecutableNotFoundException('Unable to load FFProbe', $e->getCode(), $e);
         }
     }

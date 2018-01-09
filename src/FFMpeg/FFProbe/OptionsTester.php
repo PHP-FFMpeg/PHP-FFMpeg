@@ -12,15 +12,15 @@
 namespace FFMpeg\FFProbe;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\Exception\RuntimeException;
+use Psr\SimpleCache\CacheInterface;
 
-class OptionsTester implements OptionsTesterInterface
-{
+class OptionsTester implements OptionsTesterInterface {
+
     /** @var FFProbeDriver */
     private $ffprobe;
-    /** @var Cache */
+    /** @var CacheInterface */
     private $cache;
 
     /**
@@ -28,8 +28,7 @@ class OptionsTester implements OptionsTesterInterface
      */
     protected const HELP_OUTPUT_CACHE_ID = 'helpOutput';
 
-    public function __construct(FFProbeDriver $ffprobe, Cache $cache)
-    {
+    public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache) {
         $this->ffprobe = $ffprobe;
         $this->cache = $cache;
     }
@@ -37,19 +36,18 @@ class OptionsTester implements OptionsTesterInterface
     /**
      * @inheritDoc
      */
-    public function has($name)
-    {
+    public function has($name) {
         $id = sprintf('option-%s', $name);
 
-        if ($this->cache->contains($id)) {
-            return $this->cache->fetch($id);
+        if ($this->cache->has($id)) {
+            return $this->cache->get($id);
         }
 
         $output = $this->retrieveHelpOutput();
 
-        $ret = (Boolean) preg_match('/^'.$name.'/m', $output);
+        $ret = (bool) preg_match('/^'.$name.'/m', $output);
 
-        $this->cache->save($id, $ret);
+        $this->cache->set($id, $ret);
 
         return $ret;
     }
@@ -60,8 +58,8 @@ class OptionsTester implements OptionsTesterInterface
      * @return string
      */
     private function retrieveHelpOutput() {
-        if ($this->cache->contains(static::HELP_OUTPUT_CACHE_ID)) {
-            return $this->cache->fetch(static::HELP_OUTPUT_CACHE_ID);
+        if ($this->cache->has(static::HELP_OUTPUT_CACHE_ID)) {
+            return $this->cache->get(static::HELP_OUTPUT_CACHE_ID);
         }
 
         try {
@@ -70,7 +68,7 @@ class OptionsTester implements OptionsTesterInterface
             throw new RuntimeException('Your FFProbe version is too old and does not support `-help` option, please upgrade.', $e->getCode(), $e);
         }
 
-        $this->cache->save(static::HELP_OUTPUT_CACHE_ID, $output);
+        $this->cache->set(static::HELP_OUTPUT_CACHE_ID, $output);
         return $output;
     }
 }

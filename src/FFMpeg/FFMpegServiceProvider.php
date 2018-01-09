@@ -11,7 +11,7 @@
 
 namespace FFMpeg;
 
-use Doctrine\Common\Cache\ArrayCache;
+use Sabre\Cache\Memory as MemoryCache;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
@@ -50,7 +50,7 @@ class FFMpegServiceProvider implements ServiceProviderInterface
         });
 
         $app['ffprobe.cache'] = $app->share(function () {
-            return new ArrayCache();
+            return new MemoryCache;
         });
 
         $app['ffmpeg.ffprobe'] = $app->share(function (Application $app) {

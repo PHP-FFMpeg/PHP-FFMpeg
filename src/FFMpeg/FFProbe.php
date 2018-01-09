@@ -13,8 +13,6 @@ namespace FFMpeg;
 
 use Alchemy\BinaryDriver\ConfigurationInterface;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\FFProbe\DataMapping\Format;
 use FFMpeg\FFProbe\Mapper;
@@ -26,7 +24,9 @@ use FFMpeg\FFProbe\OutputParserInterface;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
+use Psr\SimpleCache\CacheInterface;
 use Psr\Log\LoggerInterface;
+use Sabre\Cache\Memory as MemoryCache;
 
 class FFProbe {
     const TYPE_STREAMS = 'streams';
@@ -43,7 +43,7 @@ class FFProbe {
     /** @var MapperInterface */
     private $mapper;
 
-    public function __construct(FFProbeDriver $ffprobe, Cache $cache) {
+    public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache) {
         $this->ffprobe = $ffprobe;
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
         $this->parser = new OutputParser();
@@ -116,7 +116,7 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setCache(Cache $cache)
+    public function setCache(CacheInterface $cache)
     {
         $this->cache = $cache;
 
@@ -124,7 +124,7 @@ class FFProbe {
     }
 
     /**
-     * @return Cache
+     * @return CacheInterface
      */
     public function getCache()
     {
@@ -152,8 +152,6 @@ class FFProbe {
     }
 
     /**
-     * @api
-     *
      * Probes the format of a given file.
      *
      * @param string $pathfile
@@ -169,8 +167,6 @@ class FFProbe {
     }
 
     /**
-     * @api
-     *
      * Checks wether the given `$pathfile` is considered a valid media file.
      *
      * @param string $pathfile
@@ -181,15 +177,13 @@ class FFProbe {
     {
         try {
             return $this->format($pathfile)->get('duration') > 0;
-        } catch(\Exception $e) {
+        } catch(\Throwable $e) {
             // complete invalid data
             return false;
         }
     }
 
     /**
-     * @api
-     *
      * Probes the streams contained in a given file.
      *
      * @param string $pathfile
@@ -205,31 +199,29 @@ class FFProbe {
     }
 
     /**
-     * @api
-     *
      * Creates an FFProbe.
      *
-     * @param array|ConfigurationInterface $configuration
-     * @param LoggerInterface              $logger
-     * @param Cache                        $cache
+     * @param array|ConfigurationInterface  $configuration
+     * @param LoggerInterface               $logger
+     * @param CacheInterface                $cache
      *
      * @return FFProbe
      */
-    public static function create($configuration = [], LoggerInterface $logger = null, Cache $cache = null)
-    {
-        if (null === $cache) {
-            $cache = new ArrayCache();
+    public static function create($configuration = [], LoggerInterface $logger = null, CacheInterface $cacheDriver = null) {
+        if($cacheDriver === null) {
+            // default to in-memory cache
+            $cacheDriver = new MemoryCache;
         }
 
-        return new static(FFProbeDriver::create($configuration, $logger), $cache);
+        return new static(FFProbeDriver::create($configuration, $logger), $cacheDriver);
     }
 
     private function probe($pathfile, $command, $type, $allowJson = true)
     {
         $id = sprintf('%s-%s', $command, $pathfile);
 
-        if ($this->cache->contains($id)) {
-            return $this->cache->fetch($id);
+        if ($this->cache->has($id)) {
+            return $this->cache->get($id);
         }
 
         if (!$this->optionsTester->has($command)) {
@@ -257,7 +249,7 @@ class FFProbe {
 
         try {
             $output = $this->ffprobe->command($commands);
-        } catch (ExecutionFailureException $e) {
+        } catch(ExecutionFailureException $e) {
             throw new RuntimeException(sprintf('Unable to probe %s', $pathfile), $e->getCode(), $e);
         }
 
@@ -267,24 +259,30 @@ class FFProbe {
             try {
                 // Malformed json may be retrieved
                 $data = $this->parseJson($output);
-            } catch (RuntimeException $e) {
+            } catch(RuntimeException $e) {
                 return $this->probe($pathfile, $command, $type, false);
             }
         }
 
         $ret = $this->mapper->map($type, $data);
 
-        $this->cache->save($id, $ret);
+        $this->cache->set($id, $ret);
 
         return $ret;
     }
 
-    private function parseJson($data)
-    {
-        $ret = @json_decode($data, true);
+    /**
+     * Returns the php variable representation of a json string
+     *
+     * @param   string  $json   The json encoded string to parse
+     * @return mixed
+     * @see json_decode()
+     */
+    private function parseJson(string $json) {
+        $ret = json_decode($json, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new RuntimeException(sprintf('Unable to parse json %s', $ret));
+            throw new RuntimeException(sprintf('Unable to parse json: %s', json_last_error_msg()));
         }
 
         return $ret;

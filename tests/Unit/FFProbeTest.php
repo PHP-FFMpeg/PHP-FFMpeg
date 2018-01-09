@@ -59,12 +59,12 @@ class FFProbeTest extends TestCase
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
 
-        return array(
-            array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json'), false),
-            array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json'), false),
-            array($stream, 'streams', array('-show_streams'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams'), true),
-            array($format, 'format', array('-show_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format'), true),
-        );
+        return [
+            [$stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json'), false],
+            [$format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json'), false],
+            [$stream, 'streams', array('-show_streams'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams'), true],
+            [$format, 'format', array('-show_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format'), true],
+        ];
     }
 
     /**
@@ -73,7 +73,7 @@ class FFProbeTest extends TestCase
     public function testProbeWithoutCache($output, $method, $commands, $type, $caughtCommands, $isRaw)
     {
         $pathfile = __FILE__;
-        $data = array('key' => 'value');
+        $data = ['key' => 'value'];
         $rawData = 'raw data';
 
         $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
@@ -100,12 +100,12 @@ class FFProbeTest extends TestCase
 
         $cache = $this->getCacheMock();
         $cache->expects($this->once())
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(false));
         $cache->expects($this->never())
-            ->method('fetch');
+            ->method('get');
         $cache->expects($this->once())
-            ->method('save')
+            ->method('set')
             ->with($this->anything(), $output);
 
         $driver = $this->getFFProbeDriverMock();
@@ -128,10 +128,10 @@ class FFProbeTest extends TestCase
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
 
-        return array(
+        return [
             array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json')),
             array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json')),
-        );
+        ];
     }
 
     /**
@@ -140,7 +140,7 @@ class FFProbeTest extends TestCase
     public function testProbeWithWrongJson($output, $method, $commands, $type, $caughtCommands)
     {
         $pathfile = __FILE__;
-        $data = array('key' => 'value');
+        $data = ['key' => 'value'];
 
         $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
 
@@ -160,10 +160,10 @@ class FFProbeTest extends TestCase
 
         $cache = $this->getCacheMock();
         $cache->expects($this->exactly(2))
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(false));
         $cache->expects($this->never())
-            ->method('fetch');
+            ->method('get');
 
         $driver = $this->getFFProbeDriverMock();
         $driver->expects($this->exactly(2))
@@ -184,10 +184,10 @@ class FFProbeTest extends TestCase
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
 
-        return array(
-            array($stream, 'streams'),
-            array($format, 'format'),
-        );
+        return [
+            [$stream, 'streams'],
+            [$format, 'format']
+        ];
     }
 
     /**
@@ -207,13 +207,13 @@ class FFProbeTest extends TestCase
 
         $cache = $this->getCacheMock();
         $cache->expects($this->once())
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(true));
         $cache->expects($this->once())
-            ->method('fetch')
+            ->method('get')
             ->will($this->returnValue($output));
         $cache->expects($this->never())
-            ->method('save');
+            ->method('set');
 
         $driver = $this->getFFProbeDriverMock();
         $driver->expects($this->never())
@@ -229,10 +229,10 @@ class FFProbeTest extends TestCase
 
     public function provideProbeMethod()
     {
-        return array(
-            array('streams'),
-            array('format'),
-        );
+        return [
+            ['streams'],
+            ['format'],
+        ];
     }
 
     /**
@@ -285,11 +285,11 @@ class FFProbeTest extends TestCase
 
     public function provideCreateOptions()
     {
-        return array(
-            array(null, array('key' => 'value'), null),
-            array($this->getLoggerMock(), array('key' => 'value'), null),
-            array(null, new Configuration(), null),
-            array(null, array('key' => 'value'), $this->getCacheMock()),
-        );
+        return [
+            [null, array('key' => 'value'), null],
+            [$this->getLoggerMock(), array('key' => 'value'), null],
+            [null, new Configuration(), null],
+            [null, array('key' => 'value'), $this->getCacheMock()],
+        ];
     }
 }

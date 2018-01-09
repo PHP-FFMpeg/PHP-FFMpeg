@@ -60,7 +60,7 @@ class ClipFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        $commands = array('-ss', (string) $this->start);
+        $commands = ['-ss', (string) $this->start];
 
         if ($this->duration !== null) {
           $commands[] = '-t';

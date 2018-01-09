@@ -15,7 +15,7 @@ class TestCase extends PhpUnitTestCase {
     }
 
     public function getCacheMock() {
-        return $this->getMockBuilder(\Doctrine\Common\Cache\Cache::class)->getMock();
+        return $this->getMockBuilder(\Psr\SimpleCache\CacheInterface::class)->getMock();
     }
 
     public function getTimeCodeMock() {

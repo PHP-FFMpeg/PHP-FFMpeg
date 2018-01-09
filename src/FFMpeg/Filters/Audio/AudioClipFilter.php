@@ -68,9 +68,9 @@ class AudioClipFilter implements AudioFilterInterface {
       * @inheritDoc
       */
      public function apply(Audio $audio, AudioInterface $format) {
-         $commands = array('-ss', (string) $this->start);
+         $commands = ['-ss', (string) $this->start];
 
-         if ($this->duration !== null) {
+         if($this->duration !== null) {
             $commands[] = '-t';
             $commands[] = (string) $this->duration;
          }
