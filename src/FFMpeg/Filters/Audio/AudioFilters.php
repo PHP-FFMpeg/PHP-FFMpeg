@@ -15,12 +15,13 @@ use FFMpeg\Filters\Audio\AddMetadataFilter;
 use FFMpeg\Media\Audio;
 use FFMpeg\Coordinate\TimeCode;
 
-class AudioFilters
-{
+class AudioFilters {
+    /**
+     * @var Audio
+     */
     protected $media;
 
-    public function __construct(Audio $media)
-    {
+    public function __construct(Audio $media) {
         $this->media = $media;
     }
 
@@ -31,8 +32,7 @@ class AudioFilters
      *
      * @return AudioFilters
      */
-    public function resample($rate)
-    {
+    public function resample($rate) {
         $this->media->addFilter(new AudioResamplableFilter($rate));
 
         return $this;
@@ -52,8 +52,7 @@ class AudioFilters
      *    - "genre": Genre metadata
      *    - "description": Description metadata
      */
-    public function addMetadata($data = null)
-    {
+    public function addMetadata($data = null) {
         $this->media->addFilter(new AddMetadataFilter($data));
 
         return $this;

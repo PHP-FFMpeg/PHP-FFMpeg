@@ -13,8 +13,11 @@ namespace FFMpeg\Filters\Frame;
 
 use FFMpeg\Media\Frame;
 
-class FrameFilters
-{
+class FrameFilters {
+
+    /**
+     * @var Frame
+     */
     private $frame;
 
     public function __construct(Frame $frame)
@@ -32,7 +35,7 @@ class FrameFilters
      */
     public function fixDisplayRatio()
     {
-        $this->frame->addFilter(new DisplayRatioFixerFilter());
+        $this->frame->addFilter(new DisplayRatioFixerFilter);
 
         return $this;
     }

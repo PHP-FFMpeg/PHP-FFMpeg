@@ -112,7 +112,7 @@ class FFProbe {
     }
 
     /**
-     * @param Cache $cache
+     * @param CacheInterface $cache
      *
      * @return FFProbe
      */
@@ -220,26 +220,26 @@ class FFProbe {
     {
         $id = sprintf('%s-%s', $command, $pathfile);
 
-        if ($this->cache->has($id)) {
+        if($this->cache->has($id)) {
             return $this->cache->get($id);
         }
 
-        if (!$this->optionsTester->has($command)) {
+        if(!$this->optionsTester->has($command)) {
             throw new RuntimeException(sprintf(
                 'This version of ffprobe is too old and '
                 . 'does not support `%s` option, please upgrade', $command
             ));
         }
 
-        $commands = array($pathfile, $command);
+        $commands = [$pathfile, $command];
 
         $parseIsToDo = false;
 
-        if ($allowJson && $this->optionsTester->has('-print_format')) {
+        if($allowJson && $this->optionsTester->has('-print_format')) {
             // allowed in latest PHP-FFmpeg version
             $commands[] = '-print_format';
             $commands[] = 'json';
-        } elseif ($allowJson && $this->optionsTester->has('-of')) {
+        } elseif($allowJson && $this->optionsTester->has('-of')) {
             // option has changed in avconv 9
             $commands[] = '-of';
             $commands[] = 'json';
@@ -253,7 +253,7 @@ class FFProbe {
             throw new RuntimeException(sprintf('Unable to probe %s', $pathfile), $e->getCode(), $e);
         }
 
-        if ($parseIsToDo) {
+        if($parseIsToDo) {
             $data = $this->parser->parse($type, $output);
         } else {
             try {
@@ -281,7 +281,7 @@ class FFProbe {
     private function parseJson(string $json) {
         $ret = json_decode($json, true);
 
-        if (JSON_ERROR_NONE !== json_last_error()) {
+        if(JSON_ERROR_NONE !== json_last_error()) {
             throw new RuntimeException(sprintf('Unable to parse json: %s', json_last_error_msg()));
         }
 

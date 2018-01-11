@@ -13,23 +13,19 @@ namespace FFMpeg\Filters\Frame;
 
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Frame;
+use FFMpeg\Filters\TPriorityFilter;
 
-class DisplayRatioFixerFilter implements FrameFilterInterface
-{
-    /** @var integer */
-    private $priority;
+class DisplayRatioFixerFilter implements FrameFilterInterface {
 
-    public function __construct($priority = 0)
-    {
-        $this->priority = $priority;
-    }
+    use TPriorityFilter;
 
     /**
-     * @inheritDoc
+     * @var int
      */
-    public function getPriority()
-    {
-        return $this->priority;
+    private $priority;
+
+    public function __construct(int $priority = 0) {
+        $this->setPriority($priority);
     }
 
     /**
@@ -47,9 +43,7 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
                     $commands[] = '-s';
                     $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
                     break;
-                } catch (RuntimeException $e) {
-
-                }
+                } catch (RuntimeException $e) {}
             }
         }
 

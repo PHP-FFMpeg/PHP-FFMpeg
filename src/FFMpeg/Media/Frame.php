@@ -38,8 +38,7 @@ class Frame extends AbstractMediaType
      *
      * @return Video
      */
-    public function getVideo()
-    {
+    public function getVideo() {
         return $this->video;
     }
 
@@ -48,8 +47,7 @@ class Frame extends AbstractMediaType
      *
      * @return FrameFilters
      */
-    public function filters()
-    {
+    public function filters() {
         return new FrameFilters($this);
     }
 
@@ -58,8 +56,7 @@ class Frame extends AbstractMediaType
      *
      * @return Frame
      */
-    public function addFilter(FrameFilterInterface $filter)
-    {
+    public function addFilter(FrameFilterInterface $filter) {
         $this->filters->add($filter);
 
         return $this;
@@ -68,8 +65,7 @@ class Frame extends AbstractMediaType
     /**
      * @return TimeCode
      */
-    public function getTimeCode()
-    {
+    public function getTimeCode() {
         return $this->timecode;
     }
 
@@ -85,10 +81,9 @@ class Frame extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function save($pathfile, $accurate = false, $returnBase64 = false)
-    {
+    public function save($pathfile, $accurate = false, $returnBase64 = false) {
         /**
-         * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
+         * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
         $outputFormat = $returnBase64 ? "image2pipe" : "image2";

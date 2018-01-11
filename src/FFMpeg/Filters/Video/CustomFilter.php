@@ -15,19 +15,23 @@ use FFMpeg\Media\Video;
 
 class CustomFilter implements VideoFilterInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     private $filter;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $priority;
 
     /**
      * A custom filter, useful if you want to build complex filters
      *
-     * @param string $filter
-     * @param int    $priority
+     * @param   string  $filter
+     * @param   int     $priority
      */
-    public function __construct($filter, $priority = 0)
-    {
+    public function __construct(string $filter, int $priority = 0) {
         $this->filter = $filter;
         $this->priority = $priority;
     }
@@ -35,17 +39,15 @@ class CustomFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function getPriority()
-    {
+    public function getPriority(): int {
         return $this->priority;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format)
-    {
-        $commands = array('-vf', $this->filter);
+    public function apply(Video $video, VideoInterface $format): array {
+        $commands = ['-vf', $this->filter];
 
         return $commands;
     }

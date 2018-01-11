@@ -12,10 +12,13 @@
 namespace FFMpeg\Filters\Audio;
 
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
 class AudioClipFilter implements AudioFilterInterface {
+
+    use TPriorityFilter;
 
     /**
      * @var TimeCode
@@ -33,17 +36,10 @@ class AudioClipFilter implements AudioFilterInterface {
     private $priority;
 
 
-    public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0) {
+    public function __construct(TimeCode $start, TimeCode $duration = null, int $priority = 0) {
         $this->start = $start;
         $this->duration = $duration;
-        $this->priority = $priority;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getPriority() {
-        return $this->priority;
+        $this->setPriority($priority);
     }
 
      /**
@@ -67,7 +63,7 @@ class AudioClipFilter implements AudioFilterInterface {
      /**
       * @inheritDoc
       */
-     public function apply(Audio $audio, AudioInterface $format) {
+     public function apply(Audio $audio, AudioInterface $format): array {
          $commands = ['-ss', (string) $this->start];
 
          if($this->duration !== null) {

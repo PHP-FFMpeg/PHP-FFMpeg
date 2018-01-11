@@ -15,15 +15,14 @@ use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
-interface AudioFilterInterface extends FilterInterface
-{
+interface AudioFilterInterface extends FilterInterface {
     /**
      * Applies the filter on the the Audio media given an format.
      *
-     * @param Audio          $audio
-     * @param AudioInterface $format
+     * @param   Audio           $audio
+     * @param   AudioInterface  $format
      *
-     * @return array An array of arguments
+     * @return string[] An array of arguments
      */
-    public function apply(Audio $audio, AudioInterface $format);
+    public function apply(Audio $audio, AudioInterface $format): array;
 }

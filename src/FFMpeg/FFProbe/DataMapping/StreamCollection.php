@@ -80,7 +80,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      *
      * @return StreamCollection
      */
-    public function videos() {
+    public function videos(): StreamCollection {
         return new static(array_filter($this->streams, function (Stream $stream) {
             return $stream->isVideo();
         }));
@@ -91,7 +91,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      *
      * @return StreamCollection
      */
-    public function audios() {
+    public function audios(): StreamCollection {
         return new static(array_filter($this->streams, function (Stream $stream) {
             return $stream->isAudio();
         }));
@@ -100,7 +100,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
     /**
      * @inheritDoc
      */
-    public function count() {
+    public function count(): int {
         return count($this->streams);
     }
 
@@ -109,14 +109,14 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      *
      * @return Stream[]
      */
-    public function all() {
+    public function all(): array {
         return $this->streams;
     }
 
     /**
      * @inheritDoc
      */
-    public function getIterator() {
+    public function getIterator(): \ArrayIterator {
         return new \ArrayIterator($this->streams);
     }
 }

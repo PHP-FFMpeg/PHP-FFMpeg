@@ -22,13 +22,24 @@ use FFMpeg\Coordinate\Dimension;
 
 class Gif extends AbstractMediaType
 {
-    /** @var TimeCode */
+    /**
+     * @var TimeCode
+     */
     private $timecode;
-    /** @var Dimension */
+
+    /**
+     * @var Dimension
+     */
     private $dimension;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $duration;
-    /** @var Video */
+
+    /**
+     * @var Video
+     */
     private $video;
 
     public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode, Dimension $dimension, $duration = null)
@@ -102,9 +113,10 @@ class Gif extends AbstractMediaType
         /**
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
-        $commands = array(
-            '-ss', (string)$this->timecode
-        );
+        $commands = [
+            '-ss',
+            (string) $this->timecode
+        ];
 
         if(null !== $this->duration) {
             $commands[] = '-t';

@@ -191,32 +191,34 @@ class Video extends Audio {
 
         // Merge Filters into one command
         $videoFilterVars = $videoFilterProcesses = [];
-        for($i=0;$i<count($commands);$i++) {
+        for($i = 0; $i < count($commands); $i++) {
             $command = $commands[$i];
-            if ( $command === '-vf' ) {
-                $commandSplits = explode(";", $commands[$i + 1]);
-                if ( count($commandSplits) === 1 ) {
-                    $commandSplit = $commandSplits[0];
+
+            // continue when it is not a video filter
+            if($command !== '-vf') continue;
+
+            $commandSplits = explode(";", $commands[$i + 1]);
+            if (count($commandSplits) === 1) {
+                $commandSplit = $commandSplits[0];
+                $command = trim($commandSplit);
+                if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
+                    $videoFilterProcesses[] = $match[1];
+                } else {
+                    $videoFilterProcesses[] = $command;
+                }
+            } else {
+                foreach($commandSplits as $commandSplit) {
                     $command = trim($commandSplit);
-                    if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
+                    if ( preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match) ) {
                         $videoFilterProcesses[] = $match[1];
                     } else {
-                        $videoFilterProcesses[] = $command;
-                    }
-                } else {
-                    foreach($commandSplits as $commandSplit) {
-                        $command = trim($commandSplit);
-                        if ( preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match) ) {
-                            $videoFilterProcesses[] = $match[1];
-                        } else {
-                            $videoFilterVars[] = $command;
-                        }
+                        $videoFilterVars[] = $command;
                     }
                 }
-                unset($commands[$i]);
-                unset($commands[$i + 1]);
-                $i++;
             }
+            unset($commands[$i]);
+            unset($commands[$i + 1]);
+            $i++;
         }
         $videoFilterCommands = $videoFilterVars;
         $lastInput = 'in';

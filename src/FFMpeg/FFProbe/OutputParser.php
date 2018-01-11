@@ -101,7 +101,7 @@ class OutputParser implements OutputParserInterface
                 continue;
             }
 
-            if (in_array($key, array('index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'))) {
+            if (in_array($key, ['index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'])) {
                 $value = (int) $value;
             }
 

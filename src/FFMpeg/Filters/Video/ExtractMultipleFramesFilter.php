@@ -14,10 +14,13 @@ namespace FFMpeg\Filters\Video;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 
-class ExtractMultipleFramesFilter implements VideoFilterInterface
-{
+class ExtractMultipleFramesFilter implements VideoFilterInterface {
+
+    use TPriorityFilter;
+
     /** will extract a frame every second */
     const FRAMERATE_EVERY_SEC = '1/1';
     /** will extract a frame every 2 seconds */
@@ -42,19 +45,10 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
         $this->frameRate = $frameRate;
 
         // Make sure that the destination folder has a trailing slash
-        if(strcmp( substr($destinationFolder, -1), "/") != 0)
-            $destinationFolder .= "/";
+        $destinationFolder = rtrim($destinationFolder, '/') . '/';
 
         // Set the destination folder
         $this->destinationFolder = $destinationFolder;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getPriority()
-    {
-        return $this->priority;
     }
 
     /**
@@ -76,8 +70,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format)
-    {
+    public function apply(Video $video, VideoInterface $format): array {
         $commands = [];
         $duration = 0;
 
@@ -105,7 +98,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             }
 
             // Set the number of digits to use in the exported filenames
-            $nbImages = ceil( $duration * $nbFramesPerSecond );
+            $nbImages = ceil($duration * $nbFramesPerSecond);
 
             if($nbImages < 100)
                 $nbDigitsInFileNames = "02";
@@ -120,7 +113,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.jpg';
         }
         catch (RuntimeException $e) {
-            throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode());
+            throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode(), null, $e);
         }
 
         return $commands;
