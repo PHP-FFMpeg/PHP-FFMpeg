@@ -170,4 +170,10 @@ class TestCase extends BaseTestCase
 
         return $FormatInterface;
     }
+
+    public function getCodecTesterMock() {
+        return $this->getMockBuilder('FFMpeg\FFProbe\CodecTester')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
 }

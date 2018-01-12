@@ -10,6 +10,16 @@ use FFMpeg\Media\Video;
 
 class VideoTranscodeTest extends FunctionalTestCase
 {
+    public function testInvalidAudioCodec() {
+        $this->setExpectedException('\InvalidArgumentException');
+
+        $codec = new X264('some_not_existing_codec');
+        $ffmpeg = $this->getFFMpeg();
+        $video = $ffmpeg->open(__DIR__ . '/../files/Test.ogv');
+
+        $video->save($codec, __DIR__ . '/output/output-x264.mp4');
+    }
+
     public function testSimpleTranscodeX264()
     {
         $filename = __DIR__ . '/output/output-x264.mp4';
@@ -25,7 +35,7 @@ class VideoTranscodeTest extends FunctionalTestCase
         $lastPercentage = null;
         $phpunit = $this;
 
-        $codec = new X264('aac');
+        $codec = new X264();
         $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit, &$lastPercentage) {
             if (null !== $lastPercentage) {
                 $phpunit->assertGreaterThanOrEqual($lastPercentage, $percentage);
@@ -64,8 +74,11 @@ class VideoTranscodeTest extends FunctionalTestCase
             $phpunit->assertGreaterThanOrEqual(0, $percentage);
             $phpunit->assertLessThanOrEqual(100, $percentage);
         });
-
-        $video->save($codec, $filename);
+        try {
+            $video->save($codec, $filename);
+        } catch(\InvalidArgumentException $e) {
+            $this->markTestSkipped('The aac codec is not available on this machine!');
+        }
         $this->assertFileExists($filename);
         unlink($filename);
     }
@@ -85,7 +98,7 @@ class VideoTranscodeTest extends FunctionalTestCase
         $video = new Video(__DIR__ . '/../files/UnknownFileTest.ogv', $ffmpeg->getFFMpegDriver(), $ffmpeg->getFFProbe());
 
         $this->setExpectedException('FFMpeg\Exception\RuntimeException');
-        $video->save(new X264('aac'), __DIR__ . '/output/output-x264.mp4');
+        $video->save(new X264(), __DIR__ . '/output/output-x264.mp4');
     }
 
     public function testTranscodePortraitVideo()
@@ -107,7 +120,7 @@ class VideoTranscodeTest extends FunctionalTestCase
         $video->filters()
             ->resize(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET)
             ->rotate(RotateFilter::ROTATE_90);
-        $video->save(new X264('aac'), $filename);
+        $video->save(new X264(), $filename);
 
         $dimension = $ffmpeg->getFFProbe()
             ->streams($filename)

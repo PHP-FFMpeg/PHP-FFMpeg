@@ -22,7 +22,7 @@ class X264 extends DefaultVideo
     /** @var integer */
     private $passes = 2;
 
-    public function __construct($audioCodec = 'libfaac', $videoCodec = 'libx264')
+    public function __construct($audioCodec = 'libmp3lame', $videoCodec = 'libx264')
     {
         $this
             ->setAudioCodec($audioCodec)

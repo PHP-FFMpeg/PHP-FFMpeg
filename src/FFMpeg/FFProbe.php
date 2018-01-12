@@ -17,6 +17,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\FFProbe\DataMapping\Format;
+use FFMpeg\FFProbe\CodecTester;
 use FFMpeg\FFProbe\Mapper;
 use FFMpeg\FFProbe\MapperInterface;
 use FFMpeg\FFProbe\OptionsTester;
@@ -35,6 +36,12 @@ class FFProbe
 
     /** @var Cache */
     private $cache;
+
+    /**
+     * provides functions to test wether the codec wanted is available
+     * @var CodecTesterInterface
+     */
+    private $codecTester;
     /** @var OptionsTesterInterface */
     private $optionsTester;
     /** @var OutputParserInterface */
@@ -47,6 +54,7 @@ class FFProbe
     public function __construct(FFProbeDriver $ffprobe, Cache $cache)
     {
         $this->ffprobe = $ffprobe;
+        $this->codecTester = new CodecTester($ffprobe, $cache);
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
         $this->parser = new OutputParser();
         $this->mapper = new Mapper();
@@ -91,6 +99,26 @@ class FFProbe
         $this->ffprobe = $ffprobe;
 
         return $this;
+    }
+
+    /**
+     * @param CodecTesterInterface $tester
+     *
+     * @return FFProbe
+     */
+    public function setCodecTester(CodecTesterInterface $tester)
+    {
+        $this->optionsTester = $tester;
+
+        return $this;
+    }
+
+    /**
+     * @return CodecTesterInterface
+     */
+    public function getCodecTester()
+    {
+        return $this->codecTester;
     }
 
     /**

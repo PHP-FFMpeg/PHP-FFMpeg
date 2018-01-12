@@ -159,6 +159,17 @@ class AudioTest extends AbstractStreamableTestCase
                 ->method('get');
         }
 
+        $codecTester = $this->getCodecTesterMock();
+
+        $ffprobe->expects($this->any())
+            ->method('getCodecTester')
+            ->will($this->returnValue($codecTester));
+
+        // We're in test, of course the codecs won't be available at all
+        $codecTester->expects($this->any())
+            ->method('has')
+            ->will($this->returnValue(true));
+
         $capturedCommand = $capturedListeners = null;
 
         $driver->expects($this->once())
@@ -168,6 +179,8 @@ class AudioTest extends AbstractStreamableTestCase
                 $capturedCommand = $commands;
                 $capturedListeners = $listeners;
             }));
+
+        // TODO: Need help to fix this test, create mock for codectester?
 
         $outputPathfile = '/target/file';
 
