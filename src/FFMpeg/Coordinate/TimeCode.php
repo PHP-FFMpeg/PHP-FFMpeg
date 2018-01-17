@@ -55,7 +55,7 @@ class TimeCode {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString(): string {
         return sprintf('%02d:%02d:%02d.%02d', $this->hours, $this->minutes, $this->seconds, $this->frames);
     }
 
@@ -66,7 +66,7 @@ class TimeCode {
      * @return TimeCode
      * @throws InvalidArgumentException In case an invalid timecode is supplied
      */
-    public static function fromString($timecode) {
+    public static function fromString($timecode): TimeCode {
         $days = 0;
 
         if (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+\.[0-9]+$/', $timecode)) {
@@ -92,7 +92,7 @@ class TimeCode {
      * @param   float   $quantity
      * @return TimeCode
      */
-    public static function fromSeconds($quantity) {
+    public static function fromSeconds($quantity): TimeCode {
         $minutes = $hours = $frames = 0;
 
         $frames = round(100 * ($quantity - floor($quantity)));
@@ -115,7 +115,7 @@ class TimeCode {
      *
      * @return int
      */
-    public function toSeconds() {
+    public function toSeconds(): int {
         $seconds = 0;
 
         $seconds += $this->hours * 60 * 60;
@@ -133,7 +133,7 @@ class TimeCode {
      * @param   TimeCode    $timecode   The Timecode to compare
      * @return bool
      */
-    public function isAfter(TimeCode $timecode) {
+    public function isAfter(TimeCode $timecode): bool {
         // convert everything to seconds and compare
         return ($this->toSeconds() > $timecode->toSeconds());
     }

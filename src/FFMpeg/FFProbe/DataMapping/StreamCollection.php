@@ -23,12 +23,42 @@ class StreamCollection implements \Countable, \IteratorAggregate {
     private $streams;
 
     /**
+     * Holds the audio streams
+     * @var Stream[]
+     */
+    private $audioStreams;
+
+    /**
+     * Holds the video streams
+     * @var Stream[]
+     */
+    private $videoStreams;
+
+    /**
+     * Holds the unique streams
+     *
+     * @var Stream[]
+     */
+    private $uniqueStreams;
+
+    /**
      * Creates a new collection of streams
      *
      * @param   Stream[]   $streams
      */
     public function __construct(array $streams = []) {
         $this->streams = array_values($streams);
+    }
+
+    /**
+     * Resets the cached mapping of streams
+     *
+     * @return void
+     */
+    protected function resetStreamMapping(): void {
+        $this->audioStreams = null;
+        $this->videoStreams = null;
+        $this->uniqueStreams = null;
     }
 
     /**
@@ -52,6 +82,9 @@ class StreamCollection implements \Countable, \IteratorAggregate {
     public function add(Stream $stream) {
         $this->streams[] = $stream;
 
+        // clear cache
+        $this->resetStreamMapping();
+
         return $this;
     }
 
@@ -62,15 +95,20 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      * @since 1.0.0
      */
     public function unique() {
-        $serializedStreams = array_map(function(Stream $stream) {
-            return serialize($stream);
-        }, $this->streams);
+        if($this->uniqueStreams === null) {
+            $this->uniqueStreams = [];
 
-        $serializedStreams = array_unique($serializedStreams);
+            $serializedStreams = array_map(function(Stream $stream) {
+                return serialize($stream);
+            }, $this->streams);
 
-        $uniqueStreams = array_map(function(string $stream) {
-            return unserialize($stream);
-        }, $serializedStreams);
+            $serializedStreams = array_unique($serializedStreams);
+
+            $this->uniqueStreams = array_map(function(string $stream) {
+                return unserialize($stream);
+            }, $serializedStreams);
+        }
+
 
         return new static($uniqueStreams);
     }
@@ -79,11 +117,27 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      * Returns a new StreamCollection with only video streams.
      *
      * @return StreamCollection
+     * @since 1.0.0
+     */
+    public function getVideoStreams(): StreamCollection {
+        if($this->videoStreams === null) {
+            $this->videoStreams = [];
+            $this->videoStreams = array_filter($this->streams, function (Stream $stream) {
+                return $stream->isVideo();
+            });
+        }
+
+        return new static($this->videoStreams);
+    }
+
+    /**
+     * Returns a new StreamCollection with only video streams.
+     *
+     * @return StreamCollection
+     * @deprecated 1.0.0 use `getVideoStreams` instead
      */
     public function videos(): StreamCollection {
-        return new static(array_filter($this->streams, function (Stream $stream) {
-            return $stream->isVideo();
-        }));
+        return $this->getVideoStreams();
     }
 
     /**
@@ -91,10 +145,25 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      *
      * @return StreamCollection
      */
+    public function getAudioStreams(): StreamCollection {
+        if($this->audioStreams === null) {
+            $this->audioStreams = [];
+            $this->audioStreams = array_filter($this->streams, function (Stream $stream) {
+                return $stream->isAudio();
+            });
+        }
+
+        return new static($this->audioStreams);
+    }
+
+    /**
+     * Returns a new StreamCollection with only audio streams.
+     *
+     * @return StreamCollection
+     * @deprecated 1.0.0 use `getAudioStreams` instead
+     */
     public function audios(): StreamCollection {
-        return new static(array_filter($this->streams, function (Stream $stream) {
-            return $stream->isAudio();
-        }));
+        return $this->getAudioStreams();
     }
 
     /**

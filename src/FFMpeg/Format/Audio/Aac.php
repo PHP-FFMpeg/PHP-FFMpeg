@@ -14,18 +14,16 @@ namespace FFMpeg\Format\Audio;
 /**
  * The AAC audio format
  */
-class Aac extends DefaultAudio
-{
-    public function __construct()
-    {
+class Aac extends DefaultAudio {
+
+    public function __construct() {
         $this->audioCodec = 'libfdk_aac';
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
-    {
-        return array('libfdk_aac');
+    public function getAvailableAudioCodecs(): array {
+        return ['libfdk_aac'];
     }
 }

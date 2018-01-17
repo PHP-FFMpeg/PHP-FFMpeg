@@ -32,15 +32,29 @@ class FFProbe {
     const TYPE_STREAMS = 'streams';
     const TYPE_FORMAT = 'format';
 
-    /** @var Cache */
+    /**
+     * @var CacheInterface
+     */
     private $cache;
-    /** @var OptionsTesterInterface */
+
+    /**
+     * @var OptionsTesterInterface
+     */
     private $optionsTester;
-    /** @var OutputParserInterface */
+
+    /**
+     * @var OutputParserInterface
+     */
     private $parser;
-    /** @var FFProbeDriver */
+
+    /**
+     * @var FFProbeDriver
+     */
     private $ffprobe;
-    /** @var MapperInterface */
+
+    /**
+     * @var MapperInterface
+     */
     private $mapper;
 
     public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache) {
@@ -54,8 +68,7 @@ class FFProbe {
     /**
      * @return OutputParserInterface
      */
-    public function getParser()
-    {
+    public function getParser(): OutputParserInterface {
         return $this->parser;
     }
 
@@ -64,8 +77,7 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setParser(OutputParserInterface $parser)
-    {
+    public function setParser(OutputParserInterface $parser) {
         $this->parser = $parser;
 
         return $this;
@@ -74,8 +86,7 @@ class FFProbe {
     /**
      * @return FFProbeDriver
      */
-    public function getFFProbeDriver()
-    {
+    public function getFFProbeDriver(): FFProbeDriver {
         return $this->ffprobe;
     }
 
@@ -84,8 +95,7 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setFFProbeDriver(FFProbeDriver $ffprobe)
-    {
+    public function setFFProbeDriver(FFProbeDriver $ffprobe) {
         $this->ffprobe = $ffprobe;
 
         return $this;
@@ -96,8 +106,7 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setOptionsTester(OptionsTesterInterface $tester)
-    {
+    public function setOptionsTester(OptionsTesterInterface $tester): FFProbe {
         $this->optionsTester = $tester;
 
         return $this;
@@ -106,8 +115,7 @@ class FFProbe {
     /**
      * @return OptionsTesterInterface
      */
-    public function getOptionsTester()
-    {
+    public function getOptionsTester(): OptionsTesterInterface {
         return $this->optionsTester;
     }
 
@@ -116,8 +124,7 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setCache(CacheInterface $cache)
-    {
+    public function setCache(CacheInterface $cache): FFProbe {
         $this->cache = $cache;
 
         return $this;
@@ -126,16 +133,14 @@ class FFProbe {
     /**
      * @return CacheInterface
      */
-    public function getCache()
-    {
+    public function getCache(): CacheInterface {
         return $this->cache;
     }
 
     /**
      * @return MapperInterface
      */
-    public function getMapper()
-    {
+    public function getMapper(): MapperInterface {
         return $this->mapper;
     }
 
@@ -144,8 +149,7 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setMapper(MapperInterface $mapper)
-    {
+    public function setMapper(MapperInterface $mapper): FFProbe {
         $this->mapper = $mapper;
 
         return $this;
@@ -161,8 +165,7 @@ class FFProbe {
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function format($pathfile)
-    {
+    public function format($pathfile): Format {
         return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
     }
 
@@ -173,8 +176,7 @@ class FFProbe {
      * @return bool
      * @since 0.10.0
      */
-    public function isValid($pathfile)
-    {
+    public function isValid($pathfile): bool {
         try {
             return $this->format($pathfile)->get('duration') > 0;
         } catch(\Throwable $e) {
@@ -193,8 +195,7 @@ class FFProbe {
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function streams($pathfile)
-    {
+    public function streams($pathfile): StreamCollection {
         return $this->probe($pathfile, '-show_streams', static::TYPE_STREAMS);
     }
 
@@ -216,8 +217,7 @@ class FFProbe {
         return new static(FFProbeDriver::create($configuration, $logger), $cacheDriver);
     }
 
-    private function probe($pathfile, $command, $type, $allowJson = true)
-    {
+    private function probe($pathfile, $command, $type, $allowJson = true) {
         $id = sprintf('%s-%s', $command, $pathfile);
 
         if($this->cache->has($id)) {

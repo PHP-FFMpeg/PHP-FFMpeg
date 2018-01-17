@@ -42,8 +42,7 @@ class Dimension
      *
      * @return int
      */
-    public function getWidth()
-    {
+    public function getWidth(): int {
         return $this->width;
     }
 
@@ -52,8 +51,7 @@ class Dimension
      *
      * @return int
      */
-    public function getHeight()
-    {
+    public function getHeight(): int {
         return $this->height;
     }
 
@@ -64,8 +62,7 @@ class Dimension
      *
      * @return AspectRatio
      */
-    public function getRatio($forceStandards = true)
-    {
+    public function getRatio($forceStandards = true): AspectRatio {
         return AspectRatio::create($this, $forceStandards);
     }
 }

@@ -14,13 +14,11 @@ namespace FFMpeg\FFProbe;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
 
-class OutputParser implements OutputParserInterface
-{
+class OutputParser implements OutputParserInterface {
     /**
      * @inheritDoc
      */
-    public function parse($type, $data)
-    {
+    public function parse($type, $data): array {
         switch ($type) {
             case FFProbe::TYPE_FORMAT:
                 return $this->parseFormat($data);
@@ -33,8 +31,7 @@ class OutputParser implements OutputParserInterface
         }
     }
 
-    private function parseFormat($data)
-    {
+    private function parseFormat($data) {
         $ret = [];
 
         foreach (explode(PHP_EOL, $data) as $line) {
@@ -69,8 +66,7 @@ class OutputParser implements OutputParserInterface
         return ['format' => $ret];
     }
 
-    private function parseStreams($data)
-    {
+    private function parseStreams($data) {
         $ret = [];
         $n = -1;
 

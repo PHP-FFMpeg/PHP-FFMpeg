@@ -13,12 +13,13 @@ namespace FFMpeg\Filters\Waveform;
 
 use FFMpeg\Media\Waveform;
 
-class WaveformFilters
-{
+class WaveformFilters {
+    /**
+     * @var Waveform
+     */
     private $waveform;
 
-    public function __construct(Waveform $waveform)
-    {
+    public function __construct(Waveform $waveform) {
         $this->waveform = $waveform;
     }
 
@@ -29,8 +30,7 @@ class WaveformFilters
      *
      * @return WaveformFilters
      */
-    public function setDownmix()
-    {
+    public function setDownmix(): WaveformFilters {
         $this->waveform->addFilter(new WaveformDownmixFilter());
 
         return $this;

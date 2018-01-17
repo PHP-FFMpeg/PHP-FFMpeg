@@ -14,7 +14,8 @@ namespace FFMpeg\Filters\Frame;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Media\Frame;
 
-interface FrameFilterInterface extends FilterInterface
-{
-    public function apply(Frame $frame);
+interface FrameFilterInterface extends FilterInterface {
+
+    public function apply(Frame $frame): array;
+
 }

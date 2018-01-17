@@ -11,8 +11,7 @@
 
 namespace FFMpeg\FFProbe;
 
-interface OutputParserInterface
-{
+interface OutputParserInterface {
     /**
      * Parses ffprobe raw output.
      *

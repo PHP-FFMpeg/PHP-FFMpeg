@@ -15,5 +15,7 @@ use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Media\Concat;
 
 interface ConcatFilterInterface extends FilterInterface {
+
     public function apply(Concat $concat): array;
+
 }

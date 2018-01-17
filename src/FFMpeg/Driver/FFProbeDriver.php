@@ -37,7 +37,7 @@ class FFProbeDriver extends AbstractBinary {
      *
      * @return FFProbeDriver
      */
-    public static function create($configuration, LoggerInterface $logger = null) {
+    public static function create($configuration, LoggerInterface $logger = null): FFProbeDriver {
         if(!($configuration instanceof ConfigurationInterface)) {
             $configuration = new Configuration($configuration);
         }

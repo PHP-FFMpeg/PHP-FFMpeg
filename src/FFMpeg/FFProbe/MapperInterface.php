@@ -11,17 +11,22 @@
 
 namespace FFMpeg\FFProbe;
 
-interface MapperInterface
-{
+use FFMpeg\FFProbe\DataMapping\{
+    Format,
+    StreamCollection
+};
+interface MapperInterface {
+
     /**
      * Maps data given its type.
      *
      * @param string $type One of FFProbe::TYPE_* constant
      * @param string $data The data
      *
-     * @return Format|Stream
+     * @return Format|StreamCollection
      *
      * @throws InvalidArgumentException In case the type is not supported
      */
     public function map($type, $data);
+
 }

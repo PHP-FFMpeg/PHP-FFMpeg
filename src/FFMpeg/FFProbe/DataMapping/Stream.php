@@ -24,16 +24,16 @@ class Stream extends AbstractData {
      *
      * @return bool
      */
-    public function isAudio() {
+    public function isAudio(): bool {
         return $this->get('codec_type') === 'audio';
     }
 
     /**
      * Returns true if the stream is a video stream.
      *
-     * @return Boolean
+     * @return bool
      */
-    public function isVideo() {
+    public function isVideo(): bool {
         return $this->get('codec_type') === 'video';
     }
 
@@ -45,7 +45,7 @@ class Stream extends AbstractData {
      * @throws LogicException   In case the stream is not a video stream.
      * @throws RuntimeException In case the dimensions can not be extracted.
      */
-    public function getDimensions() {
+    public function getDimensions(): Dimension {
         if(!$this->isVideo()) {
             throw new LogicException('Dimensions can only be retrieved from video streams.');
         }
@@ -87,7 +87,7 @@ class Stream extends AbstractData {
      * @param   string     $name    the name of the key.
      * @return array|null   An array containing the width and the height, null if not found.
      */
-    private function extractRatio(Stream $stream, $name) {
+    private function extractRatio(Stream $stream, $name): ?array {
         if(!$stream->has($name)) {
             return;
         }

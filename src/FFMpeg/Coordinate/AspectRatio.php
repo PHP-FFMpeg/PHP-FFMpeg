@@ -19,6 +19,7 @@ use FFMpeg\Exception\InvalidArgumentException;
  * @see http://en.wikipedia.org/wiki/List_of_common_resolutions
  */
 class AspectRatio {
+
     /**
      * named 4:3 or 1.33:1 Traditional TV
      */
@@ -100,7 +101,9 @@ class AspectRatio {
      */
     const AR_ROTATED_2_DOT_39 = '1/2.39';
 
-    /** @var float */
+    /**
+     * @var float
+     */
     private $ratio;
 
     /**
@@ -108,7 +111,7 @@ class AspectRatio {
      *
      * @param   float   $ratio
      */
-    public function __construct($ratio) {
+    public function __construct(float $ratio) {
         $this->ratio = $ratio;
     }
 
@@ -117,8 +120,7 @@ class AspectRatio {
      *
      * @return float
      */
-    public function getValue()
-    {
+    public function getValue(): float {
         return $this->ratio;
     }
 
@@ -130,8 +132,7 @@ class AspectRatio {
      *
      * @return int
      */
-    public function calculateWidth($height, $modulus = 1)
-    {
+    public function calculateWidth($height, $modulus = 1): int {
         $maxPossibleWidth = $this->getMultipleUp(ceil($this->ratio * $height), $modulus);
         $minPossibleWidth = $this->getMultipleDown(floor($this->ratio * $height), $modulus);
 
@@ -149,8 +150,7 @@ class AspectRatio {
      *
      * @return int
      */
-    public function calculateHeight($width, $modulus = 1)
-    {
+    public function calculateHeight($width, $modulus = 1): int {
         $maxPossibleHeight = $this->getMultipleUp(ceil($width / $this->ratio), $modulus);
         $minPossibleHeight = $this->getMultipleDown(floor($width / $this->ratio), $modulus);
 
@@ -189,8 +189,7 @@ class AspectRatio {
      * @return AspectRatio
      * @throws InvalidArgumentException
      */
-    public static function create(Dimension $dimension, $forceStandards = true)
-    {
+    public static function create(Dimension $dimension, $forceStandards = true): AspectRatio {
         $incoming = $dimension->getWidth() / $dimension->getHeight();
 
         if ($forceStandards) {
@@ -200,8 +199,7 @@ class AspectRatio {
         }
     }
 
-    private static function valueFromName($name)
-    {
+    private static function valueFromName($name): float {
         switch ($name) {
             case static::AR_4_3:
                 return 4 / 3;
@@ -238,8 +236,7 @@ class AspectRatio {
         }
     }
 
-    private static function customStrategy($incoming)
-    {
+    private static function customStrategy($incoming) {
         $try = static::nearestStrategy($incoming);
 
         if (abs($try - $incoming) < $try * 0.05) {
@@ -249,8 +246,7 @@ class AspectRatio {
         return $incoming;
     }
 
-    private static function nearestStrategy($incoming)
-    {
+    private static function nearestStrategy($incoming) {
         $availables = [
             static::AR_4_3 => static::valueFromName(static::AR_4_3),
             static::AR_16_9 => static::valueFromName(static::AR_16_9),

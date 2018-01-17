@@ -23,9 +23,15 @@ use Psr\Log\LoggerInterface;
  * Main class for opening media files to manipulate or read data out of them.
  */
 class FFMpeg {
-    /** @var FFMpegDriver */
+
+    /**
+     * @var FFMpegDriver
+     */
     private $driver;
-    /** @var FFProbe */
+
+    /**
+     * @var FFProbe
+     */
     private $ffprobe;
 
     public function __construct(FFMpegDriver $ffmpeg, FFProbe $ffprobe) {
@@ -50,7 +56,7 @@ class FFMpeg {
      *
      * @return FFProbe
      */
-    public function getFFProbe() {
+    public function getFFProbe(): FFProbe {
         return $this->ffprobe;
     }
 
@@ -70,7 +76,7 @@ class FFMpeg {
      *
      * @return FFMpegDriver
      */
-    public function getFFMpegDriver() {
+    public function getFFMpegDriver(): FFMpegDriver {
         return $this->driver;
     }
 
@@ -81,14 +87,14 @@ class FFMpeg {
      * @return Audio|Video
      * @throws InvalidArgumentException
      */
-    public function open($pathfile) {
+    public function open($pathfile): Audio {
         if(null === ($streams = $this->ffprobe->streams($pathfile))) {
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
 
-        if(count($streams->videos())) {
+        if(count($streams->getVideoStreams())) {
             return new Video($pathfile, $this->driver, $this->ffprobe);
-        } elseif(count($streams->audios())) {
+        } elseif(count($streams->getAudioStreams())) {
             return new Audio($pathfile, $this->driver, $this->ffprobe);
         }
 
@@ -103,7 +109,7 @@ class FFMpeg {
      * @param   FFProbe                      $probe
      * @return FFMpeg
      */
-    public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null) {
+    public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null): FFMpeg {
         if(null === $probe) {
             $probe = FFProbe::create($configuration, $logger, null);
         }

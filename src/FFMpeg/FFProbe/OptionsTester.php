@@ -18,9 +18,14 @@ use Psr\SimpleCache\CacheInterface;
 
 class OptionsTester implements OptionsTesterInterface {
 
-    /** @var FFProbeDriver */
+    /**
+     * @var FFProbeDriver
+     */
     private $ffprobe;
-    /** @var CacheInterface */
+
+    /**
+     * @var CacheInterface
+     */
     private $cache;
 
     /**
@@ -36,8 +41,8 @@ class OptionsTester implements OptionsTesterInterface {
     /**
      * @inheritDoc
      */
-    public function has($name) {
-        $id = sprintf('option-%s', $name);
+    public function has(string $optionName): bool {
+        $id = sprintf('option-%s', $optionName);
 
         if ($this->cache->has($id)) {
             return $this->cache->get($id);
@@ -45,7 +50,7 @@ class OptionsTester implements OptionsTesterInterface {
 
         $output = $this->retrieveHelpOutput();
 
-        $ret = (bool) preg_match('/^'.$name.'/m', $output);
+        $ret = (bool) preg_match('/^'.$optionName.'/m', $output);
 
         $this->cache->set($id, $ret);
 

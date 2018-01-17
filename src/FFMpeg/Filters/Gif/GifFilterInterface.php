@@ -14,7 +14,8 @@ namespace FFMpeg\Filters\Gif;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Media\Gif;
 
-interface GifFilterInterface extends FilterInterface
-{
-    public function apply(Gif $gif);
+interface GifFilterInterface extends FilterInterface {
+
+    public function apply(Gif $gif): array;
+
 }

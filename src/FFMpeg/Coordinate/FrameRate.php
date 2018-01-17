@@ -41,14 +41,14 @@ class FrameRate {
      * @param   float   $value  The new value
      * @return void
      */
-    public function setValue(float $value) {
+    public function setValue(float $value): void {
         $this->value = $value;
     }
 
     /**
      * @return float
      */
-    public function getValue() {
+    public function getValue(): float {
         return $this->value;
     }
 }

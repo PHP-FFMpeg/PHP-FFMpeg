@@ -12,60 +12,47 @@
 namespace FFMpeg\Filters\Waveform;
 
 use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Media\Waveform;
 
-class WaveformDownmixFilter implements WaveformFilterInterface
-{
+class WaveformDownmixFilter implements WaveformFilterInterface {
 
-    /** @var boolean */
+    use TPriorityFilter;
+
+    /**
+     * @var bool
+     */
     private $downmix;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $priority;
 
     // By default, the downmix value is set to FALSE.
-    public function __construct($downmix = FALSE, $priority = 0)
+    public function __construct(bool $downmix = false, int $priority = 0)
     {
         $this->downmix = $downmix;
-        $this->priority = $priority;
+        $this->setPriority($priority);
     }
 
     /**
      * @inheritDoc
      */
-    public function getDownmix()
-    {
+    public function getDownmix(): bool {
         return $this->downmix;
     }
 
     /**
      * @inheritDoc
      */
-    public function getPriority()
-    {
-        return $this->priority;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function apply(Waveform $waveform)
-    {
+    public function apply(Waveform $waveform): array {
         $commands = [];
 
-        foreach ($waveform->getAudio()->getStreams() as $stream) {
-            if ($stream->isAudio()) {
-                try {
-
-                    // If the downmix parameter is set to TRUE, we add an option to the FFMPEG command
-                    if($this->downmix == TRUE) {
-                        $commands[] = '"aformat=channel_layouts=mono"';
-                    }
-
-                    break;
-
-                } catch (RuntimeException $e) {
-
-                }
+        // If the downmix parameter is set to true, we add an option to the FFMPEG command
+        if($this->downmix) {
+            foreach ($waveform->getAudio()->getStreams()->audios() as $stream) {
+                $commands[] = '"aformat=channel_layouts=mono"';
             }
         }
 

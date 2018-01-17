@@ -19,9 +19,14 @@ class AudioResamplableFilter implements AudioFilterInterface {
 
     use TPriorityFilter;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $rate;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $priority;
 
     public function __construct(int $rate, int $priority = 0) {
@@ -32,7 +37,7 @@ class AudioResamplableFilter implements AudioFilterInterface {
     /**
      * @return int
      */
-    public function getRate() {
+    public function getRate(): int {
         return $this->rate;
     }
 
