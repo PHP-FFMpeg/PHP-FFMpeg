@@ -47,7 +47,7 @@ class AudioClipFilter implements AudioFilterInterface {
       *
       * @return TimeCode
       */
-     public function getStart() {
+     public function getStart(): TimeCode {
          return $this->start;
      }
 
@@ -56,7 +56,7 @@ class AudioClipFilter implements AudioFilterInterface {
       *
       * @return TimeCode|null
       */
-     public function getDuration() {
+     public function getDuration(): ?TimeCode {
          return $this->duration;
      }
 

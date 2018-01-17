@@ -89,7 +89,7 @@ class Stream extends AbstractData {
      */
     private function extractRatio(Stream $stream, $name): ?array {
         if(!$stream->has($name)) {
-            return;
+            return null;
         }
 
         $ratio = $stream->get($name);
