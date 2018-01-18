@@ -11,6 +11,15 @@
 
 namespace FFMpeg\Format;
 
+/**
+ * Default implementation for Video Foramts
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg
+ * @subpackage Format
+ */
 interface VideoInterface extends AudioInterface {
 
     /**
