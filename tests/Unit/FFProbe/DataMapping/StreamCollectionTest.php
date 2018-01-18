@@ -15,11 +15,10 @@ class StreamCollectionTest extends TestCase
         $collection->add($stream);
         $collection->add($stream);
 
-        $this->assertEquals([$stream], $collection->unique()->all());
+        $this->assertEquals([$stream], $collection->getUniqueStreams()->all());
     }
 
-    public function testAdd()
-    {
+    public function testAdd() {
         $stream = $this->getStreamMock();
 
         $collection = new StreamCollection;
@@ -30,8 +29,7 @@ class StreamCollectionTest extends TestCase
         $this->assertEquals([$stream, $stream], $collection->all());
     }
 
-    public function testVideos()
-    {
+    public function testVideos() {
         $audio = $this->getStreamMock();
         $audio->expects($this->once())
             ->method('isVideo')
@@ -50,8 +48,7 @@ class StreamCollectionTest extends TestCase
         $this->assertEquals([$video], $videos->all());
     }
 
-    public function testAudios()
-    {
+    public function testAudios() {
         $audio = $this->getStreamMock();
         $audio->expects($this->once())
             ->method('isAudio')
@@ -70,16 +67,14 @@ class StreamCollectionTest extends TestCase
         $this->assertEquals([$audio], $audios->all());
     }
 
-    public function testCount()
-    {
+    public function testCount() {
         $stream = $this->getStreamMock();
 
         $collection = new StreamCollection([$stream]);
         $this->assertCount(1, $collection);
     }
 
-    public function testGetIterator()
-    {
+    public function testGetIterator() {
         $audio = $this->getStreamMock();
         $video = $this->getStreamMock();
 
@@ -88,8 +83,7 @@ class StreamCollectionTest extends TestCase
         $this->assertCount(2, $collection->getIterator());
     }
 
-    public function testFirst()
-    {
+    public function testFirst() {
         $stream1 = $this->getStreamMock();
         $stream2 = $this->getStreamMock();
 

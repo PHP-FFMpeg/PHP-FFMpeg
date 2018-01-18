@@ -94,7 +94,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      * @return StreamCollection
      * @since 1.0.0
      */
-    public function unique(): StreamCollection {
+    public function getUniqueStreams(): StreamCollection {
         if($this->uniqueStreams === null) {
             $this->uniqueStreams = [];
 
@@ -110,7 +110,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
         }
 
 
-        return new static($uniqueStreams);
+        return new static($this->uniqueStreams);
     }
 
     /**

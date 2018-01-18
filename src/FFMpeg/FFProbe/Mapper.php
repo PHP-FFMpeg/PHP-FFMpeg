@@ -22,7 +22,7 @@ class Mapper implements MapperInterface {
     /**
      * @inheritDoc
      */
-    public function map($type, $data) {
+    public function map(string $type, array $data) {
         switch ($type) {
             case FFProbe::TYPE_FORMAT:
                 return $this->mapFormat($data);
@@ -35,11 +35,11 @@ class Mapper implements MapperInterface {
         }
     }
 
-    private function mapFormat($data) {
+    private function mapFormat(array $data) {
         return new Format($data['format']);
     }
 
-    private function mapStreams($data) {
+    private function mapStreams(array $data) {
         $streams = new StreamCollection();
 
         foreach ($data['streams'] as $properties) {
