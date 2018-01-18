@@ -11,43 +11,44 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
-class WatermarkFilter implements VideoFilterInterface
-{
-    /** @var string */
+class WatermarkFilter implements VideoFilterInterface {
+
+    use TPriorityFilter;
+
+    /**
+     * @var string
+     */
     private $watermarkPath;
-    /** @var array */
+
+    /**
+     * @var array
+     */
     private $coordinates;
-    /** @var integer */
+
+    /**
+     * @var integer
+     */
     private $priority;
 
-    public function __construct($watermarkPath, array $coordinates = [], $priority = 0)
-    {
+    public function __construct($watermarkPath, array $coordinates = [], int $priority = 0) {
         if (!file_exists($watermarkPath)) {
             throw new InvalidArgumentException(sprintf('File %s does not exist', $watermarkPath));
         }
 
         $this->watermarkPath = $watermarkPath;
         $this->coordinates = $coordinates;
-        $this->priority = $priority;
+        $this->setPriority($priority);
     }
 
     /**
      * @inheritDoc
      */
-    public function getPriority()
-    {
-        return $this->priority;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function apply(Video $video, VideoInterface $format)
-    {
+    public function apply(Video $video, VideoInterface $format): array {
         $position = isset($this->coordinates['position']) ? $this->coordinates['position'] : 'absolute';
 
         switch ($position) {

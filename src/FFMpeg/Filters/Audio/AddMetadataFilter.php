@@ -48,17 +48,17 @@ class AddMetadataFilter implements AudioFilterInterface {
         $metadata = [];
 
         if(isset($meta["artwork"])) {
-            $metadata[] = "-i";
+            $metadata[] = '-i';
             $metadata[] = $meta['artwork'];
-            $metadata[] = "-map";
-            $metadata[] = "0";
-            $metadata[] = "-map";
-            $metadata[] = "1";
+            $metadata[] = '-map';
+            $metadata[] = '0';
+            $metadata[] = '-map';
+            $metadata[] = '1';
             unset($meta['artwork']);
         }
 
         foreach ($meta as $k => $v) {
-            $metadata[] = "-metadata";
+            $metadata[] = '-metadata';
             $metadata[] = "{$k}={$v}";
         }
 

@@ -17,21 +17,21 @@ interface AudioInterface extends FormatInterface {
      *
      * @return int
      */
-    public function getAudioKiloBitrate();
+    public function getAudioKiloBitrate(): int;
 
     /**
      * Gets the audio channels value.
      *
-     * @return int
+     * @return int|null
      */
-    public function getAudioChannels();
+    public function getAudioChannels(): ?int;
 
     /**
      * Returns the audio codec.
      *
      * @return string
      */
-    public function getAudioCodec();
+    public function getAudioCodec(): string;
 
     /**
      * Returns the list of available audio codecs for this format.

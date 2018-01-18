@@ -14,10 +14,22 @@ namespace FFMpeg\Format\Video;
 /**
  * The Ogg video format
  */
-class Ogg extends DefaultVideo
-{
-    public function __construct($audioCodec = 'libvorbis', $videoCodec = 'libtheora')
-    {
+class Ogg extends DefaultVideo {
+
+    /**
+     * @inheritDoc
+     */
+    protected $audioCodec = 'libvorbis';
+
+    /**
+     * @inheritDoc
+     */
+    protected $videoCodec = 'libtheora';
+
+    /**
+     * @deprecated 1.0.0 use setters directly
+     */
+    public function __construct(string $audioCodec = 'libvorbis', string $videoCodec = 'libtheora') {
         $this
             ->setAudioCodec($audioCodec)
             ->setVideoCodec($videoCodec);
@@ -26,24 +38,22 @@ class Ogg extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function supportBFrames()
-    {
+    public function supportBFrames(): bool {
         return true;
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
-    {
-        return array('libvorbis');
+    public function getAvailableAudioCodecs(): array {
+        return ['libvorbis'];
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableVideoCodecs()
-    {
-        return array('libtheora');
+    public function getAvailableVideoCodecs(): array {
+        return ['libtheora'];
     }
+
 }

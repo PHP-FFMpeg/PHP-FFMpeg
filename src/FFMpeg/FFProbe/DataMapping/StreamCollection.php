@@ -67,7 +67,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      *
      * @return Stream|null
      */
-    public function first() {
+    public function first(): ?Stream {
         $stream = reset($this->streams);
 
         return $stream ?: null;
@@ -79,7 +79,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      * @param   Stream  $stream
      * @return StreamCollection
      */
-    public function add(Stream $stream) {
+    public function add(Stream $stream): StreamCollection {
         $this->streams[] = $stream;
 
         // clear cache
@@ -94,7 +94,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
      * @return StreamCollection
      * @since 1.0.0
      */
-    public function unique() {
+    public function unique(): StreamCollection {
         if($this->uniqueStreams === null) {
             $this->uniqueStreams = [];
 

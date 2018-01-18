@@ -19,21 +19,31 @@ use FFMpeg\Exception\RuntimeException;
 /**
  * @author Robert Gruendler <r.gruendler@gmail.com>
  */
-abstract class AbstractProgressListener extends EventEmitter implements ListenerInterface
-{
-    /** @var integer */
+abstract class AbstractProgressListener extends EventEmitter implements ListenerInterface {
+
+    /**
+     * @var int
+     */
     private $duration;
 
-    /** @var integer */
+    /**
+     * @var int
+     */
     private $totalSize;
 
-    /** @var integer */
+    /**
+     * @var int
+     */
     private $currentSize;
 
-    /** @var integer */
+    /**
+     * @var int
+     */
     private $currentTime;
 
-    /** @var double */
+    /**
+     * @var float
+     */
     private $lastOutput = null;
 
     /** @var FFProbe */
@@ -42,46 +52,44 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /** @var string */
     private $pathfile;
 
-    /** @var Boolean */
+    /** @var bool */
     private $initialized = false;
 
-    /** @var integer */
+    /** @var int */
     private $currentPass;
 
-    /** @var integer */
+    /** @var int */
     private $totalPass;
 
     /**
      * Transcoding rate in kb/s
      *
-     * @var integer
+     * @var int
      */
     private $rate;
 
     /**
      * Percentage of transcoding progress (0 - 100)
      *
-     * @var integer
+     * @var int
      */
     private $percent = 0;
 
     /**
      * Time remaining (seconds)
      *
-     * @var integer
+     * @var int
      */
     private $remaining = null;
 
     /**
-     * @param FFProbe $ffprobe
-     * @param string  $pathfile
-     * @param integer $currentPass The cureent pass number
-     * @param integer $totalPass   The total number of passes
-     *
+     * @param   FFProbe   $ffprobe
+     * @param   string    $pathfile
+     * @param   integer   $currentPass  The cureent pass number
+     * @param   integer   $totalPasses   The total number of passes
      * @throws RuntimeException
      */
-    public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass)
-    {
+    public function __construct(FFProbe $ffprobe, string $pathfile, int $currentPass, int $totalPasses) {
         $this->ffprobe = $ffprobe;
         $this->pathfile = $pathfile;
         $this->currentPass = $currentPass;
@@ -91,48 +99,42 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return FFProbe
      */
-    public function getFFProbe()
-    {
+    public function getFFProbe(): FFProbe {
         return $this->ffprobe;
     }
 
     /**
      * @return string
      */
-    public function getPathfile()
-    {
+    public function getPathfile(): string {
         return $this->pathfile;
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getCurrentPass()
-    {
+    public function getCurrentPass(): int {
         return $this->currentPass;
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getTotalPass()
-    {
+    public function getTotalPass(): int {
         return $this->totalPass;
     }
 
     /**
      * @return int
      */
-    public function getCurrentTime()
-    {
+    public function getCurrentTime(): int {
         return $this->currentTime;
     }
 
     /**
      * @inheritDoc
      */
-    public function handle($type, $data)
-    {
+    public function handle($type, $data) {
         if (null !== $progress = $this->parseProgress($data)) {
             $this->emit('progress', array_values($progress));
         }
@@ -141,29 +143,29 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @inheritDoc
      */
-    public function forwardedEvents()
-    {
+    public function forwardedEvents(): array {
         return [];
     }
 
     /**
      * Get the regex pattern to match a ffmpeg stderr status line
+     *
+     * @return string
      */
-    abstract protected function getPattern();
+    abstract protected function getPattern(): string;
 
     /**
      * @param string $progress A ffmpeg stderr progress output
      *
-     * @return array the progressinfo array or null if there's no progress available yet.
+     * @return array|null the progressinfo array or null if there's no progress available yet.
      */
-    private function parseProgress($progress)
-    {
+    private function parseProgress($progress): ?array {
         if (!$this->initialized) {
             $this->initialize();
         }
 
         if (null === $this->totalSize || null === $this->duration) {
-            return;
+            return null;
         }
 
         $matches = [];
@@ -174,7 +176,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
         $currentDuration = $this->convertDuration($matches[2]);
         $currentTime = microtime(true);
-        $currentSize = trim(str_replace('kb', '', strtolower(($matches[1]))));
+        $currentSize = trim(str_replace('kb', '', strtolower($matches[1])));
         $percent = max(0, min(1, $currentDuration / $this->duration));
 
         if ($this->lastOutput !== null) {
@@ -208,12 +210,10 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
-     *
-     * @param  string $rawDuration in the format 00:00:00.00
-     * @return number
+     * @param string $rawDuration in the format 00:00:00.00
+     * @return int
      */
-    private function convertDuration($rawDuration)
-    {
+    private function convertDuration(string $rawDuration): int {
         $ar = array_reverse(explode(":", $rawDuration));
         $duration = floatval($ar[0]);
         if (!empty($ar[1])) {
@@ -227,30 +227,28 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    private function getProgressInfo()
-    {
-        if ($this->remaining === null) {
+    private function getProgressInfo(): ?array {
+        if($this->remaining === null) {
             return null;
         }
 
-        return array(
+        return [
             'percent'   => $this->percent,
             'remaining' => $this->remaining,
             'rate'      => $this->rate
-        );
+        ];
     }
 
-    private function initialize()
-    {
+    private function initialize(): void {
         try {
             $format = $this->ffprobe->format($this->pathfile);
         } catch (RuntimeException $e) {
             return;
         }
 
-        if (false === $format->has('size') || false === $format->has('duration')) {
+        if($format->has('size') === false || $format->has('duration') === false) {
             return;
         }
 

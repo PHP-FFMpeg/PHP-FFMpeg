@@ -14,9 +14,22 @@ namespace FFMpeg\Format\Video;
 /**
  * The WebM video format
  */
-class WebM extends DefaultVideo
-{
-    public function __construct($audioCodec = 'libvorbis', $videoCodec = 'libvpx')
+class WebM extends DefaultVideo {
+
+    /**
+     * @inheritDoc
+     */
+    protected $audioCodec = 'libvorbis';
+
+    /**
+     * @inheritDoc
+     */
+    protected $videoCodec = 'libvpx';
+
+    /**
+     * @deprecated 1.0.0 use setters directly
+     */
+    public function __construct(string $audioCodec = 'libvorbis', string $videoCodec = 'libvpx')
     {
         $this
             ->setAudioCodec($audioCodec)
@@ -26,32 +39,28 @@ class WebM extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function supportBFrames()
-    {
+    public function supportBFrames(): bool {
         return true;
     }
 
     /**
      * @inheritDoc
      */
-    public function getExtraParams()
-    {
-        return array('-f', 'webm');
+    public function getExtraParams(): array {
+        return ['-f', 'webm'];
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
-    {
-        return array('libvorbis');
+    public function getAvailableAudioCodecs(): array {
+        return ['libvorbis'];
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableVideoCodecs()
-    {
-        return array('libvpx', 'libvpx-vp9');
+    public function getAvailableVideoCodecs(): array {
+        return ['libvpx', 'libvpx-vp9'];
     }
 }

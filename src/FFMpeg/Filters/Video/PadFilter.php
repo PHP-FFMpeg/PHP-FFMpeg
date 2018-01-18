@@ -11,44 +11,42 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 
-class PadFilter implements VideoFilterInterface
-{
-    /** @var Dimension */
-    private $dimension;
-    /** @var integer */
-    private $priority;
+class PadFilter implements VideoFilterInterface {
 
-    public function __construct(Dimension $dimension, $priority = 0)
-    {
-        $this->dimension = $dimension;
-        $this->priority = $priority;
-    }
+    use TPriorityFilter;
 
     /**
-     * @inheritDoc
+     * @var Dimension
      */
-    public function getPriority()
-    {
-        return $this->priority;
+    private $dimension;
+
+    /**
+     * @var integer
+     */
+    private $priority;
+
+    public function __construct(Dimension $dimension, int $priority = 0) {
+        $this->dimension = $dimension;
+
+        $this->setPriority($priority);
     }
 
     /**
      * @return Dimension
      */
-    public function getDimension()
-    {
+    public function getDimension(): Dimension {
         return $this->dimension;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format)
-    {
+    public function apply(Video $video, VideoInterface $format): array {
         $commands = [];
 
         $commands[] = '-vf';

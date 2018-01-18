@@ -19,6 +19,7 @@ use FFMpeg\Coordinate\Dimension;
  * Represents stream' data
  */
 class Stream extends AbstractData {
+
     /**
      * Returns true if the stream is an audio stream.
      *
@@ -107,4 +108,5 @@ class Stream extends AbstractData {
 
         return null;
     }
+
 }

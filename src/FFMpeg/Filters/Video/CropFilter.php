@@ -12,38 +12,39 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\Point;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
-class CropFilter implements VideoFilterInterface
-{
-    /** @var integer */
+class CropFilter implements VideoFilterInterface {
+
+    use TPriorityFilter;
+
+    /**
+     * @var integer
+     */
     protected $priority;
-    /** @var Dimension */
+
+    /**
+     * @var Dimension
+     */
     protected $dimension;
-    /** @var Point */
+
+    /**
+     * @var Point
+     */
     protected $point;
 
-    public function __construct(Point $point, Dimension $dimension, $priority = 0)
-    {
-        $this->priority = $priority;
+    public function __construct(Point $point, Dimension $dimension, int $priority = 0) {
         $this->dimension = $dimension;
         $this->point = $point;
+        $this->setPriority($priority);
     }
 
     /**
      * @inheritDoc
      */
-    public function getPriority()
-    {
-        return $this->priority;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function apply(Video $video, VideoInterface $format)
-    {
+    public function apply(Video $video, VideoInterface $format): array {
         foreach ($video->getStreams()->videos() as $stream) {
             if ($stream->has('width') && $stream->has('height')) {
                 $stream->set('width', $this->dimension->getWidth());
