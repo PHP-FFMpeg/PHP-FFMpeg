@@ -28,7 +28,8 @@
         {
             "name": "Jens Hausdorf",
             "email": "hello@jens-hausdorf.de",
-            "homepage": "https://jens-hausdorf.de"
+            "homepage": "https://jens-hausdorf.de",
+            "role": "Maintainer"
         }
     ],
     "require": {

@@ -56,22 +56,21 @@ class FFProbeTest extends TestCase
 
     public function provideDataWhitoutCache()
     {
-        $stream = $this->getStreamMock();
+        $stream = $this->getStreamCollectionMock();
         $format = $this->getFormatMock();
 
         return [
-            [$stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json'), false],
-            [$format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json'), false],
-            [$stream, 'streams', array('-show_streams'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams'), true],
-            [$format, 'format', array('-show_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format'), true],
+            [$stream, 'streams',['-show_streams', '-print_format'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams', '-print_format', 'json'], false],
+            [$format, 'format', ['-show_format', '-print_format'], FFProbe::TYPE_FORMAT, [__FILE__, '-show_format', '-print_format', 'json'], false],
+            [$stream, 'streams', ['-show_streams'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams'], true],
+            [$format, 'format', ['-show_format'], FFProbe::TYPE_FORMAT, [__FILE__, '-show_format'], true],
         ];
     }
 
     /**
      * @dataProvider provideDataWhitoutCache
      */
-    public function testProbeWithoutCache($output, $method, $commands, $type, $caughtCommands, $isRaw)
-    {
+    public function testProbeWithoutCache($output, $method, $commands, $type, $caughtCommands, $isRaw) {
         $pathfile = __FILE__;
         $data = ['key' => 'value'];
         $rawData = 'raw data';
@@ -120,17 +119,16 @@ class FFProbeTest extends TestCase
             ->setFFProbeDriver($driver)
             ->setParser($parser);
 
-        $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
+        $this->assertEquals($output, call_user_func([$ffprobe, $method], $pathfile));
     }
 
-    public function provideDataForInvalidJson()
-    {
+    public function provideDataForInvalidJson() {
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
 
         return [
-            array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json')),
-            array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json')),
+            [$stream, 'streams', ['-show_streams', '-print_format'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams', '-print_format', 'json']],
+            [$format, 'format', ['-show_format', '-print_format'], FFProbe::TYPE_FORMAT, [__FILE__, '-show_format', '-print_format', 'json']],
         ];
     }
 

@@ -93,7 +93,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
         $this->ffprobe = $ffprobe;
         $this->pathfile = $pathfile;
         $this->currentPass = $currentPass;
-        $this->totalPass = $totalPass;
+        $this->totalPass = $totalPasses;
     }
 
     /**

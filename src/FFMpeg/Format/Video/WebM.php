@@ -29,8 +29,7 @@ class WebM extends DefaultVideo {
     /**
      * @deprecated 1.0.0 use setters directly
      */
-    public function __construct(string $audioCodec = 'libvorbis', string $videoCodec = 'libvpx')
-    {
+    public function __construct(string $audioCodec = 'libvorbis', string $videoCodec = 'libvpx') {
         $this
             ->setAudioCodec($audioCodec)
             ->setVideoCodec($videoCodec);
@@ -63,4 +62,5 @@ class WebM extends DefaultVideo {
     public function getAvailableVideoCodecs(): array {
         return ['libvpx', 'libvpx-vp9'];
     }
+
 }
