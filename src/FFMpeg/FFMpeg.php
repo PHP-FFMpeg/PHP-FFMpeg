@@ -83,18 +83,20 @@ class FFMpeg {
     /**
      * Opens a file in order to be processed.
      *
-     * @param   string  $pathfile   A pathfile
+     * @param   string  $pathfile   A path to a file
      * @return Audio|Video
      * @throws InvalidArgumentException
      */
-    public function open($pathfile): Audio {
-        if(null === ($streams = $this->ffprobe->streams($pathfile))) {
+    public function open(string $pathfile): Audio {
+        if(($streams = $this->ffprobe->streams($pathfile)) === null) {
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
 
-        if(count($streams->getVideoStreams())) {
+        if(count($streams->getVideoStreams()) > 1) {
+            // media is more likely a video file
             return new Video($pathfile, $this->driver, $this->ffprobe);
-        } elseif(count($streams->getAudioStreams())) {
+        } else if(count($streams->getAudioStreams()) > 1) {
+            // media is more likely an audio file
             return new Audio($pathfile, $this->driver, $this->ffprobe);
         }
 
@@ -110,7 +112,7 @@ class FFMpeg {
      * @return FFMpeg
      */
     public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null): FFMpeg {
-        if(null === $probe) {
+        if($probe === null) {
             $probe = FFProbe::create($configuration, $logger, null);
         }
 

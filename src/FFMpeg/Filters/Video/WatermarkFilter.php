@@ -16,6 +16,8 @@ use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
+// TODO: Clean up and document everything
+
 class WatermarkFilter implements VideoFilterInterface {
 
     use TPriorityFilter;
@@ -55,7 +57,7 @@ class WatermarkFilter implements VideoFilterInterface {
             case 'relative':
                 if (isset($this->coordinates['top'])) {
                     $y = $this->coordinates['top'];
-                } elseif (isset($this->coordinates['bottom'])) {
+                } else if (isset($this->coordinates['bottom'])) {
                     $y = sprintf('main_h - %d - overlay_h', $this->coordinates['bottom']);
                 } else {
                     $y = 0;
@@ -63,7 +65,7 @@ class WatermarkFilter implements VideoFilterInterface {
 
                 if (isset($this->coordinates['left'])) {
                     $x = $this->coordinates['left'];
-                } elseif (isset($this->coordinates['right'])) {
+                } else if (isset($this->coordinates['right'])) {
                     $x = sprintf('main_w - %d - overlay_w', $this->coordinates['right']);
                 } else {
                     $x = 0;
@@ -76,6 +78,7 @@ class WatermarkFilter implements VideoFilterInterface {
                 break;
         }
 
-        return array('-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s [out]', $this->watermarkPath, $x, $y));
+        return ['-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s [out]', $this->watermarkPath, $x, $y)];
     }
+
 }

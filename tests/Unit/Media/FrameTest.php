@@ -61,7 +61,7 @@ class FrameTest extends AbstractMediaTestCase
 
         $pathfile = '/target/destination';
 
-        array_push($commands, $pathfile);
+        $commands[] = $pathfile;
 
         $driver->expects($this->once())
             ->method('command')
@@ -79,29 +79,41 @@ class FrameTest extends AbstractMediaTestCase
 
     public function provideSaveOptions()
     {
-        return array(
-            array(false, false, array(
-                '-y', '-ss', 'timecode',
-                '-i', __FILE__,
-                '-vframes', '1',
-                '-f', 'image2')
-            ),
-            array(true, false, array(
-                '-y', '-i', __FILE__,
-                '-vframes', '1', '-ss', 'timecode',
-                '-f', 'image2')
-            ),
-            array(false, true, array(
+        return [
+            [
+                false, false,
+                [
                     '-y', '-ss', 'timecode',
                     '-i', __FILE__,
                     '-vframes', '1',
-                    '-f', 'image2pipe', '-')
-            ),
-            array(true, true, array(
+                    '-f', 'image2'
+                ]
+            ],
+            [
+                true, false,
+                [
                     '-y', '-i', __FILE__,
                     '-vframes', '1', '-ss', 'timecode',
-                    '-f', 'image2pipe', '-')
-            )
-        );
+                    '-f', 'image2'
+                ]
+            ],
+            [
+                false, true,
+                [
+                    '-y', '-ss', 'timecode',
+                    '-i', __FILE__,
+                    '-vframes', '1',
+                    '-f', 'image2pipe', '-'
+                ]
+            ],
+            [
+                true, true,
+                [
+                    '-y', '-i', __FILE__,
+                    '-vframes', '1', '-ss', 'timecode',
+                    '-f', 'image2pipe', '-'
+                ]
+            ]
+        ];
     }
 }

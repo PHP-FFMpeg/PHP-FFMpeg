@@ -15,6 +15,7 @@ use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
 
 class OutputParser implements OutputParserInterface {
+
     /**
      * @inheritDoc
      */
@@ -106,7 +107,7 @@ class OutputParser implements OutputParserInterface {
                     $ret[$n]['tags'] = [];
                 }
                 $ret[$n]['tags'][substr($key, 4)] = $value;
-            } elseif (0 === strpos($key, 'DISPOSITION:')) {
+            } else if (0 === strpos($key, 'DISPOSITION:')) {
                 if (!isset($ret[$n]['disposition'])) {
                     $ret[$n]['disposition'] = [];
                 }
@@ -118,4 +119,5 @@ class OutputParser implements OutputParserInterface {
 
         return ['streams' => $ret];
     }
+
 }

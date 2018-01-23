@@ -16,9 +16,16 @@ use FFMpeg\Exception\InvalidArgumentException;
 /**
  * Dimension object, used for manipulating width and height couples
  */
-class Dimension
-{
+class Dimension {
+
+    /**
+     * @var int
+     */
     private $width;
+
+    /**
+     * @var int
+     */
     private $height;
 
     /**
@@ -27,8 +34,7 @@ class Dimension
      *
      * @throws InvalidArgumentException when one of the parameteres is invalid (not positive)
      */
-    public function __construct(int $width, int $height)
-    {
+    public function __construct(int $width, int $height) {
         if ($width <= 0 || $height <= 0) {
             throw new InvalidArgumentException('Both width and height should be positive numbers!');
         }
@@ -62,7 +68,8 @@ class Dimension
      *
      * @return AspectRatio
      */
-    public function getRatio($forceStandards = true): AspectRatio {
+    public function getRatio(bool $forceStandards = true): AspectRatio {
         return AspectRatio::create($this, $forceStandards);
     }
+
 }

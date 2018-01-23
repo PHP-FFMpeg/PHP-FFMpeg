@@ -12,8 +12,8 @@ class ConcatTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $concat = new Concat(array(__FILE__, __FILE__), $driver, $ffprobe);
-        $this->assertSame(array(__FILE__, __FILE__), $concat->getSources());
+        $concat = new Concat([__FILE__, __FILE__], $driver, $ffprobe);
+        $this->assertSame([__FILE__, __FILE__], $concat->getSources());
     }
 
     public function testFiltersReturnFilters()
@@ -21,8 +21,8 @@ class ConcatTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $concat = new Concat(array(__FILE__, __FILE__), $driver, $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Filters\Concat\ConcatFilters', $concat->filters());
+        $concat = new Concat([__FILE__, __FILE__], $driver, $ffprobe);
+        $this->assertInstanceOf(\FFMpeg\Filters\Concat\ConcatFilters::class, $concat->filters());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -40,7 +40,7 @@ class ConcatTest extends AbstractMediaTestCase
             ->method('add')
             ->with($filter);
 
-        $concat = new Concat(array(__FILE__, __FILE__), $driver, $ffprobe);
+        $concat = new Concat([__FILE__, __FILE__], $driver, $ffprobe);
         $concat->setFiltersCollection($filters);
         $concat->addFilter($filter);
     }
@@ -55,14 +55,14 @@ class ConcatTest extends AbstractMediaTestCase
 
         $pathfile = '/target/destination';
 
-        array_push($commands, $pathfile);
+        $commands[] = $pathfile;
 
         $driver->expects($this->exactly(1))
             ->method('command')
             ->with($this->isType('array'), false, $this->anything())
             ->will($this->returnCallback(function ($commands, $errors, $listeners) {}));
 
-        $concat = new Concat(array(__FILE__, 'concat-2.mp4'), $driver, $ffprobe);
+        $concat = new Concat([__FILE__, 'concat-2.mp4'], $driver, $ffprobe);
         $concat->saveFromSameCodecs($pathfile, $streamCopy);
 
         $this->assertEquals('-f', $commands[0]);
@@ -70,50 +70,48 @@ class ConcatTest extends AbstractMediaTestCase
         $this->assertEquals('-safe', $commands[2]);
         $this->assertEquals('0', $commands[3]);
         $this->assertEquals('-i', $commands[4]);
-        if(isset($commands[6]) && (strcmp($commands[6], "-c") == 0)) {
+        if(isset($commands[6]) && (strcmp($commands[6], "-c") === 0)) {
             $this->assertEquals('-c', $commands[6]);
             $this->assertEquals('copy', $commands[7]);
         }
     }
 
-    public function provideSaveFromSameCodecsOptions()
-    {
+    public function provideSaveFromSameCodecsOptions() {
         $fs = FsManager::create();
         $tmpFile = $fs->createTemporaryFile('ffmpeg-concat');
 
-        return array(
-            array(
-                TRUE,
-                array(
+        return [
+            [
+                true,
+                [
                     '-f', 'concat',
                     '-safe', '0',
                     '-i', $tmpFile,
                     '-c', 'copy'
-                ),
-            ),
-            array(
-                FALSE,
-                array(
+                ],
+            ],
+            [
+                false,
+                [
                     '-f', 'concat',
                     '-safe', '0',
                     '-i', $tmpFile
-                )
-            ),
-        );
+                ]
+            ],
+        ];
     }
 
     /**
      * @dataProvider provideSaveFromDifferentCodecsOptions
      */
-    public function testSaveFromDifferentCodecs($commands)
-    {
+    public function testSaveFromDifferentCodecs($commands) {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
         $format = $this->getFormatInterfaceMock();
 
         $pathfile = '/target/destination';
 
-        array_push($commands, $pathfile);
+        $commands[] = $pathfile;
 
         $configuration = $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
 
@@ -125,23 +123,23 @@ class ConcatTest extends AbstractMediaTestCase
             ->method('command')
             ->with($commands);
 
-        $concat = new Concat(array(__FILE__, 'concat-2.mp4'), $driver, $ffprobe);
+        $concat = new Concat([__FILE__, 'concat-2.mp4'], $driver, $ffprobe);
         $this->assertSame($concat, $concat->saveFromDifferentCodecs($format, $pathfile));
     }
 
     public function provideSaveFromDifferentCodecsOptions()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     '-i', __FILE__,
                     '-i', 'concat-2.mp4',
                     '-filter_complex',
                     '[0:v:0] [0:a:0] [1:v:0] [1:a:0] concat=n=2:v=1:a=1 [v] [a]',
                     '-map', '[v]',
                     '-map', '[a]'
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

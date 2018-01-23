@@ -19,15 +19,19 @@ use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\TimeCode;
 
-class Frame extends AbstractMediaType
-{
-    /** @var TimeCode */
+class Frame extends AbstractMediaType {
+
+    /**
+     * @var TimeCode
+     */
     private $timecode;
-    /** @var Video */
+
+    /**
+     * @var Video
+     */
     private $video;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode)
-    {
+    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode) {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;
         $this->video = $video;
@@ -38,7 +42,7 @@ class Frame extends AbstractMediaType
      *
      * @return Video
      */
-    public function getVideo() {
+    public function getVideo(): Video {
         return $this->video;
     }
 
@@ -47,7 +51,7 @@ class Frame extends AbstractMediaType
      *
      * @return FrameFilters
      */
-    public function filters() {
+    public function filters(): FrameFilters {
         return new FrameFilters($this);
     }
 
@@ -81,36 +85,36 @@ class Frame extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function save($pathfile, $accurate = false, $returnBase64 = false) {
+    public function save($pathfile, $accurate = false, $returnBase64 = false): Frame {
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
         $outputFormat = $returnBase64 ? "image2pipe" : "image2";
         if (!$accurate) {
-            $commands = array(
+            $commands = [
                 '-y', '-ss', (string) $this->timecode,
                 '-i', $this->pathfile,
                 '-vframes', '1',
                 '-f', $outputFormat
-            );
+            ];
         } else {
-            $commands = array(
+            $commands = [
                 '-y', '-i', $this->pathfile,
                 '-vframes', '1', '-ss', (string) $this->timecode,
                 '-f', $outputFormat
-            );
+            ];
         }
 
         if($returnBase64) {
-            array_push($commands, "-");
+            $commands[] = '-';
         }
 
         foreach ($this->filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        $commands = array_merge($commands, array($pathfile));
+        $commands = array_merge($commands, [$pathfile]);
 
         try {
             if(!$returnBase64) {
@@ -125,4 +129,5 @@ class Frame extends AbstractMediaType
             throw new RuntimeException('Unable to save frame', $e->getCode(), $e);
         }
     }
+
 }

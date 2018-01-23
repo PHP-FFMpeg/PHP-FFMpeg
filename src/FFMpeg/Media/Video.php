@@ -17,6 +17,7 @@ use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Filters\Video\VideoFilterInterface;
 use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\FormatInterface;
@@ -53,7 +54,11 @@ class Video extends Audio {
      *
      * @return Video
      */
-    public function addFilter(FilterInterface $filter) {
+    public function addFilter(FilterInterface $filter): MediaTypeInterface {
+        if(!($filter instanceof VideoFilterInterface)) {
+            throw new InvalidArgumentException('Video only accepts VideoFilterInterface filters');
+        }
+
         $this->filters->add($filter);
 
         return $this;

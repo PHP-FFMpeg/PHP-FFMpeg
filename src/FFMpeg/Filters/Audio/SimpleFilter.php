@@ -15,6 +15,16 @@ use FFMpeg\Media\Audio;
 use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 
+
+/**
+ * Filter useful for setting custom arguments
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg\Filters
+ * @subpackage Audio
+ */
 class SimpleFilter implements AudioFilterInterface {
 
     use TPriorityFilter;
@@ -40,4 +50,5 @@ class SimpleFilter implements AudioFilterInterface {
     public function apply(Audio $audio, AudioInterface $format): array {
         return $this->params;
     }
+
 }

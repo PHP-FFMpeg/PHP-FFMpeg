@@ -46,7 +46,7 @@ class WaveformTest extends AbstractMediaTestCase
 
         $pathfile = '/tests/files/Audio.mp3';
 
-        array_push($commands, $pathfile);
+        $commands[] = $pathfile;
 
         $driver->expects($this->once())
             ->method('command')
@@ -58,14 +58,14 @@ class WaveformTest extends AbstractMediaTestCase
 
     public function provideSaveOptions()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     '-i', NULL, '-filter_complex',
                     'showwavespic=s=640x120',
                     '-frames:v', '1',
-                ),
-            ),
-        );
+                ]
+            ]
+        ];
     }
 }

@@ -17,6 +17,7 @@ use FFMpeg\Exception\InvalidArgumentException;
  * Helper class for dealing with framerates
  */
 class FrameRate {
+
     /**
      * @var float
      */
@@ -51,4 +52,5 @@ class FrameRate {
     public function getValue(): float {
         return $this->value;
     }
+
 }

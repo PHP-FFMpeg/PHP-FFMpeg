@@ -11,8 +11,8 @@
 
 namespace FFMpeg\Media;
 
-interface MediaTypeInterface
-{
+interface MediaTypeInterface {
+
     /**
      * Returns the available filters.
      */
@@ -21,5 +21,6 @@ interface MediaTypeInterface
     /**
      * @return string
      */
-    public function getPathfile();
+    public function getPathfile(): string;
+
 }

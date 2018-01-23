@@ -71,11 +71,11 @@ class TimeCode {
 
         if (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+\.[0-9]+$/', $timecode)) {
             list($days, $hours, $minutes, $seconds, $frames) = sscanf($timecode, '%d:%d:%d:%d.%d');
-        } elseif (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+:[0-9]+$/', $timecode)) {
+        } else if (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+:[0-9]+$/', $timecode)) {
             list($days, $hours, $minutes, $seconds, $frames) = sscanf($timecode, '%d:%d:%d:%d:%d');
-        } elseif (preg_match('/^[0-9]+:[0-9]+:[0-9]+\.[0-9]+$/', $timecode)) {
+        } else if (preg_match('/^[0-9]+:[0-9]+:[0-9]+\.[0-9]+$/', $timecode)) {
             list($hours, $minutes, $seconds, $frames) = sscanf($timecode, '%d:%d:%d.%s');
-        } elseif (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+$/', $timecode)) {
+        } else if (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+$/', $timecode)) {
             list($hours, $minutes, $seconds, $frames) = sscanf($timecode, '%d:%d:%d:%s');
         } else {
             throw new InvalidArgumentException(sprintf('Unable to parse timecode %s', $timecode));
@@ -92,7 +92,7 @@ class TimeCode {
      * @param   float   $quantity
      * @return TimeCode
      */
-    public static function fromSeconds($quantity): TimeCode {
+    public static function fromSeconds(float $quantity): TimeCode {
         $minutes = $hours = $frames = 0;
 
         $frames = round(100 * ($quantity - floor($quantity)));

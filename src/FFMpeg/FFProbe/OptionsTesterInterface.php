@@ -12,6 +12,7 @@
 namespace FFMpeg\FFProbe;
 
 interface OptionsTesterInterface {
+
     /**
      * Tells if the given option is supported by ffprobe.
      *
@@ -19,4 +20,5 @@ interface OptionsTesterInterface {
      * @return bool
      */
     public function has(string $optionName): bool;
+
 }

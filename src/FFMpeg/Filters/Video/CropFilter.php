@@ -45,7 +45,7 @@ class CropFilter implements VideoFilterInterface {
      * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format): array {
-        foreach ($video->getStreams()->videos() as $stream) {
+        foreach ($video->getStreams()->getVideoStreams() as $stream) {
             if ($stream->has('width') && $stream->has('height')) {
                 $stream->set('width', $this->dimension->getWidth());
                 $stream->set('height', $this->dimension->getHeight());

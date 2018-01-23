@@ -188,4 +188,5 @@ class StreamCollection implements \Countable, \IteratorAggregate {
     public function getIterator(): \ArrayIterator {
         return new \ArrayIterator($this->streams);
     }
+
 }

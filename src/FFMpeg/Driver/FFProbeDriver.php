@@ -22,6 +22,7 @@ use Psr\Log\LoggerInterface;
  * Driver responsible for FFProbe
  */
 class FFProbeDriver extends AbstractBinary {
+
     /**
      * @inheritDoc
      */
@@ -50,4 +51,5 @@ class FFProbeDriver extends AbstractBinary {
             throw new ExecutableNotFoundException('Unable to load FFProbe', $e->getCode(), $e);
         }
     }
+
 }

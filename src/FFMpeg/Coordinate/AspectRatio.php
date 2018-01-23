@@ -289,4 +289,5 @@ class AspectRatio {
 
         return $previous;
     }
+
 }

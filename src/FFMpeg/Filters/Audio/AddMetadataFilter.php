@@ -16,6 +16,15 @@ use FFMpeg\Filters\Audio\AudioFilterInterface;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
+/**
+ * Useful for adding metadata to an audio stream(for example, add cover image)
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg\Filters
+ * @subpackage Audio
+ */
 class AddMetadataFilter implements AudioFilterInterface {
 
     use TPriorityFilter;
@@ -47,6 +56,7 @@ class AddMetadataFilter implements AudioFilterInterface {
 
         $metadata = [];
 
+        // handle artwork image
         if(isset($meta["artwork"])) {
             $metadata[] = '-i';
             $metadata[] = $meta['artwork'];
@@ -64,4 +74,5 @@ class AddMetadataFilter implements AudioFilterInterface {
 
         return $metadata;
     }
+
 }

@@ -14,6 +14,9 @@ use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
+/**
+ * Custom filters prepended by `-vf`
+ */
 class CustomFilter implements VideoFilterInterface {
 
     use TPriorityFilter;
@@ -47,4 +50,5 @@ class CustomFilter implements VideoFilterInterface {
 
         return $commands;
     }
+
 }

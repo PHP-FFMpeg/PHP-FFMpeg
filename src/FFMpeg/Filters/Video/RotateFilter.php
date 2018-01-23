@@ -21,26 +21,41 @@ class RotateFilter implements VideoFilterInterface {
 
     use TPriorityFilter;
 
+    /**
+     * Rotates the video by 90°
+     */
     const ROTATE_90 = 'transpose=1';
+
+    /**
+     * Rotates the video by 180°
+     * (vertical and horizontal)
+     */
     const ROTATE_180 = 'hflip,vflip';
+
+    /**
+     * Rotates the video by 270°
+     */
     const ROTATE_270 = 'transpose=2';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $angle;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $priority;
 
-    public function __construct($angle, $priority = 0)
-    {
+    public function __construct(string $angle, int $priority = 0) {
         $this->setAngle($angle);
-        $this->priority = (int) $priority;
+        $this->setPriority($priority);
     }
 
     /**
-     * @return Dimension
+     * @return string
      */
-    public function getAngle()
-    {
+    public function getAngle(): string {
         return $this->angle;
     }
 
@@ -48,9 +63,10 @@ class RotateFilter implements VideoFilterInterface {
      * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format): array {
-        if (in_array($this->angle, [self::ROTATE_90, self::ROTATE_270], true)) {
-            foreach ($video->getStreams()->videos() as $stream) {
-                if ($stream->has('width') && $stream->has('height')) {
+        if(in_array($this->angle, [self::ROTATE_90, self::ROTATE_270])) {
+            foreach($video->getStreams()->getVideoStreams() as $stream) {
+                if($stream->has('width') && $stream->has('height')) {
+                    // swap height & width
                     $width = $stream->get('width');
                     $stream->set('width', $stream->get('height'));
                     $stream->set('height', $width);
@@ -58,11 +74,10 @@ class RotateFilter implements VideoFilterInterface {
             }
         }
 
-        return ['-vf', $this->angle, '-metadata:s:v:0', 'rotate=0'];
+        return ['-vf', $this->getAngle(), '-metadata:s:v:0', 'rotate=0'];
     }
 
-    private function setAngle($angle)
-    {
+    private function setAngle(string $angle): void {
         switch ($angle) {
             case self::ROTATE_90:
             case self::ROTATE_180:

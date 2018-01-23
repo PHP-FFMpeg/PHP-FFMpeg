@@ -26,7 +26,7 @@ class FrameRateFilter implements VideoFilterInterface {
     private $rate;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $gop;
 
@@ -35,7 +35,7 @@ class FrameRateFilter implements VideoFilterInterface {
      */
     private $priority;
 
-    public function __construct(FrameRate $rate, $gop, int $priority = 0) {
+    public function __construct(FrameRate $rate, ?int $gop = null, int $priority = 0) {
         $this->rate = $rate;
         $this->gop = $gop;
         $this->setPriority($priority);
@@ -54,9 +54,9 @@ class FrameRateFilter implements VideoFilterInterface {
      *
      * @see https://wikipedia.org/wiki/Group_of_pictures
      *
-     * @return int
+     * @return int|null
      */
-    public function getGOP(): int {
+    public function getGOP(): ?int {
         return $this->gop;
     }
 

@@ -35,17 +35,18 @@ class DisplayRatioFixerFilter implements FrameFilterInterface {
         $dimensions = null;
         $commands = [];
 
-        foreach ($frame->getVideo()->getStreams() as $stream) {
-            if ($stream->isVideo()) {
-                try {
-                    $dimensions = $stream->getDimensions();
-                    $commands[] = '-s';
-                    $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
-                    break;
-                } catch (RuntimeException $e) {}
+        foreach ($frame->getVideo()->getStreams()->getVideoStreams() as $stream) {
+            try {
+                $dimensions = $stream->getDimensions();
+                $commands[] = '-s';
+                $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
+                break;
+            } catch(RuntimeException $e) {
+                // ignore error when getting the dimensions
             }
         }
 
         return $commands;
     }
+
 }

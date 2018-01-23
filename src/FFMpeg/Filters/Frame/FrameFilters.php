@@ -20,8 +20,7 @@ class FrameFilters {
      */
     private $frame;
 
-    public function __construct(Frame $frame)
-    {
+    public function __construct(Frame $frame) {
         $this->frame = $frame;
     }
 
@@ -31,12 +30,12 @@ class FrameFilters {
      * In case the sample ratio and display ratio are different, image may be
      * anamorphozed. This filter fixes this by specifying the output size.
      *
-     * @return FrameFilters
+     * @return self
      */
-    public function fixDisplayRatio()
-    {
+    public function fixDisplayRatio(): self {
         $this->frame->addFilter(new DisplayRatioFixerFilter);
 
         return $this;
     }
+
 }

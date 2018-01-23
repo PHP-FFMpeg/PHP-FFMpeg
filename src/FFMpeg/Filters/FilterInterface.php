@@ -12,7 +12,7 @@
 namespace FFMpeg\Filters;
 
 /**
- * Default interface for filters
+ * Default interface for stream filters
  */
 interface FilterInterface {
 

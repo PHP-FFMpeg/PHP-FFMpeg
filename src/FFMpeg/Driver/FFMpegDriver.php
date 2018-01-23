@@ -22,6 +22,7 @@ use Psr\Log\LoggerInterface;
  * Driver responsible for FFMpeg
  */
 class FFMpegDriver extends AbstractBinary {
+
     /**
      * @inheritDoc
      */
@@ -53,4 +54,5 @@ class FFMpegDriver extends AbstractBinary {
             throw new ExecutableNotFoundException('Unable to load FFMpeg', $e->getCode(), $e);
         }
     }
+
 }

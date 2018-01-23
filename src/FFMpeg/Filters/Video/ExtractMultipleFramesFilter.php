@@ -76,14 +76,14 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface {
 
         try {
             // Get the duration of the video
-            foreach ($video->getStreams()->videos() as $stream) {
+            foreach ($video->getStreams()->getVideoStreams() as $stream) {
                 if ($stream->has('duration')) {
                     $duration = $stream->get('duration');
                 }
             }
 
             // Get the number of frames per second we have to extract.
-            if(preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== FALSE){
+            if(preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== false){
                 $operator = $matches[2];
 
                 switch($operator){
@@ -102,7 +102,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface {
 
             if($nbImages < 100)
                 $nbDigitsInFileNames = "02";
-            elseif($nbImages < 1000)
+            else if($nbImages < 1000)
                 $nbDigitsInFileNames = "03";
             else
                 $nbDigitsInFileNames = "06";
@@ -118,4 +118,5 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface {
 
         return $commands;
     }
+
 }

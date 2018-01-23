@@ -16,6 +16,15 @@ use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
+/**
+ * Clips the audio at a specific timestamp to an (optional) end
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg\Filters
+ * @subpackage Audio
+ */
 class AudioClipFilter implements AudioFilterInterface {
 
     use TPriorityFilter;
@@ -36,7 +45,7 @@ class AudioClipFilter implements AudioFilterInterface {
     private $priority;
 
 
-    public function __construct(TimeCode $start, TimeCode $duration = null, int $priority = 0) {
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, int $priority = 0) {
         $this->start = $start;
         $this->duration = $duration;
         $this->setPriority($priority);
@@ -66,6 +75,7 @@ class AudioClipFilter implements AudioFilterInterface {
     public function apply(Audio $audio, AudioInterface $format): array {
         $commands = ['-ss', (string) $this->start];
 
+        // add duration if given
         if($this->duration !== null) {
             $commands[] = '-t';
             $commands[] = (string) $this->duration;

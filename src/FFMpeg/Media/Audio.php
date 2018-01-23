@@ -21,26 +21,24 @@ use FFMpeg\Filters\Audio\AudioFilterInterface;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\ProgressableInterface;
 
-class Audio extends AbstractStreamableMedia
-{
+class Audio extends AbstractStreamableMedia {
+
     /**
      * @inheritDoc
      *
      * @return AudioFilters
      */
-    public function filters()
-    {
+    public function filters() {
         return new AudioFilters($this);
     }
 
     /**
      * @inheritDoc
      *
-     * @return Audio
+     * @return self
      */
-    public function addFilter(FilterInterface $filter)
-    {
-        if (!$filter instanceof AudioFilterInterface) {
+    public function addFilter(FilterInterface $filter): MediaTypeInterface {
+        if(!($filter instanceof AudioFilterInterface)) {
             throw new InvalidArgumentException('Audio only accepts AudioFilterInterface filters');
         }
 
@@ -104,10 +102,10 @@ class Audio extends AbstractStreamableMedia
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
         if (null !== $format->getAudioCodec()) {
-            $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+            $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
         }
 
         foreach ($filters as $filter) {
@@ -134,8 +132,8 @@ class Audio extends AbstractStreamableMedia
      * @param  integer $height
      * @return Waveform
      */
-    public function waveform($width = 640, $height = 120)
-    {
+    public function waveform($width = 640, $height = 120): Waveform {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height);
     }
+
 }

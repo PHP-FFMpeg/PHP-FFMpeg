@@ -34,7 +34,7 @@ class AudioProgressListenerTest extends TestCase
                 $phpunit->assertEquals($expectedPercent, $percent);
                 $phpunit->assertEquals($expectedRemaining, $remaining);
                 $phpunit->assertEquals($expectedRate, $rate);
-            } elseif (1 === $n) {
+            } else if (1 === $n) {
                 $phpunit->assertEquals($expectedPercent2, $percent);
                 $phpunit->assertEquals($expectedRemaining2, $remaining);
                 $phpunit->assertLessThan($expectedRate2 + 3, $rate);

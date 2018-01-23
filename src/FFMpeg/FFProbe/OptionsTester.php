@@ -62,7 +62,7 @@ class OptionsTester implements OptionsTesterInterface {
      *
      * @return string
      */
-    private function retrieveHelpOutput() {
+    private function retrieveHelpOutput(): string {
         if ($this->cache->has(static::HELP_OUTPUT_CACHE_ID)) {
             return $this->cache->get(static::HELP_OUTPUT_CACHE_ID);
         }
@@ -74,6 +74,8 @@ class OptionsTester implements OptionsTesterInterface {
         }
 
         $this->cache->set(static::HELP_OUTPUT_CACHE_ID, $output);
+
         return $output;
     }
+
 }

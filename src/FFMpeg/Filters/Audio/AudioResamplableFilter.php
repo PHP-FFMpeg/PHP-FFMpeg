@@ -15,6 +15,15 @@ use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
+/**
+ * Resamples the audio
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg\Filters
+ * @subpackage Audio
+ */
 class AudioResamplableFilter implements AudioFilterInterface {
 
     use TPriorityFilter;
@@ -47,4 +56,5 @@ class AudioResamplableFilter implements AudioFilterInterface {
     public function apply(Audio $audio, AudioInterface $format): array {
         return ['-ac', 2, '-ar', $this->rate];
     }
+
 }

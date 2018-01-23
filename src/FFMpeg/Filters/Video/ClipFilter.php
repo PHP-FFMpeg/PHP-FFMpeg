@@ -20,15 +20,22 @@ class ClipFilter implements VideoFilterInterface {
 
     use TPriorityFilter;
 
-    /** @var TimeCode */
+    /**
+     * @var TimeCode
+     */
     private $start;
-    /** @var TimeCode */
+
+    /**
+     * @var TimeCode
+     */
     private $duration;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $priority;
 
-    public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0)
-    {
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, $priority = 0) {
         $this->start = $start;
         $this->duration = $duration;
         $this->setPriority($priority);
@@ -37,16 +44,14 @@ class ClipFilter implements VideoFilterInterface {
     /**
      * @return TimeCode
      */
-    public function getStart()
-    {
+    public function getStart(): TimeCode {
         return $this->start;
     }
 
     /**
      * @return TimeCode
      */
-    public function getDuration()
-    {
+    public function getDuration(): TimeCode {
         return $this->duration;
     }
 
@@ -56,6 +61,7 @@ class ClipFilter implements VideoFilterInterface {
     public function apply(Video $video, VideoInterface $format): array {
         $commands = ['-ss', (string) $this->start];
 
+        // add duration if given
         if($this->duration !== null) {
           $commands[] = '-t';
           $commands[] = (string) $this->duration;
