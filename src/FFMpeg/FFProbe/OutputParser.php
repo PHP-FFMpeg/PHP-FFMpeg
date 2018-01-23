@@ -19,7 +19,7 @@ class OutputParser implements OutputParserInterface {
     /**
      * @inheritDoc
      */
-    public function parse($type, $data): array {
+    public function parse(string $type, string $data): array {
         switch ($type) {
             case FFProbe::TYPE_FORMAT:
                 return $this->parseFormat($data);

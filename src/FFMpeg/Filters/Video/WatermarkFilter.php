@@ -57,7 +57,7 @@ class WatermarkFilter implements VideoFilterInterface {
             case 'relative':
                 if (isset($this->coordinates['top'])) {
                     $y = $this->coordinates['top'];
-                } else if (isset($this->coordinates['bottom'])) {
+                } else if(isset($this->coordinates['bottom'])) {
                     $y = sprintf('main_h - %d - overlay_h', $this->coordinates['bottom']);
                 } else {
                     $y = 0;
@@ -65,7 +65,7 @@ class WatermarkFilter implements VideoFilterInterface {
 
                 if (isset($this->coordinates['left'])) {
                     $x = $this->coordinates['left'];
-                } else if (isset($this->coordinates['right'])) {
+                } else if(isset($this->coordinates['right'])) {
                     $x = sprintf('main_w - %d - overlay_w', $this->coordinates['right']);
                 } else {
                     $x = 0;

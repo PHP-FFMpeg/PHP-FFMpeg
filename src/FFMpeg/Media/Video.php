@@ -12,18 +12,26 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Coordinate\{
+    Dimension,
+    TimeCode
+};
+use FFMpeg\Exception\{
+    InvalidArgumentException,
+    RuntimeException
+};
 use FFMpeg\Filters\Audio\SimpleFilter;
-use FFMpeg\Exception\InvalidArgumentException;
-use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Filters\Video\VideoFilterInterface;
-use FFMpeg\Filters\Video\VideoFilters;
+use FFMpeg\Filters\Video\{
+    VideoFilterInterface,
+    VideoFilters
+};
 use FFMpeg\Filters\FilterInterface;
-use FFMpeg\Format\FormatInterface;
-use FFMpeg\Format\ProgressableInterface;
-use FFMpeg\Format\AudioInterface;
-use FFMpeg\Format\VideoInterface;
+use FFMpeg\Format\{
+    FormatInterface,
+    ProgressableInterface,
+    AudioInterface,
+    VideoInterface
+};
 use Neutron\TemporaryFilesystem\Manager as FsManager;
 
 class Video extends Audio {
@@ -78,17 +86,17 @@ class Video extends Audio {
         $failure = null;
         $totalPasses = $format->getPasses();
 
-        foreach ($passes as $pass => $passCommands) {
+        foreach($passes as $pass => $passCommands) {
             try {
-                /** add listeners here */
+                // add listeners here
                 $listeners = null;
 
-                if ($format instanceof ProgressableInterface) {
+                if($format instanceof ProgressableInterface) {
                     $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses);
                 }
 
                 $this->driver->command($passCommands, false, $listeners);
-            } catch (ExecutionFailureException $e) {
+            } catch(ExecutionFailureException $e) {
                 $failure = $e;
                 break;
             }
@@ -96,7 +104,7 @@ class Video extends Audio {
 
         $this->fs->clean($this->fsId);
 
-        if (null !== $failure) {
+        if($failure !== null) {
             throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
         }
 
@@ -126,30 +134,30 @@ class Video extends Audio {
      * @return string[][]
      */
     protected function buildCommand(FormatInterface $format, string $outputPathfile) {
-        $commands = array('-y', '-i', $this->pathfile);
+        $commands = ['-y', '-i', $this->pathfile];
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
-        }
-        if ($format instanceof VideoInterface) {
-            if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
-            }
-        }
-        if ($format instanceof AudioInterface) {
-            if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
-            }
+        if($this->driver->getConfiguration()->has('ffmpeg.threads')) {
+            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
 
-        foreach ($filters as $filter) {
+        if($format instanceof VideoInterface && $format->getVideoCodec() !== null) {
+            $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
+        }
+
+        if($format instanceof AudioInterface && $format->getAudioCodec() !== null) {
+            $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
+        }
+
+        // apply filters
+        foreach($filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        if ($format instanceof VideoInterface) {
+        if($format instanceof VideoInterface) {
+            // TODO: Remove some hardcoded values
             $commands[] = '-b:v';
             $commands[] = $format->getKiloBitrate() . 'k';
             $commands[] = '-refs';
@@ -174,23 +182,21 @@ class Video extends Audio {
             $commands[] = '1';
         }
 
-        if ($format instanceof AudioInterface) {
-            if (null !== $format->getAudioKiloBitrate()) {
+        if($format instanceof AudioInterface) {
+            if($format->getAudioKiloBitrate() !== null) {
                 $commands[] = '-b:a';
                 $commands[] = $format->getAudioKiloBitrate() . 'k';
             }
-            if (null !== $format->getAudioChannels()) {
+            if($format->getAudioChannels() !== null) {
                 $commands[] = '-ac';
                 $commands[] = $format->getAudioChannels();
             }
         }
 
-        // If the user passed some additional parameters
-        if ($format instanceof VideoInterface) {
-            if (null !== $format->getAdditionalParameters()) {
-                foreach ($format->getAdditionalParameters() as $additionalParameter) {
-                    $commands[] = $additionalParameter;
-                }
+        // add additional parameters if the user passed some
+        if($format instanceof VideoInterface && $format->getAdditionalParameters() !== null) {
+            foreach($format->getAdditionalParameters() as $additionalParameter) {
+                $commands[] = $additionalParameter;
             }
         }
 
@@ -203,10 +209,10 @@ class Video extends Audio {
             if($command !== '-vf') continue;
 
             $commandSplits = explode(";", $commands[$i + 1]);
-            if (count($commandSplits) === 1) {
+            if(count($commandSplits) === 1) {
                 $commandSplit = $commandSplits[0];
                 $command = trim($commandSplit);
-                if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
+                if(preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
                     $videoFilterProcesses[] = $match[1];
                 } else {
                     $videoFilterProcesses[] = $command;
@@ -214,17 +220,19 @@ class Video extends Audio {
             } else {
                 foreach($commandSplits as $commandSplit) {
                     $command = trim($commandSplit);
-                    if ( preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match) ) {
+                    if(preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match)) {
                         $videoFilterProcesses[] = $match[1];
                     } else {
                         $videoFilterVars[] = $command;
                     }
                 }
             }
+
             unset($commands[$i]);
             unset($commands[$i + 1]);
             $i++;
         }
+
         $videoFilterCommands = $videoFilterVars;
         $lastInput = 'in';
         foreach($videoFilterProcesses as $i => $process) {
@@ -280,7 +288,7 @@ class Video extends Audio {
      * @param  TimeCode $at
      * @return Frame
      */
-    public function frame(TimeCode $at) {
+    public function frame(TimeCode $at): Frame {
         return new Frame($this, $this->driver, $this->ffprobe, $at);
     }
 
@@ -292,7 +300,7 @@ class Video extends Audio {
      * @param  integer $duration
      * @return Gif
      */
-    public function gif(TimeCode $at, Dimension $dimension, $duration = null) {
+    public function gif(TimeCode $at, Dimension $dimension, $duration = null): Gif {
         return new Gif($this, $this->driver, $this->ffprobe, $at, $dimension, $duration);
     }
 
@@ -302,7 +310,7 @@ class Video extends Audio {
      * @param  array $sources
      * @return Concat
      */
-    public function concat($sources) {
+    public function concat($sources): Concat {
         return new Concat($sources, $this->driver, $this->ffprobe);
     }
 }

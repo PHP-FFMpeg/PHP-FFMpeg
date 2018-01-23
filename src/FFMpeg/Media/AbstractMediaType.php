@@ -104,8 +104,7 @@ abstract class AbstractMediaType implements MediaTypeInterface {
     /**
      * @return MediaTypeInterface
      */
-    public function getFiltersCollection()
-    {
+    public function getFiltersCollection(): MediaTypeInterface {
         return $this->filters;
     }
 

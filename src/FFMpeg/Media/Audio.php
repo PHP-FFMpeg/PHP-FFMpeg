@@ -132,7 +132,7 @@ class Audio extends AbstractStreamableMedia {
      * @param  integer $height
      * @return Waveform
      */
-    public function waveform($width = 640, $height = 120): Waveform {
+    public function waveform(int $width = 640, int $height = 120): Waveform {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height);
     }
 

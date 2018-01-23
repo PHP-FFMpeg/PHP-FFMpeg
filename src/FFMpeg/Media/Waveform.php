@@ -12,21 +12,32 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Filters\Waveform\WaveformFilterInterface;
-use FFMpeg\Filters\Waveform\WaveformFilters;
+use FFMpeg\Filters\Waveform\{
+    WaveformFilterInterface,
+    WaveformFilters
+};
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 
-class Waveform extends AbstractMediaType
-{
-    /** @var Video */
+class Waveform extends AbstractMediaType {
+
+    /**
+     * @var Video
+     */
     private $audio;
+
+    /**
+     * @var int
+     */
     private $width;
+
+    /**
+     * @var int
+     */
     private $height;
 
-    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height)
-    {
+    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, int $width, int $height) {
         parent::__construct($audio->getPathfile(), $driver, $ffprobe);
         $this->audio = $audio;
         $this->width = $width;
@@ -38,8 +49,7 @@ class Waveform extends AbstractMediaType
      *
      * @return Audio
      */
-    public function getAudio()
-    {
+    public function getAudio(): Audio {
         return $this->audio;
     }
 
@@ -48,8 +58,7 @@ class Waveform extends AbstractMediaType
      *
      * @return WaveformFilters
      */
-    public function filters()
-    {
+    public function filters() {
         return new WaveformFilters($this);
     }
 
@@ -58,8 +67,7 @@ class Waveform extends AbstractMediaType
      *
      * @return Waveform
      */
-    public function addFilter(WaveformFilterInterface $filter)
-    {
+    public function addFilter(WaveformFilterInterface $filter) {
         $this->filters->add($filter);
 
         return $this;
@@ -74,23 +82,22 @@ class Waveform extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function save($pathfile)
-    {
+    public function save(string $pathfile): Waveform {
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
-        $commands = array(
+        $commands = [
             '-i', $this->pathfile, '-filter_complex',
             'showwavespic=s='.$this->width.'x'.$this->height,
             '-frames:v', '1'
-        );
+        ];
 
         foreach ($this->filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        $commands = array_merge($commands, array($pathfile));
+        $commands = array_merge($commands, [$pathfile]);
 
         try {
             $this->driver->command($commands);
