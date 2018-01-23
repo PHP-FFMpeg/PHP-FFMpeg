@@ -56,20 +56,20 @@ class Stream extends AbstractData {
         $width = $this->get('width');
         $height = $this->get('height');
 
-        if(null !== $ratio = $this->extractRatio($this, 'sample_aspect_ratio')) {
+        if(($ratio = $this->extractRatio($this, 'sample_aspect_ratio')) !== null){
             $sampleRatio = $ratio;
         }
-        if(null !== $ratio = $this->extractRatio($this, 'display_aspect_ratio')) {
+        if(($ratio = $this->extractRatio($this, 'display_aspect_ratio')) !== null) {
             $displayRatio = $ratio;
         }
 
-        if(null === $height || null === $width) {
+        if($height === null || $width === null) {
             throw new RuntimeException('Unable to extract dimensions.');
         }
 
-        if(null !== $displayRatio && null !== $sampleRatio) {
+        if($displayRatio !== null && $sampleRatio !== null) {
             if($sampleRatio[0] !== 1 && $sampleRatio[1] !== 1) {
-                if(null !== $width && null !== $height) {
+                if($width !== null && $height !== null) {
                     // stretch video according to pixel sample aspect ratio
                     $width = round($width * ($sampleRatio[0] / $sampleRatio[1]));
                     // set height according to display aspect ratio

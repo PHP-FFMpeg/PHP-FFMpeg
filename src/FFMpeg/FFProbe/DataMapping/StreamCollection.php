@@ -185,7 +185,7 @@ class StreamCollection implements \Countable, \IteratorAggregate {
     /**
      * @inheritDoc
      */
-    public function getIterator(): \ArrayIterator {
+    public function getIterator(): \Traversable {
         return new \ArrayIterator($this->streams);
     }
 

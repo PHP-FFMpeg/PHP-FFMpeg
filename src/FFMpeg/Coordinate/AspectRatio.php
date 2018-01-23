@@ -279,7 +279,7 @@ class AspectRatio {
             $previous = $value;
         }
 
-        if(null === $previous) {
+        if($previous === null) {
             return $current;
         }
 
