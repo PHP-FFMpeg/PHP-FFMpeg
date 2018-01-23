@@ -7,13 +7,13 @@ use FFMpeg\Format\Audio\DefaultAudio;
 
 abstract class AudioTestCase extends TestCase
 {
-    public function testExtraParams()
-    {
+    public function testExtraParams() {
         if(empty($this->getFormat()->getExtraParams())) {
-            $this->markTestSkipped('No extra parameters set in this format!');
+            $this->assertTrue(true);
+            return;
         }
 
-        foreach ($this->getFormat()->getExtraParams() as $param) {
+        foreach($this->getFormat()->getExtraParams() as $param) {
             $this->assertScalar($param);
         }
     }

@@ -9,8 +9,8 @@ use FFMpeg\FFProbe\DataMapping\Stream;
 class FFMpegTest extends TestCase
 {
     /**
-     * @expectedException \FFMpeg\Exception\RuntimeException
-     * @expectedExceptionMessage Unable to probe "/path/to/unknown/file".
+     * @expectedException \FFMpeg\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Unable to detect file format, only audio and video supported
      */
     public function testOpenInvalid()
     {
@@ -22,11 +22,11 @@ class FFMpegTest extends TestCase
     {
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
-            ->method('audios')
-            ->will($this->returnValue(new StreamCollection(array(new Stream([])))));
+            ->method('getAudioStreams')
+            ->will($this->returnValue(new StreamCollection([new Stream])));
         $streams->expects($this->once())
-            ->method('videos')
-            ->will($this->returnValue([]));
+            ->method('getVideoStreams')
+            ->will($this->returnValue(new StreamCollection));
 
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
@@ -35,17 +35,17 @@ class FFMpegTest extends TestCase
             ->will($this->returnValue($streams));
 
         $ffmpeg = new FFMpeg($this->getFFMpegDriverMock(), $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Media\Audio', $ffmpeg->open(__FILE__));
+        $this->assertInstanceOf(\FFMpeg\Media\Audio::class, $ffmpeg->open(__FILE__));
     }
 
     public function testOpenVideo()
     {
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
-            ->method('videos')
-            ->will($this->returnValue(new StreamCollection(array(new Stream([])))));
+            ->method('getVideoStreams')
+            ->will($this->returnValue(new StreamCollection([new Stream])));
         $streams->expects($this->never())
-            ->method('audios');
+            ->method('getAudioStreams');
 
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
@@ -54,7 +54,7 @@ class FFMpegTest extends TestCase
             ->will($this->returnValue($streams));
 
         $ffmpeg = new FFMpeg($this->getFFMpegDriverMock(), $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Media\Video', $ffmpeg->open(__FILE__));
+        $this->assertInstanceOf(\FFMpeg\Media\Video::class, $ffmpeg->open(__FILE__));
     }
 
     /**
@@ -66,15 +66,14 @@ class FFMpegTest extends TestCase
         $ffprobe->expects($this->once())
             ->method('streams')
             ->with(__FILE__)
-            ->will($this->returnValue(new StreamCollection()));
+            ->will($this->returnValue(new StreamCollection));
 
         $ffmpeg = new FFMpeg($this->getFFMpegDriverMock(), $ffprobe);
         $ffmpeg->open(__FILE__);
     }
 
-    public function testCreateWithoutLoggerOrProbe()
-    {
-        $this->assertInstanceOf('FFMpeg\FFMpeg', FFMpeg::create());
+    public function testCreateWithoutLoggerOrProbe() {
+        $this->assertInstanceOf(\FFMpeg\FFMpeg::class, FFMpeg::create());
     }
 
     public function testCreateWithLoggerAndProbe()

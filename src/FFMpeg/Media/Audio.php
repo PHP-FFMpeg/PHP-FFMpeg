@@ -15,8 +15,10 @@ use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Filters\Audio\SimpleFilter;
-use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\{
+    RuntimeException,
+    InvalidArgumentException
+};
 use FFMpeg\Filters\Audio\AudioFilterInterface;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\ProgressableInterface;
@@ -55,8 +57,7 @@ class Audio extends AbstractStreamableMedia {
      * @return Audio
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, string $outputPathfile)
-    {
+    public function save(FormatInterface $format, string $outputPathfile) {
         $listeners = null;
 
         if ($format instanceof ProgressableInterface) {

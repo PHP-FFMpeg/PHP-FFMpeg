@@ -92,10 +92,10 @@ class FFMpeg {
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
 
-        if(count($streams->getVideoStreams()) > 1) {
+        if(count($streams->getVideoStreams()) >= 1) {
             // media is more likely a video file
             return new Video($pathfile, $this->driver, $this->ffprobe);
-        } else if(count($streams->getAudioStreams()) > 1) {
+        } else if(count($streams->getAudioStreams()) >= 1) {
             // media is more likely an audio file
             return new Audio($pathfile, $this->driver, $this->ffprobe);
         }
