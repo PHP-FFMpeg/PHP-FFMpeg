@@ -23,32 +23,37 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     use TPriorityFilter;
 
     /**
- * will extract a frame every second
-*/
+     * will extract a frame every second
+     */
     const FRAMERATE_EVERY_SEC = '1/1';
+
     /**
- * will extract a frame every 2 seconds
-*/
+     * will extract a frame every 2 seconds
+     */
     const FRAMERATE_EVERY_2SEC = '1/2';
+
     /**
- * will extract a frame every 5 seconds
-*/
+     * will extract a frame every 5 seconds
+     */
     const FRAMERATE_EVERY_5SEC = '1/5';
+
     /**
- * will extract a frame every 10 seconds
-*/
+     * will extract a frame every 10 seconds
+     */
     const FRAMERATE_EVERY_10SEC = '1/10';
+
     /**
- * will extract a frame every 30 seconds
-*/
+     * will extract a frame every 30 seconds
+     */
     const FRAMERATE_EVERY_30SEC = '1/30';
+
     /**
- * will extract a frame every minute
-*/
+     * will extract a frame every minute
+     */
     const FRAMERATE_EVERY_60SEC = '1/60';
 
     /**
-     * @var integer
+     * @var int
      */
     private $priority;
     private $frameRate;

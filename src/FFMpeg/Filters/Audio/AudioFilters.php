@@ -52,12 +52,15 @@ class AudioFilters
      * will remove all metadata from the audio file
      *
      * @param string[][]|null $data If array must contain one of these key/value pairs:
-     *                              * `title`: Title metadata * `artist`: Artist
-     *                              metadata * `composer`: Composer metadata * `album`:
-     *                              Album metadata * `track`: Track metadata *
-     *                              `artwork`: Song artwork. String of (absolute) file
-     *                              path * `year`: Year metadata * `genre`: Genre
-     *                              metadata * `description`: Description metadata
+     *                              * `title`: Title metadata
+     *                              * `artist`: Artist metadata
+     *                              * `composer`: Composer metadata
+     *                              * `album`: Album metadata
+     *                              * `track`: Track metadata
+     *                              * `artwork`: Song artwork. String of (absolute) file path
+     *                              * `year`: Year metadata
+     *                              * `genre`: Genre metadata
+     *                              * `description`: Description metadata
      */
     public function addMetadata(?array $data = null)
     {
