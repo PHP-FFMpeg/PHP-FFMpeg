@@ -35,4 +35,5 @@ install:
   - composer update --prefer-dist $COMPOSER_FLAGS
 
 script:
+  - vendor/bin/phpcs --standard=tests
   - vendor/bin/phpunit --verbose
