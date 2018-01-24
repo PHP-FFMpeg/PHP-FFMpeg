@@ -49,8 +49,8 @@
         "squizlabs/php_codesniffer": "^3.2"
     },
     "autoload": {
-        "psr-0": {
-            "FFMpeg": "src"
+        "psr-4": {
+            "FFMpeg\\": "src"
         }
     },
     "autoload-dev": {

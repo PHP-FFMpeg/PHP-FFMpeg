@@ -18,5 +18,4 @@ interface GifFilterInterface extends FilterInterface
 {
 
     public function apply(Gif $gif): array;
-
 }

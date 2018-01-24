@@ -38,9 +38,9 @@ class Point
      * @param int|string $y       Y-coordinate / Math expression for Y
      * @param bool       $dynamic Whether the point is dynamic based on a math expression
      */
-    public function __construct($x, $y, bool $dynamic = false) 
+    public function __construct($x, $y, bool $dynamic = false)
     {
-        if($dynamic) {
+        if ($dynamic) {
             $this->x = $x;
             $this->y = $y;
         } else {
@@ -54,7 +54,7 @@ class Point
     /**
      * @return int|string
      */
-    public function getX() 
+    public function getX()
     {
         return $this->x;
     }
@@ -62,7 +62,7 @@ class Point
     /**
      * @return int|string
      */
-    public function getY() 
+    public function getY()
     {
         return $this->y;
     }
@@ -73,9 +73,8 @@ class Point
      * @return bool
      * @since  1.0.0
      */
-    public function isDynamic(): bool 
+    public function isDynamic(): bool
     {
         return $this->isDynamic;
     }
-
 }

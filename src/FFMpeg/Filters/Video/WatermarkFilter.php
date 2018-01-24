@@ -38,7 +38,7 @@ class WatermarkFilter implements VideoFilterInterface
      */
     private $priority;
 
-    public function __construct($watermarkPath, array $coordinates = [], int $priority = 0) 
+    public function __construct($watermarkPath, array $coordinates = [], int $priority = 0)
     {
         if (!file_exists($watermarkPath)) {
             throw new InvalidArgumentException(sprintf('File %s does not exist', $watermarkPath));
@@ -52,7 +52,7 @@ class WatermarkFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array 
+    public function apply(Video $video, VideoInterface $format): array
     {
         $position = isset($this->coordinates['position']) ? $this->coordinates['position'] : 'absolute';
 
@@ -60,7 +60,7 @@ class WatermarkFilter implements VideoFilterInterface
         case 'relative':
             if (isset($this->coordinates['top'])) {
                 $y = $this->coordinates['top'];
-            } else if(isset($this->coordinates['bottom'])) {
+            } elseif (isset($this->coordinates['bottom'])) {
                 $y = sprintf('main_h - %d - overlay_h', $this->coordinates['bottom']);
             } else {
                 $y = 0;
@@ -68,7 +68,7 @@ class WatermarkFilter implements VideoFilterInterface
 
             if (isset($this->coordinates['left'])) {
                 $x = $this->coordinates['left'];
-            } else if(isset($this->coordinates['right'])) {
+            } elseif (isset($this->coordinates['right'])) {
                 $x = sprintf('main_w - %d - overlay_w', $this->coordinates['right']);
             } else {
                 $x = 0;
@@ -83,5 +83,4 @@ class WatermarkFilter implements VideoFilterInterface
 
         return ['-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s [out]', $this->watermarkPath, $x, $y)];
     }
-
 }

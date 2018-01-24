@@ -40,7 +40,7 @@ class WaveformDownmixFilter implements WaveformFilterInterface
     /**
      * @inheritDoc
      */
-    public function getDownmix(): bool 
+    public function getDownmix(): bool
     {
         return $this->downmix;
     }
@@ -48,12 +48,12 @@ class WaveformDownmixFilter implements WaveformFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Waveform $waveform): array 
+    public function apply(Waveform $waveform): array
     {
         $commands = [];
 
         // If the downmix parameter is set to true, we add an option to the FFMPEG command
-        if($this->downmix) {
+        if ($this->downmix) {
             foreach ($waveform->getAudio()->getStreams()->audios() as $stream) {
                 $commands[] = '"aformat=channel_layouts=mono"';
             }

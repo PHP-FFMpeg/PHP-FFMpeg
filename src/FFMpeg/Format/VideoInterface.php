@@ -71,5 +71,4 @@ interface VideoInterface extends AudioInterface
      * @return string[]|null
      */
     public function getAdditionalParameters(): ?array;
-
 }

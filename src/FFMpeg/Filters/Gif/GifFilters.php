@@ -21,9 +21,8 @@ class GifFilters
      */
     private $gif;
 
-    public function __construct(Gif $gif) 
+    public function __construct(Gif $gif)
     {
         $this->gif = $gif;
     }
-
 }

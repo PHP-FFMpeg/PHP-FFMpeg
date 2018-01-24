@@ -21,7 +21,7 @@ class ConcatFilters
      */
     private $concat;
 
-    public function __construct(Concat $concat) 
+    public function __construct(Concat $concat)
     {
         $this->concat = $concat;
     }

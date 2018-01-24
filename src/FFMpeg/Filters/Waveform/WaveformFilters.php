@@ -20,7 +20,7 @@ class WaveformFilters
      */
     private $waveform;
 
-    public function __construct(Waveform $waveform) 
+    public function __construct(Waveform $waveform)
     {
         $this->waveform = $waveform;
     }
@@ -32,7 +32,7 @@ class WaveformFilters
      *
      * @return WaveformFilters
      */
-    public function setDownmix(): WaveformFilters 
+    public function setDownmix(): WaveformFilters
     {
         $this->waveform->addFilter(new WaveformDownmixFilter());
 

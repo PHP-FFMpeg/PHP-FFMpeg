@@ -27,7 +27,7 @@ class FFMpegDriver extends AbstractBinary
     /**
      * @inheritDoc
      */
-    public function getName() 
+    public function getName()
     {
         return 'ffmpeg';
     }
@@ -39,7 +39,7 @@ class FFMpegDriver extends AbstractBinary
      * @param  array|Configuration $configuration
      * @return FFMpegDriver
      */
-    public static function create(LoggerInterface $logger = null, $configuration = []): FFMpegDriver 
+    public static function create(LoggerInterface $logger = null, $configuration = []): FFMpegDriver
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);
@@ -57,5 +57,4 @@ class FFMpegDriver extends AbstractBinary
             throw new ExecutableNotFoundException('Unable to load FFMpeg', $e->getCode(), $e);
         }
     }
-
 }

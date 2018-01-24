@@ -30,7 +30,7 @@ class WMV extends DefaultVideo
     /**
      * @deprecated 1.0.0 use setters directly
      */
-    public function __construct(string $audioCodec = 'wmav2', string $videoCodec = 'wmv2') 
+    public function __construct(string $audioCodec = 'wmav2', string $videoCodec = 'wmv2')
     {
         $this->setAudioCodec($audioCodec);
         $this->setVideoCodec($videoCodec);
@@ -39,7 +39,7 @@ class WMV extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function supportBFrames(): bool 
+    public function supportBFrames(): bool
     {
         return false;
     }
@@ -47,7 +47,7 @@ class WMV extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array 
+    public function getAvailableAudioCodecs(): array
     {
         return ['wmav2'];
     }
@@ -55,7 +55,7 @@ class WMV extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function getAvailableVideoCodecs(): array 
+    public function getAvailableVideoCodecs(): array
     {
         return ['wmv2'];
     }

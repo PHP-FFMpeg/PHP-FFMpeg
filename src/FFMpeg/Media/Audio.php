@@ -15,10 +15,8 @@ use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Filters\Audio\SimpleFilter;
-use FFMpeg\Exception\{
-    RuntimeException,
-    InvalidArgumentException
-};
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Filters\Audio\AudioFilterInterface;
 use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\ProgressableInterface;
@@ -31,7 +29,7 @@ class Audio extends AbstractStreamableMedia
      *
      * @return AudioFilters
      */
-    public function filters() 
+    public function filters()
     {
         return new AudioFilters($this);
     }
@@ -41,9 +39,9 @@ class Audio extends AbstractStreamableMedia
      *
      * @return self
      */
-    public function addFilter(FilterInterface $filter): MediaTypeInterface 
+    public function addFilter(FilterInterface $filter): MediaTypeInterface
     {
-        if(!($filter instanceof AudioFilterInterface)) {
+        if (!($filter instanceof AudioFilterInterface)) {
             throw new InvalidArgumentException('Audio only accepts AudioFilterInterface filters');
         }
 
@@ -60,7 +58,7 @@ class Audio extends AbstractStreamableMedia
      * @return Audio
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, string $outputPathfile) 
+    public function save(FormatInterface $format, string $outputPathfile)
     {
         $listeners = null;
 
@@ -88,7 +86,7 @@ class Audio extends AbstractStreamableMedia
      * @return string
      * @since  0.11.0
      */
-    public function getFinalCommand(FormatInterface $format, string $outputPathfile) 
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile)
     {
         return implode(' ', $this->buildCommand($format, $outputPathfile));
     }
@@ -101,7 +99,7 @@ class Audio extends AbstractStreamableMedia
      * @return string[] An array which are the components of the command
      * @since  0.11.0
      */
-    protected function buildCommand(FormatInterface $format, string $outputPathfile) 
+    protected function buildCommand(FormatInterface $format, string $outputPathfile)
     {
         $commands = ['-y', '-i', $this->pathfile];
 
@@ -139,9 +137,8 @@ class Audio extends AbstractStreamableMedia
      * @param  integer $height
      * @return Waveform
      */
-    public function waveform(int $width = 640, int $height = 120): Waveform 
+    public function waveform(int $width = 640, int $height = 120): Waveform
     {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height);
     }
-
 }

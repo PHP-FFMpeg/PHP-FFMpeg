@@ -27,7 +27,7 @@ class FFProbeDriver extends AbstractBinary
     /**
      * @inheritDoc
      */
-    public function getName() 
+    public function getName()
     {
         return 'ffprobe';
     }
@@ -40,9 +40,9 @@ class FFProbeDriver extends AbstractBinary
      *
      * @return FFProbeDriver
      */
-    public static function create($configuration, LoggerInterface $logger = null): FFProbeDriver 
+    public static function create($configuration, LoggerInterface $logger = null): FFProbeDriver
     {
-        if(!($configuration instanceof ConfigurationInterface)) {
+        if (!($configuration instanceof ConfigurationInterface)) {
             $configuration = new Configuration($configuration);
         }
 
@@ -50,9 +50,8 @@ class FFProbeDriver extends AbstractBinary
 
         try {
             return static::load($binaries, $logger, $configuration);
-        } catch(BinaryDriverExecutableNotFound $e) {
+        } catch (BinaryDriverExecutableNotFound $e) {
             throw new ExecutableNotFoundException('Unable to load FFProbe', $e->getCode(), $e);
         }
     }
-
 }

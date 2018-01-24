@@ -30,5 +30,4 @@ interface FilterInterface
      * @return int
      */
     public function getPriority(): int;
-
 }

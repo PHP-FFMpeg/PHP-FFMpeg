@@ -23,7 +23,7 @@ class Mapper implements MapperInterface
     /**
      * @inheritDoc
      */
-    public function map(string $type, array $data) 
+    public function map(string $type, array $data)
     {
         switch ($type) {
         case FFProbe::TYPE_FORMAT:
@@ -33,18 +33,19 @@ class Mapper implements MapperInterface
         default:
             throw new InvalidArgumentException(
                 sprintf(
-                    'Invalid type `%s`.', $type
+                    'Invalid type `%s`.',
+                    $type
                 )
             );
         }
     }
 
-    private function mapFormat(array $data) 
+    private function mapFormat(array $data)
     {
         return new Format($data['format']);
     }
 
-    private function mapStreams(array $data) 
+    private function mapStreams(array $data)
     {
         $streams = new StreamCollection;
 

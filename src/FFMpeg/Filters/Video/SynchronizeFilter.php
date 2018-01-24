@@ -28,7 +28,7 @@ class SynchronizeFilter implements VideoFilterInterface
      */
     private $priority;
 
-    public function __construct(int $priority = 12) 
+    public function __construct(int $priority = 12)
     {
         $this->setPriority($priority);
     }
@@ -36,7 +36,7 @@ class SynchronizeFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array 
+    public function apply(Video $video, VideoInterface $format): array
     {
         return ['-async', '1', '-metadata:s:v:0', 'start_time=0'];
     }

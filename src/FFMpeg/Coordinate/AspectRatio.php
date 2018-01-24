@@ -116,7 +116,7 @@ class AspectRatio
      *
      * @param float $ratio
      */
-    public function __construct(float $ratio) 
+    public function __construct(float $ratio)
     {
         $this->ratio = $ratio;
     }
@@ -126,7 +126,7 @@ class AspectRatio
      *
      * @return float
      */
-    public function getValue(): float 
+    public function getValue(): float
     {
         return $this->ratio;
     }
@@ -139,7 +139,7 @@ class AspectRatio
      *
      * @return int
      */
-    public function calculateWidth($height, $modulus = 1): int 
+    public function calculateWidth($height, $modulus = 1): int
     {
         $maxPossibleWidth = $this->getMultipleUp(ceil($this->ratio * $height), $modulus);
         $minPossibleWidth = $this->getMultipleDown(floor($this->ratio * $height), $modulus);
@@ -158,7 +158,7 @@ class AspectRatio
      *
      * @return int
      */
-    public function calculateHeight($width, $modulus = 1): int 
+    public function calculateHeight($width, $modulus = 1): int
     {
         $maxPossibleHeight = $this->getMultipleUp(ceil($width / $this->ratio), $modulus);
         $minPossibleHeight = $this->getMultipleDown(floor($width / $this->ratio), $modulus);
@@ -198,7 +198,7 @@ class AspectRatio
      * @return AspectRatio
      * @throws InvalidArgumentException
      */
-    public static function create(Dimension $dimension, $forceStandards = true): AspectRatio 
+    public static function create(Dimension $dimension, $forceStandards = true): AspectRatio
     {
         $incoming = $dimension->getWidth() / $dimension->getHeight();
 
@@ -209,7 +209,7 @@ class AspectRatio
         }
     }
 
-    private static function valueFromName($name): float 
+    private static function valueFromName($name): float
     {
         switch ($name) {
         case static::AR_4_3:
@@ -247,7 +247,7 @@ class AspectRatio
         }
     }
 
-    private static function customStrategy($incoming) 
+    private static function customStrategy($incoming)
     {
         $try = static::nearestStrategy($incoming);
 
@@ -258,7 +258,7 @@ class AspectRatio
         return $incoming;
     }
 
-    private static function nearestStrategy($incoming) 
+    private static function nearestStrategy($incoming)
     {
         $availables = [
             static::AR_4_3 => static::valueFromName(static::AR_4_3),
@@ -284,23 +284,22 @@ class AspectRatio
 
         $previous = $current = null;
 
-        foreach($availables as $name => $value) {
+        foreach ($availables as $name => $value) {
             $current = $value;
-            if($incoming <= $value) {
+            if ($incoming <= $value) {
                 break;
             }
             $previous = $value;
         }
 
-        if($previous === null) {
+        if ($previous === null) {
             return $current;
         }
 
-        if(($current - $incoming) < ($incoming - $previous)) {
+        if (($current - $incoming) < ($incoming - $previous)) {
             return $current;
         }
 
         return $previous;
     }
-
 }

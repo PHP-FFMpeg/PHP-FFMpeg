@@ -32,7 +32,7 @@ class Frame extends AbstractMediaType
      */
     private $video;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode) 
+    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode)
     {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;
@@ -44,7 +44,7 @@ class Frame extends AbstractMediaType
      *
      * @return Video
      */
-    public function getVideo(): Video 
+    public function getVideo(): Video
     {
         return $this->video;
     }
@@ -54,7 +54,7 @@ class Frame extends AbstractMediaType
      *
      * @return FrameFilters
      */
-    public function filters(): FrameFilters 
+    public function filters(): FrameFilters
     {
         return new FrameFilters($this);
     }
@@ -64,7 +64,7 @@ class Frame extends AbstractMediaType
      *
      * @return Frame
      */
-    public function addFilter(FrameFilterInterface $filter) 
+    public function addFilter(FrameFilterInterface $filter)
     {
         $this->filters->add($filter);
 
@@ -74,7 +74,7 @@ class Frame extends AbstractMediaType
     /**
      * @return TimeCode
      */
-    public function getTimeCode() 
+    public function getTimeCode()
     {
         return $this->timecode;
     }
@@ -91,7 +91,7 @@ class Frame extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function save($pathfile, $accurate = false, $returnBase64 = false): Frame 
+    public function save($pathfile, $accurate = false, $returnBase64 = false): Frame
     {
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking
@@ -114,7 +114,7 @@ class Frame extends AbstractMediaType
             ];
         }
 
-        if($returnBase64) {
+        if ($returnBase64) {
             $commands[] = '-';
         }
 
@@ -125,11 +125,10 @@ class Frame extends AbstractMediaType
         $commands = array_merge($commands, [$pathfile]);
 
         try {
-            if(!$returnBase64) {
+            if (!$returnBase64) {
                 $this->driver->command($commands);
                 return $this;
-            }
-            else {
+            } else {
                 return $this->driver->command($commands);
             }
         } catch (ExecutionFailureException $e) {
@@ -137,5 +136,4 @@ class Frame extends AbstractMediaType
             throw new RuntimeException('Unable to save frame', $e->getCode(), $e);
         }
     }
-
 }

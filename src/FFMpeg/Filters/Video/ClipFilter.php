@@ -36,7 +36,7 @@ class ClipFilter implements VideoFilterInterface
      */
     private $priority;
 
-    public function __construct(TimeCode $start, ?TimeCode $duration = null, $priority = 0) 
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, $priority = 0)
     {
         $this->start = $start;
         $this->duration = $duration;
@@ -46,7 +46,7 @@ class ClipFilter implements VideoFilterInterface
     /**
      * @return TimeCode
      */
-    public function getStart(): TimeCode 
+    public function getStart(): TimeCode
     {
         return $this->start;
     }
@@ -54,7 +54,7 @@ class ClipFilter implements VideoFilterInterface
     /**
      * @return TimeCode
      */
-    public function getDuration(): TimeCode 
+    public function getDuration(): TimeCode
     {
         return $this->duration;
     }
@@ -62,12 +62,12 @@ class ClipFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array 
+    public function apply(Video $video, VideoInterface $format): array
     {
         $commands = ['-ss', (string) $this->start];
 
         // add duration if given
-        if($this->duration !== null) {
+        if ($this->duration !== null) {
             $commands[] = '-t';
             $commands[] = (string) $this->duration;
         }

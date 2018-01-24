@@ -23,32 +23,32 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     use TPriorityFilter;
 
     /**
- * will extract a frame every second 
+ * will extract a frame every second
 */
     const FRAMERATE_EVERY_SEC = '1/1';
     /**
- * will extract a frame every 2 seconds 
+ * will extract a frame every 2 seconds
 */
     const FRAMERATE_EVERY_2SEC = '1/2';
     /**
- * will extract a frame every 5 seconds 
+ * will extract a frame every 5 seconds
 */
     const FRAMERATE_EVERY_5SEC = '1/5';
     /**
- * will extract a frame every 10 seconds 
+ * will extract a frame every 10 seconds
 */
     const FRAMERATE_EVERY_10SEC = '1/10';
     /**
- * will extract a frame every 30 seconds 
+ * will extract a frame every 30 seconds
 */
     const FRAMERATE_EVERY_30SEC = '1/30';
     /**
- * will extract a frame every minute 
+ * will extract a frame every minute
 */
     const FRAMERATE_EVERY_60SEC = '1/60';
 
     /**
-     * @var integer 
+     * @var integer
      */
     private $priority;
     private $frameRate;
@@ -85,7 +85,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array 
+    public function apply(Video $video, VideoInterface $format): array
     {
         $commands = [];
         $duration = 0;
@@ -99,10 +99,10 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             }
 
             // Get the number of frames per second we have to extract.
-            if(preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== false) {
+            if (preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== false) {
                 $operator = $matches[2];
 
-                switch($operator){
+                switch ($operator) {
                 case '/':
                     $nbFramesPerSecond = $matches[1] / $matches[3];
                     break;
@@ -116,9 +116,9 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             // Set the number of digits to use in the exported filenames
             $nbImages = ceil($duration * $nbFramesPerSecond);
 
-            if($nbImages < 100) {
+            if ($nbImages < 100) {
                 $nbDigitsInFileNames = "02";
-            } else if($nbImages < 1000) {
+            } elseif ($nbImages < 1000) {
                 $nbDigitsInFileNames = "03";
             } else {
                 $nbDigitsInFileNames = "06";
@@ -128,12 +128,10 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             $commands[] = '-vf';
             $commands[] = 'fps=' . $this->frameRate;
             $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.jpg';
-        }
-        catch (RuntimeException $e) {
+        } catch (RuntimeException $e) {
             throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode(), null, $e);
         }
 
         return $commands;
     }
-
 }

@@ -21,7 +21,7 @@ class FrameFilters
      */
     private $frame;
 
-    public function __construct(Frame $frame) 
+    public function __construct(Frame $frame)
     {
         $this->frame = $frame;
     }
@@ -34,11 +34,10 @@ class FrameFilters
      *
      * @return self
      */
-    public function fixDisplayRatio(): self 
+    public function fixDisplayRatio(): self
     {
         $this->frame->addFilter(new DisplayRatioFixerFilter);
 
         return $this;
     }
-
 }

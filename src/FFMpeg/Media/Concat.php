@@ -11,10 +11,8 @@
 
 namespace FFMpeg\Media;
 
-use Alchemy\BinaryDriver\Exception\{
-    ExecutionFailureException,
-    InvalidArgumentException
-};
+use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use Alchemy\BinaryDriver\Exception\InvalidArgumentException;
 use FFMpeg\Filters\Concat\ConcatFilterInterface;
 use FFMpeg\Filters\Concat\ConcatFilters;
 use FFMpeg\Driver\FFMpegDriver;
@@ -42,9 +40,9 @@ class Concat extends AbstractMediaType
      * @param FFMpegDriver $driver
      * @param FFProbe      $ffprobe
      */
-    public function __construct(array $sources, FFMpegDriver $driver, FFProbe $ffprobe) 
+    public function __construct(array $sources, FFMpegDriver $driver, FFProbe $ffprobe)
     {
-        if(count($sources) === 0) {
+        if (count($sources) === 0) {
             throw new InvalidArgumentException('No sources given');
         }
 
@@ -57,7 +55,7 @@ class Concat extends AbstractMediaType
      *
      * @return string[]
      */
-    public function getSources() 
+    public function getSources()
     {
         return $this->sources;
     }
@@ -67,7 +65,7 @@ class Concat extends AbstractMediaType
      *
      * @return ConcatFilters
      */
-    public function filters() 
+    public function filters()
     {
         return new ConcatFilters($this);
     }
@@ -77,7 +75,7 @@ class Concat extends AbstractMediaType
      *
      * @return Concat
      */
-    public function addFilter(ConcatFilterInterface $filter) 
+    public function addFilter(ConcatFilterInterface $filter)
     {
         $this->filters->add($filter);
 
@@ -94,9 +92,9 @@ class Concat extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function saveFromSameCodecs($outputPathfile, bool $streamCopy = true) 
+    public function saveFromSameCodecs($outputPathfile, bool $streamCopy = true)
     {
-        if(!(is_array($this->sources) && count($this->sources))) {
+        if (!(is_array($this->sources) && count($this->sources))) {
             throw new InvalidArgumentException('The list of videos is not a valid array.');
         }
 
@@ -112,7 +110,7 @@ class Concat extends AbstractMediaType
         // Set the content of this file
         $fileStream = @fopen($sourcesFile, 'w');
 
-        if($fileStream === false) {
+        if ($fileStream === false) {
             throw new ExecutionFailureException('Cannot open the temporary file.');
         }
 
@@ -120,7 +118,8 @@ class Concat extends AbstractMediaType
         foreach ($this->sources as $videoPath) {
             $line = "";
 
-            if($videoCount !== 0) { $line .= "\n";
+            if ($videoCount !== 0) {
+                $line .= "\n";
             }
 
             $line .= "file {$videoPath}";
@@ -139,7 +138,7 @@ class Concat extends AbstractMediaType
         ];
 
         // Check if stream copy is activated
-        if($streamCopy) {
+        if ($streamCopy) {
             $commands[] = '-c';
             $commands[] = 'copy';
         } else {
@@ -175,7 +174,7 @@ class Concat extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function saveFromDifferentCodecs(FormatInterface $format, $outputPathfile) 
+    public function saveFromDifferentCodecs(FormatInterface $format, $outputPathfile)
     {
         /**
          * @see https://ffmpeg.org/ffmpeg-formats.html#concat
@@ -183,7 +182,7 @@ class Concat extends AbstractMediaType
          */
 
         // Check the validity of the parameter
-        if(!(is_array($this->sources) && count($this->sources))) {
+        if (!(is_array($this->sources) && count($this->sources))) {
             throw new InvalidArgumentException('The list of videos is not a valid array.');
         }
 
@@ -208,7 +207,7 @@ class Concat extends AbstractMediaType
         $commands[] = '-filter_complex';
 
         $complex_filter = '';
-        for($i=0; $i < $nbSources; $i++) {
+        for ($i=0; $i < $nbSources; $i++) {
             $complex_filter .= '['.$i.':v:0] ['.$i.':a:0] ';
         }
         $complex_filter .= 'concat=n='.$nbSources.':v=1:a=1 [v] [a]';

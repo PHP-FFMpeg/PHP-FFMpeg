@@ -33,7 +33,7 @@ class Gif extends AbstractMediaType
     private $dimension;
 
     /**
-     * @var int
+     * @var TimeCode|null
      */
     private $duration;
 
@@ -42,8 +42,11 @@ class Gif extends AbstractMediaType
      */
     private $video;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode, Dimension $dimension, $duration = null) 
-    {
+    public function __construct(
+        Video $video, FFMpegDriver $driver,
+        FFProbe $ffprobe, TimeCode $timecode,
+        Dimension $dimension, ?TimeCode $duration = null
+    ) {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;
         $this->dimension = $dimension;
@@ -56,7 +59,7 @@ class Gif extends AbstractMediaType
      *
      * @return Video
      */
-    public function getVideo(): Video 
+    public function getVideo(): Video
     {
         return $this->video;
     }
@@ -66,7 +69,7 @@ class Gif extends AbstractMediaType
      *
      * @return GifFilters
      */
-    public function filters(): GifFilters 
+    public function filters(): GifFilters
     {
         return new GifFilters($this);
     }
@@ -76,7 +79,7 @@ class Gif extends AbstractMediaType
      *
      * @return Gif
      */
-    public function addFilter(GifFilterInterface $filter): self 
+    public function addFilter(GifFilterInterface $filter): self
     {
         $this->filters->add($filter);
 
@@ -86,7 +89,7 @@ class Gif extends AbstractMediaType
     /**
      * @return TimeCode
      */
-    public function getTimeCode(): TimeCode 
+    public function getTimeCode(): TimeCode
     {
         return $this->timecode;
     }
@@ -94,7 +97,7 @@ class Gif extends AbstractMediaType
     /**
      * @return Dimension
      */
-    public function getDimension(): Dimension 
+    public function getDimension(): Dimension
     {
         return $this->dimension;
     }
@@ -107,7 +110,7 @@ class Gif extends AbstractMediaType
      * @return self
      * @throws RuntimeException
      */
-    public function save(string $pathfile): self 
+    public function save(string $pathfile): self
     {
         /**
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
@@ -117,7 +120,7 @@ class Gif extends AbstractMediaType
             (string) $this->timecode
         ];
 
-        if(null !== $this->duration) {
+        if (null !== $this->duration) {
             $commands[] = '-t';
             $commands[] = (string)$this->duration;
         }
@@ -138,7 +141,7 @@ class Gif extends AbstractMediaType
 
         try {
             $this->driver->command($commands);
-        } catch(ExecutionFailureException $e) {
+        } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($pathfile);
             throw new RuntimeException('Unable to save gif', $e->getCode(), $e);
         }

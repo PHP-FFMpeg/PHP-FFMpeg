@@ -38,7 +38,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
      */
     protected $filters;
 
-    public function __construct(string $pathfile, FFMpegDriver $driver, FFProbe $ffprobe) 
+    public function __construct(string $pathfile, FFMpegDriver $driver, FFProbe $ffprobe)
     {
         $this->pathfile = $pathfile;
         $this->driver = $driver;
@@ -49,7 +49,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /**
      * @return FFMpegDriver
      */
-    public function getFFMpegDriver(): FFMpegDriver 
+    public function getFFMpegDriver(): FFMpegDriver
     {
         return $this->driver;
     }
@@ -59,7 +59,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
      *
      * @return MediaTypeInterface
      */
-    public function setFFMpegDriver(FFMpegDriver $driver): self 
+    public function setFFMpegDriver(FFMpegDriver $driver): self
     {
         $this->driver = $driver;
 
@@ -69,7 +69,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /**
      * @return FFProbe
      */
-    public function getFFProbe(): FFProbe 
+    public function getFFProbe(): FFProbe
     {
         return $this->ffprobe;
     }
@@ -79,7 +79,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
      *
      * @return MediaTypeInterface
      */
-    public function setFFProbe(FFProbe $ffprobe): MediaTypeInterface 
+    public function setFFProbe(FFProbe $ffprobe): MediaTypeInterface
     {
         $this->ffprobe = $ffprobe;
 
@@ -89,7 +89,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /**
      * @return string
      */
-    public function getPathfile(): string 
+    public function getPathfile(): string
     {
         return $this->pathfile;
     }
@@ -99,7 +99,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
      *
      * @return MediaTypeInterface
      */
-    public function setFiltersCollection(FiltersCollection $filters): MediaTypeInterface 
+    public function setFiltersCollection(FiltersCollection $filters): MediaTypeInterface
     {
         $this->filters = $filters;
 
@@ -109,12 +109,12 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /**
      * @return MediaTypeInterface
      */
-    public function getFiltersCollection(): MediaTypeInterface 
+    public function getFiltersCollection(): MediaTypeInterface
     {
         return $this->filters;
     }
 
-    protected function cleanupTemporaryFile(string $filename): self 
+    protected function cleanupTemporaryFile(string $filename): self
     {
         if (file_exists($filename) && is_writable($filename)) {
             @unlink($filename);

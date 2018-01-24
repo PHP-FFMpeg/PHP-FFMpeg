@@ -35,7 +35,7 @@ class Dimension
      *
      * @throws InvalidArgumentException when one of the parameteres is invalid (not positive)
      */
-    public function __construct(int $width, int $height) 
+    public function __construct(int $width, int $height)
     {
         if ($width <= 0 || $height <= 0) {
             throw new InvalidArgumentException('Both width and height should be positive numbers!');
@@ -50,7 +50,7 @@ class Dimension
      *
      * @return int
      */
-    public function getWidth(): int 
+    public function getWidth(): int
     {
         return $this->width;
     }
@@ -60,7 +60,7 @@ class Dimension
      *
      * @return int
      */
-    public function getHeight(): int 
+    public function getHeight(): int
     {
         return $this->height;
     }
@@ -72,9 +72,8 @@ class Dimension
      *
      * @return AspectRatio
      */
-    public function getRatio(bool $forceStandards = true): AspectRatio 
+    public function getRatio(bool $forceStandards = true): AspectRatio
     {
         return AspectRatio::create($this, $forceStandards);
     }
-
 }

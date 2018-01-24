@@ -62,7 +62,7 @@ class ResizeFilter implements VideoFilterInterface
      */
     private $priority;
 
-    public function __construct(Dimension $dimension, string $mode = self::RESIZEMODE_FIT, bool $forceStandards = true, int $priority = 0) 
+    public function __construct(Dimension $dimension, string $mode = self::RESIZEMODE_FIT, bool $forceStandards = true, int $priority = 0)
     {
         $this->dimension = $dimension;
         $this->mode = $mode;
@@ -97,7 +97,7 @@ class ResizeFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array 
+    public function apply(Video $video, VideoInterface $format): array
     {
         $dimensions = null;
         $commands = [];
@@ -107,7 +107,7 @@ class ResizeFilter implements VideoFilterInterface
             try {
                 $dimensions = $stream->getDimensions();
                 break;
-            } catch(RuntimeException $e) {
+            } catch (RuntimeException $e) {
             }
         }
 
@@ -117,7 +117,6 @@ class ResizeFilter implements VideoFilterInterface
             // Using Filter to have ordering
             $commands[] = '-vf';
             $commands[] = '[in]scale=' . $dimensions->getWidth() . ':' . $dimensions->getHeight() . ' [out]';
-
         }
 
         return $commands;

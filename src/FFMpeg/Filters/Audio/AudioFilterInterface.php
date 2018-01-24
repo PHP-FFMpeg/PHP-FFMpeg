@@ -36,5 +36,4 @@ interface AudioFilterInterface extends FilterInterface
      * @return string[] An array of arguments
      */
     public function apply(Audio $audio, AudioInterface $format): array;
-
 }

@@ -18,5 +18,4 @@ interface FrameFilterInterface extends FilterInterface
 {
 
     public function apply(Frame $frame): array;
-
 }

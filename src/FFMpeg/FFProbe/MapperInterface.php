@@ -11,10 +11,9 @@
 
 namespace FFMpeg\FFProbe;
 
-use FFMpeg\FFProbe\DataMapping\{
-    Format,
-    StreamCollection
-};
+use FFMpeg\FFProbe\DataMapping\Format;
+use FFMpeg\FFProbe\DataMapping\StreamCollection;
+
 interface MapperInterface
 {
 
@@ -29,5 +28,4 @@ interface MapperInterface
      * @throws InvalidArgumentException In case the type is not supported
      */
     public function map(string $type, array $data);
-
 }

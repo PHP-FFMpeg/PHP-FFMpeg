@@ -18,5 +18,4 @@ interface ConcatFilterInterface extends FilterInterface
 {
 
     public function apply(Concat $concat): array;
-
 }

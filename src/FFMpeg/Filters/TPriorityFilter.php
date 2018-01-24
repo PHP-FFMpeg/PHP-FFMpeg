@@ -19,7 +19,7 @@ trait TPriorityFilter
      * @param  int $priority
      * @return void
      */
-    public function setPriority(int $priority = 0): void 
+    public function setPriority(int $priority = 0): void
     {
         $this->priority = $priority;
     }
@@ -29,9 +29,8 @@ trait TPriorityFilter
      *
      * @return int
      */
-    public function getPriority(): int 
+    public function getPriority(): int
     {
         return $this->priority;
     }
-
 }

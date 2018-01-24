@@ -36,7 +36,7 @@ class CropFilter implements VideoFilterInterface
      */
     protected $point;
 
-    public function __construct(Point $point, Dimension $dimension, int $priority = 0) 
+    public function __construct(Point $point, Dimension $dimension, int $priority = 0)
     {
         $this->dimension = $dimension;
         $this->point = $point;
@@ -46,7 +46,7 @@ class CropFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array 
+    public function apply(Video $video, VideoInterface $format): array
     {
         foreach ($video->getStreams()->getVideoStreams() as $stream) {
             if ($stream->has('width') && $stream->has('height')) {

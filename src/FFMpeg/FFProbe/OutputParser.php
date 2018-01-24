@@ -20,7 +20,7 @@ class OutputParser implements OutputParserInterface
     /**
      * @inheritDoc
      */
-    public function parse(string $type, string $data): array 
+    public function parse(string $type, string $data): array
     {
         switch ($type) {
         case FFProbe::TYPE_FORMAT:
@@ -34,12 +34,11 @@ class OutputParser implements OutputParserInterface
         }
     }
 
-    private function parseFormat($data) 
+    private function parseFormat($data)
     {
         $ret = [];
 
         foreach (explode(PHP_EOL, $data) as $line) {
-
             if (in_array($line, ['[FORMAT]', '[/FORMAT]'])) {
                 continue;
             }
@@ -70,13 +69,12 @@ class OutputParser implements OutputParserInterface
         return ['format' => $ret];
     }
 
-    private function parseStreams($data) 
+    private function parseStreams($data)
     {
         $ret = [];
         $n = -1;
 
         foreach (explode(PHP_EOL, $data) as $line) {
-
             if ($line === '[STREAM]') {
                 $n ++;
                 $ret[$n] = [];
@@ -111,7 +109,7 @@ class OutputParser implements OutputParserInterface
                     $ret[$n]['tags'] = [];
                 }
                 $ret[$n]['tags'][substr($key, 4)] = $value;
-            } else if (0 === strpos($key, 'DISPOSITION:')) {
+            } elseif (0 === strpos($key, 'DISPOSITION:')) {
                 if (!isset($ret[$n]['disposition'])) {
                     $ret[$n]['disposition'] = [];
                 }
@@ -123,5 +121,4 @@ class OutputParser implements OutputParserInterface
 
         return ['streams' => $ret];
     }
-
 }

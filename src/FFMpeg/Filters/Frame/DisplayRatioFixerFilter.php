@@ -25,7 +25,7 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
      */
     private $priority;
 
-    public function __construct(int $priority = 0) 
+    public function __construct(int $priority = 0)
     {
         $this->setPriority($priority);
     }
@@ -33,7 +33,7 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Frame $frame): array 
+    public function apply(Frame $frame): array
     {
         $dimensions = null;
         $commands = [];
@@ -44,12 +44,11 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
                 $commands[] = '-s';
                 $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
                 break;
-            } catch(RuntimeException $e) {
+            } catch (RuntimeException $e) {
                 // ignore error when getting the dimensions
             }
         }
 
         return $commands;
     }
-
 }

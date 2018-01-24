@@ -40,7 +40,7 @@ class AddMetadataFilter implements AudioFilterInterface
     private $priority;
 
 
-    public function __construct(array $metaArr = null, int $priority = 9) 
+    public function __construct(array $metaArr = null, int $priority = 9)
     {
         $this->metaArr = $metaArr;
         $this->setPriority($priority);
@@ -49,18 +49,18 @@ class AddMetadataFilter implements AudioFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format): array 
+    public function apply(Audio $audio, AudioInterface $format): array
     {
         $meta = $this->metaArr;
 
-        if($meta === null) {
+        if ($meta === null) {
             return ['-map_metadata', '-1', '-vn'];
         }
 
         $metadata = [];
 
         // handle artwork image
-        if(isset($meta["artwork"])) {
+        if (isset($meta["artwork"])) {
             $metadata[] = '-i';
             $metadata[] = $meta['artwork'];
             $metadata[] = '-map';
@@ -77,5 +77,4 @@ class AddMetadataFilter implements AudioFilterInterface
 
         return $metadata;
     }
-
 }

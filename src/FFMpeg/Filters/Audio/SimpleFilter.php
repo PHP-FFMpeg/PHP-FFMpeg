@@ -15,7 +15,6 @@ use FFMpeg\Media\Audio;
 use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 
-
 /**
  * Filter useful for setting custom arguments
  *
@@ -40,7 +39,7 @@ class SimpleFilter implements AudioFilterInterface
      */
     private $priority;
 
-    public function __construct(array $params, int $priority = 0) 
+    public function __construct(array $params, int $priority = 0)
     {
         $this->params = $params;
         $this->setPriority($priority);
@@ -49,9 +48,8 @@ class SimpleFilter implements AudioFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format): array 
+    public function apply(Audio $audio, AudioInterface $format): array
     {
         return $this->params;
     }
-
 }

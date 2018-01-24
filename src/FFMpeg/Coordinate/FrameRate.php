@@ -29,9 +29,9 @@ class FrameRate
      *
      * @param float $value
      */
-    public function __construct(float $value) 
+    public function __construct(float $value)
     {
-        if($value <= 0) {
+        if ($value <= 0) {
             throw new InvalidArgumentException('Invalid frame rate, must be a positive integer.');
         }
 
@@ -44,7 +44,7 @@ class FrameRate
      * @param  float $value The new value
      * @return void
      */
-    public function setValue(float $value): void 
+    public function setValue(float $value): void
     {
         $this->value = $value;
     }
@@ -52,9 +52,8 @@ class FrameRate
     /**
      * @return float
      */
-    public function getValue(): float 
+    public function getValue(): float
     {
         return $this->value;
     }
-
 }

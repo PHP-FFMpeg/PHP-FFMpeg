@@ -31,7 +31,7 @@ class PadFilter implements VideoFilterInterface
      */
     private $priority;
 
-    public function __construct(Dimension $dimension, int $priority = 0) 
+    public function __construct(Dimension $dimension, int $priority = 0)
     {
         $this->dimension = $dimension;
 
@@ -41,7 +41,7 @@ class PadFilter implements VideoFilterInterface
     /**
      * @return Dimension
      */
-    public function getDimension(): Dimension 
+    public function getDimension(): Dimension
     {
         return $this->dimension;
     }
@@ -49,7 +49,7 @@ class PadFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array 
+    public function apply(Video $video, VideoInterface $format): array
     {
         $commands = [];
 

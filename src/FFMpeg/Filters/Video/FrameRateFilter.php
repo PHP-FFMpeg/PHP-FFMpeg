@@ -36,7 +36,7 @@ class FrameRateFilter implements VideoFilterInterface
      */
     private $priority;
 
-    public function __construct(FrameRate $rate, ?int $gop = null, int $priority = 0) 
+    public function __construct(FrameRate $rate, ?int $gop = null, int $priority = 0)
     {
         $this->rate = $rate;
         $this->gop = $gop;
@@ -47,7 +47,7 @@ class FrameRateFilter implements VideoFilterInterface
      *
      * @return FrameRate
      */
-    public function getFrameRate(): FrameRate 
+    public function getFrameRate(): FrameRate
     {
         return $this->rate;
     }
@@ -59,7 +59,7 @@ class FrameRateFilter implements VideoFilterInterface
      *
      * @return int|null
      */
-    public function getGOP(): ?int 
+    public function getGOP(): ?int
     {
         return $this->gop;
     }
@@ -67,14 +67,14 @@ class FrameRateFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array 
+    public function apply(Video $video, VideoInterface $format): array
     {
         $commands = ['-r', $this->rate->getValue()];
 
         /**
          * @see http://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping
          */
-        if($format->supportBFrames()) {
+        if ($format->supportBFrames()) {
             $commands[] = '-b_strategy';
             $commands[] = '1';
             $commands[] = '-bf';

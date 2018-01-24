@@ -46,7 +46,7 @@ class AudioClipFilter implements AudioFilterInterface
     private $priority;
 
 
-    public function __construct(TimeCode $start, ?TimeCode $duration = null, int $priority = 0) 
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, int $priority = 0)
     {
         $this->start = $start;
         $this->duration = $duration;
@@ -58,7 +58,7 @@ class AudioClipFilter implements AudioFilterInterface
      *
      * @return TimeCode
      */
-    public function getStart(): TimeCode 
+    public function getStart(): TimeCode
     {
         return $this->start;
     }
@@ -68,7 +68,7 @@ class AudioClipFilter implements AudioFilterInterface
      *
      * @return TimeCode|null
      */
-    public function getDuration(): ?TimeCode 
+    public function getDuration(): ?TimeCode
     {
         return $this->duration;
     }
@@ -76,12 +76,12 @@ class AudioClipFilter implements AudioFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format): array 
+    public function apply(Audio $audio, AudioInterface $format): array
     {
         $commands = ['-ss', (string) $this->start];
 
         // add duration if given
-        if($this->duration !== null) {
+        if ($this->duration !== null) {
             $commands[] = '-t';
             $commands[] = (string) $this->duration;
         }
@@ -91,5 +91,4 @@ class AudioClipFilter implements AudioFilterInterface
 
         return $commands;
     }
-
 }

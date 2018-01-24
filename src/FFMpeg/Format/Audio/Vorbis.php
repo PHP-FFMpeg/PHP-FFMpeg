@@ -25,7 +25,7 @@ class Vorbis extends DefaultAudio
     /**
      * @inheritDoc
      */
-    public function getExtraParams(): array 
+    public function getExtraParams(): array
     {
         return ['-strict', '-2'];
     }
@@ -33,9 +33,8 @@ class Vorbis extends DefaultAudio
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array 
+    public function getAvailableAudioCodecs(): array
     {
         return ['vorbis'];
     }
-
 }

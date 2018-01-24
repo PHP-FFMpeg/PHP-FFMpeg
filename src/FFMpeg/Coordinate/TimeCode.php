@@ -43,7 +43,7 @@ class TimeCode
      * @param float $seconds Absolute number of seconds
      * @param float $frames  Absolute number of frames
      */
-    public function __construct(float $hours, float $minutes, float $seconds, float $frames) 
+    public function __construct(float $hours, float $minutes, float $seconds, float $frames)
     {
         $this->hours = $hours;
         $this->minutes = $minutes;
@@ -57,7 +57,7 @@ class TimeCode
      *
      * @return string
      */
-    public function __toString(): string 
+    public function __toString(): string
     {
         return sprintf('%02d:%02d:%02d.%02d', $this->hours, $this->minutes, $this->seconds, $this->frames);
     }
@@ -69,17 +69,17 @@ class TimeCode
      * @return TimeCode
      * @throws InvalidArgumentException In case an invalid timecode is supplied
      */
-    public static function fromString($timecode): TimeCode 
+    public static function fromString($timecode): TimeCode
     {
         $days = 0;
 
         if (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+\.[0-9]+$/', $timecode)) {
             list($days, $hours, $minutes, $seconds, $frames) = sscanf($timecode, '%d:%d:%d:%d.%d');
-        } else if (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+:[0-9]+$/', $timecode)) {
+        } elseif (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+:[0-9]+$/', $timecode)) {
             list($days, $hours, $minutes, $seconds, $frames) = sscanf($timecode, '%d:%d:%d:%d:%d');
-        } else if (preg_match('/^[0-9]+:[0-9]+:[0-9]+\.[0-9]+$/', $timecode)) {
+        } elseif (preg_match('/^[0-9]+:[0-9]+:[0-9]+\.[0-9]+$/', $timecode)) {
             list($hours, $minutes, $seconds, $frames) = sscanf($timecode, '%d:%d:%d.%s');
-        } else if (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+$/', $timecode)) {
+        } elseif (preg_match('/^[0-9]+:[0-9]+:[0-9]+:[0-9]+$/', $timecode)) {
             list($hours, $minutes, $seconds, $frames) = sscanf($timecode, '%d:%d:%d:%s');
         } else {
             throw new InvalidArgumentException(sprintf('Unable to parse timecode %s', $timecode));
@@ -96,7 +96,7 @@ class TimeCode
      * @param  float $quantity
      * @return TimeCode
      */
-    public static function fromSeconds(float $quantity): TimeCode 
+    public static function fromSeconds(float $quantity): TimeCode
     {
         $minutes = $hours = $frames = 0;
 
@@ -120,7 +120,7 @@ class TimeCode
      *
      * @return int
      */
-    public function toSeconds(): int 
+    public function toSeconds(): int
     {
         $seconds = 0;
 
@@ -136,13 +136,13 @@ class TimeCode
     /**
      * Helper function wether `$timecode` is after this one
      *
-     * @param  TimeCode $timecode The Timecode to compare
-     * @return bool
+     * @internal
+     * @param    TimeCode $timecode The Timecode to compare
+     * @return   bool
      */
-    public function isAfter(TimeCode $timecode): bool 
+    public function isAfter(TimeCode $timecode): bool
     {
         // convert everything to seconds and compare
         return ($this->toSeconds() > $timecode->toSeconds());
     }
-
 }

@@ -26,9 +26,8 @@ class VideoProgressListener extends AbstractProgressListener
     /**
      * @inheritDoc
      */
-    public function getPattern(): string 
+    public function getPattern(): string
     {
         return '/size=(.*?) time=(.*?) /';
     }
-
 }

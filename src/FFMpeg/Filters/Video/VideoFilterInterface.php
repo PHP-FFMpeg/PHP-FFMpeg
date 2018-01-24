@@ -27,5 +27,4 @@ interface VideoFilterInterface extends FilterInterface
      * @return array An array of arguments
      */
     public function apply(Video $video, VideoInterface $format): array;
-
 }

@@ -21,5 +21,4 @@ interface OptionsTesterInterface
      * @return bool
      */
     public function has(string $optionName): bool;
-
 }

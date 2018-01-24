@@ -28,7 +28,7 @@ class AudioFilters
      *
      * @param Audio $media The audio the filters will be applied to
      */
-    public function __construct(Audio $media) 
+    public function __construct(Audio $media)
     {
         $this->media = $media;
     }
@@ -40,7 +40,7 @@ class AudioFilters
      *
      * @return AudioFilters
      */
-    public function resample(int $rate) 
+    public function resample(int $rate)
     {
         $this->media->addFilter(new AudioResamplableFilter($rate));
 
@@ -59,7 +59,7 @@ class AudioFilters
      *                              path * `year`: Year metadata * `genre`: Genre
      *                              metadata * `description`: Description metadata
      */
-    public function addMetadata(?array $data = null) 
+    public function addMetadata(?array $data = null)
     {
         $this->media->addFilter(new AddMetadataFilter($data));
 
@@ -73,7 +73,7 @@ class AudioFilters
      * @param  TimeCode|null $duration How long the clipped audio should be
      * @return AudioFilters
      */
-    public function clip(TimeCode $start, ?TimeCode $duration = null) 
+    public function clip(TimeCode $start, ?TimeCode $duration = null)
     {
         $this->media->addFilter(new AudioClipFilter($start, $duration));
 
