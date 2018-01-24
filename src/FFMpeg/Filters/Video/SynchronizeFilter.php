@@ -18,7 +18,8 @@ use FFMpeg\Media\Video;
 /**
  * Synchronizes audio and video in case of desynchronized movies.
  */
-class SynchronizeFilter implements VideoFilterInterface {
+class SynchronizeFilter implements VideoFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -27,14 +28,16 @@ class SynchronizeFilter implements VideoFilterInterface {
      */
     private $priority;
 
-    public function __construct(int $priority = 12) {
+    public function __construct(int $priority = 12) 
+    {
         $this->setPriority($priority);
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array {
+    public function apply(Video $video, VideoInterface $format): array 
+    {
         return ['-async', '1', '-metadata:s:v:0', 'start_time=0'];
     }
 }

@@ -14,7 +14,8 @@ namespace FFMpeg\Format\Audio;
 /**
  * The Vorbis audio format
  */
-class Vorbis extends DefaultAudio {
+class Vorbis extends DefaultAudio
+{
 
     /**
      * @inheritDoc
@@ -24,14 +25,16 @@ class Vorbis extends DefaultAudio {
     /**
      * @inheritDoc
      */
-    public function getExtraParams(): array {
+    public function getExtraParams(): array 
+    {
         return ['-strict', '-2'];
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array {
+    public function getAvailableAudioCodecs(): array 
+    {
         return ['vorbis'];
     }
 

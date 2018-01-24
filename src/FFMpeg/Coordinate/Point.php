@@ -34,11 +34,12 @@ class Point
     /**
      * Creates a new Point
      *
-     * @param   int|string  $x          X-coordinate / Math expression for X
-     * @param   int|string  $y          Y-coordinate / Math expression for Y
-     * @param   bool        $dynamic    Whether the point is dynamic based on a math expression
+     * @param int|string $x       X-coordinate / Math expression for X
+     * @param int|string $y       Y-coordinate / Math expression for Y
+     * @param bool       $dynamic Whether the point is dynamic based on a math expression
      */
-    public function __construct($x, $y, bool $dynamic = false) {
+    public function __construct($x, $y, bool $dynamic = false) 
+    {
         if($dynamic) {
             $this->x = $x;
             $this->y = $y;
@@ -53,14 +54,16 @@ class Point
     /**
      * @return int|string
      */
-    public function getX() {
+    public function getX() 
+    {
         return $this->x;
     }
 
     /**
      * @return int|string
      */
-    public function getY() {
+    public function getY() 
+    {
         return $this->y;
     }
 
@@ -68,9 +71,10 @@ class Point
      * Returns whether this point was set dynamic
      *
      * @return bool
-     * @since 1.0.0
+     * @since  1.0.0
      */
-    public function isDynamic(): bool {
+    public function isDynamic(): bool 
+    {
         return $this->isDynamic;
     }
 

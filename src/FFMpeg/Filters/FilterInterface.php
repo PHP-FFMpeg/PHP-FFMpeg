@@ -14,7 +14,8 @@ namespace FFMpeg\Filters;
 /**
  * Default interface for stream filters
  */
-interface FilterInterface {
+interface FilterInterface
+{
 
     /**
      * Returns the priority of the filter.

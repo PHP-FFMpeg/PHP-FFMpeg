@@ -19,7 +19,8 @@ use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\ProgressListener\AudioProgressListener;
 use FFMpeg\FFProbe;
 
-abstract class DefaultAudio extends EventEmitter implements AudioInterface, ProgressableInterface {
+abstract class DefaultAudio extends EventEmitter implements AudioInterface, ProgressableInterface
+{
 
     /**
      * @var string
@@ -39,14 +40,16 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * @inheritDoc
      */
-    public function getExtraParams(): array {
+    public function getExtraParams(): array 
+    {
         return [];
     }
 
     /**
      * @inheritDoc
      */
-    public function getAudioCodec(): string {
+    public function getAudioCodec(): string 
+    {
         return $this->audioCodec;
     }
 
@@ -54,16 +57,19 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      * Sets the audio codec, Should be in the available ones, otherwise an
      * exception is thrown.
      *
-     * @param string $audioCodec
+     * @param  string $audioCodec
      * @return self
      * @throws InvalidArgumentException
      */
-    public function setAudioCodec(string $audioCodec): self {
+    public function setAudioCodec(string $audioCodec): self 
+    {
         if(!in_array($audioCodec, $this->getAvailableAudioCodecs())) {
-            throw new InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(
+                sprintf(
                     'Wrong audiocodec value for %s, available formats are %s',
                     $audioCodec, implode(', ', $this->getAvailableAudioCodecs())
-            ));
+                )
+            );
         }
 
         $this->audioCodec = $audioCodec;
@@ -74,18 +80,20 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * @inheritDoc
      */
-    public function getAudioKiloBitrate(): int {
+    public function getAudioKiloBitrate(): int 
+    {
         return $this->audioKiloBitrate;
     }
 
     /**
      * Sets the kiloBitrate value.
      *
-     * @param  int                  $kiloBitrate
+     * @param  int $kiloBitrate
      * @throws InvalidArgumentException
      * @return self
      */
-    public function setAudioKiloBitrate(int $kiloBitrate): self {
+    public function setAudioKiloBitrate(int $kiloBitrate): self 
+    {
         if($kiloBitrate < 1) {
             throw new InvalidArgumentException('Wrong kiloBitrate value, must be positive');
         }
@@ -98,18 +106,20 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * @inheritDoc
      */
-    public function getAudioChannels(): ?int {
+    public function getAudioChannels(): ?int 
+    {
         return $this->audioChannels;
     }
 
     /**
      * Sets the channels value.
      *
-     * @param  int                  $channels
+     * @param  int $channels
      * @throws InvalidArgumentException
      * @return self
      */
-    public function setAudioChannels(int $channels): self {
+    public function setAudioChannels(int $channels): self 
+    {
         if($channels < 1) {
             throw new InvalidArgumentException('Wrong channels value, must be positive');
         }
@@ -122,12 +132,15 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * @inheritDoc
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses): array {
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses): array 
+    {
         $format = $this;
         $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $passes, $totalPasses);
-        $listener->on('progress', function () use ($media, $format) {
-           $format->emit('progress', array_merge([$media, $format], func_get_args()));
-        });
+        $listener->on(
+            'progress', function () use ($media, $format) {
+                $format->emit('progress', array_merge([$media, $format], func_get_args()));
+            }
+        );
 
         return [$listener];
     }
@@ -135,7 +148,8 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * @inheritDoc
      */
-    public function getPasses(): int {
+    public function getPasses(): int 
+    {
         return 1;
     }
 }

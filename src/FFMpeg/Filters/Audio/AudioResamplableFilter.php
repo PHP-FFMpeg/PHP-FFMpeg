@@ -24,7 +24,8 @@ use FFMpeg\Media\Audio;
  * @package    FFMpeg\Filters
  * @subpackage Audio
  */
-class AudioResamplableFilter implements AudioFilterInterface {
+class AudioResamplableFilter implements AudioFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -38,7 +39,8 @@ class AudioResamplableFilter implements AudioFilterInterface {
      */
     private $priority;
 
-    public function __construct(int $rate, int $priority = 0) {
+    public function __construct(int $rate, int $priority = 0) 
+    {
         $this->rate = $rate;
         $this->setPriority($priority);
     }
@@ -46,14 +48,16 @@ class AudioResamplableFilter implements AudioFilterInterface {
     /**
      * @return int
      */
-    public function getRate(): int {
+    public function getRate(): int 
+    {
         return $this->rate;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format): array {
+    public function apply(Audio $audio, AudioInterface $format): array 
+    {
         return ['-ac', 2, '-ar', $this->rate];
     }
 

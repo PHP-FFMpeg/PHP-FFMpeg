@@ -38,11 +38,12 @@ class Concat extends AbstractMediaType
     /**
      * Creates a new Concat filter.
      *
-     * @param   string[]        $sources
-     * @param   FFMpegDriver    $driver
-     * @param   FFProbe         $ffprobe
+     * @param string[]     $sources
+     * @param FFMpegDriver $driver
+     * @param FFProbe      $ffprobe
      */
-    public function __construct(array $sources, FFMpegDriver $driver, FFProbe $ffprobe) {
+    public function __construct(array $sources, FFMpegDriver $driver, FFProbe $ffprobe) 
+    {
         if(count($sources) === 0) {
             throw new InvalidArgumentException('No sources given');
         }
@@ -56,7 +57,8 @@ class Concat extends AbstractMediaType
      *
      * @return string[]
      */
-    public function getSources() {
+    public function getSources() 
+    {
         return $this->sources;
     }
 
@@ -65,7 +67,8 @@ class Concat extends AbstractMediaType
      *
      * @return ConcatFilters
      */
-    public function filters() {
+    public function filters() 
+    {
         return new ConcatFilters($this);
     }
 
@@ -74,7 +77,8 @@ class Concat extends AbstractMediaType
      *
      * @return Concat
      */
-    public function addFilter(ConcatFilterInterface $filter) {
+    public function addFilter(ConcatFilterInterface $filter) 
+    {
         $this->filters->add($filter);
 
         return $this;
@@ -83,14 +87,15 @@ class Concat extends AbstractMediaType
     /**
      * Saves the concatenated video in the given array, considering that the sources videos are all encoded with the same codec.
      *
-     * @param array   $outputPathfile
+     * @param array $outputPathfile
      * @param bool  $streamCopy
      *
      * @return Concat
      *
      * @throws RuntimeException
      */
-    public function saveFromSameCodecs($outputPathfile, bool $streamCopy = true) {
+    public function saveFromSameCodecs($outputPathfile, bool $streamCopy = true) 
+    {
         if(!(is_array($this->sources) && count($this->sources))) {
             throw new InvalidArgumentException('The list of videos is not a valid array.');
         }
@@ -115,7 +120,8 @@ class Concat extends AbstractMediaType
         foreach ($this->sources as $videoPath) {
             $line = "";
 
-            if($videoCount !== 0) $line .= "\n";
+            if($videoCount !== 0) { $line .= "\n";
+            }
 
             $line .= "file {$videoPath}";
 
@@ -163,13 +169,14 @@ class Concat extends AbstractMediaType
     /**
      * Saves the concatenated video in the given filename, considering that the sources videos are all encoded with the same codec.
      *
-     * @param string  $outputPathfile
+     * @param string $outputPathfile
      *
      * @return Concat
      *
      * @throws RuntimeException
      */
-    public function saveFromDifferentCodecs(FormatInterface $format, $outputPathfile) {
+    public function saveFromDifferentCodecs(FormatInterface $format, $outputPathfile) 
+    {
         /**
          * @see https://ffmpeg.org/ffmpeg-formats.html#concat
          * @see https://trac.ffmpeg.org/wiki/Concatenate

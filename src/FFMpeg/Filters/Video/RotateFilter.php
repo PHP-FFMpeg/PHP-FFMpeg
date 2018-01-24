@@ -17,7 +17,8 @@ use FFMpeg\Media\Video;
 use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 
-class RotateFilter implements VideoFilterInterface {
+class RotateFilter implements VideoFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -47,7 +48,8 @@ class RotateFilter implements VideoFilterInterface {
      */
     private $priority;
 
-    public function __construct(string $angle, int $priority = 0) {
+    public function __construct(string $angle, int $priority = 0) 
+    {
         $this->setAngle($angle);
         $this->setPriority($priority);
     }
@@ -55,14 +57,16 @@ class RotateFilter implements VideoFilterInterface {
     /**
      * @return string
      */
-    public function getAngle(): string {
+    public function getAngle(): string 
+    {
         return $this->angle;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array {
+    public function apply(Video $video, VideoInterface $format): array 
+    {
         if(in_array($this->angle, [self::ROTATE_90, self::ROTATE_270])) {
             foreach($video->getStreams()->getVideoStreams() as $stream) {
                 if($stream->has('width') && $stream->has('height')) {
@@ -77,15 +81,16 @@ class RotateFilter implements VideoFilterInterface {
         return ['-vf', $this->getAngle(), '-metadata:s:v:0', 'rotate=0'];
     }
 
-    private function setAngle(string $angle): void {
+    private function setAngle(string $angle): void 
+    {
         switch ($angle) {
-            case self::ROTATE_90:
-            case self::ROTATE_180:
-            case self::ROTATE_270:
-                $this->angle = $angle;
+        case self::ROTATE_90:
+        case self::ROTATE_180:
+        case self::ROTATE_270:
+            $this->angle = $angle;
             break;
-            default:
-                throw new InvalidArgumentException('Invalid angle value.');
+        default:
+            throw new InvalidArgumentException('Invalid angle value.');
         }
     }
 }

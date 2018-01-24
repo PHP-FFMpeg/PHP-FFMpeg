@@ -14,7 +14,8 @@ namespace FFMpeg\Format\Audio;
 /**
  * The WAV audio format
  */
-class Wav extends DefaultAudio {
+class Wav extends DefaultAudio
+{
 
     /**
      * @inheritDoc
@@ -24,7 +25,8 @@ class Wav extends DefaultAudio {
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array {
+    public function getAvailableAudioCodecs(): array 
+    {
         return ['pcm_s16le'];
     }
 

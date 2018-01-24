@@ -15,7 +15,8 @@ use FFMpeg\Filters\FilterInterface;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
-interface VideoFilterInterface extends FilterInterface {
+interface VideoFilterInterface extends FilterInterface
+{
 
     /**
      * Applies the filter on the the Video media given an format.

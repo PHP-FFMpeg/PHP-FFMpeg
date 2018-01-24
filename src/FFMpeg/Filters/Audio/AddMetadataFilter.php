@@ -25,7 +25,8 @@ use FFMpeg\Media\Audio;
  * @package    FFMpeg\Filters
  * @subpackage Audio
  */
-class AddMetadataFilter implements AudioFilterInterface {
+class AddMetadataFilter implements AudioFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -39,7 +40,8 @@ class AddMetadataFilter implements AudioFilterInterface {
     private $priority;
 
 
-    public function __construct(array $metaArr = null, int $priority = 9) {
+    public function __construct(array $metaArr = null, int $priority = 9) 
+    {
         $this->metaArr = $metaArr;
         $this->setPriority($priority);
     }
@@ -47,7 +49,8 @@ class AddMetadataFilter implements AudioFilterInterface {
     /**
      * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format): array {
+    public function apply(Audio $audio, AudioInterface $format): array 
+    {
         $meta = $this->metaArr;
 
         if($meta === null) {

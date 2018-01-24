@@ -28,7 +28,8 @@ use Psr\SimpleCache\CacheInterface;
 use Psr\Log\LoggerInterface;
 use Sabre\Cache\Memory as MemoryCache;
 
-class FFProbe {
+class FFProbe
+{
     const TYPE_STREAMS = 'streams';
     const TYPE_FORMAT = 'format';
 
@@ -57,7 +58,8 @@ class FFProbe {
      */
     private $mapper;
 
-    public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache) {
+    public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache) 
+    {
         $this->ffprobe = $ffprobe;
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
         $this->parser = new OutputParser();
@@ -68,7 +70,8 @@ class FFProbe {
     /**
      * @return OutputParserInterface
      */
-    public function getParser(): OutputParserInterface {
+    public function getParser(): OutputParserInterface 
+    {
         return $this->parser;
     }
 
@@ -77,7 +80,8 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setParser(OutputParserInterface $parser) {
+    public function setParser(OutputParserInterface $parser) 
+    {
         $this->parser = $parser;
 
         return $this;
@@ -86,7 +90,8 @@ class FFProbe {
     /**
      * @return FFProbeDriver
      */
-    public function getFFProbeDriver(): FFProbeDriver {
+    public function getFFProbeDriver(): FFProbeDriver 
+    {
         return $this->ffprobe;
     }
 
@@ -95,7 +100,8 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setFFProbeDriver(FFProbeDriver $ffprobe) {
+    public function setFFProbeDriver(FFProbeDriver $ffprobe) 
+    {
         $this->ffprobe = $ffprobe;
 
         return $this;
@@ -106,7 +112,8 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setOptionsTester(OptionsTesterInterface $tester): FFProbe {
+    public function setOptionsTester(OptionsTesterInterface $tester): FFProbe 
+    {
         $this->optionsTester = $tester;
 
         return $this;
@@ -115,7 +122,8 @@ class FFProbe {
     /**
      * @return OptionsTesterInterface
      */
-    public function getOptionsTester(): OptionsTesterInterface {
+    public function getOptionsTester(): OptionsTesterInterface 
+    {
         return $this->optionsTester;
     }
 
@@ -124,7 +132,8 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setCache(CacheInterface $cache): FFProbe {
+    public function setCache(CacheInterface $cache): FFProbe 
+    {
         $this->cache = $cache;
 
         return $this;
@@ -133,14 +142,16 @@ class FFProbe {
     /**
      * @return CacheInterface
      */
-    public function getCache(): CacheInterface {
+    public function getCache(): CacheInterface 
+    {
         return $this->cache;
     }
 
     /**
      * @return MapperInterface
      */
-    public function getMapper(): MapperInterface {
+    public function getMapper(): MapperInterface 
+    {
         return $this->mapper;
     }
 
@@ -149,7 +160,8 @@ class FFProbe {
      *
      * @return FFProbe
      */
-    public function setMapper(MapperInterface $mapper): FFProbe {
+    public function setMapper(MapperInterface $mapper): FFProbe 
+    {
         $this->mapper = $mapper;
 
         return $this;
@@ -165,18 +177,20 @@ class FFProbe {
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function format($pathfile): Format {
+    public function format($pathfile): Format 
+    {
         return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
     }
 
     /**
      * Checks wether the given `$pathfile` is considered a valid media file.
      *
-     * @param string $pathfile
+     * @param  string $pathfile
      * @return bool
-     * @since 0.10.0
+     * @since  0.10.0
      */
-    public function isValid($pathfile): bool {
+    public function isValid($pathfile): bool 
+    {
         try {
             return $this->format($pathfile)->get('duration') > 0;
         } catch(\Throwable $e) {
@@ -195,20 +209,22 @@ class FFProbe {
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function streams($pathfile): StreamCollection {
+    public function streams($pathfile): StreamCollection 
+    {
         return $this->probe($pathfile, '-show_streams', static::TYPE_STREAMS);
     }
 
     /**
      * Creates an FFProbe.
      *
-     * @param array|ConfigurationInterface  $configuration
-     * @param LoggerInterface               $logger
-     * @param CacheInterface                $cache
+     * @param array|ConfigurationInterface $configuration
+     * @param LoggerInterface              $logger
+     * @param CacheInterface               $cache
      *
      * @return FFProbe
      */
-    public static function create($configuration = [], LoggerInterface $logger = null, CacheInterface $cacheDriver = null) {
+    public static function create($configuration = [], LoggerInterface $logger = null, CacheInterface $cacheDriver = null) 
+    {
         if($cacheDriver === null) {
             // default to in-memory cache
             $cacheDriver = new MemoryCache;
@@ -217,7 +233,8 @@ class FFProbe {
         return new static(FFProbeDriver::create($configuration, $logger), $cacheDriver);
     }
 
-    private function probe($pathfile, $command, $type, $allowJson = true) {
+    private function probe($pathfile, $command, $type, $allowJson = true) 
+    {
         $id = sprintf('%s-%s', $command, $pathfile);
 
         if($this->cache->has($id)) {
@@ -225,10 +242,12 @@ class FFProbe {
         }
 
         if(!$this->optionsTester->has($command)) {
-            throw new RuntimeException(sprintf(
-                'This version of ffprobe is too old and '
-                . 'does not support `%s` option, please upgrade', $command
-            ));
+            throw new RuntimeException(
+                sprintf(
+                    'This version of ffprobe is too old and '
+                    . 'does not support `%s` option, please upgrade', $command
+                )
+            );
         }
 
         $commands = [$pathfile, $command];
@@ -274,11 +293,12 @@ class FFProbe {
     /**
      * Returns the php variable representation of a json string
      *
-     * @param   string  $json   The json encoded string to parse
+     * @param  string $json The json encoded string to parse
      * @return mixed
-     * @see json_decode()
+     * @see    json_decode()
      */
-    private function parseJson(string $json) {
+    private function parseJson(string $json) 
+    {
         $ret = json_decode($json, true);
 
         if(JSON_ERROR_NONE !== json_last_error()) {

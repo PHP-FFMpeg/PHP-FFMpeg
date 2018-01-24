@@ -14,7 +14,8 @@ namespace FFMpeg\Format\Video;
 /**
  * The X264 video format
  */
-class X264 extends DefaultVideo {
+class X264 extends DefaultVideo
+{
 
     /**
      * @var bool
@@ -39,7 +40,8 @@ class X264 extends DefaultVideo {
     /**
      * @deprecated 1.0.0 use setters directly
      */
-    public function __construct(string $audioCodec = 'libfaac', string $videoCodec = 'libx264') {
+    public function __construct(string $audioCodec = 'libfaac', string $videoCodec = 'libx264') 
+    {
         $this->setAudioCodec($audioCodec);
         $this->setVideoCodec($videoCodec);
     }
@@ -47,7 +49,8 @@ class X264 extends DefaultVideo {
     /**
      * @inheritDoc
      */
-    public function supportBFrames(): bool {
+    public function supportBFrames(): bool 
+    {
         return $this->bframesSupport;
     }
 
@@ -56,7 +59,8 @@ class X264 extends DefaultVideo {
      *
      * @return self
      */
-    public function setBFramesSupport(bool $support): self {
+    public function setBFramesSupport(bool $support): self 
+    {
         $this->bframesSupport = $support;
 
         return $this;
@@ -65,14 +69,16 @@ class X264 extends DefaultVideo {
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array {
+    public function getAvailableAudioCodecs(): array 
+    {
         return ['aac', 'libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac'];
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableVideoCodecs(): array {
+    public function getAvailableVideoCodecs(): array 
+    {
         return ['libx264'];
     }
 
@@ -81,7 +87,8 @@ class X264 extends DefaultVideo {
      *
      * @return self
      */
-    public function setPasses(int $passes): self {
+    public function setPasses(int $passes): self 
+    {
         $this->passes = $passes;
         return $this;
     }
@@ -89,14 +96,16 @@ class X264 extends DefaultVideo {
     /**
      * @inheritDoc
      */
-    public function getPasses(): int {
+    public function getPasses(): int 
+    {
         return $this->passes;
     }
 
     /**
      * @return int
      */
-    public function getModulus(): int {
+    public function getModulus(): int 
+    {
         return 2;
     }
 

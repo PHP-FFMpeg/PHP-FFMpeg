@@ -21,24 +21,27 @@ use Psr\Log\LoggerInterface;
 /**
  * Driver responsible for FFProbe
  */
-class FFProbeDriver extends AbstractBinary {
+class FFProbeDriver extends AbstractBinary
+{
 
     /**
      * @inheritDoc
      */
-    public function getName() {
+    public function getName() 
+    {
         return 'ffprobe';
     }
 
     /**
      * Creates an FFProbeDriver.
      *
-     * @param   array|ConfigurationInterface    $configuration
-     * @param   LoggerInterface                 $logger
+     * @param array|ConfigurationInterface $configuration
+     * @param LoggerInterface              $logger
      *
      * @return FFProbeDriver
      */
-    public static function create($configuration, LoggerInterface $logger = null): FFProbeDriver {
+    public static function create($configuration, LoggerInterface $logger = null): FFProbeDriver 
+    {
         if(!($configuration instanceof ConfigurationInterface)) {
             $configuration = new Configuration($configuration);
         }

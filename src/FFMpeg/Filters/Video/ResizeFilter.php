@@ -17,7 +17,8 @@ use FFMpeg\Media\Video;
 use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 
-class ResizeFilter implements VideoFilterInterface {
+class ResizeFilter implements VideoFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -61,7 +62,8 @@ class ResizeFilter implements VideoFilterInterface {
      */
     private $priority;
 
-    public function __construct(Dimension $dimension, string $mode = self::RESIZEMODE_FIT, bool $forceStandards = true, int $priority = 0) {
+    public function __construct(Dimension $dimension, string $mode = self::RESIZEMODE_FIT, bool $forceStandards = true, int $priority = 0) 
+    {
         $this->dimension = $dimension;
         $this->mode = $mode;
         $this->forceStandards = $forceStandards;
@@ -95,7 +97,8 @@ class ResizeFilter implements VideoFilterInterface {
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array {
+    public function apply(Video $video, VideoInterface $format): array 
+    {
         $dimensions = null;
         $commands = [];
 
@@ -104,7 +107,8 @@ class ResizeFilter implements VideoFilterInterface {
             try {
                 $dimensions = $stream->getDimensions();
                 break;
-            } catch(RuntimeException $e) {}
+            } catch(RuntimeException $e) {
+            }
         }
 
         if (null !== $dimensions) {
@@ -124,30 +128,30 @@ class ResizeFilter implements VideoFilterInterface {
         $originalRatio = $dimension->getRatio($this->forceStandards);
 
         switch ($this->mode) {
-            case self::RESIZEMODE_SCALE_WIDTH:
+        case self::RESIZEMODE_SCALE_WIDTH:
+            $height = $this->dimension->getHeight();
+            $width = $originalRatio->calculateWidth($height, $modulus);
+            break;
+        case self::RESIZEMODE_SCALE_HEIGHT:
+            $width = $this->dimension->getWidth();
+            $height = $originalRatio->calculateHeight($width, $modulus);
+            break;
+        case self::RESIZEMODE_INSET:
+            $targetRatio = $this->dimension->getRatio($this->forceStandards);
+
+            if ($targetRatio->getValue() > $originalRatio->getValue()) {
                 $height = $this->dimension->getHeight();
                 $width = $originalRatio->calculateWidth($height, $modulus);
-                break;
-            case self::RESIZEMODE_SCALE_HEIGHT:
+            } else {
                 $width = $this->dimension->getWidth();
                 $height = $originalRatio->calculateHeight($width, $modulus);
-                break;
-            case self::RESIZEMODE_INSET:
-                $targetRatio = $this->dimension->getRatio($this->forceStandards);
-
-                if ($targetRatio->getValue() > $originalRatio->getValue()) {
-                    $height = $this->dimension->getHeight();
-                    $width = $originalRatio->calculateWidth($height, $modulus);
-                } else {
-                    $width = $this->dimension->getWidth();
-                    $height = $originalRatio->calculateHeight($width, $modulus);
-                }
-                break;
-            case self::RESIZEMODE_FIT:
-            default:
-                $width = $this->dimension->getWidth();
-                $height = $this->dimension->getHeight();
-                break;
+            }
+            break;
+        case self::RESIZEMODE_FIT:
+        default:
+            $width = $this->dimension->getWidth();
+            $height = $this->dimension->getHeight();
+            break;
         }
 
         return new Dimension($width, $height);

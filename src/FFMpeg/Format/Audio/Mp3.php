@@ -14,7 +14,8 @@ namespace FFMpeg\Format\Audio;
 /**
  * The MP3 audio format
  */
-class Mp3 extends DefaultAudio {
+class Mp3 extends DefaultAudio
+{
 
     /**
      * @inheritDoc
@@ -24,7 +25,8 @@ class Mp3 extends DefaultAudio {
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array {
+    public function getAvailableAudioCodecs(): array 
+    {
         return ['libmp3lame'];
     }
 }

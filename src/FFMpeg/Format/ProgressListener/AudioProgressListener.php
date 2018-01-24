@@ -20,12 +20,14 @@ namespace FFMpeg\Format\ProgressListener;
  *
  * @author Robert Gruendler <r.gruendler@gmail.com>
  */
-class AudioProgressListener extends AbstractProgressListener {
+class AudioProgressListener extends AbstractProgressListener
+{
 
     /**
      * @inheritDoc
      */
-    public function getPattern(): string {
+    public function getPattern(): string 
+    {
         return '/size=(.*?) time=(.*?) /';
     }
 

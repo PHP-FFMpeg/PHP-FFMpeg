@@ -10,15 +10,17 @@ namespace FFMpeg\Filters;
  * @package    FFMpeg
  * @subpackage Filters
  */
-trait TPriorityFilter {
+trait TPriorityFilter
+{
 
     /**
      * Inits the given priority
      *
-     * @param   int     $priority
+     * @param  int $priority
      * @return void
      */
-    public function setPriority(int $priority = 0): void {
+    public function setPriority(int $priority = 0): void 
+    {
         $this->priority = $priority;
     }
 
@@ -27,7 +29,8 @@ trait TPriorityFilter {
      *
      * @return int
      */
-    public function getPriority(): int {
+    public function getPriority(): int 
+    {
         return $this->priority;
     }
 

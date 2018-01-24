@@ -23,7 +23,8 @@ use FFMpeg\Filters\Audio\{
     AudioFilters
 };
 
-class VideoFilters extends AudioFilters {
+class VideoFilters extends AudioFilters
+{
 
     // phpcs:disable
     /**
@@ -37,13 +38,14 @@ class VideoFilters extends AudioFilters {
     /**
      * Resizes a video to a given dimension.
      *
-     * @param   Dimension     $dimension
-     * @param   string        $mode
-     * @param   bool          $forceStandards
+     * @param Dimension $dimension
+     * @param string    $mode
+     * @param bool      $forceStandards
      *
      * @return self
      */
-    public function resize(Dimension $dimension, string $mode = ResizeFilter::RESIZEMODE_FIT, bool $forceStandards = true): self {
+    public function resize(Dimension $dimension, string $mode = ResizeFilter::RESIZEMODE_FIT, bool $forceStandards = true): self 
+    {
         $this->media->addFilter(new ResizeFilter($dimension, $mode, $forceStandards));
 
         return $this;
@@ -52,11 +54,12 @@ class VideoFilters extends AudioFilters {
     /**
      * Changes the video framerate.
      *
-     * @param   FrameRate   $framerate
-     * @param   int         $gop
+     * @param  FrameRate $framerate
+     * @param  int       $gop
      * @return self
      */
-    public function framerate(FrameRate $framerate, ?int $gop = null): self {
+    public function framerate(FrameRate $framerate, ?int $gop = null): self 
+    {
         $this->media->addFilter(new FrameRateFilter($framerate, $gop));
 
         return $this;
@@ -65,12 +68,13 @@ class VideoFilters extends AudioFilters {
     /**
      * Extract multiple frames from the video
      *
-     * @param   string  $frameRate
-     * @param   string  $destinationFolder
+     * @param string $frameRate
+     * @param string $destinationFolder
      *
      * @return self
      */
-    public function extractMultipleFrames(string $frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, string $destinationFolder = __DIR__): self {
+    public function extractMultipleFrames(string $frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, string $destinationFolder = __DIR__): self 
+    {
         $this->media->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
 
         return $this;
@@ -81,7 +85,8 @@ class VideoFilters extends AudioFilters {
      *
      * @return self
      */
-    public function synchronize(): self {
+    public function synchronize(): self 
+    {
         $this->media->addFilter(new SynchronizeFilter);
 
         return $this;
@@ -90,12 +95,13 @@ class VideoFilters extends AudioFilters {
     /**
      * Clips (cuts) the video.
      *
-     * @param   TimeCode    $start
-     * @param   TimeCode    $duration
+     * @param TimeCode $start
+     * @param TimeCode $duration
      *
      * @return self
      */
-    public function clip(TimeCode $start, ?TimeCode $duration = null): self {
+    public function clip(TimeCode $start, ?TimeCode $duration = null): self 
+    {
         $this->media->addFilter(new ClipFilter($start, $duration));
 
         return $this;
@@ -104,10 +110,11 @@ class VideoFilters extends AudioFilters {
     /**
      * Resamples the audio file.
      *
-     * @param   int   $rate
+     * @param  int $rate
      * @return self
      */
-    public function audioResample(int $rate): self {
+    public function audioResample(int $rate): self 
+    {
         $this->media->addFilter(new AudioResamplableFilter($rate));
 
         return $this;
@@ -116,10 +123,11 @@ class VideoFilters extends AudioFilters {
     /**
      * Adds padding (black bars) to a video.
      *
-     * @param   Dimension   $dimension
+     * @param  Dimension $dimension
      * @return self
      */
-    public function pad(Dimension $dimension): self {
+    public function pad(Dimension $dimension): self 
+    {
         $this->media->addFilter(new PadFilter($dimension));
 
         return $this;
@@ -128,10 +136,11 @@ class VideoFilters extends AudioFilters {
     /**
      * Rotates the video by given degrees.
      *
-     * @param   string  $angle  One of `RotateFilter::ROTATE_[90|180|270]` constants
+     * @param  string $angle One of `RotateFilter::ROTATE_[90|180|270]` constants
      * @return self
      */
-    public function rotate(string $angle): self {
+    public function rotate(string $angle): self 
+    {
         // use a high priority
         $this->media->addFilter(new RotateFilter($angle, 30));
 
@@ -141,12 +150,13 @@ class VideoFilters extends AudioFilters {
     /**
      * Crops the video
      *
-     * @param Point $point
+     * @param Point     $point
      * @param Dimension $dimension
      *
      * @return self
      */
-    public function crop(Point $point, Dimension $dimension): self {
+    public function crop(Point $point, Dimension $dimension): self 
+    {
         $this->media->addFilter(new CropFilter($point, $dimension));
 
         return $this;
@@ -158,7 +168,8 @@ class VideoFilters extends AudioFilters {
      *
      * @return self
      */
-    public function watermark(string $imagePath, array $coordinates = []): self {
+    public function watermark(string $imagePath, array $coordinates = []): self 
+    {
         $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates));
 
         return $this;
@@ -167,11 +178,12 @@ class VideoFilters extends AudioFilters {
     /**
      * Applies a custom filter: -vf foo bar
      *
-     * @param string    $parameters
+     * @param string $parameters
      *
      * @return self
      */
-    public function custom(string $parameters): self {
+    public function custom(string $parameters): self 
+    {
         $this->media->addFilter(new CustomFilter($parameters));
 
         return $this;

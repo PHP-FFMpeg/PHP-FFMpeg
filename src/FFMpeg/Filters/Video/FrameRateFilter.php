@@ -16,7 +16,8 @@ use FFMpeg\Coordinate\FrameRate;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 
-class FrameRateFilter implements VideoFilterInterface {
+class FrameRateFilter implements VideoFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -35,7 +36,8 @@ class FrameRateFilter implements VideoFilterInterface {
      */
     private $priority;
 
-    public function __construct(FrameRate $rate, ?int $gop = null, int $priority = 0) {
+    public function __construct(FrameRate $rate, ?int $gop = null, int $priority = 0) 
+    {
         $this->rate = $rate;
         $this->gop = $gop;
         $this->setPriority($priority);
@@ -45,7 +47,8 @@ class FrameRateFilter implements VideoFilterInterface {
      *
      * @return FrameRate
      */
-    public function getFrameRate(): FrameRate {
+    public function getFrameRate(): FrameRate 
+    {
         return $this->rate;
     }
 
@@ -56,14 +59,16 @@ class FrameRateFilter implements VideoFilterInterface {
      *
      * @return int|null
      */
-    public function getGOP(): ?int {
+    public function getGOP(): ?int 
+    {
         return $this->gop;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array {
+    public function apply(Video $video, VideoInterface $format): array 
+    {
         $commands = ['-r', $this->rate->getValue()];
 
         /**

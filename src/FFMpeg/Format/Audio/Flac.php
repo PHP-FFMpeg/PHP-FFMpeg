@@ -14,7 +14,8 @@ namespace FFMpeg\Format\Audio;
 /**
  * The Flac audio format
  */
-class Flac extends DefaultAudio {
+class Flac extends DefaultAudio
+{
 
     /**
      * @inheritDoc
@@ -24,7 +25,8 @@ class Flac extends DefaultAudio {
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array {
+    public function getAvailableAudioCodecs(): array 
+    {
         return ['flac'];
     }
 }

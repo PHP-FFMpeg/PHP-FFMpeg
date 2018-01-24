@@ -10,7 +10,8 @@
  */
 namespace FFMpeg\Format;
 
-interface AudioInterface extends FormatInterface {
+interface AudioInterface extends FormatInterface
+{
 
     /**
      * Gets the audio kiloBitrate value.

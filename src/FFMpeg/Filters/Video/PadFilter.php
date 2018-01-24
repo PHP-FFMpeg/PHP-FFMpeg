@@ -16,7 +16,8 @@ use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 
-class PadFilter implements VideoFilterInterface {
+class PadFilter implements VideoFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -30,7 +31,8 @@ class PadFilter implements VideoFilterInterface {
      */
     private $priority;
 
-    public function __construct(Dimension $dimension, int $priority = 0) {
+    public function __construct(Dimension $dimension, int $priority = 0) 
+    {
         $this->dimension = $dimension;
 
         $this->setPriority($priority);
@@ -39,14 +41,16 @@ class PadFilter implements VideoFilterInterface {
     /**
      * @return Dimension
      */
-    public function getDimension(): Dimension {
+    public function getDimension(): Dimension 
+    {
         return $this->dimension;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array {
+    public function apply(Video $video, VideoInterface $format): array 
+    {
         $commands = [];
 
         $commands[] = '-vf';

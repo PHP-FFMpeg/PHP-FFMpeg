@@ -11,4 +11,6 @@
 
 namespace FFMpeg\Format;
 
-interface FrameInterface extends FormatInterface {}
+interface FrameInterface extends FormatInterface
+{
+}

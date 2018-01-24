@@ -16,15 +16,16 @@ use Alchemy\BinaryDriver\Listeners\ListenerInterface;
 use FFMpeg\FFProbe;
 use FFMpeg\Media\MediaTypeInterface;
 
-interface ProgressableInterface extends EventEmitterInterface {
+interface ProgressableInterface extends EventEmitterInterface
+{
 
     /**
      * Creates the progress listener.
      *
-     * @param MediaTypeInterface    $media
-     * @param FFProbe               $ffprobe
-     * @param int                   $pass    The current pass number
-     * @param int                   $total   The total pass number
+     * @param MediaTypeInterface $media
+     * @param FFProbe            $ffprobe
+     * @param int                $pass    The current pass number
+     * @param int                $total   The total pass number
      *
      * @return ListenerInterface[] An array of listeners
      */

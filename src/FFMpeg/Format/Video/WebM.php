@@ -14,7 +14,8 @@ namespace FFMpeg\Format\Video;
 /**
  * The WebM video format
  */
-class WebM extends DefaultVideo {
+class WebM extends DefaultVideo
+{
 
     /**
      * @inheritDoc
@@ -29,7 +30,8 @@ class WebM extends DefaultVideo {
     /**
      * @deprecated 1.0.0 use setters directly
      */
-    public function __construct(string $audioCodec = 'libvorbis', string $videoCodec = 'libvpx') {
+    public function __construct(string $audioCodec = 'libvorbis', string $videoCodec = 'libvpx') 
+    {
         $this->setAudioCodec($audioCodec);
         $this->setVideoCodec($videoCodec);
     }
@@ -37,28 +39,32 @@ class WebM extends DefaultVideo {
     /**
      * @inheritDoc
      */
-    public function supportBFrames(): bool {
+    public function supportBFrames(): bool 
+    {
         return true;
     }
 
     /**
      * @inheritDoc
      */
-    public function getExtraParams(): array {
+    public function getExtraParams(): array 
+    {
         return ['-f', 'webm'];
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array {
+    public function getAvailableAudioCodecs(): array 
+    {
         return ['libvorbis'];
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableVideoCodecs(): array {
+    public function getAvailableVideoCodecs(): array 
+    {
         return ['libvpx', 'libvpx-vp9'];
     }
 

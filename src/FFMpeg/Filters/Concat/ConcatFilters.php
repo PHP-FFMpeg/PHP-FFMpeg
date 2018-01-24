@@ -13,14 +13,16 @@ namespace FFMpeg\Filters\Concat;
 
 use FFMpeg\Media\Concat;
 
-class ConcatFilters {
+class ConcatFilters
+{
 
     /**
      * @var Concat
      */
     private $concat;
 
-    public function __construct(Concat $concat) {
+    public function __construct(Concat $concat) 
+    {
         $this->concat = $concat;
     }
 }

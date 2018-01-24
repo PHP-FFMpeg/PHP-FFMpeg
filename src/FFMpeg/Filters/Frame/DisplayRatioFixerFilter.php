@@ -15,7 +15,8 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Frame;
 use FFMpeg\Filters\TPriorityFilter;
 
-class DisplayRatioFixerFilter implements FrameFilterInterface {
+class DisplayRatioFixerFilter implements FrameFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -24,14 +25,16 @@ class DisplayRatioFixerFilter implements FrameFilterInterface {
      */
     private $priority;
 
-    public function __construct(int $priority = 0) {
+    public function __construct(int $priority = 0) 
+    {
         $this->setPriority($priority);
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Frame $frame): array {
+    public function apply(Frame $frame): array 
+    {
         $dimensions = null;
         $commands = [];
 

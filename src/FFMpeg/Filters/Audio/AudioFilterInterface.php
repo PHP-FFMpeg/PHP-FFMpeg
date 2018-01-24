@@ -24,13 +24,14 @@ use FFMpeg\Media\Audio;
  * @package    FFMpeg\Filters
  * @subpackage Audio
  */
-interface AudioFilterInterface extends FilterInterface {
+interface AudioFilterInterface extends FilterInterface
+{
 
     /**
      * Applies the filter on the the Audio media given an format.
      *
-     * @param   Audio           $audio
-     * @param   AudioInterface  $format
+     * @param Audio          $audio
+     * @param AudioInterface $format
      *
      * @return string[] An array of arguments
      */

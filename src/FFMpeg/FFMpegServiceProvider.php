@@ -1,5 +1,7 @@
 <?php
 
+// phpcs:disable
+
 /*
  * This file is part of PHP-FFmpeg.
  *

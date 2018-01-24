@@ -16,7 +16,8 @@ use FFMpeg\Exception\InvalidArgumentException;
 /**
  * Helper class for dealing with framerates
  */
-class FrameRate {
+class FrameRate
+{
 
     /**
      * @var float
@@ -26,9 +27,10 @@ class FrameRate {
     /**
      * Initalizes a new framerate object
      *
-     * @param   float     $value
+     * @param float $value
      */
-    public function __construct(float $value) {
+    public function __construct(float $value) 
+    {
         if($value <= 0) {
             throw new InvalidArgumentException('Invalid frame rate, must be a positive integer.');
         }
@@ -39,17 +41,19 @@ class FrameRate {
     /**
      * Overwrites the value.
      *
-     * @param   float   $value  The new value
+     * @param  float $value The new value
      * @return void
      */
-    public function setValue(float $value): void {
+    public function setValue(float $value): void 
+    {
         $this->value = $value;
     }
 
     /**
      * @return float
      */
-    public function getValue(): float {
+    public function getValue(): float 
+    {
         return $this->value;
     }
 

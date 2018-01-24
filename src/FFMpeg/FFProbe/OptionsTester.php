@@ -16,7 +16,8 @@ use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\Exception\RuntimeException;
 use Psr\SimpleCache\CacheInterface;
 
-class OptionsTester implements OptionsTesterInterface {
+class OptionsTester implements OptionsTesterInterface
+{
 
     /**
      * @var FFProbeDriver
@@ -33,7 +34,8 @@ class OptionsTester implements OptionsTesterInterface {
      */
     protected const HELP_OUTPUT_CACHE_ID = 'helpOutput';
 
-    public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache) {
+    public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache) 
+    {
         $this->ffprobe = $ffprobe;
         $this->cache = $cache;
     }
@@ -41,7 +43,8 @@ class OptionsTester implements OptionsTesterInterface {
     /**
      * @inheritDoc
      */
-    public function has(string $optionName): bool {
+    public function has(string $optionName): bool 
+    {
         $id = sprintf('option-%s', $optionName);
 
         if ($this->cache->has($id)) {
@@ -62,7 +65,8 @@ class OptionsTester implements OptionsTesterInterface {
      *
      * @return string
      */
-    private function retrieveHelpOutput(): string {
+    private function retrieveHelpOutput(): string 
+    {
         if ($this->cache->has(static::HELP_OUTPUT_CACHE_ID)) {
             return $this->cache->get(static::HELP_OUTPUT_CACHE_ID);
         }

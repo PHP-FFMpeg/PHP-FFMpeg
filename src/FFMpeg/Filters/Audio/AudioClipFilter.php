@@ -25,7 +25,8 @@ use FFMpeg\Media\Audio;
  * @package    FFMpeg\Filters
  * @subpackage Audio
  */
-class AudioClipFilter implements AudioFilterInterface {
+class AudioClipFilter implements AudioFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -45,7 +46,8 @@ class AudioClipFilter implements AudioFilterInterface {
     private $priority;
 
 
-    public function __construct(TimeCode $start, ?TimeCode $duration = null, int $priority = 0) {
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, int $priority = 0) 
+    {
         $this->start = $start;
         $this->duration = $duration;
         $this->setPriority($priority);
@@ -56,7 +58,8 @@ class AudioClipFilter implements AudioFilterInterface {
      *
      * @return TimeCode
      */
-    public function getStart(): TimeCode {
+    public function getStart(): TimeCode 
+    {
         return $this->start;
     }
 
@@ -65,14 +68,16 @@ class AudioClipFilter implements AudioFilterInterface {
      *
      * @return TimeCode|null
      */
-    public function getDuration(): ?TimeCode {
+    public function getDuration(): ?TimeCode 
+    {
         return $this->duration;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format): array {
+    public function apply(Audio $audio, AudioInterface $format): array 
+    {
         $commands = ['-ss', (string) $this->start];
 
         // add duration if given

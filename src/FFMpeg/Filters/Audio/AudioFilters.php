@@ -15,7 +15,8 @@ use FFMpeg\Filters\Audio\AddMetadataFilter;
 use FFMpeg\Media\Audio;
 use FFMpeg\Coordinate\TimeCode;
 
-class AudioFilters {
+class AudioFilters
+{
 
     /**
      * @var Audio
@@ -25,9 +26,10 @@ class AudioFilters {
     /**
      * Initializes the filters
      *
-     * @param   Audio   $media  The audio the filters will be applied to
+     * @param Audio $media The audio the filters will be applied to
      */
-    public function __construct(Audio $media) {
+    public function __construct(Audio $media) 
+    {
         $this->media = $media;
     }
 
@@ -38,7 +40,8 @@ class AudioFilters {
      *
      * @return AudioFilters
      */
-    public function resample(int $rate) {
+    public function resample(int $rate) 
+    {
         $this->media->addFilter(new AudioResamplableFilter($rate));
 
         return $this;
@@ -47,18 +50,17 @@ class AudioFilters {
     /**
      * Add metadata to an audio file. If no arguments are given then filter
      * will remove all metadata from the audio file
-     * @param string[][]|null $data  If array must contain one of these key/value pairs:
-     * * `title`: Title metadata
-     * * `artist`: Artist metadata
-     * * `composer`: Composer metadata
-     * * `album`: Album metadata
-     * * `track`: Track metadata
-     * * `artwork`: Song artwork. String of (absolute) file path
-     * * `year`: Year metadata
-     * * `genre`: Genre metadata
-     * * `description`: Description metadata
+     *
+     * @param string[][]|null $data If array must contain one of these key/value pairs:
+     *                              * `title`: Title metadata * `artist`: Artist
+     *                              metadata * `composer`: Composer metadata * `album`:
+     *                              Album metadata * `track`: Track metadata *
+     *                              `artwork`: Song artwork. String of (absolute) file
+     *                              path * `year`: Year metadata * `genre`: Genre
+     *                              metadata * `description`: Description metadata
      */
-    public function addMetadata(?array $data = null) {
+    public function addMetadata(?array $data = null) 
+    {
         $this->media->addFilter(new AddMetadataFilter($data));
 
         return $this;
@@ -67,11 +69,12 @@ class AudioFilters {
     /**
      * Cuts the audio at `$start`, optionally define the end
      *
-     * @param   TimeCode        $start      Where the clipping starts(seek to time)
-     * @param   TimeCode|null   $duration   How long the clipped audio should be
+     * @param  TimeCode      $start    Where the clipping starts(seek to time)
+     * @param  TimeCode|null $duration How long the clipped audio should be
      * @return AudioFilters
      */
-    public function clip(TimeCode $start, ?TimeCode $duration = null) {
+    public function clip(TimeCode $start, ?TimeCode $duration = null) 
+    {
         $this->media->addFilter(new AudioClipFilter($start, $duration));
 
         return $this;

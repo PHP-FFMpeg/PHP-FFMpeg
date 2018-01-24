@@ -18,14 +18,16 @@ use FFMpeg\Coordinate\Dimension;
 /**
  * Represents stream' data
  */
-class Stream extends AbstractData {
+class Stream extends AbstractData
+{
 
     /**
      * Returns true if the stream is an audio stream.
      *
      * @return bool
      */
-    public function isAudio(): bool {
+    public function isAudio(): bool 
+    {
         return $this->get('codec_type') === 'audio';
     }
 
@@ -34,7 +36,8 @@ class Stream extends AbstractData {
      *
      * @return bool
      */
-    public function isVideo(): bool {
+    public function isVideo(): bool 
+    {
         return $this->get('codec_type') === 'video';
     }
 
@@ -46,7 +49,8 @@ class Stream extends AbstractData {
      * @throws LogicException   In case the stream is not a video stream.
      * @throws RuntimeException In case the dimensions can not be extracted.
      */
-    public function getDimensions(): Dimension {
+    public function getDimensions(): Dimension 
+    {
         if(!$this->isVideo()) {
             throw new LogicException('Dimensions can only be retrieved from video streams.');
         }
@@ -56,7 +60,7 @@ class Stream extends AbstractData {
         $width = $this->get('width');
         $height = $this->get('height');
 
-        if(($ratio = $this->extractRatio($this, 'sample_aspect_ratio')) !== null){
+        if(($ratio = $this->extractRatio($this, 'sample_aspect_ratio')) !== null) {
             $sampleRatio = $ratio;
         }
         if(($ratio = $this->extractRatio($this, 'display_aspect_ratio')) !== null) {
@@ -84,25 +88,30 @@ class Stream extends AbstractData {
     /**
      * Extracts a ratio from a string in a `\d+:\d+` format given a key name.
      *
-     * @param   Stream     $stream  The stream where to look for the ratio.
-     * @param   string     $name    the name of the key.
+     * @param  Stream $stream The stream where to look for the ratio.
+     * @param  string $name   the name of the key.
      * @return array|null   An array containing the width and the height, null if not found.
      */
-    private function extractRatio(Stream $stream, $name): ?array {
+    private function extractRatio(Stream $stream, $name): ?array 
+    {
         if(!$stream->has($name)) {
             return null;
         }
 
         $ratio = $stream->get($name);
         if(preg_match('/\d+:\d+/', $ratio)) {
-            $data = array_filter(explode(':', $ratio), function($int) {
-                return $int > 0;
-            });
+            $data = array_filter(
+                explode(':', $ratio), function ($int) {
+                    return $int > 0;
+                }
+            );
 
             if(count($data) === 2) {
-                return array_map(function($int) {
-                    return (int) $int;
-                }, $data);
+                return array_map(
+                    function ($int) {
+                        return (int) $int;
+                    }, $data
+                );
             }
         }
 

@@ -17,7 +17,8 @@ use FFMpeg\Media\Video;
 /**
  * Custom filters prepended by `-vf`
  */
-class CustomFilter implements VideoFilterInterface {
+class CustomFilter implements VideoFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -34,10 +35,11 @@ class CustomFilter implements VideoFilterInterface {
     /**
      * A custom filter, useful if you want to build complex filters
      *
-     * @param   string  $filter
-     * @param   int     $priority
+     * @param string $filter
+     * @param int    $priority
      */
-    public function __construct(string $filter, int $priority = 0) {
+    public function __construct(string $filter, int $priority = 0) 
+    {
         $this->filter = $filter;
         $this->priority = $priority;
     }
@@ -45,7 +47,8 @@ class CustomFilter implements VideoFilterInterface {
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array {
+    public function apply(Video $video, VideoInterface $format): array 
+    {
         $commands = ['-vf', $this->filter];
 
         return $commands;

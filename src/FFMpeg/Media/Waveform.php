@@ -20,7 +20,8 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 
-class Waveform extends AbstractMediaType {
+class Waveform extends AbstractMediaType
+{
 
     /**
      * @var Video
@@ -37,7 +38,8 @@ class Waveform extends AbstractMediaType {
      */
     private $height;
 
-    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, int $width, int $height) {
+    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, int $width, int $height) 
+    {
         parent::__construct($audio->getPathfile(), $driver, $ffprobe);
         $this->audio = $audio;
         $this->width = $width;
@@ -49,7 +51,8 @@ class Waveform extends AbstractMediaType {
      *
      * @return Audio
      */
-    public function getAudio(): Audio {
+    public function getAudio(): Audio 
+    {
         return $this->audio;
     }
 
@@ -58,7 +61,8 @@ class Waveform extends AbstractMediaType {
      *
      * @return WaveformFilters
      */
-    public function filters() {
+    public function filters() 
+    {
         return new WaveformFilters($this);
     }
 
@@ -67,7 +71,8 @@ class Waveform extends AbstractMediaType {
      *
      * @return Waveform
      */
-    public function addFilter(WaveformFilterInterface $filter) {
+    public function addFilter(WaveformFilterInterface $filter) 
+    {
         $this->filters->add($filter);
 
         return $this;
@@ -76,15 +81,17 @@ class Waveform extends AbstractMediaType {
     /**
      * Saves the waveform in the given filename.
      *
-     * @param string  $pathfile
+     * @param string $pathfile
      *
      * @return Waveform
      *
      * @throws RuntimeException
      */
-    public function save(string $pathfile): Waveform {
+    public function save(string $pathfile): Waveform 
+    {
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
+         *
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
         $commands = [

@@ -14,4 +14,6 @@ namespace FFMpeg\Exception;
 /**
  * Thrown when an error occured at runtime
  */
-class RuntimeException extends \RuntimeException implements ExceptionInterface {}
+class RuntimeException extends \RuntimeException implements ExceptionInterface
+{
+}

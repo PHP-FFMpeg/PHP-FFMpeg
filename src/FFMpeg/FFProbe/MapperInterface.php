@@ -15,12 +15,13 @@ use FFMpeg\FFProbe\DataMapping\{
     Format,
     StreamCollection
 };
-interface MapperInterface {
+interface MapperInterface
+{
 
     /**
      * Maps data given its type.
      *
-     * @param string $type One of FFProbe::TYPE_* constant
+     * @param string  $type One of FFProbe::TYPE_* constant
      * @param mixed[] $data The data
      *
      * @return Format|StreamCollection

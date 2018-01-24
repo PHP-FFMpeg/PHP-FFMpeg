@@ -18,7 +18,8 @@ use FFMpeg\Exception\InvalidArgumentException;
  *
  * @see http://en.wikipedia.org/wiki/List_of_common_resolutions
  */
-class AspectRatio {
+class AspectRatio
+{
 
     /**
      * named 4:3 or 1.33:1 Traditional TV
@@ -32,12 +33,14 @@ class AspectRatio {
 
     /**
      * named 3:2 or 1.5:1
+     *
      * @see http://en.wikipedia.org/wiki/135_film
      */
     const AR_3_2 = '3/2';
 
     /**
      * named 5:3 or 1.66:1
+     *
      * @see http://en.wikipedia.org/wiki/Super_16_mm
      */
     const AR_5_3 = '5/3';
@@ -54,12 +57,14 @@ class AspectRatio {
 
     /**
      * 1.85:1 US widescreen cinema standard
+     *
      * @see http://en.wikipedia.org/wiki/Widescreen#Film
      */
     const AR_1_DOT_85_1 = '1.85:1';
 
     /**
      * 2.39:1 or 2.40:1 Current widescreen cinema standard
+     *
      * @see http://en.wikipedia.org/wiki/Anamorphic_format
      */
     const AR_2_DOT_39_1 = '2.39:1';
@@ -109,9 +114,10 @@ class AspectRatio {
     /**
      * Creates a new AspectRatio
      *
-     * @param   float   $ratio
+     * @param float $ratio
      */
-    public function __construct(float $ratio) {
+    public function __construct(float $ratio) 
+    {
         $this->ratio = $ratio;
     }
 
@@ -120,19 +126,21 @@ class AspectRatio {
      *
      * @return float
      */
-    public function getValue(): float {
+    public function getValue(): float 
+    {
         return $this->ratio;
     }
 
     /**
      * Computes the best width for given height and modulus.
      *
-     * @param   int     $height
-     * @param   int     $modulus
+     * @param int $height
+     * @param int $modulus
      *
      * @return int
      */
-    public function calculateWidth($height, $modulus = 1): int {
+    public function calculateWidth($height, $modulus = 1): int 
+    {
         $maxPossibleWidth = $this->getMultipleUp(ceil($this->ratio * $height), $modulus);
         $minPossibleWidth = $this->getMultipleDown(floor($this->ratio * $height), $modulus);
 
@@ -145,12 +153,13 @@ class AspectRatio {
     /**
      * Computes the best height for given width and modulus.
      *
-     * @param   int     $width
-     * @param   int     $modulus
+     * @param int $width
+     * @param int $modulus
      *
      * @return int
      */
-    public function calculateHeight($width, $modulus = 1): int {
+    public function calculateHeight($width, $modulus = 1): int 
+    {
         $maxPossibleHeight = $this->getMultipleUp(ceil($width / $this->ratio), $modulus);
         $minPossibleHeight = $this->getMultipleDown(floor($width / $this->ratio), $modulus);
 
@@ -184,12 +193,13 @@ class AspectRatio {
      * The strategy parameter forces by default to use standardized ratios. If
      * custom ratio need to be used, disable it.
      *
-     * @param   Dimension   $dimension
-     * @param   bool        $forceStandards Whether to force or not standard ratios
+     * @param  Dimension $dimension
+     * @param  bool      $forceStandards Whether to force or not standard ratios
      * @return AspectRatio
      * @throws InvalidArgumentException
      */
-    public static function create(Dimension $dimension, $forceStandards = true): AspectRatio {
+    public static function create(Dimension $dimension, $forceStandards = true): AspectRatio 
+    {
         $incoming = $dimension->getWidth() / $dimension->getHeight();
 
         if ($forceStandards) {
@@ -199,44 +209,46 @@ class AspectRatio {
         }
     }
 
-    private static function valueFromName($name): float {
+    private static function valueFromName($name): float 
+    {
         switch ($name) {
-            case static::AR_4_3:
-                return 4 / 3;
-            case static::AR_16_9:
-                return 16 / 9;
-            case static::AR_1_1:
-                return 1 / 1;
-            case static::AR_1_DOT_85_1:
-                return 1.85;
-            case static::AR_2_DOT_39_1:
-                return 2.39;
-            case static::AR_3_2:
-                return 3 / 2;
-            case static::AR_5_3:
-                return 5 / 3;
-            case static::AR_5_4:
-                return 5 / 4;
-            case static::AR_ROTATED_3_4:
-                return 3 / 4;
-            case static::AR_ROTATED_9_16:
-                return 9 / 16;
-            case static::AR_ROTATED_2_3:
-                return 2 / 3;
-            case static::AR_ROTATED_3_5:
-                return 3 / 5;
-            case static::AR_ROTATED_4_5:
-                return 4 / 5;
-            case static::AR_ROTATED_1_DOT_85:
-                return 1 / 1.85;
-            case static::AR_ROTATED_2_DOT_39:
-                return 1 / 2.39;
-            default:
-                throw new InvalidArgumentException(sprintf('Unable to find value for %s', $name));
+        case static::AR_4_3:
+            return 4 / 3;
+        case static::AR_16_9:
+            return 16 / 9;
+        case static::AR_1_1:
+            return 1 / 1;
+        case static::AR_1_DOT_85_1:
+            return 1.85;
+        case static::AR_2_DOT_39_1:
+            return 2.39;
+        case static::AR_3_2:
+            return 3 / 2;
+        case static::AR_5_3:
+            return 5 / 3;
+        case static::AR_5_4:
+            return 5 / 4;
+        case static::AR_ROTATED_3_4:
+            return 3 / 4;
+        case static::AR_ROTATED_9_16:
+            return 9 / 16;
+        case static::AR_ROTATED_2_3:
+            return 2 / 3;
+        case static::AR_ROTATED_3_5:
+            return 3 / 5;
+        case static::AR_ROTATED_4_5:
+            return 4 / 5;
+        case static::AR_ROTATED_1_DOT_85:
+            return 1 / 1.85;
+        case static::AR_ROTATED_2_DOT_39:
+            return 1 / 2.39;
+        default:
+            throw new InvalidArgumentException(sprintf('Unable to find value for %s', $name));
         }
     }
 
-    private static function customStrategy($incoming) {
+    private static function customStrategy($incoming) 
+    {
         $try = static::nearestStrategy($incoming);
 
         if (abs($try - $incoming) < $try * 0.05) {
@@ -246,7 +258,8 @@ class AspectRatio {
         return $incoming;
     }
 
-    private static function nearestStrategy($incoming) {
+    private static function nearestStrategy($incoming) 
+    {
         $availables = [
             static::AR_4_3 => static::valueFromName(static::AR_4_3),
             static::AR_16_9 => static::valueFromName(static::AR_16_9),

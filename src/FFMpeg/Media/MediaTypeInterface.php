@@ -11,7 +11,8 @@
 
 namespace FFMpeg\Media;
 
-interface MediaTypeInterface {
+interface MediaTypeInterface
+{
 
     /**
      * Returns the available filters.

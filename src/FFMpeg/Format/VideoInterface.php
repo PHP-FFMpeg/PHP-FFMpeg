@@ -20,7 +20,8 @@ namespace FFMpeg\Format;
  * @package    FFMpeg
  * @subpackage Format
  */
-interface VideoInterface extends AudioInterface {
+interface VideoInterface extends AudioInterface
+{
 
     /**
      * Gets the kiloBitrate value.

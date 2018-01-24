@@ -15,7 +15,8 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Media\Waveform;
 
-class WaveformDownmixFilter implements WaveformFilterInterface {
+class WaveformDownmixFilter implements WaveformFilterInterface
+{
 
     use TPriorityFilter;
 
@@ -39,14 +40,16 @@ class WaveformDownmixFilter implements WaveformFilterInterface {
     /**
      * @inheritDoc
      */
-    public function getDownmix(): bool {
+    public function getDownmix(): bool 
+    {
         return $this->downmix;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Waveform $waveform): array {
+    public function apply(Waveform $waveform): array 
+    {
         $commands = [];
 
         // If the downmix parameter is set to true, we add an option to the FFMPEG command

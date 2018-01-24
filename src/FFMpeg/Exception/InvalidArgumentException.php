@@ -14,4 +14,6 @@ namespace FFMpeg\Exception;
 /**
  * Thrown when the driver expects different kind of arguments
  */
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface {}
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+{
+}

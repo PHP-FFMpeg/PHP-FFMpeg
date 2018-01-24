@@ -20,7 +20,8 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 
-class Gif extends AbstractMediaType {
+class Gif extends AbstractMediaType
+{
     /**
      * @var TimeCode
      */
@@ -41,7 +42,8 @@ class Gif extends AbstractMediaType {
      */
     private $video;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode, Dimension $dimension, $duration = null) {
+    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode, Dimension $dimension, $duration = null) 
+    {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;
         $this->dimension = $dimension;
@@ -54,7 +56,8 @@ class Gif extends AbstractMediaType {
      *
      * @return Video
      */
-    public function getVideo(): Video {
+    public function getVideo(): Video 
+    {
         return $this->video;
     }
 
@@ -63,7 +66,8 @@ class Gif extends AbstractMediaType {
      *
      * @return GifFilters
      */
-    public function filters(): GifFilters {
+    public function filters(): GifFilters 
+    {
         return new GifFilters($this);
     }
 
@@ -72,7 +76,8 @@ class Gif extends AbstractMediaType {
      *
      * @return Gif
      */
-    public function addFilter(GifFilterInterface $filter): self {
+    public function addFilter(GifFilterInterface $filter): self 
+    {
         $this->filters->add($filter);
 
         return $this;
@@ -81,26 +86,29 @@ class Gif extends AbstractMediaType {
     /**
      * @return TimeCode
      */
-    public function getTimeCode(): TimeCode {
+    public function getTimeCode(): TimeCode 
+    {
         return $this->timecode;
     }
 
     /**
      * @return Dimension
      */
-    public function getDimension(): Dimension {
+    public function getDimension(): Dimension 
+    {
         return $this->dimension;
     }
 
     /**
      * Saves the gif in the given filename.
      *
-     * @param string  $pathfile
+     * @param string $pathfile
      *
      * @return self
      * @throws RuntimeException
      */
-    public function save(string $pathfile): self {
+    public function save(string $pathfile): self 
+    {
         /**
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */

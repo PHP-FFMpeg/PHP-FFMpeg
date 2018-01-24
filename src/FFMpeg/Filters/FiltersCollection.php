@@ -11,7 +11,8 @@
 
 namespace FFMpeg\Filters;
 
-class FiltersCollection implements \Countable, \IteratorAggregate {
+class FiltersCollection implements \Countable, \IteratorAggregate
+{
 
     /**
      * @var FilterInterface[]|null
@@ -28,7 +29,8 @@ class FiltersCollection implements \Countable, \IteratorAggregate {
      *
      * @return self
      */
-    public function add(FilterInterface $filter): self {
+    public function add(FilterInterface $filter): self 
+    {
         $this->filters[$filter->getPriority()][] = $filter;
         $this->sorted = null;
 
@@ -38,7 +40,8 @@ class FiltersCollection implements \Countable, \IteratorAggregate {
     /**
      * @inheritDoc
      */
-    public function count(): int {
+    public function count(): int 
+    {
         if(count($this->filters) === 0) {
             return 0;
         }
@@ -49,7 +52,8 @@ class FiltersCollection implements \Countable, \IteratorAggregate {
     /**
      * @inheritDoc
      */
-    public function getIterator(): \Traversable {
+    public function getIterator(): \Traversable 
+    {
         if($this->sorted === null) {
             if(count($this->filters) === 0) {
                 $this->sorted = $this->filters;

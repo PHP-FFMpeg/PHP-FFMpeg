@@ -34,16 +34,19 @@ use FFMpeg\Format\{
 };
 use Neutron\TemporaryFilesystem\Manager as FsManager;
 
-class Video extends Audio {
+class Video extends Audio
+{
 
     /**
      * FileSystem Manager instance
+     *
      * @var Manager
      */
     protected $fs;
 
     /**
      * FileSystem Manager ID
+     *
      * @var int
      */
     protected $fsId;
@@ -53,7 +56,8 @@ class Video extends Audio {
      *
      * @return VideoFilters
      */
-    public function filters() {
+    public function filters() 
+    {
         return new VideoFilters($this);
     }
 
@@ -62,7 +66,8 @@ class Video extends Audio {
      *
      * @return Video
      */
-    public function addFilter(FilterInterface $filter): MediaTypeInterface {
+    public function addFilter(FilterInterface $filter): MediaTypeInterface 
+    {
         if(!($filter instanceof VideoFilterInterface)) {
             throw new InvalidArgumentException('Video only accepts VideoFilterInterface filters');
         }
@@ -75,12 +80,13 @@ class Video extends Audio {
     /**
      * Exports the video in the desired format, applies registered filters.
      *
-     * @param   FormatInterface   $format
-     * @param   string            $outputPathfile
+     * @param  FormatInterface $format
+     * @param  string          $outputPathfile
      * @return Video
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, string $outputPathfile) {
+    public function save(FormatInterface $format, string $outputPathfile) 
+    {
         $passes = $this->buildCommand($format, $outputPathfile);
 
         $failure = null;
@@ -113,9 +119,11 @@ class Video extends Audio {
 
     /**
      * NOTE: This method is different to the Audio's one, because Video is using passes.
+     *
      * @inheritDoc
      */
-    public function getFinalCommand(FormatInterface $format, string $outputPathfile) {
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile) 
+    {
         $finalCommands = [];
 
         foreach($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
@@ -131,9 +139,10 @@ class Video extends Audio {
      * **NOTE:** This creates passes instead of a single command!
      *
      * @inheritDoc
-     * @return string[][]
+     * @return     string[][]
      */
-    protected function buildCommand(FormatInterface $format, string $outputPathfile) {
+    protected function buildCommand(FormatInterface $format, string $outputPathfile) 
+    {
         $commands = ['-y', '-i', $this->pathfile];
 
         $filters = clone $this->filters;
@@ -209,7 +218,8 @@ class Video extends Audio {
             $command = $commands[$i];
 
             // continue when it is not a video filter
-            if($command !== '-vf') continue;
+            if($command !== '-vf') { continue;
+            }
 
             $commandSplits = explode(";", $commands[$i + 1]);
             if(count($commandSplits) === 1) {
@@ -291,19 +301,21 @@ class Video extends Audio {
      * @param  TimeCode $at
      * @return Frame
      */
-    public function frame(TimeCode $at): Frame {
+    public function frame(TimeCode $at): Frame 
+    {
         return new Frame($this, $this->driver, $this->ffprobe, $at);
     }
 
     /**
      * Extracts a gif from a sequence of the video.
      *
-     * @param  TimeCode $at
+     * @param  TimeCode  $at
      * @param  Dimension $dimension
-     * @param  integer $duration
+     * @param  integer   $duration
      * @return Gif
      */
-    public function gif(TimeCode $at, Dimension $dimension, $duration = null): Gif {
+    public function gif(TimeCode $at, Dimension $dimension, $duration = null): Gif 
+    {
         return new Gif($this, $this->driver, $this->ffprobe, $at, $dimension, $duration);
     }
 
@@ -313,7 +325,8 @@ class Video extends Audio {
      * @param  array $sources
      * @return Concat
      */
-    public function concat($sources): Concat {
+    public function concat($sources): Concat 
+    {
         return new Concat($sources, $this->driver, $this->ffprobe);
     }
 }

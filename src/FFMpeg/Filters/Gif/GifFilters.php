@@ -13,14 +13,16 @@ namespace FFMpeg\Filters\Gif;
 
 use FFMpeg\Media\Gif;
 
-class GifFilters {
+class GifFilters
+{
 
     /**
      * @var Gif
      */
     private $gif;
 
-    public function __construct(Gif $gif) {
+    public function __construct(Gif $gif) 
+    {
         $this->gif = $gif;
     }
 

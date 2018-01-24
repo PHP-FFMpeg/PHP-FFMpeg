@@ -21,23 +21,26 @@ use Psr\Log\LoggerInterface;
 /**
  * Driver responsible for FFMpeg
  */
-class FFMpegDriver extends AbstractBinary {
+class FFMpegDriver extends AbstractBinary
+{
 
     /**
      * @inheritDoc
      */
-    public function getName() {
+    public function getName() 
+    {
         return 'ffmpeg';
     }
 
     /**
      * Creates an FFMpegDriver.
      *
-     * @param   LoggerInterface         $logger
-     * @param   array|Configuration     $configuration
+     * @param  LoggerInterface     $logger
+     * @param  array|Configuration $configuration
      * @return FFMpegDriver
      */
-    public static function create(LoggerInterface $logger = null, $configuration = []): FFMpegDriver {
+    public static function create(LoggerInterface $logger = null, $configuration = []): FFMpegDriver 
+    {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);
         }
