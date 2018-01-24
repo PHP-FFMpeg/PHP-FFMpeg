@@ -40,9 +40,8 @@ class X264 extends DefaultVideo {
      * @deprecated 1.0.0 use setters directly
      */
     public function __construct(string $audioCodec = 'libfaac', string $videoCodec = 'libx264') {
-        $this
-            ->setAudioCodec($audioCodec)
-            ->setVideoCodec($videoCodec);
+        $this->setAudioCodec($audioCodec);
+        $this->setVideoCodec($videoCodec);
     }
 
     /**

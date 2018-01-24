@@ -83,7 +83,7 @@ class RotateFilter implements VideoFilterInterface {
             case self::ROTATE_180:
             case self::ROTATE_270:
                 $this->angle = $angle;
-                break;
+            break;
             default:
                 throw new InvalidArgumentException('Invalid angle value.');
         }

@@ -126,11 +126,11 @@ class Gif extends AbstractMediaType {
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        $commands = array_merge($commands, array($pathfile));
+        $commands = array_merge($commands, [$pathfile]);
 
         try {
             $this->driver->command($commands);
-        } catch (ExecutionFailureException $e) {
+        } catch(ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($pathfile);
             throw new RuntimeException('Unable to save gif', $e->getCode(), $e);
         }

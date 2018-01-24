@@ -30,9 +30,8 @@ class WMV3 extends DefaultVideo {
      * @deprecated 1.0.0 use setters directly
      */
     public function __construct(string $audioCodec = 'wmav3', string $videoCodec = 'wmv3') {
-        $this
-            ->setAudioCodec($audioCodec)
-            ->setVideoCodec($videoCodec);
+        $this->setAudioCodec($audioCodec);
+        $this->setVideoCodec($videoCodec);
     }
 
     /**

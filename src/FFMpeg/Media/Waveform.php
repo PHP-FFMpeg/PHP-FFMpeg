@@ -108,4 +108,5 @@ class Waveform extends AbstractMediaType {
 
         return $this;
     }
+
 }

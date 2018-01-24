@@ -30,9 +30,8 @@ class Ogg extends DefaultVideo {
      * @deprecated 1.0.0 use setters directly
      */
     public function __construct(string $audioCodec = 'libvorbis', string $videoCodec = 'libtheora') {
-        $this
-            ->setAudioCodec($audioCodec)
-            ->setVideoCodec($videoCodec);
+        $this->setAudioCodec($audioCodec);
+        $this->setVideoCodec($videoCodec);
     }
 
     /**

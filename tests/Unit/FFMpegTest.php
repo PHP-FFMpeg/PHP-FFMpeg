@@ -6,8 +6,8 @@ use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use FFMpeg\FFProbe\DataMapping\Stream;
 
-class FFMpegTest extends TestCase
-{
+class FFMpegTest extends TestCase {
+
     /**
      * @expectedException \FFMpeg\Exception\InvalidArgumentException
      * @expectedExceptionMessage Unable to detect file format, only audio and video supported
@@ -18,8 +18,7 @@ class FFMpegTest extends TestCase
         $ffmpeg->open('/path/to/unknown/file');
     }
 
-    public function testOpenAudio()
-    {
+    public function testOpenAudio() {
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('getAudioStreams')
@@ -38,8 +37,7 @@ class FFMpegTest extends TestCase
         $this->assertInstanceOf(\FFMpeg\Media\Audio::class, $ffmpeg->open(__FILE__));
     }
 
-    public function testOpenVideo()
-    {
+    public function testOpenVideo() {
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('getVideoStreams')
@@ -81,7 +79,7 @@ class FFMpegTest extends TestCase
         $logger = $this->getLoggerMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $ffmpeg = FFMpeg::create(array('timeout' => 42), $logger, $ffprobe);
+        $ffmpeg = FFMpeg::create(['timeout' => 42], $logger, $ffprobe);
         $this->assertInstanceOf('FFMpeg\FFMpeg', $ffmpeg);
 
         $this->assertSame($logger, $ffmpeg->getFFMpegDriver()->getProcessRunner()->getLogger());

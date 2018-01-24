@@ -202,7 +202,10 @@ class Video extends Audio {
 
         // Merge Filters into one command
         $videoFilterVars = $videoFilterProcesses = [];
+
+        // phpcs:disable Generic.CodeAnalysis.ForLoopWithTestFunctionCall
         for($i = 0; $i < count($commands); $i++) {
+            // phpcs:enable
             $command = $commands[$i];
 
             // continue when it is not a video filter
@@ -267,7 +270,7 @@ class Video extends Audio {
         for($i = 1; $i <= $totalPasses; $i++) {
             $pass = $commands;
 
-            if ($totalPasses > 1) {
+            if($totalPasses > 1) {
                 $pass[] = '-pass';
                 $pass[] = $i;
                 $pass[] = '-passlogfile';

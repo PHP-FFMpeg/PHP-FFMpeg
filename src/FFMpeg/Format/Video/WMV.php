@@ -29,11 +29,9 @@ class WMV extends DefaultVideo {
     /**
      * @deprecated 1.0.0 use setters directly
      */
-    public function __construct(string $audioCodec = 'wmav2', string $videoCodec = 'wmv2')
-    {
-        $this
-            ->setAudioCodec($audioCodec)
-            ->setVideoCodec($videoCodec);
+    public function __construct(string $audioCodec = 'wmav2', string $videoCodec = 'wmv2') {
+        $this->setAudioCodec($audioCodec);
+        $this->setVideoCodec($videoCodec);
     }
 
     /**

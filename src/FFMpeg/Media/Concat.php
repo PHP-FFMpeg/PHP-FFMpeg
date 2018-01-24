@@ -11,8 +11,10 @@
 
 namespace FFMpeg\Media;
 
-use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use Alchemy\BinaryDriver\Exception\InvalidArgumentException;
+use Alchemy\BinaryDriver\Exception\{
+    ExecutionFailureException,
+    InvalidArgumentException
+};
 use FFMpeg\Filters\Concat\ConcatFilterInterface;
 use FFMpeg\Filters\Concat\ConcatFilters;
 use FFMpeg\Driver\FFMpegDriver;
@@ -40,9 +42,12 @@ class Concat extends AbstractMediaType
      * @param   FFMpegDriver    $driver
      * @param   FFProbe         $ffprobe
      */
-    public function __construct(array $sources, FFMpegDriver $driver, FFProbe $ffprobe)
-    {
-        parent::__construct($sources, $driver, $ffprobe);
+    public function __construct(array $sources, FFMpegDriver $driver, FFProbe $ffprobe) {
+        if(count($sources) === 0) {
+            throw new InvalidArgumentException('No sources given');
+        }
+
+        parent::__construct($sources[0], $driver, $ffprobe);
         $this->sources = $sources;
     }
 

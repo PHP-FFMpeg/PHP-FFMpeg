@@ -11,22 +11,28 @@
 
 namespace FFMpeg\Filters\Video;
 
-use FFMpeg\Coordinate\Point;
 use FFMpeg\Media\Video;
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Coordinate\FrameRate;
-use FFMpeg\Filters\Audio\AudioResamplableFilter;
-use FFMpeg\Filters\Audio\AudioFilters;
+use FFMpeg\Coordinate\{
+    TimeCode,
+    Dimension,
+    FrameRate,
+    Point
+};
+use FFMpeg\Filters\Audio\{
+    AudioResamplableFilter,
+    AudioFilters
+};
 
 class VideoFilters extends AudioFilters {
 
+    // phpcs:disable
     /**
      * @inheritDoc
      */
     public function __construct(Video $media) {
         parent::__construct($media);
     }
+    // phpcs:enable
 
     /**
      * Resizes a video to a given dimension.
@@ -50,7 +56,7 @@ class VideoFilters extends AudioFilters {
      * @param   int         $gop
      * @return self
      */
-    public function framerate(FrameRate $framerate, $gop): self {
+    public function framerate(FrameRate $framerate, ?int $gop = null): self {
         $this->media->addFilter(new FrameRateFilter($framerate, $gop));
 
         return $this;
@@ -89,7 +95,7 @@ class VideoFilters extends AudioFilters {
      *
      * @return self
      */
-    public function clip($start, $duration = null): self {
+    public function clip(TimeCode $start, ?TimeCode $duration = null): self {
         $this->media->addFilter(new ClipFilter($start, $duration));
 
         return $this;
@@ -126,6 +132,7 @@ class VideoFilters extends AudioFilters {
      * @return self
      */
     public function rotate(string $angle): self {
+        // use a high priority
         $this->media->addFilter(new RotateFilter($angle, 30));
 
         return $this;
