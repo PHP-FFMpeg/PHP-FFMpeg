@@ -30,7 +30,7 @@ class X264 extends DefaultVideo
     /**
      * @inheritDoc
      */
-    protected $audioCodec = 'libfaac';
+    protected $audioCodec = 'libmp3lame';
 
     /**
      * @inheritDoc
@@ -40,7 +40,7 @@ class X264 extends DefaultVideo
     /**
      * @deprecated 1.0.0 use setters directly
      */
-    public function __construct(string $audioCodec = 'libfaac', string $videoCodec = 'libx264')
+    public function __construct(string $audioCodec = 'libmp3lame', string $videoCodec = 'libx264')
     {
         $this->setAudioCodec($audioCodec);
         $this->setVideoCodec($videoCodec);

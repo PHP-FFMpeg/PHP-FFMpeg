@@ -56,33 +56,46 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
      * @var int
      */
     private $priority;
+
+    /**
+     * @var string
+     */
     private $frameRate;
+
+    /**
+     * @var string
+     */
     private $destinationFolder;
 
-    public function __construct($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority = 0)
+    public function __construct(string $frameRate = self::FRAMERATE_EVERY_SEC, string $destinationFolder = __DIR__, int $priority = 0)
     {
-        $this->priority = $priority;
+        $this->setPriority($priority);
+
         $this->frameRate = $frameRate;
 
         // Make sure that the destination folder has a trailing slash
         $destinationFolder = rtrim($destinationFolder, '/') . '/';
-
         // Set the destination folder
         $this->destinationFolder = $destinationFolder;
     }
 
     /**
-     * @inheritDoc
+     * Returns the framerate used.
+     * One of the FRAMERATE_EVERY_* constants
+     *
+     * @return string
      */
-    public function getFrameRate()
+    public function getFrameRate(): string
     {
         return $this->frameRate;
     }
 
     /**
-     * @inheritDoc
+     * Returns the folder the frames will be saved to.
+     *
+     * @return string
      */
-    public function getDestinationFolder()
+    public function getDestinationFolder(): string
     {
         return $this->destinationFolder;
     }
@@ -100,6 +113,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             foreach ($video->getStreams()->getVideoStreams() as $stream) {
                 if ($stream->has('duration')) {
                     $duration = $stream->get('duration');
+                    break;
                 }
             }
 
@@ -108,13 +122,12 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
                 $operator = $matches[2];
 
                 switch ($operator) {
-                case '/':
-                    $nbFramesPerSecond = $matches[1] / $matches[3];
+                    case '/':
+                        $nbFramesPerSecond = $matches[1] / $matches[3];
                     break;
 
-                default:
-                    throw new InvalidArgumentException('The frame rate is not a proper division: ' . $this->frameRate);
-                        break;
+                    default:
+                        throw new InvalidArgumentException('The frame rate is not a proper division: ' . $this->frameRate);
                 }
             }
 
