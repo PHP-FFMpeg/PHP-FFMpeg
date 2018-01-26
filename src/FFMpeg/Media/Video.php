@@ -147,15 +147,15 @@ class Video extends Audio implements MediaTypeInterface
                 // miss! Default codec is not supported, search for supported ones and take the first one which is supported.
                 $availableVideoCodec = null;
 
-                foreach($format->getAvailableVideoCodecs() as $videoCodec) {
-                    if($this->ffprobe->getCodecTester()->has($videoCodec)) {
+                foreach ($format->getAvailableVideoCodecs() as $videoCodec) {
+                    if ($this->ffprobe->getCodecTester()->has($videoCodec)) {
                         // hit!
                         $availableVideoCodec = $videoCodec;
                         break;
                     }
                 }
 
-                if($availableVideoCodec === null) {
+                if ($availableVideoCodec === null) {
                     throw new RuntimeException('No codecs supported by the format ' . get_class($format) . ' are also supported by your host system.');
                 } else {
                     $filters->add(new SimpleFilter(['-vcodec', $availableVideoCodec]));
@@ -172,15 +172,15 @@ class Video extends Audio implements MediaTypeInterface
                 // miss! Default codec is not supported, search for supported ones and take the first one which is supported.
                 $availableAudioCodec = null;
 
-                foreach($format->getAvailableAudioCodecs() as $audioCodec) {
-                    if($this->ffprobe->getCodecTester()->has($audioCodec)) {
+                foreach ($format->getAvailableAudioCodecs() as $audioCodec) {
+                    if ($this->ffprobe->getCodecTester()->has($audioCodec)) {
                         // hit!
                         $availableAudioCodec = $audioCodec;
                         break;
                     }
                 }
 
-                if($availableAudioCodec === null) {
+                if ($availableAudioCodec === null) {
                     throw new RuntimeException('No codecs supported by the format ' . get_class($format) . ' are also supported by your host system.');
                 } else {
                     $filters->add(new SimpleFilter(['-acodec', $availableAudioCodec]));
