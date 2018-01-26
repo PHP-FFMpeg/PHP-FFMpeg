@@ -17,6 +17,8 @@ use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\FFProbe\DataMapping\Format;
 use FFMpeg\FFProbe\Mapper;
 use FFMpeg\FFProbe\MapperInterface;
+use FFMpeg\FFProbe\CodecTester;
+use FFMpeg\FFProbe\CodecTesterInterface;
 use FFMpeg\FFProbe\OptionsTester;
 use FFMpeg\FFProbe\OptionsTesterInterface;
 use FFMpeg\FFProbe\OutputParser;
@@ -58,12 +60,20 @@ class FFProbe
      */
     private $mapper;
 
+    /**
+     * Checks whether codecs are available
+     *
+     * @var CodecTesterInterface
+     */
+    private $codecTester;
+
     public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache)
     {
         $this->ffprobe = $ffprobe;
+        $this->codecTester = new CodecTester($ffprobe, $cache);
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
-        $this->parser = new OutputParser();
-        $this->mapper = new Mapper();
+        $this->parser = new OutputParser;
+        $this->mapper = new Mapper;
         $this->cache = $cache;
     }
 
@@ -98,21 +108,41 @@ class FFProbe
     /**
      * @param FFProbeDriver $ffprobe
      *
-     * @return FFProbe
+     * @return self
      */
-    public function setFFProbeDriver(FFProbeDriver $ffprobe)
+    public function setFFProbeDriver(FFProbeDriver $ffprobe): self
     {
         $this->ffprobe = $ffprobe;
 
         return $this;
     }
 
+
+    /**
+     * @param CodecTesterInterface $tester
+     *
+     * @return self
+     */
+    public function setCodecTester(CodecTesterInterface $tester): self
+    {
+        $this->codecTester = $tester;
+
+        return $this;
+    }
+
+    /**
+     * @return CodecTesterInterface
+     */
+    public function getCodecTester(): CodecTesterInterface {
+        return $this->codecTester;
+    }
+
     /**
      * @param OptionsTesterInterface $tester
      *
-     * @return FFProbe
+     * @return self
      */
-    public function setOptionsTester(OptionsTesterInterface $tester): FFProbe
+    public function setOptionsTester(OptionsTesterInterface $tester): self
     {
         $this->optionsTester = $tester;
 

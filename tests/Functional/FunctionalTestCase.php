@@ -11,7 +11,7 @@ abstract class FunctionalTestCase extends TestCase {
      * @return FFMpeg
      */
     public function getFFMpeg() {
-        return FFMpeg::create(array('timeout' => 300));
+        return FFMpeg::create(['timeout' => 300]);
     }
 
 }

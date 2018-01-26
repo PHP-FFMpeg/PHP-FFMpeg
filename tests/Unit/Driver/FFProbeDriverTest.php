@@ -14,7 +14,7 @@ class FFProbeDriverTest extends TestCase
         $executableFinder = new ExecutableFinder();
 
         $found = false;
-        foreach (array('avprobe', 'ffprobe') as $name) {
+        foreach (['avprobe', 'ffprobe'] as $name) {
             if (null !== $executableFinder->find($name)) {
                 $found = true;
                 break;
@@ -46,6 +46,6 @@ class FFProbeDriverTest extends TestCase
      */
     public function testCreateFailureThrowsAnException()
     {
-        FFProbeDriver::create(array('ffprobe.binaries' => '/path/to/nowhere'));
+        FFProbeDriver::create(['ffprobe.binaries' => '/path/to/nowhere']);
     }
 }

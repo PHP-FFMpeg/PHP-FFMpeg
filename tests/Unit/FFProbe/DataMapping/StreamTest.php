@@ -19,10 +19,10 @@ class StreamTest extends TestCase
 
     public function provideAudioCases()
     {
-        return array(
-            array(true, array('codec_type' => 'audio')),
-            array(false, array('codec_type' => 'video')),
-        );
+        return [
+            [true,  ['codec_type' => 'audio']],
+            [false, ['codec_type' => 'video']],
+        ];
     }
 
     /**
@@ -36,10 +36,10 @@ class StreamTest extends TestCase
 
     public function provideVideoCases()
     {
-        return array(
-            array(true, array('codec_type' => 'video')),
-            array(false, array('codec_type' => 'audio')),
-        );
+        return [
+            [true,     ['codec_type' => 'video']],
+            [false,    ['codec_type' => 'audio']],
+        ];
     }
 
     /**
@@ -48,13 +48,13 @@ class StreamTest extends TestCase
      */
     public function testGetDimensionsFromAudio()
     {
-        $stream = new Stream(array('codec_type' => 'audio'));
+        $stream = new Stream(['codec_type' => 'audio']);
         $stream->getDimensions();
     }
 
     public function testGetDimensionsFromVideo()
     {
-        $stream = new Stream(array('codec_type' => 'video', 'width' => 960, 'height' => 720));
+        $stream = new Stream(['codec_type' => 'video', 'width' => 960, 'height' => 720]);
         $this->assertEquals(new Dimension(960, 720), $stream->getDimensions());
     }
 
@@ -65,16 +65,16 @@ class StreamTest extends TestCase
      */
     public function testUnableToGetDimensionsFromVideo($properties)
     {
-        $stream = new Stream(array('codec_type' => 'video', 'width' => 960));
+        $stream = new Stream(['codec_type' => 'video', 'width' => 960]);
         $stream->getDimensions();
     }
 
     public function provideInvalidPropertiesForDimensionsExtraction()
     {
-        return array(
-            array('codec_type' => 'video', 'width' => 960),
-            array('codec_type' => 'video', 'height' => 960),
-        );
+        return [
+            ['codec_type' => 'video', 'width' => 960   ],
+            ['codec_type' => 'video', 'height' => 960  ],
+        ];
     }
 
     /**
@@ -82,13 +82,13 @@ class StreamTest extends TestCase
      */
     public function testGetDimensionsFromVideoWithDisplayRatio($data)
     {
-        $stream = new Stream(array(
+        $stream = new Stream([
             'codec_type' => 'video',
             'width' => $data['width'],
             'height' =>  $data['height'],
             'sample_aspect_ratio' =>  $data['sar'],
             'display_aspect_ratio' =>  $data['dar']
-        ));
+        ]);
         $this->assertEquals(new Dimension($data['result_width'], $data['result_height']), $stream->getDimensions());
     }
 
@@ -97,7 +97,7 @@ class StreamTest extends TestCase
      */
     public function testGetDimensionsFromVideoWithInvalidDisplayRatio($invalidRatio)
     {
-        $stream = new Stream(array('codec_type' => 'video', 'width' => 960, 'height' => 720, 'sample_aspect_ratio' => $invalidRatio, 'display_aspect_ratio' => '16:9'));
+        $stream = new Stream(['codec_type' => 'video', 'width' => 960, 'height' => 720, 'sample_aspect_ratio' => $invalidRatio, 'display_aspect_ratio' => '16:9']);
         $this->assertEquals(new Dimension(960, 720), $stream->getDimensions());
     }
 

@@ -32,7 +32,7 @@ class OptionsTester implements OptionsTesterInterface
     /**
      * The cache key used for the (parsed) output of `ffprobe -help -loglevel quiet`
      */
-    protected const HELP_OUTPUT_CACHE_ID = 'helpOutput';
+    protected const HELP_OUTPUT_CACHE_ID = 'php-ffmpeg-ffprobe-helpOutput';
 
     public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache)
     {
