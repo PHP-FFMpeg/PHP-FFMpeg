@@ -60,3 +60,6 @@ composer.lock
 
 # PHPUnit files
 phpunit.xml
+
+# Random test files
+test.php
