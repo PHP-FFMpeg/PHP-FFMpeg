@@ -37,16 +37,16 @@ class AudioProgressListenerTest extends TestCase
             } else if(1 === $n) {
                 $phpunit->assertEquals($expectedPercent2, $percent);
                 $phpunit->assertEquals($expectedRemaining2, $remaining);
-                $phpunit->assertLessThan($expectedRate2 + 3, $rate);
-                $phpunit->assertGreaterThan($expectedRate2 - 3, $rate);
+                $phpunit->assertLessThan($expectedRate2 + 10, $rate);
+                $phpunit->assertGreaterThan($expectedRate2 - 10, $rate);
             }
             $n++;
         });
         // first one does not trigger progress event
         $listener->handle('any-type'.mt_rand(), $data);
-        sleep(1);
+        usleep(500);
         $listener->handle('any-type'.mt_rand(), $data);
-        sleep(1);
+        usleep(500);
         $listener->handle('any-type'.mt_rand(), $data2);
         $this->assertEquals(2, $n);
     }

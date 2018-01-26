@@ -45,9 +45,9 @@ interface VideoInterface extends AudioInterface
     /**
      * Returns the video codec.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVideoCodec(): string;
+    public function getVideoCodec(): ?string;
 
     /**
      * Returns true if the current format supports B-Frames.

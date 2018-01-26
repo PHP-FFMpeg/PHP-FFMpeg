@@ -23,7 +23,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
 {
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $audioCodec;
 
@@ -48,7 +48,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * @inheritDoc
      */
-    public function getAudioCodec(): string
+    public function getAudioCodec(): ?string
     {
         return $this->audioCodec;
     }

@@ -48,9 +48,9 @@ class VideoProgressListenerTest extends TestCase
         });
         // first one does not trigger progress event
         $listener->handle('any-type'.mt_rand(), $data);
-        sleep(1);
+        usleep(500);
         $listener->handle('any-type'.mt_rand(), $data);
-        sleep(1);
+        usleep(500);
         $listener->handle('any-type'.mt_rand(), $data2);
         $this->assertEquals(2, $n);
     }

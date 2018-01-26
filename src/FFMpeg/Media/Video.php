@@ -26,7 +26,7 @@ use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
 use Neutron\TemporaryFilesystem\Manager as FsManager;
 
-class Video extends Audio
+class Video extends Audio implements MediaTypeInterface
 {
 
     /**
@@ -60,10 +60,6 @@ class Video extends Audio
      */
     public function addFilter(FilterInterface $filter): MediaTypeInterface
     {
-        if (!($filter instanceof VideoFilterInterface)) {
-            throw new InvalidArgumentException('Video only accepts VideoFilterInterface filters');
-        }
-
         $this->filters->add($filter);
 
         return $this;

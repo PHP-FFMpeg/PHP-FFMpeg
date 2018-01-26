@@ -87,11 +87,11 @@ class Frame extends AbstractMediaType
      * @param string  $pathfile
      * @param Boolean $accurate
      *
-     * @return Frame
+     * @return Frame|string
      *
      * @throws RuntimeException
      */
-    public function save($pathfile, $accurate = false, $returnBase64 = false): Frame
+    public function save($pathfile, $accurate = false, $returnBase64 = false)
     {
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking

@@ -113,9 +113,15 @@ class TestCase extends PhpUnitTestCase {
     }
 
     protected function getAudioMock() {
-        return $this->getMockBuilder('FFMpeg\Media\Audio')
+        $audio = $this->getMockBuilder('FFMpeg\Media\Audio')
             ->disableOriginalConstructor()
             ->getMock();
+
+        $audio->expects($this->any())
+        ->method('addFilter')
+        ->will($this->returnValue($audio));
+
+        return $audio;
     }
 
     protected function getVideoMock($filename = null) {
@@ -126,6 +132,10 @@ class TestCase extends PhpUnitTestCase {
         $video->expects($this->any())
             ->method('getPathfile')
             ->will($this->returnValue($filename));
+
+        $video->expects($this->any())
+            ->method('addFilter')
+            ->will($this->returnValue($video));
 
         return $video;
     }

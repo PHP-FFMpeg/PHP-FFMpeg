@@ -73,7 +73,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * @inheritDoc
      */
-    public function getVideoCodec(): string
+    public function getVideoCodec(): ?string
     {
         return $this->videoCodec;
     }

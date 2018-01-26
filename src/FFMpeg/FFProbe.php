@@ -122,6 +122,7 @@ class FFProbe
      * @param CodecTesterInterface $tester
      *
      * @return self
+     * @since 1.0.0
      */
     public function setCodecTester(CodecTesterInterface $tester): self
     {
@@ -132,6 +133,7 @@ class FFProbe
 
     /**
      * @return CodecTesterInterface
+     * @since 1.0.0
      */
     public function getCodecTester(): CodecTesterInterface {
         return $this->codecTester;

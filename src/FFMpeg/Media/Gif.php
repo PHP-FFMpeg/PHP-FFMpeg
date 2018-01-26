@@ -33,7 +33,7 @@ class Gif extends AbstractMediaType
     private $dimension;
 
     /**
-     * @var TimeCode|null
+     * @var int|null
      */
     private $duration;
 
@@ -45,7 +45,7 @@ class Gif extends AbstractMediaType
     public function __construct(
         Video $video, FFMpegDriver $driver,
         FFProbe $ffprobe, TimeCode $timecode,
-        Dimension $dimension, ?TimeCode $duration = null
+        Dimension $dimension, ?int $duration = null
     ) {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;
@@ -122,7 +122,7 @@ class Gif extends AbstractMediaType
 
         if (null !== $this->duration) {
             $commands[] = '-t';
-            $commands[] = (string)$this->duration;
+            $commands[] = (string) $this->duration;
         }
 
         $commands[] = '-i';

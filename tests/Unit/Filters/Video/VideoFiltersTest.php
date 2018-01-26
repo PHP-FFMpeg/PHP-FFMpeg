@@ -21,7 +21,7 @@ class VideoFiltersTest extends TestCase
 
         $video->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Video\ResizeFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Video\ResizeFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
@@ -54,7 +54,7 @@ class VideoFiltersTest extends TestCase
 
         $video->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Video\FrameRateFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Video\FrameRateFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));

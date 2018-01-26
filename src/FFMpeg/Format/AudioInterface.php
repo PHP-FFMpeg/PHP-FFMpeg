@@ -30,9 +30,9 @@ interface AudioInterface extends FormatInterface
     /**
      * Returns the audio codec.
      *
-     * @return string
+     * @return string|null
      */
-    public function getAudioCodec(): string;
+    public function getAudioCodec(): ?string;
 
     /**
      * Returns the list of available audio codecs for this format.
