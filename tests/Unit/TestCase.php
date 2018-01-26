@@ -118,8 +118,8 @@ class TestCase extends PhpUnitTestCase {
             ->getMock();
 
         $audio->expects($this->any())
-        ->method('addFilter')
-        ->will($this->returnValue($audio));
+            ->method('addFilter')
+            ->will($this->returnValue($audio));
 
         return $audio;
     }
