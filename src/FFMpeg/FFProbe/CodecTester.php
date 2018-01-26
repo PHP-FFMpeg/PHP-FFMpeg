@@ -16,7 +16,8 @@ use Psr\SimpleCache\CacheInterface;
  * @subpackage  FFProbe
  * @since       1.0.0
  */
-final class CodecTester implements CodecTesterInterface {
+final class CodecTester implements CodecTesterInterface
+{
 
     /**
      * @var CacheInterface
@@ -73,5 +74,4 @@ final class CodecTester implements CodecTesterInterface {
     {
         return in_array($codecName, $this->getAvailableCodecs());
     }
-
 }

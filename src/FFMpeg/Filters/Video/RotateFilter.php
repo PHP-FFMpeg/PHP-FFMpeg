@@ -84,13 +84,13 @@ class RotateFilter implements VideoFilterInterface
     private function setAngle(string $angle): void
     {
         switch ($angle) {
-        case self::ROTATE_90:
-        case self::ROTATE_180:
-        case self::ROTATE_270:
-            $this->angle = $angle;
-            break;
-        default:
-            throw new InvalidArgumentException('Invalid angle value.');
+            case self::ROTATE_90:
+            case self::ROTATE_180:
+            case self::ROTATE_270:
+                $this->angle = $angle;
+                break;
+            default:
+                throw new InvalidArgumentException('Invalid angle value.');
         }
     }
 }

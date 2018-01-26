@@ -11,7 +11,8 @@ namespace FFMpeg\FFProbe;
  * @subpackage  FFProbe
  * @since       1.0.0
  */
-interface CodecTesterInterface {
+interface CodecTesterInterface
+{
 
     /**
      * Returns true when the codec `$codecName` is available.
@@ -27,5 +28,4 @@ interface CodecTesterInterface {
      * @return string[]
      */
     public function getAvailableCodecs(): array;
-
 }

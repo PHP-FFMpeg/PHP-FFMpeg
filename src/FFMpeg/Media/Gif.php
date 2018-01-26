@@ -43,9 +43,12 @@ class Gif extends AbstractMediaType
     private $video;
 
     public function __construct(
-        Video $video, FFMpegDriver $driver,
-        FFProbe $ffprobe, TimeCode $timecode,
-        Dimension $dimension, ?int $duration = null
+        Video $video,
+        FFMpegDriver $driver,
+        FFProbe $ffprobe,
+        TimeCode $timecode,
+        Dimension $dimension,
+        ?int $duration = null
     ) {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;

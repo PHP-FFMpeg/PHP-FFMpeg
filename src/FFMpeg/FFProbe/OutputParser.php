@@ -23,14 +23,14 @@ class OutputParser implements OutputParserInterface
     public function parse(string $type, string $data): array
     {
         switch ($type) {
-        case FFProbe::TYPE_FORMAT:
-            return $this->parseFormat($data);
+            case FFProbe::TYPE_FORMAT:
+                return $this->parseFormat($data);
                 break;
-        case FFProbe::TYPE_STREAMS:
-            return $this->parseStreams($data);
+            case FFProbe::TYPE_STREAMS:
+                return $this->parseStreams($data);
                 break;
-        default:
-            throw new InvalidArgumentException(sprintf('Unknown data type %s', $type));
+            default:
+                throw new InvalidArgumentException(sprintf('Unknown data type %s', $type));
         }
     }
 

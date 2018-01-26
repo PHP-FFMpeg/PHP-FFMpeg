@@ -135,7 +135,8 @@ class FFProbe
      * @return CodecTesterInterface
      * @since 1.0.0
      */
-    public function getCodecTester(): CodecTesterInterface {
+    public function getCodecTester(): CodecTesterInterface
+    {
         return $this->codecTester;
     }
 

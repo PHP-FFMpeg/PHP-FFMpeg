@@ -212,38 +212,38 @@ class AspectRatio
     private static function valueFromName($name): float
     {
         switch ($name) {
-        case static::AR_4_3:
-            return 4 / 3;
-        case static::AR_16_9:
-            return 16 / 9;
-        case static::AR_1_1:
-            return 1 / 1;
-        case static::AR_1_DOT_85_1:
-            return 1.85;
-        case static::AR_2_DOT_39_1:
-            return 2.39;
-        case static::AR_3_2:
-            return 3 / 2;
-        case static::AR_5_3:
-            return 5 / 3;
-        case static::AR_5_4:
-            return 5 / 4;
-        case static::AR_ROTATED_3_4:
-            return 3 / 4;
-        case static::AR_ROTATED_9_16:
-            return 9 / 16;
-        case static::AR_ROTATED_2_3:
-            return 2 / 3;
-        case static::AR_ROTATED_3_5:
-            return 3 / 5;
-        case static::AR_ROTATED_4_5:
-            return 4 / 5;
-        case static::AR_ROTATED_1_DOT_85:
-            return 1 / 1.85;
-        case static::AR_ROTATED_2_DOT_39:
-            return 1 / 2.39;
-        default:
-            throw new InvalidArgumentException(sprintf('Unable to find value for %s', $name));
+            case static::AR_4_3:
+                return 4 / 3;
+            case static::AR_16_9:
+                return 16 / 9;
+            case static::AR_1_1:
+                return 1 / 1;
+            case static::AR_1_DOT_85_1:
+                return 1.85;
+            case static::AR_2_DOT_39_1:
+                return 2.39;
+            case static::AR_3_2:
+                return 3 / 2;
+            case static::AR_5_3:
+                return 5 / 3;
+            case static::AR_5_4:
+                return 5 / 4;
+            case static::AR_ROTATED_3_4:
+                return 3 / 4;
+            case static::AR_ROTATED_9_16:
+                return 9 / 16;
+            case static::AR_ROTATED_2_3:
+                return 2 / 3;
+            case static::AR_ROTATED_3_5:
+                return 3 / 5;
+            case static::AR_ROTATED_4_5:
+                return 4 / 5;
+            case static::AR_ROTATED_1_DOT_85:
+                return 1 / 1.85;
+            case static::AR_ROTATED_2_DOT_39:
+                return 1 / 2.39;
+            default:
+                throw new InvalidArgumentException(sprintf('Unable to find value for %s', $name));
         }
     }
 

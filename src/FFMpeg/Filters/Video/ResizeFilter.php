@@ -127,30 +127,30 @@ class ResizeFilter implements VideoFilterInterface
         $originalRatio = $dimension->getRatio($this->forceStandards);
 
         switch ($this->mode) {
-        case self::RESIZEMODE_SCALE_WIDTH:
-            $height = $this->dimension->getHeight();
-            $width = $originalRatio->calculateWidth($height, $modulus);
-            break;
-        case self::RESIZEMODE_SCALE_HEIGHT:
-            $width = $this->dimension->getWidth();
-            $height = $originalRatio->calculateHeight($width, $modulus);
-            break;
-        case self::RESIZEMODE_INSET:
-            $targetRatio = $this->dimension->getRatio($this->forceStandards);
-
-            if ($targetRatio->getValue() > $originalRatio->getValue()) {
+            case self::RESIZEMODE_SCALE_WIDTH:
                 $height = $this->dimension->getHeight();
                 $width = $originalRatio->calculateWidth($height, $modulus);
-            } else {
+                break;
+            case self::RESIZEMODE_SCALE_HEIGHT:
                 $width = $this->dimension->getWidth();
                 $height = $originalRatio->calculateHeight($width, $modulus);
-            }
-            break;
-        case self::RESIZEMODE_FIT:
-        default:
-            $width = $this->dimension->getWidth();
-            $height = $this->dimension->getHeight();
-            break;
+                break;
+            case self::RESIZEMODE_INSET:
+                $targetRatio = $this->dimension->getRatio($this->forceStandards);
+
+                if ($targetRatio->getValue() > $originalRatio->getValue()) {
+                    $height = $this->dimension->getHeight();
+                    $width = $originalRatio->calculateWidth($height, $modulus);
+                } else {
+                    $width = $this->dimension->getWidth();
+                    $height = $originalRatio->calculateHeight($width, $modulus);
+                }
+                break;
+            case self::RESIZEMODE_FIT:
+            default:
+                $width = $this->dimension->getWidth();
+                $height = $this->dimension->getHeight();
+                break;
         }
 
         return new Dimension($width, $height);

@@ -124,7 +124,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
                 switch ($operator) {
                     case '/':
                         $nbFramesPerSecond = $matches[1] / $matches[3];
-                    break;
+                        break;
 
                     default:
                         throw new InvalidArgumentException('The frame rate is not a proper division: ' . $this->frameRate);
