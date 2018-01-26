@@ -32,22 +32,22 @@ class FiltersCollectionTest extends TestCase
 
     public function testEmptyIterator()
     {
-        $coll = new FiltersCollection();
+        $coll = new FiltersCollection;
         $this->assertInstanceOf(ArrayIterator::class, $coll->getIterator());
     }
 
     public function testIteratorSort()
     {
         $coll = new FiltersCollection();
-        $coll->add(new SimpleFilter(array('a')));
-        $coll->add(new SimpleFilter(array('1'), 12));
-        $coll->add(new SimpleFilter(array('b')));
-        $coll->add(new SimpleFilter(array('2'), 12));
-        $coll->add(new SimpleFilter(array('c')));
-        $coll->add(new SimpleFilter(array('3'), 10));
-        $coll->add(new SimpleFilter(array('d')));
-        $coll->add(new SimpleFilter(array('4'), -2));
-        $coll->add(new SimpleFilter(array('e')));
+        $coll->add(new SimpleFilter(['a']));
+        $coll->add(new SimpleFilter(['1'], 12));
+        $coll->add(new SimpleFilter(['b']));
+        $coll->add(new SimpleFilter(['2'], 12));
+        $coll->add(new SimpleFilter(['c']));
+        $coll->add(new SimpleFilter(['3'], 10));
+        $coll->add(new SimpleFilter(['d']));
+        $coll->add(new SimpleFilter(['4'], -2));
+        $coll->add(new SimpleFilter(['e']));
 
         $data = [];
         $video = $this->getVideoMock();
@@ -57,6 +57,6 @@ class FiltersCollectionTest extends TestCase
             $data = array_merge($data, $filter->apply($video, $format));
         }
 
-        $this->assertEquals(array('1', '2', '3', 'a', 'b', 'c', 'd', 'e', '4'), $data);
+        $this->assertEquals(['1', '2', '3', 'a', 'b', 'c', 'd', 'e', '4'], $data);
     }
 }

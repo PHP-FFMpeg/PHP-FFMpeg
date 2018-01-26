@@ -136,16 +136,56 @@ class Video extends Audio implements MediaTypeInterface
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
-        }
+        $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads', 2)]));
 
         if ($format instanceof VideoInterface && $format->getVideoCodec() !== null) {
-            $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
+            // TODO: Write tests for this behaviour.
+            if ($this->ffprobe->getCodecTester()->has($format->getVideoCodec())) {
+                // hit!
+                $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
+            } else {
+                // miss! Default codec is not supported, search for supported ones and take the first one which is supported.
+                $availableVideoCodec = null;
+
+                foreach($format->getAvailableVideoCodecs() as $videoCodec) {
+                    if($this->ffprobe->getCodecTester()->has($videoCodec)) {
+                        // hit!
+                        $availableVideoCodec = $videoCodec;
+                        break;
+                    }
+                }
+
+                if($availableVideoCodec === null) {
+                    throw new RuntimeException('No codecs supported by the format ' . get_class($format) . ' are also supported by your host system.');
+                } else {
+                    $filters->add(new SimpleFilter(['-vcodec', $availableVideoCodec]));
+                }
+            }
         }
 
         if ($format instanceof AudioInterface && $format->getAudioCodec() !== null) {
-            $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
+            // TODO: Write tests for this behaviour.
+            if ($this->ffprobe->getCodecTester()->has($format->getAudioCodec())) {
+                // hit!
+                $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
+            } else {
+                // miss! Default codec is not supported, search for supported ones and take the first one which is supported.
+                $availableAudioCodec = null;
+
+                foreach($format->getAvailableAudioCodecs() as $audioCodec) {
+                    if($this->ffprobe->getCodecTester()->has($audioCodec)) {
+                        // hit!
+                        $availableAudioCodec = $audioCodec;
+                        break;
+                    }
+                }
+
+                if($availableAudioCodec === null) {
+                    throw new RuntimeException('No codecs supported by the format ' . get_class($format) . ' are also supported by your host system.');
+                } else {
+                    $filters->add(new SimpleFilter(['-acodec', $availableAudioCodec]));
+                }
+            }
         }
 
         // apply filters

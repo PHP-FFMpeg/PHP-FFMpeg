@@ -243,7 +243,7 @@ class FFProbeTest extends TestCase
 
         $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
         $ffprobe->setOptionsTester($this->getFFProbeOptionsTesterMock());
-        call_user_func(array($ffprobe, $method), $pathfile);
+        call_user_func([$ffprobe, $method], $pathfile);
     }
 
     /**
@@ -251,10 +251,10 @@ class FFProbeTest extends TestCase
      */
     public function testCreate($logger, $conf, $cache)
     {
-        $finder = new ExecutableFinder();
+        $finder = new ExecutableFinder;
 
         $found = false;
-        foreach (array('avprobe', 'ffprobe') as $name) {
+        foreach (['avprobe', 'ffprobe'] as $name) {
             if (null !== $finder->find($name)) {
                 $found = true;
             }
@@ -265,10 +265,10 @@ class FFProbeTest extends TestCase
         }
 
         $ffprobe = FFProbe::create();
-        $this->assertInstanceOf('FFMpeg\FFprobe', $ffprobe);
+        $this->assertInstanceOf(\FFMpeg\FFProbe::class, $ffprobe);
 
         $ffprobe = FFProbe::create($conf, $logger, $cache);
-        $this->assertInstanceOf('FFMpeg\FFprobe', $ffprobe);
+        $this->assertInstanceOf(\FFMpeg\FFProbe::class, $ffprobe);
 
         if (null !== $cache) {
             $this->assertSame($cache, $ffprobe->getCache());
@@ -284,10 +284,10 @@ class FFProbeTest extends TestCase
     public function provideCreateOptions()
     {
         return [
-            [null, array('key' => 'value'), null],
-            [$this->getLoggerMock(), array('key' => 'value'), null],
-            [null, new Configuration(), null],
-            [null, array('key' => 'value'), $this->getCacheMock()],
+            [null, ['key' => 'value'], null],
+            [$this->getLoggerMock(), ['key' => 'value'], null],
+            [null, new Configuration, null],
+            [null, ['key' => 'value'], $this->getCacheMock()],
         ];
     }
 }
