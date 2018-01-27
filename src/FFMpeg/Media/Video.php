@@ -136,7 +136,7 @@ class Video extends Audio implements MediaTypeInterface
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
-        $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads', 2)]));
+        $filters->add(new SimpleFilter(['-threads', (string) $this->driver->getConfiguration()->get('ffmpeg.threads', 2)]));
 
         if ($format instanceof VideoInterface && $format->getVideoCodec() !== null) {
             // TODO: Write tests for this behaviour.
@@ -220,13 +220,13 @@ class Video extends Audio implements MediaTypeInterface
         }
 
         if ($format instanceof AudioInterface) {
-            if ($format->getAudioKiloBitrate() !== null) {
+            if ($format->getAudioKiloBitrate()) {
                 $commands[] = '-b:a';
                 $commands[] = $format->getAudioKiloBitrate() . 'k';
             }
             if ($format->getAudioChannels() !== null) {
                 $commands[] = '-ac';
-                $commands[] = $format->getAudioChannels();
+                $commands[] = (string) $format->getAudioChannels();
             }
         }
 

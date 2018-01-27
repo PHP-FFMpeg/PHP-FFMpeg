@@ -146,7 +146,7 @@ class FFProbeTest extends TestCase
         $mapper->expects($this->once())
             ->method('map')
             ->with($this->isType('string'), 'good data parsed')
-            ->will($this->returnValue($output));
+			->will($this->returnValue([$output]));
 
         $parser = $this->getFFProbeParserMock();
         $parser->expects($this->once())
@@ -174,7 +174,7 @@ class FFProbeTest extends TestCase
             ->setFFProbeDriver($driver)
             ->setParser($parser);
 
-        $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
+        $this->assertEquals($output, call_user_func([$ffprobe, $method], $pathfile));
     }
 
     public function provideProbingDataWithCache()
@@ -209,7 +209,7 @@ class FFProbeTest extends TestCase
             ->will($this->returnValue(true));
         $cache->expects($this->once())
             ->method('get')
-            ->will($this->returnValue($output));
+            ->will($this->returnValue(new FFMpeg\FFProbe\DataMapping\StreamCollection($output)));
         $cache->expects($this->never())
             ->method('set');
 
@@ -222,7 +222,7 @@ class FFProbeTest extends TestCase
             ->setMapper($mapper)
             ->setFFProbeDriver($driver);
 
-        $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
+        $this->assertEquals($output, call_user_func([$ffprobe, $method], $pathfile));
     }
 
     public function provideProbeMethod()
