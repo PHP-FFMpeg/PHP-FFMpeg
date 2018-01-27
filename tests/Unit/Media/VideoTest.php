@@ -499,7 +499,7 @@ class VideoTest extends AbstractStreamableTestCase
                     '-threads', '24', '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
+                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', 'foo', 'bar', '-pass', '1', '-passlogfile',
                     '/target/file',
                 ), array(
                     '-y', '-i', __FILE__,
@@ -507,7 +507,7 @@ class VideoTest extends AbstractStreamableTestCase
                     '-b:v', '663k',
                     '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                     '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
+                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', 'foo', 'bar', '-pass', '2', '-passlogfile',
                     '/target/file',
                 )), null, $format2),
             array(true, array(array(
@@ -668,6 +668,6 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function getClassName()
     {
-        return 'FFMpeg\Media\Video';
+        return \FFMpeg\Media\Video::class;
     }
 }

@@ -196,7 +196,7 @@ class Video extends Audio implements MediaTypeInterface
         if ($format instanceof VideoInterface) {
             // TODO: Remove some hardcoded values
             $commands[] = '-b:v';
-            $commands[] = $format->getKiloBitrate() . 'k';
+            $commands[] = ($format->getKiloBitrate() ? $format->getKiloBitrate() : '') . 'k';
             $commands[] = '-refs';
             $commands[] = '6';
             $commands[] = '-coder';
