@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="PHP-FFMpeg">
+    <description>PHP-FFMpeg Coding Standard</description>
+    <rule ref="PSR2" />
+
+    <file>../src/</file>
+</ruleset>

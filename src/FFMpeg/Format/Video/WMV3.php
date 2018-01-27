@@ -16,34 +16,47 @@ namespace FFMpeg\Format\Video;
  */
 class WMV3 extends DefaultVideo
 {
-    public function __construct($audioCodec = 'wmav3', $videoCodec = 'wmv3')
+
+    /**
+     * @inheritDoc
+     */
+    protected $audioCodec = 'wmav3';
+
+    /**
+     * @inheritDoc
+     */
+    protected $videoCodec = 'wmv3';
+
+    /**
+     * @deprecated 1.0.0 use setters directly
+     */
+    public function __construct(string $audioCodec = 'wmav3', string $videoCodec = 'wmv3')
     {
-        $this
-            ->setAudioCodec($audioCodec)
-            ->setVideoCodec($videoCodec);
+        $this->setAudioCodec($audioCodec);
+        $this->setVideoCodec($videoCodec);
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function supportBFrames()
+    public function supportBFrames(): bool
     {
         return false;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
+    public function getAvailableAudioCodecs(): array
     {
-        return array('wmav3');
+        return ['wmav3'];
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableVideoCodecs()
+    public function getAvailableVideoCodecs(): array
     {
-        return array('wmv3');
+        return ['wmv3'];
     }
 }

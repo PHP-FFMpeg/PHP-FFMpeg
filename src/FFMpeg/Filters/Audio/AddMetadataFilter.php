@@ -11,48 +11,70 @@
 
 namespace FFMpeg\Filters\Audio;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Filters\Audio\AudioFilterInterface;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
+/**
+ * Useful for adding metadata to an audio stream(for example, add cover image)
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg\Filters
+ * @subpackage Audio
+ */
 class AddMetadataFilter implements AudioFilterInterface
 {
-	/** @var Array */
-	private $metaArr;
-	/** @var Integer */
-	private $priority;
 
-	function __construct($metaArr = null, $priority = 9)
-	{
-		$this->metaArr = $metaArr;
-		$this->priority = $priority;
-	}
+    use TPriorityFilter;
 
-	public function getPriority()
-	{
-		//must be of high priority in case theres a second input stream (artwork) to register with audio
-		return $this->priority;
-	}
+    /**
+     * @var string[]
+     */
+    private $metaArr;
+    /**
+     * @var int
+     */
+    private $priority;
 
-	public function apply(Audio $audio, AudioInterface $format)
-	{
-		$meta = $this->metaArr;
 
-		if (is_null($meta)) {
-			return ['-map_metadata', '-1', '-vn'];
-		}
+    public function __construct(array $metaArr = null, int $priority = 9)
+    {
+        $this->metaArr = $metaArr;
+        $this->setPriority($priority);
+    }
 
-		$metadata = [];
+    /**
+     * @inheritDoc
+     */
+    public function apply(Audio $audio, AudioInterface $format): array
+    {
+        $meta = $this->metaArr;
 
-		if (array_key_exists("artwork", $meta)) {
-			array_push($metadata, "-i", $meta['artwork'], "-map", "0", "-map", "1");
-			unset($meta['artwork']);
-		}
+        if ($meta === null) {
+            return ['-map_metadata', '-1', '-vn'];
+        }
 
-		foreach ($meta as $k => $v) {
-			array_push($metadata, "-metadata", "$k=$v");
-		}
+        $metadata = [];
 
-		return $metadata;
-	}
+        // handle artwork image
+        if (isset($meta["artwork"])) {
+            $metadata[] = '-i';
+            $metadata[] = $meta['artwork'];
+            $metadata[] = '-map';
+            $metadata[] = '0';
+            $metadata[] = '-map';
+            $metadata[] = '1';
+            unset($meta['artwork']);
+        }
+
+        foreach ($meta as $k => $v) {
+            $metadata[] = '-metadata';
+            $metadata[] = "{$k}={$v}";
+        }
+
+        return $metadata;
+    }
 }

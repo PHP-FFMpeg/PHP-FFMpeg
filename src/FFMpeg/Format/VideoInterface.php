@@ -11,14 +11,24 @@
 
 namespace FFMpeg\Format;
 
+/**
+ * Default implementation for Video Foramts
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg
+ * @subpackage Format
+ */
 interface VideoInterface extends AudioInterface
 {
+
     /**
      * Gets the kiloBitrate value.
      *
-     * @return integer
+     * @return int
      */
-    public function getKiloBitrate();
+    public function getKiloBitrate(): int;
 
     /**
      * Returns the modulus used by the Resizable video.
@@ -28,37 +38,37 @@ interface VideoInterface extends AudioInterface
      *
      * @see http://www.undeadborn.net/tools/rescalculator.php
      *
-     * @return integer
+     * @return int
      */
-    public function getModulus();
+    public function getModulus(): int;
 
     /**
      * Returns the video codec.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVideoCodec();
+    public function getVideoCodec(): ?string;
 
     /**
      * Returns true if the current format supports B-Frames.
      *
      * @see https://wikipedia.org/wiki/Video_compression_picture_types
      *
-     * @return Boolean
+     * @return bool
      */
-    public function supportBFrames();
+    public function supportBFrames(): bool;
 
     /**
      * Returns the list of available video codecs for this format.
      *
-     * @return array
+     * @return string[]
      */
-    public function getAvailableVideoCodecs();
+    public function getAvailableVideoCodecs(): array;
 
     /**
-     * Returns the list of available video codecs for this format.
+     * Returns the list of additional parameters for this format.
      *
-     * @return array
+     * @return string[]|null
      */
-    public function getAdditionalParameters();
+    public function getAdditionalParameters(): ?array;
 }

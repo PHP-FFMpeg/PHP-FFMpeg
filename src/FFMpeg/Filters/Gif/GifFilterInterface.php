@@ -16,5 +16,6 @@ use FFMpeg\Media\Gif;
 
 interface GifFilterInterface extends FilterInterface
 {
-    public function apply(Gif $gif);
+
+    public function apply(Gif $gif): array;
 }

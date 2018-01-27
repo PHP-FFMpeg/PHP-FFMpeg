@@ -18,10 +18,14 @@ use Alchemy\BinaryDriver\Exception\ExecutableNotFoundException as BinaryDriverEx
 use FFMpeg\Exception\ExecutableNotFoundException;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Driver responsible for FFMpeg
+ */
 class FFMpegDriver extends AbstractBinary
 {
+
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -31,18 +35,17 @@ class FFMpegDriver extends AbstractBinary
     /**
      * Creates an FFMpegDriver.
      *
-     * @param LoggerInterface     $logger
-     * @param array|Configuration $configuration
-     *
+     * @param  LoggerInterface     $logger
+     * @param  array|Configuration $configuration
      * @return FFMpegDriver
      */
-    public static function create(LoggerInterface $logger = null, $configuration = array())
+    public static function create(LoggerInterface $logger = null, $configuration = []): FFMpegDriver
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);
         }
 
-        $binaries = $configuration->get('ffmpeg.binaries', array('avconv', 'ffmpeg'));
+        $binaries = $configuration->get('ffmpeg.binaries', ['ffmpeg', 'avconv']);
 
         if (!$configuration->has('timeout')) {
             $configuration->set('timeout', 300);

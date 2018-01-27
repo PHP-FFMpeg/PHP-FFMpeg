@@ -15,14 +15,14 @@ interface FormatInterface
     /**
      * Returns the number of passes.
      *
-     * @return string
+     * @return int
      */
-    public function getPasses();
+    public function getPasses(): int;
 
     /**
      * Returns an array of extra parameters to add to ffmpeg commandline.
      *
-     * @return array()
+     * @return string[]
      */
-    public function getExtraParams();
+    public function getExtraParams(): array;
 }

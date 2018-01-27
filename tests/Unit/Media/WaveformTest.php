@@ -25,7 +25,7 @@ class WaveformTest extends AbstractMediaTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $filter = $this->getMock('FFMpeg\Filters\Waveform\WaveformFilterInterface');
+        $filter = $this->getMockBuilder(\FFMpeg\Filters\Waveform\WaveformFilterInterface::class)->getMock();
 
         $filters->expects($this->once())
             ->method('add')
@@ -46,26 +46,26 @@ class WaveformTest extends AbstractMediaTestCase
 
         $pathfile = '/tests/files/Audio.mp3';
 
-        array_push($commands, $pathfile);
+        $commands[] = $pathfile;
 
         $driver->expects($this->once())
             ->method('command')
             ->with($commands);
 
-        $waveform = new Waveform($this->getAudioMock(__FILE__), $driver, $ffprobe, 640, 120, ['#FFFFFF']);
+        $waveform = new Waveform($this->getAudioMock(__FILE__), $driver, $ffprobe, 640, 120);
         $this->assertSame($waveform, $waveform->save($pathfile));
     }
 
     public function provideSaveOptions()
     {
-        return array(
-            array(
-                array(
-                    '-y', '-i', NULL, '-filter_complex',
-                    'showwavespic=colors=#FFFFFF:s=640x120',
+        return [
+            [
+                [
+                    '-i', NULL, '-filter_complex',
+                    'showwavespic=s=640x120',
                     '-frames:v', '1',
-                ),
-            ),
-        );
+                ]
+            ]
+        ];
     }
 }

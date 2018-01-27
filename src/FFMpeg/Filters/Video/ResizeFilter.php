@@ -14,42 +14,60 @@ namespace FFMpeg\Filters\Video;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 
 class ResizeFilter implements VideoFilterInterface
 {
-    /** fits to the dimensions, might introduce anamorphosis */
+
+    use TPriorityFilter;
+
+    /**
+     * fits to the dimensions, might introduce anamorphosis
+     */
     const RESIZEMODE_FIT = 'fit';
-    /** resizes the video inside the given dimension, no anamorphosis */
+
+    /**
+     * resizes the video inside the given dimension, no anamorphosis
+     */
     const RESIZEMODE_INSET = 'inset';
-    /** resizes the video to fit the dimension width, no anamorphosis */
+
+    /**
+     * resizes the video to fit the dimension width, no anamorphosis
+     */
     const RESIZEMODE_SCALE_WIDTH = 'width';
-    /** resizes the video to fit the dimension height, no anamorphosis */
+
+    /**
+     * resizes the video to fit the dimension height, no anamorphosis
+     */
     const RESIZEMODE_SCALE_HEIGHT = 'height';
 
-    /** @var Dimension */
+    /**
+     * @var Dimension
+     */
     private $dimension;
-    /** @var string */
+
+    /**
+     * @var string
+     */
     private $mode;
-    /** @var Boolean */
+
+    /**
+     * @var bool
+     */
     private $forceStandards;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $priority;
 
-    public function __construct(Dimension $dimension, $mode = self::RESIZEMODE_FIT, $forceStandards = true, $priority = 0)
+    public function __construct(Dimension $dimension, string $mode = self::RESIZEMODE_FIT, bool $forceStandards = true, int $priority = 0)
     {
         $this->dimension = $dimension;
         $this->mode = $mode;
         $this->forceStandards = $forceStandards;
-        $this->priority = $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
+        $this->setPriority($priority);
     }
 
     /**
@@ -77,21 +95,19 @@ class ResizeFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format)
+    public function apply(Video $video, VideoInterface $format): array
     {
         $dimensions = null;
-        $commands = array();
+        $commands = [];
 
-        foreach ($video->getStreams() as $stream) {
-            if ($stream->isVideo()) {
-                try {
-                    $dimensions = $stream->getDimensions();
-                    break;
-                } catch (RuntimeException $e) {
-
-                }
+        foreach ($video->getStreams()->videos() as $stream) {
+            // poll as long as we get proper dimensions
+            try {
+                $dimensions = $stream->getDimensions();
+                break;
+            } catch (RuntimeException $e) {
             }
         }
 
@@ -101,7 +117,6 @@ class ResizeFilter implements VideoFilterInterface
             // Using Filter to have ordering
             $commands[] = '-vf';
             $commands[] = '[in]scale=' . $dimensions->getWidth() . ':' . $dimensions->getHeight() . ' [out]';
-            
         }
 
         return $commands;

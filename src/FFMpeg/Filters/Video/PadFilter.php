@@ -11,45 +11,47 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 
 class PadFilter implements VideoFilterInterface
 {
-    /** @var Dimension */
-    private $dimension;
-    /** @var integer */
-    private $priority;
 
-    public function __construct(Dimension $dimension, $priority = 0)
-    {
-        $this->dimension = $dimension;
-        $this->priority = $priority;
-    }
+    use TPriorityFilter;
 
     /**
-     * {@inheritdoc}
+     * @var Dimension
      */
-    public function getPriority()
+    private $dimension;
+
+    /**
+     * @var integer
+     */
+    private $priority;
+
+    public function __construct(Dimension $dimension, int $priority = 0)
     {
-        return $this->priority;
+        $this->dimension = $dimension;
+
+        $this->setPriority($priority);
     }
 
     /**
      * @return Dimension
      */
-    public function getDimension()
+    public function getDimension(): Dimension
     {
         return $this->dimension;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format)
+    public function apply(Video $video, VideoInterface $format): array
     {
-        $commands = array();
+        $commands = [];
 
         $commands[] = '-vf';
         $commands[] = 'scale=iw*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight() .'/ih):ih*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight() .'/ih),pad=' . $this->dimension->getWidth() . ':' . $this->dimension->getHeight() . ':(' . $this->dimension->getWidth() . '-iw)/2:(' . $this->dimension->getHeight() .'-ih)/2';

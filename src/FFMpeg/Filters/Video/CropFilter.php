@@ -12,49 +12,53 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\Point;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
 class CropFilter implements VideoFilterInterface
 {
-    /** @var integer */
+
+    use TPriorityFilter;
+
+    /**
+     * @var integer
+     */
     protected $priority;
-    /** @var Dimension */
+
+    /**
+     * @var Dimension
+     */
     protected $dimension;
-    /** @var Point */
+
+    /**
+     * @var Point
+     */
     protected $point;
 
-    public function __construct(Point $point, Dimension $dimension, $priority = 0)
+    public function __construct(Point $point, Dimension $dimension, int $priority = 0)
     {
-        $this->priority = $priority;
         $this->dimension = $dimension;
         $this->point = $point;
+        $this->setPriority($priority);
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getPriority()
+    public function apply(Video $video, VideoInterface $format): array
     {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function apply(Video $video, VideoInterface $format)
-    {
-        foreach ($video->getStreams()->videos() as $stream) {
+        foreach ($video->getStreams()->getVideoStreams() as $stream) {
             if ($stream->has('width') && $stream->has('height')) {
                 $stream->set('width', $this->dimension->getWidth());
                 $stream->set('height', $this->dimension->getHeight());
             }
         }
 
-        return array(
+        return [
             '-filter:v',
             'crop=' .
             $this->dimension->getWidth() .':' . $this->dimension->getHeight() . ':' . $this->point->getX() . ':' . $this->point->getY()
-        );
+        ];
     }
 }

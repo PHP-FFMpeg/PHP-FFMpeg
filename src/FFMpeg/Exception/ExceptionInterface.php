@@ -11,6 +11,9 @@
 
 namespace FFMpeg\Exception;
 
+/**
+ * Base interface for all exceptions that are thrown by PHP-FFMpeg
+ */
 interface ExceptionInterface
 {
 }

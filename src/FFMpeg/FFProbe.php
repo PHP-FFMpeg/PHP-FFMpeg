@@ -13,12 +13,12 @@ namespace FFMpeg;
 
 use Alchemy\BinaryDriver\ConfigurationInterface;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\FFProbe\DataMapping\Format;
 use FFMpeg\FFProbe\Mapper;
 use FFMpeg\FFProbe\MapperInterface;
+use FFMpeg\FFProbe\CodecTester;
+use FFMpeg\FFProbe\CodecTesterInterface;
 use FFMpeg\FFProbe\OptionsTester;
 use FFMpeg\FFProbe\OptionsTesterInterface;
 use FFMpeg\FFProbe\OutputParser;
@@ -26,37 +26,61 @@ use FFMpeg\FFProbe\OutputParserInterface;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
+use Psr\SimpleCache\CacheInterface;
 use Psr\Log\LoggerInterface;
+use Sabre\Cache\Memory as MemoryCache;
 
 class FFProbe
 {
     const TYPE_STREAMS = 'streams';
     const TYPE_FORMAT = 'format';
 
-    /** @var Cache */
+    /**
+     * @var CacheInterface
+     */
     private $cache;
-    /** @var OptionsTesterInterface */
+
+    /**
+     * @var OptionsTesterInterface
+     */
     private $optionsTester;
-    /** @var OutputParserInterface */
+
+    /**
+     * @var OutputParserInterface
+     */
     private $parser;
-    /** @var FFProbeDriver */
+
+    /**
+     * @var FFProbeDriver
+     */
     private $ffprobe;
-    /** @var MapperInterface */
+
+    /**
+     * @var MapperInterface
+     */
     private $mapper;
 
-    public function __construct(FFProbeDriver $ffprobe, Cache $cache)
+    /**
+     * Checks whether codecs are available
+     *
+     * @var CodecTesterInterface
+     */
+    private $codecTester;
+
+    public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache)
     {
         $this->ffprobe = $ffprobe;
+        $this->codecTester = new CodecTester($ffprobe, $cache);
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
-        $this->parser = new OutputParser();
-        $this->mapper = new Mapper();
+        $this->parser = new OutputParser;
+        $this->mapper = new Mapper;
         $this->cache = $cache;
     }
 
     /**
      * @return OutputParserInterface
      */
-    public function getParser()
+    public function getParser(): OutputParserInterface
     {
         return $this->parser;
     }
@@ -76,7 +100,7 @@ class FFProbe
     /**
      * @return FFProbeDriver
      */
-    public function getFFProbeDriver()
+    public function getFFProbeDriver(): FFProbeDriver
     {
         return $this->ffprobe;
     }
@@ -84,21 +108,44 @@ class FFProbe
     /**
      * @param FFProbeDriver $ffprobe
      *
-     * @return FFProbe
+     * @return self
      */
-    public function setFFProbeDriver(FFProbeDriver $ffprobe)
+    public function setFFProbeDriver(FFProbeDriver $ffprobe): self
     {
         $this->ffprobe = $ffprobe;
 
         return $this;
     }
 
+
+    /**
+     * @param CodecTesterInterface $tester
+     *
+     * @return self
+     * @since 1.0.0
+     */
+    public function setCodecTester(CodecTesterInterface $tester): self
+    {
+        $this->codecTester = $tester;
+
+        return $this;
+    }
+
+    /**
+     * @return CodecTesterInterface
+     * @since 1.0.0
+     */
+    public function getCodecTester(): CodecTesterInterface
+    {
+        return $this->codecTester;
+    }
+
     /**
      * @param OptionsTesterInterface $tester
      *
-     * @return FFProbe
+     * @return self
      */
-    public function setOptionsTester(OptionsTesterInterface $tester)
+    public function setOptionsTester(OptionsTesterInterface $tester): self
     {
         $this->optionsTester = $tester;
 
@@ -108,17 +155,17 @@ class FFProbe
     /**
      * @return OptionsTesterInterface
      */
-    public function getOptionsTester()
+    public function getOptionsTester(): OptionsTesterInterface
     {
         return $this->optionsTester;
     }
 
     /**
-     * @param Cache $cache
+     * @param CacheInterface $cache
      *
      * @return FFProbe
      */
-    public function setCache(Cache $cache)
+    public function setCache(CacheInterface $cache): FFProbe
     {
         $this->cache = $cache;
 
@@ -126,9 +173,9 @@ class FFProbe
     }
 
     /**
-     * @return Cache
+     * @return CacheInterface
      */
-    public function getCache()
+    public function getCache(): CacheInterface
     {
         return $this->cache;
     }
@@ -136,7 +183,7 @@ class FFProbe
     /**
      * @return MapperInterface
      */
-    public function getMapper()
+    public function getMapper(): MapperInterface
     {
         return $this->mapper;
     }
@@ -146,7 +193,7 @@ class FFProbe
      *
      * @return FFProbe
      */
-    public function setMapper(MapperInterface $mapper)
+    public function setMapper(MapperInterface $mapper): FFProbe
     {
         $this->mapper = $mapper;
 
@@ -154,8 +201,6 @@ class FFProbe
     }
 
     /**
-     * @api
-     *
      * Probes the format of a given file.
      *
      * @param string $pathfile
@@ -165,33 +210,29 @@ class FFProbe
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function format($pathfile)
+    public function format($pathfile): Format
     {
         return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
     }
 
     /**
-     * @api
-     *
      * Checks wether the given `$pathfile` is considered a valid media file.
      *
-     * @param string $pathfile
+     * @param  string $pathfile
      * @return bool
-     * @since 0.10.0
+     * @since  0.10.0
      */
-    public function isValid($pathfile)
+    public function isValid($pathfile): bool
     {
         try {
             return $this->format($pathfile)->get('duration') > 0;
-        } catch(\Exception $e) {
+        } catch (\Throwable $e) {
             // complete invalid data
             return false;
         }
     }
 
     /**
-     * @api
-     *
      * Probes the streams contained in a given file.
      *
      * @param string $pathfile
@@ -201,47 +242,49 @@ class FFProbe
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function streams($pathfile)
+    public function streams($pathfile): StreamCollection
     {
         return $this->probe($pathfile, '-show_streams', static::TYPE_STREAMS);
     }
 
     /**
-     * @api
-     *
      * Creates an FFProbe.
      *
      * @param array|ConfigurationInterface $configuration
      * @param LoggerInterface              $logger
-     * @param Cache                        $cache
+     * @param CacheInterface               $cache
      *
      * @return FFProbe
      */
-    public static function create($configuration = array(), LoggerInterface $logger = null, Cache $cache = null)
+    public static function create($configuration = [], LoggerInterface $logger = null, CacheInterface $cacheDriver = null)
     {
-        if (null === $cache) {
-            $cache = new ArrayCache();
+        if ($cacheDriver === null) {
+            // default to in-memory cache
+            $cacheDriver = new MemoryCache;
         }
 
-        return new static(FFProbeDriver::create($configuration, $logger), $cache);
+        return new static(FFProbeDriver::create($configuration, $logger), $cacheDriver);
     }
 
     private function probe($pathfile, $command, $type, $allowJson = true)
     {
         $id = sprintf('%s-%s', $command, $pathfile);
 
-        if ($this->cache->contains($id)) {
-            return $this->cache->fetch($id);
+        if ($this->cache->has($id)) {
+            return $this->cache->get($id);
         }
 
         if (!$this->optionsTester->has($command)) {
-            throw new RuntimeException(sprintf(
-                'This version of ffprobe is too old and '
-                . 'does not support `%s` option, please upgrade', $command
-            ));
+            throw new RuntimeException(
+                sprintf(
+                    'This version of ffprobe is too old and '
+                    . 'does not support `%s` option, please upgrade',
+                    $command
+                )
+            );
         }
 
-        $commands = array($pathfile, $command);
+        $commands = [$pathfile, $command];
 
         $parseIsToDo = false;
 
@@ -276,17 +319,24 @@ class FFProbe
 
         $ret = $this->mapper->map($type, $data);
 
-        $this->cache->save($id, $ret);
+        $this->cache->set($id, $ret);
 
         return $ret;
     }
 
-    private function parseJson($data)
+    /**
+     * Returns the php variable representation of a json string
+     *
+     * @param  string $json The json encoded string to parse
+     * @return mixed
+     * @see    json_decode()
+     */
+    private function parseJson(string $json)
     {
-        $ret = @json_decode($data, true);
+        $ret = json_decode($json, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new RuntimeException(sprintf('Unable to parse json %s', $ret));
+            throw new RuntimeException(sprintf('Unable to parse json: %s', json_last_error_msg()));
         }
 
         return $ret;

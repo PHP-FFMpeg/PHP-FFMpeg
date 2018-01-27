@@ -12,31 +12,32 @@ namespace FFMpeg\Format;
 
 interface AudioInterface extends FormatInterface
 {
+
     /**
      * Gets the audio kiloBitrate value.
      *
-     * @return integer
+     * @return int
      */
-    public function getAudioKiloBitrate();
+    public function getAudioKiloBitrate(): int;
 
     /**
      * Gets the audio channels value.
      *
-     * @return integer
+     * @return int|null
      */
-    public function getAudioChannels();
+    public function getAudioChannels(): ?int;
 
     /**
      * Returns the audio codec.
      *
-     * @return string
+     * @return string|null
      */
-    public function getAudioCodec();
+    public function getAudioCodec(): ?string;
 
     /**
      * Returns the list of available audio codecs for this format.
      *
-     * @return array
+     * @return string[]
      */
-    public function getAvailableAudioCodecs();
+    public function getAvailableAudioCodecs(): array;
 }

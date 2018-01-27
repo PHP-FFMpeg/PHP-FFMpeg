@@ -51,7 +51,7 @@ class GifTest extends AbstractMediaTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $filter = $this->getMock('FFMpeg\Filters\Gif\GifFilterInterface');
+        $filter = $this->getMockBuilder(\FFMpeg\Filters\Gif\GifFilterInterface::class)->getMock();
 
         $filters->expects($this->once())
             ->method('add')
@@ -77,7 +77,7 @@ class GifTest extends AbstractMediaTestCase
 
         $pathfile = '/target/destination';
 
-        array_push($commands, $pathfile);
+        $commands[] = $pathfile;
 
         $driver->expects($this->once())
             ->method('command')

@@ -16,34 +16,47 @@ namespace FFMpeg\Format\Video;
  */
 class WMV extends DefaultVideo
 {
-    public function __construct($audioCodec = 'wmav2', $videoCodec = 'wmv2')
+
+    /**
+     * @inheritDoc
+     */
+    protected $audioCodec = 'wmav2';
+
+    /**
+     * @inheritDoc
+     */
+    protected $videoCodec = 'wmv2';
+
+    /**
+     * @deprecated 1.0.0 use setters directly
+     */
+    public function __construct(string $audioCodec = 'wmav2', string $videoCodec = 'wmv2')
     {
-        $this
-            ->setAudioCodec($audioCodec)
-            ->setVideoCodec($videoCodec);
+        $this->setAudioCodec($audioCodec);
+        $this->setVideoCodec($videoCodec);
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function supportBFrames()
+    public function supportBFrames(): bool
     {
         return false;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
+    public function getAvailableAudioCodecs(): array
     {
-        return array('wmav2');
+        return ['wmav2'];
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableVideoCodecs()
+    public function getAvailableVideoCodecs(): array
     {
-        return array('wmv2');
+        return ['wmv2'];
     }
 }

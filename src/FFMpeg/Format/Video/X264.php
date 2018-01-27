@@ -16,23 +16,40 @@ namespace FFMpeg\Format\Video;
  */
 class X264 extends DefaultVideo
 {
-    /** @var boolean */
+
+    /**
+     * @var bool
+     */
     private $bframesSupport = true;
 
-    /** @var integer */
+    /**
+     * @var int
+     */
     private $passes = 2;
 
-    public function __construct($audioCodec = 'libfaac', $videoCodec = 'libx264')
+    /**
+     * @inheritDoc
+     */
+    protected $audioCodec = 'libmp3lame';
+
+    /**
+     * @inheritDoc
+     */
+    protected $videoCodec = 'libx264';
+
+    /**
+     * @deprecated 1.0.0 use setters directly
+     */
+    public function __construct(string $audioCodec = 'libmp3lame', string $videoCodec = 'libx264')
     {
-        $this
-            ->setAudioCodec($audioCodec)
-            ->setVideoCodec($videoCodec);
+        $this->setAudioCodec($audioCodec);
+        $this->setVideoCodec($videoCodec);
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function supportBFrames()
+    public function supportBFrames(): bool
     {
         return $this->bframesSupport;
     }
@@ -40,9 +57,9 @@ class X264 extends DefaultVideo
     /**
      * @param $support
      *
-     * @return X264
+     * @return self
      */
-    public function setBFramesSupport($support)
+    public function setBFramesSupport(bool $support): self
     {
         $this->bframesSupport = $support;
 
@@ -50,36 +67,36 @@ class X264 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
+    public function getAvailableAudioCodecs(): array
     {
-        return array('aac', 'libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac');
+        return ['aac', 'libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac'];
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableVideoCodecs()
+    public function getAvailableVideoCodecs(): array
     {
-        return array('libx264');
+        return ['libx264'];
     }
 
     /**
      * @param $passes
      *
-     * @return X264
+     * @return self
      */
-    public function setPasses($passes)
+    public function setPasses(int $passes): self
     {
         $this->passes = $passes;
         return $this;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getPasses()
+    public function getPasses(): int
     {
         return $this->passes;
     }
@@ -87,7 +104,7 @@ class X264 extends DefaultVideo
     /**
      * @return int
      */
-    public function getModulus()
+    public function getModulus(): int
     {
         return 2;
     }

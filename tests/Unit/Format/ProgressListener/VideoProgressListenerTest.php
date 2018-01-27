@@ -21,40 +21,44 @@ class VideoProgressListenerTest extends TestCase
         $ffprobe->expects($this->once())
             ->method('format')
             ->with(__FILE__)
-            ->will($this->returnValue(new Format(array(
+            ->will($this->returnValue(new Format([
                 'size'     => $size,
-                'duration' => $duration,
-            ))));
+                'duration' => $duration
+            ])));
 
         $listener = new VideoProgressListener($ffprobe, __FILE__, $currentPass, $totalPass);
+
         $phpunit = $this;
         $n = 0;
         $listener->on('progress', function ($percent, $remaining, $rate) use (&$n, $phpunit, $expectedPercent, $expectedRemaining, $expectedRate, $expectedPercent2, $expectedRemaining2, $expectedRate2) {
-            if (0 === $n) {
+            if($n === 0) {
                 $phpunit->assertEquals($expectedPercent, $percent);
                 $phpunit->assertEquals($expectedRemaining, $remaining);
                 $phpunit->assertEquals($expectedRate, $rate);
-            } elseif (1 === $n) {
+            } else if($n === 1) {
                 $phpunit->assertEquals($expectedPercent2, $percent);
                 $phpunit->assertEquals($expectedRemaining2, $remaining);
-                $phpunit->assertLessThan($expectedRate2 + 10, $rate);
-                $phpunit->assertGreaterThan($expectedRate2 - 10, $rate);
+
+                // allow minor differences
+                $phpunit->assertLessThan($expectedRate2 + 15, $rate);
+                $phpunit->assertGreaterThan($expectedRate2 - 15, $rate);
             }
+
             $n++;
         });
         // first one does not trigger progress event
         $listener->handle('any-type'.mt_rand(), $data);
-        sleep(1);
+        usleep(500);
         $listener->handle('any-type'.mt_rand(), $data);
-        sleep(1);
+        usleep(500);
         $listener->handle('any-type'.mt_rand(), $data2);
         $this->assertEquals(2, $n);
     }
 
     public function provideData()
     {
-        return array(
-            array(
+        return [
+            [
                 147073958,
                 281.147533,
                 'frame=  206 fps=202 q=10.0 size=     571kB time=00:00:07.12 bitrate= 656.8kbits/s dup=9 drop=0',
@@ -67,8 +71,8 @@ class VideoProgressListenerTest extends TestCase
                 3868,
                 1,
                 1
-            ),
-            array(
+            ],
+            [
                 147073958,
                 281.147533,
                 'frame=  206 fps=202 q=10.0 size=     571kB time=00:00:07.12 bitrate= 656.8kbits/s dup=9 drop=0',
@@ -81,7 +85,7 @@ class VideoProgressListenerTest extends TestCase
                 3868,
                 1,
                 2
-            )
-        );
+            ]
+        ];
     }
 }

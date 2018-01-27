@@ -18,31 +18,39 @@ use FFMpeg\Exception\InvalidArgumentException;
  */
 class Dimension
 {
+
+    /**
+     * @var int
+     */
     private $width;
+
+    /**
+     * @var int
+     */
     private $height;
 
     /**
-     * @param integer $width
-     * @param integer $height
+     * @param   int $width
+     * @param   int $height
      *
-     * @throws InvalidArgumentException when one of the parameteres is invalid
+     * @throws InvalidArgumentException when one of the parameteres is invalid (not positive)
      */
-    public function __construct($width, $height)
+    public function __construct(int $width, int $height)
     {
         if ($width <= 0 || $height <= 0) {
-            throw new InvalidArgumentException('Width and height should be positive integer');
+            throw new InvalidArgumentException('Both width and height should be positive numbers!');
         }
 
-        $this->width = (int) $width;
-        $this->height = (int) $height;
+        $this->width = $width;
+        $this->height = $height;
     }
 
     /**
      * Returns width.
      *
-     * @return integer
+     * @return int
      */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
@@ -50,9 +58,9 @@ class Dimension
     /**
      * Returns height.
      *
-     * @return integer
+     * @return int
      */
-    public function getHeight()
+    public function getHeight(): int
     {
         return $this->height;
     }
@@ -60,11 +68,11 @@ class Dimension
     /**
      * Returns the ratio.
      *
-     * @param type $forceStandards Whether or not force the use of standards ratios;
+     * @param bool $forceStandards Whether or not force the use of standards ratios;
      *
      * @return AspectRatio
      */
-    public function getRatio($forceStandards = true)
+    public function getRatio(bool $forceStandards = true): AspectRatio
     {
         return AspectRatio::create($this, $forceStandards);
     }

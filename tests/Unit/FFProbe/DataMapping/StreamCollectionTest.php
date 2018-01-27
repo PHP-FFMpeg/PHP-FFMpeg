@@ -7,20 +7,29 @@ use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
 class StreamCollectionTest extends TestCase
 {
-    public function testAdd()
-    {
+    public function testUniqueness() {
         $stream = $this->getStreamMock();
 
-        $collection = new StreamCollection();
-        $this->assertEquals(array(), $collection->all());
+        $collection = new StreamCollection;
+
         $collection->add($stream);
-        $this->assertEquals(array($stream), $collection->all());
         $collection->add($stream);
-        $this->assertEquals(array($stream, $stream), $collection->all());
+
+        $this->assertEquals([$stream], $collection->getUniqueStreams()->all());
     }
 
-    public function testVideos()
-    {
+    public function testAdd() {
+        $stream = $this->getStreamMock();
+
+        $collection = new StreamCollection;
+        $this->assertEquals([], $collection->all());
+        $collection->add($stream);
+        $this->assertEquals([$stream], $collection->all());
+        $collection->add($stream);
+        $this->assertEquals([$stream, $stream], $collection->all());
+    }
+
+    public function testVideos() {
         $audio = $this->getStreamMock();
         $audio->expects($this->once())
             ->method('isVideo')
@@ -31,16 +40,15 @@ class StreamCollectionTest extends TestCase
             ->method('isVideo')
             ->will($this->returnValue(true));
 
-        $collection = new StreamCollection(array($audio, $video));
+        $collection = new StreamCollection([$audio, $video]);
         $videos = $collection->videos();
 
-        $this->assertInstanceOf('FFMpeg\FFProbe\DataMapping\StreamCollection', $videos);
+        $this->assertInstanceOf(StreamCollection::class, $videos);
         $this->assertCount(1, $videos);
-        $this->assertEquals(array($video), $videos->all());
+        $this->assertEquals([$video], $videos->all());
     }
 
-    public function testAudios()
-    {
+    public function testAudios() {
         $audio = $this->getStreamMock();
         $audio->expects($this->once())
             ->method('isAudio')
@@ -51,38 +59,35 @@ class StreamCollectionTest extends TestCase
             ->method('isAudio')
             ->will($this->returnValue(false));
 
-        $collection = new StreamCollection(array($audio, $video));
+        $collection = new StreamCollection([$audio, $video]);
         $audios = $collection->audios();
 
-        $this->assertInstanceOf('FFMpeg\FFProbe\DataMapping\StreamCollection', $audios);
+        $this->assertInstanceOf(StreamCollection::class, $audios);
         $this->assertCount(1, $audios);
-        $this->assertEquals(array($audio), $audios->all());
+        $this->assertEquals([$audio], $audios->all());
     }
 
-    public function testCount()
-    {
+    public function testCount() {
         $stream = $this->getStreamMock();
 
-        $collection = new StreamCollection(array($stream));
+        $collection = new StreamCollection([$stream]);
         $this->assertCount(1, $collection);
     }
 
-    public function testGetIterator()
-    {
+    public function testGetIterator() {
         $audio = $this->getStreamMock();
         $video = $this->getStreamMock();
 
-        $collection = new StreamCollection(array($audio, $video));
-        $this->assertInstanceOf('\Iterator', $collection->getIterator());
+        $collection = new StreamCollection([$audio, $video]);
+        $this->assertInstanceOf(\Iterator::class, $collection->getIterator());
         $this->assertCount(2, $collection->getIterator());
     }
 
-    public function testFirst()
-    {
+    public function testFirst() {
         $stream1 = $this->getStreamMock();
         $stream2 = $this->getStreamMock();
 
-        $coll = new StreamCollection(array($stream1, $stream2));
+        $coll = new StreamCollection([$stream1, $stream2]);
 
         $this->assertSame($stream1, $coll->first());
     }

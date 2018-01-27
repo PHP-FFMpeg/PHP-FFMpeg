@@ -14,7 +14,7 @@ class WaveformFiltersTest extends TestCase
 
         $Waveform->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Waveform\WaveformDownmixFilter'));
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Waveform\WaveformDownmixFilter::class));
 
         $filters->setDownmix();
     }

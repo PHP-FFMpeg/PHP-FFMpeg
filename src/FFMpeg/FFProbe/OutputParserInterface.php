@@ -13,6 +13,7 @@ namespace FFMpeg\FFProbe;
 
 interface OutputParserInterface
 {
+
     /**
      * Parses ffprobe raw output.
      *
@@ -23,5 +24,5 @@ interface OutputParserInterface
      *
      * @throws InvalidArgumentException In case the type is not supported
      */
-    public function parse($type, $data);
+    public function parse(string $type, string $data): array;
 }

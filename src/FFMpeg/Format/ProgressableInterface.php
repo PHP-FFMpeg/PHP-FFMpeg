@@ -12,20 +12,22 @@
 namespace FFMpeg\Format;
 
 use Evenement\EventEmitterInterface;
+use Alchemy\BinaryDriver\Listeners\ListenerInterface;
 use FFMpeg\FFProbe;
 use FFMpeg\Media\MediaTypeInterface;
 
 interface ProgressableInterface extends EventEmitterInterface
 {
+
     /**
      * Creates the progress listener.
      *
      * @param MediaTypeInterface $media
      * @param FFProbe            $ffprobe
-     * @param Integer            $pass    The current pas snumber
-     * @param Integer            $total   The total pass number
+     * @param int                $pass    The current pass number
+     * @param int                $total   The total pass number
      *
-     * @return array An array of listeners
+     * @return ListenerInterface[] An array of listeners
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total);
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses): array;
 }

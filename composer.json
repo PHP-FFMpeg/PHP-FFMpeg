@@ -28,15 +28,16 @@
         {
             "name": "Jens Hausdorf",
             "email": "hello@jens-hausdorf.de",
-            "homepage": "https://jens-hausdorf.de"
+            "homepage": "https://jens-hausdorf.de",
+            "role": "Maintainer"
         }
     ],
     "require": {
-        "php": "^5.3.9 || ^7.0",
-        "alchemy/binary-driver": "^1.5",
-        "doctrine/cache": "^1.0",
+        "php": "^7.1",
+        "alchemy/binary-driver": "^1.6",
         "evenement/evenement": "^2.0 || ^1.0",
-        "neutron/temporary-filesystem": "^2.1.1"
+        "neutron/temporary-filesystem": "dev-jens1o-update-deps",
+        "sabre/cache": "^1.0"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
@@ -44,11 +45,18 @@
     "require-dev": {
         "sami/sami": "~1.0",
         "silex/silex": "~1.0",
-        "phpunit/phpunit": "^4.8.36"
+        "phpunit/phpunit": "^6.4",
+        "squizlabs/php_codesniffer": "^3.2"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/jens1o/Temporary-Filesystem"
+        }
+    ],
     "autoload": {
         "psr-0": {
-            "FFMpeg": "src"
+            "FFMpeg\\": "src"
         }
     },
     "autoload-dev": {

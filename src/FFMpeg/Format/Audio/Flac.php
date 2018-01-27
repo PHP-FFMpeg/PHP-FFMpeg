@@ -16,16 +16,17 @@ namespace FFMpeg\Format\Audio;
  */
 class Flac extends DefaultAudio
 {
-    public function __construct()
-    {
-        $this->audioCodec = 'flac';
-    }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
+    protected $audioCodec = 'flac';
+
+    /**
+     * @inheritDoc
+     */
+    public function getAvailableAudioCodecs(): array
     {
-        return array('flac');
+        return ['flac'];
     }
 }

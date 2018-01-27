@@ -22,17 +22,34 @@ use FFMpeg\Coordinate\Dimension;
 
 class Gif extends AbstractMediaType
 {
-    /** @var TimeCode */
+    /**
+     * @var TimeCode
+     */
     private $timecode;
-    /** @var Dimension */
+
+    /**
+     * @var Dimension
+     */
     private $dimension;
-    /** @var integer */
+
+    /**
+     * @var int|null
+     */
     private $duration;
-    /** @var Video */
+
+    /**
+     * @var Video
+     */
     private $video;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode, Dimension $dimension, $duration = null)
-    {
+    public function __construct(
+        Video $video,
+        FFMpegDriver $driver,
+        FFProbe $ffprobe,
+        TimeCode $timecode,
+        Dimension $dimension,
+        ?int $duration = null
+    ) {
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;
         $this->dimension = $dimension;
@@ -45,27 +62,27 @@ class Gif extends AbstractMediaType
      *
      * @return Video
      */
-    public function getVideo()
+    public function getVideo(): Video
     {
         return $this->video;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return GifFilters
      */
-    public function filters()
+    public function filters(): GifFilters
     {
         return new GifFilters($this);
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Gif
      */
-    public function addFilter(GifFilterInterface $filter)
+    public function addFilter(GifFilterInterface $filter): self
     {
         $this->filters->add($filter);
 
@@ -75,7 +92,7 @@ class Gif extends AbstractMediaType
     /**
      * @return TimeCode
      */
-    public function getTimeCode()
+    public function getTimeCode(): TimeCode
     {
         return $this->timecode;
     }
@@ -83,7 +100,7 @@ class Gif extends AbstractMediaType
     /**
      * @return Dimension
      */
-    public function getDimension()
+    public function getDimension(): Dimension
     {
         return $this->dimension;
     }
@@ -91,24 +108,24 @@ class Gif extends AbstractMediaType
     /**
      * Saves the gif in the given filename.
      *
-     * @param string  $pathfile
+     * @param string $pathfile
      *
-     * @return Gif
-     *
+     * @return self
      * @throws RuntimeException
      */
-    public function save($pathfile)
+    public function save(string $pathfile): self
     {
         /**
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
-        $commands = array(
-            '-ss', (string)$this->timecode
-        );
+        $commands = [
+            '-ss',
+            (string) $this->timecode
+        ];
 
-        if(null !== $this->duration) {
+        if (null !== $this->duration) {
             $commands[] = '-t';
-            $commands[] = (string)$this->duration;
+            $commands[] = (string) $this->duration;
         }
 
         $commands[] = '-i';
@@ -123,7 +140,7 @@ class Gif extends AbstractMediaType
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        $commands = array_merge($commands, array($pathfile));
+        $commands = array_merge($commands, [$pathfile]);
 
         try {
             $this->driver->command($commands);
