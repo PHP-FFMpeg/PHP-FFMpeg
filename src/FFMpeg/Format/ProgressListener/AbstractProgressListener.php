@@ -121,6 +121,14 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
+     * @return int
+     */
+    public function getCurrentTime()
+    {
+        return $this->currentTime;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function handle($type, $data)
@@ -171,6 +179,12 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
         if ($this->lastOutput !== null) {
             $delta = $currentTime - $this->lastOutput;
+
+            // Check the type of the currentSize variable and convert it to an integer if needed.
+            if(!is_numeric($currentSize)) {
+                $currentSize = (int)$currentSize;
+            }
+
             $deltaSize = $currentSize - $this->currentSize;
             $rate = $deltaSize * $delta;
             if ($rate > 0) {

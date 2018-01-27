@@ -20,7 +20,7 @@
              dataType: 'script',
              success: function () {
                  $('.loader').css('display', 'none');
-                 var panel = new Searchdoc.Panel($('#panel'), search_data, tree, top.frames[1]);
+                 var panel = new Searchdoc.Panel($('#panel'), search_data, tree, parent.frames[1]);
                  $('#search').focus();
 
                  for (var i=0; i < 2; i++) {

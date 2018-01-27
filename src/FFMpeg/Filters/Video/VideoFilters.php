@@ -11,7 +11,9 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Coordinate\Point;
 use FFMpeg\Media\Video;
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\FrameRate;
 use FFMpeg\Filters\Audio\AudioResamplableFilter;
@@ -44,13 +46,28 @@ class VideoFilters extends AudioFilters
      * Changes the video framerate.
      *
      * @param FrameRate $framerate
-     * @param type      $gop
+     * @param Integer      $gop
      *
      * @return VideoFilters
      */
     public function framerate(FrameRate $framerate, $gop)
     {
         $this->media->addFilter(new FrameRateFilter($framerate, $gop));
+
+        return $this;
+    }
+
+    /**
+     * Extract multiple frames from the video
+     *
+     * @param string $frameRate
+     * @param string  $destinationFolder
+     *
+     * @return $this
+     */
+    public function extractMultipleFrames($frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, $destinationFolder = __DIR__)
+    {
+        $this->media->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
 
         return $this;
     }
@@ -96,9 +113,65 @@ class VideoFilters extends AudioFilters
         return $this;
     }
 
+    /**
+     * Adds padding (black bars) to a video.
+     *
+     * @param Dimension $dimension
+     *
+     * @return VideoFilters
+     */
+    public function pad(Dimension $dimension)
+    {
+        $this->media->addFilter(new PadFilter($dimension));
+
+        return $this;
+    }
+
     public function rotate($angle)
     {
         $this->media->addFilter(new RotateFilter($angle, 30));
+
+        return $this;
+    }
+
+    /**
+     * Crops the video
+     *
+     * @param Point $point
+     * @param Dimension $dimension
+     *
+     * @return VideoFilters
+     */
+    public function crop(Point $point, Dimension $dimension)
+    {
+        $this->media->addFilter(new CropFilter($point, $dimension));
+
+        return $this;
+    }
+
+    /**
+     * @param string $imagePath
+     * @param array  $coordinates
+     *
+     * @return $this
+     */
+    public function watermark($imagePath, array $coordinates = array())
+    {
+        $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates));
+
+        return $this;
+    }
+
+    /**
+     * Applies a custom filter: -vf foo bar
+     *
+     * @param string    $parameters
+     *
+     * @return VideoFilters
+     */
+    public function custom($parameters)
+    {
+        $this->media->addFilter(new CustomFilter($parameters));
 
         return $this;
     }

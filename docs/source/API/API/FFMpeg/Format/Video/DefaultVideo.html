@@ -12,6 +12,7 @@
             <li><a href="../../../classes.html">Classes</a></li>
                             <li><a href="../../../namespaces.html">Namespaces</a></li>
                         <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
             <li><a href="../../../doc-index.html">Index</a></li>
             
         </ul>
@@ -22,12 +23,14 @@
     <h1><a href="../../../FFMpeg/Format/Video.html">FFMpeg\Format\Video</a>\DefaultVideo</h1>
     </div>
         <div class="content">
-                <p>abstract class    <strong>DefaultVideo</strong>        extends <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a>        implements
+                <p>abstract     class
+    <strong>DefaultVideo</strong>        extends <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a>        implements
         <a href="../../../FFMpeg/Format/VideoInterface.html"><abbr title="FFMpeg\Format\VideoInterface">VideoInterface</abbr></a></p>
 
             <div class="description">
             <p>The abstract default Video format</p>
-            <p></p>
+            <p>
+</p>
         </div>
     
     
@@ -87,6 +90,26 @@
             </tr>
                     <tr>
                 <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_getAudioChannels">getAudioChannels</a>()
+                    <p>Gets the audio channels value.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioChannels"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setAudioChannels">setAudioChannels</a>(integer $channels)
+                    <p>Sets the channels value.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioChannels"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     array
                 </td>
                 <td class="last">
@@ -94,6 +117,16 @@
                     <p>Creates the progress listener.</p>
                 </td>
                 <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getPasses">getPasses</a>()
+                    <p>Returns the number of passes.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getPasses"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -137,21 +170,12 @@
             </tr>
                     <tr>
                 <td class="type">
-                    string
-                </td>
-                <td class="last">
-                    <a href="#method_getPasses">getPasses</a>()
-                    <p>Returns the number of passes.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
                     integer
                 </td>
                 <td class="last">
                     <a href="#method_getModulus">getModulus</a>()
-                    <p></p>
+                    <p>
+</p>
                 </td>
                 <td></td>
             </tr>
@@ -161,13 +185,14 @@
         <h2>Details</h2>
 
                         <h3 id="method_getExtraParams">
-        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getExtraParams"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 33</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getExtraParams"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 36</div>
         <code>            public            <abbr title="FFMpeg\Format\array()">array()</abbr>
     <strong>getExtraParams</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns an array of extra parameters to add to ffmpeg commandline.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -175,7 +200,8 @@
                     <table>
         <tr>
             <td><abbr title="FFMpeg\Format\array()">array()</abbr></td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -185,13 +211,14 @@
     </div>
 
                 <h3 id="method_getAudioCodec">
-        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioCodec"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 41</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioCodec"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 44</div>
         <code>            public            string
     <strong>getAudioCodec</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns the audio codec.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -199,7 +226,8 @@
                     <table>
         <tr>
             <td>string</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -209,13 +237,14 @@
     </div>
 
                 <h3 id="method_setAudioCodec">
-        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioCodec"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 54</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioCodec"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 57</div>
         <code>            public            
     <strong>setAudioCodec</strong>(string $audioCodec)</code>
     </h3>
     <div class="details">
         <p>Sets the audio codec, Should be in the available ones, otherwise an exception is thrown.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -223,7 +252,8 @@
                     <tr>
                 <td>string</td>
                 <td>$audioCodec</td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -234,7 +264,8 @@
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -243,13 +274,14 @@
     </div>
 
                 <h3 id="method_getAudioKiloBitrate">
-        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioKiloBitrate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 71</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioKiloBitrate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 74</div>
         <code>            public            integer
     <strong>getAudioKiloBitrate</strong>()</code>
     </h3>
     <div class="details">
         <p>Gets the audio kiloBitrate value.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -257,7 +289,8 @@
                     <table>
         <tr>
             <td>integer</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -267,13 +300,14 @@
     </div>
 
                 <h3 id="method_setAudioKiloBitrate">
-        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioKiloBitrate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 82</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioKiloBitrate"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 85</div>
         <code>            public            
     <strong>setAudioKiloBitrate</strong>(integer $kiloBitrate)</code>
     </h3>
     <div class="details">
         <p>Sets the kiloBitrate value.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -281,7 +315,8 @@
                     <tr>
                 <td>integer</td>
                 <td>$kiloBitrate</td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -292,7 +327,71 @@
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAudioChannels">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getAudioChannels"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 99</div>
+        <code>            public            integer
+    <strong>getAudioChannels</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the audio channels value.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAudioChannels">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_setAudioChannels"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 110</div>
+        <code>            public            
+    <strong>setAudioChannels</strong>(integer $channels)</code>
+    </h3>
+    <div class="details">
+        <p>Sets the channels value.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$channels</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -301,13 +400,14 @@
     </div>
 
                 <h3 id="method_createProgressListener">
-        <div class="location">at line 108</div>
+        <div class="location">at line 100</div>
         <code>            public            array
     <strong>createProgressListener</strong>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total)</code>
     </h3>
     <div class="details">
         <p>Creates the progress listener.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -315,12 +415,14 @@
                     <tr>
                 <td><a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
                 <td>$media</td>
-                <td></td>
+                <td>
+</td>
             </tr>
                     <tr>
                 <td><a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
                 <td>$ffprobe</td>
-                <td></td>
+                <td>
+</td>
             </tr>
                     <tr>
                 <td>Integer</td>
@@ -349,6 +451,32 @@
                     </div>
     </div>
 
+                <h3 id="method_getPasses">
+        <div class="location">in <a href="../../../FFMpeg/Format/Audio/DefaultAudio.html#method_getPasses"><abbr title="FFMpeg\Format\Audio\DefaultAudio">DefaultAudio</abbr></a> at line 138</div>
+        <code>            public            string
+    <strong>getPasses</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the number of passes.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_getKiloBitrate">
         <div class="location">at line 38</div>
         <code>            public            integer
@@ -356,7 +484,8 @@
     </h3>
     <div class="details">
         <p>Gets the kiloBitrate value.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -364,7 +493,8 @@
                     <table>
         <tr>
             <td>integer</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -380,7 +510,8 @@
     </h3>
     <div class="details">
         <p>Sets the kiloBitrate value.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -388,7 +519,8 @@
                     <tr>
                 <td>integer</td>
                 <td>$kiloBitrate</td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -399,7 +531,8 @@
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -414,7 +547,8 @@
     </h3>
     <div class="details">
         <p>Returns the video codec.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -422,7 +556,8 @@
                     <table>
         <tr>
             <td>string</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -438,7 +573,8 @@
     </h3>
     <div class="details">
         <p>Sets the video codec, Should be in the available ones, otherwise an exception is thrown.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -446,7 +582,8 @@
                     <tr>
                 <td>string</td>
                 <td>$videoCodec</td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -457,7 +594,8 @@
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td></td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -465,38 +603,16 @@
                     </div>
     </div>
 
-                <h3 id="method_getPasses">
-        <div class="location">at line 92</div>
-        <code>            public            string
-    <strong>getPasses</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>Returns the number of passes.</p>
-        <p></p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>string</td>
-            <td></td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
                 <h3 id="method_getModulus">
-        <div class="location">at line 100</div>
+        <div class="location">at line 92</div>
         <code>            public            integer
     <strong>getModulus</strong>()</code>
     </h3>
     <div class="details">
-        <p></p>
-        <p></p>
+        <p>
+</p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -504,7 +620,8 @@
                     <table>
         <tr>
             <td>integer</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 

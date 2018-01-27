@@ -12,6 +12,7 @@
             <li><a href="../../classes.html">Classes</a></li>
                             <li><a href="../../namespaces.html">Namespaces</a></li>
                         <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
             <li><a href="../../doc-index.html">Index</a></li>
             
         </ul>
@@ -22,7 +23,8 @@
     <h1><a href="../../FFMpeg/Format.html">FFMpeg\Format</a>\VideoInterface</h1>
     </div>
         <div class="content">
-                <p>interface    <strong>VideoInterface</strong>        implements
+                <p>    interface
+    <strong>VideoInterface</strong>        implements
         <a href="../../FFMpeg/Format/AudioInterface.html"><abbr title="FFMpeg\Format\AudioInterface">AudioInterface</abbr></a></p>
 
     
@@ -31,6 +33,26 @@
             <h2>Methods</h2>
 
             <table>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getPasses">getPasses</a>()
+                    <p>Returns the number of passes.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Format/FormatInterface.html#method_getPasses"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="FFMpeg\Format\array()">array()</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_getExtraParams">getExtraParams</a>()
+                    <p>Returns an array of extra parameters to add to ffmpeg commandline.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Format/FormatInterface.html#method_getExtraParams"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a></small></td>
+            </tr>
                     <tr>
                 <td class="type">
                     integer
@@ -43,13 +65,13 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <abbr title="FFMpeg\Format\array()">array()</abbr>
+                    integer
                 </td>
                 <td class="last">
-                    <a href="#method_getExtraParams">getExtraParams</a>()
-                    <p>Returns an array of extra parameters to add to ffmpeg commandline.</p>
+                    <a href="#method_getAudioChannels">getAudioChannels</a>()
+                    <p>Gets the audio channels value.</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../FFMpeg/Format/AudioInterface.html#method_getExtraParams"><abbr title="FFMpeg\Format\AudioInterface">AudioInterface</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Format/AudioInterface.html#method_getAudioChannels"><abbr title="FFMpeg\Format\AudioInterface">AudioInterface</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -78,16 +100,6 @@
                 <td class="last">
                     <a href="#method_getKiloBitrate">getKiloBitrate</a>()
                     <p>Gets the kiloBitrate value.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    string
-                </td>
-                <td class="last">
-                    <a href="#method_getPasses">getPasses</a>()
-                    <p>Returns the number of passes.</p>
                 </td>
                 <td></td>
             </tr>
@@ -136,22 +148,24 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_getAudioKiloBitrate">
-        <div class="location">in <a href="../../FFMpeg/Format/AudioInterface.html#method_getAudioKiloBitrate"><abbr title="FFMpeg\Format\AudioInterface">AudioInterface</abbr></a> at line 20</div>
-        <code>            public            integer
-    <strong>getAudioKiloBitrate</strong>()</code>
+                        <h3 id="method_getPasses">
+        <div class="location">in <a href="../../FFMpeg/Format/FormatInterface.html#method_getPasses"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a> at line 20</div>
+        <code>            public            string
+    <strong>getPasses</strong>()</code>
     </h3>
     <div class="details">
-        <p>Gets the audio kiloBitrate value.</p>
-        <p></p>
+        <p>Returns the number of passes.</p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table>
         <tr>
-            <td>integer</td>
-            <td></td>
+            <td>string</td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -161,13 +175,14 @@
     </div>
 
                 <h3 id="method_getExtraParams">
-        <div class="location">in <a href="../../FFMpeg/Format/AudioInterface.html#method_getExtraParams"><abbr title="FFMpeg\Format\AudioInterface">AudioInterface</abbr></a> at line 27</div>
+        <div class="location">in <a href="../../FFMpeg/Format/FormatInterface.html#method_getExtraParams"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a> at line 27</div>
         <code>            public            <abbr title="FFMpeg\Format\array()">array()</abbr>
     <strong>getExtraParams</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns an array of extra parameters to add to ffmpeg commandline.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -175,7 +190,60 @@
                     <table>
         <tr>
             <td><abbr title="FFMpeg\Format\array()">array()</abbr></td>
-            <td></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAudioKiloBitrate">
+        <div class="location">in <a href="../../FFMpeg/Format/AudioInterface.html#method_getAudioKiloBitrate"><abbr title="FFMpeg\Format\AudioInterface">AudioInterface</abbr></a> at line 20</div>
+        <code>            public            integer
+    <strong>getAudioKiloBitrate</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the audio kiloBitrate value.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAudioChannels">
+        <div class="location">in <a href="../../FFMpeg/Format/AudioInterface.html#method_getAudioChannels"><abbr title="FFMpeg\Format\AudioInterface">AudioInterface</abbr></a> at line 27</div>
+        <code>            public            integer
+    <strong>getAudioChannels</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the audio channels value.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -191,7 +259,8 @@
     </h3>
     <div class="details">
         <p>Returns the audio codec.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -199,7 +268,8 @@
                     <table>
         <tr>
             <td>string</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -215,7 +285,8 @@
     </h3>
     <div class="details">
         <p>Returns the list of available audio codecs for this format.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -223,7 +294,8 @@
                     <table>
         <tr>
             <td>array</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -239,7 +311,8 @@
     </h3>
     <div class="details">
         <p>Gets the kiloBitrate value.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -247,31 +320,8 @@
                     <table>
         <tr>
             <td>integer</td>
-            <td></td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_getPasses">
-        <div class="location">at line 28</div>
-        <code>            public            string
-    <strong>getPasses</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>Returns the number of passes.</p>
-        <p></p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>string</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -281,14 +331,14 @@
     </div>
 
                 <h3 id="method_getModulus">
-        <div class="location">at line 40</div>
+        <div class="location">at line 33</div>
         <code>            public            integer
     <strong>getModulus</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns the modulus used by the Resizable video.</p>
-        <p>This used to calculate the target dimensions while maintaining the best<br />
- aspect ratio.</p>
+        <p>This used to calculate the target dimensions while maintaining the best
+aspect ratio.</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -296,7 +346,8 @@
                     <table>
         <tr>
             <td>integer</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -315,13 +366,14 @@
     </div>
 
                 <h3 id="method_getVideoCodec">
-        <div class="location">at line 47</div>
+        <div class="location">at line 40</div>
         <code>            public            string
     <strong>getVideoCodec</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns the video codec.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -329,7 +381,8 @@
                     <table>
         <tr>
             <td>string</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -339,13 +392,14 @@
     </div>
 
                 <h3 id="method_supportBFrames">
-        <div class="location">at line 56</div>
+        <div class="location">at line 49</div>
         <code>            public            Boolean
     <strong>supportBFrames</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns true if the current format supports B-Frames.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -353,7 +407,8 @@
                     <table>
         <tr>
             <td>Boolean</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 
@@ -372,13 +427,14 @@
     </div>
 
                 <h3 id="method_getAvailableVideoCodecs">
-        <div class="location">at line 63</div>
+        <div class="location">at line 56</div>
         <code>            public            array
     <strong>getAvailableVideoCodecs</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns the list of available video codecs for this format.</p>
-        <p></p>
+        <p>
+</p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -386,7 +442,8 @@
                     <table>
         <tr>
             <td>array</td>
-            <td></td>
+            <td>
+</td>
         </tr>
     </table>
 

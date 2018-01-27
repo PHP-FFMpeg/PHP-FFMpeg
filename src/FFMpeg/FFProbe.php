@@ -25,6 +25,7 @@ use FFMpeg\FFProbe\OutputParser;
 use FFMpeg\FFProbe\OutputParserInterface;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
+use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use Psr\Log\LoggerInterface;
 
 class FFProbe
@@ -167,6 +168,25 @@ class FFProbe
     public function format($pathfile)
     {
         return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
+    }
+
+    /**
+     * @api
+     *
+     * Checks wether the given `$pathfile` is considered a valid media file.
+     *
+     * @param string $pathfile
+     * @return bool
+     * @since 0.10.0
+     */
+    public function isValid($pathfile)
+    {
+        try {
+            return $this->format($pathfile)->get('duration') > 0;
+        } catch(\Exception $e) {
+            // complete invalid data
+            return false;
+        }
     }
 
     /**
