@@ -125,7 +125,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * {@inheritdoc}
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
     {
         $format = $this;
         $listeners = array(new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total));

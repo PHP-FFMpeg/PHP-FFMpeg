@@ -62,7 +62,7 @@ class Audio extends AbstractStreamableMedia
         $listeners = null;
 
         if ($format instanceof ProgressableInterface) {
-            $listeners = $format->createProgressListener($this, $this->ffprobe, 1, 1);
+            $listeners = $format->createProgressListener($this, $this->ffprobe, 1, 1, 0);
         }
 
         $commands = $this->buildCommand($format, $outputPathfile);
