@@ -255,9 +255,8 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
             return;
         }
 
-        $this->totalSize = $format->get('size') / 1024;
-        $this->duration = (int) $this->duration > 0 ? (int) $this->duration : $format->get('duration');
-
+        $this->duration = (int) $this->duration > 0 ? $this->duration : $format->get('duration');
+        $this->totalSize = $format->get('size') / 1024 * ($this->duration / $format->get('duration'));
         $this->initialized = true;
     }
 }

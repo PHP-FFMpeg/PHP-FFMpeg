@@ -83,12 +83,10 @@ class Video extends Audio
                 if ($format instanceof ProgressableInterface) {
                     $filters = clone $this->filters;
                     $duration = 0;
-                    /*
-                     check the filters of the video, 
-                        and if the video has the ClipFilter than: 
-                            take the new video duration and send to the
-                            FFMpeg\Format\ProgressListener\AbstractProgressListener class
-                     */
+                    
+                    // check the filters of the video, and if the video has the ClipFilter then
+                    // take the new video duration and send to the
+                    // FFMpeg\Format\ProgressListener\AbstractProgressListener class
                     foreach ($filters as $filter) {
                         if($filter instanceof ClipFilter){
                             $duration = $filter->getDuration()->toSeconds();
