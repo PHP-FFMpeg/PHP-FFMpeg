@@ -24,6 +24,7 @@ use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
 use Neutron\TemporaryFilesystem\Manager as FsManager;
+use FFMpeg\Filters\Video\ClipFilter;
 
 class Video extends Audio
 {
@@ -78,9 +79,21 @@ class Video extends Audio
             try {
                 /** add listeners here */
                 $listeners = null;
-
+        
                 if ($format instanceof ProgressableInterface) {
-                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses);
+                    $filters = clone $this->filters;
+                    $duration = 0;
+                    
+                    // check the filters of the video, and if the video has the ClipFilter then
+                    // take the new video duration and send to the
+                    // FFMpeg\Format\ProgressListener\AbstractProgressListener class
+                    foreach ($filters as $filter) {
+                        if($filter instanceof ClipFilter){
+                            $duration = $filter->getDuration()->toSeconds();
+                            break;
+                        }
+                    }
+                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses, $duration);
                 }
 
                 $this->driver->command($passCommands, false, $listeners);
