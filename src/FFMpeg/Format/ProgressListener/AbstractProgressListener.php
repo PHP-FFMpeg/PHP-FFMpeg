@@ -80,12 +80,13 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      *
      * @throws RuntimeException
      */
-    public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass)
+    public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass, $duration = 0)
     {
         $this->ffprobe = $ffprobe;
         $this->pathfile = $pathfile;
         $this->currentPass = $currentPass;
         $this->totalPass = $totalPass;
+        $this->duration = $duration;
     }
 
     /**
@@ -118,6 +119,14 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     public function getTotalPass()
     {
         return $this->totalPass;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCurrentTime()
+    {
+        return $this->currentTime;
     }
 
     /**
@@ -171,6 +180,12 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
         if ($this->lastOutput !== null) {
             $delta = $currentTime - $this->lastOutput;
+
+            // Check the type of the currentSize variable and convert it to an integer if needed.
+            if(!is_numeric($currentSize)) {
+                $currentSize = (int)$currentSize;
+            }
+
             $deltaSize = $currentSize - $this->currentSize;
             $rate = $deltaSize * $delta;
             if ($rate > 0) {
@@ -240,9 +255,8 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
             return;
         }
 
-        $this->totalSize = $format->get('size') / 1024;
-        $this->duration = $format->get('duration');
-
+        $this->duration = (int) $this->duration > 0 ? $this->duration : $format->get('duration');
+        $this->totalSize = $format->get('size') / 1024 * ($this->duration / $format->get('duration'));
         $this->initialized = true;
     }
 }

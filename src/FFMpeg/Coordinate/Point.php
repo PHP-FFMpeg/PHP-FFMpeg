@@ -16,10 +16,15 @@ class Point
     private $x;
     private $y;
 
-    public function __construct($x, $y)
+    public function __construct($x, $y, $dynamic = false)
     {
-        $this->x = (int) $x;
-        $this->y = (int) $y;
+        if ($dynamic) {
+            $this->x = $x;
+            $this->y = $y;
+        } else {
+            $this->x = (int)$x;
+            $this->y = (int)$y;
+        }
     }
 
     /**

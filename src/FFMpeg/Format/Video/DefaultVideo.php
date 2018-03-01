@@ -32,6 +32,9 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /** @var Integer */
     protected $modulus = 16;
 
+    /** @var Array */
+    protected $additionalParamaters;
+
     /**
      * {@inheritdoc}
      */
@@ -97,10 +100,35 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * {@inheritdoc}
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
+    public function getAdditionalParameters()
+    {
+        return $this->additionalParamaters;
+    }
+
+    /**
+     * Sets additional parameters.
+     *
+     * @param  array                    $additionalParamaters
+     * @throws InvalidArgumentException
+     */
+    public function setAdditionalParameters($additionalParamaters)
+    {
+        if (!is_array($additionalParamaters)) {
+            throw new InvalidArgumentException('Wrong additionalParamaters value');
+        }
+
+        $this->additionalParamaters = $additionalParamaters;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
     {
         $format = $this;
-        $listeners = array(new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total));
+        $listeners = array(new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration));
 
         foreach ($listeners as $listener) {
             $listener->on('progress', function () use ($format, $media) {
