@@ -20,6 +20,12 @@ class AspectRatio
     const AR_4_3 = '4/3';
     // named 16:9 or 1.77:1 HD video standard
     const AR_16_9 = '16/9';
+    
+    // named 8:5 or 16:10 or 1.6:1
+    const AR_8_5 = '8/5';
+
+    // named 25:16 or 1.56:1
+    const AR_25_16 = '25/16';
 
     // named 3:2 or 1.5:1 see http://en.wikipedia.org/wiki/135_film
     const AR_3_2 = '3/2';
@@ -160,6 +166,10 @@ class AspectRatio
                 return 4 / 3;
             case static::AR_16_9:
                 return 16 / 9;
+            case static::AR_8_5:
+                return 8 / 5;
+            case static::AR_25_16:
+                return 25 / 16;
             case static::AR_1_1:
                 return 1 / 1;
             case static::AR_1_DOT_85_1:
@@ -207,6 +217,8 @@ class AspectRatio
         $availables = array(
             static::AR_4_3 => static::valueFromName(static::AR_4_3),
             static::AR_16_9 => static::valueFromName(static::AR_16_9),
+            static::AR_8_5 => static::valueFromName(static::AR_8_5),
+            static::AR_25_16 => static::valueFromName(static::AR_25_16),
             static::AR_1_1 => static::valueFromName(static::AR_1_1),
             static::AR_1_DOT_85_1 => static::valueFromName(static::AR_1_DOT_85_1),
             static::AR_2_DOT_39_1 => static::valueFromName(static::AR_2_DOT_39_1),
