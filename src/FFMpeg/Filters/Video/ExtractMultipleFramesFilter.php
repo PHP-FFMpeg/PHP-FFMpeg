@@ -35,6 +35,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     private $priority;
     private $frameRate;
     private $destinationFolder;
+    private $frameFileType = 'jpg';
 
     public function __construct($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority = 0)
     {
@@ -47,6 +48,10 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
 
         // Set the destination folder
         $this->destinationFolder = $destinationFolder;
+    }
+
+    public function setFrameFileType($frameFileType) {
+    	$this->frameFileType = $frameFileType;
     }
 
     /**
@@ -117,7 +122,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             // Set the parameters
             $commands[] = '-vf';
             $commands[] = 'fps=' . $this->frameRate;
-            $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.jpg';
+            $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.' . $this->frameFileType;
         }
         catch (RuntimeException $e) {
             throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode());

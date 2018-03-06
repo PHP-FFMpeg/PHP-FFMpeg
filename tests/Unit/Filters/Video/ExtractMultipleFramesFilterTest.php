@@ -12,7 +12,7 @@ class ExtractMultipleFramesFilterTest extends TestCase
     /**
      * @dataProvider provideFrameRates
      */
-    public function testApply($frameRate, $destinationFolder, $duration, $modulus, $expected)
+    public function testApply($frameRate, $frameFileType,$destinationFolder, $duration, $modulus, $expected)
     {
         $video = $this->getVideoMock();
         $pathfile = '/path/to/file'.mt_rand();
@@ -34,18 +34,19 @@ class ExtractMultipleFramesFilterTest extends TestCase
             ->will($this->returnValue($streams));
 
         $filter = new ExtractMultipleFramesFilter($frameRate, $destinationFolder);
+        $filter->setFrameFileType($frameFileType);
         $this->assertEquals($expected, $filter->apply($video, $format));
     }
 
     public function provideFrameRates()
     {
         return array(
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_SEC, '/', 100, 2, array('-vf', 'fps=1/1', '/frame-%03d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, '/', 100, 2, array('-vf', 'fps=1/2', '/frame-%02d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_5SEC, '/', 100, 2, array('-vf', 'fps=1/5', '/frame-%02d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC, '/', 100, 2, array('-vf', 'fps=1/10', '/frame-%02d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC, '/', 100, 2, array('-vf', 'fps=1/30', '/frame-%02d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC, '/', 100, 2, array('-vf', 'fps=1/60', '/frame-%02d.jpg')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/1', '/frame-%03d.jpg')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/2', '/frame-%02d.jpg')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_5SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/5', '/frame-%02d.jpg')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/10', '/frame-%02d.jpg')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/30', '/frame-%02d.jpg')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC,'png', '/', 100, 2, array('-vf', 'fps=1/60', '/frame-%02d.png')),
         );
     }
 }
