@@ -50,6 +50,9 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
         $this->destinationFolder = $destinationFolder;
     }
 
+	/**
+	 * @param string $frameFileType
+	 */
     public function setFrameFileType($frameFileType) {
     	$this->frameFileType = $frameFileType;
     }

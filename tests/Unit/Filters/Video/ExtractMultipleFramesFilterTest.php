@@ -46,6 +46,12 @@ class ExtractMultipleFramesFilterTest extends TestCase
             array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_5SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/5', '/frame-%02d.jpg')),
             array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/10', '/frame-%02d.jpg')),
             array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/30', '/frame-%02d.jpg')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC,'jpg', '/', 100, 2, array('-vf', 'fps=1/60', '/frame-%02d.jpg')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_SEC,'png', '/', 100, 2, array('-vf', 'fps=1/1', '/frame-%03d.png')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC,'png', '/', 100, 2, array('-vf', 'fps=1/2', '/frame-%02d.png')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_5SEC,'png', '/', 100, 2, array('-vf', 'fps=1/5', '/frame-%02d.png')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC,'png', '/', 100, 2, array('-vf', 'fps=1/10', '/frame-%02d.png')),
+            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC,'png', '/', 100, 2, array('-vf', 'fps=1/30', '/frame-%02d.png')),
             array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC,'png', '/', 100, 2, array('-vf', 'fps=1/60', '/frame-%02d.png')),
         );
     }
