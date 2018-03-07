@@ -37,6 +37,9 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     private $destinationFolder;
     private $frameFileType = 'jpg';
 
+    /** @var array */
+    private static $supportedFrameFileTypes = ['jpg', 'jpeg', 'png'];
+
     public function __construct($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority = 0)
     {
         $this->priority = $priority;
@@ -52,9 +55,16 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
 
 	/**
 	 * @param string $frameFileType
+	 * @throws \FFMpeg\Exception\InvalidArgumentException
+	 * @return ExtractMultipleFramesFilter
 	 */
     public function setFrameFileType($frameFileType) {
-    	$this->frameFileType = $frameFileType;
+    	if (in_array($frameFileType, self::$supportedFrameFileTypes)) {
+    		$this->frameFileType = $frameFileType;
+    		return $this;
+    	}
+
+    	throw new InvalidArgumentException('Invalid frame file type, use: ' . implode(',', self::$supportedFrameFileTypes));
     }
 
     /**
