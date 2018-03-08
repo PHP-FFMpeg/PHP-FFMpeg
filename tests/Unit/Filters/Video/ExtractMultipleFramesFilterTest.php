@@ -68,7 +68,7 @@ class ExtractMultipleFramesFilterTest extends TestCase
      * @expectedException \FFMpeg\Exception\InvalidArgumentException
      */
     public function testInvalidFrameFileType() {
-    	$filter = new ExtractMultipleFramesFilter('1/1', '/');
+        $filter = new ExtractMultipleFramesFilter('1/1', '/');
         $filter->setFrameFileType('webm');
     }
 }
