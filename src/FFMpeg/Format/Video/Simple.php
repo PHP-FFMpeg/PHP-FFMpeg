@@ -12,7 +12,7 @@
 namespace FFMpeg\Format\Video;
 
 /**
- * The X264 video format
+ * The Simple video format
  */
 class Simple extends DefaultVideo {
     /** @var boolean */
@@ -56,7 +56,7 @@ class Simple extends DefaultVideo {
     /**
      * @param $passes
      *
-     * @return X264
+     * @return Simple
      */
     public function setPasses($passes) {
         $this->passes = $passes;
