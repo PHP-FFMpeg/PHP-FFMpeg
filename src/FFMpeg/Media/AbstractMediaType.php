@@ -17,27 +17,39 @@ use FFMpeg\Filters\FiltersCollection;
 
 abstract class AbstractMediaType implements MediaTypeInterface
 {
-    /** @var string */
+
+    /**
+     * @var string
+     */
     protected $pathfile;
-    /** @var FFMpegDriver */
+
+    /**
+     * @var FFMpegDriver
+     */
     protected $driver;
-    /** @var FFProbe */
+
+    /**
+     * @var FFProbe
+     */
     protected $ffprobe;
-    /** @var FiltersCollection */
+
+    /**
+     * @var FiltersCollection
+     */
     protected $filters;
 
-    public function __construct($pathfile, FFMpegDriver $driver, FFProbe $ffprobe)
+    public function __construct(string $pathfile, FFMpegDriver $driver, FFProbe $ffprobe)
     {
         $this->pathfile = $pathfile;
         $this->driver = $driver;
         $this->ffprobe = $ffprobe;
-        $this->filters = new FiltersCollection();
+        $this->filters = new FiltersCollection;
     }
 
     /**
      * @return FFMpegDriver
      */
-    public function getFFMpegDriver()
+    public function getFFMpegDriver(): FFMpegDriver
     {
         return $this->driver;
     }
@@ -47,7 +59,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
      *
      * @return MediaTypeInterface
      */
-    public function setFFMpegDriver(FFMpegDriver $driver)
+    public function setFFMpegDriver(FFMpegDriver $driver): self
     {
         $this->driver = $driver;
 
@@ -57,7 +69,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /**
      * @return FFProbe
      */
-    public function getFFProbe()
+    public function getFFProbe(): FFProbe
     {
         return $this->ffprobe;
     }
@@ -67,7 +79,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
      *
      * @return MediaTypeInterface
      */
-    public function setFFProbe(FFProbe $ffprobe)
+    public function setFFProbe(FFProbe $ffprobe): MediaTypeInterface
     {
         $this->ffprobe = $ffprobe;
 
@@ -77,7 +89,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /**
      * @return string
      */
-    public function getPathfile()
+    public function getPathfile(): string
     {
         return $this->pathfile;
     }
@@ -87,7 +99,7 @@ abstract class AbstractMediaType implements MediaTypeInterface
      *
      * @return MediaTypeInterface
      */
-    public function setFiltersCollection(FiltersCollection $filters)
+    public function setFiltersCollection(FiltersCollection $filters): MediaTypeInterface
     {
         $this->filters = $filters;
 
@@ -97,15 +109,15 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /**
      * @return MediaTypeInterface
      */
-    public function getFiltersCollection()
+    public function getFiltersCollection(): MediaTypeInterface
     {
         return $this->filters;
     }
 
-    protected function cleanupTemporaryFile($filename)
+    protected function cleanupTemporaryFile(string $filename): self
     {
         if (file_exists($filename) && is_writable($filename)) {
-            unlink($filename);
+            @unlink($filename);
         }
 
         return $this;

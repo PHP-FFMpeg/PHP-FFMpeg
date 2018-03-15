@@ -16,16 +16,17 @@ namespace FFMpeg\Format\Audio;
  */
 class Wav extends DefaultAudio
 {
-    public function __construct()
-    {
-        $this->audioCodec = 'pcm_s16le';
-    }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
+    protected $audioCodec = 'pcm_s16le';
+
+    /**
+     * @inheritDoc
+     */
+    public function getAvailableAudioCodecs(): array
     {
-        return array('pcm_s16le');
+        return ['pcm_s16le'];
     }
 }

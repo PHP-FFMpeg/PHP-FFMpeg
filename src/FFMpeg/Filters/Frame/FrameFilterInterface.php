@@ -16,5 +16,6 @@ use FFMpeg\Media\Frame;
 
 interface FrameFilterInterface extends FilterInterface
 {
-    public function apply(Frame $frame);
+
+    public function apply(Frame $frame): array;
 }

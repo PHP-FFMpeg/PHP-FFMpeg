@@ -11,38 +11,42 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 use FFMpeg\Coordinate\TimeCode;
 
 class ClipFilter implements VideoFilterInterface
 {
-    /** @var TimeCode */
+
+    use TPriorityFilter;
+
+    /**
+     * @var TimeCode
+     */
     private $start;
-    /** @var TimeCode */
+
+    /**
+     * @var TimeCode
+     */
     private $duration;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $priority;
 
-    public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0)
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, $priority = 0)
     {
         $this->start = $start;
         $this->duration = $duration;
-        $this->priority = $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
+        $this->setPriority($priority);
     }
 
     /**
      * @return TimeCode
      */
-    public function getStart()
+    public function getStart(): TimeCode
     {
         return $this->start;
     }
@@ -50,21 +54,22 @@ class ClipFilter implements VideoFilterInterface
     /**
      * @return TimeCode
      */
-    public function getDuration()
+    public function getDuration(): TimeCode
     {
         return $this->duration;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format)
+    public function apply(Video $video, VideoInterface $format): array
     {
-        $commands = array('-ss', (string) $this->start);
+        $commands = ['-ss', (string) $this->start];
 
+        // add duration if given
         if ($this->duration !== null) {
-          $commands[] = '-t';
-          $commands[] = (string) $this->duration;
+            $commands[] = '-t';
+            $commands[] = (string) $this->duration;
         }
 
         return $commands;

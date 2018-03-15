@@ -11,6 +11,7 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
@@ -19,26 +20,24 @@ use FFMpeg\Media\Video;
  */
 class SynchronizeFilter implements VideoFilterInterface
 {
+
+    use TPriorityFilter;
+
+    /**
+     * @var int
+     */
     private $priority;
 
-    public function __construct($priority = 12)
+    public function __construct(int $priority = 12)
     {
-        $this->priority = $priority;
+        $this->setPriority($priority);
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getPriority()
+    public function apply(Video $video, VideoInterface $format): array
     {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function apply(Video $video, VideoInterface $format)
-    {
-        return array('-async', '1', '-metadata:s:v:0', 'start_time=0');
+        return ['-async', '1', '-metadata:s:v:0', 'start_time=0'];
     }
 }

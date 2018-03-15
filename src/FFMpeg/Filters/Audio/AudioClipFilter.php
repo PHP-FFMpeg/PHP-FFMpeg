@@ -12,10 +12,23 @@
 namespace FFMpeg\Filters\Audio;
 
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
-class AudioClipFilter implements AudioFilterInterface {
+/**
+ * Clips the audio at a specific timestamp to an (optional) end
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg\Filters
+ * @subpackage Audio
+ */
+class AudioClipFilter implements AudioFilterInterface
+{
+
+    use TPriorityFilter;
 
     /**
      * @var TimeCode
@@ -33,52 +46,49 @@ class AudioClipFilter implements AudioFilterInterface {
     private $priority;
 
 
-    public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0) {
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, int $priority = 0)
+    {
         $this->start = $start;
         $this->duration = $duration;
-        $this->priority = $priority;
+        $this->setPriority($priority);
+    }
+
+    /**
+     * Returns the start position the audio is being cutted
+     *
+     * @return TimeCode
+     */
+    public function getStart(): TimeCode
+    {
+        return $this->start;
+    }
+
+    /**
+     * Returns how long the audio is being cutted or null when the duration is infinite.
+     *
+     * @return TimeCode|null
+     */
+    public function getDuration(): ?TimeCode
+    {
+        return $this->duration;
     }
 
     /**
      * @inheritDoc
      */
-    public function getPriority() {
-        return $this->priority;
-    }
+    public function apply(Audio $audio, AudioInterface $format): array
+    {
+        $commands = ['-ss', (string) $this->start];
 
-     /**
-      * Returns the start position the audio is being cutted
-      *
-      * @return TimeCode
-      */
-     public function getStart() {
-         return $this->start;
-     }
-
-     /**
-      * Returns how long the audio is being cutted. Returns null when the duration is infinite,
-      *
-      * @return TimeCode|null
-      */
-     public function getDuration() {
-         return $this->duration;
-     }
-
-     /**
-      * @inheritDoc
-      */
-     public function apply(Audio $audio, AudioInterface $format) {
-         $commands = array('-ss', (string) $this->start);
-
-         if ($this->duration !== null) {
+        // add duration if given
+        if ($this->duration !== null) {
             $commands[] = '-t';
             $commands[] = (string) $this->duration;
-         }
+        }
 
-         $commands[] = '-acodec';
-         $commands[] = 'copy';
+        $commands[] = '-acodec';
+        $commands[] = 'copy';
 
-         return $commands;
-     }
-
+        return $commands;
+    }
 }

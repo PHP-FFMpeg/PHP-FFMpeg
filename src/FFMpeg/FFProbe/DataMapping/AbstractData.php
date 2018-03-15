@@ -11,11 +11,20 @@
 
 namespace FFMpeg\FFProbe\DataMapping;
 
+/**
+ * Abstract implementation for data
+ */
 abstract class AbstractData implements \Countable
 {
+
+    /**
+     * Holds the properties
+     *
+     * @var mixed[]
+     */
     private $properties;
 
-    public function __construct(array $properties)
+    public function __construct(array $properties = [])
     {
         $this->properties = $properties;
     }
@@ -23,10 +32,10 @@ abstract class AbstractData implements \Countable
     /**
      * Returns true if data has property.
      *
-     * @param  string  $property
-     * @return Boolean
+     * @param  string $property
+     * @return bool
      */
-    public function has($property)
+    public function has($property): bool
     {
         return isset($this->properties[$property]);
     }
@@ -36,12 +45,11 @@ abstract class AbstractData implements \Countable
      *
      * @param  string $property
      * @param  mixed  $default
-     *
      * @return mixed
      */
-    public function get($property, $default = null)
+    public function get(string $property, $default = null)
     {
-        if (!isset($this->properties[$property])) {
+        if (!$this->has($property)) {
             return $default;
         }
 
@@ -51,12 +59,11 @@ abstract class AbstractData implements \Countable
     /**
      * Sets the property value given its name.
      *
-     * @param string $property
-     * @param mixed  $value
-     *
-     * @return AbstractData
+     * @param  string $property
+     * @param  mixed  $value
+     * @return self
      */
-    public function set($property, $value)
+    public function set(string $property, $value): self
     {
         $this->properties[$property] = $value;
 
@@ -66,9 +73,9 @@ abstract class AbstractData implements \Countable
     /**
      * Returns all property names.
      *
-     * @return array
+     * @return string[]
      */
-    public function keys()
+    public function keys(): array
     {
         return array_keys($this->properties);
     }
@@ -76,7 +83,7 @@ abstract class AbstractData implements \Countable
     /**
      * Returns all properties and their values.
      *
-     * @return array
+     * @return mixed[][]
      */
     public function all()
     {
@@ -84,9 +91,9 @@ abstract class AbstractData implements \Countable
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->properties);
     }

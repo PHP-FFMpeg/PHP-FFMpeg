@@ -11,44 +11,53 @@
 
 namespace FFMpeg\Filters\Audio;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
+/**
+ * Resamples the audio
+ *
+ * @author     jens1o
+ * @copyright  Jens Hausdorf 2018
+ * @license    MIT License
+ * @package    FFMpeg\Filters
+ * @subpackage Audio
+ */
 class AudioResamplableFilter implements AudioFilterInterface
 {
-    /** @var string */
+
+    use TPriorityFilter;
+
+    /**
+     * @var string
+     */
     private $rate;
-    /** @var integer */
+
+    /**
+     * @var int
+     */
     private $priority;
 
-    public function __construct($rate, $priority = 0)
+    public function __construct(int $rate, int $priority = 0)
     {
         $this->rate = $rate;
-        $this->priority = $priority;
+        $this->setPriority($priority);
     }
 
     /**
-     * {@inheritdoc}
+     * @return int
      */
-    public function getPriority()
-    {
-        return $this->priority;
-    }
-
-    /**
-     *
-     * @return Integer
-     */
-    public function getRate()
+    public function getRate(): int
     {
         return $this->rate;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format)
+    public function apply(Audio $audio, AudioInterface $format): array
     {
-        return array('-ac', 2, '-ar', $this->rate);
+        return ['-ac', 2, '-ar', $this->rate];
     }
 }

@@ -16,16 +16,17 @@ namespace FFMpeg\Format\Audio;
  */
 class Mp3 extends DefaultAudio
 {
-    public function __construct()
-    {
-        $this->audioCodec = 'libmp3lame';
-    }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getAvailableAudioCodecs()
+    protected $audioCodec = 'libmp3lame';
+
+    /**
+     * @inheritDoc
+     */
+    public function getAvailableAudioCodecs(): array
     {
-        return array('libmp3lame');
+        return ['libmp3lame'];
     }
 }

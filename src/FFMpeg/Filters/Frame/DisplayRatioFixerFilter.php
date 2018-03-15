@@ -13,43 +13,39 @@ namespace FFMpeg\Filters\Frame;
 
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Frame;
+use FFMpeg\Filters\TPriorityFilter;
 
 class DisplayRatioFixerFilter implements FrameFilterInterface
 {
-    /** @var integer */
+
+    use TPriorityFilter;
+
+    /**
+     * @var int
+     */
     private $priority;
 
-    public function __construct($priority = 0)
+    public function __construct(int $priority = 0)
     {
-        $this->priority = $priority;
+        $this->setPriority($priority);
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getPriority()
-    {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function apply(Frame $frame)
+    public function apply(Frame $frame): array
     {
         $dimensions = null;
-        $commands = array();
+        $commands = [];
 
-        foreach ($frame->getVideo()->getStreams() as $stream) {
-            if ($stream->isVideo()) {
-                try {
-                    $dimensions = $stream->getDimensions();
-                    $commands[] = '-s';
-                    $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
-                    break;
-                } catch (RuntimeException $e) {
-
-                }
+        foreach ($frame->getVideo()->getStreams()->getVideoStreams() as $stream) {
+            try {
+                $dimensions = $stream->getDimensions();
+                $commands[] = '-s';
+                $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
+                break;
+            } catch (RuntimeException $e) {
+                // ignore error when getting the dimensions
             }
         }
 

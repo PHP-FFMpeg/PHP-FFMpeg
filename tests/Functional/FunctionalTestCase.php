@@ -3,15 +3,15 @@
 namespace Tests\FFMpeg\Functional;
 
 use FFMpeg\FFMpeg;
-use PHPUnit\Framework\TestCase;
+use Tests\FFMpeg\Unit\TestCase;
 
-abstract class FunctionalTestCase extends TestCase
-{
+abstract class FunctionalTestCase extends TestCase {
+
     /**
      * @return FFMpeg
      */
-    public function getFFMpeg()
-    {
-        return FFMpeg::create(array('timeout' => 300));
+    public function getFFMpeg() {
+        return FFMpeg::create(['timeout' => 300]);
     }
+
 }

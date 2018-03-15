@@ -35,9 +35,6 @@ $ composer require php-ffmpeg/php-ffmpeg
 ## Basic Usage
 
 ```php
-
-require 'vendor/autoload.php';
-
 $ffmpeg = FFMpeg\FFMpeg::create();
 $video = $ffmpeg->open('video.mpg');
 $video
@@ -162,13 +159,13 @@ You can generate a waveform of an audio file using the `FFMpeg\Media\Audio::wave
 method.
 
 This code returns a `FFMpeg\Media\Waveform` instance.
-You can optionally pass dimensions as the first two arguments and an array of hex string colors for ffmpeg to use for the waveform, see dedicated
+You can optionally pass dimensions as arguments, see dedicated
 documentation below for more information.
 
 The ouput file MUST use the PNG extension.
 
 ```php
-$waveform = $audio->waveform(640, 120, array('#00FF00'));
+$waveform = $audio->waveform(640, 120);
 $waveform->save('waveform.png');
 ```
 

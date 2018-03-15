@@ -21,7 +21,7 @@ class MapperTest extends TestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
+     * @expectedException TypeError
      */
     public function testMapInvalidArgument()
     {

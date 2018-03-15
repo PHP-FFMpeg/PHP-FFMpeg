@@ -23,8 +23,9 @@ use FFMpeg\Format\ProgressableInterface;
 
 class Audio extends AbstractStreamableMedia
 {
+
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return AudioFilters
      */
@@ -34,13 +35,13 @@ class Audio extends AbstractStreamableMedia
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
-     * @return Audio
+     * @return self
      */
-    public function addFilter(FilterInterface $filter)
+    public function addFilter(FilterInterface $filter): MediaTypeInterface
     {
-        if (!$filter instanceof AudioFilterInterface) {
+        if (!($filter instanceof AudioFilterInterface)) {
             throw new InvalidArgumentException('Audio only accepts AudioFilterInterface filters');
         }
 
@@ -52,12 +53,12 @@ class Audio extends AbstractStreamableMedia
     /**
      * Exports the audio in the desired format, applies registered filters.
      *
-     * @param FormatInterface   $format
-     * @param string            $outputPathfile
+     * @param  FormatInterface $format
+     * @param  string          $outputPathfile
      * @return Audio
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, string $outputPathfile)
     {
         $listeners = null;
 
@@ -80,34 +81,36 @@ class Audio extends AbstractStreamableMedia
     /**
      * Returns the final command as a string, useful for debugging purposes.
      *
-     * @param FormatInterface   $format
-     * @param string            $outputPathfile
+     * @param  FormatInterface $format
+     * @param  string          $outputPathfile
      * @return string
-     * @since 0.11.0
+     * @since  0.11.0
      */
-    public function getFinalCommand(FormatInterface $format, $outputPathfile) {
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile)
+    {
         return implode(' ', $this->buildCommand($format, $outputPathfile));
     }
 
     /**
      * Builds the command which will be executed with the provided format
      *
-     * @param FormatInterface   $format
-     * @param string            $outputPathfile
+     * @param  FormatInterface $format
+     * @param  string          $outputPathfile
      * @return string[] An array which are the components of the command
-     * @since 0.11.0
+     * @since  0.11.0
      */
-    protected function buildCommand(FormatInterface $format, $outputPathfile) {
-        $commands = array('-y', '-i', $this->pathfile);
+    protected function buildCommand(FormatInterface $format, string $outputPathfile)
+    {
+        $commands = ['-y', '-i', $this->pathfile];
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
         if (null !== $format->getAudioCodec()) {
-            $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+            $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
         }
 
         foreach ($filters as $filter) {
@@ -132,11 +135,10 @@ class Audio extends AbstractStreamableMedia
      *
      * @param  integer $width
      * @param  integer $height
-     * @param array $colors Array of colors for ffmpeg to use. Color format is #000000 (RGB hex string with #)
      * @return Waveform
      */
-    public function waveform($width = 640, $height = 120, $colors = array(Waveform::DEFAULT_COLOR))
+    public function waveform(int $width = 640, int $height = 120): Waveform
     {
-        return new Waveform($this, $this->driver, $this->ffprobe, $width, $height, $colors);
+        return new Waveform($this, $this->driver, $this->ffprobe, $width, $height);
     }
 }

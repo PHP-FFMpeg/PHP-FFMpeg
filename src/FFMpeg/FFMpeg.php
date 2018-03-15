@@ -19,11 +19,20 @@ use FFMpeg\Media\Audio;
 use FFMpeg\Media\Video;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Main class for opening media files to manipulate or read data out of them.
+ */
 class FFMpeg
 {
-    /** @var FFMpegDriver */
+
+    /**
+     * @var FFMpegDriver
+     */
     private $driver;
-    /** @var FFProbe */
+
+    /**
+     * @var FFProbe
+     */
     private $ffprobe;
 
     public function __construct(FFMpegDriver $ffmpeg, FFProbe $ffprobe)
@@ -35,8 +44,7 @@ class FFMpeg
     /**
      * Sets FFProbe.
      *
-     * @param FFProbe
-     *
+     * @param  FFProbe
      * @return FFMpeg
      */
     public function setFFProbe(FFProbe $ffprobe)
@@ -51,7 +59,7 @@ class FFMpeg
      *
      * @return FFProbe
      */
-    public function getFFProbe()
+    public function getFFProbe(): FFProbe
     {
         return $this->ffprobe;
     }
@@ -73,7 +81,7 @@ class FFMpeg
      *
      * @return FFMpegDriver
      */
-    public function getFFMpegDriver()
+    public function getFFMpegDriver(): FFMpegDriver
     {
         return $this->driver;
     }
@@ -81,21 +89,21 @@ class FFMpeg
     /**
      * Opens a file in order to be processed.
      *
-     * @param string $pathfile A pathfile
-     *
+     * @param  string $pathfile A path to a file
      * @return Audio|Video
-     *
      * @throws InvalidArgumentException
      */
-    public function open($pathfile)
+    public function open(string $pathfile): Audio
     {
-        if (null === $streams = $this->ffprobe->streams($pathfile)) {
+        if (($streams = $this->ffprobe->streams($pathfile)) === null) {
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
 
-        if (0 < count($streams->videos())) {
+        if (count($streams->getVideoStreams()) >= 1) {
+            // media is more likely a video file
             return new Video($pathfile, $this->driver, $this->ffprobe);
-        } elseif (0 < count($streams->audios())) {
+        } elseif (count($streams->getAudioStreams()) >= 1) {
+            // media is more likely an audio file
             return new Audio($pathfile, $this->driver, $this->ffprobe);
         }
 
@@ -105,15 +113,14 @@ class FFMpeg
     /**
      * Creates a new FFMpeg instance.
      *
-     * @param array|ConfigurationInterface $configuration
-     * @param LoggerInterface              $logger
-     * @param FFProbe                      $probe
-     *
+     * @param  array|ConfigurationInterface $configuration
+     * @param  LoggerInterface              $logger
+     * @param  FFProbe                      $probe
      * @return FFMpeg
      */
-    public static function create($configuration = array(), LoggerInterface $logger = null, FFProbe $probe = null)
+    public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null): FFMpeg
     {
-        if (null === $probe) {
+        if ($probe === null) {
             $probe = FFProbe::create($configuration, $logger, null);
         }
 

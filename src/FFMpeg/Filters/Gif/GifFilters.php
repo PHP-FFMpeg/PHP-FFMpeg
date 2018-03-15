@@ -15,6 +15,10 @@ use FFMpeg\Media\Gif;
 
 class GifFilters
 {
+
+    /**
+     * @var Gif
+     */
     private $gif;
 
     public function __construct(Gif $gif)

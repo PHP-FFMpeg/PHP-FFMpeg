@@ -16,24 +16,25 @@ namespace FFMpeg\Format\Audio;
  */
 class Vorbis extends DefaultAudio
 {
-    public function __construct()
+
+    /**
+     * @inheritDoc
+     */
+    protected $audioCodec = 'vorbis';
+
+    /**
+     * @inheritDoc
+     */
+    public function getExtraParams(): array
     {
-        $this->audioCodec = 'vorbis';
+        return ['-strict', '-2'];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getExtraParams()
+    public function getAvailableAudioCodecs(): array
     {
-        return array('-strict', '-2');
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAvailableAudioCodecs()
-    {
-        return array('vorbis');
+        return ['vorbis'];
     }
 }

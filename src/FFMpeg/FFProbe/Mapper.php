@@ -19,10 +19,11 @@ use FFMpeg\Exception\InvalidArgumentException;
 
 class Mapper implements MapperInterface
 {
+
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function map($type, $data)
+    public function map(string $type, array $data)
     {
         switch ($type) {
             case FFProbe::TYPE_FORMAT:
@@ -30,20 +31,23 @@ class Mapper implements MapperInterface
             case FFProbe::TYPE_STREAMS:
                 return $this->mapStreams($data);
             default:
-                throw new InvalidArgumentException(sprintf(
-                    'Invalid type `%s`.', $type
-                ));
+                throw new InvalidArgumentException(
+                    sprintf(
+                        'Invalid type `%s`.',
+                        $type
+                    )
+                );
         }
     }
 
-    private function mapFormat($data)
+    private function mapFormat(array $data)
     {
         return new Format($data['format']);
     }
 
-    private function mapStreams($data)
+    private function mapStreams(array $data)
     {
-        $streams = new StreamCollection();
+        $streams = new StreamCollection;
 
         foreach ($data['streams'] as $properties) {
             $streams->add(new Stream($properties));

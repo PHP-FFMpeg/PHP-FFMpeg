@@ -1,5 +1,7 @@
 <?php
 
+// phpcs:disable
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -11,15 +13,21 @@
 
 namespace FFMpeg;
 
-use Doctrine\Common\Cache\ArrayCache;
+use Sabre\Cache\Memory as MemoryCache;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
+/**
+ * @deprecated 1.0.0
+ */
 class FFMpegServiceProvider implements ServiceProviderInterface
 {
+    /**
+     * @deprecated 1.0.0
+     */
     public function register(Application $app)
     {
-        $app['ffmpeg.configuration'] = array();
+        $app['ffmpeg.configuration'] = [];
         $app['ffmpeg.default.configuration'] = array(
             'ffmpeg.threads'   => 4,
             'ffmpeg.timeout'   => 300,
@@ -44,7 +52,7 @@ class FFMpegServiceProvider implements ServiceProviderInterface
         });
 
         $app['ffprobe.cache'] = $app->share(function () {
-            return new ArrayCache();
+            return new MemoryCache;
         });
 
         $app['ffmpeg.ffprobe'] = $app->share(function (Application $app) {

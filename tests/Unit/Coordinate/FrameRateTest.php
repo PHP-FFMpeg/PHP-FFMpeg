@@ -24,8 +24,8 @@ class FrameRateTest extends TestCase
 
     public function provideInvalidFrameRates()
     {
-        return array(
-            array(0), array(-1.5), array(-2),
-        );
+        return [
+            [0], [-1.5], [-2],
+        ];
     }
 }

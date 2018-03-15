@@ -15,6 +15,10 @@ use FFMpeg\Media\Concat;
 
 class ConcatFilters
 {
+
+    /**
+     * @var Concat
+     */
     private $concat;
 
     public function __construct(Concat $concat)

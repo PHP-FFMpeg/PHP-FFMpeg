@@ -21,27 +21,34 @@ use FFMpeg\FFProbe;
 
 abstract class DefaultAudio extends EventEmitter implements AudioInterface, ProgressableInterface
 {
-    /** @var string */
-    protected $audioCodec;
-
-    /** @var integer */
-    protected $audioKiloBitrate = 128;
-
-    /** @var integer */
-    protected $audioChannels = null;
 
     /**
-     * {@inheritdoc}
+     * @var string|null
      */
-    public function getExtraParams()
+    protected $audioCodec;
+
+    /**
+     * @var int
+     */
+    protected $audioKiloBitrate = 128;
+
+    /**
+     * @var int
+     */
+    protected $audioChannels;
+
+    /**
+     * @inheritDoc
+     */
+    public function getExtraParams(): array
     {
-        return array();
+        return [];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getAudioCodec()
+    public function getAudioCodec(): ?string
     {
         return $this->audioCodec;
     }
@@ -50,17 +57,20 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      * Sets the audio codec, Should be in the available ones, otherwise an
      * exception is thrown.
      *
-     * @param string $audioCodec
-     *
+     * @param  string $audioCodec
+     * @return self
      * @throws InvalidArgumentException
      */
-    public function setAudioCodec($audioCodec)
+    public function setAudioCodec(string $audioCodec): self
     {
-        if ( ! in_array($audioCodec, $this->getAvailableAudioCodecs())) {
-            throw new InvalidArgumentException(sprintf(
-                    'Wrong audiocodec value for %s, available formats are %s'
-                    , $audioCodec, implode(', ', $this->getAvailableAudioCodecs())
-            ));
+        if (!in_array($audioCodec, $this->getAvailableAudioCodecs())) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Wrong audiocodec value for %s, available formats are %s',
+                    $audioCodec,
+                    implode(', ', $this->getAvailableAudioCodecs())
+                )
+            );
         }
 
         $this->audioCodec = $audioCodec;
@@ -69,9 +79,9 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getAudioKiloBitrate()
+    public function getAudioKiloBitrate(): int
     {
         return $this->audioKiloBitrate;
     }
@@ -79,13 +89,14 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * Sets the kiloBitrate value.
      *
-     * @param  integer                  $kiloBitrate
+     * @param  int $kiloBitrate
      * @throws InvalidArgumentException
+     * @return self
      */
-    public function setAudioKiloBitrate($kiloBitrate)
+    public function setAudioKiloBitrate(int $kiloBitrate): self
     {
         if ($kiloBitrate < 1) {
-            throw new InvalidArgumentException('Wrong kiloBitrate value');
+            throw new InvalidArgumentException('Wrong kiloBitrate value, must be positive');
         }
 
         $this->audioKiloBitrate = (int) $kiloBitrate;
@@ -94,9 +105,9 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-	 * {@inheritdoc}
-	 */
-    public function getAudioChannels()
+     * @inheritDoc
+     */
+    public function getAudioChannels(): ?int
     {
         return $this->audioChannels;
     }
@@ -104,13 +115,14 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * Sets the channels value.
      *
-     * @param  integer                  $channels
+     * @param  int $channels
      * @throws InvalidArgumentException
+     * @return self
      */
-    public function setAudioChannels($channels)
+    public function setAudioChannels(int $channels): self
     {
         if ($channels < 1) {
-            throw new InvalidArgumentException('Wrong channels value');
+            throw new InvalidArgumentException('Wrong channels value, must be positive');
         }
 
         $this->audioChannels = (int) $channels;
@@ -119,23 +131,26 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses): array
     {
         $format = $this;
-        $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration);
-        $listener->on('progress', function () use ($media, $format) {
-           $format->emit('progress', array_merge(array($media, $format), func_get_args()));
-        });
+        $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $passes, $totalPasses);
+        $listener->on(
+            'progress',
+            function () use ($media, $format) {
+                $format->emit('progress', array_merge([$media, $format], func_get_args()));
+            }
+        );
 
-        return array($listener);
+        return [$listener];
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getPasses()
+    public function getPasses(): int
     {
         return 1;
     }
