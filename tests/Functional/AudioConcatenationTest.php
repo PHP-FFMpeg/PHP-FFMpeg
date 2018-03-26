@@ -20,9 +20,8 @@ class AudioConcatenationTest extends FunctionalTestCase
 
         $this->assertInstanceOf('FFMpeg\Media\Audio', $audio);
         
-        $outputDirectory = __DIR__ . '/output/';
-        clearstatcache($outputDirectory);
-        $filename = $outputDirectory . 'concat-output.mp3';
+        clearstatcache();
+        $filename = __DIR__ . '/output/concat-output.mp3';
 
         $audio->concat($files)->saveFromSameCodecs($filename, TRUE);
         
