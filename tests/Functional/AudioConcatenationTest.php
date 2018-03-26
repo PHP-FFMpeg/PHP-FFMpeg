@@ -16,15 +16,13 @@ class AudioConcatenationTest extends FunctionalTestCase
             __DIR__ . '/../files/02_-_Favorite_Secrets.mp3',
         ];
 
-        $audio = $ffmpeg->open(current($files));
+        $audio = $ffmpeg->open(reset($files));
 
         $this->assertInstanceOf('FFMpeg\Media\Audio', $audio);
         
-        $filename = __DIR__ . '/output/concat-output.mp3';
-
-        if (is_file($filename)) {
-            unlink($filename);
-        }
+        $outputDirectory = __DIR__ . '/output/';
+        clearstatcache($outputDirectory);
+        $filename = $outputDirectory . 'concat-output.mp3';
 
         $audio->concat($files)->saveFromSameCodecs($filename, TRUE);
         
