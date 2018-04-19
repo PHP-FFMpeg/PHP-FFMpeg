@@ -106,6 +106,7 @@ class Video extends Audio
         $this->fs->clean($this->fsId);
 
         if (null !== $failure) {
+            var_dump($failure);exit;
             throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
         }
 
@@ -271,6 +272,10 @@ class Video extends Audio
                 $pass[] = $i;
                 $pass[] = '-passlogfile';
                 $pass[] = $passPrefix;
+            }
+            if($format->getAudioCodec()=='aac'){
+                $pass[] = '-strict';
+                $pass[] = '-2';
             }
 
             $pass[] = $outputPathfile;
