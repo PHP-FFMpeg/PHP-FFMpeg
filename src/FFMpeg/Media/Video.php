@@ -272,7 +272,7 @@ class Video extends Audio
                 $pass[] = '-passlogfile';
                 $pass[] = $passPrefix;
             }
-            if($format->getAudioCodec()=='aac'){
+            if($format->getAudioCodec() == 'aac'){
                 $pass[] = '-strict';
                 $pass[] = '-2';
             }
