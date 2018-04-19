@@ -106,7 +106,6 @@ class Video extends Audio
         $this->fs->clean($this->fsId);
 
         if (null !== $failure) {
-            var_dump($failure);exit;
             throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
         }
 
