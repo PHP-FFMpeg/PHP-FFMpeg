@@ -2,7 +2,6 @@
 
 namespace FFMpeg\Filters\Audio;
 
-
 use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;

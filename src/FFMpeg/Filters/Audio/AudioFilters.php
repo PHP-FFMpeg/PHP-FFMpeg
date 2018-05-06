@@ -11,9 +11,8 @@
 
 namespace FFMpeg\Filters\Audio;
 
-use FFMpeg\Filters\Audio\AddMetadataFilter;
-use FFMpeg\Media\Audio;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Media\Audio;
 
 class AudioFilters
 {
@@ -91,7 +90,8 @@ class AudioFilters
      * @param array $flags Some extra flags that could be passed to the conversion command.
      * @return AudioFilters
      */
-    public function imageVideo($artwork, $preset = null, $flags = null) {
+    public function imageVideo($artwork, $preset = null, $flags = null)
+    {
         $this->media->addFilter(new ImageVideoFilter($artwork, $preset, $flags));
 
         return $this;
