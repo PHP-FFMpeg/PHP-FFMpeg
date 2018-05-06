@@ -38,7 +38,7 @@ class ImageVideoFilter implements AudioFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(Audio $audio, AudioInterface $format)
+    public function apply(Audio $audio, AudioInterface $format): array
     {
         $commands = array('-loop', 1, '-i', (string)$this->artwork);
 

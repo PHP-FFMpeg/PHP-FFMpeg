@@ -20,7 +20,7 @@ class AudioImageVideoFilterTest extends TestCase
                 $capturedFilter = $filter;
             }));
 
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $filter = new AudioFilters($audio);
 
         $filter->imageVideo($artwork);
