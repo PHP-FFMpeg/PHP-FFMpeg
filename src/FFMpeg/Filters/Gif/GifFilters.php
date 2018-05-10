@@ -15,7 +15,7 @@ use FFMpeg\Media\Gif;
 
 class GifFilters
 {
-    private $gif;
+    protected $gif;
 
     public function __construct(Gif $gif)
     {

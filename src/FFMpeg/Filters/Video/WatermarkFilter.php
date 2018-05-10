@@ -18,11 +18,11 @@ use FFMpeg\Media\Video;
 class WatermarkFilter implements VideoFilterInterface
 {
     /** @var string */
-    private $watermarkPath;
+    protected $watermarkPath;
     /** @var array */
-    private $coordinates;
+    protected $coordinates;
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     public function __construct($watermarkPath, array $coordinates = array(), $priority = 0)
     {

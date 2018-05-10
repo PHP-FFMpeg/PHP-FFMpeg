@@ -20,7 +20,7 @@ class AspectRatio
     const AR_4_3 = '4/3';
     // named 16:9 or 1.77:1 HD video standard
     const AR_16_9 = '16/9';
-    
+
     // named 8:5 or 16:10 or 1.6:1
     const AR_8_5 = '8/5';
 
@@ -62,7 +62,7 @@ class AspectRatio
     const AR_ROTATED_2_DOT_39 = '1/2.39';
 
     /** @var float */
-    private $ratio;
+    protected $ratio;
 
     public function __construct($ratio)
     {

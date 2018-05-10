@@ -22,9 +22,9 @@ use FFMpeg\Coordinate\TimeCode;
 class Frame extends AbstractMediaType
 {
     /** @var TimeCode */
-    private $timecode;
+    protected $timecode;
     /** @var Video */
-    private $video;
+    protected $video;
 
     public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode)
     {
@@ -106,7 +106,7 @@ class Frame extends AbstractMediaType
                 '-f', $outputFormat
             );
         }
-        
+
         if($returnBase64) {
             array_push($commands, "-");
         }

@@ -15,7 +15,7 @@ use FFMpeg\Media\Frame;
 
 class FrameFilters
 {
-    private $frame;
+    protected $frame;
 
     public function __construct(Frame $frame)
     {

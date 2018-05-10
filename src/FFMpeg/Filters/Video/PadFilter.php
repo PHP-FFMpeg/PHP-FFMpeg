@@ -18,9 +18,9 @@ use FFMpeg\Format\VideoInterface;
 class PadFilter implements VideoFilterInterface
 {
     /** @var Dimension */
-    private $dimension;
+    protected $dimension;
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     public function __construct(Dimension $dimension, $priority = 0)
     {

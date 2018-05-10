@@ -13,7 +13,7 @@ namespace FFMpeg\FFProbe\DataMapping;
 
 class StreamCollection implements \Countable, \IteratorAggregate
 {
-    private $streams;
+    protected $streams;
 
     public function __construct(array $streams = array())
     {

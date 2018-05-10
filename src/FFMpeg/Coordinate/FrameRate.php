@@ -15,7 +15,7 @@ use FFMpeg\Exception\InvalidArgumentException;
 
 class FrameRate
 {
-    private $value;
+    protected $value;
 
     public function __construct($value)
     {

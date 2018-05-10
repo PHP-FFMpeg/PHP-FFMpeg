@@ -15,7 +15,7 @@ use FFMpeg\Media\Concat;
 
 class ConcatFilters
 {
-    private $concat;
+    protected $concat;
 
     public function __construct(Concat $concat)
     {

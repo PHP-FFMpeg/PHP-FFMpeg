@@ -18,9 +18,9 @@ use FFMpeg\Media\Audio;
 class AddMetadataFilter implements AudioFilterInterface
 {
 	/** @var Array */
-	private $metaArr;
+	protected $metaArr;
 	/** @var Integer */
-	private $priority;
+	protected $priority;
 
 	function __construct($metaArr = null, $priority = 9)
 	{

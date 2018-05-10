@@ -16,9 +16,9 @@ use FFMpeg\Media\Video;
 class CustomFilter implements VideoFilterInterface
 {
     /** @var string */
-    private $filter;
+    protected $filter;
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     /**
      * A custom filter, useful if you want to build complex filters

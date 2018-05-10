@@ -15,7 +15,7 @@ use FFMpeg\Media\Waveform;
 
 class WaveformFilters
 {
-    private $waveform;
+    protected $waveform;
 
     public function __construct(Waveform $waveform)
     {

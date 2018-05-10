@@ -23,9 +23,9 @@ class RotateFilter implements VideoFilterInterface
     const ROTATE_270 = 'transpose=2';
 
     /** @var string */
-    private $angle;
+    protected $angle;
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     public function __construct($angle, $priority = 0)
     {

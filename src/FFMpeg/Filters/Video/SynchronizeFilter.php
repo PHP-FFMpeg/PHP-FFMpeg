@@ -19,7 +19,7 @@ use FFMpeg\Media\Video;
  */
 class SynchronizeFilter implements VideoFilterInterface
 {
-    private $priority;
+    protected $priority;
 
     public function __construct($priority = 12)
     {

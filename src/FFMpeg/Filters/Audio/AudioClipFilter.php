@@ -20,17 +20,17 @@ class AudioClipFilter implements AudioFilterInterface {
     /**
      * @var TimeCode
      */
-    private $start;
+    protected $start;
 
     /**
      * @var TimeCode
      */
-    private $duration;
+    protected $duration;
 
     /**
      * @var int
      */
-    private $priority;
+    protected $priority;
 
 
     public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0) {

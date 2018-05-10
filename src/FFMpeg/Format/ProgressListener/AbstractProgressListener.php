@@ -22,34 +22,34 @@ use FFMpeg\Exception\RuntimeException;
 abstract class AbstractProgressListener extends EventEmitter implements ListenerInterface
 {
     /** @var integer */
-    private $duration;
+    protected $duration;
 
     /** @var integer */
-    private $totalSize;
+    protected $totalSize;
 
     /** @var integer */
-    private $currentSize;
+    protected $currentSize;
 
     /** @var integer */
-    private $currentTime;
+    protected $currentTime;
 
     /** @var double */
-    private $lastOutput = null;
+    protected $lastOutput = null;
 
     /** @var FFProbe */
-    private $ffprobe;
+    protected $ffprobe;
 
     /** @var string */
-    private $pathfile;
+    protected $pathfile;
 
     /** @var Boolean */
-    private $initialized = false;
+    protected $initialized = false;
 
     /** @var integer */
-    private $currentPass;
+    protected $currentPass;
 
     /** @var integer */
-    private $totalPass;
+    protected $totalPass;
 
     /**
      * Transcoding rate in kb/s
