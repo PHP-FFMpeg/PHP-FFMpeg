@@ -16,10 +16,10 @@ use FFMpeg\Exception\InvalidArgumentException;
 class TimeCode
 {
     //see http://www.dropframetimecode.org/
-    private $hours;
-    private $minutes;
-    private $seconds;
-    private $frames;
+    protected $hours;
+    protected $minutes;
+    protected $seconds;
+    protected $frames;
 
     public function __construct($hours, $minutes, $seconds, $frames)
     {

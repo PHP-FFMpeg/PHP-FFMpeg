@@ -19,9 +19,9 @@ use FFMpeg\Exception\RuntimeException;
 class OptionsTester implements OptionsTesterInterface
 {
     /** @var FFProbeDriver */
-    private $ffprobe;
+    protected $ffprobe;
     /** @var Cache */
-    private $cache;
+    protected $cache;
 
     public function __construct(FFProbeDriver $ffprobe, Cache $cache)
     {

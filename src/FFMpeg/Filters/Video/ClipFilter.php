@@ -18,11 +18,11 @@ use FFMpeg\Coordinate\TimeCode;
 class ClipFilter implements VideoFilterInterface
 {
     /** @var TimeCode */
-    private $start;
+    protected $start;
     /** @var TimeCode */
-    private $duration;
+    protected $duration;
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0)
     {

@@ -18,9 +18,9 @@ class WaveformDownmixFilter implements WaveformFilterInterface
 {
 
     /** @var boolean */
-    private $downmix;
+    protected $downmix;
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     // By default, the downmix value is set to FALSE.
     public function __construct($downmix = FALSE, $priority = 0)
@@ -55,12 +55,12 @@ class WaveformDownmixFilter implements WaveformFilterInterface
         foreach ($waveform->getAudio()->getStreams() as $stream) {
             if ($stream->isAudio()) {
                 try {
-                    
+
                     // If the downmix parameter is set to TRUE, we add an option to the FFMPEG command
                     if($this->downmix == TRUE) {
                         $commands[] = '"aformat=channel_layouts=mono"';
                     }
-                    
+
                     break;
 
                 } catch (RuntimeException $e) {

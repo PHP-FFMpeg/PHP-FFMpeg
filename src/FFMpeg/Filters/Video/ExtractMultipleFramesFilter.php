@@ -32,9 +32,9 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     const FRAMERATE_EVERY_60SEC = '1/60';
 
     /** @var integer */
-    private $priority;
-    private $frameRate;
-    private $destinationFolder;
+    protected $priority;
+    protected $frameRate;
+    protected $destinationFolder;
 
     public function __construct($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority = 0)
     {

@@ -22,9 +22,9 @@ use Psr\Log\LoggerInterface;
 class FFMpeg
 {
     /** @var FFMpegDriver */
-    private $driver;
+    protected $driver;
     /** @var FFProbe */
-    private $ffprobe;
+    protected $ffprobe;
 
     public function __construct(FFMpegDriver $ffmpeg, FFProbe $ffprobe)
     {

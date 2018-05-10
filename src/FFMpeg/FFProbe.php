@@ -34,15 +34,15 @@ class FFProbe
     const TYPE_FORMAT = 'format';
 
     /** @var Cache */
-    private $cache;
+    protected $cache;
     /** @var OptionsTesterInterface */
-    private $optionsTester;
+    protected $optionsTester;
     /** @var OutputParserInterface */
-    private $parser;
+    protected $parser;
     /** @var FFProbeDriver */
-    private $ffprobe;
+    protected $ffprobe;
     /** @var MapperInterface */
-    private $mapper;
+    protected $mapper;
 
     public function __construct(FFProbeDriver $ffprobe, Cache $cache)
     {

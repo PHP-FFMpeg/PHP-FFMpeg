@@ -16,7 +16,7 @@ use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
 abstract class AbstractStreamableMedia extends AbstractMediaType
 {
-    private $streams;
+    protected $streams;
 
     /**
      * @return StreamCollection

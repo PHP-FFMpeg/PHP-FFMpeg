@@ -28,13 +28,13 @@ class ResizeFilter implements VideoFilterInterface
     const RESIZEMODE_SCALE_HEIGHT = 'height';
 
     /** @var Dimension */
-    private $dimension;
+    protected $dimension;
     /** @var string */
-    private $mode;
+    protected $mode;
     /** @var Boolean */
-    private $forceStandards;
+    protected $forceStandards;
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     public function __construct(Dimension $dimension, $mode = self::RESIZEMODE_FIT, $forceStandards = true, $priority = 0)
     {
@@ -101,7 +101,7 @@ class ResizeFilter implements VideoFilterInterface
             // Using Filter to have ordering
             $commands[] = '-vf';
             $commands[] = '[in]scale=' . $dimensions->getWidth() . ':' . $dimensions->getHeight() . ' [out]';
-            
+
         }
 
         return $commands;

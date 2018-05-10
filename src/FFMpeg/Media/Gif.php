@@ -23,13 +23,13 @@ use FFMpeg\Coordinate\Dimension;
 class Gif extends AbstractMediaType
 {
     /** @var TimeCode */
-    private $timecode;
+    protected $timecode;
     /** @var Dimension */
-    private $dimension;
+    protected $dimension;
     /** @var integer */
-    private $duration;
+    protected $duration;
     /** @var Video */
-    private $video;
+    protected $video;
 
     public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $timecode, Dimension $dimension, $duration = null)
     {

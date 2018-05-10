@@ -17,7 +17,7 @@ use FFMpeg\Media\Frame;
 class DisplayRatioFixerFilter implements FrameFilterInterface
 {
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     public function __construct($priority = 0)
     {

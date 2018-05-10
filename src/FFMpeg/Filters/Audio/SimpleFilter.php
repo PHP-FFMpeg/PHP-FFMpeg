@@ -16,8 +16,8 @@ use FFMpeg\Format\AudioInterface;
 
 class SimpleFilter implements AudioFilterInterface
 {
-    private $params;
-    private $priority;
+    protected $params;
+    protected $priority;
 
     public function __construct(array $params, $priority = 0)
     {

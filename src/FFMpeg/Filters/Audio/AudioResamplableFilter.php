@@ -17,9 +17,9 @@ use FFMpeg\Media\Audio;
 class AudioResamplableFilter implements AudioFilterInterface
 {
     /** @var string */
-    private $rate;
+    protected $rate;
     /** @var integer */
-    private $priority;
+    protected $priority;
 
     public function __construct($rate, $priority = 0)
     {

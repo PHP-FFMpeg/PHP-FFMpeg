@@ -17,9 +17,9 @@ use FFMpeg\Format\VideoInterface;
 
 class FrameRateFilter implements VideoFilterInterface
 {
-    private $rate;
-    private $gop;
-    private $priority;
+    protected $rate;
+    protected $gop;
+    protected $priority;
 
     public function __construct(FrameRate $rate, $gop, $priority = 0)
     {

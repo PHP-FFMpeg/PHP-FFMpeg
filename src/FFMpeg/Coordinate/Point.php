@@ -13,8 +13,8 @@ namespace FFMpeg\Coordinate;
 
 class Point
 {
-    private $x;
-    private $y;
+    protected $x;
+    protected $y;
 
     public function __construct($x, $y, $dynamic = false)
     {

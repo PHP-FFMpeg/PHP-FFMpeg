@@ -29,7 +29,7 @@ use Neutron\TemporaryFilesystem\Manager as FsManager;
 class Concat extends AbstractMediaType
 {
     /** @var array */
-    private $sources;
+    protected $sources;
 
     public function __construct($sources, FFMpegDriver $driver, FFProbe $ffprobe)
     {
