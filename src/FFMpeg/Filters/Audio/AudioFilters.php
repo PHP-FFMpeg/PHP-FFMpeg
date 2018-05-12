@@ -87,12 +87,11 @@ class AudioFilters
      *
      * @param string $artwork  The artwork image link to add to the video
      * @param string $preset Certain encoding speed to compression ration and the default preset type is 'veryslow'.
-     * @param array $flags Some extra flags that could be passed to the conversion command.
      * @return AudioFilters
      */
-    public function addVideoArtwork(string $artwork, string $preset = null, array $flags = null) : AudioFilters
+    public function addVideoArtwork(string $artwork, string $preset = null) : AudioFilters
     {
-        $this->media->addFilter(new ImageVideoFilter($artwork, $preset, $flags));
+        $this->media->addFilter(new ImageVideoFilter($artwork, $preset));
 
         return $this;
     }

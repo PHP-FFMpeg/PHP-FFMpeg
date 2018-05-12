@@ -40,15 +40,10 @@ class ImageVideoFilter implements AudioFilterInterface
      * @var int
      */
     private $priority;
-    /**
-     * @var array
-     */
-    private $extraFlags;
 
-    public function __construct(string $artwork, string $preset = null, array $flags = null, int $priority = 10)
+    public function __construct(string $artwork, string $preset = null, int $priority = 10)
     {
         $this->artwork = $artwork;
-        $this->extraFlags = $flags;
         $this->preset = $preset;
         $this->priority = $priority;
     }
@@ -58,14 +53,11 @@ class ImageVideoFilter implements AudioFilterInterface
      */
     public function apply(Audio $audio, AudioInterface $format): array
     {
-        $commands = array('-loop', 1, '-i', $this->artwork);
-
-        if (!is_null($this->extraFlags)) {
-            $commands = array_merge($commands, $this->extraFlags);
-        }
+        $commands = [ '-loop', 1, '-i', $this->artwork ];
+        $presets = [ 'ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow' ];
 
         $commands[] = '-preset';
-        $commands[] = (!is_null($this->preset)) ? $this->preset : 'veryslow';
+        $commands[] = in_array($this->preset, $presets) ? $this->preset : 'veryslow';
 
         $commands[] = '-shortest';
 

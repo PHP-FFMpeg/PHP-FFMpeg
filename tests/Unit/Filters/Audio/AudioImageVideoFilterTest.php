@@ -24,6 +24,6 @@ class AudioImageVideoFilterTest extends TestCase
         $filter = new AudioFilters($audio);
 
         $filter->imageVideo($artwork);
-        $this->assertEquals(array(0 => '-loop', 1 => 1, 2 => '-i', 3 => '/path/to/artwork.jpg', 4 => '-preset', 5 => 'veryslow', 6 => '-shortest'), $capturedFilter->apply($audio, $format));
+        $this->assertEquals([ '-loop', 1, '-i', '/path/to/artwork.jpg', '-preset', 'veryslow', '-shortest' ], $capturedFilter->apply($audio, $format));
     }
 }
