@@ -86,10 +86,10 @@ class AudioFilters
      * Adds the `$artwork` to the audio and converts it to a video file.
      *
      * @param string $artwork  The artwork image link to add to the video
-     * @param string $preset Certain encoding speed to compression ration and the default preset type is 'veryslow'.
+     * @param string $preset Certain encoding speed for selecting compression ratios.
      * @return AudioFilters
      */
-    public function addVideoArtwork(string $artwork, string $preset = null) : AudioFilters
+    public function addVideoArtwork(string $artwork, string $preset) : AudioFilters
     {
         $this->media->addFilter(new ImageVideoFilter($artwork, $preset));
 
