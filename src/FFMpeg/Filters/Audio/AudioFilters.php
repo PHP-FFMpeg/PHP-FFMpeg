@@ -11,9 +11,8 @@
 
 namespace FFMpeg\Filters\Audio;
 
-use FFMpeg\Filters\Audio\AddMetadataFilter;
-use FFMpeg\Media\Audio;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Media\Audio;
 
 class AudioFilters
 {
@@ -79,6 +78,20 @@ class AudioFilters
     public function clip(TimeCode $start, ?TimeCode $duration = null)
     {
         $this->media->addFilter(new AudioClipFilter($start, $duration));
+
+        return $this;
+    }
+
+    /**
+     * Adds the `$artwork` to the audio and converts it to a video file.
+     *
+     * @param string $artwork  The artwork image link to add to the video
+     * @param string $preset Certain encoding speed for selecting compression ratios.
+     * @return AudioFilters
+     */
+    public function addVideoArtwork(string $artwork, string $preset) : AudioFilters
+    {
+        $this->media->addFilter(new ImageVideoFilter($artwork, $preset));
 
         return $this;
     }
