@@ -23,7 +23,7 @@ class AudioImageVideoFilterTest extends TestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $filter = new AudioFilters($audio);
 
-        $filter->imageVideo($artwork);
+        $filter->addVideoArtwork($artwork, 'veryslow');
         $this->assertEquals([ '-loop', 1, '-i', '/path/to/artwork.jpg', '-preset', 'veryslow', '-shortest' ], $capturedFilter->apply($audio, $format));
     }
 }
