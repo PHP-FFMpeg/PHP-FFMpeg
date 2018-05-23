@@ -11,7 +11,7 @@ class VideoProgressListenerTest extends TestCase
     /**
      * @dataProvider provideData
      */
-    public function testHandle($size, $duration,
+    public function testHandle($size, $duration, $newVideoDuration,
         $data, $expectedPercent, $expectedRemaining, $expectedRate,
         $data2, $expectedPercent2, $expectedRemaining2, $expectedRate2,
         $currentPass, $totalPass
@@ -61,6 +61,7 @@ class VideoProgressListenerTest extends TestCase
             [
                 147073958,
                 281.147533,
+                281.147533,
                 'frame=  206 fps=202 q=10.0 size=     571kB time=00:00:07.12 bitrate= 656.8kbits/s dup=9 drop=0',
                 2,
                 0,
@@ -74,6 +75,7 @@ class VideoProgressListenerTest extends TestCase
             ],
             [
                 147073958,
+                281.147533,
                 281.147533,
                 'frame=  206 fps=202 q=10.0 size=     571kB time=00:00:07.12 bitrate= 656.8kbits/s dup=9 drop=0',
                 1,

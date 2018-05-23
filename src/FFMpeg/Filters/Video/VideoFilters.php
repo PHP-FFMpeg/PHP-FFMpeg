@@ -69,9 +69,9 @@ class VideoFilters extends AudioFilters
      *
      * @return self
      */
-    public function extractMultipleFrames(string $frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, string $destinationFolder = __DIR__): self
+    public function extractMultipleFrames($frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, $priority = 0)
     {
-        $this->media->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
+        $this->media->addFilter(new ExtractMultipleFramesFilter($frameRate, $priority));
 
         return $this;
     }

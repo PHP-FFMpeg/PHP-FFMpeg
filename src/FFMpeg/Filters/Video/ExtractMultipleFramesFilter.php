@@ -16,15 +16,11 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
-
-class ExtractMultipleFramesFilter implements VideoFilterInterface
+ 
+class ExtractMultipleFramesFilter implements VideoFilterInterface 
 {
-
     use TPriorityFilter;
-
-    /**
-     * will extract a frame every second
-     */
+ 
     const FRAMERATE_EVERY_SEC = '1/1';
 
     /**
@@ -53,103 +49,38 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     const FRAMERATE_EVERY_60SEC = '1/60';
 
     /**
-     * @var int
-     */
-    private $priority;
-
-    /**
      * @var string
      */
     private $frameRate;
 
     /**
-     * @var string
+     * @var int
      */
-    private $destinationFolder;
+    private $priority;
 
-    public function __construct(string $frameRate = self::FRAMERATE_EVERY_SEC, string $destinationFolder = __DIR__, int $priority = 0)
-    {
-        $this->setPriority($priority);
-
+    /**
+     * @param $frameRate
+     * @param selfFRAMERATE_EVERY_SEC $frameFileType
+     */
+    public function __construct($frameRate = self::FRAMERATE_EVERY_SEC, $priority = 0) {
         $this->frameRate = $frameRate;
-
-        // Make sure that the destination folder has a trailing slash
-        $destinationFolder = rtrim($destinationFolder, '/') . '/';
-        // Set the destination folder
-        $this->destinationFolder = $destinationFolder;
+        $this->priority = $priority;
     }
 
     /**
-     * Returns the framerate used.
-     * One of the FRAMERATE_EVERY_* constants
-     *
-     * @return string
+     * @return mixed
      */
-    public function getFrameRate(): string
-    {
-        return $this->frameRate;
-    }
-
-    /**
-     * Returns the folder the frames will be saved to.
-     *
-     * @return string
-     */
-    public function getDestinationFolder(): string
-    {
-        return $this->destinationFolder;
+    public function getPriority() {
+        return $this->priority;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array
-    {
+    public function apply(Video $video, VideoInterface $format) {
         $commands = [];
-        $duration = 0;
-
-        try {
-            // Get the duration of the video
-            foreach ($video->getStreams()->getVideoStreams() as $stream) {
-                if ($stream->has('duration')) {
-                    $duration = $stream->get('duration');
-                    break;
-                }
-            }
-
-            // Get the number of frames per second we have to extract.
-            if (preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== false) {
-                $operator = $matches[2];
-
-                switch ($operator) {
-                    case '/':
-                        $nbFramesPerSecond = $matches[1] / $matches[3];
-                        break;
-
-                    default:
-                        throw new InvalidArgumentException('The frame rate is not a proper division: ' . $this->frameRate);
-                }
-            }
-
-            // Set the number of digits to use in the exported filenames
-            $nbImages = ceil($duration * $nbFramesPerSecond);
-
-            if ($nbImages < 100) {
-                $nbDigitsInFileNames = "02";
-            } elseif ($nbImages < 1000) {
-                $nbDigitsInFileNames = "03";
-            } else {
-                $nbDigitsInFileNames = "06";
-            }
-
-            // Set the parameters
-            $commands[] = '-vf';
-            $commands[] = 'fps=' . $this->frameRate;
-            $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.jpg';
-        } catch (RuntimeException $e) {
-            throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode(), null, $e);
-        }
-
+        $commands[] = '-vf';
+        $commands[] = 'fps=' . $this->frameRate;
         return $commands;
     }
 }

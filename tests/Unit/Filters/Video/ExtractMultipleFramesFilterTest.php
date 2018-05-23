@@ -7,45 +7,45 @@ use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\FFProbe\DataMapping\Stream;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
-class ExtractMultipleFramesFilterTest extends TestCase
-{
+class ExtractMultipleFramesFilterTest extends TestCase {
     /**
      * @dataProvider provideFrameRates
      */
-    public function testApply($frameRate, $destinationFolder, $duration, $modulus, $expected)
-    {
+    public function testApply($frameRate, $frameFileType, $modulus, $expected) {
         $video = $this->getVideoMock();
-        $pathfile = '/path/to/file'.mt_rand();
+        $pathfile = '/path/to/file' . mt_rand();
 
         $format = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
         $format->expects($this->any())
             ->method('getModulus')
             ->will($this->returnValue($modulus));
 
-        $streams = new StreamCollection(array(
-            new Stream(array(
-                'codec_type' => 'video',
-                'duration'      => $duration,
-            ))
-        ));
-
-        $video->expects($this->once())
-            ->method('getStreams')
-            ->will($this->returnValue($streams));
-
-        $filter = new ExtractMultipleFramesFilter($frameRate, $destinationFolder);
+        $filter = new ExtractMultipleFramesFilter($frameRate, $frameFileType);
         $this->assertEquals($expected, $filter->apply($video, $format));
     }
 
-    public function provideFrameRates()
-    {
-        return array(
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_SEC, '/', 100, 2, array('-vf', 'fps=1/1', '/frame-%03d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, '/', 100, 2, array('-vf', 'fps=1/2', '/frame-%02d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_5SEC, '/', 100, 2, array('-vf', 'fps=1/5', '/frame-%02d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC, '/', 100, 2, array('-vf', 'fps=1/10', '/frame-%02d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC, '/', 100, 2, array('-vf', 'fps=1/30', '/frame-%02d.jpg')),
-            array(ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC, '/', 100, 2, array('-vf', 'fps=1/60', '/frame-%02d.jpg')),
-        );
+    public function provideFrameRates() {
+        return [
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_SEC, 'jpg', 2, ['-vf', 'fps=1/1']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, 'jpg', 2, ['-vf', 'fps=1/2']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_5SEC, 'jpg', 2, ['-vf', 'fps=1/5']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC, 'jpg', 2, ['-vf', 'fps=1/10']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC, 'jpg', 2, ['-vf', 'fps=1/30']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC, 'jpg', 2, ['-vf', 'fps=1/60']],
+
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_SEC, 'jpeg', 2, ['-vf', 'fps=1/1']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, 'jpeg', 2, ['-vf', 'fps=1/2']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_5SEC, 'jpeg', 2, ['-vf', 'fps=1/5']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC, 'jpeg', 2, ['-vf', 'fps=1/10']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC, 'jpeg', 2, ['-vf', 'fps=1/30']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC, 'jpeg', 2, ['-vf', 'fps=1/60']],
+
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_SEC, 'png', 2, ['-vf', 'fps=1/1']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, 'png', 2, ['-vf', 'fps=1/2']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_5SEC, 'png', 2, ['-vf', 'fps=1/5']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC, 'png', 2, ['-vf', 'fps=1/10']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC, 'png', 2, ['-vf', 'fps=1/30']],
+            [ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC, 'png', 2, ['-vf', 'fps=1/60']],
+        ];
     }
 }
