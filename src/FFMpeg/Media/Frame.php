@@ -115,8 +115,7 @@ class Frame extends AbstractMediaType
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        // without output filename when return binary string
-        if(!$returnBase64) {
+        if (!$returnBase64) {
             $commands = array_merge($commands, array($pathfile));
         }
 
