@@ -71,4 +71,18 @@ class AudioFilters
 
         return $this;
     }
+
+    /**
+     * Add custom filter.
+     *
+     * @param $params
+     * @param int $priority
+     * @return $this
+     */
+    public function simple($params, $priority = 0)
+    {
+        $this->media->addFilter(new SimpleFilter($params, $priority));
+
+        return $this;
+    }
 }

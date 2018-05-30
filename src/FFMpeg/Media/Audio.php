@@ -115,8 +115,13 @@ class Audio extends AbstractStreamableMedia
         }
 
         if (null !== $format->getAudioKiloBitrate()) {
-            $commands[] = '-b:a';
-            $commands[] = $format->getAudioKiloBitrate() . 'k';
+            if (($format->getEnableVbrEncoding() === NULL) || !$format->getEnableVbrEncoding()) {
+                $commands[] = '-b:a';
+                $commands[] = $format->getAudioKiloBitrate() . 'k';
+            } else {
+                $commands[] = '-q:a';
+                $commands[] = $format->getVbrEncodingQuality();
+            }
         }
         if (null !== $format->getAudioChannels()) {
             $commands[] = '-ac';

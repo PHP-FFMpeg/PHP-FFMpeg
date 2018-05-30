@@ -39,4 +39,18 @@ interface AudioInterface extends FormatInterface
      * @return array
      */
     public function getAvailableAudioCodecs();
+
+    /**
+     * Get enable vbr encoding parametr
+     *
+     * @return bool
+     */
+    public function getEnableVbrEncoding();
+
+    /**
+     * Set vbr encoding quality
+     *
+     * @return integer
+     */
+    public function getVbrEncodingQuality();
 }

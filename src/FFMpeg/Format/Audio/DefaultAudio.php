@@ -30,12 +30,66 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /** @var integer */
     protected $audioChannels = null;
 
+    /** @var bool */
+    protected $enableVbrEncoding = false;
+
+    /** @var integer */
+    protected $vbrEncodingQuality = 3;
+
     /**
      * {@inheritdoc}
      */
     public function getExtraParams()
     {
         return array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnableVbrEncoding()
+    {
+        return $this->vbrEncodingQuality;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnableVbrEncoding($value)
+    {
+        if (is_bool($value)) {
+            $this->enableVbrEncoding = (bool) $value;
+        } else {
+            $this->enableVbrEncoding = false;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVbrEncodingQuality()
+    {
+        return $this->vbrEncodingQuality;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVbrEncodingQuality($value)
+    {
+        if (!is_int($value)) {
+            throw new InvalidArgumentException('Wrong vbr encoding quality type');
+        }
+
+        if ($value < 1 || $value > 9) {
+            throw new InvalidArgumentException('Wrong vbr encoding quality value');
+        }
+
+        $this->vbrEncodingQuality = (int) $value;
+
+        return $this;
     }
 
     /**
