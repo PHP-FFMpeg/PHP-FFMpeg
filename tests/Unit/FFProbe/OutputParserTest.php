@@ -13,6 +13,11 @@ class OutputParserTest extends TestCase
      */
     public function testParse($type, $data, $expectedOutput)
     {
+        if (DIRECTORY_SEPARATOR === '\\') {
+            $this->markTestSkipped('Not available on Windows');
+            return;
+        }
+
         $parser = new OutputParser();
         $this->assertEquals($expectedOutput, $parser->parse($type, $data));
     }
@@ -34,9 +39,9 @@ class OutputParserTest extends TestCase
         $rawFormat = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_format.raw');
         $rawStreams = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_streams.raw');
 
-        return array(
-            array(FFProbe::TYPE_FORMAT, $rawFormat, $expectedFormat),
-            array(FFProbe::TYPE_STREAMS, $rawStreams, $expectedStreams),
-        );
+        return [
+            [FFProbe::TYPE_FORMAT, $rawFormat, $expectedFormat],
+            [FFProbe::TYPE_STREAMS, $rawStreams, $expectedStreams],
+        ];
     }
 }

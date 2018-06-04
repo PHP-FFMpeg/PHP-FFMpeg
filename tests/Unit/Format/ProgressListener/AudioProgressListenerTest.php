@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Tests\FFMpeg\Unit\Format\ProgressListener;
 
 use Tests\FFMpeg\Unit\TestCase;
@@ -21,15 +21,15 @@ class AudioProgressListenerTest extends TestCase
         $ffprobe->expects($this->once())
             ->method('format')
             ->with(__FILE__)
-            ->will($this->returnValue(new Format(array(
+            ->will($this->returnValue(new Format([
                 'size'     => $size,
                 'duration' => $duration,
-            ))));
+            ])));
 
         $listener = new AudioProgressListener($ffprobe, __FILE__, $currentPass, $totalPass);
         $phpunit = $this;
-        $n = 0;
-        $listener->on('progress', function ($percent, $remaining, $rate) use (&$n, $phpunit, $expectedPercent, $expectedRemaining, $expectedRate, $expectedPercent2, $expectedRemaining2, $expectedRate2) {
+        $numberListenerIsCalled = 0;
+        $listener->on('progress', function ($percent, $remaining, $rate) use (&$numberListenerIsCalled, $phpunit, $expectedPercent, $expectedRemaining, $expectedRate, $expectedPercent2, $expectedRemaining2, $expectedRate2) {
             if (0 === $n) {
                 $phpunit->assertEquals($expectedPercent, $percent);
                 $phpunit->assertEquals($expectedRemaining, $remaining);
@@ -40,15 +40,15 @@ class AudioProgressListenerTest extends TestCase
                 $phpunit->assertLessThan($expectedRate2 + 10, $rate);
                 $phpunit->assertGreaterThan($expectedRate2 - 10, $rate);
             }
-            $n++;
+            ++$numberListenerIsCalled;
         });
         // first one does not trigger progress event
         $listener->handle('any-type'.mt_rand(), $data);
-        usleep(500);
+        usleep(250);
         $listener->handle('any-type'.mt_rand(), $data);
-        usleep(500);
+        usleep(250);
         $listener->handle('any-type'.mt_rand(), $data2);
-        $this->assertEquals(2, $n);
+        $this->assertEquals(2, $numberListenerIsCalled);
     }
 
     public function provideData()

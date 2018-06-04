@@ -80,7 +80,7 @@ class FFMpegTest extends TestCase {
         $ffprobe = $this->getFFProbeMock();
 
         $ffmpeg = FFMpeg::create(['timeout' => 42], $logger, $ffprobe);
-        $this->assertInstanceOf('FFMpeg\FFMpeg', $ffmpeg);
+        $this->assertInstanceOf(\FFMpeg\FFMpeg::class, $ffmpeg);
 
         $this->assertSame($logger, $ffmpeg->getFFMpegDriver()->getProcessRunner()->getLogger());
         $this->assertSame($ffprobe, $ffmpeg->getFFProbe());

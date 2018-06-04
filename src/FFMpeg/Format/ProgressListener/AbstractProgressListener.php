@@ -15,6 +15,7 @@ use Alchemy\BinaryDriver\Listeners\ListenerInterface;
 use Evenement\EventEmitter;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Coordinate\TimeCode;
 
 /**
  * @author Robert Gruendler <r.gruendler@gmail.com>
@@ -98,14 +99,16 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      * @param   string  $pathfile
      * @param   integer $currentPass The cureent pass number
      * @param   integer $totalPasses The total number of passes
+     * @param   integer $duration    The new (overwritten) duration (needed when clipping the media file)
      * @throws RuntimeException
      */
-    public function __construct(FFProbe $ffprobe, string $pathfile, int $currentPass, int $totalPasses)
+    public function __construct(FFProbe $ffprobe, string $pathfile, int $currentPass, int $totalPass, int $duration = 0)
     {
         $this->ffprobe = $ffprobe;
         $this->pathfile = $pathfile;
         $this->currentPass = $currentPass;
-        $this->totalPass = $totalPasses;
+        $this->totalPass = $totalPass;
+        $this->duration = $duration;
     }
 
     /**
@@ -235,16 +238,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      */
     private function convertDuration(string $rawDuration): int
     {
-        $ar = array_reverse(explode(":", $rawDuration));
-        $duration = floatval($ar[0]);
-        if (!empty($ar[1])) {
-            $duration += intval($ar[1]) * 60;
-        }
-        if (!empty($ar[2])) {
-            $duration += intval($ar[2]) * 60 * 60;
-        }
-
-        return $duration;
+        return TimeCode::fromString($rawDuration)->toSeconds();
     }
 
     /**
@@ -275,9 +269,8 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
             return;
         }
 
-        $this->totalSize = $format->get('size') / 1024;
-        $this->duration = $format->get('duration');
-
+        $this->duration = (int) $this->duration > 0 ? $this->duration : $format->get('duration');
+        $this->totalSize = $format->get('size') / 1024 * ($this->duration / $format->get('duration'));
         $this->initialized = true;
     }
 }

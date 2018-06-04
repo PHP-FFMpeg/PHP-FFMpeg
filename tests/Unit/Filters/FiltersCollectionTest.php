@@ -26,14 +26,14 @@ class FiltersCollectionTest extends TestCase
         $coll->add($this->getMockBuilder(\FFMpeg\Filters\FilterInterface::class)->getMock());
         $coll->add($this->getMockBuilder(\FFMpeg\Filters\FilterInterface::class)->getMock());
 
-        $this->assertInstanceOf(ArrayIterator::class, $coll->getIterator());
+        $this->assertInstanceOf(\ArrayIterator::class, $coll->getIterator());
         $this->assertCount(2, $coll->getIterator());
     }
 
     public function testEmptyIterator()
     {
         $coll = new FiltersCollection;
-        $this->assertInstanceOf(ArrayIterator::class, $coll->getIterator());
+        $this->assertInstanceOf(\ArrayIterator::class, $coll->getIterator());
     }
 
     public function testIteratorSort()

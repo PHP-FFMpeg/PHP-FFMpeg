@@ -133,16 +133,13 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * @inheritDoc
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses): array
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $total, int $duration = 0): array
     {
         $format = $this;
-        $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $passes, $totalPasses);
-        $listener->on(
-            'progress',
-            function () use ($media, $format) {
-                $format->emit('progress', array_merge([$media, $format], func_get_args()));
-            }
-        );
+        $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $passes, $total, $duration);
+        $listener->on('progress', function () use ($media, $format) {
+           $format->emit('progress', array_merge([$media, $format], func_get_args()));
+        });
 
         return [$listener];
     }

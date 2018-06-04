@@ -43,31 +43,31 @@ class TestCase extends PhpUnitTestCase {
     }
 
     public function getWaveformMock() {
-        return $this->getMockBuilder('FFMpeg\Media\Waveform')
+        return $this->getMockBuilder(\FFMpeg\Media\Waveform::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     public function getFFMpegDriverMock() {
-        return $this->getMockBuilder('FFMpeg\Driver\FFMpegDriver')
+        return $this->getMockBuilder(\FFMpeg\Driver\FFMpegDriver::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     public function getFFProbeDriverMock() {
-        return $this->getMockBuilder('FFMpeg\Driver\FFProbeDriver')
+        return $this->getMockBuilder(\FFMpeg\Driver\FFProbeDriver::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     public function getFFProbeMock() {
-        return $this->getMockBuilder('FFMpeg\FFProbe')
+        return $this->getMockBuilder(\FFMpeg\FFProbe::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     public function getStreamMock() {
-        return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\Stream')
+        return $this->getMockBuilder(\FFMpeg\FFProbe\DataMapping\Stream::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

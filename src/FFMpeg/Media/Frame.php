@@ -122,7 +122,9 @@ class Frame extends AbstractMediaType
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        $commands = array_merge($commands, [$pathfile]);
+        if (!$returnBase64) {
+            $commands = array_merge($commands, [$pathfile]);
+        }
 
         try {
             if (!$returnBase64) {

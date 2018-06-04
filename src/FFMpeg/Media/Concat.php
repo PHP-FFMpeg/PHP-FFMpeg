@@ -85,14 +85,14 @@ class Concat extends AbstractMediaType
     /**
      * Saves the concatenated video in the given array, considering that the sources videos are all encoded with the same codec.
      *
-     * @param array $outputPathfile
+     * @param string $outputPathfile
      * @param bool  $streamCopy
      *
      * @return Concat
      *
      * @throws RuntimeException
      */
-    public function saveFromSameCodecs($outputPathfile, bool $streamCopy = true)
+    public function saveFromSameCodecs(string $outputPathfile, bool $streamCopy = true): self
     {
         if (!(is_array($this->sources) && count($this->sources))) {
             throw new InvalidArgumentException('The list of videos is not a valid array.');
@@ -149,18 +149,17 @@ class Concat extends AbstractMediaType
         }
 
         // Set the output file in the command
-        $commands = array_merge($commands, [$outputPathfile]);
+        $commands[] = $outputPathfile;
 
         // Execute the command
         try {
             $this->driver->command($commands);
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($outputPathfile);
-            $this->cleanupTemporaryFile($sourcesFile);
             throw new RuntimeException('Unable to save concatenated video', $e->getCode(), $e);
+        } finally {
+            $this->cleanupTemporaryFile($sourcesFile);
         }
-
-        $this->cleanupTemporaryFile($sourcesFile);
 
         return $this;
     }

@@ -14,7 +14,7 @@ class AudioTest extends AbstractStreamableTestCase
         $ffprobe = $this->getFFProbeMock();
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Filters\Audio\AudioFilters', $audio->filters());
+        $this->assertInstanceOf(\FFMpeg\Filters\Audio\AudioFilters::class, $audio->filters());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -22,7 +22,7 @@ class AudioTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 

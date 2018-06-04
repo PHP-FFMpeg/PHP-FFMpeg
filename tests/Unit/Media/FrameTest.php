@@ -23,7 +23,7 @@ class FrameTest extends AbstractMediaTestCase
         $timecode = $this->getTimeCodeMock();
 
         $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
-        $this->assertInstanceOf('FFMpeg\Filters\Frame\FrameFilters', $frame->filters());
+        $this->assertInstanceOf(\FFMpeg\Filters\Frame\FrameFilters::class, $frame->filters());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -32,7 +32,7 @@ class FrameTest extends AbstractMediaTestCase
         $ffprobe = $this->getFFProbeMock();
         $timecode = $this->getTimeCodeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -61,7 +61,9 @@ class FrameTest extends AbstractMediaTestCase
 
         $pathfile = '/target/destination';
 
-        $commands[] = $pathfile;
+        if (!$base64) {
+            $commands[] = $pathfile;
+        }
 
         $driver->expects($this->once())
             ->method('command')

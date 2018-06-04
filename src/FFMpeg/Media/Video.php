@@ -25,6 +25,7 @@ use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
 use Neutron\TemporaryFilesystem\Manager as FsManager;
+use FFMpeg\Filters\Video\ClipFilter;
 
 class Video extends Audio implements MediaTypeInterface
 {
@@ -86,7 +87,19 @@ class Video extends Audio implements MediaTypeInterface
                 $listeners = null;
 
                 if ($format instanceof ProgressableInterface) {
-                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses);
+                    $filters = clone $this->filters;
+                    $duration = 0;
+
+                    // check the filters of the video, and if the video has the ClipFilter then
+                    // take the new video duration and send to the
+                    // FFMpeg\Format\ProgressListener\AbstractProgressListener class
+                    foreach ($filters as $filter) {
+                        if($filter instanceof ClipFilter){
+                            $duration = $filter->getDuration()->toSeconds();
+                            break;
+                        }
+                    }
+                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses, $duration);
                 }
 
                 $this->driver->command($passCommands, false, $listeners);
@@ -195,8 +208,10 @@ class Video extends Audio implements MediaTypeInterface
 
         if ($format instanceof VideoInterface) {
             // TODO: Remove some hardcoded values
-            $commands[] = '-b:v';
-            $commands[] = ($format->getKiloBitrate() ? $format->getKiloBitrate() : '') . 'k';
+            if ($format->getKiloBitrate()) {
+                $commands[] = '-b:v';
+                $commands[] = $format->getKiloBitrate() . 'k';
+            }
             $commands[] = '-refs';
             $commands[] = '6';
             $commands[] = '-coder';

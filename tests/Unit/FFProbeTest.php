@@ -6,6 +6,7 @@ use FFMpeg\FFProbe;
 use Symfony\Component\Process\ExecutableFinder;
 use Alchemy\BinaryDriver\ConfigurationInterface;
 use Alchemy\BinaryDriver\Configuration;
+use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
 class FFProbeTest extends TestCase
 {
@@ -152,7 +153,7 @@ class FFProbeTest extends TestCase
         $parser->expects($this->once())
             ->method('parse')
             ->with($this->isType('string', json_encode($data) . 'lala'))
-            ->will($this->returnValue('good data parsed'));
+            ->will($this->returnValue(['good data parsed']));
 
         $tester = $this->getFFProbeOptionsTesterMockWithOptions($commands);
 
@@ -209,7 +210,7 @@ class FFProbeTest extends TestCase
             ->will($this->returnValue(true));
         $cache->expects($this->once())
             ->method('get')
-            ->will($this->returnValue(new FFMpeg\FFProbe\DataMapping\StreamCollection($output)));
+            ->will($this->returnValue(new StreamCollection($output)));
         $cache->expects($this->never())
             ->method('set');
 

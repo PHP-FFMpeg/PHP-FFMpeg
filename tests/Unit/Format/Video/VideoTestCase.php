@@ -62,7 +62,7 @@ abstract class VideoTestCase extends AudioTestCase
         $ffprobe = $this->getFFProbeMock();
 
         foreach ($format->createProgressListener($media, $ffprobe, 1, 3) as $listener) {
-            $this->assertInstanceOf('FFMpeg\Format\ProgressListener\VideoProgressListener', $listener);
+            $this->assertInstanceOf(\FFMpeg\Format\ProgressListener\VideoProgressListener::class, $listener);
             $this->assertSame($ffprobe, $listener->getFFProbe());
             $this->assertSame(__FILE__, $listener->getPathfile());
             $this->assertSame(1, $listener->getCurrentPass());

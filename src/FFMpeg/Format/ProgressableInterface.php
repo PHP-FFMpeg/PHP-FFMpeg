@@ -22,12 +22,13 @@ interface ProgressableInterface extends EventEmitterInterface
     /**
      * Creates the progress listener.
      *
-     * @param MediaTypeInterface $media
-     * @param FFProbe            $ffprobe
-     * @param int                $pass    The current pass number
-     * @param int                $total   The total pass number
+     * @param MediaTypeInterface    $media
+     * @param FFProbe               $ffprobe
+     * @param int                   $passes    The current pas snumber
+     * @param int                   $total   The total pass number
+     * @param int                   $duration   The new video duration
      *
      * @return ListenerInterface[] An array of listeners
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses): array;
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses, int $duration = 0): array;
 }

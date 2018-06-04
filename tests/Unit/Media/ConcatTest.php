@@ -30,7 +30,7 @@ class ConcatTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 

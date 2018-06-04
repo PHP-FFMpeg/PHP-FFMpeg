@@ -20,7 +20,7 @@ class VideoTranscodeTest extends FunctionalTestCase
         $ffmpeg = $this->getFFMpeg();
         $video = $ffmpeg->open(__DIR__ . '/../files/Test.ogv');
 
-        $this->assertInstanceOf('FFMpeg\Media\Video', $video);
+        $this->assertInstanceOf(\FFMpeg\Media\Video::class, $video);
 
         $lastPercentage = null;
         $phpunit = $this;

@@ -13,7 +13,7 @@ class WaveformTest extends AbstractMediaTestCase
         $ffprobe = $this->getFFProbeMock();
 
         $waveform = new Waveform($this->getAudioMock(__FILE__), $driver, $ffprobe, 640, 120);
-        $this->assertInstanceOf('FFMpeg\Filters\Waveform\WaveformFilters', $waveform->filters());
+        $this->assertInstanceOf(\FFMpeg\Filters\Waveform\WaveformFilters::class, $waveform->filters());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -21,7 +21,7 @@ class WaveformTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 

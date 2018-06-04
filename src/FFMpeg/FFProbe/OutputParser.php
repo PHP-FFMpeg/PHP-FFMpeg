@@ -76,8 +76,7 @@ class OutputParser implements OutputParserInterface
 
         foreach (explode(PHP_EOL, $data) as $line) {
             if ($line === '[STREAM]') {
-                $n ++;
-                $ret[$n] = [];
+                $ret[++$n] = [];
                 continue;
             }
             if ($line === '[/STREAM]') {
