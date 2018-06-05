@@ -315,4 +315,15 @@ class Video extends Audio
     {
         return new Concat($sources, $this->driver, $this->ffprobe);
     }
+
+    /**
+     * Gets the frames at $frameRate.
+     *
+     * @param string $frameRate
+     * @return Frames
+     */
+    public function frames($frameRate = Frames::FRAMERATE_EVERY_SEC)
+    {
+        return new Frames($this, $this->driver, $this->ffprobe, $frameRate);
+    }
 }

@@ -144,16 +144,11 @@ $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(42));
 $frame->save('image.jpg');
 ```
 
-If you want to extract multiple images from your video, you can use the following filter:
+If you want to extract multiple images from your video, you can use the following method:
 
 ```php
-$video
-    ->filters()
-    ->extractMultipleFrames(FFMpeg\Filters\Video\ExtractMultipleFramesFilter::FRAMERATE_EVERY_10SEC, '/path/to/destination/folder/')
-    ->synchronize();
-
-$video
-    ->save(new FFMpeg\Format\Video\X264(), '/path/to/new/file');
+$frames = $video->frames(FFMpeg\Media\Frames::FRAMERATE_EVERY_10SEC);
+$frames->save('/path/to/destination');
 ```
 
 ##### Generate a waveform
