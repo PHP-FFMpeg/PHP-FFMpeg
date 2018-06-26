@@ -8,7 +8,7 @@ use FFMpeg\Coordinate\TimeCode;
 /**
  * Video clip.
  *
- * See http://trac.ffmpeg.org/wiki/Seeking
+ * Use input seeking, see http://trac.ffmpeg.org/wiki/Seeking
  */
 class Clip extends Video
 {
