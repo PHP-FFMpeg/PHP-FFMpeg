@@ -11,7 +11,7 @@ class ClipTest extends AbstractMediaTestCase
      */
     public function testBuildCommand($startValue, $durationValue, $commands)
     {
-        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+        $configuration = $this->getConfigurationMock();
 
         $driver = $this->getFFMpegDriverMock();
         $driver->expects($this->any())
@@ -25,9 +25,8 @@ class ClipTest extends AbstractMediaTestCase
             ->method('__toString')
             ->will($this->returnValue($startValue));
 
-        if (is_null($durationValue)) {
-            $duration = null;
-        } else {
+        $duration = null;
+        if (null !== $durationValue) {
             $duration = $this->getTimeCodeMock();
             $duration->expects($this->once())
                 ->method('__toString')

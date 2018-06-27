@@ -51,7 +51,7 @@ class Video extends AbstractVideo
     }
 
     /**
-     * Return clip.
+     * Clips the video at the given time(s).
      *
      * @param TimeCode $start Start time
      * @param TimeCode $duration Duration
