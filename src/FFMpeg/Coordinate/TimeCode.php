@@ -57,7 +57,7 @@ class TimeCode
      *
      * @return string
      */
-    public function __toString(): string
+    public function __toString() : string
     {
         return sprintf('%02d:%02d:%02d.%02d', $this->hours, $this->minutes, $this->seconds, $this->frames);
     }
@@ -69,7 +69,7 @@ class TimeCode
      * @return TimeCode
      * @throws InvalidArgumentException In case an invalid timecode is supplied
      */
-    public static function fromString($timecode): TimeCode
+    public static function fromString($timecode) : TimeCode
     {
         $days = 0;
 
@@ -96,7 +96,7 @@ class TimeCode
      * @param  float $quantity
      * @return TimeCode
      */
-    public static function fromSeconds(float $quantity): TimeCode
+    public static function fromSeconds(float $quantity) : TimeCode
     {
         $minutes = $hours = $frames = 0;
 
@@ -118,9 +118,9 @@ class TimeCode
     /**
      * Returns this timecode in seconds
      *
-     * @return int
+     * @return float
      */
-    public function toSeconds(): int
+    public function toSeconds() : float
     {
         $seconds = 0;
 
@@ -128,9 +128,12 @@ class TimeCode
         $seconds += $this->minutes * 60;
         $seconds += $this->seconds;
 
-        // TODO: Handle frames?
+        // prevent division by zero
+        if (0 !== $this->frames) {
+            $seconds += (1 / $this->frames);
+        }
 
-        return (int) $seconds;
+        return $seconds;
     }
 
     /**
@@ -140,7 +143,7 @@ class TimeCode
      * @param    TimeCode $timecode The Timecode to compare
      * @return   bool
      */
-    public function isAfter(TimeCode $timecode): bool
+    public function isAfter(TimeCode $timecode) : bool
     {
         // convert everything to seconds and compare
         return ($this->toSeconds() > $timecode->toSeconds());

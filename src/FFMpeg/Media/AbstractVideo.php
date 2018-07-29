@@ -90,7 +90,14 @@ abstract class AbstractVideo extends Audio
                             break;
                         }
                     }
-                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses, $duration);
+
+                    $listeners = $format->createProgressListener(
+                        $this,
+                        $this->ffprobe,
+                        $pass + 1,
+                        $totalPasses,
+                        $duration
+                    );
                 }
 
                 $this->driver->command($passCommands, false, $listeners);
