@@ -17,10 +17,15 @@ use FFMpeg\Exception\InvalidArgumentException;
 class OutputParser implements OutputParserInterface
 {
 
+    protected const NUMERIC_VALUES = [
+        'index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'
+    ];
+
+
     /**
      * @inheritDoc
      */
-    public function parse(string $type, string $data): array
+    public function parse(string $type, string $data) : array
     {
         switch ($type) {
             case FFProbe::TYPE_FORMAT:
@@ -53,7 +58,7 @@ class OutputParser implements OutputParserInterface
             $value = trim(implode('=', $chunks));
 
             if ('nb_streams' === $key) {
-                $value = (int) $value;
+                $value = (int)$value;
             }
 
             if (0 === strpos($key, 'TAG:')) {
@@ -99,8 +104,8 @@ class OutputParser implements OutputParserInterface
                 continue;
             }
 
-            if (in_array($key, ['index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'])) {
-                $value = (int) $value;
+            if (in_array($key, self::NUMERIC_VALUES)) {
+                $value = (int)$value;
             }
 
             if (0 === strpos($key, 'TAG:')) {

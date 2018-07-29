@@ -80,7 +80,7 @@ class FFProbe
     /**
      * @return OutputParserInterface
      */
-    public function getParser(): OutputParserInterface
+    public function getParser() : OutputParserInterface
     {
         return $this->parser;
     }
@@ -100,7 +100,7 @@ class FFProbe
     /**
      * @return FFProbeDriver
      */
-    public function getFFProbeDriver(): FFProbeDriver
+    public function getFFProbeDriver() : FFProbeDriver
     {
         return $this->ffprobe;
     }
@@ -110,7 +110,7 @@ class FFProbe
      *
      * @return self
      */
-    public function setFFProbeDriver(FFProbeDriver $ffprobe): self
+    public function setFFProbeDriver(FFProbeDriver $ffprobe) : self
     {
         $this->ffprobe = $ffprobe;
 
@@ -124,7 +124,7 @@ class FFProbe
      * @return self
      * @since 1.0.0
      */
-    public function setCodecTester(CodecTesterInterface $tester): self
+    public function setCodecTester(CodecTesterInterface $tester) : self
     {
         $this->codecTester = $tester;
 
@@ -135,7 +135,7 @@ class FFProbe
      * @return CodecTesterInterface
      * @since 1.0.0
      */
-    public function getCodecTester(): CodecTesterInterface
+    public function getCodecTester() : CodecTesterInterface
     {
         return $this->codecTester;
     }
@@ -145,7 +145,7 @@ class FFProbe
      *
      * @return self
      */
-    public function setOptionsTester(OptionsTesterInterface $tester): self
+    public function setOptionsTester(OptionsTesterInterface $tester) : self
     {
         $this->optionsTester = $tester;
 
@@ -155,7 +155,7 @@ class FFProbe
     /**
      * @return OptionsTesterInterface
      */
-    public function getOptionsTester(): OptionsTesterInterface
+    public function getOptionsTester() : OptionsTesterInterface
     {
         return $this->optionsTester;
     }
@@ -165,7 +165,7 @@ class FFProbe
      *
      * @return FFProbe
      */
-    public function setCache(CacheInterface $cache): FFProbe
+    public function setCache(CacheInterface $cache) : FFProbe
     {
         $this->cache = $cache;
 
@@ -175,7 +175,7 @@ class FFProbe
     /**
      * @return CacheInterface
      */
-    public function getCache(): CacheInterface
+    public function getCache() : CacheInterface
     {
         return $this->cache;
     }
@@ -183,7 +183,7 @@ class FFProbe
     /**
      * @return MapperInterface
      */
-    public function getMapper(): MapperInterface
+    public function getMapper() : MapperInterface
     {
         return $this->mapper;
     }
@@ -193,7 +193,7 @@ class FFProbe
      *
      * @return FFProbe
      */
-    public function setMapper(MapperInterface $mapper): FFProbe
+    public function setMapper(MapperInterface $mapper) : FFProbe
     {
         $this->mapper = $mapper;
 
@@ -210,7 +210,7 @@ class FFProbe
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function format($pathfile): Format
+    public function format($pathfile) : Format
     {
         return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
     }
@@ -222,7 +222,7 @@ class FFProbe
      * @return bool
      * @since  0.10.0
      */
-    public function isValid($pathfile): bool
+    public function isValid($pathfile) : bool
     {
         try {
             return $this->format($pathfile)->get('duration') > 0;
@@ -242,7 +242,7 @@ class FFProbe
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function streams($pathfile): StreamCollection
+    public function streams($pathfile) : StreamCollection
     {
         return $this->probe($pathfile, '-show_streams', static::TYPE_STREAMS);
     }
@@ -256,11 +256,14 @@ class FFProbe
      *
      * @return FFProbe
      */
-    public static function create($configuration = [], LoggerInterface $logger = null, CacheInterface $cacheDriver = null)
-    {
+    public static function create(
+        $configuration = [],
+        LoggerInterface $logger = null,
+        CacheInterface $cacheDriver = null
+    ) {
         if ($cacheDriver === null) {
             // default to in-memory cache
-            $cacheDriver = new MemoryCache;
+            $cacheDriver = new MemoryCache();
         }
 
         return new static(FFProbeDriver::create($configuration, $logger), $cacheDriver);
@@ -278,7 +281,7 @@ class FFProbe
             throw new RuntimeException(
                 sprintf(
                     'This version of ffprobe is too old and '
-                    . 'does not support `%s` option, please upgrade',
+                        . 'does not support `%s` option, please upgrade',
                     $command
                 )
             );

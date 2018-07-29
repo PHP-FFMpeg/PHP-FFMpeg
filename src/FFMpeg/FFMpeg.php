@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -59,7 +59,7 @@ class FFMpeg
      *
      * @return FFProbe
      */
-    public function getFFProbe(): FFProbe
+    public function getFFProbe() : FFProbe
     {
         return $this->ffprobe;
     }
@@ -81,7 +81,7 @@ class FFMpeg
      *
      * @return FFMpegDriver
      */
-    public function getFFMpegDriver(): FFMpegDriver
+    public function getFFMpegDriver() : FFMpegDriver
     {
         return $this->driver;
     }
@@ -93,7 +93,7 @@ class FFMpeg
      * @return Audio|Video
      * @throws InvalidArgumentException
      */
-    public function open(string $pathfile): Audio
+    public function open(string $pathfile) : Audio
     {
         if (($streams = $this->ffprobe->streams($pathfile)) === null) {
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
@@ -118,7 +118,7 @@ class FFMpeg
      * @param  FFProbe                      $probe
      * @return FFMpeg
      */
-    public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null): FFMpeg
+    public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null) : FFMpeg
     {
         if ($probe === null) {
             $probe = FFProbe::create($configuration, $logger, null);

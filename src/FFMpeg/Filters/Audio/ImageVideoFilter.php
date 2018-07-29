@@ -29,7 +29,9 @@ class ImageVideoFilter implements AudioFilterInterface
 {
     use TPriorityFilter;
 
-    protected const FFMPEG_PRESETS = [ 'ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow' ];
+    protected const FFMPEG_PRESETS = [
+        'ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow'
+    ];
 
     /**
      * @var string
@@ -47,20 +49,25 @@ class ImageVideoFilter implements AudioFilterInterface
     public function __construct(string $artwork, string $preset, int $priority = 10)
     {
         $this->artwork = $artwork;
-        $this->preset = $preset;
         $this->priority = $priority;
+
+        if (!in_array($this->preset, self::FFMPEG_PRESETS)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Undefined Preset. Please pass a preset type (%s) to the method.',
+                    implode(', ', self::FFMPEG_PRESETS)
+                )
+            );
+        }
+        $this->preset = $preset;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function apply(Audio $audio, AudioInterface $format): array
+    public function apply(Audio $audio, AudioInterface $format) : array
     {
         $commands = ['-loop', '1', '-i', $this->artwork];
-
-        if (!in_array($this->preset, self::FFMPEG_PRESETS)) {
-            throw new InvalidArgumentException('Undefined Preset. Please pass a preset type to the method.');
-        }
 
         $commands[] = '-preset';
         $commands[] = $this->preset;

@@ -52,7 +52,7 @@ class WatermarkFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array
+    public function apply(Video $video, VideoInterface $format) : array
     {
         $position = isset($this->coordinates['position']) ? $this->coordinates['position'] : 'absolute';
 
@@ -81,6 +81,13 @@ class WatermarkFilter implements VideoFilterInterface
                 break;
         }
 
-        return ['-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s [out]', $this->watermarkPath, $x, $y)];
+        $videoFilter = sprintf(
+            'movie=%s [watermark]; [in][watermark] overlay=%s:%s [out]',
+            $this->watermarkPath,
+            $x,
+            $y
+        );
+
+        return ['-vf', $videoFilter];
     }
 }

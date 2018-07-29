@@ -140,16 +140,16 @@ abstract class AbstractVideo extends Audio
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+                $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
             }
         }
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+                $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
             }
         }
 
@@ -203,7 +203,7 @@ abstract class AbstractVideo extends Audio
         }
 
         // Merge Filters into one command
-        $videoFilterVars = $videoFilterProcesses = array();
+        $videoFilterVars = $videoFilterProcesses = [];
         for ($i = 0; $i < count($commands); $i++) {
             $command = $commands[$i];
             if ($command == '-vf') {
@@ -233,11 +233,13 @@ abstract class AbstractVideo extends Audio
         }
         $videoFilterCommands = $videoFilterVars;
         $lastInput = 'in';
+        $videoFilterProcessesCount = count($videoFilterProcesses);
+
         foreach ($videoFilterProcesses as $i => $process) {
             $command = '[' . $lastInput . ']';
             $command .= $process;
             $lastInput = 'p' . $i;
-            if ($i === (count($videoFilterProcesses) - 1)) {
+            if ($i === ($videoFilterProcessesCount - 1)) {
                 $command .= '[out]';
             } else {
                 $command .= '[' . $lastInput . ']';
@@ -255,7 +257,7 @@ abstract class AbstractVideo extends Audio
         $this->fs = FsManager::create();
         $this->fsId = uniqid('ffmpeg-passes');
         $passPrefix = $this->fs->createTemporaryDirectory(0777, 50, $this->fsId) . '/' . uniqid('pass-');
-        $passes = array();
+        $passes = [];
         $totalPasses = $format->getPasses();
 
         if (!$totalPasses) {

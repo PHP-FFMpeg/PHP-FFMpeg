@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -62,8 +63,12 @@ class ResizeFilter implements VideoFilterInterface
      */
     private $priority;
 
-    public function __construct(Dimension $dimension, string $mode = self::RESIZEMODE_FIT, bool $forceStandards = true, int $priority = 0)
-    {
+    public function __construct(
+        Dimension $dimension,
+        string $mode = self::RESIZEMODE_FIT,
+        bool $forceStandards = true,
+        int $priority = 0
+    ) {
         $this->dimension = $dimension;
         $this->mode = $mode;
         $this->forceStandards = $forceStandards;
@@ -97,7 +102,7 @@ class ResizeFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array
+    public function apply(Video $video, VideoInterface $format) : array
     {
         $dimensions = null;
         $commands = [];
