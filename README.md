@@ -564,12 +564,12 @@ class CustomWMVFormat extends FFMpeg\Format\Video\DefaultVideo
 
     public function getAvailableAudioCodecs()
     {
-        return array('wmav2');
+        return ['wmav2'];
     }
 
     public function getAvailableVideoCodecs()
     {
-        return array('wmv2');
+        return ['wmv2'];
     }
 }
 ```

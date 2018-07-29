@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -205,12 +206,12 @@ class FFProbe
      *
      * @param string $pathfile
      *
-     * @return Format A Format object
+     * @return Format|StreamCollection
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function format($pathfile) : Format
+    public function format(string $pathfile)
     {
         return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
     }

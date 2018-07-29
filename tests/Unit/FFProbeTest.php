@@ -61,7 +61,7 @@ class FFProbeTest extends TestCase
         $format = $this->getFormatMock();
 
         return [
-            [$stream, 'streams',['-show_streams', '-print_format'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams', '-print_format', 'json'], false],
+            [$stream, 'streams', ['-show_streams', '-print_format'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams', '-print_format', 'json'], false],
             [$format, 'format', ['-show_format', '-print_format'], FFProbe::TYPE_FORMAT, [__FILE__, '-show_format', '-print_format', 'json'], false],
             [$stream, 'streams', ['-show_streams'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams'], true],
             [$format, 'format', ['-show_format'], FFProbe::TYPE_FORMAT, [__FILE__, '-show_format'], true],
@@ -71,7 +71,8 @@ class FFProbeTest extends TestCase
     /**
      * @dataProvider provideDataWhitoutCache
      */
-    public function testProbeWithoutCache($output, $method, $commands, $type, $caughtCommands, $isRaw) {
+    public function testProbeWithoutCache($output, $method, $commands, $type, $caughtCommands, $isRaw)
+    {
         $pathfile = __FILE__;
         $data = ['key' => 'value'];
         $rawData = 'raw data';
@@ -123,7 +124,8 @@ class FFProbeTest extends TestCase
         $this->assertEquals($output, call_user_func([$ffprobe, $method], $pathfile));
     }
 
-    public function provideDataForInvalidJson() {
+    public function provideDataForInvalidJson()
+    {
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
 
@@ -147,7 +149,7 @@ class FFProbeTest extends TestCase
         $mapper->expects($this->once())
             ->method('map')
             ->with($this->isType('string'), 'good data parsed')
-			->will($this->returnValue([$output]));
+            ->will($this->returnValue([$output]));
 
         $parser = $this->getFFProbeParserMock();
         $parser->expects($this->once())
@@ -210,7 +212,7 @@ class FFProbeTest extends TestCase
             ->will($this->returnValue(true));
         $cache->expects($this->once())
             ->method('get')
-            ->will($this->returnValue(new StreamCollection($output)));
+            ->will($this->returnValue(new StreamCollection([$output])));
         $cache->expects($this->never())
             ->method('set');
 

@@ -90,6 +90,9 @@ class TimeCode
         return new static($hours, $minutes, $seconds, $frames);
     }
 
+    // FIXME: Either `fromSeconds` or `toSeconds` is calculating junk in terms of
+    // seconds -> frames OR frames -> seconds
+
     /**
      * Creates timecode from number of seconds.
      *

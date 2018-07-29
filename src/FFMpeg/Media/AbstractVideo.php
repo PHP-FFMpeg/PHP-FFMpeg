@@ -50,7 +50,7 @@ abstract class AbstractVideo extends Audio
      * @inheritDoc
      * @return Video
      */
-    public function addFilter(FilterInterface $filter)
+    public function addFilter(FilterInterface $filter) : MediaTypeInterface
     {
         $this->filters->add($filter);
 
@@ -215,7 +215,7 @@ abstract class AbstractVideo extends Audio
             $command = $commands[$i];
             if ($command == '-vf') {
                 $commandSplits = explode(";", $commands[$i + 1]);
-                if (count($commandSplits) == 1) {
+                if (count($commandSplits) === 1) {
                     $commandSplit = $commandSplits[0];
                     $command = trim($commandSplit);
                     if (preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match)) {
@@ -290,12 +290,12 @@ abstract class AbstractVideo extends Audio
     }
 
     /**
-     * Return base part of command.
+     * Returns base part of command.
      *
-     * @return array
+     * @return string[]
      */
-    protected function basePartOfCommand()
+    protected function basePartOfCommand() : array
     {
-        return array('-y', '-i', $this->pathfile);
+        return ['-y', '-i', $this->pathfile];
     }
 }

@@ -51,11 +51,12 @@ class ImageVideoFilter implements AudioFilterInterface
         $this->artwork = $artwork;
         $this->priority = $priority;
 
-        if (!in_array($this->preset, self::FFMPEG_PRESETS)) {
+        if (!in_array($preset, self::FFMPEG_PRESETS)) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'Undefined Preset. Please pass a preset type (%s) to the method.',
-                    implode(', ', self::FFMPEG_PRESETS)
+                    'Undefined preset (%s) given. Please pass a preset type ("%s") to the method.',
+                    $this->preset,
+                    implode('", "', self::FFMPEG_PRESETS)
                 )
             );
         }

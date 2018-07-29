@@ -47,7 +47,7 @@ class Mapper implements MapperInterface
 
     private function mapStreams(array $data)
     {
-        $streams = new StreamCollection;
+        $streams = new StreamCollection();
 
         foreach ($data['streams'] as $properties) {
             $streams->add(new Stream($properties));
