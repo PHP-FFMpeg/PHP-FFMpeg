@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -42,7 +43,7 @@ class Concat extends AbstractMediaType
      */
     public function __construct(array $sources, FFMpegDriver $driver, FFProbe $ffprobe)
     {
-        if (count($sources) === 0) {
+        if (empty($sources)) {
             throw new InvalidArgumentException('No sources given');
         }
 
@@ -55,7 +56,7 @@ class Concat extends AbstractMediaType
      *
      * @return string[]
      */
-    public function getSources()
+    public function getSources() : array
     {
         return $this->sources;
     }
@@ -65,7 +66,7 @@ class Concat extends AbstractMediaType
      *
      * @return ConcatFilters
      */
-    public function filters()
+    public function filters() : ConcatFilters
     {
         return new ConcatFilters($this);
     }
@@ -75,7 +76,7 @@ class Concat extends AbstractMediaType
      *
      * @return Concat
      */
-    public function addFilter(ConcatFilterInterface $filter)
+    public function addFilter(ConcatFilterInterface $filter) : self
     {
         $this->filters->add($filter);
 
@@ -92,12 +93,8 @@ class Concat extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function saveFromSameCodecs(string $outputPathfile, bool $streamCopy = true): self
+    public function saveFromSameCodecs(string $outputPathfile, bool $streamCopy = true) : self
     {
-        if (!(is_array($this->sources) && count($this->sources))) {
-            throw new InvalidArgumentException('The list of videos is not a valid array.');
-        }
-
         /**
          * @see https://ffmpeg.org/ffmpeg-formats.html#concat
          * @see https://trac.ffmpeg.org/wiki/Concatenate
@@ -114,19 +111,19 @@ class Concat extends AbstractMediaType
             throw new ExecutionFailureException('Cannot open the temporary file.');
         }
 
-        $videoCount = 0;
+        $prependNewline = false;
         foreach ($this->sources as $videoPath) {
             $line = "";
 
-            if ($videoCount !== 0) {
-                $line .= "\n";
+            if ($prependNewline) {
+                $line = "\n";
             }
 
             $line .= "file {$videoPath}";
 
             fwrite($fileStream, $line);
 
-            $videoCount++;
+            $prependNewline = true;
         }
 
         fclose($fileStream);
@@ -157,7 +154,8 @@ class Concat extends AbstractMediaType
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($outputPathfile);
             throw new RuntimeException('Unable to save concatenated video', $e->getCode(), $e);
-        } finally {
+        }
+        finally {
             $this->cleanupTemporaryFile($sourcesFile);
         }
 
@@ -180,11 +178,6 @@ class Concat extends AbstractMediaType
          * @see https://trac.ffmpeg.org/wiki/Concatenate
          */
 
-        // Check the validity of the parameter
-        if (!(is_array($this->sources) && count($this->sources))) {
-            throw new InvalidArgumentException('The list of videos is not a valid array.');
-        }
-
         // Create the commands variable
         $commands = [];
 
@@ -206,10 +199,10 @@ class Concat extends AbstractMediaType
         $commands[] = '-filter_complex';
 
         $complex_filter = '';
-        for ($i=0; $i < $nbSources; $i++) {
-            $complex_filter .= '['.$i.':v:0] ['.$i.':a:0] ';
+        for ($i = 0; $i < $nbSources; $i++) {
+            $complex_filter .= '[' . $i . ':v:0] [' . $i . ':a:0] ';
         }
-        $complex_filter .= 'concat=n='.$nbSources.':v=1:a=1 [v] [a]';
+        $complex_filter .= 'concat=n=' . $nbSources . ':v=1:a=1 [v] [a]';
 
         $commands[] = $complex_filter;
         $commands[] = '-map';
@@ -262,8 +255,6 @@ class Concat extends AbstractMediaType
 
         // Set the output file in the command
         $commands[] = $outputPathfile;
-
-        $failure = null;
 
         try {
             $this->driver->command($commands);
