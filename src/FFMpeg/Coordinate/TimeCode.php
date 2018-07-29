@@ -16,34 +16,34 @@ use FFMpeg\Exception\InvalidArgumentException;
 class TimeCode
 {
     /**
-     * @var float
+     * @var int
      */
     private $hours;
 
     /**
-     * @var float
+     * @var int
      */
     private $minutes;
 
     /**
-     * @var float
+     * @var int
      */
     private $seconds;
 
     /**
-     * @var float
+     * @var int
      */
     private $frames;
 
     /**
      * Creates a new timecode based on absolutate numbers.
      *
-     * @param float $hours   Absolute number of hours
-     * @param float $minutes Absolute number of minutes
-     * @param float $seconds Absolute number of seconds
-     * @param float $frames  Absolute number of frames
+     * @param int $hours   Absolute number of hours
+     * @param int $minutes Absolute number of minutes
+     * @param int $seconds Absolute number of seconds
+     * @param int $frames  Absolute number of frames
      */
-    public function __construct(float $hours, float $minutes, float $seconds, float $frames)
+    public function __construct(int $hours, int $minutes, int $seconds, int $frames)
     {
         $this->hours = $hours;
         $this->minutes = $minutes;
