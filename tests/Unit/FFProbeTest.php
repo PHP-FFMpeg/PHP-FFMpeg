@@ -148,13 +148,13 @@ class FFProbeTest extends TestCase
         $mapper = $this->getFFProbeMapperMock();
         $mapper->expects($this->once())
             ->method('map')
-            ->with($this->isType('string'), 'good data parsed')
+            ->with(['good data parsed'])
             ->will($this->returnValue([$output]));
 
         $parser = $this->getFFProbeParserMock();
         $parser->expects($this->once())
             ->method('parse')
-            ->with($this->isType('string', json_encode($data) . 'lala'))
+            ->with([json_encode($data) . 'lala'])
             ->will($this->returnValue(['good data parsed']));
 
         $tester = $this->getFFProbeOptionsTesterMockWithOptions($commands);
@@ -182,7 +182,7 @@ class FFProbeTest extends TestCase
 
     public function provideProbingDataWithCache()
     {
-        $stream = $this->getStreamMock();
+        $stream = $this->getStreamCollectionMock();
         $format = $this->getFormatMock();
 
         return [
@@ -212,7 +212,7 @@ class FFProbeTest extends TestCase
             ->will($this->returnValue(true));
         $cache->expects($this->once())
             ->method('get')
-            ->will($this->returnValue(new StreamCollection([$output])));
+            ->will($this->returnValue($output));
         $cache->expects($this->never())
             ->method('set');
 

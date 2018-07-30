@@ -236,7 +236,7 @@ class Concat extends AbstractMediaType
         }
 
         if ($format instanceof AudioInterface) {
-            if (null !== $format->getAudioKiloBitrate()) {
+            if ($format->getAudioKiloBitrate()) {
                 $commands[] = '-b:a';
                 $commands[] = $format->getAudioKiloBitrate() . 'k';
             }

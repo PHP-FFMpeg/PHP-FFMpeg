@@ -50,12 +50,14 @@ class AudioProgressListenerTest extends TestCase
             }
             ++$numberListenerIsCalled;
         });
+
         // first one does not trigger progress event
         $listener->handle('any-type' . mt_rand(), $data);
-        usleep(250);
+        usleep(125);
         $listener->handle('any-type' . mt_rand(), $data);
-        usleep(250);
+        usleep(125);
         $listener->handle('any-type' . mt_rand(), $data2);
+
         $this->assertEquals(2, $numberListenerIsCalled);
     }
 

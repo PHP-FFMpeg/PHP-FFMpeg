@@ -206,12 +206,12 @@ class FFProbe
      *
      * @param string $pathfile
      *
-     * @return Format|StreamCollection
+     * @return Format
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function format(string $pathfile)
+    public function format(string $pathfile) : Format
     {
         return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
     }
@@ -293,7 +293,7 @@ class FFProbe
         $parseIsToDo = false;
 
         if ($allowJson && $this->optionsTester->has('-print_format')) {
-            // allowed in latest PHP-FFmpeg version
+            // allowed in latest ffmpeg version
             $commands[] = '-print_format';
             $commands[] = 'json';
         } elseif ($allowJson && $this->optionsTester->has('-of')) {

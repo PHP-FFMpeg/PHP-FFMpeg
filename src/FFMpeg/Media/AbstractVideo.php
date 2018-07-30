@@ -1,4 +1,6 @@
 <?php
+declare (strict_types = 1);
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -122,7 +124,7 @@ abstract class AbstractVideo extends Audio
      */
     public function getFinalCommand(FormatInterface $format, $outputPathfile)
     {
-        $finalCommands = array();
+        $finalCommands = [];
 
         foreach ($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
             $finalCommands[] = implode(' ', $passCommands);
@@ -190,7 +192,7 @@ abstract class AbstractVideo extends Audio
         }
 
         if ($format instanceof AudioInterface) {
-            if (null !== $format->getAudioKiloBitrate()) {
+            if ($format->getAudioKiloBitrate()) {
                 $commands[] = '-b:a';
                 $commands[] = $format->getAudioKiloBitrate() . 'k';
             }
@@ -213,7 +215,7 @@ abstract class AbstractVideo extends Audio
         $videoFilterVars = $videoFilterProcesses = [];
         for ($i = 0; $i < count($commands); $i++) {
             $command = $commands[$i];
-            if ($command == '-vf') {
+            if ($command === '-vf') {
                 $commandSplits = explode(";", $commands[$i + 1]);
                 if (count($commandSplits) === 1) {
                     $commandSplit = $commandSplits[0];

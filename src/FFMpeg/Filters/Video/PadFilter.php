@@ -60,7 +60,7 @@ class PadFilter implements VideoFilterInterface
 
         // cleaned up to obey codestyle.
         $padFilterPart1 = 'scale=iw*min(' . $width . '/iw\,' . $height . '/ih):';
-        $padFilterPart2 = ':ih*min(' . $width . '/iw\,' . $height . '/ih),';
+        $padFilterPart2 = 'ih*min(' . $width . '/iw\,' . $height . '/ih),';
         $padFilterPart3 = 'pad=' . $width . ':' . $height . ':(' . $width . '-iw)/2:(' . $height . '-ih)/2';
 
         $commands[] = $padFilterPart1 . $padFilterPart2 . $padFilterPart3;

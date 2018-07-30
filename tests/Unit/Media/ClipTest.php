@@ -35,13 +35,7 @@ class ClipTest extends AbstractMediaTestCase
 
         $outputPathfile = '/target/file';
 
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
-        $format->expects($this->any())
-            ->method('getPasses')
-            ->will($this->returnValue(1));
-        $format->expects($this->any())
-            ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+        $format = $this->getVideoInterfaceMock();
 
         $clip = new Clip($this->getVideoMock(__FILE__), $driver, $ffprobe, $start, $duration);
         $fc = $clip->getFinalCommand($format, $outputPathfile);
@@ -52,16 +46,22 @@ class ClipTest extends AbstractMediaTestCase
 
     public function provideBuildOptions()
     {
-        return array(
-            array('SS01', null, array(
+        return [
+            [
+                'SS01', null,
+                [
                     '-y', '-ss', 'SS01',
-                    '-i', __FILE__)
-            ),
-            array('SS02', 'D02', array(
+                    '-i', __FILE__
+                ]
+            ],
+            [
+                'SS02', 'D02',
+                [
                     '-y', '-ss', 'SS02',
                     '-i', __FILE__,
-                    '-t', 'D02')
-            )
-        );
+                    '-t', 'D02'
+                ]
+            ]
+        ];
     }
 }

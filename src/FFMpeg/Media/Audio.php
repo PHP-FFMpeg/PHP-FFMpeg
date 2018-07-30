@@ -39,7 +39,7 @@ class Audio extends AbstractStreamableMedia
      *
      * @return self
      */
-    public function addFilter(FilterInterface $filter): MediaTypeInterface
+    public function addFilter(FilterInterface $filter) : MediaTypeInterface
     {
         if (!($filter instanceof AudioFilterInterface)) {
             throw new InvalidArgumentException('Audio only accepts AudioFilterInterface filters');
@@ -117,7 +117,7 @@ class Audio extends AbstractStreamableMedia
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        if (null !== $format->getAudioKiloBitrate()) {
+        if ($format->getAudioKiloBitrate()) {
             $commands[] = '-b:a';
             $commands[] = $format->getAudioKiloBitrate() . 'k';
         }
@@ -137,7 +137,7 @@ class Audio extends AbstractStreamableMedia
      * @param  integer $height
      * @return Waveform
      */
-    public function waveform(int $width = 640, int $height = 120): Waveform
+    public function waveform(int $width = 640, int $height = 120) : Waveform
     {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height);
     }
