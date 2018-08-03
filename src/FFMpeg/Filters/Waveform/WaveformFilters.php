@@ -28,11 +28,9 @@ class WaveformFilters
     /**
      * Sets the downmix of the output waveform.
      *
-     * If you want a simpler waveform, sets the downmix to TRUE.
-     *
      * @return WaveformFilters
      */
-    public function setDownmix(): WaveformFilters
+    public function setDownmix() : WaveformFilters
     {
         $this->waveform->addFilter(new WaveformDownmixFilter());
 

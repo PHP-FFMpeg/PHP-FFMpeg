@@ -12,12 +12,12 @@ class StreamCollectionTest extends TestCase
     {
         $stream = $this->getStreamMock();
 
-        $collection = new StreamCollection;
+        $collection = new StreamCollection();
 
         $collection->add($stream);
         $collection->add($stream);
 
-        $this->assertEquals([$stream], $collection->getUniqueStreams()->all());
+        $this->assertEquals([$stream], $collection->getUniqueStreams()->getAllStreams());
     }
 
     public function testAdd()
@@ -25,11 +25,11 @@ class StreamCollectionTest extends TestCase
         $stream = $this->getStreamMock();
 
         $collection = new StreamCollection;
-        $this->assertEquals([], $collection->all());
+        $this->assertEquals([], $collection->getAllStreams());
         $collection->add($stream);
-        $this->assertEquals([$stream], $collection->all());
+        $this->assertEquals([$stream], $collection->getAllStreams());
         $collection->add($stream);
-        $this->assertEquals([$stream, $stream], $collection->all());
+        $this->assertEquals([$stream, $stream], $collection->getAllStreams());
     }
 
     public function testVideos()
@@ -45,11 +45,11 @@ class StreamCollectionTest extends TestCase
             ->will($this->returnValue(true));
 
         $collection = new StreamCollection([$audio, $video]);
-        $videos = $collection->videos();
+        $videos = $collection->getVideoStreams();
 
         $this->assertInstanceOf(StreamCollection::class, $videos);
         $this->assertCount(1, $videos);
-        $this->assertEquals([$video], $videos->all());
+        $this->assertEquals([$video], $videos->getAllStreams());
     }
 
     public function testAudios()
@@ -65,11 +65,11 @@ class StreamCollectionTest extends TestCase
             ->will($this->returnValue(false));
 
         $collection = new StreamCollection([$audio, $video]);
-        $audios = $collection->audios();
+        $audios = $collection->getAudioStreams();
 
         $this->assertInstanceOf(StreamCollection::class, $audios);
         $this->assertCount(1, $audios);
-        $this->assertEquals([$audio], $audios->all());
+        $this->assertEquals([$audio], $audios->getAllStreams());
     }
 
     public function testCount()
@@ -90,6 +90,20 @@ class StreamCollectionTest extends TestCase
         $this->assertCount(2, $collection->getIterator());
     }
 
+    public function testEmptyCollectionIsStillWorking()
+    {
+        $collection = new StreamCollection([]);
+
+        foreach (['getAudioStreams', 'getUniqueStreams', 'getVideoStreams'] as $method) {
+            $emptyCollection = $collection->$method();
+
+            $this->assertInstanceOf(StreamCollection::class, $emptyCollection);
+            $this->assertInstanceOf(\Iterator::class, $emptyCollection->getIterator());
+            $this->assertCount(0, $emptyCollection);
+            $this->assertEmpty($collection->getAllStreams());
+        }
+    }
+
     public function testFirst()
     {
         $stream1 = $this->getStreamMock();
@@ -97,6 +111,13 @@ class StreamCollectionTest extends TestCase
 
         $coll = new StreamCollection([$stream1, $stream2]);
 
-        $this->assertSame($stream1, $coll->getFirstStream()());
+        $this->assertSame($stream1, $coll->getFirstStream());
+    }
+
+    public function testFirstIsNullWhenCollectionIsEmpty()
+    {
+        $collection = new StreamCollection([]);
+
+        $this->assertNull($collection->getFirstStream());
     }
 }

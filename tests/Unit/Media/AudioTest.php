@@ -137,7 +137,7 @@ class AudioTest extends AbstractStreamableTestCase
     /**
      * @dataProvider provideSaveData
      */
-    public function testSaveShouldSave($threads, $expectedCommands, $expectedListeners, $format)
+    public function testSaveShouldSave(bool $threads, array $expectedCommands, ? array $expectedListeners, $format)
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
@@ -156,7 +156,7 @@ class AudioTest extends AbstractStreamableTestCase
         $configuration->expects($this->once())
             ->method('get')
             ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue($threads ? '24' : '2'));
+            ->will($this->returnValue($threads ? : '2'));
 
         $capturedCommand = $capturedListeners = null;
 
@@ -177,7 +177,7 @@ class AudioTest extends AbstractStreamableTestCase
         $this->assertEquals($expectedListeners, $capturedListeners);
     }
 
-    public function provideSaveData()
+    public function provideSaveData() : array
     {
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $format->expects($this->any())
@@ -217,7 +217,7 @@ class AudioTest extends AbstractStreamableTestCase
 
         $listeners = [$this->getMockBuilder(\Alchemy\BinaryDriver\Listeners\ListenerInterface::class)->getMock()];
 
-        $progressableFormat = $this->getMockBuilder('Tests\FFMpeg\Unit\Media\AudioProg')
+        $progressableFormat = $this->getMockBuilder(\Tests\FFMpeg\Unit\Media\AudioProg::class)
             ->disableOriginalConstructor()->getMock();
         $progressableFormat->expects($this->any())
             ->method('getExtraParams')
@@ -232,60 +232,60 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getAudioChannels')
             ->will($this->returnValue(5));
 
-        return array(
-            array(false, array(
+        return [
+            [false, [
                 '-y', '-i', __FILE__,
                 '-threads', '2',
                 '-b:a', '663k',
                 '-ac', '5',
                 '/target/file',
-            ), null, $format),
-            array(false, array(
+            ], null, $format],
+            [false, [
                 '-y', '-i', __FILE__,
                 '-threads', '2',
                 '-acodec', 'patati-patata-audio',
                 '-b:a', '664k',
                 '-ac', '5',
                 '/target/file',
-            ), null, $audioFormat),
-            array(false, array(
+            ], null, $audioFormat],
+            [false, [
                 '-y', '-i', __FILE__,
                 '-threads', '2',
                 'extra', 'param',
                 '-b:a', '665k',
                 '-ac', '5',
                 '/target/file',
-            ), null, $formatExtra),
-            array(true, array(
+            ], null, $formatExtra],
+            [true, [
                 '-y', '-i', __FILE__,
-                '-threads', 24,
+                '-threads', '24',
                 '-b:a', '663k',
                 '-ac', '5',
                 '/target/file',
-            ), null, $format),
-            array(true, array(
+            ], null, $format],
+            [true, [
                 '-y', '-i', __FILE__,
                 '-threads', '2',
                 'extra', 'param',
                 '-b:a', '665k',
                 '-ac', '5',
                 '/target/file',
-            ), null, $formatExtra),
-            array(false, array(
+            ], null, $formatExtra],
+            [false, [
                 '-y', '-i', __FILE__,
-                '-threads', 24,
+                '-threads', '24',
                 '-b:a', '666k',
                 '-ac', '5',
                 '/target/file',
-            ), $listeners, $progressableFormat),
-            array(true, array(
+            ], $listeners, $progressableFormat],
+            [true, [
                 '-y', '-i', __FILE__,
-                '-threads', 24,
+                '-threads', '24',
                 '-b:a', '666k',
                 '-ac', '5',
                 '/target/file',
-            ), $listeners, $progressableFormat),
-        );
+            ], $listeners, $progressableFormat],
+        ];
     }
 
     public function testSaveShouldNotStoreCodecFiltersInTheMedia()

@@ -32,6 +32,13 @@ class AudioFilters
         $this->media = $media;
     }
 
+    /**
+     * Adds a user-specified filter to the list of filters.
+     *
+     * @param string[] $filters
+     *
+     * @return self
+     */
     public function simple(array $filters) : self
     {
         $this->media->addFilter(new SimpleFilter($filters));

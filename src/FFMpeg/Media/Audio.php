@@ -122,7 +122,7 @@ class Audio extends AbstractStreamableMedia
         }
         if (null !== $format->getAudioChannels()) {
             $commands[] = '-ac';
-            $commands[] = $format->getAudioChannels();
+            $commands[] = (string)$format->getAudioChannels();
         }
         $commands[] = $outputPathfile;
 

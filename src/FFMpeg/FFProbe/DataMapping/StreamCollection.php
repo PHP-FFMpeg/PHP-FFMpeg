@@ -105,7 +105,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      */
     public function getUniqueStreams() : StreamCollection
     {
-        if (null !== $this->uniqueStreams) {
+        if (null === $this->uniqueStreams) {
             $this->uniqueStreams = [];
 
             $serializedStreams = array_map(
@@ -126,7 +126,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
         }
 
 
-        return new static($this->uniqueStreams);
+        return new static($this->uniqueStreams ? : []);
     }
 
     /**
@@ -137,7 +137,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      */
     public function getVideoStreams() : StreamCollection
     {
-        if (null !== $this->videoStreams) {
+        if (null === $this->videoStreams) {
             $this->videoStreams = [];
             $this->videoStreams = array_filter(
                 $this->streams,
@@ -147,7 +147,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
             );
         }
 
-        return new static($this->videoStreams);
+        return new static($this->videoStreams ? : []);
     }
 
     /**
@@ -157,7 +157,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      */
     public function getAudioStreams() : StreamCollection
     {
-        if (null !== $this->audioStreams) {
+        if (null === $this->audioStreams) {
             $this->audioStreams = [];
             $this->audioStreams = array_filter(
                 $this->streams,
@@ -167,7 +167,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
             );
         }
 
-        return new static($this->audioStreams);
+        return new static($this->audioStreams ? : []);
     }
 
     /**
@@ -183,7 +183,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return Stream[]
      */
-    public function all() : array
+    public function getAllStreams() : array
     {
         return $this->streams;
     }

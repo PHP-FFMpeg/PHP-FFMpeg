@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -30,33 +31,20 @@ class WaveformDownmixFilter implements WaveformFilterInterface
      */
     private $priority;
 
-    // By default, the downmix value is set to FALSE.
-    public function __construct(bool $downmix = false, int $priority = 0)
+    public function __construct(int $priority = 0)
     {
-        $this->downmix = $downmix;
         $this->setPriority($priority);
     }
 
     /**
      * @inheritDoc
      */
-    public function getDownmix(): bool
-    {
-        return $this->downmix;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function apply(Waveform $waveform): array
+    public function apply(Waveform $waveform) : array
     {
         $commands = [];
 
-        // If the downmix parameter is set to true, we add an option to the FFMPEG command
-        if ($this->downmix) {
-            foreach ($waveform->getAudio()->getStreams()->audios() as $stream) {
-                $commands[] = '"aformat=channel_layouts=mono"';
-            }
+        foreach ($waveform->getAudio()->getStreams()->getAudioStreams() as $stream) {
+            $commands[] = '"aformat=channel_layouts=mono"';
         }
 
         return $commands;

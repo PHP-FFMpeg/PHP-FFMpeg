@@ -107,7 +107,7 @@ class ResizeFilter implements VideoFilterInterface
         $dimensions = null;
         $commands = [];
 
-        foreach ($video->getStreams()->videos() as $stream) {
+        foreach ($video->getStreams()->getVideoStreams() as $stream) {
             // poll as long as we get proper dimensions
             try {
                 $dimensions = $stream->getDimensions();

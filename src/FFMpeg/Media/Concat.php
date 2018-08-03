@@ -240,7 +240,7 @@ class Concat extends AbstractMediaType
             }
             if (null !== $format->getAudioChannels()) {
                 $commands[] = '-ac';
-                $commands[] = $format->getAudioChannels();
+                $commands[] = (string)$format->getAudioChannels();
             }
         }
 

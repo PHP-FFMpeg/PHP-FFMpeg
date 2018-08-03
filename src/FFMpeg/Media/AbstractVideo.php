@@ -196,7 +196,7 @@ abstract class AbstractVideo extends Audio
             }
             if (null !== $format->getAudioChannels()) {
                 $commands[] = '-ac';
-                $commands[] = $format->getAudioChannels();
+                $commands[] = (string)$format->getAudioChannels();
             }
         }
 

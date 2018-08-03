@@ -484,8 +484,8 @@ To concatenate videos encoded with the same codec, do as follow:
 // We recommand that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 $video
-    ->concat(array('/path/to/video1', '/path/to/video2'))
-    ->saveFromSameCodecs('/path/to/new_file', TRUE);
+    ->concat(['/path/to/video1', '/path/to/video2'])
+    ->saveFromSameCodecs('/path/to/new_file', true);
 ```
 
 The boolean parameter of the save function allows you to use the copy parameter which accelerates drastically the generation of the encoded file.

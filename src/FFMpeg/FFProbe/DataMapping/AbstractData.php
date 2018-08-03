@@ -86,7 +86,7 @@ abstract class AbstractData implements \Countable
      *
      * @return mixed[][]
      */
-    public function all() : array
+    public function getAllData() : array
     {
         return $this->properties;
     }

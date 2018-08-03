@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\FFProbe\DataMapping;
 
@@ -20,7 +21,7 @@ class StreamTest extends TestCase
     public function provideAudioCases()
     {
         return [
-            [true,  ['codec_type' => 'audio']],
+            [true, ['codec_type' => 'audio']],
             [false, ['codec_type' => 'video']],
         ];
     }
@@ -37,8 +38,8 @@ class StreamTest extends TestCase
     public function provideVideoCases()
     {
         return [
-            [true,     ['codec_type' => 'video']],
-            [false,    ['codec_type' => 'audio']],
+            [true, ['codec_type' => 'video']],
+            [false, ['codec_type' => 'audio']],
         ];
     }
 
@@ -72,8 +73,8 @@ class StreamTest extends TestCase
     public function provideInvalidPropertiesForDimensionsExtraction()
     {
         return [
-            ['codec_type' => 'video', 'width' => 960   ],
-            ['codec_type' => 'video', 'height' => 960  ],
+            ['codec_type' => 'video', 'width' => 960],
+            ['codec_type' => 'video', 'height' => 960],
         ];
     }
 
@@ -85,9 +86,9 @@ class StreamTest extends TestCase
         $stream = new Stream([
             'codec_type' => 'video',
             'width' => $data['width'],
-            'height' =>  $data['height'],
-            'sample_aspect_ratio' =>  $data['sar'],
-            'display_aspect_ratio' =>  $data['dar']
+            'height' => $data['height'],
+            'sample_aspect_ratio' => $data['sar'],
+            'display_aspect_ratio' => $data['dar']
         ]);
         $this->assertEquals(new Dimension($data['result_width'], $data['result_height']), $stream->getDimensions());
     }
@@ -103,31 +104,39 @@ class StreamTest extends TestCase
 
     public function provideInvalidRatios()
     {
-        return array(array('0:1'), array('2:1:3'));
+        return [['0:1'], ['2:1:3']];
     }
 
     public function providePropertiesForDimensionsExtraction()
     {
         return array(
             array(
-                array('width' => '960', 'height' => '720',
-                'sar' => '4:3', 'dar' => '16:9',
-                'result_width' => '1280', 'result_height' => '720'),
+                array(
+                    'width' => 960, 'height' => 720,
+                    'sar' => '4:3', 'dar' => '16:9',
+                    'result_width' => 1280, 'result_height' => 720
+                ),
             ),
             array(
-                array('width' => '1920', 'height' => '1080',
-                'sar' => '1:1', 'dar' => '16:9',
-                'result_width' => '1920', 'result_height' => '1080'),
+                array(
+                    'width' => 1920, 'height' => 1080,
+                    'sar' => '1:1', 'dar' => '16:9',
+                    'result_width' => 1920, 'result_height' => 1080
+                ),
             ),
             array(
-                array('width' => '640', 'height' => '480',
-                'sar' => '75:74', 'dar' => '50:37',
-                'result_width' => '649', 'result_height' => '480'),
+                array(
+                    'width' => 640, 'height' => 480,
+                    'sar' => '75:74', 'dar' => '50:37',
+                    'result_width' => 649, 'result_height' => 480
+                ),
             ),
             array(
-                array('width' => '720', 'height' => '576',
-                  'sar' => '52:28', 'dar' => '16:9',
-                  'result_width' => '1337', 'result_height' => '752'),
+                array(
+                    'width' => 720, 'height' => 576,
+                    'sar' => '52:28', 'dar' => '16:9',
+                    'result_width' => 1337, 'result_height' => 752
+                ),
             ),
         );
     }
