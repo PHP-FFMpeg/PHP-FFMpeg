@@ -45,7 +45,7 @@ class OptionsTester implements OptionsTesterInterface
      */
     public function has(string $optionName) : bool
     {
-        $id = sprintf('option-%s', $optionName);
+        $id = sprintf('php-ffmpeg-ffprobe-option-%s', $optionName);
 
         if ($this->cache->has($id)) {
             return $this->cache->get($id);

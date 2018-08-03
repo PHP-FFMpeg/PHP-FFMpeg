@@ -104,11 +104,13 @@ class Audio extends AbstractStreamableMedia
         $commands = ['-y', '-i', $this->pathfile];
 
         $filters = clone $this->filters;
-        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
+
+        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
+
         if (null !== $format->getAudioCodec()) {
             $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
         }

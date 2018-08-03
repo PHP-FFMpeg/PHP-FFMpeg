@@ -73,8 +73,8 @@ class FFProbe
         $this->ffprobe = $ffprobe;
         $this->codecTester = new CodecTester($ffprobe, $cache);
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
-        $this->parser = new OutputParser;
-        $this->mapper = new Mapper;
+        $this->parser = new OutputParser();
+        $this->mapper = new Mapper();
         $this->cache = $cache;
     }
 
@@ -333,6 +333,7 @@ class FFProbe
      *
      * @param  string $json The json encoded string to parse
      * @return mixed
+     * @throws RuntimeException When invalid json is supplied.
      * @see    json_decode()
      */
     private function parseJson(string $json)

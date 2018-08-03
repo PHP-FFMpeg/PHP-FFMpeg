@@ -214,11 +214,13 @@ class Concat extends AbstractMediaType
 
         // Prepare the filters
         $filters = clone $this->filters;
-        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
+
+        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
+
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
                 $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));

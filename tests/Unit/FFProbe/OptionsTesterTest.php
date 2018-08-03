@@ -102,12 +102,12 @@ class OptionsTesterTest extends TestCase
 
         $cache->expects($this->once())
             ->method('get')
-            ->with('option-' . $optionName)
+            ->with('php-ffmpeg-ffprobe-option-' . $optionName)
             ->will($this->returnValue($isPresent));
 
         $cache->expects($this->once())
             ->method('has')
-            ->with('option-' . $optionName)
+            ->with('php-ffmpeg-ffprobe-option-' . $optionName)
             ->will($this->returnValue(true));
 
         $ffprobe = $this->getFFProbeDriverMock();

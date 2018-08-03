@@ -235,53 +235,53 @@ class AudioTest extends AbstractStreamableTestCase
 
         return array(
             array(false, array(
-                    '-y', '-i', __FILE__,
-                    '-b:a', '663k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $format),
+                '-y', '-i', __FILE__,
+                '-b:a', '663k',
+                '-ac', '5',
+                '/target/file',
+            ), null, $format),
             array(false, array(
-                    '-y', '-i', __FILE__,
-                    '-acodec', 'patati-patata-audio',
-                    '-b:a', '664k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $audioFormat),
+                '-y', '-i', __FILE__,
+                '-acodec', 'patati-patata-audio',
+                '-b:a', '664k',
+                '-ac', '5',
+                '/target/file',
+            ), null, $audioFormat),
             array(false, array(
-                    '-y', '-i', __FILE__,
-                    'extra', 'param',
-                    '-b:a', '665k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $formatExtra),
+                '-y', '-i', __FILE__,
+                'extra', 'param',
+                '-b:a', '665k',
+                '-ac', '5',
+                '/target/file',
+            ), null, $formatExtra),
             array(true, array(
-                    '-y', '-i', __FILE__,
-                    '-threads', 24,
-                    '-b:a', '663k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $format),
+                '-y', '-i', __FILE__,
+                '-threads', 24,
+                '-b:a', '663k',
+                '-ac', '5',
+                '/target/file',
+            ), null, $format),
             array(true, array(
-                    '-y', '-i', __FILE__,
-                    'extra', 'param',
-                    '-threads', 24,
-                    '-b:a', '665k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $formatExtra),
+                '-y', '-i', __FILE__,
+                'extra', 'param',
+                '-threads', 24,
+                '-b:a', '665k',
+                '-ac', '5',
+                '/target/file',
+            ), null, $formatExtra),
             array(false, array(
-                    '-y', '-i', __FILE__,
-                    '-b:a', '666k',
-                    '-ac', '5',
-                    '/target/file',
-                ), $listeners, $progressableFormat),
+                '-y', '-i', __FILE__,
+                '-b:a', '666k',
+                '-ac', '5',
+                '/target/file',
+            ), $listeners, $progressableFormat),
             array(true, array(
-                    '-y', '-i', __FILE__,
-                    '-threads', 24,
-                    '-b:a', '666k',
-                    '-ac', '5',
-                    '/target/file',
-                ), $listeners, $progressableFormat),
+                '-y', '-i', __FILE__,
+                '-threads', 24,
+                '-b:a', '666k',
+                '-ac', '5',
+                '/target/file',
+            ), $listeners, $progressableFormat),
         );
     }
 
@@ -320,15 +320,15 @@ class AudioTest extends AbstractStreamableTestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array('param')));
+            ->will($this->returnValue(['param']));
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
         $audio->save($format, $outputPathfile);
         $audio->save($format, $outputPathfile);
 
-        $expected = array(
+        $expected = [
             '-y', '-i', __FILE__, 'param', '-threads', 24, '/target/file',
-        );
+        ];
 
         foreach ($capturedCommands as $capturedCommand) {
             $this->assertEquals($expected, $capturedCommand);
