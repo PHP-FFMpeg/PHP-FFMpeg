@@ -98,7 +98,11 @@ class StreamTest extends TestCase
      */
     public function testGetDimensionsFromVideoWithInvalidDisplayRatio($invalidRatio)
     {
-        $stream = new Stream(['codec_type' => 'video', 'width' => 960, 'height' => 720, 'sample_aspect_ratio' => $invalidRatio, 'display_aspect_ratio' => '16:9']);
+        $stream = new Stream([
+            'codec_type' => 'video', 'width' => 960,
+            'height' => 720, 'sample_aspect_ratio' => $invalidRatio,
+            'display_aspect_ratio' => '16:9'
+        ]);
         $this->assertEquals(new Dimension(960, 720), $stream->getDimensions());
     }
 
@@ -109,35 +113,35 @@ class StreamTest extends TestCase
 
     public function providePropertiesForDimensionsExtraction()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'width' => 960, 'height' => 720,
                     'sar' => '4:3', 'dar' => '16:9',
                     'result_width' => 1280, 'result_height' => 720
-                ),
-            ),
-            array(
-                array(
+                ],
+            ],
+            [
+                [
                     'width' => 1920, 'height' => 1080,
                     'sar' => '1:1', 'dar' => '16:9',
                     'result_width' => 1920, 'result_height' => 1080
-                ),
-            ),
-            array(
-                array(
+                ],
+            ],
+            [
+                [
                     'width' => 640, 'height' => 480,
                     'sar' => '75:74', 'dar' => '50:37',
                     'result_width' => 649, 'result_height' => 480
-                ),
-            ),
-            array(
-                array(
+                ],
+            ],
+            [
+                [
                     'width' => 720, 'height' => 576,
                     'sar' => '52:28', 'dar' => '16:9',
                     'result_width' => 1337, 'result_height' => 752
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

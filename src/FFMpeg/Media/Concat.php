@@ -156,8 +156,7 @@ class Concat extends AbstractMediaType
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($outputPathfile);
             throw new RuntimeException('Unable to save concatenated video', $e->getCode(), $e);
-        }
-        finally {
+        } finally {
             $this->cleanupTemporaryFile($sourcesFile);
         }
 

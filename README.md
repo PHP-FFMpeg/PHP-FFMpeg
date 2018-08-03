@@ -537,7 +537,7 @@ The argument of the setAdditionalParameters method is an array.
 
 ```php
 $format = new FFMpeg\Format\Video\X264();
-$format->setAdditionalParameters(array('foo', 'bar'));
+$format->setAdditionalParameters(['foo', 'bar']);
 $video->save($format, 'video.avi');
 ```
 
