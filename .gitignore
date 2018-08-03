@@ -63,3 +63,6 @@ phpunit.xml
 
 # Random test files
 test.php
+
+# local test file to work with resolving failing tests
+failedTests.txt
