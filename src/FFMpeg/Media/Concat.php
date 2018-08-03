@@ -181,7 +181,7 @@ class Concat extends AbstractMediaType
          */
 
         // Create the commands variable
-        $commands = [];
+        $commands = ['-threads', (string)$this->driver->getConfiguration()->get('ffmpeg.threads')];
 
         // Prepare the parameters
         $nbSources = 0;
@@ -214,10 +214,6 @@ class Concat extends AbstractMediaType
 
         // Prepare the filters
         $filters = clone $this->filters;
-
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
-        }
 
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 

@@ -19,7 +19,7 @@ class OptionsTesterTest extends TestCase
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->once())
             ->method('command')
-            ->with(array('-help', '-loglevel', 'quiet'))
+            ->with(['-help', '-loglevel', 'quiet'])
             ->will($this->throwException(new ExecutionFailureException('Failed to execute')));
 
         $tester = new OptionsTester($ffprobe, $cache);

@@ -69,12 +69,12 @@ paths explicitly, you can pass an array as configuration. A `Psr\Logger\LoggerIn
 can also be passed to log binary executions.
 
 ```php
-$ffmpeg = FFMpeg\FFMpeg::create(array(
+$ffmpeg = FFMpeg\FFMpeg::create([
     'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
     'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
     'timeout'          => 3600, // The timeout for the underlying process
     'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
-), $logger);
+], $logger);
 ```
 
 ### Manipulate media
@@ -92,7 +92,7 @@ ffmpeg -protocols
 To open a resource, use the `FFMpeg\FFMpeg::open` method.
 
 ```php
-$ffmpeg->open('video.mpeg');
+$ffmpeg->open('video.mp4');
 ```
 
 Two types of media can be resolved: `FFMpeg\Media\Audio` and `FFMpeg\Media\Video`.

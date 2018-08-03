@@ -254,7 +254,7 @@ class FFProbeTest extends TestCase
      */
     public function testCreate($logger, $conf, $cache)
     {
-        $finder = new ExecutableFinder;
+        $finder = new ExecutableFinder();
 
         $found = false;
         foreach (['avprobe', 'ffprobe'] as $name) {

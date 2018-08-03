@@ -29,6 +29,9 @@ class ImageVideoFilter implements AudioFilterInterface
 {
     use TPriorityFilter;
 
+    /**
+     * Presets of ffmpeg quality levels
+     */
     protected const FFMPEG_PRESETS = [
         'ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow'
     ];
@@ -54,7 +57,7 @@ class ImageVideoFilter implements AudioFilterInterface
         if (!in_array($preset, self::FFMPEG_PRESETS)) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'Undefined preset (%s) given. Please pass a preset type ("%s") to the method.',
+                    'Undefined preset (%s) given. Please pass a preset type (one of "%s") to this method.',
                     $this->preset,
                     implode('", "', self::FFMPEG_PRESETS)
                 )

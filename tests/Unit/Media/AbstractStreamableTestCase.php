@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\Media;
 
@@ -34,5 +35,11 @@ abstract class AbstractStreamableTestCase extends AbstractMediaTestCase
         $this->assertSame($streams, $media->getStreams());
     }
 
-    abstract protected function getClassName();
+    /**
+     * Returns the class name of this streamable media
+     * to test basic functionality.
+     *
+     * @return string
+     */
+    abstract protected function getClassName() : string;
 }

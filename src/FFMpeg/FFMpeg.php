@@ -100,7 +100,7 @@ class FFMpeg
      */
     public function open(string $pathfile) : Audio
     {
-        if (($streams = $this->ffprobe->streams($pathfile)) === null) {
+        if (null === ($streams = $this->ffprobe->streams($pathfile))) {
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
 
@@ -125,7 +125,7 @@ class FFMpeg
      */
     public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null) : FFMpeg
     {
-        if ($probe === null) {
+        if (null === $probe) {
             $probe = FFProbe::create($configuration, $logger, null);
         }
 

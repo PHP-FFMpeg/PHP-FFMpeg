@@ -32,6 +32,13 @@ class AudioFilters
         $this->media = $media;
     }
 
+    public function simple(array $filters) : self
+    {
+        $this->media->addFilter(new SimpleFilter($filters));
+
+        return $this;
+    }
+
     /**
      * Resamples the audio file.
      *
@@ -39,7 +46,7 @@ class AudioFilters
      *
      * @return AudioFilters
      */
-    public function resample(int $rate)
+    public function resample(int $rate) : self
     {
         $this->media->addFilter(new AudioResamplableFilter($rate));
 
@@ -60,8 +67,10 @@ class AudioFilters
      *                              * `year`: Year metadata
      *                              * `genre`: Genre metadata
      *                              * `description`: Description metadata
+     *
+     * @return AudioFilters
      */
-    public function addMetadata(?array $data = null)
+    public function addMetadata(? array $data = null) : self
     {
         $this->media->addFilter(new AddMetadataFilter($data));
 
@@ -72,10 +81,11 @@ class AudioFilters
      * Cuts the audio at `$start`, optionally define the end
      *
      * @param  TimeCode      $start    Where the clipping starts(seek to time)
-     * @param  TimeCode|null $duration How long the clipped audio should be
+     * @param  TimeCode|null $duration How long the clipped audio should be.
+     *
      * @return AudioFilters
      */
-    public function clip(TimeCode $start, ?TimeCode $duration = null)
+    public function clip(TimeCode $start, ? TimeCode $duration = null)
     {
         $this->media->addFilter(new AudioClipFilter($start, $duration));
 

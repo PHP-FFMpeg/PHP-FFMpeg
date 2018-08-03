@@ -1,0 +1,267 @@
+PHPUnit 6.5.9 by Sebastian Bergmann and contributors.
+
+....................................................SSSSSSSSSSS  63 / 482 ( 13%)
+SSSSSSSSSS.......................FF............................ 126 / 482 ( 26%)
+................SS............................................. 189 / 482 ( 39%)
+............................................................... 252 / 482 ( 52%)
+..........................................FFFFF................ 315 / 482 ( 65%)
+............................................................... 378 / 482 ( 78%)
+.........................................FFFFFFFF.........F.... 441 / 482 ( 91%)
+..............F.....F....F...............                       482 / 482 (100%)
+
+Time: 10.5 seconds, Memory: 14.00MB
+
+There were 19 failures:
+
+1) Tests\FFMpeg\Unit\FFProbeTest::testProbeWithWrongJson with data set #0 (Mock_Stream_9b6f2130 Object (...), 'streams', array('-show_streams', '-print_format'), 'streams', array('C:\nginx\html\projects\php-ff...st.php', '-show_streams', '-print_format', 'json'))
+Expectation failed for method name is equal to "parse" when invoked 1 time(s)
+Parameter 0 for invocation FFMpeg\FFProbe\OutputParserInterface::parse('streams', '{"key":"value"}lala'): array does not match expected value.
+'streams' does not match expected type "array".
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\FFProbe.php:314
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\FFProbe.php:320
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\FFProbe.php:248
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\FFProbeTest.php:180
+
+2) Tests\FFMpeg\Unit\FFProbeTest::testProbeWithWrongJson with data set #1 (Mock_Format_af8aa4b2 Object (...), 'format', array('-show_format', '-print_format'), 'format', array('C:\nginx\html\projects\php-ff...st.php', '-show_format', '-print_format', 'json'))
+Expectation failed for method name is equal to "parse" when invoked 1 time(s)
+Parameter 0 for invocation FFMpeg\FFProbe\OutputParserInterface::parse('format', '{"key":"value"}lala'): array does not match expected value.
+'format' does not match expected type "array".
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\FFProbe.php:314
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\FFProbe.php:320
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\FFProbe.php:216
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\FFProbeTest.php:180
+
+3) Tests\FFMpeg\Unit\Format\ProgressListener\AudioProgressListenerTest::testHandle with data set #0 (2894412, 180.90075, 'size=     712kB time=00:00:45...bits/s', 25, 0, 0, 'size=     1274kB time=00:01:2...bits/s', 49, 2, 563, 1, 1)
+Failed asserting that 24.0 matches expected 25.
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\AudioProgressListenerTest.php:42
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\vendor\evenement\evenement\src\Evenement\EventEmitterTrait.php:70
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\Format\ProgressListener\AbstractProgressListener.php:160
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\AudioProgressListenerTest.php:57
+
+4) Tests\FFMpeg\Unit\Format\ProgressListener\AudioProgressListenerTest::testHandle with data set #1 (2894412, 180.90075, 'size=     712kB time=00:00:45...bits/s', 12, 0, 0, 'size=     1274kB time=00:01:2...bits/s', 24, 2, 563, 1, 2)
+Failed asserting that 164.0 matches expected 2.
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\AudioProgressListenerTest.php:47
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\vendor\evenement\evenement\src\Evenement\EventEmitterTrait.php:70
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\Format\ProgressListener\AbstractProgressListener.php:160
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\AudioProgressListenerTest.php:59
+
+5) Tests\FFMpeg\Unit\Format\ProgressListener\VideoProgressListenerTest::testHandle with data set #0 (147073958, 281.147533, 281.147533, 'frame=  206 fps=202 q=10.0 si...drop=0', 2, 0, 0, 'frame=  854 fps=113 q=20.0 si...drop=0', 11, 32, 3868, 1, 1)
+Failed asserting that 2050.0 matches expected 32.
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\VideoProgressListenerTest.php:39
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\vendor\evenement\evenement\src\Evenement\EventEmitterTrait.php:70
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\Format\ProgressListener\AbstractProgressListener.php:160
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\VideoProgressListenerTest.php:53
+
+6) Tests\FFMpeg\Unit\Format\ProgressListener\VideoProgressListenerTest::testHandle with data set #1 (147073958, 281.147533, 281.147533, 'frame=  206 fps=202 q=10.0 si...drop=0', 1, 0, 0, 'frame=  854 fps=113 q=20.0 si...drop=0', 5, 32, 3868, 1, 2)
+Failed asserting that 2102.0 matches expected 32.
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\VideoProgressListenerTest.php:39
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\vendor\evenement\evenement\src\Evenement\EventEmitterTrait.php:70
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\Format\ProgressListener\AbstractProgressListener.php:160
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\VideoProgressListenerTest.php:53
+
+7) Tests\FFMpeg\Unit\Format\ProgressListener\VideoProgressListenerTest::testHandle with data set #2 (147073958, 281.147533, 281.147533, 'frame=  206 fps=202 q=10.0 si...drop=0', 60, 0, 0, 'frame=  854 fps=113 q=20.0 si...drop=0', 97, 0, 3868, 2, 2)
+Failed asserting that 51.0 matches expected 60.
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\VideoProgressListenerTest.php:34
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\vendor\evenement\evenement\src\Evenement\EventEmitterTrait.php:70
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\Format\ProgressListener\AbstractProgressListener.php:160
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Format\ProgressListener\VideoProgressListenerTest.php:51
+
+8) Tests\FFMpeg\Unit\Media\AudioTest::testSaveShouldSave with data set #0 (false, array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', '-threads', '2', '-b:a', '663k', '-ac', '5', '/target/file'), null, Mock_AudioInterface_89bff6c3 Object (...))
+Expectation failed for method name is equal to "has" when invoked 1 time(s).
+Method was expected to be called 1 times, actually called 0 times.
+
+9) Tests\FFMpeg\Unit\Media\AudioTest::testSaveShouldSave with data set #1 (false, array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', '-threads', '2', '-acodec', 'patati-patata-audio', '-b:a', '664k', '-ac', '5', '/target/file'), null, Mock_AudioInterface_89bff6c3 Object (...))
+Expectation failed for method name is equal to "has" when invoked 1 time(s).
+Method was expected to be called 1 times, actually called 0 times.
+
+10) Tests\FFMpeg\Unit\Media\AudioTest::testSaveShouldSave with data set #2 (false, array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', '-threads', '2', 'extra', 'param', '-b:a', '665k', '-ac', '5', '/target/file'), null, Mock_AudioInterface_89bff6c3 Object (...))
+Expectation failed for method name is equal to "has" when invoked 1 time(s).
+Method was expected to be called 1 times, actually called 0 times.
+
+11) Tests\FFMpeg\Unit\Media\AudioTest::testSaveShouldSave with data set #3 (true, array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', '-threads', 24, '-b:a', '663k', '-ac', '5', '/target/file'), null, Mock_AudioInterface_89bff6c3 Object (...))
+Expectation failed for method name is equal to "has" when invoked 1 time(s).
+Method was expected to be called 1 times, actually called 0 times.
+
+12) Tests\FFMpeg\Unit\Media\AudioTest::testSaveShouldSave with data set #4 (true, array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', '-threads', '2', 'extra', 'param', '-b:a', '665k', '-ac', '5', '/target/file'), null, Mock_AudioInterface_89bff6c3 Object (...))
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+     0 => '-y'
+     1 => '-i'
+     2 => 'C:\nginx\html\projects\php-ff...st.php'
+     3 => '-threads'
+-    4 => '2'
++    4 => '24'
+     5 => 'extra'
+     6 => 'param'
+     7 => '-b:a'
+     8 => '665k'
+     9 => '-ac'
+-    10 => '5'
++    10 => 5
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\AudioTest.php:176
+
+13) Tests\FFMpeg\Unit\Media\AudioTest::testSaveShouldSave with data set #5 (false, array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', '-threads', 24, '-b:a', '666k', '-ac', '5', '/target/file'), array(Mock_ListenerInterface_cef93c76 Object (...)), Mock_AudioProg_53ce4def Object (...))
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+     0 => '-y'
+     1 => '-i'
+     2 => 'C:\nginx\html\projects\php-ff...st.php'
+     3 => '-threads'
+-    4 => 24
++    4 => '2'
+     5 => '-b:a'
+     6 => '666k'
+     7 => '-ac'
+-    8 => '5'
++    8 => 5
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\AudioTest.php:176
+
+14) Tests\FFMpeg\Unit\Media\AudioTest::testSaveShouldSave with data set #6 (true, array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', '-threads', 24, '-b:a', '666k', '-ac', '5', '/target/file'), array(Mock_ListenerInterface_cef93c76 Object (...)), Mock_AudioProg_53ce4def Object (...))
+Expectation failed for method name is equal to "has" when invoked 1 time(s).
+Method was expected to be called 1 times, actually called 0 times.
+
+15) Tests\FFMpeg\Unit\Media\AudioTest::testSaveShouldNotStoreCodecFiltersInTheMedia
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+     0 => '-y'
+     1 => '-i'
+     2 => 'C:\nginx\html\projects\php-ff...st.php'
+-    3 => 'param'
+-    4 => '-threads'
+-    5 => 24
++    3 => '-threads'
++    4 => '24'
++    5 => 'param'
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\AudioTest.php:337
+
+16) Tests\FFMpeg\Unit\Media\ConcatTest::testSaveFromDifferentCodecs with data set #0 (array('-i', 'C:\nginx\html\projects\php-ff...st.php', '-i', 'concat-2.mp4', '-filter_complex', '[0:v:0] [0:a:0] [1:v:0] [1:a:...v] [a]', '-map', '[v]', '-map', '[a]'))
+Expectation failed for method name is equal to "command" when invoked 1 time(s)
+Parameter 0 for invocation Alchemy\BinaryDriver\AbstractBinary::command(Array (...), false, null) does not match expected value.
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+-    0 => '-i'
+-    1 => 'C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\ConcatTest.php'
++    0 => '-threads'
++    1 => '2'
+     2 => '-i'
+-    3 => 'concat-2.mp4'
+-    4 => '-filter_complex'
+-    5 => '[0:v:0] [0:a:0] [1:v:0] [1:a:0] concat=n=2:v=1:a=1 [v] [a]'
+-    6 => '-map'
+-    7 => '[v]'
++    3 => 'C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\ConcatTest.php'
++    4 => '-i'
++    5 => 'concat-2.mp4'
++    6 => '-filter_complex'
++    7 => '[0:v:0] [0:a:0] [1:v:0] [1:a:0] concat=n=2:v=1:a=1 [v] [a]'
+     8 => '-map'
+-    9 => '[a]'
+-    10 => '/target/destination'
++    9 => '[v]'
++    10 => '-map'
++    11 => '[a]'
++    12 => '/target/destination'
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\src\FFMpeg\Media\Concat.php:260
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\ConcatTest.php:130
+
+17) Tests\FFMpeg\Unit\Media\VideoTest::testSaveAppliesFilters
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'extra-filter-command'
++'-threads'
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\VideoTest.php:150
+
+18) Tests\FFMpeg\Unit\Media\VideoTest::testSaveShouldSave with data set #5 (true, array(array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', 'extra', 'param', '-threads', '24', '-b:v', '665k', '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop', '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile', '/target/file'), array('-y', '-i', 'C:\nginx\html\projects\php-ff...st.php', 'extra', 'param', '-threads', '24', '-b:v', '665k', '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop', '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile', '/target/file')), null, Mock_VideoInterface_99f8b997 Object (...))
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+     0 => Array (
+         0 => '-y'
+         1 => '-i'
+         2 => 'C:\nginx\html\projects\php-ff...st.php'
+-        3 => 'extra'
+-        4 => 'param'
+-        5 => '-threads'
+-        6 => '24'
++        3 => '-threads'
++        4 => '24'
++        5 => 'extra'
++        6 => 'param'
+@@ @@
+-        32 => '2'
++        32 => 2
+         33 => '-pass'
+-        34 => '1'
++        34 => 1
+@@ @@
+-        3 => 'extra'
+-        4 => 'param'
+-        5 => '-threads'
+-        6 => '24'
++        3 => '-threads'
++        4 => '24'
++        5 => 'extra'
++        6 => 'param'
+@@ @@
+-        32 => '2'
++        32 => 2
+         33 => '-pass'
+-        34 => '2'
++        34 => 2
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\VideoTest.php:221
+
+19) Tests\FFMpeg\Unit\Media\VideoTest::testSaveShouldNotStoreCodecFiltersInTheMedia
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+     0 => '-y'
+     1 => '-i'
+     2 => 'C:\nginx\html\projects\php-ff...st.php'
+-    3 => 'param'
+-    4 => '-threads'
+-    5 => '24'
++    3 => '-threads'
++    4 => '24'
++    5 => 'param'
+     6 => '-b:v'
+-    7 => 'k'
++    7 => '0k'
+@@ @@
+-    29 => '1'
++    29 => 1
+
+C:\nginx\html\projects\php-ffmpeg-org\PHP-FFMpeg\tests\Unit\Media\VideoTest.php:664
+
+FAILURES!
+Tests: 482, Assertions: 877, Failures: 19, Skipped: 23.

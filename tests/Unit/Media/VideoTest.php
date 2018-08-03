@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\Media;
 
@@ -14,7 +15,7 @@ class VideoTest extends AbstractStreamableTestCase
         $ffprobe = $this->getFFProbeMock();
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Filters\Video\VideoFilters', $video->filters());
+        $this->assertInstanceOf(\FFMpeg\Filters\Video\VideoFilters::class, $video->filters());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -22,7 +23,7 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -43,7 +44,7 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -167,7 +168,7 @@ class VideoTest extends AbstractStreamableTestCase
         $configuration->expects($this->once())
             ->method('get')
             ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue($threads ? 24 : 2));
+            ->will($this->returnValue($threads ? '24' : '2'));
 
         $capturedCommands = [];
         $capturedListeners = null;
@@ -191,7 +192,7 @@ class VideoTest extends AbstractStreamableTestCase
                 // look for pass commands only in multipass cases
                 foreach ($pass as $command) {
                     $prefix = null;
-                    if (false !== strpos($command, '/pass-')) {
+                    if (false !== strpos((string)$command, '/pass-')) {
                         $prefix = $command;
                         break;
                     }
@@ -589,7 +590,7 @@ class VideoTest extends AbstractStreamableTestCase
         $configuration->expects($this->any())
             ->method('get')
             ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue(24));
+            ->will($this->returnValue('24'));
 
         $capturedCommands = [];
 
@@ -633,7 +634,7 @@ class VideoTest extends AbstractStreamableTestCase
         foreach ($capturedCommands as $capturedCommand) {
             $prefix = null;
             foreach ($capturedCommand as $command) {
-                if (false !== strpos($command, '/pass-')) {
+                if (false !== strpos((string)$command, '/pass-')) {
                     $prefix = $command;
                     break;
                 }
@@ -666,7 +667,10 @@ class VideoTest extends AbstractStreamableTestCase
         }
     }
 
-    public function getClassName()
+    /**
+     * @inheritDoc
+     */
+    public function getClassName() : string
     {
         return \FFMpeg\Media\Video::class;
     }

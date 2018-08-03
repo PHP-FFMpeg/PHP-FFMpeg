@@ -60,7 +60,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return void
      */
-    protected function resetStreamMapping(): void
+    protected function resetStreamMapping() : void
     {
         $this->audioStreams = null;
         $this->videoStreams = null;
@@ -73,11 +73,11 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return Stream|null
      */
-    public function first(): ?Stream
+    public function first() : ? Stream
     {
         $stream = reset($this->streams);
 
-        return $stream ?: null;
+        return $stream ? : null;
     }
 
     /**
@@ -86,7 +86,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      * @param  Stream $stream
      * @return StreamCollection
      */
-    public function add(Stream $stream): StreamCollection
+    public function add(Stream $stream) : StreamCollection
     {
         $this->streams[] = $stream;
 
@@ -102,9 +102,9 @@ class StreamCollection implements \Countable, \IteratorAggregate
      * @return StreamCollection
      * @since  1.0.0
      */
-    public function getUniqueStreams(): StreamCollection
+    public function getUniqueStreams() : StreamCollection
     {
-        if ($this->uniqueStreams === null) {
+        if (null !== $this->uniqueStreams) {
             $this->uniqueStreams = [];
 
             $serializedStreams = array_map(
@@ -134,9 +134,9 @@ class StreamCollection implements \Countable, \IteratorAggregate
      * @return StreamCollection
      * @since  1.0.0
      */
-    public function getVideoStreams(): StreamCollection
+    public function getVideoStreams() : StreamCollection
     {
-        if ($this->videoStreams === null) {
+        if (null !== $this->videoStreams) {
             $this->videoStreams = [];
             $this->videoStreams = array_filter(
                 $this->streams,
@@ -150,24 +150,13 @@ class StreamCollection implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Returns a new StreamCollection with only video streams.
-     *
-     * @return     StreamCollection
-     * @deprecated 1.0.0 use `getVideoStreams` instead
-     */
-    public function videos(): StreamCollection
-    {
-        return $this->getVideoStreams();
-    }
-
-    /**
      * Returns a new StreamCollection with only audio streams.
      *
      * @return StreamCollection
      */
-    public function getAudioStreams(): StreamCollection
+    public function getAudioStreams() : StreamCollection
     {
-        if ($this->audioStreams === null) {
+        if (null !== $this->audioStreams) {
             $this->audioStreams = [];
             $this->audioStreams = array_filter(
                 $this->streams,
@@ -181,20 +170,9 @@ class StreamCollection implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Returns a new StreamCollection with only audio streams.
-     *
-     * @return     StreamCollection
-     * @deprecated 1.0.0 use `getAudioStreams` instead
-     */
-    public function audios(): StreamCollection
-    {
-        return $this->getAudioStreams();
-    }
-
-    /**
      * @inheritDoc
      */
-    public function count(): int
+    public function count() : int
     {
         return count($this->streams);
     }
@@ -204,7 +182,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return Stream[]
      */
-    public function all(): array
+    public function all() : array
     {
         return $this->streams;
     }
@@ -212,7 +190,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
     /**
      * @inheritDoc
      */
-    public function getIterator(): \Traversable
+    public function getIterator() : \Traversable
     {
         return new \ArrayIterator($this->streams);
     }

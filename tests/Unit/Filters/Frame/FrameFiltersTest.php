@@ -9,12 +9,14 @@ class FrameFiltersTest extends TestCase
 {
     public function testResize()
     {
+        // TODO: What is the use of this test? Add some `assert*`-method calls here.
+
         $frame = $this->getFrameMock();
         $filters = new FrameFilters($frame);
 
         $frame->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Frame\DisplayRatioFixerFilter'));
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Frame\DisplayRatioFixerFilter::class));
 
         $filters->fixDisplayRatio();
     }

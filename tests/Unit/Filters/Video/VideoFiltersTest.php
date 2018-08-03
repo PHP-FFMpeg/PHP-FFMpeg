@@ -67,12 +67,14 @@ class VideoFiltersTest extends TestCase
 
     public function testSynchronize()
     {
+        // TODO: What is the use of this test? Add some `assert*`-method calls here.
+
         $video = $this->getVideoMock();
         $filters = new VideoFilters($video);
 
         $video->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Video\SynchronizeFilter'));
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Video\SynchronizeFilter::class));
 
         $filters->synchronize();
     }

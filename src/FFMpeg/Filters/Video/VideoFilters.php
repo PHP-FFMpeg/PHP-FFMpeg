@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -24,6 +25,7 @@ class VideoFilters extends AudioFilters
 
     /**
      * @inheritDoc
+     * @param Video $media The video the filters will be applied to
      */
     public function __construct(Video $media)
     {
@@ -87,7 +89,7 @@ class VideoFilters extends AudioFilters
      */
     public function synchronize() : self
     {
-        $this->media->addFilter(new SynchronizeFilter);
+        $this->media->addFilter(new SynchronizeFilter());
 
         return $this;
     }

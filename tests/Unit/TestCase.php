@@ -116,7 +116,17 @@ class TestCase extends PhpUnitTestCase
 
     public function getConfigurationMock()
     {
-        return $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
+        $mock = $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)
+            ->getMock();
+
+        // return default number of threads
+        $mock
+            ->expects($this->any())
+            ->method('get')
+            ->with('ffmpeg.threads')
+            ->will($this->returnValue('2'));
+
+        return $mock;
     }
 
     public function getFormatMock()

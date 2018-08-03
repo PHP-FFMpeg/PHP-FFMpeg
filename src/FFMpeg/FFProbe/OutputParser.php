@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -14,11 +15,31 @@ namespace FFMpeg\FFProbe;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
 
+/**
+ * Responsible for parsing output of `ffprobe`
+ *
+ * @author      jens1o
+ * @copyright   Jens Hausdorf 2018
+ * @license     MIT License
+ * @package     FFMpeg
+ * @subpackage  FFProbe
+ */
 class OutputParser implements OutputParserInterface
 {
 
+    /**
+     * Keys of values that are considered numeric when parsing streams of a file.
+     */
     protected const NUMERIC_VALUES = [
-        'index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'
+        'index',
+        'width',
+        'height',
+        'channels',
+        'bits_per_sample',
+        'has_b_frames',
+        'level',
+        'start_pts',
+        'duration_ts'
     ];
 
 
@@ -39,7 +60,7 @@ class OutputParser implements OutputParserInterface
         }
     }
 
-    private function parseFormat($data)
+    private function parseFormat(string $data) : array
     {
         $ret = [];
 
@@ -74,17 +95,19 @@ class OutputParser implements OutputParserInterface
         return ['format' => $ret];
     }
 
-    private function parseStreams($data)
+    private function parseStreams(string $data) : array
     {
         $ret = [];
-        $n = -1;
+        $currentStreamNumber = -1;
 
         foreach (explode(PHP_EOL, $data) as $line) {
-            if ($line === '[STREAM]') {
-                $ret[++$n] = [];
+            if ($line === '[/STREAM]') {
                 continue;
             }
-            if ($line === '[/STREAM]') {
+
+            if ($line === '[STREAM]') {
+                // detect start of a new stream
+                $ret[++$currentStreamNumber] = [];
                 continue;
             }
 
@@ -109,17 +132,17 @@ class OutputParser implements OutputParserInterface
             }
 
             if (0 === strpos($key, 'TAG:')) {
-                if (!isset($ret[$n]['tags'])) {
-                    $ret[$n]['tags'] = [];
+                if (!isset($ret[$currentStreamNumber]['tags'])) {
+                    $ret[$currentStreamNumber]['tags'] = [];
                 }
-                $ret[$n]['tags'][substr($key, 4)] = $value;
+                $ret[$currentStreamNumber]['tags'][substr($key, 4)] = $value;
             } elseif (0 === strpos($key, 'DISPOSITION:')) {
-                if (!isset($ret[$n]['disposition'])) {
-                    $ret[$n]['disposition'] = [];
+                if (!isset($ret[$currentStreamNumber]['disposition'])) {
+                    $ret[$currentStreamNumber]['disposition'] = [];
                 }
-                $ret[$n]['disposition'][substr($key, 12)] = $value;
+                $ret[$currentStreamNumber]['disposition'][substr($key, 12)] = $value;
             } else {
-                $ret[$n][$key] = $value;
+                $ret[$currentStreamNumber][$key] = $value;
             }
         }
 

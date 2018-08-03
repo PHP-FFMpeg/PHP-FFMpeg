@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -101,13 +102,9 @@ class Audio extends AbstractStreamableMedia
      */
     protected function buildCommand(FormatInterface $format, string $outputPathfile)
     {
-        $commands = ['-y', '-i', $this->pathfile];
+        $commands = ['-y', '-i', $this->pathfile, '-threads', (string)$this->driver->getConfiguration()->get('ffmpeg.threads')];
 
         $filters = clone $this->filters;
-
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
-        }
 
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 

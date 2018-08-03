@@ -37,7 +37,7 @@ class GifTest extends AbstractMediaTestCase
         $dimension = $this->getDimensionMock();
 
         $gif = new Gif($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode, $dimension);
-        $this->assertInstanceOf('FFMpeg\Filters\Gif\GifFilters', $gif->filters());
+        $this->assertInstanceOf(\FFMpeg\Filters\Gif\GifFilters::class, $gif->filters());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -47,7 +47,7 @@ class GifTest extends AbstractMediaTestCase
         $timecode = $this->getTimeCodeMock();
         $dimension = $this->getDimensionMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -89,28 +89,28 @@ class GifTest extends AbstractMediaTestCase
 
     public function provideSaveOptions()
     {
-        return array(
-            array(
+        return [
+            [
                 new Dimension(320, 240), 3,
-                array(
+                [
                     '-ss', 'timecode',
                     '-t', '3',
                     '-i', __FILE__,
                     '-vf',
                     'scale=320:-1', '-gifflags',
                     '+transdiff', '-y'
-                ),
-            ),
-            array(
+                ],
+            ],
+            [
                 new Dimension(320, 240), null,
-                array(
+                [
                     '-ss', 'timecode',
                     '-i', __FILE__,
                     '-vf',
                     'scale=320:-1', '-gifflags',
                     '+transdiff', '-y'
-                )
-            ),
-        );
+                ]
+            ],
+        ];
     }
 }

@@ -262,7 +262,7 @@ class FFProbe
         LoggerInterface $logger = null,
         CacheInterface $cacheDriver = null
     ) {
-        if ($cacheDriver === null) {
+        if (null === $cacheDriver) {
             // default to in-memory cache
             $cacheDriver = new MemoryCache();
         }

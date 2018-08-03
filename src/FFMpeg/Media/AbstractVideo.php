@@ -67,7 +67,7 @@ abstract class AbstractVideo extends Audio
      * @return Video
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, string $outputPathfile)
     {
         $passes = $this->buildCommand($format, $outputPathfile);
 
@@ -146,8 +146,6 @@ abstract class AbstractVideo extends Audio
         $commands = $this->basePartOfCommand();
 
         $filters = clone $this->filters;
-
-        $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads', 2)]));
 
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
@@ -298,6 +296,6 @@ abstract class AbstractVideo extends Audio
      */
     protected function basePartOfCommand() : array
     {
-        return ['-y', '-i', $this->pathfile];
+        return ['-y', '-i', $this->pathfile, '-threads', (string)$this->driver->getConfiguration()->get('ffmpeg.threads', 2)];
     }
 }
