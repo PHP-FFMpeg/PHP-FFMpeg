@@ -117,7 +117,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getPasses')
             ->will($this->returnValue(2));
 
-        $configuration = $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
+        $configuration = $this->getConfigurationMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -147,14 +147,17 @@ class VideoTest extends AbstractStreamableTestCase
             $this->assertEquals('-y', $commands[0]);
             $this->assertEquals('-i', $commands[1]);
             $this->assertEquals(__FILE__, $commands[2]);
-            $this->assertEquals('extra-filter-command', $commands[3]);
+            $this->assertEquals('-threads', $commands[3]);
+            // default number of threads
+            $this->assertEquals('2', $commands[4]);
+            $this->assertEquals('extra-filter-command', $commands[5]);
         }
     }
 
     /**
      * @dataProvider provideSaveData
      */
-    public function testSaveShouldSave($threads, $expectedCommands, $expectedListeners, $format)
+    public function testSaveShouldSave(bool $threads, array $expectedCommands, ? array $expectedListeners, $format)
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
@@ -438,7 +441,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getPasses')
             ->will($this->returnValue(1));
 
-        return array(
+        return [
             array(false, array(array(
                 '-y', '-i', __FILE__, '-threads', '2', '-b:v', '663k',
                 '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
@@ -512,15 +515,15 @@ class VideoTest extends AbstractStreamableTestCase
                 '/target/file',
             )), null, $format2),
             array(true, array(array(
-                '-y', '-i', __FILE__,
-                'extra', 'param', '-threads', '24', '-b:v', '665k',
+                '-y', '-i', __FILE__, '-threads', '24',
+                'extra', 'param', '-b:v', '665k',
                 '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                 '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                 '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
                 '/target/file',
             ), array(
-                '-y', '-i', __FILE__,
-                'extra', 'param', '-threads', '24', '-b:v', '665k',
+                '-y', '-i', __FILE__, '-threads', '24',
+                'extra', 'param', '-b:v', '665k',
                 '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
                 '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
                 '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
@@ -568,7 +571,7 @@ class VideoTest extends AbstractStreamableTestCase
                 '-b:a', '92k', '-ac', '2',
                 '/target/file',
             )), $listeners, $progressableAudioFormat),
-        );
+        ];
     }
 
     public function testSaveShouldNotStoreCodecFiltersInTheMedia()
@@ -615,20 +618,20 @@ class VideoTest extends AbstractStreamableTestCase
         $video->save($format, $outputPathfile);
         $video->save($format, $outputPathfile);
 
-        $expectedPass1 = array(
-            '-y', '-i', __FILE__, 'param', '-threads', '24', '-b:v', 'k', '-refs',
+        $expectedPass1 = [
+            '-y', '-i', __FILE__, '-threads', '24', 'param', '-b:v', 'k', '-refs',
             '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
             '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71',
             '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1',
             '-pass', '1', '-passlogfile', '/target/file',
-        );
-        $expectedPass2 = array(
-            '-y', '-i', __FILE__, 'param', '-threads', '24', '-b:v', 'k', '-refs',
+        ];
+        $expectedPass2 = [
+            '-y', '-i', __FILE__, '-threads', '24', 'param', '-b:v', 'k', '-refs',
             '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
             '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71',
             '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1',
             '-pass', '2', '-passlogfile', '/target/file',
-        );
+        ];
 
         $n = 1;
         foreach ($capturedCommands as $capturedCommand) {

@@ -27,19 +27,6 @@ class X264 extends DefaultVideo
      */
     private $passes = 2;
 
-    /**
-     * @inheritDoc
-     */
-    protected $audioCodec = 'libmp3lame';
-
-    /**
-     * @inheritDoc
-     */
-    protected $videoCodec = 'libx264';
-
-    /**
-     * @deprecated 1.0.0 use setters directly
-     */
     public function __construct(string $audioCodec = 'aac', string $videoCodec = 'libx264')
     {
         $this->setAudioCodec($audioCodec);

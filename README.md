@@ -280,11 +280,11 @@ Watermark a video with a given image.
 ```php
 $video
     ->filters()
-    ->watermark($watermarkPath, array(
+    ->watermark($watermarkPath, [
         'position' => 'relative',
         'bottom' => 50,
         'right' => 50,
-    ));
+    ]);
 ```
 
 The watermark filter takes two parameters:
@@ -295,11 +295,11 @@ The watermark filter takes two parameters:
 ```php
 $video
     ->filters()
-    ->watermark($watermarkPath, array(
+    ->watermark($watermarkPath, [
         'position' => 'absolute',
         'x' => 1180,
         'y' => 620,
-    ));
+    ]);
 ```
 
 ###### Framerate
@@ -501,7 +501,7 @@ $format = new FFMpeg\Format\Video\X264();
 $format->setAudioCodec("libmp3lame");
 
 $video
-    ->concat(array('/path/to/video1', '/path/to/video2'))
+    ->concat(['/path/to/video1', '/path/to/video2'))
     ->saveFromDifferentCodecs($format, '/path/to/new_file');
 ```
 

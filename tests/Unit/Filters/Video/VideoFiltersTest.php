@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\Filters\Video;
 
@@ -11,7 +12,7 @@ class VideoFiltersTest extends TestCase
     /**
      * @dataProvider provideResizeOptions
      */
-    public function testResize($mode, $forceStandards)
+    public function testResize(string $mode, bool $forceStandards) : void
     {
         $capturedFilter = null;
 
@@ -33,17 +34,17 @@ class VideoFiltersTest extends TestCase
         $this->assertSame($dimension, $capturedFilter->getDimension());
     }
 
-    public function provideResizeOptions()
+    public function provideResizeOptions() : array
     {
-        return array(
-            array(ResizeFilter::RESIZEMODE_FIT, true),
-            array(ResizeFilter::RESIZEMODE_SCALE_WIDTH, true),
-            array(ResizeFilter::RESIZEMODE_SCALE_HEIGHT, false),
-            array(ResizeFilter::RESIZEMODE_INSET, false),
-        );
+        return [
+            [ResizeFilter::RESIZEMODE_FIT, true],
+            [ResizeFilter::RESIZEMODE_SCALE_WIDTH, true],
+            [ResizeFilter::RESIZEMODE_SCALE_HEIGHT, false],
+            [ResizeFilter::RESIZEMODE_INSET, false],
+        ];
     }
 
-    public function testResample()
+    public function testResample() : void
     {
         $capturedFilter = null;
 

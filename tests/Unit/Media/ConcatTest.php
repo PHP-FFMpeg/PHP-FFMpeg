@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\Media;
 
@@ -48,7 +49,7 @@ class ConcatTest extends AbstractMediaTestCase
     /**
      * @dataProvider provideSaveFromSameCodecsOptions
      */
-    public function testSaveFromSameCodecs($streamCopy, $commands)
+    public function testSaveFromSameCodecs(bool $streamCopy, array $commands) : void
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
@@ -77,7 +78,7 @@ class ConcatTest extends AbstractMediaTestCase
         }
     }
 
-    public function provideSaveFromSameCodecsOptions()
+    public function provideSaveFromSameCodecsOptions() : array
     {
         $fs = FsManager::create();
         $tmpFile = $fs->createTemporaryFile('ffmpeg-concat');
@@ -106,7 +107,7 @@ class ConcatTest extends AbstractMediaTestCase
     /**
      * @dataProvider provideSaveFromDifferentCodecsOptions
      */
-    public function testSaveFromDifferentCodecs($commands)
+    public function testSaveFromDifferentCodecs(array $commands) : void
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
@@ -130,13 +131,14 @@ class ConcatTest extends AbstractMediaTestCase
         $this->assertSame($concat, $concat->saveFromDifferentCodecs($format, $pathfile));
     }
 
-    public function provideSaveFromDifferentCodecsOptions()
+    public function provideSaveFromDifferentCodecsOptions() : array
     {
         return [
             [
                 [
                     '-i', __FILE__,
                     '-i', 'concat-2.mp4',
+                    '-threads', '2',
                     '-filter_complex',
                     '[0:v:0] [0:a:0] [1:v:0] [1:a:0] concat=n=2:v=1:a=1 [v] [a]',
                     '-map', '[v]',

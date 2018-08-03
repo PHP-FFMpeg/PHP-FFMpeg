@@ -22,11 +22,6 @@ class WaveformDownmixFilter implements WaveformFilterInterface
     use TPriorityFilter;
 
     /**
-     * @var bool
-     */
-    private $downmix;
-
-    /**
      * @var int
      */
     private $priority;

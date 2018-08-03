@@ -149,14 +149,9 @@ class AudioTest extends AbstractStreamableTestCase
             ->will($this->returnValue($configuration));
 
         $configuration->expects($this->once())
-            ->method('has')
-            ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue(true));
-
-        $configuration->expects($this->once())
             ->method('get')
             ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue($threads ? : '2'));
+            ->will($this->returnValue($threads ? 24 : 2));
 
         $capturedCommand = $capturedListeners = null;
 
@@ -233,58 +228,73 @@ class AudioTest extends AbstractStreamableTestCase
             ->will($this->returnValue(5));
 
         return [
-            [false, [
-                '-y', '-i', __FILE__,
-                '-threads', '2',
-                '-b:a', '663k',
-                '-ac', '5',
-                '/target/file',
-            ], null, $format],
-            [false, [
-                '-y', '-i', __FILE__,
-                '-threads', '2',
-                '-acodec', 'patati-patata-audio',
-                '-b:a', '664k',
-                '-ac', '5',
-                '/target/file',
-            ], null, $audioFormat],
-            [false, [
-                '-y', '-i', __FILE__,
-                '-threads', '2',
-                'extra', 'param',
-                '-b:a', '665k',
-                '-ac', '5',
-                '/target/file',
-            ], null, $formatExtra],
-            [true, [
-                '-y', '-i', __FILE__,
-                '-threads', '24',
-                '-b:a', '663k',
-                '-ac', '5',
-                '/target/file',
-            ], null, $format],
-            [true, [
-                '-y', '-i', __FILE__,
-                '-threads', '2',
-                'extra', 'param',
-                '-b:a', '665k',
-                '-ac', '5',
-                '/target/file',
-            ], null, $formatExtra],
-            [false, [
-                '-y', '-i', __FILE__,
-                '-threads', '24',
-                '-b:a', '666k',
-                '-ac', '5',
-                '/target/file',
-            ], $listeners, $progressableFormat],
-            [true, [
-                '-y', '-i', __FILE__,
-                '-threads', '24',
-                '-b:a', '666k',
-                '-ac', '5',
-                '/target/file',
-            ], $listeners, $progressableFormat],
+            [
+                false, [
+                    '-y', '-i', __FILE__,
+                    '-threads', '2',
+                    '-b:a', '663k',
+                    '-ac', '5',
+                    '/target/file',
+                ], null, $format
+            ],
+            [
+                false, [
+                    '-y', '-i', __FILE__,
+                    '-threads', '2',
+                    '-acodec', 'patati-patata-audio',
+                    '-b:a', '664k',
+                    '-ac', '5',
+                    '/target/file',
+                ], null, $audioFormat
+            ],
+            [
+                false, [
+                    '-y', '-i', __FILE__,
+                    '-threads', '2',
+                    'extra', 'param',
+                    '-b:a', '665k',
+                    '-ac', '5',
+                    '/target/file',
+                ], null, $formatExtra
+            ],
+            [
+                true, [
+                    '-y', '-i', __FILE__,
+                    '-threads', '24',
+                    '-b:a', '663k',
+                    '-ac', '5',
+                    '/target/file',
+                ], null, $format
+            ],
+            [
+                false, [
+                    '-y', '-i', __FILE__,
+                    '-threads', '2',
+                    'extra', 'param',
+                    '-b:a', '665k',
+                    '-ac', '5',
+                    '/target/file',
+                ], null, $formatExtra
+            ],
+            [
+                true, [
+                    '-y', '-i', __FILE__,
+                    '-threads', '24',
+                    '-b:a', '666k',
+                    '-ac', '5',
+                    '/target/file',
+                ],
+                $listeners, $progressableFormat
+            ],
+            [
+                true, [
+                    '-y', '-i', __FILE__,
+                    '-threads', '24',
+                    '-b:a', '666k',
+                    '-ac', '5',
+                    '/target/file',
+                ], $listeners, $progressableFormat
+            ],
         ];
     }
 
@@ -330,7 +340,7 @@ class AudioTest extends AbstractStreamableTestCase
         $audio->save($format, $outputPathfile);
 
         $expected = [
-            '-y', '-i', __FILE__, 'param', '-threads', 24, '/target/file',
+            '-y', '-i', __FILE__, '-threads', '24', 'param', '/target/file',
         ];
 
         foreach ($capturedCommands as $capturedCommand) {

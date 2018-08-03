@@ -86,6 +86,7 @@ class Concat extends AbstractMediaType
     /**
      * Saves the concatenated video in the given array,
      * considering that the sources videos are all encoded with the same codec.
+     * Please note: If `$streamCopy === true`, filters will not be applied.
      *
      * @param string $outputPathfile
      * @param bool  $streamCopy
@@ -173,7 +174,7 @@ class Concat extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function saveFromDifferentCodecs(FormatInterface $format, $outputPathfile)
+    public function saveFromDifferentCodecs(FormatInterface $format, $outputPathfile) : self
     {
         /**
          * @see https://ffmpeg.org/ffmpeg-formats.html#concat
@@ -181,7 +182,7 @@ class Concat extends AbstractMediaType
          */
 
         // Create the commands variable
-        $commands = ['-threads', (string)$this->driver->getConfiguration()->get('ffmpeg.threads')];
+        $commands = [];
 
         // Prepare the parameters
         $nbSources = 0;
@@ -197,16 +198,21 @@ class Concat extends AbstractMediaType
 
         $commands = array_merge($commands, $files);
 
+        $commands[] = '-threads';
+        $commands[] = (string)$this->driver->getConfiguration()->get('ffmpeg.threads');
+
         // Set the parameters of the request
         $commands[] = '-filter_complex';
 
-        $complex_filter = '';
+        // build complex filter
+        $complexFilter = '';
         for ($i = 0; $i < $nbSources; $i++) {
-            $complex_filter .= '[' . $i . ':v:0] [' . $i . ':a:0] ';
+            $complexFilter .= '[' . $i . ':v:0] [' . $i . ':a:0] ';
         }
-        $complex_filter .= 'concat=n=' . $nbSources . ':v=1:a=1 [v] [a]';
+        $complexFilter .= 'concat=n=' . $nbSources . ':v=1:a=1 [v] [a]';
 
-        $commands[] = $complex_filter;
+        $commands[] = $complexFilter;
+
         $commands[] = '-map';
         $commands[] = '[v]';
         $commands[] = '-map';

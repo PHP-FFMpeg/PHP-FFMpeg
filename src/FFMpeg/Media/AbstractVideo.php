@@ -166,7 +166,7 @@ abstract class AbstractVideo extends Audio
 
         if ($format instanceof VideoInterface) {
             $commands[] = '-b:v';
-            $commands[] = $format->getKiloBitrate() . 'k';
+            $commands[] = ($format->getKiloBitrate() !== 0 ? $format->getKiloBitrate() : '') . 'k';
             $commands[] = '-refs';
             $commands[] = '6';
             $commands[] = '-coder';
