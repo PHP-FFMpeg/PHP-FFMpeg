@@ -593,8 +593,8 @@ also use it to extract media metadata.
 $ffprobe = FFMpeg\FFProbe::create();
 $ffprobe
     ->streams('/path/to/video/mp4') // extracts streams informations
-    ->videos()                      // filters video streams
-    ->first()                       // returns the first video stream
+    ->getVideoStreams()             // filters video streams
+    ->getFirstStream()              // returns the first video stream
     ->get('codec_name');            // returns the codec_name property
 ```
 

@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -73,7 +74,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return Stream|null
      */
-    public function first() : ? Stream
+    public function getFirstStream() : ? Stream
     {
         $stream = reset($this->streams);
 

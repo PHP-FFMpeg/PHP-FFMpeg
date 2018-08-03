@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\FFProbe\DataMapping;
 
@@ -7,7 +8,8 @@ use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
 class StreamCollectionTest extends TestCase
 {
-    public function testUniqueness() {
+    public function testUniqueness()
+    {
         $stream = $this->getStreamMock();
 
         $collection = new StreamCollection;
@@ -18,7 +20,8 @@ class StreamCollectionTest extends TestCase
         $this->assertEquals([$stream], $collection->getUniqueStreams()->all());
     }
 
-    public function testAdd() {
+    public function testAdd()
+    {
         $stream = $this->getStreamMock();
 
         $collection = new StreamCollection;
@@ -29,7 +32,8 @@ class StreamCollectionTest extends TestCase
         $this->assertEquals([$stream, $stream], $collection->all());
     }
 
-    public function testVideos() {
+    public function testVideos()
+    {
         $audio = $this->getStreamMock();
         $audio->expects($this->once())
             ->method('isVideo')
@@ -48,7 +52,8 @@ class StreamCollectionTest extends TestCase
         $this->assertEquals([$video], $videos->all());
     }
 
-    public function testAudios() {
+    public function testAudios()
+    {
         $audio = $this->getStreamMock();
         $audio->expects($this->once())
             ->method('isAudio')
@@ -67,14 +72,16 @@ class StreamCollectionTest extends TestCase
         $this->assertEquals([$audio], $audios->all());
     }
 
-    public function testCount() {
+    public function testCount()
+    {
         $stream = $this->getStreamMock();
 
         $collection = new StreamCollection([$stream]);
         $this->assertCount(1, $collection);
     }
 
-    public function testGetIterator() {
+    public function testGetIterator()
+    {
         $audio = $this->getStreamMock();
         $video = $this->getStreamMock();
 
@@ -83,12 +90,13 @@ class StreamCollectionTest extends TestCase
         $this->assertCount(2, $collection->getIterator());
     }
 
-    public function testFirst() {
+    public function testFirst()
+    {
         $stream1 = $this->getStreamMock();
         $stream2 = $this->getStreamMock();
 
         $coll = new StreamCollection([$stream1, $stream2]);
 
-        $this->assertSame($stream1, $coll->first());
+        $this->assertSame($stream1, $coll->getFirstStream()());
     }
 }
