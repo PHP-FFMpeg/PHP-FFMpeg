@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\Filters\Waveform;
 
@@ -22,7 +23,7 @@ class WaveformDownmixFilterTest extends TestCase
             ->will($this->returnValue($streams));
 
         $waveform = new Waveform($audio, $this->getFFMpegDriverMock(), $this->getFFProbeMock(), 640, 120);
-        $filter = new WaveformDownmixFilter(true);
+        $filter = new WaveformDownmixFilter();
         $this->assertEquals(['"aformat=channel_layouts=mono"'], $filter->apply($waveform));
     }
 }
