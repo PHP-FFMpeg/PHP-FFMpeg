@@ -2,7 +2,16 @@
     "name": "php-ffmpeg/php-ffmpeg",
     "type": "library",
     "description": "FFMpeg PHP, an Object Oriented library to communicate with AVconv / ffmpeg",
-    "keywords": ["video processing", "video", "audio processing", "audio", "avconv", "ffmpeg", "avprobe", "ffprobe"],
+    "keywords": [
+        "video processing",
+        "video",
+        "audio processing",
+        "audio",
+        "avconv",
+        "ffmpeg",
+        "avprobe",
+        "ffprobe"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -34,26 +43,18 @@
     ],
     "require": {
         "php": "^7.1",
-        "alchemy/binary-driver": "^1.6",
-        "evenement/evenement": "^2.0 || ^1.0",
-        "neutron/temporary-filesystem": "dev-jens1o-update-deps",
+        "alchemy/binary-driver": "^2.0",
+        "evenement/evenement": "^2.0",
+        "neutron/temporary-filesystem": "2.3",
         "sabre/cache": "^1.0"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "sami/sami": "~1.0",
-        "silex/silex": "~1.0",
-        "phpunit/phpunit": "^6.4",
-        "squizlabs/php_codesniffer": "^3.2"
+        "phpunit/phpunit": "^6.5",
+        "squizlabs/php_codesniffer": "^3.3"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/jens1o/Temporary-Filesystem"
-        }
-    ],
     "autoload": {
         "psr-0": {
             "FFMpeg\\": "src"
