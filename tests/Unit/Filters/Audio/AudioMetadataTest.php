@@ -14,15 +14,15 @@ class AudioMetadataTest extends TestCase
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Audio\AddMetadataFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Audio\AddMetadataFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         $filters = new AudioFilters($audio);
-        $filters->addMetadata(array('title' => "Hello World"));
-        $this->assertEquals(array(0 => "-metadata", 1 => "title=Hello World"), $capturedFilter->apply($audio, $format));
+        $filters->addMetadata(['title' => "Hello World"]);
+        $this->assertEquals(["-metadata", "title=Hello World"], $capturedFilter->apply($audio, $format));
     }
 
     public function testAddArtwork()
@@ -32,16 +32,17 @@ class AudioMetadataTest extends TestCase
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Audio\AddMetadataFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Audio\AddMetadataFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         $filters = new AudioFilters($audio);
-        $filters->addMetadata(array('genre' => 'Some Genre', 'artwork' => "/path/to/file.jpg"));
-        $this->assertEquals(array(0 => "-i", 1 => "/path/to/file.jpg", 2 => "-map", 3 => "0", 4 => "-map", 5 => "1", 6 => "-metadata", 7 => "genre=Some Genre"), $capturedFilter->apply($audio, $format));
-        $this->assertEquals(array(0 => "-i", 1 => "/path/to/file.jpg", 2 => "-map", 3 => "0", 4 => "-map", 5 => "1", 6 => "-metadata", 7 => "genre=Some Genre"), $capturedFilter->apply($audio, $format));
+        $filters->addMetadata(['genre' => 'Some Genre', 'artwork' => "/path/to/file.jpg"]);
+        $this->assertEquals([
+            "-i", "/path/to/file.jpg", "-map", "0", "-map", "1", "-metadata", "genre=Some Genre"
+        ], $capturedFilter->apply($audio, $format));
     }
 
     public function testRemoveMetadata()
@@ -51,7 +52,7 @@ class AudioMetadataTest extends TestCase
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Audio\AddMetadataFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Audio\AddMetadataFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
@@ -59,6 +60,6 @@ class AudioMetadataTest extends TestCase
 
         $filters = new AudioFilters($audio);
         $filters->addMetadata();
-        $this->assertEquals(array(0 => "-map_metadata", 1 => "-1", 2 => "-vn"), $capturedFilter->apply($audio, $format));
+        $this->assertEquals(["-map_metadata", "-1", "-vn"], $capturedFilter->apply($audio, $format));
     }
 }

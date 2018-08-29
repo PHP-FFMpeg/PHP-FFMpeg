@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Functional;
 
@@ -115,8 +116,8 @@ class VideoTranscodeTest extends FunctionalTestCase
 
         $dimension = $ffmpeg->getFFProbe()
             ->streams($filename)
-            ->videos()
-            ->first()
+            ->getVideoStreams()
+            ->getFirstStream()
             ->getDimensions();
 
         $this->assertLessThan(1, $dimension->getRatio(false)->getValue());
@@ -139,7 +140,7 @@ class VideoTranscodeTest extends FunctionalTestCase
 
         preg_match('/^([a-z]+)\s+version\s+([0-9\.]+)/i', $output[0], $matches);
 
-        if (count($matches)) {
+        if (!empty($matches)) {
             $name = $matches[1];
             $version = $matches[2];
         }

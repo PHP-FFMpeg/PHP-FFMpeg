@@ -6,11 +6,12 @@ use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use FFMpeg\FFProbe\DataMapping\Stream;
 
-class FFMpegTest extends TestCase {
+class FFMpegTest extends TestCase
+{
 
     /**
      * @expectedException \FFMpeg\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Unable to detect file format, only audio and video supported
+     * @expectedExceptionMessage Unable to detect file format, only audio and video are supported.
      */
     public function testOpenInvalid()
     {
@@ -18,14 +19,15 @@ class FFMpegTest extends TestCase {
         $ffmpeg->open('/path/to/unknown/file');
     }
 
-    public function testOpenAudio() {
+    public function testOpenAudio()
+    {
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('getAudioStreams')
-            ->will($this->returnValue(new StreamCollection([new Stream])));
+            ->will($this->returnValue(new StreamCollection([new Stream()])));
         $streams->expects($this->once())
             ->method('getVideoStreams')
-            ->will($this->returnValue(new StreamCollection));
+            ->will($this->returnValue(new StreamCollection()));
 
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
@@ -37,11 +39,12 @@ class FFMpegTest extends TestCase {
         $this->assertInstanceOf(\FFMpeg\Media\Audio::class, $ffmpeg->open(__FILE__));
     }
 
-    public function testOpenVideo() {
+    public function testOpenVideo()
+    {
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('getVideoStreams')
-            ->will($this->returnValue(new StreamCollection([new Stream])));
+            ->will($this->returnValue(new StreamCollection([new Stream()])));
         $streams->expects($this->never())
             ->method('getAudioStreams');
 
@@ -70,7 +73,8 @@ class FFMpegTest extends TestCase {
         $ffmpeg->open(__FILE__);
     }
 
-    public function testCreateWithoutLoggerOrProbe() {
+    public function testCreateWithoutLoggerOrProbe()
+    {
         $this->assertInstanceOf(\FFMpeg\FFMpeg::class, FFMpeg::create());
     }
 

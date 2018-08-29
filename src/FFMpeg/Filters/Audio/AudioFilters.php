@@ -11,9 +11,8 @@
 
 namespace FFMpeg\Filters\Audio;
 
-use FFMpeg\Filters\Audio\AddMetadataFilter;
-use FFMpeg\Media\Audio;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Media\Audio;
 
 class AudioFilters
 {
@@ -34,13 +33,27 @@ class AudioFilters
     }
 
     /**
+     * Adds a user-specified filter to the list of filters.
+     *
+     * @param string[] $filters
+     *
+     * @return self
+     */
+    public function simple(array $filters) : self
+    {
+        $this->media->addFilter(new SimpleFilter($filters));
+
+        return $this;
+    }
+
+    /**
      * Resamples the audio file.
      *
      * @param int $rate
      *
      * @return AudioFilters
      */
-    public function resample(int $rate)
+    public function resample(int $rate) : self
     {
         $this->media->addFilter(new AudioResamplableFilter($rate));
 
@@ -61,8 +74,10 @@ class AudioFilters
      *                              * `year`: Year metadata
      *                              * `genre`: Genre metadata
      *                              * `description`: Description metadata
+     *
+     * @return AudioFilters
      */
-    public function addMetadata(?array $data = null)
+    public function addMetadata(? array $data = null) : self
     {
         $this->media->addFilter(new AddMetadataFilter($data));
 
@@ -73,12 +88,27 @@ class AudioFilters
      * Cuts the audio at `$start`, optionally define the end
      *
      * @param  TimeCode      $start    Where the clipping starts(seek to time)
-     * @param  TimeCode|null $duration How long the clipped audio should be
+     * @param  TimeCode|null $duration How long the clipped audio should be.
+     *
      * @return AudioFilters
      */
-    public function clip(TimeCode $start, ?TimeCode $duration = null)
+    public function clip(TimeCode $start, ? TimeCode $duration = null)
     {
         $this->media->addFilter(new AudioClipFilter($start, $duration));
+
+        return $this;
+    }
+
+    /**
+     * Adds the `$artwork` to the audio and converts it to a video file.
+     *
+     * @param string $artwork  The artwork image link to add to the video
+     * @param string $preset Certain encoding speed for selecting compression ratios.
+     * @return AudioFilters
+     */
+    public function addVideoArtwork(string $artwork, string $preset) : AudioFilters
+    {
+        $this->media->addFilter(new ImageVideoFilter($artwork, $preset));
 
         return $this;
     }

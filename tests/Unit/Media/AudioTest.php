@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\Media;
 
@@ -43,7 +44,7 @@ class AudioTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -96,7 +97,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getExtraParams')
             ->will($this->returnValue([]));
 
-        $configuration = $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
+        $configuration = $this->getConfigurationMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -108,7 +109,7 @@ class AudioTest extends AbstractStreamableTestCase
         $filter->expects($this->once())
             ->method('apply')
             ->with($audio, $format)
-            ->will($this->returnValue(array('extra-filter-command')));
+            ->will($this->returnValue(['extra-filter-command']));
 
         $capturedCommands = [];
 
@@ -126,14 +127,17 @@ class AudioTest extends AbstractStreamableTestCase
             $this->assertEquals('-y', $commands[0]);
             $this->assertEquals('-i', $commands[1]);
             $this->assertEquals(__FILE__, $commands[2]);
-            $this->assertEquals('extra-filter-command', $commands[3]);
+            $this->assertEquals('-threads', $commands[3]);
+            // assert default value of -threads (2)
+            $this->assertEquals('2', $commands[4]);
+            $this->assertEquals('extra-filter-command', $commands[5]);
         }
     }
 
     /**
      * @dataProvider provideSaveData
      */
-    public function testSaveShouldSave($threads, $expectedCommands, $expectedListeners, $format)
+    public function testSaveShouldSave(bool $threads, array $expectedCommands, ? array $expectedListeners, $format)
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
@@ -145,19 +149,9 @@ class AudioTest extends AbstractStreamableTestCase
             ->will($this->returnValue($configuration));
 
         $configuration->expects($this->once())
-            ->method('has')
+            ->method('get')
             ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue($threads));
-
-        if ($threads) {
-            $configuration->expects($this->once())
-                ->method('get')
-                ->with($this->equalTo('ffmpeg.threads'))
-                ->will($this->returnValue(24));
-        } else {
-            $configuration->expects($this->never())
-                ->method('get');
-        }
+            ->will($this->returnValue($threads ? 24 : 2));
 
         $capturedCommand = $capturedListeners = null;
 
@@ -178,7 +172,7 @@ class AudioTest extends AbstractStreamableTestCase
         $this->assertEquals($expectedListeners, $capturedListeners);
     }
 
-    public function provideSaveData()
+    public function provideSaveData() : array
     {
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $format->expects($this->any())
@@ -208,7 +202,7 @@ class AudioTest extends AbstractStreamableTestCase
         $formatExtra = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $formatExtra->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array('extra', 'param')));
+            ->will($this->returnValue(['extra', 'param']));
         $formatExtra->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(665));
@@ -216,9 +210,9 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getAudioChannels')
             ->will($this->returnValue(5));
 
-        $listeners = array($this->getMockBuilder(\Alchemy\BinaryDriver\Listeners\ListenerInterface::class)->getMock());
+        $listeners = [$this->getMockBuilder(\Alchemy\BinaryDriver\Listeners\ListenerInterface::class)->getMock()];
 
-        $progressableFormat = $this->getMockBuilder('Tests\FFMpeg\Unit\Media\AudioProg')
+        $progressableFormat = $this->getMockBuilder(\Tests\FFMpeg\Unit\Media\AudioProg::class)
             ->disableOriginalConstructor()->getMock();
         $progressableFormat->expects($this->any())
             ->method('getExtraParams')
@@ -233,56 +227,75 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getAudioChannels')
             ->will($this->returnValue(5));
 
-        return array(
-            array(false, array(
+        return [
+            [
+                false, [
                     '-y', '-i', __FILE__,
+                    '-threads', '2',
                     '-b:a', '663k',
                     '-ac', '5',
                     '/target/file',
-                ), null, $format),
-            array(false, array(
+                ], null, $format
+            ],
+            [
+                false, [
                     '-y', '-i', __FILE__,
+                    '-threads', '2',
                     '-acodec', 'patati-patata-audio',
                     '-b:a', '664k',
                     '-ac', '5',
                     '/target/file',
-                ), null, $audioFormat),
-            array(false, array(
+                ], null, $audioFormat
+            ],
+            [
+                false, [
                     '-y', '-i', __FILE__,
+                    '-threads', '2',
                     'extra', 'param',
                     '-b:a', '665k',
                     '-ac', '5',
                     '/target/file',
-                ), null, $formatExtra),
-            array(true, array(
+                ], null, $formatExtra
+            ],
+            [
+                true, [
                     '-y', '-i', __FILE__,
-                    '-threads', 24,
+                    '-threads', '24',
                     '-b:a', '663k',
                     '-ac', '5',
                     '/target/file',
-                ), null, $format),
-            array(true, array(
+                ], null, $format
+            ],
+            [
+                false, [
                     '-y', '-i', __FILE__,
+                    '-threads', '2',
                     'extra', 'param',
-                    '-threads', 24,
                     '-b:a', '665k',
                     '-ac', '5',
                     '/target/file',
-                ), null, $formatExtra),
-            array(false, array(
+                ], null, $formatExtra
+            ],
+            [
+                true, [
                     '-y', '-i', __FILE__,
+                    '-threads', '24',
                     '-b:a', '666k',
                     '-ac', '5',
                     '/target/file',
-                ), $listeners, $progressableFormat),
-            array(true, array(
+                ],
+                $listeners, $progressableFormat
+            ],
+            [
+                true, [
                     '-y', '-i', __FILE__,
-                    '-threads', 24,
+                    '-threads', '24',
                     '-b:a', '666k',
                     '-ac', '5',
                     '/target/file',
-                ), $listeners, $progressableFormat),
-        );
+                ], $listeners, $progressableFormat
+            ],
+        ];
     }
 
     public function testSaveShouldNotStoreCodecFiltersInTheMedia()
@@ -320,23 +333,26 @@ class AudioTest extends AbstractStreamableTestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array('param')));
+            ->will($this->returnValue(['param']));
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
         $audio->save($format, $outputPathfile);
         $audio->save($format, $outputPathfile);
 
-        $expected = array(
-            '-y', '-i', __FILE__, 'param', '-threads', 24, '/target/file',
-        );
+        $expected = [
+            '-y', '-i', __FILE__, '-threads', '24', 'param', '/target/file',
+        ];
 
         foreach ($capturedCommands as $capturedCommand) {
             $this->assertEquals($expected, $capturedCommand);
         }
     }
 
-    public function getClassName()
+    /**
+     * @inheritDoc
+     */
+    public function getClassName() : string
     {
-        return 'FFMpeg\Media\Audio';
+        return \FFMpeg\Media\Audio::class;
     }
 }

@@ -43,7 +43,7 @@ class AbstractDataTest extends TestCase
         $values = ['key1' => 'value1', 'key2' => 'value2'];
         $imp = new Implementation($values);
 
-        $this->assertEquals($values, $imp->all());
+        $this->assertEquals($values, $imp->getAllData());
     }
 }
 

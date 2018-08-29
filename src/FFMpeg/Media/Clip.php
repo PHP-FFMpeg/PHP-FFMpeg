@@ -22,8 +22,13 @@ class Clip extends Video
     /** @var Video Parrent video */
     private $video;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $start, TimeCode $duration = null)
-    {
+    public function __construct(
+        Video $video,
+        FFMpegDriver $driver,
+        FFProbe $ffprobe,
+        TimeCode $start,
+        TimeCode $duration = null
+    ) {
         $this->start = $start;
         $this->duration = $duration;
         $this->video = $video;
@@ -42,19 +47,19 @@ class Clip extends Video
     }
 
     /**
-     * Return base part of command.
+     * Returns the base part of command.
      *
-     * @return array
+     * @return string[]
      */
-    protected function basePartOfCommand()
+    protected function basePartOfCommand() : array
     {
-        $arr = array('-y', '-ss', (string) $this->start, '-i', $this->pathfile);
+        $basePart = ['-y', '-ss', (string)$this->start, '-i', $this->pathfile];
 
-        if (is_null($this->duration) === false) {
-            $arr[] = '-t';
-            $arr[] = (string) $this->duration;
+        if (null !== $this->duration) {
+            $basePart[] = '-t';
+            $basePart[] = (string)$this->duration;
         }
 
-        return $arr;
+        return $basePart;
     }
 }

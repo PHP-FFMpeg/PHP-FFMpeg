@@ -19,7 +19,7 @@ class OptionsTesterTest extends TestCase
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->once())
             ->method('command')
-            ->with(array('-help', '-loglevel', 'quiet'))
+            ->with(['-help', '-loglevel', 'quiet'])
             ->will($this->throwException(new ExecutionFailureException('Failed to execute')));
 
         $tester = new OptionsTester($ffprobe, $cache);
@@ -102,12 +102,12 @@ class OptionsTesterTest extends TestCase
 
         $cache->expects($this->once())
             ->method('get')
-            ->with('option-' . $optionName)
+            ->with('php-ffmpeg-ffprobe-option-' . $optionName)
             ->will($this->returnValue($isPresent));
 
         $cache->expects($this->once())
             ->method('has')
-            ->with('option-' . $optionName)
+            ->with('php-ffmpeg-ffprobe-option-' . $optionName)
             ->will($this->returnValue(true));
 
         $ffprobe = $this->getFFProbeDriverMock();

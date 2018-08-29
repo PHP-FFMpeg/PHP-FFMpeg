@@ -30,5 +30,11 @@ interface ProgressableInterface extends EventEmitterInterface
      *
      * @return ListenerInterface[] An array of listeners
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses, int $duration = 0): array;
+    public function createProgressListener(
+        MediaTypeInterface $media,
+        FFProbe $ffprobe,
+        int $passes,
+        int $totalPasses,
+        int $duration = 0
+    ) : array;
 }

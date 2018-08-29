@@ -14,7 +14,7 @@ class AudioFiltersTest extends TestCase
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Audio\AudioResamplableFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Audio\AudioResamplableFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));

@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -35,9 +36,9 @@ abstract class AbstractData implements \Countable
      * @param  string $property
      * @return bool
      */
-    public function has($property): bool
+    public function has($property) : bool
     {
-        return isset($this->properties[$property]);
+        return isset($this->properties[$property]) || array_key_exists($property, $this->properties);
     }
 
     /**
@@ -63,7 +64,7 @@ abstract class AbstractData implements \Countable
      * @param  mixed  $value
      * @return self
      */
-    public function set(string $property, $value): self
+    public function set(string $property, $value) : self
     {
         $this->properties[$property] = $value;
 
@@ -75,7 +76,7 @@ abstract class AbstractData implements \Countable
      *
      * @return string[]
      */
-    public function keys(): array
+    public function keys() : array
     {
         return array_keys($this->properties);
     }
@@ -85,7 +86,7 @@ abstract class AbstractData implements \Countable
      *
      * @return mixed[][]
      */
-    public function all()
+    public function getAllData() : array
     {
         return $this->properties;
     }
@@ -93,7 +94,7 @@ abstract class AbstractData implements \Countable
     /**
      * @inheritDoc
      */
-    public function count(): int
+    public function count() : int
     {
         return count($this->properties);
     }

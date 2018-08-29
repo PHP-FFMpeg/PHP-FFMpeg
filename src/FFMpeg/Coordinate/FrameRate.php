@@ -44,15 +44,18 @@ class FrameRate
      * @param  float $value The new value
      * @return void
      */
-    public function setValue(float $value): void
+    public function setValue(float $value) : void
     {
+        if ($value <= 0) {
+            throw new InvalidArgumentException('Invalid frame rate, must be a positive integer.');
+        }
         $this->value = $value;
     }
 
     /**
      * @return float
      */
-    public function getValue(): float
+    public function getValue() : float
     {
         return $this->value;
     }

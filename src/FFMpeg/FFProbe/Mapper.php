@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -40,14 +41,14 @@ class Mapper implements MapperInterface
         }
     }
 
-    private function mapFormat(array $data)
+    private function mapFormat(array $data) : Format
     {
         return new Format($data['format']);
     }
 
-    private function mapStreams(array $data)
+    private function mapStreams(array $data) : StreamCollection
     {
-        $streams = new StreamCollection;
+        $streams = new StreamCollection();
 
         foreach ($data['streams'] as $properties) {
             $streams->add(new Stream($properties));

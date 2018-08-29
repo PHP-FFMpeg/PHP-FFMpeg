@@ -16,34 +16,34 @@ use FFMpeg\Exception\InvalidArgumentException;
 class TimeCode
 {
     /**
-     * @var float
+     * @var int
      */
     private $hours;
 
     /**
-     * @var float
+     * @var int
      */
     private $minutes;
 
     /**
-     * @var float
+     * @var int
      */
     private $seconds;
 
     /**
-     * @var float
+     * @var int
      */
     private $frames;
 
     /**
      * Creates a new timecode based on absolutate numbers.
      *
-     * @param float $hours   Absolute number of hours
-     * @param float $minutes Absolute number of minutes
-     * @param float $seconds Absolute number of seconds
-     * @param float $frames  Absolute number of frames
+     * @param int $hours   Absolute number of hours
+     * @param int $minutes Absolute number of minutes
+     * @param int $seconds Absolute number of seconds
+     * @param int $frames  Absolute number of frames
      */
-    public function __construct(float $hours, float $minutes, float $seconds, float $frames)
+    public function __construct(int $hours, int $minutes, int $seconds, int $frames)
     {
         $this->hours = $hours;
         $this->minutes = $minutes;
@@ -57,7 +57,7 @@ class TimeCode
      *
      * @return string
      */
-    public function __toString(): string
+    public function __toString() : string
     {
         return sprintf('%02d:%02d:%02d.%02d', $this->hours, $this->minutes, $this->seconds, $this->frames);
     }
@@ -69,7 +69,7 @@ class TimeCode
      * @return TimeCode
      * @throws InvalidArgumentException In case an invalid timecode is supplied
      */
-    public static function fromString($timecode): TimeCode
+    public static function fromString($timecode) : TimeCode
     {
         $days = 0;
 
@@ -90,13 +90,16 @@ class TimeCode
         return new static($hours, $minutes, $seconds, $frames);
     }
 
+    // FIXME: Either `fromSeconds` or `toSeconds` is calculating junk in terms of
+    // seconds -> frames OR frames -> seconds
+
     /**
      * Creates timecode from number of seconds.
      *
      * @param  float $quantity
      * @return TimeCode
      */
-    public static function fromSeconds(float $quantity): TimeCode
+    public static function fromSeconds(float $quantity) : TimeCode
     {
         $minutes = $hours = $frames = 0;
 
@@ -118,9 +121,9 @@ class TimeCode
     /**
      * Returns this timecode in seconds
      *
-     * @return int
+     * @return float
      */
-    public function toSeconds(): int
+    public function toSeconds() : float
     {
         $seconds = 0;
 
@@ -128,9 +131,12 @@ class TimeCode
         $seconds += $this->minutes * 60;
         $seconds += $this->seconds;
 
-        // TODO: Handle frames?
+        // prevent division by zero
+        if (0 !== $this->frames) {
+            $seconds += (1 / $this->frames);
+        }
 
-        return (int) $seconds;
+        return $seconds;
     }
 
     /**
@@ -140,7 +146,7 @@ class TimeCode
      * @param    TimeCode $timecode The Timecode to compare
      * @return   bool
      */
-    public function isAfter(TimeCode $timecode): bool
+    public function isAfter(TimeCode $timecode) : bool
     {
         // convert everything to seconds and compare
         return ($this->toSeconds() > $timecode->toSeconds());

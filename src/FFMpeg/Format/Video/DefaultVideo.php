@@ -47,7 +47,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * @inheritDoc
      */
-    public function getKiloBitrate(): int
+    public function getKiloBitrate() : int
     {
         return $this->kiloBitrate;
     }
@@ -59,13 +59,13 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      * @return self
      * @throws InvalidArgumentException
      */
-    public function setKiloBitrate(int $kiloBitrate): self
+    public function setKiloBitrate(int $kiloBitrate) : self
     {
         if ($kiloBitrate < 1) {
             throw new InvalidArgumentException('Wrong kiloBitrate value');
         }
 
-        $this->kiloBitrate = (int) $kiloBitrate;
+        $this->kiloBitrate = (int)$kiloBitrate;
 
         return $this;
     }
@@ -73,7 +73,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * @inheritDoc
      */
-    public function getVideoCodec(): ?string
+    public function getVideoCodec() : ? string
     {
         return $this->videoCodec;
     }
@@ -86,7 +86,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      * @return self
      * @throws InvalidArgumentException
      */
-    public function setVideoCodec(string $videoCodec): self
+    public function setVideoCodec(string $videoCodec) : self
     {
         if (!in_array($videoCodec, $this->getAvailableVideoCodecs())) {
             throw new InvalidArgumentException(
@@ -106,7 +106,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * @return int
      */
-    public function getModulus(): int
+    public function getModulus() : int
     {
         return $this->modulus;
     }
@@ -114,7 +114,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * @inheritDoc
      */
-    public function getAdditionalParameters(): ?array
+    public function getAdditionalParameters() : ? array
     {
         return $this->additionalParamaters;
     }
@@ -126,7 +126,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      * @return self
      * @throws InvalidArgumentException
      */
-    public function setAdditionalParameters(array $additionalParamaters): self
+    public function setAdditionalParameters(array $additionalParamaters) : self
     {
         $this->additionalParamaters = $additionalParamaters;
 
@@ -136,8 +136,13 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * @inheritDoc
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, int $passes, int $totalPasses, int $duration = 0): array
-    {
+    public function createProgressListener(
+        MediaTypeInterface $media,
+        FFProbe $ffprobe,
+        int $passes,
+        int $totalPasses,
+        int $duration = 0
+    ) : array {
         $format = $this;
         $listener = new VideoProgressListener($ffprobe, $media->getPathfile(), $passes, $totalPasses, $duration);
 

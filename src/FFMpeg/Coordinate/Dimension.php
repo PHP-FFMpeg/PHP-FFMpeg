@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -20,22 +20,22 @@ class Dimension
 {
 
     /**
-     * @var int
+     * @var float
      */
     private $width;
 
     /**
-     * @var int
+     * @var float
      */
     private $height;
 
     /**
-     * @param   int $width
-     * @param   int $height
+     * @param   float $width
+     * @param   float $height
      *
      * @throws InvalidArgumentException when one of the parameteres is invalid (not positive)
      */
-    public function __construct(int $width, int $height)
+    public function __construct(float $width, float $height)
     {
         if ($width <= 0 || $height <= 0) {
             throw new InvalidArgumentException('Both width and height should be positive numbers!');
@@ -48,9 +48,9 @@ class Dimension
     /**
      * Returns width.
      *
-     * @return int
+     * @return float
      */
-    public function getWidth(): int
+    public function getWidth() : float
     {
         return $this->width;
     }
@@ -58,9 +58,9 @@ class Dimension
     /**
      * Returns height.
      *
-     * @return int
+     * @return float
      */
-    public function getHeight(): int
+    public function getHeight() : float
     {
         return $this->height;
     }
@@ -72,7 +72,7 @@ class Dimension
      *
      * @return AspectRatio
      */
-    public function getRatio(bool $forceStandards = true): AspectRatio
+    public function getRatio(bool $forceStandards = true) : AspectRatio
     {
         return AspectRatio::create($this, $forceStandards);
     }

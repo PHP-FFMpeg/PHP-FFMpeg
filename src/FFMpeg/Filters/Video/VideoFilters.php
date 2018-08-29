@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -22,14 +23,14 @@ use FFMpeg\Filters\Audio\AudioFilters;
 class VideoFilters extends AudioFilters
 {
 
-    // phpcs:disable
     /**
      * @inheritDoc
+     * @param Video $media The video the filters will be applied to
      */
-    public function __construct(Video $media) {
+    public function __construct(Video $media)
+    {
         parent::__construct($media);
     }
-    // phpcs:enable
 
     /**
      * Resizes a video to a given dimension.
@@ -40,8 +41,11 @@ class VideoFilters extends AudioFilters
      *
      * @return self
      */
-    public function resize(Dimension $dimension, string $mode = ResizeFilter::RESIZEMODE_FIT, bool $forceStandards = true): self
-    {
+    public function resize(
+        Dimension $dimension,
+        string $mode = ResizeFilter::RESIZEMODE_FIT,
+        bool $forceStandards = true
+    ) : self {
         $this->media->addFilter(new ResizeFilter($dimension, $mode, $forceStandards));
 
         return $this;
@@ -54,7 +58,7 @@ class VideoFilters extends AudioFilters
      * @param  int       $gop
      * @return self
      */
-    public function framerate(FrameRate $framerate, ?int $gop = null): self
+    public function framerate(FrameRate $framerate, ? int $gop = null) : self
     {
         $this->media->addFilter(new FrameRateFilter($framerate, $gop));
 
@@ -69,8 +73,10 @@ class VideoFilters extends AudioFilters
      *
      * @return self
      */
-    public function extractMultipleFrames(string $frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, string $destinationFolder = __DIR__): self
-    {
+    public function extractMultipleFrames(
+        string $frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC,
+        string $destinationFolder = __DIR__
+    ) : self {
         $this->media->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
 
         return $this;
@@ -81,9 +87,9 @@ class VideoFilters extends AudioFilters
      *
      * @return self
      */
-    public function synchronize(): self
+    public function synchronize() : self
     {
-        $this->media->addFilter(new SynchronizeFilter);
+        $this->media->addFilter(new SynchronizeFilter());
 
         return $this;
     }
@@ -96,7 +102,7 @@ class VideoFilters extends AudioFilters
      *
      * @return self
      */
-    public function clip(TimeCode $start, ?TimeCode $duration = null): self
+    public function clip(TimeCode $start, ? TimeCode $duration = null) : self
     {
         $this->media->addFilter(new ClipFilter($start, $duration));
 
@@ -109,7 +115,7 @@ class VideoFilters extends AudioFilters
      * @param  int $rate
      * @return self
      */
-    public function audioResample(int $rate): self
+    public function audioResample(int $rate) : self
     {
         $this->media->addFilter(new AudioResamplableFilter($rate));
 
@@ -122,7 +128,7 @@ class VideoFilters extends AudioFilters
      * @param  Dimension $dimension
      * @return self
      */
-    public function pad(Dimension $dimension): self
+    public function pad(Dimension $dimension) : self
     {
         $this->media->addFilter(new PadFilter($dimension));
 
@@ -135,7 +141,7 @@ class VideoFilters extends AudioFilters
      * @param  string $angle One of `RotateFilter::ROTATE_[90|180|270]` constants
      * @return self
      */
-    public function rotate(string $angle): self
+    public function rotate(string $angle) : self
     {
         // use a high priority
         $this->media->addFilter(new RotateFilter($angle, 30));
@@ -151,7 +157,7 @@ class VideoFilters extends AudioFilters
      *
      * @return self
      */
-    public function crop(Point $point, Dimension $dimension): self
+    public function crop(Point $point, Dimension $dimension) : self
     {
         $this->media->addFilter(new CropFilter($point, $dimension));
 
@@ -164,7 +170,7 @@ class VideoFilters extends AudioFilters
      *
      * @return self
      */
-    public function watermark(string $imagePath, array $coordinates = []): self
+    public function watermark(string $imagePath, array $coordinates = []) : self
     {
         $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates));
 
@@ -178,7 +184,7 @@ class VideoFilters extends AudioFilters
      *
      * @return self
      */
-    public function custom(string $parameters): self
+    public function custom(string $parameters) : self
     {
         $this->media->addFilter(new CustomFilter($parameters));
 

@@ -71,8 +71,11 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     /** @var string[] */
     private static $supportedFrameFileTypes = ['jpg', 'jpeg', 'png'];
 
-    public function __construct(string $frameRate = self::FRAMERATE_EVERY_SEC, string $destinationFolder = __DIR__, int $priority = 0)
-    {
+    public function __construct(
+        string $frameRate = self::FRAMERATE_EVERY_SEC,
+        string $destinationFolder = __DIR__,
+        int $priority = 0
+    ) {
         $this->setPriority($priority);
 
         $this->frameRate = $frameRate;
@@ -95,7 +98,9 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             return $this;
         }
 
-        throw new InvalidArgumentException('Invalid frame file type, use: ' . implode(',', self::$supportedFrameFileTypes));
+        throw new InvalidArgumentException(
+            'Invalid frame file type, use: ' . implode(', ', self::$supportedFrameFileTypes)
+        );
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -21,6 +21,11 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Main class for opening media files to manipulate or read data out of them.
+ *
+ * @author      jens1o
+ * @copyright   Jens Hausdorf 2018
+ * @license     MIT License
+ * @package     FFMpeg
  */
 class FFMpeg
 {
@@ -59,7 +64,7 @@ class FFMpeg
      *
      * @return FFProbe
      */
-    public function getFFProbe(): FFProbe
+    public function getFFProbe() : FFProbe
     {
         return $this->ffprobe;
     }
@@ -81,7 +86,7 @@ class FFMpeg
      *
      * @return FFMpegDriver
      */
-    public function getFFMpegDriver(): FFMpegDriver
+    public function getFFMpegDriver() : FFMpegDriver
     {
         return $this->driver;
     }
@@ -91,11 +96,11 @@ class FFMpeg
      *
      * @param  string $pathfile A path to a file
      * @return Audio|Video
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException when it fails to detect the file format or there is a general error.
      */
-    public function open(string $pathfile): Audio
+    public function open(string $pathfile) : Audio
     {
-        if (($streams = $this->ffprobe->streams($pathfile)) === null) {
+        if (null === ($streams = $this->ffprobe->streams($pathfile))) {
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
 
@@ -107,7 +112,7 @@ class FFMpeg
             return new Audio($pathfile, $this->driver, $this->ffprobe);
         }
 
-        throw new InvalidArgumentException('Unable to detect file format, only audio and video supported');
+        throw new InvalidArgumentException('Unable to detect file format, only audio and video are supported.');
     }
 
     /**
@@ -118,9 +123,9 @@ class FFMpeg
      * @param  FFProbe                      $probe
      * @return FFMpeg
      */
-    public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null): FFMpeg
+    public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null) : FFMpeg
     {
-        if ($probe === null) {
+        if (null === $probe) {
             $probe = FFProbe::create($configuration, $logger, null);
         }
 

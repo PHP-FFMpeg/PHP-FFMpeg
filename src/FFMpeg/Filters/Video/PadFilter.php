@@ -41,7 +41,7 @@ class PadFilter implements VideoFilterInterface
     /**
      * @return Dimension
      */
-    public function getDimension(): Dimension
+    public function getDimension() : Dimension
     {
         return $this->dimension;
     }
@@ -49,12 +49,21 @@ class PadFilter implements VideoFilterInterface
     /**
      * @inheritDoc
      */
-    public function apply(Video $video, VideoInterface $format): array
+    public function apply(Video $video, VideoInterface $format) : array
     {
+        $width = $this->dimension->getWidth();
+        $height = $this->dimension->getHeight();
+
         $commands = [];
 
         $commands[] = '-vf';
-        $commands[] = 'scale=iw*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight() .'/ih):ih*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight() .'/ih),pad=' . $this->dimension->getWidth() . ':' . $this->dimension->getHeight() . ':(' . $this->dimension->getWidth() . '-iw)/2:(' . $this->dimension->getHeight() .'-ih)/2';
+
+        // cleaned up to obey codestyle.
+        $padFilterPart1 = 'scale=iw*min(' . $width . '/iw\,' . $height . '/ih):';
+        $padFilterPart2 = 'ih*min(' . $width . '/iw\,' . $height . '/ih),';
+        $padFilterPart3 = 'pad=' . $width . ':' . $height . ':(' . $width . '-iw)/2:(' . $height . '-ih)/2';
+
+        $commands[] = $padFilterPart1 . $padFilterPart2 . $padFilterPart3;
 
         return $commands;
     }

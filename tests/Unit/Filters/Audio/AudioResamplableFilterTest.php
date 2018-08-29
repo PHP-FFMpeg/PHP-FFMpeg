@@ -19,6 +19,6 @@ class AudioResamplableFilterTest extends TestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         $filter = new AudioResamplableFilter(500);
-        $this->assertEquals(array('-ac', 2, '-ar', 500), $filter->apply($audio, $format));
+        $this->assertEquals(['-ac', '2', '-ar', '500'], $filter->apply($audio, $format));
     }
 }

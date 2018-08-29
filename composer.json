@@ -43,7 +43,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "alchemy/binary-driver": "^2.0",
+        "alchemy/binary-driver": "^5.0",
         "evenement/evenement": "^2.0",
         "neutron/temporary-filesystem": "2.3",
         "sabre/cache": "^1.0"
@@ -63,11 +63,6 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\FFMpeg\\": "tests"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.7-dev"
         }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 namespace Tests\FFMpeg\Unit\Format\ProgressListener;
 
 use Tests\FFMpeg\Unit\TestCase;
@@ -11,18 +11,26 @@ class AudioProgressListenerTest extends TestCase
     /**
      * @dataProvider provideData
      */
-    public function testHandle($size, $duration,
-        $data, $expectedPercent, $expectedRemaining, $expectedRate,
-        $data2, $expectedPercent2, $expectedRemaining2, $expectedRate2,
-        $currentPass, $totalPass
-    )
-    {
+    public function testHandle(
+        $size,
+        $duration,
+        $data,
+        $expectedPercent,
+        $expectedRemaining,
+        $expectedRate,
+        $data2,
+        $expectedPercent2,
+        $expectedRemaining2,
+        $expectedRate2,
+        $currentPass,
+        $totalPass
+    ) {
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
             ->method('format')
             ->with(__FILE__)
             ->will($this->returnValue(new Format([
-                'size'     => $size,
+                'size' => $size,
                 'duration' => $duration,
             ])));
 
@@ -30,11 +38,11 @@ class AudioProgressListenerTest extends TestCase
         $phpunit = $this;
         $numberListenerIsCalled = 0;
         $listener->on('progress', function ($percent, $remaining, $rate) use (&$numberListenerIsCalled, $phpunit, $expectedPercent, $expectedRemaining, $expectedRate, $expectedPercent2, $expectedRemaining2, $expectedRate2) {
-            if (0 === $n) {
+            if (0 === $numberListenerIsCalled) {
                 $phpunit->assertEquals($expectedPercent, $percent);
                 $phpunit->assertEquals($expectedRemaining, $remaining);
                 $phpunit->assertEquals($expectedRate, $rate);
-            } else if(1 === $n) {
+            } else if (1 === $numberListenerIsCalled) {
                 $phpunit->assertEquals($expectedPercent2, $percent);
                 $phpunit->assertEquals($expectedRemaining2, $remaining);
                 $phpunit->assertLessThan($expectedRate2 + 10, $rate);
@@ -42,19 +50,21 @@ class AudioProgressListenerTest extends TestCase
             }
             ++$numberListenerIsCalled;
         });
+
         // first one does not trigger progress event
-        $listener->handle('any-type'.mt_rand(), $data);
-        usleep(250);
-        $listener->handle('any-type'.mt_rand(), $data);
-        usleep(250);
-        $listener->handle('any-type'.mt_rand(), $data2);
+        $listener->handle('any-type' . mt_rand(), $data);
+        usleep(125);
+        $listener->handle('any-type' . mt_rand(), $data);
+        usleep(125);
+        $listener->handle('any-type' . mt_rand(), $data2);
+
         $this->assertEquals(2, $numberListenerIsCalled);
     }
 
     public function provideData()
     {
-        return array(
-            array(
+        return [
+            [
                 2894412,
                 180.900750,
                 'size=     712kB time=00:00:45.50 bitrate= 128.1kbits/s',
@@ -67,8 +77,8 @@ class AudioProgressListenerTest extends TestCase
                 563,
                 1,
                 1
-            ),
-            array(
+            ],
+            [
                 2894412,
                 180.900750,
                 'size=     712kB time=00:00:45.50 bitrate= 128.1kbits/s',
@@ -81,7 +91,7 @@ class AudioProgressListenerTest extends TestCase
                 563,
                 1,
                 2
-            )
-        );
+            ]
+        ];
     }
 }

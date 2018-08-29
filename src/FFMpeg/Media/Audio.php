@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -39,7 +40,7 @@ class Audio extends AbstractStreamableMedia
      *
      * @return self
      */
-    public function addFilter(FilterInterface $filter): MediaTypeInterface
+    public function addFilter(FilterInterface $filter) : MediaTypeInterface
     {
         if (!($filter instanceof AudioFilterInterface)) {
             throw new InvalidArgumentException('Audio only accepts AudioFilterInterface filters');
@@ -101,14 +102,12 @@ class Audio extends AbstractStreamableMedia
      */
     protected function buildCommand(FormatInterface $format, string $outputPathfile)
     {
-        $commands = ['-y', '-i', $this->pathfile];
+        $commands = ['-y', '-i', $this->pathfile, '-threads', (string)$this->driver->getConfiguration()->get('ffmpeg.threads')];
 
         $filters = clone $this->filters;
+
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
-        }
         if (null !== $format->getAudioCodec()) {
             $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
         }
@@ -117,13 +116,13 @@ class Audio extends AbstractStreamableMedia
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
 
-        if (null !== $format->getAudioKiloBitrate()) {
+        if ($format->getAudioKiloBitrate()) {
             $commands[] = '-b:a';
             $commands[] = $format->getAudioKiloBitrate() . 'k';
         }
         if (null !== $format->getAudioChannels()) {
             $commands[] = '-ac';
-            $commands[] = $format->getAudioChannels();
+            $commands[] = (string)$format->getAudioChannels();
         }
         $commands[] = $outputPathfile;
 
@@ -137,7 +136,7 @@ class Audio extends AbstractStreamableMedia
      * @param  integer $height
      * @return Waveform
      */
-    public function waveform(int $width = 640, int $height = 120): Waveform
+    public function waveform(int $width = 640, int $height = 120) : Waveform
     {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height);
     }

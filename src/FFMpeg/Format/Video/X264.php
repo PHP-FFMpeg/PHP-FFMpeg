@@ -27,20 +27,7 @@ class X264 extends DefaultVideo
      */
     private $passes = 2;
 
-    /**
-     * @inheritDoc
-     */
-    protected $audioCodec = 'libmp3lame';
-
-    /**
-     * @inheritDoc
-     */
-    protected $videoCodec = 'libx264';
-
-    /**
-     * @deprecated 1.0.0 use setters directly
-     */
-    public function __construct(string $audioCodec = 'libmp3lame', string $videoCodec = 'libx264')
+    public function __construct(string $audioCodec = 'aac', string $videoCodec = 'libx264')
     {
         $this->setAudioCodec($audioCodec);
         $this->setVideoCodec($videoCodec);
@@ -49,7 +36,7 @@ class X264 extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function supportBFrames(): bool
+    public function supportBFrames() : bool
     {
         return $this->bframesSupport;
     }
@@ -59,7 +46,7 @@ class X264 extends DefaultVideo
      *
      * @return self
      */
-    public function setBFramesSupport(bool $support): self
+    public function setBFramesSupport(bool $support) : self
     {
         $this->bframesSupport = $support;
 
@@ -69,7 +56,7 @@ class X264 extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function getAvailableAudioCodecs(): array
+    public function getAvailableAudioCodecs() : array
     {
         return ['aac', 'libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac'];
     }
@@ -77,7 +64,7 @@ class X264 extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function getAvailableVideoCodecs(): array
+    public function getAvailableVideoCodecs() : array
     {
         return ['libx264'];
     }
@@ -87,7 +74,7 @@ class X264 extends DefaultVideo
      *
      * @return self
      */
-    public function setPasses(int $passes): self
+    public function setPasses(int $passes) : self
     {
         $this->passes = $passes;
         return $this;
@@ -96,7 +83,7 @@ class X264 extends DefaultVideo
     /**
      * @inheritDoc
      */
-    public function getPasses(): int
+    public function getPasses() : int
     {
         return $this->passes;
     }
@@ -104,7 +91,7 @@ class X264 extends DefaultVideo
     /**
      * @return int
      */
-    public function getModulus(): int
+    public function getModulus() : int
     {
         return 2;
     }

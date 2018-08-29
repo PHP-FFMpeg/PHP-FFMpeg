@@ -39,7 +39,7 @@ class FFMpegDriver extends AbstractBinary
      * @param  array|Configuration $configuration
      * @return FFMpegDriver
      */
-    public static function create(LoggerInterface $logger = null, $configuration = []): FFMpegDriver
+    public static function create(LoggerInterface $logger = null, $configuration = []) : FFMpegDriver
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);
@@ -49,6 +49,10 @@ class FFMpegDriver extends AbstractBinary
 
         if (!$configuration->has('timeout')) {
             $configuration->set('timeout', 300);
+        }
+
+        if (!$configuration->has('ffmpeg.threads')) {
+            $configuration->set('ffmpeg.threads', 2);
         }
 
         try {

@@ -1,4 +1,6 @@
 <?php
+declare (strict_types = 1);
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -50,7 +52,7 @@ abstract class AbstractVideo extends Audio
      * @inheritDoc
      * @return Video
      */
-    public function addFilter(FilterInterface $filter)
+    public function addFilter(FilterInterface $filter) : MediaTypeInterface
     {
         $this->filters->add($filter);
 
@@ -65,7 +67,7 @@ abstract class AbstractVideo extends Audio
      * @return Video
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, string $outputPathfile)
     {
         $passes = $this->buildCommand($format, $outputPathfile);
 
@@ -90,7 +92,14 @@ abstract class AbstractVideo extends Audio
                             break;
                         }
                     }
-                    $listeners = $format->createProgressListener($this, $this->ffprobe, $pass + 1, $totalPasses, $duration);
+
+                    $listeners = $format->createProgressListener(
+                        $this,
+                        $this->ffprobe,
+                        $pass + 1,
+                        $totalPasses,
+                        $duration
+                    );
                 }
 
                 $this->driver->command($passCommands, false, $listeners);
@@ -115,7 +124,7 @@ abstract class AbstractVideo extends Audio
      */
     public function getFinalCommand(FormatInterface $format, $outputPathfile)
     {
-        $finalCommands = array();
+        $finalCommands = [];
 
         foreach ($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
             $finalCommands[] = implode(' ', $passCommands);
@@ -137,19 +146,17 @@ abstract class AbstractVideo extends Audio
         $commands = $this->basePartOfCommand();
 
         $filters = clone $this->filters;
+
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
-        }
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+                $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
             }
         }
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+                $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
             }
         }
 
@@ -159,7 +166,7 @@ abstract class AbstractVideo extends Audio
 
         if ($format instanceof VideoInterface) {
             $commands[] = '-b:v';
-            $commands[] = $format->getKiloBitrate() . 'k';
+            $commands[] = ($format->getKiloBitrate() !== 0 ? $format->getKiloBitrate() : '') . 'k';
             $commands[] = '-refs';
             $commands[] = '6';
             $commands[] = '-coder';
@@ -183,13 +190,13 @@ abstract class AbstractVideo extends Audio
         }
 
         if ($format instanceof AudioInterface) {
-            if (null !== $format->getAudioKiloBitrate()) {
+            if ($format->getAudioKiloBitrate()) {
                 $commands[] = '-b:a';
                 $commands[] = $format->getAudioKiloBitrate() . 'k';
             }
             if (null !== $format->getAudioChannels()) {
                 $commands[] = '-ac';
-                $commands[] = $format->getAudioChannels();
+                $commands[] = (string)$format->getAudioChannels();
             }
         }
 
@@ -203,12 +210,12 @@ abstract class AbstractVideo extends Audio
         }
 
         // Merge Filters into one command
-        $videoFilterVars = $videoFilterProcesses = array();
+        $videoFilterVars = $videoFilterProcesses = [];
         for ($i = 0; $i < count($commands); $i++) {
             $command = $commands[$i];
-            if ($command == '-vf') {
+            if ($command === '-vf') {
                 $commandSplits = explode(";", $commands[$i + 1]);
-                if (count($commandSplits) == 1) {
+                if (count($commandSplits) === 1) {
                     $commandSplit = $commandSplits[0];
                     $command = trim($commandSplit);
                     if (preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match)) {
@@ -233,11 +240,13 @@ abstract class AbstractVideo extends Audio
         }
         $videoFilterCommands = $videoFilterVars;
         $lastInput = 'in';
+        $videoFilterProcessesCount = count($videoFilterProcesses);
+
         foreach ($videoFilterProcesses as $i => $process) {
             $command = '[' . $lastInput . ']';
             $command .= $process;
             $lastInput = 'p' . $i;
-            if ($i === (count($videoFilterProcesses) - 1)) {
+            if ($i === ($videoFilterProcessesCount - 1)) {
                 $command .= '[out]';
             } else {
                 $command .= '[' . $lastInput . ']';
@@ -255,7 +264,7 @@ abstract class AbstractVideo extends Audio
         $this->fs = FsManager::create();
         $this->fsId = uniqid('ffmpeg-passes');
         $passPrefix = $this->fs->createTemporaryDirectory(0777, 50, $this->fsId) . '/' . uniqid('pass-');
-        $passes = array();
+        $passes = [];
         $totalPasses = $format->getPasses();
 
         if (!$totalPasses) {
@@ -281,12 +290,12 @@ abstract class AbstractVideo extends Audio
     }
 
     /**
-     * Return base part of command.
+     * Returns base part of command.
      *
-     * @return array
+     * @return string[]
      */
-    protected function basePartOfCommand()
+    protected function basePartOfCommand() : array
     {
-        return array('-y', '-i', $this->pathfile);
+        return ['-y', '-i', $this->pathfile, '-threads', (string)$this->driver->getConfiguration()->get('ffmpeg.threads', 2)];
     }
 }

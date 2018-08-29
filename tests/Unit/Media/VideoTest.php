@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\Media;
 
@@ -14,7 +15,7 @@ class VideoTest extends AbstractStreamableTestCase
         $ffprobe = $this->getFFProbeMock();
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Filters\Video\VideoFilters', $video->filters());
+        $this->assertInstanceOf(\FFMpeg\Filters\Video\VideoFilters::class, $video->filters());
     }
 
     public function testAddFiltersAddsAFilter()
@@ -22,7 +23,7 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -43,7 +44,7 @@ class VideoTest extends AbstractStreamableTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -116,7 +117,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getPasses')
             ->will($this->returnValue(2));
 
-        $configuration = $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
+        $configuration = $this->getConfigurationMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -128,7 +129,7 @@ class VideoTest extends AbstractStreamableTestCase
         $filter->expects($this->once())
             ->method('apply')
             ->with($video, $format)
-            ->will($this->returnValue(array('extra-filter-command')));
+            ->will($this->returnValue(['extra-filter-command']));
 
         $capturedCommands = [];
 
@@ -146,14 +147,17 @@ class VideoTest extends AbstractStreamableTestCase
             $this->assertEquals('-y', $commands[0]);
             $this->assertEquals('-i', $commands[1]);
             $this->assertEquals(__FILE__, $commands[2]);
-            $this->assertEquals('extra-filter-command', $commands[3]);
+            $this->assertEquals('-threads', $commands[3]);
+            // default number of threads
+            $this->assertEquals('2', $commands[4]);
+            $this->assertEquals('extra-filter-command', $commands[5]);
         }
     }
 
     /**
      * @dataProvider provideSaveData
      */
-    public function testSaveShouldSave($threads, $expectedCommands, $expectedListeners, $format)
+    public function testSaveShouldSave(bool $threads, array $expectedCommands, ? array $expectedListeners, $format)
     {
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
@@ -167,7 +171,7 @@ class VideoTest extends AbstractStreamableTestCase
         $configuration->expects($this->once())
             ->method('get')
             ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue($threads ? 24 : 2));
+            ->will($this->returnValue($threads ? '24' : '2'));
 
         $capturedCommands = [];
         $capturedListeners = null;
@@ -191,7 +195,7 @@ class VideoTest extends AbstractStreamableTestCase
                 // look for pass commands only in multipass cases
                 foreach ($pass as $command) {
                     $prefix = null;
-                    if (false !== strpos($command, '/pass-')) {
+                    if (false !== strpos((string)$command, '/pass-')) {
                         $prefix = $command;
                         break;
                     }
@@ -261,7 +265,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->returnValue(2));
         $format2->expects($this->any())
             ->method('getAdditionalParameters')
-			->will($this->returnValue(['foo', 'bar']));
+            ->will($this->returnValue(['foo', 'bar']));
 
         $audioFormat = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $audioFormat->expects($this->any())
@@ -437,137 +441,137 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getPasses')
             ->will($this->returnValue(1));
 
-        return array(
+        return [
             array(false, array(array(
-                    '-y', '-i', __FILE__, '-threads', '2', '-b:v', '663k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
-                    '/target/file',
-                ), array(
-                    '-y', '-i', __FILE__, '-threads', '2',
-                    '-b:v', '663k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
-                    '/target/file',
-                )), null, $format),
+                '-y', '-i', __FILE__, '-threads', '2', '-b:v', '663k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 1, '-passlogfile',
+                '/target/file',
+            ), array(
+                '-y', '-i', __FILE__, '-threads', '2',
+                '-b:v', '663k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', 2, 'foo', 'bar', '-pass', 2, '-passlogfile',
+                '/target/file',
+            )), null, $format),
             array(false, array(array(
-                    '-y', '-i', __FILE__, '-threads', '2',
-                    '-vcodec', 'gloubi-boulga-video',
-                    '-acodec', 'patati-patata-audio', '-b:v', '664k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
-                    '/target/file',
-                ), array(
-                    '-y', '-i', __FILE__, '-threads', '2',
-                    '-vcodec', 'gloubi-boulga-video',
-                    '-acodec', 'patati-patata-audio',
-                    '-b:v', '664k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
-                    '/target/file',
-                )), null, $audioVideoFormat),
+                '-y', '-i', __FILE__, '-threads', '2',
+                '-vcodec', 'gloubi-boulga-video',
+                '-acodec', 'patati-patata-audio', '-b:v', '664k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '/target/file',
+            ), array(
+                '-y', '-i', __FILE__, '-threads', '2',
+                '-vcodec', 'gloubi-boulga-video',
+                '-acodec', 'patati-patata-audio',
+                '-b:v', '664k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '/target/file',
+            )), null, $audioVideoFormat),
             array(false, array(array(
-                    '-y', '-i', __FILE__, '-threads', '2',
-                    '-vcodec', 'gloubi-boulga-video',
-                    '-acodec', 'patati-patata-audio', '-b:v', '664k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2',
-                    '/target/file',
-                )), null, $audioVideoFormatSinglePass),
+                '-y', '-i', __FILE__, '-threads', '2',
+                '-vcodec', 'gloubi-boulga-video',
+                '-acodec', 'patati-patata-audio', '-b:v', '664k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2',
+                '/target/file',
+            )), null, $audioVideoFormatSinglePass),
             array(false, array(array(
-                    '-y', '-i', __FILE__, '-threads', '2',
-                    'extra', 'param','-b:v', '665k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
-                    '/target/file',
-                ), array(
-                    '-y', '-i', __FILE__, '-threads', '2',
-                    'extra', 'param', '-b:v', '665k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
-                    '/target/file',
-                )), null, $formatExtra),
+                '-y', '-i', __FILE__, '-threads', '2',
+                'extra', 'param', '-b:v', '665k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '/target/file',
+            ), array(
+                '-y', '-i', __FILE__, '-threads', '2',
+                'extra', 'param', '-b:v', '665k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '/target/file',
+            )), null, $formatExtra),
             array(true, array(array(
-                    '-y', '-i', __FILE__,
-                    '-threads', '24', '-b:v', '663k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', 'foo', 'bar', '-pass', '1', '-passlogfile',
-                    '/target/file',
-                ), array(
-                    '-y', '-i', __FILE__,
-                    '-threads', '24',
-                    '-b:v', '663k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', 'foo', 'bar', '-pass', '2', '-passlogfile',
-                    '/target/file',
-                )), null, $format2),
+                '-y', '-i', __FILE__,
+                '-threads', '24', '-b:v', '663k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', 'foo', 'bar', '-pass', '1', '-passlogfile',
+                '/target/file',
+            ), array(
+                '-y', '-i', __FILE__,
+                '-threads', '24',
+                '-b:v', '663k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', 'foo', 'bar', '-pass', '2', '-passlogfile',
+                '/target/file',
+            )), null, $format2),
             array(true, array(array(
-                    '-y', '-i', __FILE__,
-                    'extra', 'param', '-threads', '24', '-b:v', '665k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
-                    '/target/file',
-                ), array(
-                    '-y', '-i', __FILE__,
-                    'extra', 'param', '-threads', '24', '-b:v', '665k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
-                    '/target/file',
-                )), null, $formatExtra2),
+                '-y', '-i', __FILE__, '-threads', '24',
+                'extra', 'param', '-b:v', '665k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '/target/file',
+            ), array(
+                '-y', '-i', __FILE__, '-threads', '24',
+                'extra', 'param', '-b:v', '665k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '/target/file',
+            )), null, $formatExtra2),
             array(false, array(array(
-                    '-y', '-i', __FILE__, '-threads', '2', '-b:v', '666k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
-                    '/target/file',
-                ), array(
-                    '-y', '-i', __FILE__, '-threads', '2',
-                    '-b:v', '666k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
-                    '/target/file',
-                )), $listeners, $progressableFormat2),
+                '-y', '-i', __FILE__, '-threads', '2', '-b:v', '666k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '/target/file',
+            ), array(
+                '-y', '-i', __FILE__, '-threads', '2',
+                '-b:v', '666k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '/target/file',
+            )), $listeners, $progressableFormat2),
             array(true, array(array(
-                    '-y', '-i', __FILE__,
-                    '-threads', '24', '-b:v', '666k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
-                    '/target/file',
-                ), array(
-                    '-y', '-i', __FILE__,
-                    '-threads', '24',
-                    '-b:v', '666k',
-                    '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
-                    '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
-                    '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
-                    '/target/file',
-                )), $listeners, $progressableFormat),
+                '-y', '-i', __FILE__,
+                '-threads', '24', '-b:v', '666k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '1', '-passlogfile',
+                '/target/file',
+            ), array(
+                '-y', '-i', __FILE__,
+                '-threads', '24',
+                '-b:v', '666k',
+                '-refs', '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
+                '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71', '-qcomp', '0.6',
+                '-qdiff', '4', '-trellis', '1', '-b:a', '92k', '-ac', '2', '-pass', '2', '-passlogfile',
+                '/target/file',
+            )), $listeners, $progressableFormat),
             array(true, array(array(
-                    '-y', '-i', __FILE__,
-                    '-threads', '24', '-acodec', 'patati-patata-audio',
-                    '-b:a', '92k', '-ac', '2',
-                    '/target/file',
-                )), null, $audioFormat),
+                '-y', '-i', __FILE__,
+                '-threads', '24', '-acodec', 'patati-patata-audio',
+                '-b:a', '92k', '-ac', '2',
+                '/target/file',
+            )), null, $audioFormat),
             array(true, array(array(
-                    '-y', '-i', __FILE__,
-                    '-threads', '24', '-acodec', 'patati-patata-audio',
-                    '-b:a', '92k', '-ac', '2',
-                    '/target/file',
-                )), $listeners, $progressableAudioFormat),
-        );
+                '-y', '-i', __FILE__,
+                '-threads', '24', '-acodec', 'patati-patata-audio',
+                '-b:a', '92k', '-ac', '2',
+                '/target/file',
+            )), $listeners, $progressableAudioFormat),
+        ];
     }
 
     public function testSaveShouldNotStoreCodecFiltersInTheMedia()
@@ -589,7 +593,7 @@ class VideoTest extends AbstractStreamableTestCase
         $configuration->expects($this->any())
             ->method('get')
             ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue(24));
+            ->will($this->returnValue('24'));
 
         $capturedCommands = [];
 
@@ -614,26 +618,26 @@ class VideoTest extends AbstractStreamableTestCase
         $video->save($format, $outputPathfile);
         $video->save($format, $outputPathfile);
 
-        $expectedPass1 = array(
-            '-y', '-i', __FILE__, 'param', '-threads', '24', '-b:v', 'k', '-refs',
+        $expectedPass1 = [
+            '-y', '-i', __FILE__, '-threads', '24', 'param', '-b:v', 'k', '-refs',
             '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
             '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71',
             '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1',
             '-pass', '1', '-passlogfile', '/target/file',
-        );
-        $expectedPass2 = array(
-            '-y', '-i', __FILE__, 'param', '-threads', '24', '-b:v', 'k', '-refs',
+        ];
+        $expectedPass2 = [
+            '-y', '-i', __FILE__, '-threads', '24', 'param', '-b:v', 'k', '-refs',
             '6', '-coder', '1', '-sc_threshold', '40', '-flags', '+loop',
             '-me_range', '16', '-subq', '7', '-i_qfactor', '0.71',
             '-qcomp', '0.6', '-qdiff', '4', '-trellis', '1',
             '-pass', '2', '-passlogfile', '/target/file',
-        );
+        ];
 
         $n = 1;
         foreach ($capturedCommands as $capturedCommand) {
             $prefix = null;
             foreach ($capturedCommand as $command) {
-                if (false !== strpos($command, '/pass-')) {
+                if (false !== strpos((string)$command, '/pass-')) {
                     $prefix = $command;
                     break;
                 }
@@ -666,7 +670,10 @@ class VideoTest extends AbstractStreamableTestCase
         }
     }
 
-    public function getClassName()
+    /**
+     * @inheritDoc
+     */
+    public function getClassName() : string
     {
         return \FFMpeg\Media\Video::class;
     }

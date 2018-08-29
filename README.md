@@ -69,12 +69,12 @@ paths explicitly, you can pass an array as configuration. A `Psr\Logger\LoggerIn
 can also be passed to log binary executions.
 
 ```php
-$ffmpeg = FFMpeg\FFMpeg::create(array(
+$ffmpeg = FFMpeg\FFMpeg::create([
     'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
     'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
     'timeout'          => 3600, // The timeout for the underlying process
     'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
-), $logger);
+], $logger);
 ```
 
 ### Manipulate media
@@ -92,7 +92,7 @@ ffmpeg -protocols
 To open a resource, use the `FFMpeg\FFMpeg::open` method.
 
 ```php
-$ffmpeg->open('video.mpeg');
+$ffmpeg->open('video.mp4');
 ```
 
 Two types of media can be resolved: `FFMpeg\Media\Audio` and `FFMpeg\Media\Video`.
@@ -280,11 +280,11 @@ Watermark a video with a given image.
 ```php
 $video
     ->filters()
-    ->watermark($watermarkPath, array(
+    ->watermark($watermarkPath, [
         'position' => 'relative',
         'bottom' => 50,
         'right' => 50,
-    ));
+    ]);
 ```
 
 The watermark filter takes two parameters:
@@ -295,11 +295,11 @@ The watermark filter takes two parameters:
 ```php
 $video
     ->filters()
-    ->watermark($watermarkPath, array(
+    ->watermark($watermarkPath, [
         'position' => 'absolute',
         'x' => 1180,
         'y' => 620,
-    ));
+    ]);
 ```
 
 ###### Framerate
@@ -484,8 +484,8 @@ To concatenate videos encoded with the same codec, do as follow:
 // We recommand that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 $video
-    ->concat(array('/path/to/video1', '/path/to/video2'))
-    ->saveFromSameCodecs('/path/to/new_file', TRUE);
+    ->concat(['/path/to/video1', '/path/to/video2'])
+    ->saveFromSameCodecs('/path/to/new_file', true);
 ```
 
 The boolean parameter of the save function allows you to use the copy parameter which accelerates drastically the generation of the encoded file.
@@ -501,7 +501,7 @@ $format = new FFMpeg\Format\Video\X264();
 $format->setAudioCodec("libmp3lame");
 
 $video
-    ->concat(array('/path/to/video1', '/path/to/video2'))
+    ->concat(['/path/to/video1', '/path/to/video2'))
     ->saveFromDifferentCodecs($format, '/path/to/new_file');
 ```
 
@@ -537,7 +537,7 @@ The argument of the setAdditionalParameters method is an array.
 
 ```php
 $format = new FFMpeg\Format\Video\X264();
-$format->setAdditionalParameters(array('foo', 'bar'));
+$format->setAdditionalParameters(['foo', 'bar']);
 $video->save($format, 'video.avi');
 ```
 
@@ -564,12 +564,12 @@ class CustomWMVFormat extends FFMpeg\Format\Video\DefaultVideo
 
     public function getAvailableAudioCodecs()
     {
-        return array('wmav2');
+        return ['wmav2'];
     }
 
     public function getAvailableVideoCodecs()
     {
-        return array('wmv2');
+        return ['wmv2'];
     }
 }
 ```
@@ -593,8 +593,8 @@ also use it to extract media metadata.
 $ffprobe = FFMpeg\FFProbe::create();
 $ffprobe
     ->streams('/path/to/video/mp4') // extracts streams informations
-    ->videos()                      // filters video streams
-    ->first()                       // returns the first video stream
+    ->getVideoStreams()             // filters video streams
+    ->getFirstStream()              // returns the first video stream
     ->get('codec_name');            // returns the codec_name property
 ```
 
@@ -615,32 +615,6 @@ $ffprobe = FFMpeg\FFProbe::create();
 $ffprobe->isValid('/path/to/file/to/check'); // returns bool
 ```
 
-## Using with Silex Microframework
-
-Service provider is easy to set up:
-
-```php
-$app = new Silex\Application();
-$app->register(new FFMpeg\FFMpegServiceProvider());
-
-$video = $app['ffmpeg']->open('video.mpeg');
-```
-
-Available options are as follow:
-
-```php
-$app->register(new FFMpeg\FFMpegServiceProvider(), array(
-    'ffmpeg.configuration' => array(
-        'ffmpeg.threads'   => 4,
-        'ffmpeg.timeout'   => 300,
-        'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
-        'ffprobe.timeout'  => 30,
-        'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
-    ),
-    'ffmpeg.logger' => $logger,
-));
-```
-
 ## License
 
-This project is licensed under the [MIT license](http://opensource.org/licenses/MIT).
+This project is licensed under the [MIT license](https://opensource.org/licenses/MIT).
