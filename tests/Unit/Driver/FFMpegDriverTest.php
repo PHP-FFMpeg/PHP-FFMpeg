@@ -14,15 +14,12 @@ class FFMpegDriverTest extends TestCase
         $executableFinder = new ExecutableFinder();
 
         $found = false;
-        foreach (['avconv', 'ffmpeg'] as $name) {
-            if (null !== $executableFinder->find($name)) {
-                $found = true;
-                break;
-            }
+        if (null !== $executableFinder->find('ffmpeg')) {
+            $found = true;
         }
 
         if (!$found) {
-            $this->markTestSkipped('Neither ffmpeg or avconv found');
+            $this->markTestSkipped('ffmpeg not found');
         }
     }
 

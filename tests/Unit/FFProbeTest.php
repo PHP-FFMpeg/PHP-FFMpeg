@@ -257,10 +257,9 @@ class FFProbeTest extends TestCase
         $finder = new ExecutableFinder();
 
         $found = false;
-        foreach (['avprobe', 'ffprobe'] as $name) {
-            if (null !== $finder->find($name)) {
-                $found = true;
-            }
+
+        if (null !== $finder->find('ffprobe')) {
+            $found = true;
         }
 
         if (!$found) {

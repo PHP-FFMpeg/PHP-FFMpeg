@@ -22,7 +22,6 @@ use FFMpeg\Coordinate\TimeCode;
  */
 abstract class AbstractProgressListener extends EventEmitter implements ListenerInterface
 {
-
     /**
      * @var int
      */
@@ -114,7 +113,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return FFProbe
      */
-    public function getFFProbe(): FFProbe
+    public function getFFProbe() : FFProbe
     {
         return $this->ffprobe;
     }
@@ -122,7 +121,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return string
      */
-    public function getPathfile(): string
+    public function getPathfile() : string
     {
         return $this->pathfile;
     }
@@ -130,7 +129,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return int
      */
-    public function getCurrentPass(): int
+    public function getCurrentPass() : int
     {
         return $this->currentPass;
     }
@@ -138,7 +137,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return int
      */
-    public function getTotalPass(): int
+    public function getTotalPass() : int
     {
         return $this->totalPass;
     }
@@ -146,7 +145,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return int
      */
-    public function getCurrentTime(): int
+    public function getCurrentTime() : int
     {
         return $this->currentTime;
     }
@@ -164,7 +163,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @inheritDoc
      */
-    public function forwardedEvents(): array
+    public function forwardedEvents() : array
     {
         return [];
     }
@@ -174,14 +173,14 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      *
      * @return string
      */
-    abstract protected function getPattern(): string;
+    abstract protected function getPattern() : string;
 
     /**
      * @param string $progress A ffmpeg stderr progress output
      *
      * @return array|null the progressinfo array or null if there's no progress available yet.
      */
-    private function parseProgress($progress): ?array
+    private function parseProgress($progress) : ? array
     {
         if (!$this->initialized) {
             $this->initialize();
@@ -226,7 +225,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
         $this->percent = floor($percent * 100);
         $this->lastOutput = $currentTime;
-        $this->currentSize = (int) $currentSize;
+        $this->currentSize = (int)$currentSize;
         $this->currentTime = $currentDuration;
 
         return $this->getProgressInfo();
@@ -236,7 +235,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      * @param string $rawDuration in the format 00:00:00.00
      * @return int
      */
-    private function convertDuration(string $rawDuration): int
+    private function convertDuration(string $rawDuration) : int
     {
         return TimeCode::fromString($rawDuration)->toSeconds();
     }
@@ -244,20 +243,20 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return array|null
      */
-    private function getProgressInfo(): ?array
+    private function getProgressInfo() : ? array
     {
         if ($this->remaining === null) {
             return null;
         }
 
         return [
-            'percent'   => $this->percent,
+            'percent' => $this->percent,
             'remaining' => $this->remaining,
-            'rate'      => $this->rate
+            'rate' => $this->rate
         ];
     }
 
-    private function initialize(): void
+    private function initialize() : void
     {
         try {
             $format = $this->ffprobe->format($this->pathfile);
@@ -269,7 +268,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
             return;
         }
 
-        $this->duration = (int) $this->duration > 0 ? $this->duration : $format->get('duration');
+        $this->duration = (int)$this->duration > 0 ? $this->duration : $format->get('duration');
         $this->totalSize = $format->get('size') / 1024 * ($this->duration / $format->get('duration'));
         $this->initialized = true;
     }

@@ -97,10 +97,6 @@ class VideoTranscodeTest extends FunctionalTestCase
     {
         $info = $this->getNameAndVersion();
 
-        if ($info['name'] === 'avconv' && version_compare($info['version'], '0.9', '<')) {
-            $this->markTestSkipped('This version of avconv is buggy and does not support this test.');
-        }
-
         $filename = __DIR__ . '/output/output-x264.mp4';
         if (is_file($filename)) {
             unlink(__DIR__ . '/output/output-x264.mp4');

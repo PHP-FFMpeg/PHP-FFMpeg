@@ -11,18 +11,27 @@ class VideoProgressListenerTest extends TestCase
     /**
      * @dataProvider provideData
      */
-    public function testHandle($size, $duration, $newVideoDuration,
-        $data, $expectedPercent, $expectedRemaining, $expectedRate,
-        $data2, $expectedPercent2, $expectedRemaining2, $expectedRate2,
-        $currentPass, $totalPass
-    )
-    {
+    public function testHandle(
+        $size,
+        $duration,
+        $newVideoDuration,
+        $data,
+        $expectedPercent,
+        $expectedRemaining,
+        $expectedRate,
+        $data2,
+        $expectedPercent2,
+        $expectedRemaining2,
+        $expectedRate2,
+        $currentPass,
+        $totalPass
+    ) {
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
             ->method('format')
             ->with(__FILE__)
             ->will($this->returnValue(new Format([
-                'size'     => $size,
+                'size' => $size,
                 'duration' => $duration
             ])));
 
@@ -30,27 +39,25 @@ class VideoProgressListenerTest extends TestCase
         $phpunit = $this;
         $n = 0;
         $listener->on('progress', function ($percent, $remaining, $rate) use (&$n, $phpunit, $expectedPercent, $expectedRemaining, $expectedRate, $expectedPercent2, $expectedRemaining2, $expectedRate2) {
-            if($n === 0) {
+            if ($n === 0) {
                 $phpunit->assertEquals($expectedPercent, $percent);
                 $phpunit->assertEquals($expectedRemaining, $remaining);
                 $phpunit->assertEquals($expectedRate, $rate);
-            } else if($n === 1) {
+            } else if ($n === 1) {
                 $phpunit->assertEquals($expectedPercent2, $percent);
                 $phpunit->assertEquals($expectedRemaining2, $remaining);
 
                 // allow minor differences
-                $phpunit->assertLessThan($expectedRate2 + 7.5, $rate);
-                $phpunit->assertGreaterThan($expectedRate2 - 7.5, $rate);
+                $phpunit->assertLessThan($expectedRate2, $rate);
+                $phpunit->assertGreaterThan($expectedRate2, $rate);
             }
 
             $n++;
         });
         // first one does not trigger progress event
-        $listener->handle('any-type'.mt_rand(), $data);
-        usleep(125);
-        $listener->handle('any-type'.mt_rand(), $data);
-        usleep(125);
-        $listener->handle('any-type'.mt_rand(), $data2);
+        $listener->handle('any-type' . mt_rand(), $data);
+        $listener->handle('any-type' . mt_rand(), $data);
+        $listener->handle('any-type' . mt_rand(), $data2);
         $this->assertEquals(2, $n);
     }
 

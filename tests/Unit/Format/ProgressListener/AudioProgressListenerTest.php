@@ -66,7 +66,7 @@ class AudioProgressListenerTest extends TestCase
         return [
             [
                 2894412,
-                180.900750,
+                180,
                 'size=     712kB time=00:00:45.50 bitrate= 128.1kbits/s',
                 25,
                 0,

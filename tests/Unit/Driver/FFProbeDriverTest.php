@@ -14,15 +14,12 @@ class FFProbeDriverTest extends TestCase
         $executableFinder = new ExecutableFinder();
 
         $found = false;
-        foreach (['avprobe', 'ffprobe'] as $name) {
-            if (null !== $executableFinder->find($name)) {
-                $found = true;
-                break;
-            }
+        if (null !== $executableFinder->find('ffprobe')) {
+            $found = true;
         }
 
         if (!$found) {
-            $this->markTestSkipped('Neither ffprobe or avprobe found');
+            $this->markTestSkipped('FFProbe not found');
         }
     }
 

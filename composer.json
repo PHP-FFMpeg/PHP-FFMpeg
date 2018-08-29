@@ -7,9 +7,7 @@
         "video",
         "audio processing",
         "audio",
-        "avconv",
         "ffmpeg",
-        "avprobe",
         "ffprobe"
     ],
     "license": "MIT",

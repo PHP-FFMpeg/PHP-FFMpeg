@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 namespace FFMpeg\FFProbe;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
@@ -35,7 +36,7 @@ final class CodecTester implements CodecTesterInterface
     private const CACHE_KEY = 'php-ffmpeg-available-codecs';
 
     /**
-     * How long the codec cache ttl is.
+     * How long the codec cache's ttl is.
      */
     private const CACHE_TTL = 600;
 
@@ -48,7 +49,7 @@ final class CodecTester implements CodecTesterInterface
     /**
      * @inheritDoc
      */
-    public function getAvailableCodecs(): array
+    public function getAvailableCodecs() : array
     {
         if ($this->cache->has(self::CACHE_KEY)) {
             return $this->cache->get(self::CACHE_KEY);
@@ -70,8 +71,8 @@ final class CodecTester implements CodecTesterInterface
     /**
      * @inheritDoc
      */
-    public function has(string $codecName): bool
+    public function has(string $codecName) : bool
     {
-        return in_array($codecName, $this->getAvailableCodecs());
+        return \in_array($codecName, $this->getAvailableCodecs());
     }
 }

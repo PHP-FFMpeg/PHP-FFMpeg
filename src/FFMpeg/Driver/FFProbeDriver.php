@@ -46,7 +46,7 @@ class FFProbeDriver extends AbstractBinary
             $configuration = new Configuration($configuration);
         }
 
-        $binaries = $configuration->get('ffprobe.binaries', ['ffprobe', 'avprobe']);
+        $binaries = $configuration->get('ffprobe.binaries', ['ffprobe']);
 
         try {
             return static::load($binaries, $logger, $configuration);
