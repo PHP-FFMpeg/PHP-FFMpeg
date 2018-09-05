@@ -156,6 +156,28 @@ $video
     ->save(new FFMpeg\Format\Video\X264(), '/path/to/new/file');
 ```
 
+##### Clip
+
+Cuts the video at a desired point. Use input seeking method. It is faster option than use filter clip.
+
+```php
+$clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
+$clip->save(new FFMpeg\Format\Video\X264(), 'video.avi');
+```
+
+The clip filter takes two parameters:
+
+- `$start`, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the start point of the clip
+- `$duration`, optional, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the duration of the clip
+
+On clip you can apply same filters as on video. For example resizing filter.
+
+```php
+$clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
+$clip->filters()->resize(new FFMpeg\Coordinate\Dimension(320, 240), FFMpeg\Filters\Video\ResizeFilter::RESIZEMODE_INSET, true);
+$clip->save(new FFMpeg\Format\Video\X264(), 'video.avi');
+```
+
 ##### Generate a waveform
 
 You can generate a waveform of an audio file using the `FFMpeg\Media\Audio::waveform`
