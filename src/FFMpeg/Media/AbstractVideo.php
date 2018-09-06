@@ -122,7 +122,7 @@ abstract class AbstractVideo extends Audio
      * NOTE: This method is different to the Audio's one, because Video is using passes.
      * @inheritDoc
      */
-    public function getFinalCommand(FormatInterface $format, $outputPathfile)
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile)
     {
         $finalCommands = [];
 
@@ -141,7 +141,7 @@ abstract class AbstractVideo extends Audio
      * @inheritDoc
      * @return string[][]
      */
-    protected function buildCommand(FormatInterface $format, $outputPathfile)
+    protected function buildCommand(FormatInterface $format, string $outputPathfile)
     {
         $commands = $this->basePartOfCommand();
 
