@@ -139,4 +139,15 @@ class Audio extends AbstractStreamableMedia
     {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height, $colors);
     }
+
+    /**
+     * Concatenates a list of audio files into one unique audio file.
+     *
+     * @param  array $sources
+     * @return Concat
+     */
+    public function concat($sources)
+    {
+        return new Concat($sources, $this->driver, $this->ffprobe);
+    }
 }

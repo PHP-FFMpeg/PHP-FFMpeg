@@ -647,3 +647,11 @@ $app->register(new FFMpeg\FFMpegServiceProvider(), array(
 ## License
 
 This project is licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+Music: "Favorite Secrets" by Waylon Thornton
+From the Free Music Archive
+[CC BY NC SA](http://creativecommons.org/licenses/by-nc-sa/3.0/us/)
+
+Music: "Siesta" by Jahzzar
+From the Free Music Archive
+[CC BY SA](https://creativecommons.org/licenses/by-sa/3.0/)
