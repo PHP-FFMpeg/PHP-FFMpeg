@@ -4,7 +4,7 @@
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983/big.png)](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983)
 
-An Object Oriented library to convert video/audio files with FFmpeg / AVConv.
+An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 
 Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
 
@@ -16,7 +16,7 @@ This library requires a working FFMpeg install. You will need both FFMpeg and FF
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
 otherwise you should have to explicitly give the binaries path on load.
 
-For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
+For Windows users: Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
 
 ### Known issues:
 
@@ -128,7 +128,7 @@ $video->save($format, 'video.avi');
 ```
 
 Transcoding progress can be monitored in realtime, see Format documentation
-below for more informations.
+below for more information.
 
 ##### Extracting image
 
@@ -187,7 +187,7 @@ This code returns a `FFMpeg\Media\Waveform` instance.
 You can optionally pass dimensions as the first two arguments and an array of hex string colors for ffmpeg to use for the waveform, see dedicated
 documentation below for more information.
 
-The ouput file MUST use the PNG extension.
+The output file MUST use the PNG extension.
 
 ```php
 $waveform = $audio->waveform(640, 120, array('#00FF00'));
@@ -323,7 +323,7 @@ The framerate filter takes two parameters:
 Synchronizes audio and video.
 
 Some containers may use a delay that results in desynchronized outputs. This
-filters solves this issue.
+filter solves this issue.
 
 ```php
 $video->filters()->synchronize();
@@ -383,7 +383,7 @@ $audio->save($format, 'track.flac');
 ```
 
 Transcoding progress can be monitored in realtime, see Format documentation
-below for more informations.
+below for more information.
 
 ##### Filters
 
@@ -436,7 +436,7 @@ The resample filter takes two parameters :
 
 #### Frame
 
-A frame is a image at a timecode of a video ; see documentation above about
+A frame is an image at a timecode of a video; see documentation above about
 frame extraction.
 
 You can save frames using the `FFMpeg\Media\Frame::save` method.
@@ -446,7 +446,7 @@ $frame->save('target.jpg');
 ```
 
 This method has a second optional boolean parameter. Set it to true to get
-accurate images ; it takes more time to execute.
+accurate images; it takes more time to execute.
 
 #### Gif
 
@@ -516,10 +516,10 @@ A format implements `FFMpeg\Format\FormatInterface`. To save to a video file,
 use `FFMpeg\Format\VideoInterface`, and `FFMpeg\Format\AudioInterface` for
 audio files.
 
-Format can also extends `FFMpeg\Format\ProgressableInterface` to get realtime
-informations about the transcoding.
+A format can also extends `FFMpeg\Format\ProgressableInterface` to get realtime
+information about the transcoding.
 
-Predefined formats already provide progress informations as events.
+Predefined formats already provide progress information as events.
 
 ```php
 $format = new FFMpeg\Format\Video\X264();
@@ -579,7 +579,7 @@ class CustomWMVFormat extends FFMpeg\Format\Video\DefaultVideo
 
 #### Coordinates
 
-FFMpeg use many units for time and space coordinates.
+FFMpeg uses many units for time and space coordinates.
 
 - `FFMpeg\Coordinate\AspectRatio` represents an aspect ratio.
 - `FFMpeg\Coordinate\Dimension` represent a dimension.
@@ -620,7 +620,7 @@ $ffprobe->isValid('/path/to/file/to/check'); // returns bool
 
 ## Using with Silex Microframework
 
-Service provider is easy to set up:
+A service provider is easy to set up:
 
 ```php
 $app = new Silex\Application();
