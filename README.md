@@ -484,7 +484,7 @@ To concatenate videos encoded with the same codec, do as follow:
 
 ```php
 // In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
-// We recommand that you put there the path of any of the video you want to use in this concatenation.
+// We recommend that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 $video
     ->concat(array('/path/to/video1', '/path/to/video2'))
@@ -497,7 +497,7 @@ To concatenate videos encoded with the same codec, do as follow:
 
 ```php
 // In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
-// We recommand that you put there the path of any of the video you want to use in this concatenation.
+// We recommend that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 
 $format = new FFMpeg\Format\Video\X264();
@@ -620,7 +620,7 @@ $ffprobe->isValid('/path/to/file/to/check'); // returns bool
 
 ## Using with Silex Microframework
 
-A service provider is easy to set up:
+The service provider is easy to set up:
 
 ```php
 $app = new Silex\Application();
