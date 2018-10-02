@@ -516,7 +516,7 @@ A format implements `FFMpeg\Format\FormatInterface`. To save to a video file,
 use `FFMpeg\Format\VideoInterface`, and `FFMpeg\Format\AudioInterface` for
 audio files.
 
-A format can also extends `FFMpeg\Format\ProgressableInterface` to get realtime
+A format can also extend `FFMpeg\Format\ProgressableInterface` to get realtime
 information about the transcoding.
 
 Predefined formats already provide progress information as events.
