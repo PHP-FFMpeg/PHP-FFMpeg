@@ -105,7 +105,7 @@ class Concat extends AbstractMediaType
                 if($count_videos != 0)
                     $line .= "\n";
 
-                $line .= "file ".$videoPath;
+                $line .= "file " . addcslashes($videoPath, '\'"\\\0 ');
 
                 fwrite($fileStream, $line);
 
