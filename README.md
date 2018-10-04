@@ -1,4 +1,4 @@
-# PHP FFmpeg
+# php-ffmpeg
 
 [![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
 
@@ -144,7 +144,7 @@ $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(42));
 $frame->save('image.jpg');
 ```
 
-If you want to extract multiple images from your video, you can use the following filter:
+If you want to extract multiple images from the video, you can use the following filter:
 
 ```php
 $video
@@ -154,6 +154,16 @@ $video
 
 $video
     ->save(new FFMpeg\Format\Video\X264(), '/path/to/new/file');
+```
+By default, this will save the frames as `jpg` images.
+
+You are able to override this using `setFrameFileType` to save the frames in another format:
+```php
+$frameFileType = 'jpg'; // either 'jpg', 'jpeg' or 'png'
+$filter = new ExtractMultipleFramesFilter($frameRate, $destinationFolder);
+$filter->setFrameFileType($frameFileType);
+
+$video->addFilter($filter);
 ```
 
 ##### Clip
