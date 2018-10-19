@@ -91,7 +91,7 @@ class Gif extends AbstractMediaType
     /**
      * Saves the gif in the given filename.
      *
-     * @param string  $pathfile
+     * @param string $pathfile
      *
      * @return Gif
      *
@@ -106,7 +106,7 @@ class Gif extends AbstractMediaType
             '-ss', (string)$this->timecode
         );
 
-        if(null !== $this->duration) {
+        if (null !== $this->duration) {
             $commands[] = '-t';
             $commands[] = (string)$this->duration;
         }
@@ -127,6 +127,62 @@ class Gif extends AbstractMediaType
 
         try {
             $this->driver->command($commands);
+        } catch (ExecutionFailureException $e) {
+            $this->cleanupTemporaryFile($pathfile);
+            throw new RuntimeException('Unable to save gif', $e->getCode(), $e);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Saves the gif in the given filename.
+     *
+     * @param string $pathfile
+     * @param string $palette
+     *
+     * @return Gif
+     */
+    public function saveWithHighQuality($pathfile, $palette = '/tmp/palette.png')
+    {
+        /**
+         * @see http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
+         */
+
+        $filters = 'fps=30,scale=' . $this->dimension->getWidth() . ':-1:flags=lanczos';
+        $commands = $commands_2 = array(
+            '-ss', (string)$this->timecode
+        );
+
+        if (null !== $this->duration) {
+            $commands[] = $commands_2[] = '-t';
+            $commands[] = $commands_2[] = (string)$this->duration;
+        }
+
+        $commands[] = $commands_2[] = '-i';
+        $commands[] = $commands_2[] = $this->pathfile;
+        $commands[] = '-vf';
+        $commands[] = $filters . ',palettegen';
+        $commands[] = '-y';
+        $commands[] = $palette;
+
+        $commands_2[] = '-i';
+        $commands_2[] = $palette;
+        $commands_2[] = '-lavfi';
+        $commands_2[] = $filters . ' [x]; [x][1:v] paletteuse';
+        $commands_2[] = '-y';
+
+        $commands_2 = array_merge($commands_2, array($pathfile));
+
+        try {
+            $this->driver->command($commands);
+        } catch (ExecutionFailureException $e) {
+            $this->cleanupTemporaryFile($pathfile);
+            throw new RuntimeException('Unable to generate palette', $e->getCode(), $e);
+        }
+
+        try {
+            $this->driver->command($commands_2);
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($pathfile);
             throw new RuntimeException('Unable to save gif', $e->getCode(), $e);
