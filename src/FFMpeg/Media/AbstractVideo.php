@@ -206,7 +206,7 @@ abstract class AbstractVideo extends Audio
         $videoFilterVars = $videoFilterProcesses = array();
         for ($i = 0; $i < count($commands); $i++) {
             $command = $commands[$i];
-            if ($command == '-vf') {
+            if ($command === '-vf') {
                 $commandSplits = explode(";", $commands[$i + 1]);
                 if (count($commandSplits) == 1) {
                     $commandSplit = $commandSplits[0];
