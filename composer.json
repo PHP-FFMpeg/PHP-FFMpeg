@@ -2,7 +2,16 @@
     "name": "php-ffmpeg/php-ffmpeg",
     "type": "library",
     "description": "FFMpeg PHP, an Object Oriented library to communicate with AVconv / ffmpeg",
-    "keywords": ["video processing", "video", "audio processing", "audio", "avconv", "ffmpeg", "avprobe", "ffprobe"],
+    "keywords": [
+        "video processing",
+        "video",
+        "audio processing",
+        "audio",
+        "avconv",
+        "ffmpeg",
+        "avprobe",
+        "ffprobe"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -32,19 +41,17 @@
         }
     ],
     "require": {
-        "php": "^5.3.9 || ^7.0",
-        "alchemy/binary-driver": "^1.5 || ~2.0.0 || ^5.0",
-        "doctrine/cache": "^1.0",
-        "evenement/evenement": "^2.0 || ^1.0",
-        "neutron/temporary-filesystem": "^2.1.1"
+        "php": "^7.1",
+        "alchemy/binary-driver": "^2.0.0",
+        "sabre/cache": "^1.0",
+        "evenement/evenement": "^2.0",
+        "neutron/temporary-filesystem": "^2.3"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "sami/sami": "~1.0",
-        "silex/silex": "~1.0",
-        "phpunit/phpunit": "^4.8.36"
+        "phpunit/phpunit": "^7"
     },
     "autoload": {
         "psr-0": {

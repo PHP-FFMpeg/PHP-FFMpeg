@@ -13,12 +13,12 @@ class TestCase extends BaseTestCase
 
     public function getLoggerMock()
     {
-        return $this->getMock('Psr\Log\LoggerInterface');
+        return $this->getMockBuilder(\Psr\Log\LoggerInterface::class)->getMock();
     }
 
     public function getCacheMock()
     {
-        return $this->getMock('Doctrine\Common\Cache\Cache');
+        return $this->getMockBuilder(\Psr\SimpleCache\CacheInterface::class)->getMock();
     }
 
     public function getTimeCodeMock()
@@ -65,7 +65,7 @@ class TestCase extends BaseTestCase
 
     public function getFFProbeDriverMock()
     {
-        return $this->getMockBuilder('FFMpeg\Driver\FFProbeDriver')
+        return $this->getMockBuilder(\FFMpeg\Driver\FFProbeDriver::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -86,17 +86,17 @@ class TestCase extends BaseTestCase
 
     public function getFFProbeParserMock()
     {
-        return $this->getMock('FFMpeg\FFProbe\OutputParserInterface');
+        return $this->getMockBuilder(\FFMpeg\FFProbe\OutputParserInterface::class)->getMock();
     }
 
     public function getFFProbeOptionsTesterMock()
     {
-        return $this->getMock('FFMpeg\FFProbe\OptionsTesterInterface');
+        return $this->getMockBuilder(\FFMpeg\FFProbe\OptionsTesterInterface::class)->getMock();
     }
 
     public function getFFProbeMapperMock()
     {
-        return $this->getMock('FFMpeg\FFProbe\MapperInterface');
+        return $this->getMockBuilder(\FFMpeg\FFProbe\MapperInterface::class)->getMock();
     }
 
     public function getFFProbeOptionsTesterMockWithOptions(array $options)

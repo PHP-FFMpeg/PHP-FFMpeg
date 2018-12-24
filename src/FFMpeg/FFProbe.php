@@ -13,8 +13,6 @@ namespace FFMpeg;
 
 use Alchemy\BinaryDriver\ConfigurationInterface;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\FFProbe\DataMapping\Format;
 use FFMpeg\FFProbe\Mapper;
@@ -26,14 +24,16 @@ use FFMpeg\FFProbe\OutputParserInterface;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
+use Sabre\Cache\Memory as MemoryCache;
 use Psr\Log\LoggerInterface;
+use Psr\SimpleCache\CacheInterface;
 
 class FFProbe
 {
     const TYPE_STREAMS = 'streams';
     const TYPE_FORMAT = 'format';
 
-    /** @var Cache */
+    /** @var CacheInterface */
     private $cache;
     /** @var OptionsTesterInterface */
     private $optionsTester;
@@ -44,7 +44,7 @@ class FFProbe
     /** @var MapperInterface */
     private $mapper;
 
-    public function __construct(FFProbeDriver $ffprobe, Cache $cache)
+    public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache)
     {
         $this->ffprobe = $ffprobe;
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
@@ -114,11 +114,11 @@ class FFProbe
     }
 
     /**
-     * @param Cache $cache
+     * @param CacheInterface $cache
      *
      * @return FFProbe
      */
-    public function setCache(Cache $cache)
+    public function setCache(CacheInterface $cache)
     {
         $this->cache = $cache;
 
@@ -213,14 +213,14 @@ class FFProbe
      *
      * @param array|ConfigurationInterface $configuration
      * @param LoggerInterface              $logger
-     * @param Cache                        $cache
+     * @param CacheInterface               $cache
      *
      * @return FFProbe
      */
-    public static function create($configuration = array(), LoggerInterface $logger = null, Cache $cache = null)
+    public static function create($configuration = array(), LoggerInterface $logger = null, CacheInterface $cache = null)
     {
         if (null === $cache) {
-            $cache = new ArrayCache();
+            $cache = new MemoryCache();
         }
 
         return new static(FFProbeDriver::create($configuration, $logger), $cache);
@@ -230,8 +230,8 @@ class FFProbe
     {
         $id = sprintf('%s-%s', $command, $pathfile);
 
-        if ($this->cache->contains($id)) {
-            return $this->cache->fetch($id);
+        if ($this->cache->has($id)) {
+            return $this->cache->get($id);
         }
 
         if (!$this->optionsTester->has($command)) {
@@ -276,7 +276,7 @@ class FFProbe
 
         $ret = $this->mapper->map($type, $data);
 
-        $this->cache->save($id, $ret);
+        $this->cache->set($id, $ret);
 
         return $ret;
     }

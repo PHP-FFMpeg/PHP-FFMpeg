@@ -100,12 +100,12 @@ class FFProbeTest extends TestCase
 
         $cache = $this->getCacheMock();
         $cache->expects($this->once())
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(false));
         $cache->expects($this->never())
-            ->method('fetch');
+            ->method('get');
         $cache->expects($this->once())
-            ->method('save')
+            ->method('set')
             ->with($this->anything(), $output);
 
         $driver = $this->getFFProbeDriverMock();
@@ -160,10 +160,10 @@ class FFProbeTest extends TestCase
 
         $cache = $this->getCacheMock();
         $cache->expects($this->exactly(2))
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(false));
         $cache->expects($this->never())
-            ->method('fetch');
+            ->method('get');
 
         $driver = $this->getFFProbeDriverMock();
         $driver->expects($this->exactly(2))
@@ -207,13 +207,13 @@ class FFProbeTest extends TestCase
 
         $cache = $this->getCacheMock();
         $cache->expects($this->once())
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(true));
         $cache->expects($this->once())
-            ->method('fetch')
+            ->method('get')
             ->will($this->returnValue($output));
         $cache->expects($this->never())
-            ->method('save');
+            ->method('set');
 
         $driver = $this->getFFProbeDriverMock();
         $driver->expects($this->never())

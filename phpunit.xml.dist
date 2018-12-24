@@ -7,7 +7,6 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="true"
          verbose="false"
          bootstrap="tests/bootstrap.php"
 >
@@ -21,10 +20,9 @@
     </testsuites>
 
     <filter>
-      <blacklist>
-        <directory>vendor</directory>
-        <directory>tests</directory>
-      </blacklist>
+      <whitelist>
+        <directory>src</directory>
+      </whitelist>
     </filter>
 </phpunit>
 
