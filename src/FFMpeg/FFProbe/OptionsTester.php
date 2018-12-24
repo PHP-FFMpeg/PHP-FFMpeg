@@ -44,7 +44,7 @@ class OptionsTester implements OptionsTesterInterface
 
         $ret = (Boolean) preg_match('/^'.$name.'/m', $output);
 
-        $this->cache->save($id, $ret);
+        $this->cache->set($id, $ret);
 
         return $ret;
     }

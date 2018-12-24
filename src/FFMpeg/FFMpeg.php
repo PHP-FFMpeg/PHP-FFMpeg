@@ -89,7 +89,7 @@ class FFMpeg
      */
     public function open($pathfile)
     {
-        if (null === $streams = $this->ffprobe->streams($pathfile)) {
+        if (null === ($streams = $this->ffprobe->streams($pathfile))) {
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
 

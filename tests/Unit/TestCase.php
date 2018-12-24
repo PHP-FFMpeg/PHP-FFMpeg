@@ -58,7 +58,7 @@ class TestCase extends BaseTestCase
 
     public function getFFMpegDriverMock()
     {
-        return $this->getMockBuilder('FFMpeg\Driver\FFMpegDriver')
+        return $this->getMockBuilder(\FFMpeg\Driver\FFMpegDriver::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -72,7 +72,7 @@ class TestCase extends BaseTestCase
 
     public function getFFProbeMock()
     {
-        return $this->getMockBuilder('FFMpeg\FFProbe')
+        return $this->getMockBuilder(\FFMpeg\FFProbe::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
