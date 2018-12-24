@@ -35,7 +35,8 @@ class ClipTest extends AbstractMediaTestCase
 
         $outputPathfile = '/target/file';
 
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
+
         $format->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(1));

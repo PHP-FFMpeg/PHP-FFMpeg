@@ -47,11 +47,11 @@ class GifTest extends AbstractMediaTestCase
         $timecode = $this->getTimeCodeMock();
         $dimension = $this->getDimensionMock();
 
-        $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
+        $filters = $this->getMockBuilder(\FFMpeg\Filters\FiltersCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $filter = $this->getMock('FFMpeg\Filters\Gif\GifFilterInterface');
+        $filter = $this->getMockBuilder(\FFMpeg\Filters\Gif\GifFilterInterface::class)->getMock();
 
         $filters->expects($this->once())
             ->method('add')

@@ -114,7 +114,7 @@ class TestCase extends BaseTestCase
 
     public function getConfigurationMock()
     {
-        return $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+        return $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
     }
 
     public function getFormatMock()
