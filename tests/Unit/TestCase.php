@@ -133,7 +133,7 @@ class TestCase extends BaseTestCase
 
     protected function getAudioMock()
     {
-        return $this->getMockBuilder('FFMpeg\Media\Audio')
+        return $this->getMockBuilder(\FFMpeg\Media\Audio::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
