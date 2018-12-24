@@ -33,8 +33,8 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /** @var integer */
     private $currentTime;
 
-    /** @var double */
-    private $lastOutput = null;
+    /** @var float */
+    private $lastOutput;
 
     /** @var FFProbe */
     private $ffprobe;
@@ -42,45 +42,46 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /** @var string */
     private $pathfile;
 
-    /** @var Boolean */
-    private $initialized = false;
+    /** @var bool */
+    private $didInit = false;
 
-    /** @var integer */
+    /** @var int */
     private $currentPass;
 
-    /** @var integer */
+    /** @var int */
     private $totalPass;
 
     /**
      * Transcoding rate in kb/s
      *
-     * @var integer
+     * @var int
      */
     private $rate;
 
     /**
      * Percentage of transcoding progress (0 - 100)
      *
-     * @var integer
+     * @var int
      */
     private $percent = 0;
 
     /**
      * Time remaining (seconds)
      *
-     * @var integer
+     * @var int
      */
     private $remaining = null;
 
     /**
-     * @param FFProbe $ffprobe
-     * @param string  $pathfile
-     * @param integer $currentPass The cureent pass number
-     * @param integer $totalPass   The total number of passes
+     * @param FFProbe   $ffprobe
+     * @param string    $pathfile
+     * @param int       $currentPass    The current pass number
+     * @param int       $totalPass      The total number of passes
+     * @param int       $duration
      *
      * @throws RuntimeException
      */
-    public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass, $duration = 0)
+    public function __construct(FFProbe $ffprobe, string $pathfile, int $currentPass, int $totalPass, int $duration = 0)
     {
         $this->ffprobe = $ffprobe;
         $this->pathfile = $pathfile;
@@ -92,7 +93,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return FFProbe
      */
-    public function getFFProbe()
+    public function getFFProbe(): FFProbe
     {
         return $this->ffprobe;
     }
@@ -100,23 +101,23 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return string
      */
-    public function getPathfile()
+    public function getPathfile(): string
     {
         return $this->pathfile;
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getCurrentPass()
+    public function getCurrentPass(): int
     {
         return $this->currentPass;
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getTotalPass()
+    public function getTotalPass(): int
     {
         return $this->totalPass;
     }
@@ -124,7 +125,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @return int
      */
-    public function getCurrentTime()
+    public function getCurrentTime(): int
     {
         return $this->currentTime;
     }
@@ -132,7 +133,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * {@inheritdoc}
      */
-    public function handle($type, $data)
+    public function handle($type, $data): void
     {
         if (null !== $progress = $this->parseProgress($data)) {
             $this->emit('progress', array_values($progress));
@@ -140,49 +141,52 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function forwardedEvents()
+    public function forwardedEvents(): array
     {
-        return array();
+        return [];
     }
 
     /**
-     * Get the regex pattern to match a ffmpeg stderr status line
+     * Returns the regex pattern to match a ffmpeg stderr status line, allowing
+     * extracting the current progress.
+     *
+     * @return string
      */
-    abstract protected function getPattern();
+    abstract protected function getPattern(): string;
 
     /**
      * @param string $progress A ffmpeg stderr progress output
      *
-     * @return array the progressinfo array or null if there's no progress available yet.
+     * @return array|null the progressinfo array or null if there's no progress available yet.
      */
-    private function parseProgress($progress)
+    private function parseProgress(string $progress): ?array
     {
-        if (!$this->initialized) {
+        if (!$this->didInit) {
             $this->initialize();
         }
 
         if (null === $this->totalSize || null === $this->duration) {
-            return;
+            return null;
         }
 
-        $matches = array();
+        $matches = [];
 
-        if (preg_match($this->getPattern(), $progress, $matches) !== 1) {
+        if (\preg_match($this->getPattern(), $progress, $matches) !== 1) {
             return null;
         }
 
         $currentDuration = $this->convertDuration($matches[2]);
-        $currentTime = microtime(true);
-        $currentSize = trim(str_replace('kb', '', strtolower(($matches[1]))));
-        $percent = max(0, min(1, $currentDuration / $this->duration));
+        $currentTime = \microtime(true);
+        $currentSize = \trim(\str_replace('kb', '', \strtolower(($matches[1]))));
+        $percent = \max(0, \min(1, $currentDuration / $this->duration));
 
         if ($this->lastOutput !== null) {
             $delta = $currentTime - $this->lastOutput;
 
             // Check the type of the currentSize variable and convert it to an integer if needed.
-            if(!is_numeric($currentSize)) {
+            if(!\is_numeric($currentSize)) {
                 $currentSize = (int)$currentSize;
             }
 
@@ -190,8 +194,8 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
             $rate = $deltaSize * $delta;
             if ($rate > 0) {
                 $totalDuration = $this->totalSize / $rate;
-                $this->remaining = floor($totalDuration - ($totalDuration * $percent));
-                $this->rate = floor($rate);
+                $this->remaining = \floor($totalDuration - ($totalDuration * $percent));
+                $this->rate = \floor($rate);
             } else {
                 $this->remaining = 0;
                 $this->rate = 0;
@@ -200,7 +204,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
         $percent = $percent / $this->totalPass + ($this->currentPass - 1) / $this->totalPass;
 
-        $this->percent = floor($percent * 100);
+        $this->percent = \floor($percent * 100);
         $this->lastOutput = $currentTime;
         $this->currentSize = (int) $currentSize;
         $this->currentTime = $currentDuration;
@@ -215,35 +219,35 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      */
     private function convertDuration($rawDuration)
     {
-        $ar = array_reverse(explode(":", $rawDuration));
-        $duration = floatval($ar[0]);
+        $ar = \array_reverse(\explode(":", $rawDuration));
+        $duration = \floatval($ar[0]);
         if (!empty($ar[1])) {
-            $duration += intval($ar[1]) * 60;
+            $duration += \intval($ar[1]) * 60;
         }
         if (!empty($ar[2])) {
-            $duration += intval($ar[2]) * 60 * 60;
+            $duration += \intval($ar[2]) * 60 * 60;
         }
 
         return $duration;
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    private function getProgressInfo()
+    private function getProgressInfo(): ?array
     {
         if ($this->remaining === null) {
             return null;
         }
 
-        return array(
+        return [
             'percent'   => $this->percent,
             'remaining' => $this->remaining,
             'rate'      => $this->rate
-        );
+        ];
     }
 
-    private function initialize()
+    private function initialize(): void
     {
         try {
             $format = $this->ffprobe->format($this->pathfile);
@@ -257,6 +261,6 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
         $this->duration = (int) $this->duration > 0 ? $this->duration : $format->get('duration');
         $this->totalSize = $format->get('size') / 1024 * ($this->duration / $format->get('duration'));
-        $this->initialized = true;
+        $this->didInit = true;
     }
 }

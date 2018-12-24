@@ -10,11 +10,14 @@
  */
 namespace FFMpeg\Filters\Audio;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
 class CustomFilter implements AudioFilterInterface
 {
+    use TPriorityFilter;
+
     /** @var string */
     private $filter;
     /** @var integer */
@@ -30,14 +33,6 @@ class CustomFilter implements AudioFilterInterface
     {
         $this->filter = $filter;
         $this->priority = $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
     }
 
     /**

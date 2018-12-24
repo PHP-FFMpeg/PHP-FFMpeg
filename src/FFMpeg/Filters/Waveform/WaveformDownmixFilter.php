@@ -11,64 +11,42 @@
 
 namespace FFMpeg\Filters\Waveform;
 
-use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Media\Waveform;
 
 class WaveformDownmixFilter implements WaveformFilterInterface
 {
+    use TPriorityFilter;
 
-    /** @var boolean */
+    /** @var bool */
     private $downmix;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
-    // By default, the downmix value is set to FALSE.
-    public function __construct($downmix = FALSE, $priority = 0)
+    public function __construct(bool $downmix = false, int $priority = 0)
     {
         $this->downmix = $downmix;
         $this->priority = $priority;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getDownmix()
+    public function getDownmix(): bool
     {
         return $this->downmix;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getPriority()
+    public function apply(Waveform $waveform): array
     {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function apply(Waveform $waveform)
-    {
-        $commands = array();
-
-        foreach ($waveform->getAudio()->getStreams() as $stream) {
-            if ($stream->isAudio()) {
-                try {
-                    
-                    // If the downmix parameter is set to TRUE, we add an option to the FFMPEG command
-                    if($this->downmix == TRUE) {
-                        $commands[] = '"aformat=channel_layouts=mono"';
-                    }
-                    
-                    break;
-
-                } catch (RuntimeException $e) {
-
+        if ($this->downmix) {
+            foreach ($waveform->getAudio()->getStreams() as $stream) {
+                if ($stream->isAudio()) {
+                    return ['"aformat=channel_layouts=mono"'];
                 }
             }
         }
 
-        return $commands;
+        return [];
     }
 }

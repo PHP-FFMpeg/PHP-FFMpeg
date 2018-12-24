@@ -15,9 +15,12 @@ use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Filters\TPriorityFilter;
 
 class ExtractMultipleFramesFilter implements VideoFilterInterface
 {
+    use TPriorityFilter;
+
     /** will extract a frame every second */
     const FRAMERATE_EVERY_SEC = '1/1';
     /** will extract a frame every 2 seconds */
@@ -31,7 +34,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     /** will extract a frame every minute */
     const FRAMERATE_EVERY_60SEC = '1/60';
 
-    /** @var integer */
+    /** @var int */
     private $priority;
     private $frameRate;
     private $destinationFolder;
@@ -65,14 +68,6 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     	}
 
     	throw new InvalidArgumentException('Invalid frame file type, use: ' . implode(',', self::$supportedFrameFileTypes));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
     }
 
     /**

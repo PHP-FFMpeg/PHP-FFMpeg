@@ -50,7 +50,7 @@ class Clip extends Video
     {
         $arr = array('-y', '-ss', (string) $this->start, '-i', $this->pathfile);
 
-        if (is_null($this->duration) === false) {
+        if (null !== $this->duration) {
             $arr[] = '-t';
             $arr[] = (string) $this->duration;
         }

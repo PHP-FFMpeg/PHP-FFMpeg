@@ -11,15 +11,20 @@
 
 namespace FFMpeg\Filters\Audio;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Media\Audio;
 use FFMpeg\Format\AudioInterface;
 
 class SimpleFilter implements AudioFilterInterface
 {
+    use TPriorityFilter;
+
+    /** @var string[] */
     private $params;
+    /** @var int */
     private $priority;
 
-    public function __construct(array $params, $priority = 0)
+    public function __construct(array $params, int $priority = 0)
     {
         $this->params = $params;
         $this->priority = $priority;
@@ -28,15 +33,7 @@ class SimpleFilter implements AudioFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
-    {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function apply(Audio $audio, AudioInterface $format)
+    public function apply(Audio $audio, AudioInterface $format): array
     {
         return $this->params;
     }

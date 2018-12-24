@@ -11,14 +11,17 @@
 
 namespace FFMpeg\Filters\Frame;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Frame;
 
 class CustomFrameFilter implements FrameFilterInterface
 {
+    use TPriorityFilter;
+
     /** @var string */
     private $filter;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     /**
@@ -27,7 +30,7 @@ class CustomFrameFilter implements FrameFilterInterface
      * @param string $filter
      * @param int    $priority
      */
-    public function __construct($filter, $priority = 0)
+    public function __construct(string $filter, int $priority = 0)
     {
         $this->filter = $filter;
         $this->priority = $priority;
@@ -36,19 +39,8 @@ class CustomFrameFilter implements FrameFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function apply(Frame $frame): array
     {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function apply(Frame $frame)
-    {
-        $commands = array('-vf', $this->filter);
-
-        return $commands;
+        return ['-vf', $this->filter];
     }
 }
-

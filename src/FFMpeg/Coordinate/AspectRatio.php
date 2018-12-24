@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-/*
+/**
  * This file is part of PHP-FFmpeg.
  *
  * (c) Alchemy <dev.team@alchemy.fr>
@@ -38,9 +39,15 @@ class AspectRatio
     const AR_5_4 = '5/4';
     const AR_1_1 = '1/1';
 
-    // 1.85:1 US widescreen cinema standard see http://en.wikipedia.org/wiki/Widescreen#Film
+    /**
+     * 1.85:1 US widescreen cinema standard
+     * @see http://en.wikipedia.org/wiki/Widescreen#Film
+     */
     const AR_1_DOT_85_1 = '1.85:1';
-    // 2.39:1 or 2.40:1 Current widescreen cinema standard see http://en.wikipedia.org/wiki/Anamorphic_format
+    /**
+     * 2.39:1 or 2.40:1 Current widescreen cinema standard
+     * @see http://en.wikipedia.org/wiki/Anamorphic_format
+     */
     const AR_2_DOT_39_1 = '2.39:1';
 
     // Rotated constants
@@ -87,9 +94,9 @@ class AspectRatio
      * @param int $height
      * @param int $modulus
      *
-     * @return int
+     * @return float
      */
-    public function calculateWidth($height, $modulus = 1)
+    public function calculateWidth(int $height, int $modulus = 1): float
     {
         $maxPossibleWidth = $this->getMultipleUp(ceil($this->ratio * $height), $modulus);
         $minPossibleWidth = $this->getMultipleDown(floor($this->ratio * $height), $modulus);
@@ -106,9 +113,9 @@ class AspectRatio
      * @param int $width
      * @param int $modulus
      *
-     * @return int
+     * @return float
      */
-    public function calculateHeight($width, $modulus = 1): int
+    public function calculateHeight($width, int $modulus = 1): float
     {
         $maxPossibleHeight = $this->getMultipleUp(ceil($width / $this->ratio), $modulus);
         $minPossibleHeight = $this->getMultipleDown(floor($width / $this->ratio), $modulus);
@@ -119,7 +126,7 @@ class AspectRatio
         return $maxRatioDiff < $minRatioDiff ? $maxPossibleHeight : $minPossibleHeight;
     }
 
-    private function getMultipleUp($value, $multiple)
+    private function getMultipleUp(float $value, int $multiple): float
     {
         while (0 !== $value % $multiple) {
             $value++;
@@ -128,7 +135,7 @@ class AspectRatio
         return $value;
     }
 
-    private function getMultipleDown($value, $multiple)
+    private function getMultipleDown(float $value, int $multiple): float
     {
         while (0 !== $value % $multiple) {
             $value--;
@@ -143,14 +150,13 @@ class AspectRatio
      * The strategy parameter forces by default to use standardized ratios. If
      * custom ratio need to be used, disable it.
      *
-     * @param Dimension $dimension
-     * @param Boolean   $forceStandards Whether to force or not standard ratios
+     * @param Dimension     $dimension
+     * @param bool          $forceStandards Whether to force or not standard ratios
      *
      * @return AspectRatio
-     *
      * @throws InvalidArgumentException
      */
-    public static function create(Dimension $dimension, $forceStandards = true): AspectRatio
+    public static function create(Dimension $dimension, bool $forceStandards = true): AspectRatio
     {
         $incoming = $dimension->getWidth() / $dimension->getHeight();
 

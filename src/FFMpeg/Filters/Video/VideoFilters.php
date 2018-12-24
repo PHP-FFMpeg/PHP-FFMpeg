@@ -77,7 +77,7 @@ class VideoFilters extends AudioFilters
      *
      * @return VideoFilters
      */
-    public function synchronize()
+    public function synchronize(): VideoFilters
     {
         $this->media->addFilter(new SynchronizeFilter());
 
@@ -85,14 +85,14 @@ class VideoFilters extends AudioFilters
     }
 
     /**
-     * Clips (cuts) the video.
+     * Clips (cuts) the video starting at `$start`, optionally until the time of `$duration`.
      *
      * @param TimeCode $start
-     * @param TimeCode $duration
+     * @param TimeCode|null $duration
      *
      * @return VideoFilters
      */
-    public function clip($start, $duration = null)
+    public function clip(TimeCode $start, ?TimeCode $duration = null)
     {
         $this->media->addFilter(new ClipFilter($start, $duration));
 

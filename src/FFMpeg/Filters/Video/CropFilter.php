@@ -13,30 +13,25 @@ namespace FFMpeg\Filters\Video;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\Point;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Media\Video;
 
 class CropFilter implements VideoFilterInterface
 {
-    /** @var integer */
+    use TPriorityFilter;
+
+    /** @var int */
     protected $priority;
     /** @var Dimension */
     protected $dimension;
     /** @var Point */
     protected $point;
 
-    public function __construct(Point $point, Dimension $dimension, $priority = 0)
+    public function __construct(Point $point, Dimension $dimension, int $priority = 0)
     {
         $this->priority = $priority;
         $this->dimension = $dimension;
         $this->point = $point;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
     }
 
     /**

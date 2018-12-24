@@ -11,11 +11,14 @@
 
 namespace FFMpeg\Filters\Audio;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
-class AudioClipFilter implements AudioFilterInterface {
+class AudioClipFilter implements AudioFilterInterface
+{
+    use TPriorityFilter;
 
     /**
      * @var TimeCode
@@ -23,7 +26,7 @@ class AudioClipFilter implements AudioFilterInterface {
     private $start;
 
     /**
-     * @var TimeCode
+     * @var TimeCode|null
      */
     private $duration;
 
@@ -33,7 +36,8 @@ class AudioClipFilter implements AudioFilterInterface {
     private $priority;
 
 
-    public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0) {
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, int $priority = 0)
+    {
         $this->start = $start;
         $this->duration = $duration;
         $this->priority = $priority;
@@ -42,7 +46,8 @@ class AudioClipFilter implements AudioFilterInterface {
     /**
      * @inheritDoc
      */
-    public function getPriority() {
+    public function getPriority(): int
+    {
         return $this->priority;
     }
 
@@ -51,7 +56,8 @@ class AudioClipFilter implements AudioFilterInterface {
      *
      * @return TimeCode
      */
-    public function getStart() {
+    public function getStart(): TimeCode
+    {
         return $this->start;
     }
 
@@ -60,14 +66,16 @@ class AudioClipFilter implements AudioFilterInterface {
      *
      * @return TimeCode|null
      */
-    public function getDuration() {
+    public function getDuration(): ?TimeCode
+    {
         return $this->duration;
     }
 
     /**
      * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format) {
+    public function apply(Audio $audio, AudioInterface $format): array
+    {
         $commands = ['-ss', (string) $this->start];
 
         if (null !== $this->duration) {
@@ -80,5 +88,4 @@ class AudioClipFilter implements AudioFilterInterface {
 
         return $commands;
     }
-
 }

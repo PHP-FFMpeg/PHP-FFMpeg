@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of PHP-FFmpeg.
  *
  * (c) Strime <contact@strime.io>
@@ -15,6 +15,7 @@ use FFMpeg\Media\Gif;
 
 class GifFilters
 {
+    /** @var Gif */
     private $gif;
 
     public function __construct(Gif $gif)

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -26,13 +27,13 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /** @var string */
     protected $videoCodec;
 
-    /** @var Integer */
+    /** @var int */
     protected $kiloBitrate = 1000;
 
-    /** @var Integer */
+    /** @var int */
     protected $modulus = 16;
 
-    /** @var Array */
+    /** @var string[] */
     protected $additionalParamaters;
 
     /**
@@ -46,13 +47,13 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * Sets the kiloBitrate value.
      *
-     * @param  integer                  $kiloBitrate
+     * @param  int                  $kiloBitrate
      * @throws InvalidArgumentException
      */
-    public function setKiloBitrate($kiloBitrate)
+    public function setKiloBitrate(int $kiloBitrate)
     {
-        if ($kiloBitrate < 1) {
-            throw new InvalidArgumentException('Wrong kiloBitrate value');
+        if ($kiloBitrate <= 0) {
+            throw new InvalidArgumentException('Kilobitrate must be a positive value!');
         }
 
         $this->kiloBitrate = (int) $kiloBitrate;
@@ -69,7 +70,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * Sets the video codec, Should be in the available ones, otherwise an
+     * Sets the video codec. Should be in the available ones, otherwise an
      * exception is thrown.
      *
      * @param  string                   $videoCodec
@@ -77,10 +78,10 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      */
     public function setVideoCodec($videoCodec)
     {
-        if ( ! in_array($videoCodec, $this->getAvailableVideoCodecs())) {
+        if (!in_array($videoCodec, $this->getAvailableVideoCodecs())) {
             throw new InvalidArgumentException(sprintf(
-                    'Wrong videocodec value for %s, available formats are %s'
-                    , $videoCodec, implode(', ', $this->getAvailableVideoCodecs())
+                    'The given video codec %s is not available for this format, available formats are %s.',
+                    $videoCodec, implode(', ', $this->getAvailableVideoCodecs())
             ));
         }
 
@@ -90,9 +91,9 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getModulus()
+    public function getModulus(): int
     {
         return $this->modulus;
     }
@@ -108,34 +109,29 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * Sets additional parameters.
      *
-     * @param  array                    $additionalParamaters
+     * @param  string[] $additionalParamaters
      * @throws InvalidArgumentException
+     * @return DefaultVideo
      */
-    public function setAdditionalParameters($additionalParamaters)
+    public function setAdditionalParameters(array $additionalParamaters): DefaultVideo
     {
-        if (!is_array($additionalParamaters)) {
-            throw new InvalidArgumentException('Wrong additionalParamaters value');
-        }
-
         $this->additionalParamaters = $additionalParamaters;
 
         return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
+     * @return VideoProgressListener[]
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0): array
     {
         $format = $this;
-        $listeners = array(new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration));
+        $listener = new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration);
+        $listener->on('progress', function () use ($format, $media) {
+            $format->emit('progress', array_merge(array($media, $format), func_get_args()));
+        });
 
-        foreach ($listeners as $listener) {
-            $listener->on('progress', function () use ($format, $media) {
-               $format->emit('progress', array_merge(array($media, $format), func_get_args()));
-            });
-        }
-
-        return $listeners;
+        return [$listener];
     }
 }

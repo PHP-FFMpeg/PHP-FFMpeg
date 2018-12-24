@@ -119,7 +119,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
     {
@@ -129,7 +129,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
            $format->emit('progress', array_merge(array($media, $format), func_get_args()));
         });
 
-        return array($listener);
+        return [$listener];
     }
 
     /**

@@ -15,9 +15,12 @@ use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Filters\TPriorityFilter;
 
 class ResizeFilter implements VideoFilterInterface
 {
+    use TPriorityFilter;
+
     /** fits to the dimensions, might introduce anamorphosis */
     const RESIZEMODE_FIT = 'fit';
     /** resizes the video inside the given dimension, no anamorphosis */
@@ -42,14 +45,6 @@ class ResizeFilter implements VideoFilterInterface
         $this->mode = $mode;
         $this->forceStandards = $forceStandards;
         $this->priority = $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
     }
 
     /**
@@ -101,7 +96,7 @@ class ResizeFilter implements VideoFilterInterface
             // Using Filter to have ordering
             $commands[] = '-vf';
             $commands[] = '[in]scale=' . $dimensions->getWidth() . ':' . $dimensions->getHeight() . ' [out]';
-            
+
         }
 
         return $commands;

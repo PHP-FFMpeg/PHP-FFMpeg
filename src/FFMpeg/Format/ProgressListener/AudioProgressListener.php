@@ -22,7 +22,10 @@ namespace FFMpeg\Format\ProgressListener;
  */
 class AudioProgressListener extends AbstractProgressListener
 {
-    public function getPattern()
+    /**
+     * @inheritDoc
+     */
+    public function getPattern(): string
     {
         return '/size=(.*?) time=(.*?) /';
     }

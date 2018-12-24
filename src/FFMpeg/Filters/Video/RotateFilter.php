@@ -15,30 +15,25 @@ use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Filters\TPriorityFilter;
 
 class RotateFilter implements VideoFilterInterface
 {
+    use TPriorityFilter;
+
     const ROTATE_90 = 'transpose=1';
     const ROTATE_180 = 'hflip,vflip';
     const ROTATE_270 = 'transpose=2';
 
     /** @var string */
     private $angle;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
-    public function __construct($angle, $priority = 0)
+    public function __construct($angle, int $priority = 0)
     {
         $this->setAngle($angle);
-        $this->priority = (int) $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
+        $this->priority = $priority;
     }
 
     /**
@@ -64,7 +59,7 @@ class RotateFilter implements VideoFilterInterface
             }
         }
 
-        return array('-vf', $this->angle, '-metadata:s:v:0', 'rotate=0');
+        return ['-vf', $this->angle, '-metadata:s:v:0', 'rotate=0'];
     }
 
     private function setAngle($angle)

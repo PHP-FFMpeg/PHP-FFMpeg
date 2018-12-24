@@ -10,23 +10,26 @@
  */
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
 class CustomFilter implements VideoFilterInterface
 {
+    use TPriorityFilter;
+
     /** @var string */
     private $filter;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     /**
-     * A custom filter, useful if you want to build complex filters
+     * A custom filter, useful if you want to build complex filters.
      *
      * @param string $filter
      * @param int    $priority
      */
-    public function __construct($filter, $priority = 0)
+    public function __construct(string $filter, int $priority = 0)
     {
         $this->filter = $filter;
         $this->priority = $priority;
@@ -35,18 +38,8 @@ class CustomFilter implements VideoFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function apply(Video $video, VideoInterface $format): array
     {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function apply(Video $video, VideoInterface $format)
-    {
-        $commands = array('-vf', $this->filter);
-
-        return $commands;
+        return ['-vf', $this->filter];
     }
 }

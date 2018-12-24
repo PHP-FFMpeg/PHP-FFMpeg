@@ -19,10 +19,10 @@ class X264 extends DefaultVideo
     /** @var boolean */
     private $bframesSupport = true;
 
-    /** @var integer */
+    /** @var int */
     private $passes = 2;
 
-    public function __construct($audioCodec = 'libfaac', $videoCodec = 'libx264')
+    public function __construct($audioCodec = 'libmp3lame', $videoCodec = 'libx264')
     {
         $this
             ->setAudioCodec($audioCodec)
@@ -52,34 +52,34 @@ class X264 extends DefaultVideo
     /**
      * {@inheritDoc}
      */
-    public function getAvailableAudioCodecs()
+    public function getAvailableAudioCodecs(): array
     {
-        return array('aac', 'libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac');
+        return ['aac', 'libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac'];
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getAvailableVideoCodecs()
+    public function getAvailableVideoCodecs(): array
     {
-        return array('libx264');
+        return ['libx264'];
     }
 
     /**
-     * @param $passes
+     * @param int $passes
      *
      * @return X264
      */
-    public function setPasses($passes)
+    public function setPasses(int $passes): VideoInterface
     {
         $this->passes = $passes;
         return $this;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getPasses()
+    public function getPasses(): int
     {
         return $this->passes;
     }
@@ -87,7 +87,7 @@ class X264 extends DefaultVideo
     /**
      * @return int
      */
-    public function getModulus()
+    public function getModulus(): int
     {
         return 2;
     }

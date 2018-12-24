@@ -11,15 +11,18 @@
 
 namespace FFMpeg\Filters\Frame;
 
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Frame;
 
 class DisplayRatioFixerFilter implements FrameFilterInterface
 {
-    /** @var integer */
+    use TPriorityFilter;
+
+    /** @var int */
     private $priority;
 
-    public function __construct($priority = 0)
+    public function __construct(int $priority = 0)
     {
         $this->priority = $priority;
     }
@@ -27,18 +30,9 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function apply(Frame $frame): array
     {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function apply(Frame $frame)
-    {
-        $dimensions = null;
-        $commands = array();
+        $commands = [];
 
         foreach ($frame->getVideo()->getStreams() as $stream) {
             if ($stream->isVideo()) {
@@ -48,7 +42,7 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
                     $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
                     break;
                 } catch (RuntimeException $e) {
-
+                    // ignore
                 }
             }
         }
