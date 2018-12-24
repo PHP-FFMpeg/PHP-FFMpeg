@@ -79,12 +79,14 @@ class VideoTranscodeTest extends FunctionalTestCase
         $ffmpeg->open(__DIR__ . '/../files/UnknownFileTest.ogv');
     }
 
+    /**
+     * @expectedException \FFMpeg\Exception\RuntimeException
+     */
     public function testSaveInvalidForgedVideo()
     {
         $ffmpeg = $this->getFFMpeg();
         $video = new Video(__DIR__ . '/../files/UnknownFileTest.ogv', $ffmpeg->getFFMpegDriver(), $ffmpeg->getFFProbe());
 
-        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
         $video->save(new X264('aac'), __DIR__ . '/output/output-x264.mp4');
     }
 
@@ -94,11 +96,12 @@ class VideoTranscodeTest extends FunctionalTestCase
 
         if ($info['name'] === 'avconv' && version_compare($info['version'], '0.9', '<')) {
             $this->markTestSkipped('This version of avconv is buggy and does not support this test.');
+            return;
         }
 
         $filename = __DIR__ . '/output/output-x264.mp4';
         if (is_file($filename)) {
-            unlink(__DIR__ . '/output/output-x264.mp4');
+            @unlink(__DIR__ . '/output/output-x264.mp4');
         }
 
         $ffmpeg = $this->getFFMpeg();
@@ -119,7 +122,8 @@ class VideoTranscodeTest extends FunctionalTestCase
         $this->assertEquals(240, $dimension->getHeight());
 
         $this->assertFileExists($filename);
-        unlink($filename);
+
+        @unlink($filename);
     }
 
     private function getNameAndVersion()

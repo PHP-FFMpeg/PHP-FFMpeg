@@ -13,18 +13,18 @@ class FiltersCollectionTest extends TestCase
         $coll = new FiltersCollection();
         $this->assertCount(0, $coll);
 
-        $coll->add($this->getMock('FFMpeg\Filters\FilterInterface'));
+        $coll->add($this->getMockBuilder(\FFMpeg\Filters\FilterInterface::class)->getMock());
         $this->assertCount(1, $coll);
 
-        $coll->add($this->getMock('FFMpeg\Filters\FilterInterface'));
+        $coll->add($this->getMockBuilder(\FFMpeg\Filters\FilterInterface::class)->getMock());
         $this->assertCount(2, $coll);
     }
 
     public function testIterator()
     {
         $coll = new FiltersCollection();
-        $coll->add($this->getMock('FFMpeg\Filters\FilterInterface'));
-        $coll->add($this->getMock('FFMpeg\Filters\FilterInterface'));
+        $coll->add($this->getMockBuilder(\FFMpeg\Filters\FilterInterface::class)->getMock());
+        $coll->add($this->getMockBuilder(\FFMpeg\Filters\FilterInterface::class)->getMock());
 
         $this->assertInstanceOf('\ArrayIterator', $coll->getIterator());
         $this->assertCount(2, $coll->getIterator());
@@ -51,12 +51,12 @@ class FiltersCollectionTest extends TestCase
 
         $data = array();
         $video = $this->getVideoMock();
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         foreach ($coll as $filter) {
             $data = array_merge($data, $filter->apply($video, $format));
         }
 
-        $this->assertEquals(array('1', '2', '3', 'a', 'b', 'c', 'd', 'e', '4'), $data);
+        $this->assertEquals(['1', '2', '3', 'a', 'b', 'c', 'd', 'e', '4'], $data);
     }
 }

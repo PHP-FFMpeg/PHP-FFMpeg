@@ -38,19 +38,25 @@ class AddMetadataFilter implements AudioFilterInterface
 	{
 		$meta = $this->metaArr;
 
-		if (is_null($meta)) {
+		if (null === $meta) {
 			return ['-map_metadata', '-1', '-vn'];
 		}
 
 		$metadata = [];
 
 		if (array_key_exists("artwork", $meta)) {
-			array_push($metadata, "-i", $meta['artwork'], "-map", "0", "-map", "1");
+			$metadata[] = "-i";
+			$metadata[] = $meta['artwork'];
+			$metadata[] = "-map";
+			$metadata[] = "0";
+			$metadata[] = "-map";
+			$metadata[] = "1";
 			unset($meta['artwork']);
 		}
 
 		foreach ($meta as $k => $v) {
-			array_push($metadata, "-metadata", "$k=$v");
+			$metadata[] = "-metadata";
+			$metadata[] = "{$k}={$v}";
 		}
 
 		return $metadata;

@@ -34,19 +34,19 @@ class OptionsTesterTest extends TestCase
         $cache = $this->getCacheMock();
 
         $cache->expects($this->never())
-            ->method('fetch');
+            ->method('get');
 
         $cache->expects($this->exactly(2))
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(false));
 
         $cache->expects($this->exactly(2))
-            ->method('save');
+            ->method('set');
 
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->once())
             ->method('command')
-            ->with(array('-help', '-loglevel', 'quiet'))
+            ->with(['-help', '-loglevel', 'quiet'])
             ->will($this->returnValue($data));
 
         $tester = new OptionsTester($ffprobe, $cache);
@@ -71,26 +71,26 @@ class OptionsTesterTest extends TestCase
         $cache = $this->getCacheMock();
 
         $cache->expects($this->once())
-            ->method('fetch')
+            ->method('get')
             ->will($this->returnValue($data));
 
         $cache->expects($this->at(0))
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(false));
 
         $cache->expects($this->at(1))
-            ->method('contains')
+            ->method('has')
             ->will($this->returnValue(true));
 
         $cache->expects($this->once())
-            ->method('save');
+            ->method('set');
 
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->never())
             ->method('command');
 
         $tester = new OptionsTester($ffprobe, $cache);
-        $this->assertTrue($isPresent === $tester->has($optionName));
+        $this->assertSame($isPresent, $tester->has($optionName));
     }
 
     /**
@@ -101,12 +101,12 @@ class OptionsTesterTest extends TestCase
         $cache = $this->getCacheMock();
 
         $cache->expects($this->once())
-            ->method('fetch')
+            ->method('get')
             ->with('option-' . $optionName)
             ->will($this->returnValue($isPresent));
 
         $cache->expects($this->once())
-            ->method('contains')
+            ->method('has')
             ->with('option-' . $optionName)
             ->will($this->returnValue(true));
 
@@ -115,6 +115,6 @@ class OptionsTesterTest extends TestCase
             ->method('command');
 
         $tester = new OptionsTester($ffprobe, $cache);
-        $this->assertTrue($isPresent === $tester->has($optionName));
+        $this->assertSame($isPresent, $tester->has($optionName));
     }
 }

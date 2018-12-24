@@ -34,7 +34,7 @@ class StreamCollectionTest extends TestCase
         $collection = new StreamCollection(array($audio, $video));
         $videos = $collection->videos();
 
-        $this->assertInstanceOf('FFMpeg\FFProbe\DataMapping\StreamCollection', $videos);
+        $this->assertInstanceOf(\FFMpeg\FFProbe\DataMapping\StreamCollection::class, $videos);
         $this->assertCount(1, $videos);
         $this->assertEquals(array($video), $videos->all());
     }

@@ -46,39 +46,39 @@ class AudioClipFilter implements AudioFilterInterface {
         return $this->priority;
     }
 
-     /**
-      * Returns the start position the audio is being cutted
-      *
-      * @return TimeCode
-      */
-     public function getStart() {
-         return $this->start;
-     }
+    /**
+     * Returns the start position the audio is being cutted
+     *
+     * @return TimeCode
+     */
+    public function getStart() {
+        return $this->start;
+    }
 
-     /**
-      * Returns how long the audio is being cutted. Returns null when the duration is infinite,
-      *
-      * @return TimeCode|null
-      */
-     public function getDuration() {
-         return $this->duration;
-     }
+    /**
+     * Returns how long the audio is being cutted. Returns null when the duration is infinite,
+     *
+     * @return TimeCode|null
+     */
+    public function getDuration() {
+        return $this->duration;
+    }
 
-     /**
-      * @inheritDoc
-      */
-     public function apply(Audio $audio, AudioInterface $format) {
-         $commands = array('-ss', (string) $this->start);
+    /**
+     * @inheritDoc
+     */
+    public function apply(Audio $audio, AudioInterface $format) {
+        $commands = ['-ss', (string) $this->start];
 
-         if ($this->duration !== null) {
+        if (null !== $this->duration) {
             $commands[] = '-t';
             $commands[] = (string) $this->duration;
-         }
+        }
 
-         $commands[] = '-acodec';
-         $commands[] = 'copy';
+        $commands[] = '-acodec';
+        $commands[] = 'copy';
 
-         return $commands;
-     }
+        return $commands;
+    }
 
 }

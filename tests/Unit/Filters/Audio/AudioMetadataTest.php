@@ -14,15 +14,15 @@ class AudioMetadataTest extends TestCase
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Audio\AddMetadataFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Audio\AddMetadataFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         $filters = new AudioFilters($audio);
         $filters->addMetadata(array('title' => "Hello World"));
-        $this->assertEquals(array(0 => "-metadata", 1 => "title=Hello World"), $capturedFilter->apply($audio, $format));
+        $this->assertEquals(["-metadata", "title=Hello World"], $capturedFilter->apply($audio, $format));
     }
 
     public function testAddArtwork()
@@ -36,7 +36,7 @@ class AudioMetadataTest extends TestCase
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         $filters = new AudioFilters($audio);
         $filters->addMetadata(array('genre' => 'Some Genre', 'artwork' => "/path/to/file.jpg"));
@@ -51,14 +51,14 @@ class AudioMetadataTest extends TestCase
         $audio = $this->getAudioMock();
         $audio->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Audio\AddMetadataFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Audio\AddMetadataFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         $filters = new AudioFilters($audio);
         $filters->addMetadata();
-        $this->assertEquals(array(0 => "-map_metadata", 1 => "-1", 2 => "-vn"), $capturedFilter->apply($audio, $format));
+        $this->assertEquals(["-map_metadata", "-1", "-vn"], $capturedFilter->apply($audio, $format));
     }
 }

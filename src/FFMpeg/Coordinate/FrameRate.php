@@ -15,9 +15,10 @@ use FFMpeg\Exception\InvalidArgumentException;
 
 class FrameRate
 {
+    /** @var float */
     private $value;
 
-    public function __construct($value)
+    public function __construct(float $value)
     {
         if ($value <= 0) {
             throw new InvalidArgumentException('Invalid frame rate, must be positive value.');
@@ -29,7 +30,7 @@ class FrameRate
     /**
      * @return float
      */
-    public function getValue()
+    public function getValue(): float
     {
         return $this->value;
     }
