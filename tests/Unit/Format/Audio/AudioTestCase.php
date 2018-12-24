@@ -7,9 +7,18 @@ use FFMpeg\Format\Audio\DefaultAudio;
 
 abstract class AudioTestCase extends TestCase
 {
-    public function testExtraParams()
+    public function testExtraParams(): void
     {
-        foreach ($this->getFormat()->getExtraParams() as $param) {
+        $format = $this->getFormat();
+        $extraParams = $format->getExtraParams();
+
+        if (empty($extraParams)) {
+            $className = \strtoupper((new \ReflectionClass($format))->getShortName());
+            $this->markTestSkipped("Audio format {$className} has no extra paramater to check.");
+            return;
+        }
+
+        foreach ($extraParams as $param) {
             $this->assertScalar($param);
         }
     }
@@ -45,7 +54,7 @@ abstract class AudioTestCase extends TestCase
 
     public function testGetAudioKiloBitrate()
     {
-        $this->assertInternalType('integer', $this->getFormat()->getAudioKiloBitrate());
+        $this->assertInternalType('int', $this->getFormat()->getAudioKiloBitrate());
     }
 
     public function testSetAudioKiloBitrate()
@@ -101,7 +110,7 @@ abstract class AudioTestCase extends TestCase
 
     public function testCreateProgressListener()
     {
-        $media = $this->getMock('FFMpeg\Media\MediaTypeInterface');
+        $media = $this->getMockBuilder(\FFMpeg\Media\MediaTypeInterface::class)->getMock();
         $media->expects($this->any())
             ->method('getPathfile')
             ->will($this->returnValue(__FILE__));
@@ -109,7 +118,7 @@ abstract class AudioTestCase extends TestCase
         $ffprobe = $this->getFFProbeMock();
 
         foreach ($format->createProgressListener($media, $ffprobe, 1, 3) as $listener) {
-            $this->assertInstanceOf('FFMpeg\Format\ProgressListener\AudioProgressListener', $listener);
+            $this->assertInstanceOf(\FFMpeg\Format\ProgressListener\AudioProgressListener::class, $listener);
             $this->assertSame($ffprobe, $listener->getFFProbe());
             $this->assertSame(__FILE__, $listener->getPathfile());
             $this->assertSame(1, $listener->getCurrentPass());
@@ -120,5 +129,5 @@ abstract class AudioTestCase extends TestCase
     /**
      * @return DefaultAudio
      */
-    abstract public function getFormat();
+    abstract public function getFormat(): DefaultAudio;
 }

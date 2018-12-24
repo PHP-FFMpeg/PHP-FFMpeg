@@ -18,7 +18,7 @@ class Aac extends DefaultAudio
 {
     public function __construct()
     {
-        $this->audioCodec = 'libfdk_aac';
+        $this->audioCodec = 'aac';
     }
 
     /**
@@ -26,6 +26,6 @@ class Aac extends DefaultAudio
      */
     public function getAvailableAudioCodecs()
     {
-        return array('libfdk_aac');
+        return ['aac', 'libfdk_aac'];
     }
 }

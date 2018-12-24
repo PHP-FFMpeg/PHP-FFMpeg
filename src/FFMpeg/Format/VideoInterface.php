@@ -44,9 +44,9 @@ interface VideoInterface extends AudioInterface
      *
      * @see https://wikipedia.org/wiki/Video_compression_picture_types
      *
-     * @return Boolean
+     * @return bool
      */
-    public function supportBFrames();
+    public function supportBFrames(): bool;
 
     /**
      * Returns the list of available video codecs for this format.

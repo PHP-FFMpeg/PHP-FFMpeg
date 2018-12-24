@@ -24,9 +24,9 @@ class WMV extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function supportBFrames()
+    public function supportBFrames(): bool
     {
         return false;
     }

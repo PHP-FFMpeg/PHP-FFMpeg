@@ -30,9 +30,9 @@ class X264 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function supportBFrames()
+    public function supportBFrames(): bool
     {
         return $this->bframesSupport;
     }

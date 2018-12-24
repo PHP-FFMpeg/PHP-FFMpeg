@@ -14,7 +14,7 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testSupportBFrames()
     {
-        $this->assertInternalType('boolean', $this->getFormat()->supportBFrames());
+        $this->assertInternalType('bool', $this->getFormat()->supportBFrames());
     }
 
     public function testSetVideoCodec()
@@ -54,7 +54,7 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testCreateProgressListener()
     {
-        $media = $this->getMock('FFMpeg\Media\MediaTypeInterface');
+        $media = $this->getMockBuilder(\FFMpeg\Media\MediaTypeInterface::class)->getMock();
         $media->expects($this->any())
             ->method('getPathfile')
             ->will($this->returnValue(__FILE__));
@@ -62,7 +62,7 @@ abstract class VideoTestCase extends AudioTestCase
         $ffprobe = $this->getFFProbeMock();
 
         foreach ($format->createProgressListener($media, $ffprobe, 1, 3) as $listener) {
-            $this->assertInstanceOf('FFMpeg\Format\ProgressListener\VideoProgressListener', $listener);
+            $this->assertInstanceOf(\FFMpeg\Format\ProgressListener\VideoProgressListener::class, $listener);
             $this->assertSame($ffprobe, $listener->getFFProbe());
             $this->assertSame(__FILE__, $listener->getPathfile());
             $this->assertSame(1, $listener->getCurrentPass());

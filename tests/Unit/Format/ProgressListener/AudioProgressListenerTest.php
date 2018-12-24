@@ -21,10 +21,10 @@ class AudioProgressListenerTest extends TestCase
         $ffprobe->expects($this->once())
             ->method('format')
             ->with(__FILE__)
-            ->will($this->returnValue(new Format(array(
+            ->will($this->returnValue(new Format([
                 'size'     => $size,
                 'duration' => $duration,
-            ))));
+            ])));
 
         $listener = new AudioProgressListener($ffprobe, __FILE__, $currentPass, $totalPass);
         $phpunit = $this;
@@ -44,10 +44,13 @@ class AudioProgressListenerTest extends TestCase
         });
         // first one does not trigger progress event
         $listener->handle('any-type'.mt_rand(), $data);
+
+        // DO NOT remove the `sleep(1)` lines in this test
         sleep(1);
         $listener->handle('any-type'.mt_rand(), $data);
         sleep(1);
         $listener->handle('any-type'.mt_rand(), $data2);
+
         $this->assertEquals(2, $n);
     }
 
