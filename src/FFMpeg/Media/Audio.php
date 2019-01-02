@@ -85,7 +85,7 @@ class Audio extends AbstractStreamableMedia
      * @return string
      * @since 0.11.0
      */
-    public function getFinalCommand(FormatInterface $format, $outputPathfile) {
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile) {
         return implode(' ', $this->buildCommand($format, $outputPathfile));
     }
 

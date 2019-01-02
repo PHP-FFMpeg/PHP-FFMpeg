@@ -88,7 +88,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->returnValue(1));
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $configuration = $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
 
@@ -113,7 +113,7 @@ class VideoTest extends AbstractStreamableTestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $format->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(2));
@@ -132,7 +132,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->with($video, $format)
             ->will($this->returnValue(array('extra-filter-command')));
 
-        $capturedCommands = array();
+        $capturedCommands = [];
 
         $driver->expects($this->exactly(2))
             ->method('command')
@@ -181,7 +181,7 @@ class VideoTest extends AbstractStreamableTestCase
                 ->method('get');
         }
 
-        $capturedCommands = array();
+        $capturedCommands = [];
         $capturedListeners = null;
 
         $driver->expects($this->exactly(count($expectedCommands)))
@@ -239,7 +239,7 @@ class VideoTest extends AbstractStreamableTestCase
 
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $format->expects($this->any())
             ->method('getKiloBitrate')
             ->will($this->returnValue(663));
@@ -260,7 +260,7 @@ class VideoTest extends AbstractStreamableTestCase
 
         $format2->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $format2->expects($this->any())
             ->method('getKiloBitrate')
             ->will($this->returnValue(663));
@@ -281,7 +281,7 @@ class VideoTest extends AbstractStreamableTestCase
 
         $audioFormat->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $audioFormat->expects($this->any())
             ->method('getAudioCodec')
             ->will($this->returnValue('patati-patata-audio'));
@@ -298,7 +298,7 @@ class VideoTest extends AbstractStreamableTestCase
         $audioVideoFormat = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
         $audioVideoFormat->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $audioVideoFormat->expects($this->any())
             ->method('getVideoCodec')
             ->will($this->returnValue('gloubi-boulga-video'));
@@ -319,13 +319,13 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->returnValue(2));
         $audioVideoFormat->expects($this->any())
             ->method('getAdditionalParameters')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $audioVideoFormatSinglePass = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
 
         $audioVideoFormatSinglePass->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $audioVideoFormatSinglePass->expects($this->any())
             ->method('getVideoCodec')
             ->will($this->returnValue('gloubi-boulga-video'));
@@ -346,7 +346,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->returnValue(1));
         $audioVideoFormatSinglePass->expects($this->any())
             ->method('getAdditionalParameters')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $formatExtra = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
         $formatExtra->expects($this->any())
@@ -366,7 +366,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->returnValue(2));
         $formatExtra->expects($this->any())
             ->method('getAdditionalParameters')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $formatExtra2 = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
 
@@ -387,7 +387,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->returnValue(2));
         $formatExtra2->expects($this->any())
             ->method('getAdditionalParameters')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $listeners = array($this->getMockBuilder(\Alchemy\BinaryDriver\Listeners\ListenerInterface::class)->getMock());
 
@@ -395,7 +395,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->disableOriginalConstructor()->getMock();
         $progressableFormat->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $progressableFormat->expects($this->any())
             ->method('createProgressListener')
             ->will($this->returnValue($listeners));
@@ -416,7 +416,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->disableOriginalConstructor()->getMock();
         $progressableFormat2->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $progressableFormat2->expects($this->any())
             ->method('createProgressListener')
             ->will($this->returnValue($listeners));
@@ -437,7 +437,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->disableOriginalConstructor()->getMock();
         $progressableAudioFormat->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $progressableAudioFormat->expects($this->any())
             ->method('getAudioCodec')
             ->will($this->returnValue('patati-patata-audio'));
@@ -608,7 +608,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->with($this->equalTo('ffmpeg.threads'))
             ->will($this->returnValue(24));
 
-        $capturedCommands = array();
+        $capturedCommands = [];
 
         $driver->expects($this->exactly(4))
             ->method('command')

@@ -11,17 +11,22 @@
 
 namespace FFMpeg\Driver;
 
-use Alchemy\BinaryDriver\AbstractBinary;
-use Alchemy\BinaryDriver\Configuration;
-use Alchemy\BinaryDriver\ConfigurationInterface;
+use Alchemy\BinaryDriver\{
+    AbstractBinary,
+    Configuration,
+    ConfigurationInterface
+};
 use Alchemy\BinaryDriver\Exception\ExecutableNotFoundException as BinaryDriverExecutableNotFound;
-use FFMpeg\Exception\ExecutableNotFoundException;
+use FFMpeg\Exception\{
+    ExecutableNotFoundException,
+    InvalidArgumentException
+};
 use Psr\Log\LoggerInterface;
 
 class FFMpegDriver extends AbstractBinary
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -31,18 +36,28 @@ class FFMpegDriver extends AbstractBinary
     /**
      * Creates an FFMpegDriver.
      *
-     * @param LoggerInterface     $logger
+     * @param LoggerInterface|null     $logger
      * @param array|Configuration $configuration
      *
      * @return FFMpegDriver
+     *
+     * @throws InvalidArgumentException
+     * @throws ExecutableNotFoundException
      */
-    public static function create(LoggerInterface $logger = null, $configuration = array())
+    public static function create(?LoggerInterface $logger = null, $configuration = [])
     {
-        if (!$configuration instanceof ConfigurationInterface) {
+        if (!($configuration instanceof ConfigurationInterface)) {
+            if (!\is_array($configuration)) {
+                $givenType = \gettype($configuration);
+                throw new InvalidArgumentException(
+                    "The \$configuration Parameter must either be an array or an instance of ConfigurationInterface, {$givenType} given."
+                );
+            }
+
             $configuration = new Configuration($configuration);
         }
 
-        $binaries = $configuration->get('ffmpeg.binaries', array('avconv', 'ffmpeg'));
+        $binaries = $configuration->get('ffmpeg.binaries', ['ffmpeg', 'avconv']);
 
         if (!$configuration->has('timeout')) {
             $configuration->set('timeout', 300);

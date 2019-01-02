@@ -56,10 +56,10 @@ class Stream extends AbstractData
         $width = $this->get('width');
         $height = $this->get('height');
 
-        if (null !== $ratio = $this->extractRatio($this, 'sample_aspect_ratio')) {
+        if (null !== ($ratio = $this->extractRatio($this, 'sample_aspect_ratio'))) {
             $sampleRatio = $ratio;
         }
-        if (null !== $ratio = $this->extractRatio($this, 'display_aspect_ratio')) {
+        if (null !== ($ratio = $this->extractRatio($this, 'display_aspect_ratio'))) {
             $displayRatio = $ratio;
         }
 
@@ -71,9 +71,9 @@ class Stream extends AbstractData
             if ($sampleRatio[0] !== 1 && $sampleRatio[1] !== 1) {
                 if (null !== $width && null !== $height) {
                     // stretch video according to pixel sample aspect ratio
-                    $width = round($width * ($sampleRatio[0] / $sampleRatio[1]));
+                    $width = \round($width * ($sampleRatio[0] / $sampleRatio[1]));
                     // set height according to display aspect ratio
-                    $height = round($width * ($displayRatio[1] / $displayRatio[0]));
+                    $height = \round($width * ($displayRatio[1] / $displayRatio[0]));
                 }
             }
         }
@@ -95,12 +95,12 @@ class Stream extends AbstractData
         }
 
         $ratio = $stream->get($name);
-        if (preg_match('/\d+:\d+/', $ratio)) {
-            $data = array_filter(explode(':', $ratio), function ($int) {
+        if (\preg_match('/\d+:\d+/', $ratio)) {
+            $data = \array_filter(\explode(':', $ratio), function ($int) {
                 return $int > 0;
             });
-            if (2 === count($data)) {
-                return array_map(function ($int) { return (int) $int; }, $data);
+            if (2 === \count($data)) {
+                return \array_map(function ($int) { return (int) $int; }, $data);
             }
         }
     }

@@ -22,7 +22,7 @@ class Mapper implements MapperInterface
     /**
      * {@inheritdoc}
      */
-    public function map($type, $data)
+    public function map(string $type, $data)
     {
         switch ($type) {
             case FFProbe::TYPE_FORMAT:

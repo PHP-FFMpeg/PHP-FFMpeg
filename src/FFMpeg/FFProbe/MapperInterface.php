@@ -17,11 +17,11 @@ interface MapperInterface
      * Maps data given its type.
      *
      * @param string $type One of FFProbe::TYPE_* constant
-     * @param string $data The data
+     * @param mixed[][] $data The data
      *
      * @return Format|Stream
      *
      * @throws InvalidArgumentException In case the type is not supported
      */
-    public function map($type, $data);
+    public function map(string $type, $data);
 }

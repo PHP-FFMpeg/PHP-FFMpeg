@@ -2,8 +2,8 @@
 | -------------- | ---
 | Bug?           | no
 | New Feature?   | no
-| Version Used   | Specific tag or commit sha
-| FFmpeg Version | FFmpeg or AVConv and version
+| Version used   | Specific tag or commit sha
+| FFMpeg version | FFmpeg or AVConv and version
 | OS             | Your OS and version
 
 #### Actual Behavior

@@ -225,7 +225,7 @@ class AspectRatio
 
     private static function nearestStrategy($incoming)
     {
-        $availables = array(
+        $availables = [
             static::AR_4_3 => static::valueFromName(static::AR_4_3),
             static::AR_16_9 => static::valueFromName(static::AR_16_9),
             static::AR_8_5 => static::valueFromName(static::AR_8_5),
@@ -245,7 +245,8 @@ class AspectRatio
             static::AR_ROTATED_3_4 => static::valueFromName(static::AR_ROTATED_3_4),
             static::AR_ROTATED_1_DOT_85 => static::valueFromName(static::AR_ROTATED_1_DOT_85),
             static::AR_ROTATED_2_DOT_39 => static::valueFromName(static::AR_ROTATED_2_DOT_39),
-        );
+        ];
+
         asort($availables);
 
         $previous = $current = null;

@@ -42,7 +42,7 @@ class ClipTest extends AbstractMediaTestCase
             ->will($this->returnValue(1));
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $clip = new Clip($this->getVideoMock(__FILE__), $driver, $ffprobe, $start, $duration);
         $fc = $clip->getFinalCommand($format, $outputPathfile);

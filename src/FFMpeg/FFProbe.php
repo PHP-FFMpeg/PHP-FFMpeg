@@ -217,7 +217,7 @@ class FFProbe
      *
      * @return FFProbe
      */
-    public static function create($configuration = array(), LoggerInterface $logger = null, CacheInterface $cache = null)
+    public static function create($configuration = [], LoggerInterface $logger = null, CacheInterface $cache = null)
     {
         if (null === $cache) {
             $cache = new MemoryCache();
@@ -226,7 +226,7 @@ class FFProbe
         return new static(FFProbeDriver::create($configuration, $logger), $cache);
     }
 
-    private function probe($pathfile, $command, $type, $allowJson = true)
+    private function probe(string $pathfile, $command, $type, $allowJson = true)
     {
         $id = sprintf('%s-%s', $command, $pathfile);
 
@@ -241,7 +241,7 @@ class FFProbe
             ));
         }
 
-        $commands = array($pathfile, $command);
+        $commands = [$pathfile, $command];
 
         $parseIsToDo = false;
 

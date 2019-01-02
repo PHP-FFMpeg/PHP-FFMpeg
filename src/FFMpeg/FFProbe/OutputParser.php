@@ -19,7 +19,7 @@ class OutputParser implements OutputParserInterface
     /**
      * {@inheritdoc}
      */
-    public function parse($type, $data)
+    public function parse(string $type, string $data)
     {
         switch ($type) {
             case FFProbe::TYPE_FORMAT:
@@ -33,13 +33,13 @@ class OutputParser implements OutputParserInterface
         }
     }
 
-    private function parseFormat($data)
+    private function parseFormat(string $data)
     {
-        $ret = array();
+        $ret = [];
 
         foreach (explode(PHP_EOL, $data) as $line) {
 
-            if (in_array($line, array('[FORMAT]', '[/FORMAT]'))) {
+            if (in_array($line, ['[FORMAT]', '[/FORMAT]'])) {
                 continue;
             }
 
@@ -58,7 +58,7 @@ class OutputParser implements OutputParserInterface
 
             if (0 === strpos($key, 'TAG:')) {
                 if (!isset($ret['tags'])) {
-                    $ret['tags'] = array();
+                    $ret['tags'] = [];
                 }
                 $ret['tags'][substr($key, 4)] = $value;
             } else {
@@ -66,19 +66,18 @@ class OutputParser implements OutputParserInterface
             }
         }
 
-        return array('format' => $ret);
+        return ['format' => $ret];
     }
 
-    private function parseStreams($data)
+    private function parseStreams(string $data)
     {
-        $ret = array();
+        $ret = [];
         $n = -1;
 
         foreach (explode(PHP_EOL, $data) as $line) {
-
             if ($line == '[STREAM]') {
-                $n ++;
-                $ret[$n] = array();
+                $n++;
+                $ret[$n] = [];
                 continue;
             }
             if ($line == '[/STREAM]') {
@@ -107,19 +106,21 @@ class OutputParser implements OutputParserInterface
 
             if (0 === strpos($key, 'TAG:')) {
                 if (!isset($ret[$n]['tags'])) {
-                    $ret[$n]['tags'] = array();
+                    $ret[$n]['tags'] = [];
                 }
+
                 $ret[$n]['tags'][substr($key, 4)] = $value;
             } elseif (0 === strpos($key, 'DISPOSITION:')) {
                 if (!isset($ret[$n]['disposition'])) {
-                    $ret[$n]['disposition'] = array();
+                    $ret[$n]['disposition'] = [];
                 }
+
                 $ret[$n]['disposition'][substr($key, 12)] = $value;
             } else {
                 $ret[$n][$key] = $value;
             }
         }
 
-        return array('streams' => $ret);
+        return ['streams' => $ret];
     }
 }

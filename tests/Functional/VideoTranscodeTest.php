@@ -14,13 +14,13 @@ class VideoTranscodeTest extends FunctionalTestCase
     {
         $filename = __DIR__ . '/output/output-x264.mp4';
         if (is_file($filename)) {
-            unlink(__DIR__ . '/output/output-x264.mp4');
+            @unlink(__DIR__ . '/output/output-x264.mp4');
         }
 
         $ffmpeg = $this->getFFMpeg();
         $video = $ffmpeg->open(__DIR__ . '/../files/Test.ogv');
 
-        $this->assertInstanceOf('FFMpeg\Media\Video', $video);
+        $this->assertInstanceOf(\FFMpeg\Media\Video::class, $video);
 
         $lastPercentage = null;
         $phpunit = $this;
@@ -44,13 +44,13 @@ class VideoTranscodeTest extends FunctionalTestCase
     {
         $filename = __DIR__ . '/output/output-x264_2.mp4';
         if (is_file($filename)) {
-            unlink(__DIR__ . '/output/output-x264_2.mp4');
+            @unlink(__DIR__ . '/output/output-x264_2.mp4');
         }
 
         $ffmpeg = $this->getFFMpeg();
         $video = $ffmpeg->open(__DIR__ . '/../files/sample.3gp');
 
-        $this->assertInstanceOf('FFMpeg\Media\Video', $video);
+        $this->assertInstanceOf(\FFMpeg\Media\Video::class, $video);
 
         $lastPercentage = null;
         $phpunit = $this;
@@ -67,7 +67,7 @@ class VideoTranscodeTest extends FunctionalTestCase
 
         $video->save($codec, $filename);
         $this->assertFileExists($filename);
-        unlink($filename);
+        @unlink($filename);
     }
 
     /**

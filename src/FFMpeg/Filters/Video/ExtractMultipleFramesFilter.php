@@ -91,7 +91,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        $commands = array();
+        $commands = [];
         $duration = 0;
 
         try {

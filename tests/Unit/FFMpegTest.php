@@ -23,10 +23,10 @@ class FFMpegTest extends TestCase
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('audios')
-            ->will($this->returnValue(new StreamCollection(array(new Stream(array())))));
+            ->will($this->returnValue(new StreamCollection([new Stream([])])));
         $streams->expects($this->once())
             ->method('videos')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue(new StreamCollection([])));
 
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
@@ -35,7 +35,7 @@ class FFMpegTest extends TestCase
             ->will($this->returnValue($streams));
 
         $ffmpeg = new FFMpeg($this->getFFMpegDriverMock(), $ffprobe);
-        $this->assertInstanceOf('FFMpeg\Media\Audio', $ffmpeg->open(__FILE__));
+        $this->assertInstanceOf(\FFMpeg\Media\Audio::class, $ffmpeg->open(__FILE__));
     }
 
     public function testOpenVideo()
@@ -43,7 +43,7 @@ class FFMpegTest extends TestCase
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('videos')
-            ->will($this->returnValue(new StreamCollection(array(new Stream(array())))));
+            ->will($this->returnValue(new StreamCollection([new Stream([])])));
         $streams->expects($this->never())
             ->method('audios');
 
@@ -82,8 +82,8 @@ class FFMpegTest extends TestCase
         $logger = $this->getLoggerMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $ffmpeg = FFMpeg::create(array('timeout' => 42), $logger, $ffprobe);
-        $this->assertInstanceOf('FFMpeg\FFMpeg', $ffmpeg);
+        $ffmpeg = FFMpeg::create(['timeout' => 42], $logger, $ffprobe);
+        $this->assertInstanceOf(\FFMpeg\FFMpeg::class, $ffmpeg);
 
         $this->assertSame($logger, $ffmpeg->getFFMpegDriver()->getProcessRunner()->getLogger());
         $this->assertSame($ffprobe, $ffmpeg->getFFProbe());

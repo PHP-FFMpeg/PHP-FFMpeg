@@ -29,8 +29,8 @@ class FFProbeDriverTest extends TestCase
     public function testCreate()
     {
         $logger = $this->getLoggerMock();
-        $ffprobe = FFProbeDriver::create(array(), $logger);
-        $this->assertInstanceOf('FFMpeg\Driver\FFProbeDriver', $ffprobe);
+        $ffprobe = FFProbeDriver::create([], $logger);
+        $this->assertInstanceOf(\FFMpeg\Driver\FFProbeDriver::class, $ffprobe);
         $this->assertEquals($logger, $ffprobe->getProcessRunner()->getLogger());
     }
 

@@ -113,9 +113,9 @@ abstract class AbstractVideo extends Audio
      * NOTE: This method is different to the Audio's one, because Video is using passes.
      * @inheritDoc
      */
-    public function getFinalCommand(FormatInterface $format, $outputPathfile)
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile)
     {
-        $finalCommands = array();
+        $finalCommands = [];
 
         foreach ($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
             $finalCommands[] = implode(' ', $passCommands);
@@ -203,7 +203,7 @@ abstract class AbstractVideo extends Audio
         }
 
         // Merge Filters into one command
-        $videoFilterVars = $videoFilterProcesses = array();
+        $videoFilterVars = $videoFilterProcesses = [];
         for ($i = 0; $i < count($commands); $i++) {
             $command = $commands[$i];
             if ($command === '-vf') {
@@ -255,7 +255,7 @@ abstract class AbstractVideo extends Audio
         $this->fs = FsManager::create();
         $this->fsId = uniqid('ffmpeg-passes');
         $passPrefix = $this->fs->createTemporaryDirectory(0777, 50, $this->fsId) . '/' . uniqid('pass-');
-        $passes = array();
+        $passes = [];
         $totalPasses = $format->getPasses();
 
         if (!$totalPasses) {

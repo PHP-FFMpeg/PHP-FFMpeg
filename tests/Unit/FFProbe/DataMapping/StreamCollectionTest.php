@@ -12,7 +12,7 @@ class StreamCollectionTest extends TestCase
         $stream = $this->getStreamMock();
 
         $collection = new StreamCollection();
-        $this->assertEquals(array(), $collection->all());
+        $this->assertEquals([], $collection->all());
         $collection->add($stream);
         $this->assertEquals(array($stream), $collection->all());
         $collection->add($stream);

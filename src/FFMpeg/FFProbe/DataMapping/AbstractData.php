@@ -24,9 +24,9 @@ abstract class AbstractData implements \Countable
      * Returns true if data has property.
      *
      * @param  string  $property
-     * @return Boolean
+     * @return bool
      */
-    public function has($property)
+    public function has(string $property): bool
     {
         return isset($this->properties[$property]);
     }
@@ -39,7 +39,7 @@ abstract class AbstractData implements \Countable
      *
      * @return mixed
      */
-    public function get($property, $default = null)
+    public function get(string $property, $default = null)
     {
         if (!isset($this->properties[$property])) {
             return $default;
@@ -56,7 +56,7 @@ abstract class AbstractData implements \Countable
      *
      * @return AbstractData
      */
-    public function set($property, $value)
+    public function set(string $property, $value): AbstractData
     {
         $this->properties[$property] = $value;
 
@@ -66,9 +66,9 @@ abstract class AbstractData implements \Countable
     /**
      * Returns all property names.
      *
-     * @return array
+     * @return string[]
      */
-    public function keys()
+    public function keys(): array
     {
         return array_keys($this->properties);
     }
@@ -76,17 +76,17 @@ abstract class AbstractData implements \Countable
     /**
      * Returns all properties and their values.
      *
-     * @return array
+     * @return mixed[]|mixed[][]
      */
-    public function all()
+    public function all(): array
     {
         return $this->properties;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->properties);
     }

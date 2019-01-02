@@ -13,9 +13,10 @@ namespace FFMpeg\FFProbe\DataMapping;
 
 class StreamCollection implements \Countable, \IteratorAggregate
 {
+    /** @var Stream[] */
     private $streams;
 
-    public function __construct(array $streams = array())
+    public function __construct(array $streams = [])
     {
         $this->streams = array_values($streams);
     }
@@ -26,7 +27,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return null|Stream
      */
-    public function first()
+    public function first(): ?Stream
     {
         $stream = reset($this->streams);
 
@@ -40,7 +41,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return StreamCollection
      */
-    public function add(Stream $stream)
+    public function add(Stream $stream): StreamCollection
     {
         $this->streams[] = $stream;
 
@@ -52,7 +53,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return StreamCollection
      */
-    public function videos()
+    public function videos(): StreamCollection
     {
         return new static(array_filter($this->streams, function (Stream $stream) {
             return $stream->isVideo();
@@ -64,7 +65,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return StreamCollection
      */
-    public function audios()
+    public function audios(): StreamCollection
     {
         return new static(array_filter($this->streams, function (Stream $stream) {
             return $stream->isAudio();
@@ -74,7 +75,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return count($this->streams);
     }
@@ -84,7 +85,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      *
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->streams;
     }

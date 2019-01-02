@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -86,6 +87,7 @@ class FFMpeg
      * @return Audio|Video
      *
      * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function open($pathfile)
     {
@@ -99,7 +101,7 @@ class FFMpeg
             return new Audio($pathfile, $this->driver, $this->ffprobe);
         }
 
-        throw new InvalidArgumentException('Unable to detect file format, only audio and video supported');
+        throw new InvalidArgumentException('Unable to detect file format, only audio and video files are supported.');
     }
 
     /**
@@ -111,7 +113,7 @@ class FFMpeg
      *
      * @return FFMpeg
      */
-    public static function create($configuration = array(), LoggerInterface $logger = null, FFProbe $probe = null)
+    public static function create($configuration = [], LoggerInterface $logger = null, FFProbe $probe = null)
     {
         if (null === $probe) {
             $probe = FFProbe::create($configuration, $logger, null);

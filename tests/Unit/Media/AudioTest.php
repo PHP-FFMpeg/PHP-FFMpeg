@@ -73,7 +73,7 @@ class AudioTest extends AbstractStreamableTestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $configuration = $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
 
@@ -100,7 +100,7 @@ class AudioTest extends AbstractStreamableTestCase
 
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $configuration = $this->getMockBuilder(\Alchemy\BinaryDriver\ConfigurationInterface::class)->getMock();
         $driver->expects($this->any())
@@ -115,7 +115,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->with($audio, $format)
             ->will($this->returnValue(array('extra-filter-command')));
 
-        $capturedCommands = array();
+        $capturedCommands = [];
 
         $driver->expects($this->once())
             ->method('command')
@@ -188,7 +188,7 @@ class AudioTest extends AbstractStreamableTestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $format->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(663));
@@ -199,7 +199,7 @@ class AudioTest extends AbstractStreamableTestCase
         $audioFormat = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $audioFormat->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $audioFormat->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(664));
@@ -227,7 +227,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->disableOriginalConstructor()->getMock();
         $progressableFormat->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $progressableFormat->expects($this->any())
             ->method('createProgressListener')
             ->will($this->returnValue($listeners));
@@ -311,7 +311,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->with($this->equalTo('ffmpeg.threads'))
             ->will($this->returnValue(24));
 
-        $capturedCommands = array();
+        $capturedCommands = [];
 
         $driver->expects($this->exactly(2))
             ->method('command')
