@@ -30,9 +30,9 @@ class OptionsTester implements OptionsTesterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function has($name)
+    public function has(string $name): bool
     {
         $id = sprintf('option-%s', $name);
 
@@ -42,14 +42,14 @@ class OptionsTester implements OptionsTesterInterface
 
         $output = $this->retrieveHelpOutput();
 
-        $ret = (Boolean) preg_match('/^'.$name.'/m', $output);
+        $ret = (bool) preg_match('/^'.$name.'/m', $output);
 
         $this->cache->set($id, $ret);
 
         return $ret;
     }
 
-    private function retrieveHelpOutput()
+    private function retrieveHelpOutput(): string
     {
         $id = 'help';
 
@@ -58,7 +58,7 @@ class OptionsTester implements OptionsTesterInterface
         }
 
         try {
-            $output = $this->ffprobe->command(array('-help', '-loglevel', 'quiet'));
+            $output = $this->ffprobe->command(['-help', '-loglevel', 'quiet']);
         } catch (ExecutionFailureException $e) {
             throw new RuntimeException('Your FFProbe version is too old and does not support `-help` option, please upgrade.', $e->getCode(), $e);
         }

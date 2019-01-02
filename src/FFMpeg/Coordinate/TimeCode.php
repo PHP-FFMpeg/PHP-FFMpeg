@@ -25,10 +25,10 @@ class TimeCode
     /** @var int */
     private $seconds;
 
-    /** @var int */
+    /** @var float */
     private $frames;
 
-    public function __construct(int $hours, int $minutes, int $seconds, int $frames)
+    public function __construct(int $hours, int $minutes, int $seconds, float $frames)
     {
         $this->hours = $hours;
         $this->minutes = $minutes;
@@ -68,7 +68,7 @@ class TimeCode
 
         $hours += $days * 24;
 
-        return new static($hours, $minutes, $seconds, $frames);
+        return new static($hours, $minutes, $seconds, (float) $frames);
     }
 
     /**
@@ -78,7 +78,7 @@ class TimeCode
      *
      * @return TimeCode
      */
-    public static function fromSeconds($quantity): TimeCode
+    public static function fromSeconds(float $quantity): TimeCode
     {
         $minutes = $hours = $frames = 0;
 
@@ -94,7 +94,7 @@ class TimeCode
             $minutes = $minutes % 60;
         }
 
-        return new static($hours, $minutes, $seconds, $frames);
+        return new static((int) $hours, (int) $minutes, (int) $seconds, (float) $frames);
     }
 
     /**

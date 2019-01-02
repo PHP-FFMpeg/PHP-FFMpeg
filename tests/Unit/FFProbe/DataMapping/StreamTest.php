@@ -97,7 +97,7 @@ class StreamTest extends TestCase
      */
     public function testGetDimensionsFromVideoWithInvalidDisplayRatio($invalidRatio)
     {
-        $stream = new Stream(array('codec_type' => 'video', 'width' => 960, 'height' => 720, 'sample_aspect_ratio' => $invalidRatio, 'display_aspect_ratio' => '16:9'));
+        $stream = new Stream(['codec_type' => 'video', 'width' => 960, 'height' => 720, 'sample_aspect_ratio' => $invalidRatio, 'display_aspect_ratio' => '16:9']);
         $this->assertEquals(new Dimension(960, 720), $stream->getDimensions());
     }
 

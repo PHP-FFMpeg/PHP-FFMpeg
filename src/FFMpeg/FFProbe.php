@@ -226,7 +226,7 @@ class FFProbe
         return new static(FFProbeDriver::create($configuration, $logger), $cache);
     }
 
-    private function probe(string $pathfile, $command, $type, $allowJson = true)
+    private function probe(string $pathfile, $command, string $type, bool $allowJson = true)
     {
         $id = sprintf('%s-%s', $command, $pathfile);
 

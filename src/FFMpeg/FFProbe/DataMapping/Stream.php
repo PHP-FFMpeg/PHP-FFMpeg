@@ -15,7 +15,7 @@ use FFMpeg\Exception\LogicException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\Dimension;
 
-class Stream extends AbstractData
+class Stream extends AbstractData implements MapableData
 {
     /**
      * Returns true if the stream is an audio stream.
@@ -103,5 +103,7 @@ class Stream extends AbstractData
                 return \array_map(function ($int) { return (int) $int; }, $data);
             }
         }
+
+        return null;
     }
 }
