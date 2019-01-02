@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -13,6 +14,7 @@ namespace FFMpeg\FFProbe\DataMapping;
 
 abstract class AbstractData implements \Countable
 {
+    /** @var array */
     private $properties;
 
     public function __construct(array $properties)

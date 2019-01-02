@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -21,7 +22,7 @@ use Psr\Log\LoggerInterface;
 class FFProbeDriver extends AbstractBinary
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -36,7 +37,7 @@ class FFProbeDriver extends AbstractBinary
      *
      * @return FFProbeDriver
      */
-    public static function create($configuration = [], LoggerInterface $logger = null)
+    public static function create($configuration = [], LoggerInterface $logger = null): FFProbeDriver
     {
         if (!$configuration instanceof ConfigurationInterface) {
             if (!\is_array($configuration)) {

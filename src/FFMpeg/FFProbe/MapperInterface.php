@@ -11,6 +11,8 @@
 
 namespace FFMpeg\FFProbe;
 
+use FFMpeg\FFProbe\DataMapping\MapableData;
+
 interface MapperInterface
 {
     /**
@@ -19,9 +21,9 @@ interface MapperInterface
      * @param string $type One of FFProbe::TYPE_* constant
      * @param mixed[][] $data The data
      *
-     * @return Format|Stream
+     * @return MapableData
      *
      * @throws InvalidArgumentException In case the type is not supported
      */
-    public function map(string $type, $data);
+    public function map(string $type, $data): MapableData;
 }

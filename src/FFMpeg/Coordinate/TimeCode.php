@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -15,13 +16,19 @@ use FFMpeg\Exception\InvalidArgumentException;
 
 class TimeCode
 {
-    //see http://www.dropframetimecode.org/
+    /** @var int */
     private $hours;
+
+    /** @var int */
     private $minutes;
+
+    /** @var int */
     private $seconds;
+
+    /** @var int */
     private $frames;
 
-    public function __construct($hours, $minutes, $seconds, $frames)
+    public function __construct(int $hours, int $minutes, int $seconds, int $frames)
     {
         $this->hours = $hours;
         $this->minutes = $minutes;
@@ -29,7 +36,7 @@ class TimeCode
         $this->frames = $frames;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%02d:%02d:%02d.%02d', $this->hours, $this->minutes, $this->seconds, $this->frames);
     }
@@ -43,7 +50,7 @@ class TimeCode
      *
      * @throws InvalidArgumentException In case an invalid timecode is supplied
      */
-    public static function fromString($timecode)
+    public static function fromString(string $timecode): TimeCode
     {
         $days = 0;
 
@@ -71,7 +78,7 @@ class TimeCode
      *
      * @return TimeCode
      */
-    public static function fromSeconds($quantity)
+    public static function fromSeconds($quantity): TimeCode
     {
         $minutes = $hours = $frames = 0;
 
@@ -94,7 +101,7 @@ class TimeCode
      * Returns this timecode in seconds
      * @return int
      */
-    public function toSeconds() {
+    public function toSeconds(): int {
         $seconds = 0;
 
         $seconds += $this->hours * 60 * 60;
@@ -112,7 +119,7 @@ class TimeCode
      * @param   TimeCode    $timecode   The Timecode to compare
      * @return bool
      */
-    public function isAfter(TimeCode $timecode) {
+    public function isAfter(TimeCode $timecode): bool {
         // convert everything to seconds and compare
         return ($this->toSeconds() > $timecode->toSeconds());
     }

@@ -12,17 +12,20 @@
 namespace FFMpeg\FFProbe;
 
 use FFMpeg\FFProbe;
-use FFMpeg\FFProbe\DataMapping\Format;
-use FFMpeg\FFProbe\DataMapping\StreamCollection;
-use FFMpeg\FFProbe\DataMapping\Stream;
+use FFMpeg\FFProbe\DataMapping\{
+    Format,
+    MapableData,
+    StreamCollection,
+    Stream
+};
 use FFMpeg\Exception\InvalidArgumentException;
 
 class Mapper implements MapperInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function map(string $type, $data)
+    public function map(string $type, $data): MapableData
     {
         switch ($type) {
             case FFProbe::TYPE_FORMAT:
@@ -36,12 +39,12 @@ class Mapper implements MapperInterface
         }
     }
 
-    private function mapFormat($data)
+    private function mapFormat($data): Format
     {
         return new Format($data['format']);
     }
 
-    private function mapStreams($data)
+    private function mapStreams($data): StreamCollection
     {
         $streams = new StreamCollection();
 

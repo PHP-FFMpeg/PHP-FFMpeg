@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -36,15 +37,15 @@ class FFMpegDriver extends AbstractBinary
     /**
      * Creates an FFMpegDriver.
      *
-     * @param LoggerInterface|null     $logger
-     * @param array|Configuration $configuration
+     * @param   LoggerInterface|null    $logger
+     * @param   array|Configuration     $configuration
      *
      * @return FFMpegDriver
      *
      * @throws InvalidArgumentException
      * @throws ExecutableNotFoundException
      */
-    public static function create(?LoggerInterface $logger = null, $configuration = [])
+    public static function create(?LoggerInterface $logger = null, $configuration = []): FFMpegDriver
     {
         if (!($configuration instanceof ConfigurationInterface)) {
             if (!\is_array($configuration)) {

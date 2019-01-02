@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -11,24 +12,44 @@
 
 namespace FFMpeg\Coordinate;
 
+use FFMpeg\Exception\InvalidArgumentException;
+
 class Point
 {
+    /** @var int|string */
     private $x;
+    /** @var int|string */
     private $y;
+    /** @var bool */
+    private $isDynamicPoint;
 
-    public function __construct($x, $y, $dynamic = false)
+    public function __construct($x, $y, bool $isDynamicPoint = false)
     {
-        if ($dynamic) {
+        if ($isDynamicPoint) {
+            if (!\is_string($x) || !\is_string($y)) {
+                throw new InvalidArgumentException(
+                    'When creating dynamic points, the expression of the coordinates must be given as a string.'
+                );
+            }
+
             $this->x = $x;
             $this->y = $y;
         } else {
+            if (!\is_int($x) || !\is_int($y)) {
+                throw new InvalidArgumentException(
+                    'When creating non-dynamic points, the expression of the coordinates must be given as integers.'
+                );
+            }
+
             $this->x = (int)$x;
             $this->y = (int)$y;
         }
+
+        $this->isDynamicPoint = $isDynamicPoint;
     }
 
     /**
-     * @return integer
+     * @return int|string
      */
     public function getX()
     {
@@ -36,10 +57,17 @@ class Point
     }
 
     /**
-     * @return integer
+     * @return int|string
      */
     public function getY()
     {
         return $this->y;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDynamicPoint(): bool {
+        return $this->isDynamicPoint;
     }
 }

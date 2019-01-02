@@ -11,7 +11,7 @@
 
 namespace FFMpeg\FFProbe\DataMapping;
 
-class StreamCollection implements \Countable, \IteratorAggregate
+class StreamCollection implements \Countable, \IteratorAggregate, MapableData
 {
     /** @var Stream[] */
     private $streams;

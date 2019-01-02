@@ -19,24 +19,43 @@ use FFMpeg\Exception\InvalidArgumentException;
  */
 class AspectRatio
 {
-    // named 4:3 or 1.33:1 Traditional TV
+    /**
+     * named 4:3 or 1.33:1 Traditional TV
+     */
     const AR_4_3 = '4/3';
-    // named 16:9 or 1.77:1 HD video standard
+    /**
+     * named 16:9 or 1.77:1 HD video standard
+     */
     const AR_16_9 = '16/9';
 
-    // named 8:5 or 16:10 or 1.6:1
+    /**
+     * named 8:5 or 16:10 or 1.6:1
+     */
     const AR_8_5 = '8/5';
 
-    // named 25:16 or 1.56:1
+    /**
+     * named 25:16 or 1.56:1
+     */
     const AR_25_16 = '25/16';
 
-    // named 3:2 or 1.5:1 see http://en.wikipedia.org/wiki/135_film
+    /**
+     * named 3:2 or 1.5:1
+     * @see http://en.wikipedia.org/wiki/135_film
+     */
     const AR_3_2 = '3/2';
-    // named 5:3 or 1.66:1 see http://en.wikipedia.org/wiki/Super_16_mm
+    /**
+     * named 5:3 or 1.66:1
+     * @see http://en.wikipedia.org/wiki/Super_16_mm
+     */
     const AR_5_3 = '5/3';
 
-    // mostly used in Photography
+    /**
+     * mostly used in Photography
+     */
     const AR_5_4 = '5/4';
+    /**
+     * mostly used in Photography
+     */
     const AR_1_1 = '1/1';
 
     /**
@@ -44,6 +63,7 @@ class AspectRatio
      * @see http://en.wikipedia.org/wiki/Widescreen#Film
      */
     const AR_1_DOT_85_1 = '1.85:1';
+
     /**
      * 2.39:1 or 2.40:1 Current widescreen cinema standard
      * @see http://en.wikipedia.org/wiki/Anamorphic_format
@@ -52,22 +72,37 @@ class AspectRatio
 
     // Rotated constants
 
-    // Rotated 4:3
+    /**
+     * Rotated 4:3
+     */
     const AR_ROTATED_3_4 = '3/4';
-    // Rotated 16:9
+    /**
+     * Rotated 16:9
+     */
     const AR_ROTATED_9_16 = '9/16';
 
-    // Rotated 3:2
+    /**
+     * Rotated 3:2
+    */
     const AR_ROTATED_2_3 = '2/3';
-    // Rotated 5:3
+
+    /**
+     * Rotated 5:3
+     */
     const AR_ROTATED_3_5 = '3/5';
 
-    // Rotated 5:4
+    /**
+     * Rotated 5:4
+     */
     const AR_ROTATED_4_5 = '4/5';
 
-    // Rotated 1.85
+    /**
+     * Rotated 1.85
+     */
     const AR_ROTATED_1_DOT_85 = '1/1.85';
-    // Rotated 2.39
+    /**
+     * Rotated 2.39
+     */
     const AR_ROTATED_2_DOT_39 = '1/2.39';
 
     /** @var float */
