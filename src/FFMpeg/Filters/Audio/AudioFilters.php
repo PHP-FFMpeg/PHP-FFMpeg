@@ -41,7 +41,7 @@ class AudioFilters
     /**
      * Add metadata to an audio file. If no arguments are given then the filter
      * will remove all metadata from the audio file.
-     * @param Array|Null $data  If array must contain one of these key/value pairs:
+     * @param string[][]|null $data  If array must contain one of these key/value pairs:
      *    - "title": Title metadata
      *    - "artist": Artist metadata
      *    - "composer": Composer metadata
@@ -52,7 +52,7 @@ class AudioFilters
      *    - "genre": Genre metadata
      *    - "description": Description metadata
      */
-    public function addMetadata($data = null)
+    public function addMetadata(?array $data = null): AudioFilters
     {
         $this->media->addFilter(new AddMetadataFilter($data));
 

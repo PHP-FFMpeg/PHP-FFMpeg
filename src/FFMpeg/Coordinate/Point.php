@@ -67,7 +67,8 @@ class Point
     /**
      * @return bool
      */
-    public function isDynamicPoint(): bool {
+    public function isDynamicPoint(): bool
+    {
         return $this->isDynamicPoint;
     }
 }

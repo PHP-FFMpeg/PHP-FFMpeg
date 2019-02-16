@@ -44,14 +44,6 @@ class AudioClipFilter implements AudioFilterInterface
     }
 
     /**
-     * @inheritDoc
-     */
-    public function getPriority(): int
-    {
-        return $this->priority;
-    }
-
-    /**
      * Returns the start position the audio is being cutted
      *
      * @return TimeCode

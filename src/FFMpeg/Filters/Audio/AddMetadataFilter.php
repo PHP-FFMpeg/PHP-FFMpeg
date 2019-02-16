@@ -35,7 +35,7 @@ class AddMetadataFilter implements AudioFilterInterface
         $this->priority = $priority;
     }
 
-    public function apply(Audio $audio, AudioInterface $format)
+    public function apply(Audio $audio, AudioInterface $format): array
     {
         $meta = $this->metaArr;
 

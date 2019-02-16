@@ -101,7 +101,8 @@ class TimeCode
      * Returns this timecode in seconds
      * @return int
      */
-    public function toSeconds(): int {
+    public function toSeconds(): int
+    {
         $seconds = 0;
 
         $seconds += $this->hours * 60 * 60;
@@ -119,7 +120,8 @@ class TimeCode
      * @param   TimeCode    $timecode   The Timecode to compare
      * @return bool
      */
-    public function isAfter(TimeCode $timecode): bool {
+    public function isAfter(TimeCode $timecode): bool
+    {
         // convert everything to seconds and compare
         return ($this->toSeconds() > $timecode->toSeconds());
     }
