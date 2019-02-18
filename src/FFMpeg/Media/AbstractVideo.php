@@ -134,7 +134,7 @@ abstract class AbstractVideo extends Audio
      */
     protected function buildCommand(FormatInterface $format, $outputPathfile)
     {
-        $commands = $this->basePartOfCommand();
+        $commands = $this->basePartOfCommand($format);
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
@@ -285,8 +285,22 @@ abstract class AbstractVideo extends Audio
      *
      * @return array
      */
-    protected function basePartOfCommand()
+    protected function basePartOfCommand(FormatInterface $format)
     {
-        return array('-y', '-i', $this->pathfile);
+        $commands = array('-y');
+
+        // If the user passed some initial parameters
+        if ($format instanceof VideoInterface) {
+            if (null !== $format->getInitialParameters()) {
+                foreach ($format->getInitialParameters() as $initialParameter) {
+                    $commands[] = $initialParameter;
+                }
+            }
+        }
+
+        $commands[] = '-i';
+        $commands[] = $this->pathfile;
+
+        return $commands;
     }
 }
