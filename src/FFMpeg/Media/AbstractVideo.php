@@ -283,6 +283,8 @@ abstract class AbstractVideo extends Audio
     /**
      * Return base part of command.
      *
+     * @param FormatInterface   $format
+     *
      * @return array
      */
     protected function basePartOfCommand(FormatInterface $format)

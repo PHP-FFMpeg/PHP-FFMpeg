@@ -4,6 +4,7 @@ namespace FFMpeg\Media;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Format\FormatInterface;
 
 /**
  * Video clip.
@@ -44,9 +45,11 @@ class Clip extends Video
     /**
      * Return base part of command.
      *
+     * @param FormatInterface   $format
+     *
      * @return array
      */
-    protected function basePartOfCommand()
+    protected function basePartOfCommand(FormatInterface $format)
     {
         $arr = array('-y', '-ss', (string) $this->start, '-i', $this->pathfile);
 
