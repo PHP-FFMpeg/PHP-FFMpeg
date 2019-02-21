@@ -72,8 +72,8 @@ class Concat extends AbstractMediaType
     /**
      * Saves the concatenated video in the given array, considering that the sources videos are all encoded with the same codec.
      *
-     * @param array   $outputPathfile
-     * @param string  $streamCopy
+     * @param string  $outputPathfile
+     * @param bool    $streamCopy
      *
      * @return Concat
      *
@@ -105,7 +105,7 @@ class Concat extends AbstractMediaType
                 if($count_videos != 0)
                     $line .= "\n";
 
-                $line .= "file ".$videoPath;
+                $line .= "file " . addcslashes($videoPath, '\'"\\\0 ');
 
                 fwrite($fileStream, $line);
 
@@ -144,6 +144,7 @@ class Concat extends AbstractMediaType
             $this->driver->command($commands);
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($outputPathfile);
+            // TODO@v1: paste this line into an `finally` block.
             $this->cleanupTemporaryFile($sourcesFile);
             throw new RuntimeException('Unable to save concatenated video', $e->getCode(), $e);
         }

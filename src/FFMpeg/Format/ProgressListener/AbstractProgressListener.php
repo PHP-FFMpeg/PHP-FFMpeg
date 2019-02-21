@@ -80,12 +80,13 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      *
      * @throws RuntimeException
      */
-    public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass)
+    public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass, $duration = 0)
     {
         $this->ffprobe = $ffprobe;
         $this->pathfile = $pathfile;
         $this->currentPass = $currentPass;
         $this->totalPass = $totalPass;
+        $this->duration = $duration;
     }
 
     /**
@@ -254,9 +255,8 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
             return;
         }
 
-        $this->totalSize = $format->get('size') / 1024;
-        $this->duration = $format->get('duration');
-
+        $this->duration = (int) $this->duration > 0 ? $this->duration : $format->get('duration');
+        $this->totalSize = $format->get('size') / 1024 * ($this->duration / $format->get('duration'));
         $this->initialized = true;
     }
 }

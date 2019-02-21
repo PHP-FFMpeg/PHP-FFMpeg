@@ -62,7 +62,7 @@ class Audio extends AbstractStreamableMedia
         $listeners = null;
 
         if ($format instanceof ProgressableInterface) {
-            $listeners = $format->createProgressListener($this, $this->ffprobe, 1, 1);
+            $listeners = $format->createProgressListener($this, $this->ffprobe, 1, 1, 0);
         }
 
         $commands = $this->buildCommand($format, $outputPathfile);
@@ -138,5 +138,16 @@ class Audio extends AbstractStreamableMedia
     public function waveform($width = 640, $height = 120, $colors = array(Waveform::DEFAULT_COLOR))
     {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height, $colors);
+    }
+
+    /**
+     * Concatenates a list of audio files into one unique audio file.
+     *
+     * @param  array $sources
+     * @return Concat
+     */
+    public function concat($sources)
+    {
+        return new Concat($sources, $this->driver, $this->ffprobe);
     }
 }

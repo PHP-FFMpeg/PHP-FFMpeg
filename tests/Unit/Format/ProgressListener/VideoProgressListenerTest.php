@@ -11,7 +11,7 @@ class VideoProgressListenerTest extends TestCase
     /**
      * @dataProvider provideData
      */
-    public function testHandle($size, $duration,
+    public function testHandle($size, $duration, $newVideoDuration,
         $data, $expectedPercent, $expectedRemaining, $expectedRate,
         $data2, $expectedPercent2, $expectedRemaining2, $expectedRate2,
         $currentPass, $totalPass
@@ -26,7 +26,7 @@ class VideoProgressListenerTest extends TestCase
                 'duration' => $duration,
             ))));
 
-        $listener = new VideoProgressListener($ffprobe, __FILE__, $currentPass, $totalPass);
+        $listener = new VideoProgressListener($ffprobe, __FILE__, $currentPass, $totalPass, $newVideoDuration);
         $phpunit = $this;
         $n = 0;
         $listener->on('progress', function ($percent, $remaining, $rate) use (&$n, $phpunit, $expectedPercent, $expectedRemaining, $expectedRate, $expectedPercent2, $expectedRemaining2, $expectedRate2) {
@@ -57,6 +57,7 @@ class VideoProgressListenerTest extends TestCase
             array(
                 147073958,
                 281.147533,
+                281.147533,
                 'frame=  206 fps=202 q=10.0 size=     571kB time=00:00:07.12 bitrate= 656.8kbits/s dup=9 drop=0',
                 2,
                 0,
@@ -71,6 +72,7 @@ class VideoProgressListenerTest extends TestCase
             array(
                 147073958,
                 281.147533,
+                281.147533,
                 'frame=  206 fps=202 q=10.0 size=     571kB time=00:00:07.12 bitrate= 656.8kbits/s dup=9 drop=0',
                 1,
                 0,
@@ -80,6 +82,21 @@ class VideoProgressListenerTest extends TestCase
                 32,
                 3868,
                 1,
+                2
+            ),
+            array(
+                147073958,
+                281.147533,
+                35,
+                'frame=  206 fps=202 q=10.0 size=     571kB time=00:00:07.12 bitrate= 656.8kbits/s dup=9 drop=0',
+                60,
+                0,
+                0,
+                'frame=  854 fps=113 q=20.0 size=    4430kB time=00:00:33.04 bitrate=1098.5kbits/s dup=36 drop=0',
+                97,
+                0,
+                3868,
+                2,
                 2
             )
         );
