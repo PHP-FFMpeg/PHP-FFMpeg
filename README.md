@@ -1,10 +1,10 @@
-# PHP FFmpeg
+# php-ffmpeg
 
 [![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983/big.png)](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983)
 
-An Object Oriented library to convert video/audio files with FFmpeg / AVConv.
+An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 
 Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
 
@@ -16,7 +16,7 @@ This library requires a working FFMpeg install. You will need both FFMpeg and FF
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
 otherwise you should have to explicitly give the binaries path on load.
 
-For Windows users : Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
+For Windows users: Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
 
 ### Known issues:
 
@@ -35,6 +35,9 @@ $ composer require php-ffmpeg/php-ffmpeg
 ## Basic Usage
 
 ```php
+
+require 'vendor/autoload.php';
+
 $ffmpeg = FFMpeg\FFMpeg::create();
 $video = $ffmpeg->open('video.mpg');
 $video
@@ -125,7 +128,7 @@ $video->save($format, 'video.avi');
 ```
 
 Transcoding progress can be monitored in realtime, see Format documentation
-below for more informations.
+below for more information.
 
 ##### Extracting image
 
@@ -141,7 +144,7 @@ $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(42));
 $frame->save('image.jpg');
 ```
 
-If you want to extract multiple images from your video, you can use the following filter:
+If you want to extract multiple images from the video, you can use the following filter:
 
 ```php
 $video
@@ -152,6 +155,38 @@ $video
 $video
     ->save(new FFMpeg\Format\Video\X264(), '/path/to/new/file');
 ```
+By default, this will save the frames as `jpg` images.
+
+You are able to override this using `setFrameFileType` to save the frames in another format:
+```php
+$frameFileType = 'jpg'; // either 'jpg', 'jpeg' or 'png'
+$filter = new ExtractMultipleFramesFilter($frameRate, $destinationFolder);
+$filter->setFrameFileType($frameFileType);
+
+$video->addFilter($filter);
+```
+
+##### Clip
+
+Cuts the video at a desired point. Use input seeking method. It is faster option than use filter clip.
+
+```php
+$clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
+$clip->save(new FFMpeg\Format\Video\X264(), 'video.avi');
+```
+
+The clip filter takes two parameters:
+
+- `$start`, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the start point of the clip
+- `$duration`, optional, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the duration of the clip
+
+On clip you can apply same filters as on video. For example resizing filter.
+
+```php
+$clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
+$clip->filters()->resize(new FFMpeg\Coordinate\Dimension(320, 240), FFMpeg\Filters\Video\ResizeFilter::RESIZEMODE_INSET, true);
+$clip->save(new FFMpeg\Format\Video\X264(), 'video.avi');
+```
 
 ##### Generate a waveform
 
@@ -159,13 +194,13 @@ You can generate a waveform of an audio file using the `FFMpeg\Media\Audio::wave
 method.
 
 This code returns a `FFMpeg\Media\Waveform` instance.
-You can optionally pass dimensions as arguments, see dedicated
+You can optionally pass dimensions as the first two arguments and an array of hex string colors for ffmpeg to use for the waveform, see dedicated
 documentation below for more information.
 
-The ouput file MUST use the PNG extension.
+The output file MUST use the PNG extension.
 
 ```php
-$waveform = $audio->waveform(640, 120);
+$waveform = $audio->waveform(640, 120, array('#00FF00'));
 $waveform->save('waveform.png');
 ```
 
@@ -178,8 +213,8 @@ $video = $ffmpeg->open( 'video.mp4' );
 // Set an audio format
 $audio_format = new FFMpeg\Format\Audio\Mp3();
 
-// Extract the audio into a new file
-$video->save('audio.mp3');
+// Extract the audio into a new file as mp3
+$video->save($audio_format, 'audio.mp3');
 
 // Set the audio file
 $audio = $ffmpeg->open( 'audio.mp3' );
@@ -298,7 +333,7 @@ The framerate filter takes two parameters:
 Synchronizes audio and video.
 
 Some containers may use a delay that results in desynchronized outputs. This
-filters solves this issue.
+filter solves this issue.
 
 ```php
 $video->filters()->synchronize();
@@ -316,6 +351,18 @@ The clip filter takes two parameters:
 
 - `$start`, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the start point of the clip
 - `$duration`, optional, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the duration of the clip
+
+###### Crop
+
+Crops the video based on a width and height(a `Point`)
+
+```php
+$video->filters()->crop(new FFMpeg\Coordinate\Point("t*100", 0, true), new FFMpeg\Coordinate\Dimension(200, 600));
+```
+
+It takes two parameters:
+- `$point`, an instance of `FFMpeg\Coordinate\Point`, specifies the point to crop
+- `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`, specifies the dimension of the output video
 
 ### Audio
 
@@ -346,7 +393,7 @@ $audio->save($format, 'track.flac');
 ```
 
 Transcoding progress can be monitored in realtime, see Format documentation
-below for more informations.
+below for more information.
 
 ##### Filters
 
@@ -399,7 +446,7 @@ The resample filter takes two parameters :
 
 #### Frame
 
-A frame is a image at a timecode of a video ; see documentation above about
+A frame is an image at a timecode of a video; see documentation above about
 frame extraction.
 
 You can save frames using the `FFMpeg\Media\Frame::save` method.
@@ -409,7 +456,7 @@ $frame->save('target.jpg');
 ```
 
 This method has a second optional boolean parameter. Set it to true to get
-accurate images ; it takes more time to execute.
+accurate images; it takes more time to execute.
 
 #### Gif
 
@@ -447,7 +494,7 @@ To concatenate videos encoded with the same codec, do as follow:
 
 ```php
 // In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
-// We recommand that you put there the path of any of the video you want to use in this concatenation.
+// We recommend that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 $video
     ->concat(array('/path/to/video1', '/path/to/video2'))
@@ -460,7 +507,7 @@ To concatenate videos encoded with the same codec, do as follow:
 
 ```php
 // In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
-// We recommand that you put there the path of any of the video you want to use in this concatenation.
+// We recommend that you put there the path of any of the video you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 
 $format = new FFMpeg\Format\Video\X264();
@@ -479,10 +526,10 @@ A format implements `FFMpeg\Format\FormatInterface`. To save to a video file,
 use `FFMpeg\Format\VideoInterface`, and `FFMpeg\Format\AudioInterface` for
 audio files.
 
-Format can also extends `FFMpeg\Format\ProgressableInterface` to get realtime
-informations about the transcoding.
+A format can also extend `FFMpeg\Format\ProgressableInterface` to get realtime
+information about the transcoding.
 
-Predefined formats already provide progress informations as events.
+Predefined formats already provide progress information as events.
 
 ```php
 $format = new FFMpeg\Format\Video\X264();
@@ -542,12 +589,12 @@ class CustomWMVFormat extends FFMpeg\Format\Video\DefaultVideo
 
 #### Coordinates
 
-FFMpeg use many units for time and space coordinates.
+FFMpeg uses many units for time and space coordinates.
 
 - `FFMpeg\Coordinate\AspectRatio` represents an aspect ratio.
 - `FFMpeg\Coordinate\Dimension` represent a dimension.
 - `FFMpeg\Coordinate\FrameRate` represent a framerate.
-- `FFMpeg\Coordinate\Point` represent a point.
+- `FFMpeg\Coordinate\Point` represent a point. (Supports dynamic points since v0.10.0)
 - `FFMpeg\Coordinate\TimeCode` represent a timecode.
 
 ### FFProbe
@@ -571,9 +618,19 @@ $ffprobe
     ->get('duration');             // returns the duration property
 ```
 
+### Validating media files
+
+(since 0.10.0)
+You can validate media files using PHP-FFMpeg's FFProbe wrapper.
+
+```php
+$ffprobe = FFMpeg\FFProbe::create();
+$ffprobe->isValid('/path/to/file/to/check'); // returns bool
+```
+
 ## Using with Silex Microframework
 
-Service provider is easy to set up:
+The service provider is easy to set up:
 
 ```php
 $app = new Silex\Application();
@@ -597,10 +654,14 @@ $app->register(new FFMpeg\FFMpegServiceProvider(), array(
 ));
 ```
 
-## API Browser
-
-Browse the [API](https://ffmpeg-php.readthedocs.io/en/latest/_static/API/)
-
 ## License
 
 This project is licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+Music: "Favorite Secrets" by Waylon Thornton
+From the Free Music Archive
+[CC BY NC SA](http://creativecommons.org/licenses/by-nc-sa/3.0/us/)
+
+Music: "Siesta" by Jahzzar
+From the Free Music Archive
+[CC BY SA](https://creativecommons.org/licenses/by-sa/3.0/)

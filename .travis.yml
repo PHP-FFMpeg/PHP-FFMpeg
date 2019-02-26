@@ -5,6 +5,12 @@ dist: trusty
 branches:
   only:
     - master
+    - v1.x
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.cache
 
 php:
   - 5.4
@@ -12,11 +18,10 @@ php:
   - 5.6
   - 7.0
   - 7.1
-  - hhvm
+  - 7.2
+  - 7.3
 
 matrix:
-  allow_failures:
-    - php: hhvm
   include:
     - php: 5.4
       env: COMPOSER_FLAGS="--prefer-lowest"
@@ -29,7 +34,7 @@ before_install:
 
 install:
   - sudo apt-get install -y ffmpeg
-  - composer update --prefer-source $COMPOSER_FLAGS
+  - composer update --prefer-dist $COMPOSER_FLAGS
 
 script:
   - vendor/bin/phpunit --verbose

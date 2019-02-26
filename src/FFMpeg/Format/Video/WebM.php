@@ -52,6 +52,6 @@ class WebM extends DefaultVideo
      */
     public function getAvailableVideoCodecs()
     {
-        return array('libvpx');
+        return array('libvpx', 'libvpx-vp9');
     }
 }

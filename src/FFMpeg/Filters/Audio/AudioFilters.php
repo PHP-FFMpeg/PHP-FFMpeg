@@ -71,4 +71,18 @@ class AudioFilters
 
         return $this;
     }
+
+    /**
+     * Applies a custom filter
+     *
+     * @param string    $parameters
+     *
+     * @return AudioFilters
+     */
+    public function custom($parameters)
+    {
+        $this->media->addFilter(new CustomFilter($parameters));
+
+        return $this;
+    }
 }
