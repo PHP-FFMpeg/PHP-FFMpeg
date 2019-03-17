@@ -36,12 +36,10 @@ class CustomFilter implements AudioFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function apply(Audio $audio, AudioInterface $format)
+    public function apply(Audio $audio, AudioInterface $format): array
     {
-        $commands = array('-af', $this->filter);
-
-        return $commands;
+        return ['-af', $this->filter];
     }
 }

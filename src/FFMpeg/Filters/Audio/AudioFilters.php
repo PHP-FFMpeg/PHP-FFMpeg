@@ -1,17 +1,8 @@
 <?php
-
-/*
- * This file is part of PHP-FFmpeg.
- *
- * (c) Alchemy <info@alchemy.fr>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+declare(strict_types=1);
 
 namespace FFMpeg\Filters\Audio;
 
-use FFMpeg\Filters\Audio\AddMetadataFilter;
 use FFMpeg\Media\Audio;
 use FFMpeg\Coordinate\TimeCode;
 
@@ -27,11 +18,11 @@ class AudioFilters
     /**
      * Resamples the audio file.
      *
-     * @param Integer $rate
+     * @param int $rate
      *
      * @return AudioFilters
      */
-    public function resample($rate)
+    public function resample(int $rate): AudioFilters
     {
         $this->media->addFilter(new AudioResamplableFilter($rate));
 
@@ -51,6 +42,8 @@ class AudioFilters
      *    - "year": Year metadata
      *    - "genre": Genre metadata
      *    - "description": Description metadata
+     *
+     * @return AudioFilters
      */
     public function addMetadata(?array $data = null): AudioFilters
     {
@@ -64,6 +57,7 @@ class AudioFilters
      *
      * @param   TimeCode        $start      Where the clipping starts(seek to time)
      * @param   TimeCode|null   $duration   How long the clipped audio should be
+     *
      * @return AudioFilters
      */
     public function clip(TimeCode $start, ?TimeCode $duration = null)
@@ -83,6 +77,21 @@ class AudioFilters
     public function custom($parameters)
     {
         $this->media->addFilter(new CustomFilter($parameters));
+
+        return $this;
+    }
+
+    /**
+     * Adds the `$artwork` to the audio and converts it to a video file.
+     *
+     * @param string $artwork  The artwork image link to add to the video
+     * @param string $preset Certain encoding speed for selecting compression ratios.
+     *
+     * @return AudioFilters
+     */
+    public function addVideoArtwork(string $artwork, string $preset) : AudioFilters
+    {
+        $this->media->addFilter(new ImageVideoFilter($artwork, $preset));
 
         return $this;
     }
