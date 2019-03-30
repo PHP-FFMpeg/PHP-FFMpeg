@@ -119,7 +119,7 @@ class TestCase extends BaseTestCase
 
     public function getFormatMock()
     {
-        return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\Format')
+        return $this->getMockBuilder(\FFMpeg\FFProbe\DataMapping\Format::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -140,7 +140,7 @@ class TestCase extends BaseTestCase
 
     protected function getVideoMock($filename = null)
     {
-        $video = $this->getMockBuilder('FFMpeg\Media\Video')
+        $video = $this->getMockBuilder(\FFMpeg\Media\Video::class)
             ->disableOriginalConstructor()
             ->getMock();
 

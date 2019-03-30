@@ -87,6 +87,14 @@ class Frame extends AbstractMediaType
      */
     public function save($pathfile, $accurate = false, $returnBase64 = false)
     {
+        $videoDuration = Timecode::fromSeconds((float) $this->getVideo()->getFormat()->get('duration'));
+
+        if ($this->timecode->isAfter($videoDuration)) {
+            throw new RuntimeException(
+                'Trying to save a frame that would be after the video has ended. (Extract timecode greater than the duration of the video.)'
+            );
+        }
+
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
@@ -106,7 +114,7 @@ class Frame extends AbstractMediaType
                 '-f', $outputFormat
             );
         }
-        
+
         if($returnBase64) {
             array_push($commands, "-");
         }

@@ -3,6 +3,8 @@
 namespace Tests\FFMpeg\Unit\Media;
 
 use FFMpeg\Media\Frame;
+use FFMpeg\Coordinate\Timecode;
+use FFMpeg\Exception\RuntimeException;
 
 class FrameTest extends AbstractMediaTestCase
 {
@@ -59,6 +61,18 @@ class FrameTest extends AbstractMediaTestCase
             ->method('__toString')
             ->will($this->returnValue('timecode'));
 
+        $format = $this->getFormatMock();
+        $format->expects($this->once())
+            ->method('get')
+            ->with('duration')
+            ->will($this->returnValue('42.42')); // duration large enough to test it.
+
+        $video = $this->getVideoMock(__FILE__);
+
+        $video->expects($this->once())
+            ->method('getFormat')
+            ->will($this->returnValue($format));
+
         $pathfile = '/target/destination';
 
         if (!$base64) {
@@ -70,13 +84,38 @@ class FrameTest extends AbstractMediaTestCase
             ->with($commands);
 
         if(!$base64) {
-            $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
+            $frame = new Frame($video, $driver, $ffprobe, $timecode);
             $this->assertSame($frame, $frame->save($pathfile, $accurate, $base64));
         }
         else {
-            $frame = new Frame($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode);
+            $frame = new Frame($video, $driver, $ffprobe, $timecode);
             $frame->save($pathfile, $accurate, $base64);
         }
+    }
+
+    public function testInvalidExtractTimecode()
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage(
+            'Trying to save a frame that would be after the video has ended. (Extract timecode greater than the duration of the video.)'
+        );
+
+        $format = $this->getFormatMock();
+        $format->expects($this->once())
+            ->method('get')
+            ->with('duration')
+            ->will($this->returnValue('39.02'));
+
+        $video = $this->getVideoMock(__FILE__);
+        $video->expects($this->once())
+            ->method('getFormat')
+            ->will($this->returnValue($format));
+
+        // Test: Are we allowed to extract a frame that exceeds the video duration?
+        $timecode = Timecode::fromSeconds(42.32);
+
+        $frame = new Frame($video, $this->getFFMpegDriverMock(), $this->getFFProbeMock(), $timecode);
+        $frame->save('/path/to/stupid/file');
     }
 
     public function provideSaveOptions()
