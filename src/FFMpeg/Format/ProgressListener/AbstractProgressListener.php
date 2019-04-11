@@ -131,7 +131,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function handle($type, $data): void
     {
@@ -182,7 +182,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
         $currentSize = \trim(\str_replace('kb', '', \strtolower(($matches[1]))));
         $percent = \max(0, \min(1, $currentDuration / $this->duration));
 
-        if ($this->lastOutput !== null) {
+        if (null !== $this->lastOutput) {
             $delta = $currentTime - $this->lastOutput;
 
             // Check the type of the currentSize variable and convert it to an integer if needed.
@@ -236,7 +236,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
      */
     private function getProgressInfo(): ?array
     {
-        if ($this->remaining === null) {
+        if (null === $this->remaining) {
             return null;
         }
 

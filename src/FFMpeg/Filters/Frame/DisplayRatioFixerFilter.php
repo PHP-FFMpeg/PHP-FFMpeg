@@ -28,7 +28,7 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Frame $frame): array
     {

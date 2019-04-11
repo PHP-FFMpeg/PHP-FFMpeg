@@ -24,7 +24,7 @@ use FFMpeg\Format\ProgressableInterface;
 class Audio extends AbstractStreamableMedia
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return AudioFilters
      */
@@ -34,7 +34,7 @@ class Audio extends AbstractStreamableMedia
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Audio
      */

@@ -14,9 +14,12 @@ namespace FFMpeg\Filters\Video;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Filters\TPriorityFilter;
 
 class ClipFilter implements VideoFilterInterface
 {
+    use TPriorityFilter;
+
     /** @var TimeCode */
     private $start;
     /** @var TimeCode */
@@ -29,14 +32,6 @@ class ClipFilter implements VideoFilterInterface
         $this->start = $start;
         $this->duration = $duration;
         $this->priority = $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
     }
 
     /**
@@ -56,13 +51,13 @@ class ClipFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        $commands = array('-ss', (string) $this->start);
+        $commands = ['-ss', (string) $this->start];
 
-        if ($this->duration !== null) {
+        if (null !== $this->duration) {
           $commands[] = '-t';
           $commands[] = (string) $this->duration;
         }

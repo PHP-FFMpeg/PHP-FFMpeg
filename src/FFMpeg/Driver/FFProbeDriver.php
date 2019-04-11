@@ -16,7 +16,7 @@ use Alchemy\BinaryDriver\AbstractBinary;
 use Alchemy\BinaryDriver\Configuration;
 use Alchemy\BinaryDriver\ConfigurationInterface;
 use Alchemy\BinaryDriver\Exception\ExecutableNotFoundException as BinaryDriverExecutableNotFound;
-use FFMpeg\Exception\ExecutableNotFoundException;
+use FFMpeg\Exception\{ExecutableNotFoundException, InvalidArgumentException};
 use Psr\Log\LoggerInterface;
 
 class FFProbeDriver extends AbstractBinary

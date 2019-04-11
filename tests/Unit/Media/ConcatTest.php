@@ -70,7 +70,7 @@ class ConcatTest extends AbstractMediaTestCase
         $this->assertEquals('-safe', $commands[2]);
         $this->assertEquals('0', $commands[3]);
         $this->assertEquals('-i', $commands[4]);
-        if(isset($commands[6]) && (strcmp($commands[6], "-c") == 0)) {
+        if (isset($commands[6]) && $commands[6] == "-c") {
             $this->assertEquals('-c', $commands[6]);
             $this->assertEquals('copy', $commands[7]);
         }

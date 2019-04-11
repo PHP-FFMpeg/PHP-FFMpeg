@@ -44,7 +44,7 @@ class Frame extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return FrameFilters
      */
@@ -54,7 +54,7 @@ class Frame extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Frame
      */
@@ -95,28 +95,26 @@ class Frame extends AbstractMediaType
             );
         }
 
-        /**
-         * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
-         * @see http://ffmpeg.org/ffmpeg.html#Main-options
-         */
+        // might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
+        // see http://ffmpeg.org/ffmpeg.html#Main-options
         $outputFormat = $returnBase64 ? "image2pipe" : "image2";
         if (!$accurate) {
-            $commands = array(
+            $commands = [
                 '-y', '-ss', (string) $this->timecode,
                 '-i', $this->pathfile,
                 '-vframes', '1',
                 '-f', $outputFormat
-            );
+            ];
         } else {
-            $commands = array(
+            $commands = [
                 '-y', '-i', $this->pathfile,
                 '-vframes', '1', '-ss', (string) $this->timecode,
                 '-f', $outputFormat
-            );
+            ];
         }
 
-        if($returnBase64) {
-            array_push($commands, "-");
+        if ($returnBase64) {
+            $commands[] = '-';
         }
 
         foreach ($this->filters as $filter) {
@@ -124,15 +122,14 @@ class Frame extends AbstractMediaType
         }
 
         if (!$returnBase64) {
-            $commands = array_merge($commands, array($pathfile));
+            $commands = array_merge($commands, [$pathfile]);
         }
 
         try {
-            if(!$returnBase64) {
+            if (!$returnBase64) {
                 $this->driver->command($commands);
                 return $this;
-            }
-            else {
+            } else {
                 return $this->driver->command($commands);
             }
         } catch (ExecutionFailureException $e) {

@@ -37,7 +37,7 @@ class CustomFrameFilter implements FrameFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Frame $frame): array
     {

@@ -22,12 +22,12 @@ class ExtractMultipleFramesFilterTest extends TestCase
             ->method('getModulus')
             ->will($this->returnValue($modulus));
 
-        $streams = new StreamCollection(array(
-            new Stream(array(
+        $streams = new StreamCollection([
+            new Stream([
                 'codec_type' => 'video',
-                'duration'      => $duration,
-            ))
-        ));
+                'duration' => $duration
+            ])
+        ]);
 
         $video->expects($this->once())
             ->method('getStreams')

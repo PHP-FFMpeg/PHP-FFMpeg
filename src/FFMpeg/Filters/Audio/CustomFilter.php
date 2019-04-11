@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -29,7 +30,7 @@ class CustomFilter implements AudioFilterInterface
      * @param string $filter
      * @param int    $priority
      */
-    public function __construct($filter, $priority = 0)
+    public function __construct(string $filter, int $priority = 0)
     {
         $this->filter = $filter;
         $this->priority = $priority;

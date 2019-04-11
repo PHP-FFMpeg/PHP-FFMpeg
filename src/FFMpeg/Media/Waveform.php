@@ -54,7 +54,7 @@ class Waveform extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return WaveformFilters
      */
@@ -64,7 +64,7 @@ class Waveform extends AbstractMediaType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Waveform
      */

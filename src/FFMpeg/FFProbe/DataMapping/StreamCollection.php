@@ -73,7 +73,7 @@ class StreamCollection implements \Countable, \IteratorAggregate, MapableData
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function count(): int
     {
@@ -91,7 +91,7 @@ class StreamCollection implements \Countable, \IteratorAggregate, MapableData
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getIterator()
     {

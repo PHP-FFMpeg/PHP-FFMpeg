@@ -17,7 +17,7 @@ use FFMpeg\Exception\InvalidArgumentException;
 class OutputParser implements OutputParserInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function parse(string $type, string $data)
     {

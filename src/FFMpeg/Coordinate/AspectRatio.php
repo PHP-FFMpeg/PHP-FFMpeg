@@ -242,8 +242,6 @@ class AspectRatio
                 return 1 / 1.85;
             case static::AR_ROTATED_2_DOT_39:
                 return 1 / 2.39;
-            default:
-                throw new InvalidArgumentException(sprintf('Unable to find value for %s', $name));
         }
     }
 

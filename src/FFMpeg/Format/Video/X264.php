@@ -50,7 +50,7 @@ class X264 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableAudioCodecs(): array
     {
@@ -58,7 +58,7 @@ class X264 extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAvailableVideoCodecs(): array
     {

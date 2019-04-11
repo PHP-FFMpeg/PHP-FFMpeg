@@ -40,7 +40,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     private $destinationFolder;
     private $frameFileType = 'jpg';
 
-    /** @var array */
+    /** @var string[] */
     private static $supportedFrameFileTypes = ['jpg', 'jpeg', 'png'];
 
     public function __construct($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority = 0)
@@ -49,29 +49,28 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
         $this->frameRate = $frameRate;
 
         // Make sure that the destination folder has a trailing slash
-        if(strcmp( substr($destinationFolder, -1), "/") != 0)
-            $destinationFolder .= "/";
+        $destinationFolder = rtrim($destinationFolder, '/') . '/';
 
         // Set the destination folder
         $this->destinationFolder = $destinationFolder;
     }
 
-	/**
-	 * @param string $frameFileType
-	 * @throws \FFMpeg\Exception\InvalidArgumentException
-	 * @return ExtractMultipleFramesFilter
-	 */
+    /**
+     * @param string $frameFileType
+     * @throws \FFMpeg\Exception\InvalidArgumentException
+     * @return ExtractMultipleFramesFilter
+     */
     public function setFrameFileType($frameFileType) {
-    	if (in_array($frameFileType, self::$supportedFrameFileTypes)) {
-    		$this->frameFileType = $frameFileType;
-    		return $this;
-    	}
+        if (in_array($frameFileType, self::$supportedFrameFileTypes)) {
+            $this->frameFileType = $frameFileType;
+            return $this;
+        }
 
-    	throw new InvalidArgumentException('Invalid frame file type, use: ' . implode(',', self::$supportedFrameFileTypes));
+        throw new InvalidArgumentException('Invalid frame file type, use: ' . implode(',', self::$supportedFrameFileTypes));
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getFrameRate()
     {
@@ -79,7 +78,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getDestinationFolder()
     {
@@ -87,7 +86,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function apply(Video $video, VideoInterface $format)
     {
@@ -103,7 +102,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             }
 
             // Get the number of frames per second we have to extract.
-            if(preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== FALSE){
+            if (\preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== false){
                 $operator = $matches[2];
 
                 switch($operator){
@@ -118,14 +117,18 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             }
 
             // Set the number of digits to use in the exported filenames
-            $nbImages = ceil( $duration * $nbFramesPerSecond );
+            $nbImages = ceil($duration * $nbFramesPerSecond);
 
-            if($nbImages < 100)
-                $nbDigitsInFileNames = "02";
-            elseif($nbImages < 1000)
-                $nbDigitsInFileNames = "03";
-            else
-                $nbDigitsInFileNames = "06";
+            switch (true) {
+                case $nbImages < 100:
+                    $nbDigitsInFileNames = "02";
+                    break;
+                case $nbImages < 1000:
+                    $nbDigitsInFileNames = "03";
+                    break;
+                default:
+                    $nbDigitsInFileNames = "06";
+            }
 
             // Set the parameters
             $commands[] = '-vf';
