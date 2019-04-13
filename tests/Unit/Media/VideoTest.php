@@ -203,7 +203,7 @@ class VideoTest extends AbstractStreamableTestCase
                 // look for pass commands only in multipass cases
                 foreach ($pass as $command) {
                     $prefix = null;
-                    if (false !== strpos($command, '/pass-')) {
+                    if (false !== \strpos($command, '/pass-')) {
                         $prefix = $command;
                         break;
                     }
@@ -219,7 +219,7 @@ class VideoTest extends AbstractStreamableTestCase
                 if ($command === $prefix) {
                     $found = true;
                     unset($capturedCommands[$passKey][$key]);
-                    $capturedCommands[$passKey] = array_values($capturedCommands[$passKey]);
+                    $capturedCommands[$passKey] = \array_values($capturedCommands[$passKey]);
                     break;
                 }
             }
@@ -254,7 +254,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->returnValue(2));
         $format->expects($this->any())
             ->method('getAdditionalParameters')
-            ->will($this->returnValue(array('foo', 'bar')));
+            ->will($this->returnValue(['foo', 'bar']));
 
         $format2 = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
 
@@ -275,7 +275,7 @@ class VideoTest extends AbstractStreamableTestCase
             ->will($this->returnValue(2));
         $format2->expects($this->any())
             ->method('getAdditionalParameters')
-            ->will($this->returnValue(array('foo', 'bar')));
+            ->will($this->returnValue(['foo', 'bar']));
 
         $audioFormat = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 

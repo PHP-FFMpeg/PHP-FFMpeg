@@ -36,7 +36,7 @@ class WMV3 extends DefaultVideo
      */
     public function getAvailableAudioCodecs()
     {
-        return array('wmav3');
+        return ['wmav3'];
     }
 
     /**
@@ -44,6 +44,6 @@ class WMV3 extends DefaultVideo
      */
     public function getAvailableVideoCodecs()
     {
-        return array('wmv3');
+        return ['wmv3'];
     }
 }

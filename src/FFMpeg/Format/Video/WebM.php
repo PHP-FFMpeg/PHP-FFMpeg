@@ -36,7 +36,7 @@ class WebM extends DefaultVideo
      */
     public function getExtraParams()
     {
-        return array('-f', 'webm');
+        return ['-f', 'webm'];
     }
 
     /**
@@ -44,7 +44,7 @@ class WebM extends DefaultVideo
      */
     public function getAvailableAudioCodecs()
     {
-        return array('libvorbis');
+        return ['libvorbis'];
     }
 
     /**
@@ -52,6 +52,6 @@ class WebM extends DefaultVideo
      */
     public function getAvailableVideoCodecs()
     {
-        return array('libvpx', 'libvpx-vp9');
+        return ['libvpx', 'libvpx-vp9'];
     }
 }

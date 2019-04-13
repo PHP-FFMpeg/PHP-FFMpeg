@@ -138,15 +138,15 @@ class VideoTranscodeTest extends FunctionalTestCase
         exec($binary . ' -version 2>&1', $output);
 
         if (!isset($output[0])) {
-            return array('name' => null, 'version' => null);
+            return ['name' => null, 'version' => null];
         }
 
         preg_match('/^([a-z]+)\s+version\s+([0-9\.]+)/i', $output[0], $matches);
 
-        if (count($matches) > 0) {
-            return array('name' => $matches[1], 'version' => $matches[2]);
+        if (!empty($matches)) {
+            return ['name' => $matches[1], 'version' => $matches[2]];
         }
 
-        return array('name' => null, 'version' => null);
+        return ['name' => null, 'version' => null];
     }
 }

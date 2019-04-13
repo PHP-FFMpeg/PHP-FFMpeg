@@ -26,7 +26,7 @@ class Vorbis extends DefaultAudio
      */
     public function getExtraParams()
     {
-        return array('-strict', '-2');
+        return ['-strict', '-2'];
     }
 
     /**
@@ -34,6 +34,6 @@ class Vorbis extends DefaultAudio
      */
     public function getAvailableAudioCodecs()
     {
-        return array('vorbis');
+        return ['vorbis'];
     }
 }

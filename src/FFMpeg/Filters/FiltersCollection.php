@@ -34,11 +34,11 @@ class FiltersCollection implements \Countable, \IteratorAggregate
      */
     public function count()
     {
-        if (0 === count($this->filters)) {
+        if (0 === \count($this->filters)) {
             return 0;
         }
 
-        return count(call_user_func_array('array_merge', $this->filters));
+        return \count(call_user_func_array('array_merge', $this->filters));
     }
 
     /**
@@ -47,11 +47,11 @@ class FiltersCollection implements \Countable, \IteratorAggregate
     public function getIterator()
     {
         if (null === $this->sorted) {
-            if (0 === count($this->filters)) {
+            if (0 === \count($this->filters)) {
                 $this->sorted = $this->filters;
             } else {
-                krsort($this->filters);
-                $this->sorted = call_user_func_array('array_merge', $this->filters);
+                \krsort($this->filters);
+                $this->sorted = \call_user_func_array('array_merge', $this->filters);
             }
         }
 

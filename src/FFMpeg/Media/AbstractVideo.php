@@ -204,22 +204,22 @@ abstract class AbstractVideo extends Audio
 
         // Merge Filters into one command
         $videoFilterVars = $videoFilterProcesses = [];
-        for ($i = 0; $i < count($commands); $i++) {
+        for ($i = 0; $i < \count($commands); $i++) {
             $command = $commands[$i];
             if ($command === '-vf') {
                 $commandSplits = explode(";", $commands[$i + 1]);
-                if (count($commandSplits) == 1) {
+                if (\count($commandSplits) == 1) {
                     $commandSplit = $commandSplits[0];
-                    $command = trim($commandSplit);
-                    if (preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match)) {
+                    $command = \trim($commandSplit);
+                    if (\preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match)) {
                         $videoFilterProcesses[] = $match[1];
                     } else {
                         $videoFilterProcesses[] = $command;
                     }
                 } else {
                     foreach ($commandSplits as $commandSplit) {
-                        $command = trim($commandSplit);
-                        if (preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match)) {
+                        $command = \trim($commandSplit);
+                        if (\preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match)) {
                             $videoFilterProcesses[] = $match[1];
                         } else {
                             $videoFilterVars[] = $command;
@@ -237,7 +237,7 @@ abstract class AbstractVideo extends Audio
             $command = '[' . $lastInput . ']';
             $command .= $process;
             $lastInput = 'p' . $i;
-            if ($i === (count($videoFilterProcesses) - 1)) {
+            if ($i === (\count($videoFilterProcesses) - 1)) {
                 $command .= '[out]';
             } else {
                 $command .= '[' . $lastInput . ']';
@@ -245,7 +245,7 @@ abstract class AbstractVideo extends Audio
 
             $videoFilterCommands[] = $command;
         }
-        $videoFilterCommand = implode(';', $videoFilterCommands);
+        $videoFilterCommand = \implode(';', $videoFilterCommands);
 
         if ($videoFilterCommand) {
             $commands[] = '-vf';
@@ -253,8 +253,8 @@ abstract class AbstractVideo extends Audio
         }
 
         $this->fs = FsManager::create();
-        $this->fsId = uniqid('ffmpeg-passes');
-        $passPrefix = $this->fs->createTemporaryDirectory(0777, 50, $this->fsId) . '/' . uniqid('pass-');
+        $this->fsId = \uniqid('ffmpeg-passes');
+        $passPrefix = $this->fs->createTemporaryDirectory(0777, 50, $this->fsId) . '/' . \uniqid('pass-');
         $passes = [];
         $totalPasses = $format->getPasses();
 
@@ -283,10 +283,10 @@ abstract class AbstractVideo extends Audio
     /**
      * Return base part of command.
      *
-     * @return array
+     * @return string[]
      */
     protected function basePartOfCommand()
     {
-        return array('-y', '-i', $this->pathfile);
+        return ['-y', '-i', $this->pathfile];
     }
 }

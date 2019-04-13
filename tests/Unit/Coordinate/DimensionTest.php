@@ -18,15 +18,15 @@ class DimensionTest extends TestCase
 
     public function provideInvalidDimensions()
     {
-        return array(
-            array(320, 0),
-            array(320, -10),
-            array(0, 240),
-            array(-10, 240),
-            array(0, 0),
-            array(0, -10),
-            array(-10, 0),
-        );
+        return [
+            [320, 0],
+            [320, -10],
+            [0, 240],
+            [-10, 240],
+            [0, 0],
+            [0, -10],
+            [-10, 0],
+        ];
     }
 
     public function testGetters()

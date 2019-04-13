@@ -99,7 +99,7 @@ class Concat extends AbstractMediaType
         }
 
         $addNewline = false;
-        if (is_array($this->sources) && (count($this->sources) > 0)) {
+        if (is_array($this->sources) && !empty($this->sources)) {
             foreach ($this->sources as $videoPath) {
                 $line = '';
 
@@ -213,16 +213,16 @@ class Concat extends AbstractMediaType
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+                $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
             }
         }
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+                $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
             }
         }
 
@@ -253,8 +253,6 @@ class Concat extends AbstractMediaType
 
         // Set the output file in the command
         $commands[] = $outputPathfile;
-
-        $failure = null;
 
         try {
             $this->driver->command($commands);

@@ -19,11 +19,16 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 
-class Waveform extends AbstractMediaType
+class Waveform extends AbstractMediaType implements IAudioOwned
 {
+    use TAudioOwned;
+
     const DEFAULT_COLOR = '#000000';
 
-    /** @var Video */
+    /**
+     * The audio class this waveform is created for
+     * @var Audio
+     */
     protected $audio;
     protected $width;
     protected $height;
@@ -33,7 +38,7 @@ class Waveform extends AbstractMediaType
      */
     protected $colors;
 
-    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height, $colors = array(self::DEFAULT_COLOR))
+    public function __construct(Audio $audio, FFMpegDriver $driver, FFProbe $ffprobe, $width, $height, $colors = [self::DEFAULT_COLOR])
     {
         parent::__construct($audio->getPathfile(), $driver, $ffprobe);
         $this->audio = $audio;
@@ -41,16 +46,6 @@ class Waveform extends AbstractMediaType
         $this->height = $height;
 
         $this->setColors($colors);
-    }
-
-    /**
-     * Returns the audio related to the waveform.
-     *
-     * @return Audio
-     */
-    public function getAudio()
-    {
-        return $this->audio;
     }
 
     /**
@@ -85,10 +80,8 @@ class Waveform extends AbstractMediaType
      */
     public function setColors(array $colors)
     {
-        foreach ($colors as $row => $value)
-        {
-            if (!preg_match('/^#(?:[0-9a-fA-F]{6})$/', $value))
-            {
+        foreach ($colors as $row => $value) {
+            if (!\preg_match('/^#(?:[0-9a-fA-F]{6})$/', $value)) {
                 //invalid color
                 //unset($colors[$row]);
 
@@ -96,8 +89,7 @@ class Waveform extends AbstractMediaType
             }
         }
 
-        if (count($colors))
-        {
+        if (!empty($colors)) {
             $this->colors = $colors;
         }
     }
@@ -107,7 +99,7 @@ class Waveform extends AbstractMediaType
      * to the waveform. Background cannot be controlled that easily and it is probably easier to save the waveform
      * as a transparent png file and then add background of choice.
      *
-     * @return array
+     * @return string[]
      */
     public function getColors()
     {
@@ -119,9 +111,9 @@ class Waveform extends AbstractMediaType
      *
      * @return string
      */
-    protected function compileColors()
+    protected function compileColors(): string
     {
-        return implode('|', $this->colors);
+        return \implode('|', $this->colors);
     }
 
     /**
@@ -139,17 +131,18 @@ class Waveform extends AbstractMediaType
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
-        $commands = array(
+        $commands = [
             '-y', '-i', $this->pathfile, '-filter_complex',
             'showwavespic=colors='.$this->compileColors().':s='.$this->width.'x'.$this->height,
             '-frames:v', '1'
-        );
+        ];
 
         foreach ($this->filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        $commands = array_merge($commands, array($pathfile));
+        // add location where the waveform should be saved to
+        $commands[] = $pathfile;
 
         try {
             $this->driver->command($commands);

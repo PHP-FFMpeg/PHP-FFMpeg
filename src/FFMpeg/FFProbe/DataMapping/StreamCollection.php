@@ -55,7 +55,7 @@ class StreamCollection implements \Countable, \IteratorAggregate, MapableData
      */
     public function videos(): StreamCollection
     {
-        return new static(array_filter($this->streams, function (Stream $stream) {
+        return new static(\array_filter($this->streams, function (Stream $stream) {
             return $stream->isVideo();
         }));
     }
@@ -67,7 +67,7 @@ class StreamCollection implements \Countable, \IteratorAggregate, MapableData
      */
     public function audios(): StreamCollection
     {
-        return new static(array_filter($this->streams, function (Stream $stream) {
+        return new static(\array_filter($this->streams, function (Stream $stream) {
             return $stream->isAudio();
         }));
     }
@@ -77,7 +77,7 @@ class StreamCollection implements \Countable, \IteratorAggregate, MapableData
      */
     public function count(): int
     {
-        return count($this->streams);
+        return \count($this->streams);
     }
 
     /**
