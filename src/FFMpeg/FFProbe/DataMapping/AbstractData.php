@@ -14,7 +14,7 @@ namespace FFMpeg\FFProbe\DataMapping;
 
 abstract class AbstractData implements \Countable
 {
-    /** @var array */
+    /** @var mixed[] */
     private $properties;
 
     public function __construct(array $properties)

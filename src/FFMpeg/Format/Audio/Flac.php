@@ -26,6 +26,6 @@ class Flac extends DefaultAudio
      */
     public function getAvailableAudioCodecs()
     {
-        return array('flac');
+        return ['flac'];
     }
 }

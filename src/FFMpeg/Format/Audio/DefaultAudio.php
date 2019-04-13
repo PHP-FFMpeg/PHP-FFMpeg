@@ -56,7 +56,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      */
     public function setAudioCodec($audioCodec)
     {
-        if ( ! in_array($audioCodec, $this->getAvailableAudioCodecs())) {
+        if (!in_array($audioCodec, $this->getAvailableAudioCodecs())) {
             throw new InvalidArgumentException(sprintf(
                     'Wrong audiocodec value for %s, available formats are %s'
                     , $audioCodec, implode(', ', $this->getAvailableAudioCodecs())

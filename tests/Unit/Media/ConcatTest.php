@@ -55,14 +55,14 @@ class ConcatTest extends AbstractMediaTestCase
 
         $pathfile = '/target/destination';
 
-        array_push($commands, $pathfile);
+        $commands[] = $pathfile;
 
         $driver->expects($this->exactly(1))
             ->method('command')
             ->with($this->isType('array'), false, $this->anything())
             ->will($this->returnCallback(function ($commands, $errors, $listeners) {}));
 
-        $concat = new Concat(array(__FILE__, 'concat-2.mp4'), $driver, $ffprobe);
+        $concat = new Concat([__FILE__, 'concat-2.mp4'], $driver, $ffprobe);
         $concat->saveFromSameCodecs($pathfile, $streamCopy);
 
         $this->assertEquals('-f', $commands[0]);
@@ -70,6 +70,7 @@ class ConcatTest extends AbstractMediaTestCase
         $this->assertEquals('-safe', $commands[2]);
         $this->assertEquals('0', $commands[3]);
         $this->assertEquals('-i', $commands[4]);
+        // $commands[5] is the temp file path
         if (isset($commands[6]) && $commands[6] == "-c") {
             $this->assertEquals('-c', $commands[6]);
             $this->assertEquals('copy', $commands[7]);

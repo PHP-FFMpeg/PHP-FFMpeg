@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -20,8 +21,10 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 
-class Gif extends AbstractMediaType
+class Gif extends AbstractMediaType implements IVideoOwned
 {
+    use TVideoOwned;
+
     /** @var TimeCode */
     private $timecode;
     /** @var Dimension */
@@ -38,16 +41,6 @@ class Gif extends AbstractMediaType
         $this->dimension = $dimension;
         $this->duration = $duration;
         $this->video = $video;
-    }
-
-    /**
-     * Returns the video related to the gif.
-     *
-     * @return Video
-     */
-    public function getVideo()
-    {
-        return $this->video;
     }
 
     /**
@@ -75,7 +68,7 @@ class Gif extends AbstractMediaType
     /**
      * @return TimeCode
      */
-    public function getTimeCode()
+    public function getTimeCode(): TimeCode
     {
         return $this->timecode;
     }
@@ -83,7 +76,7 @@ class Gif extends AbstractMediaType
     /**
      * @return Dimension
      */
-    public function getDimension()
+    public function getDimension(): Dimension
     {
         return $this->dimension;
     }
@@ -97,16 +90,16 @@ class Gif extends AbstractMediaType
      *
      * @throws RuntimeException
      */
-    public function save($pathfile)
+    public function save(string $pathfile)
     {
         /**
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
-        $commands = array(
+        $commands = [
             '-ss', (string)$this->timecode
-        );
+        ];
 
-        if(null !== $this->duration) {
+        if (null !== $this->duration) {
             $commands[] = '-t';
             $commands[] = (string)$this->duration;
         }
@@ -123,7 +116,7 @@ class Gif extends AbstractMediaType
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        $commands = array_merge($commands, array($pathfile));
+        $commands[] = $pathfile;
 
         try {
             $this->driver->command($commands);

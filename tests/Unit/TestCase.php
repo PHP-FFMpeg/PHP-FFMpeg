@@ -23,7 +23,7 @@ class TestCase extends BaseTestCase
 
     public function getTimeCodeMock()
     {
-        return $this->getMockBuilder('FFMpeg\Coordinate\TimeCode')
+        return $this->getMockBuilder(\FFMpeg\Coordinate\TimeCode::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -126,7 +126,7 @@ class TestCase extends BaseTestCase
 
     public function getStreamCollectionMock()
     {
-        return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\StreamCollection')
+        return $this->getMockBuilder(\FFMpeg\FFProbe\DataMapping\StreamCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -153,14 +153,14 @@ class TestCase extends BaseTestCase
 
     public function getConcatMock()
     {
-        return $this->getMockBuilder('FFMpeg\Media\Concat')
+        return $this->getMockBuilder(\FFMpeg\Media\Concat::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     public function getFormatInterfaceMock()
     {
-        $FormatInterface = $this->getMockBuilder('FFMpeg\Format\FormatInterface')
+        $FormatInterface = $this->getMockBuilder(\FFMpeg\Format\FormatInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 

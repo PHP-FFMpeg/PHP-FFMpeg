@@ -77,7 +77,7 @@ class GifTest extends AbstractMediaTestCase
 
         $pathfile = '/target/destination';
 
-        array_push($commands, $pathfile);
+        $commands[] = $pathfile;
 
         $driver->expects($this->once())
             ->method('command')

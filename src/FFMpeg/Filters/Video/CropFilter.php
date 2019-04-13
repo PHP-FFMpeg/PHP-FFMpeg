@@ -46,10 +46,10 @@ class CropFilter implements VideoFilterInterface
             }
         }
 
-        return array(
+        return [
             '-filter:v',
             'crop=' .
             $this->dimension->getWidth() .':' . $this->dimension->getHeight() . ':' . $this->point->getX() . ':' . $this->point->getY()
-        );
+        ];
     }
 }

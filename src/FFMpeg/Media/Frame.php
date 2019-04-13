@@ -19,8 +19,10 @@ use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Coordinate\TimeCode;
 
-class Frame extends AbstractMediaType
+class Frame extends AbstractMediaType implements IVideoOwned
 {
+    use TVideoOwned;
+
     /** @var TimeCode */
     private $timecode;
     /** @var Video */
@@ -31,16 +33,6 @@ class Frame extends AbstractMediaType
         parent::__construct($video->getPathfile(), $driver, $ffprobe);
         $this->timecode = $timecode;
         $this->video = $video;
-    }
-
-    /**
-     * Returns the video related to the frame.
-     *
-     * @return Video
-     */
-    public function getVideo()
-    {
-        return $this->video;
     }
 
     /**

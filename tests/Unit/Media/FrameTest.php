@@ -76,14 +76,14 @@ class FrameTest extends AbstractMediaTestCase
         $pathfile = '/target/destination';
 
         if (!$base64) {
-            array_push($commands, $pathfile);
+            $commands[] = $pathfile;
         }
 
         $driver->expects($this->once())
             ->method('command')
             ->with($commands);
 
-        if(!$base64) {
+        if (!$base64) {
             $frame = new Frame($video, $driver, $ffprobe, $timecode);
             $this->assertSame($frame, $frame->save($pathfile, $accurate, $base64));
         }

@@ -102,7 +102,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             }
 
             // Get the number of frames per second we have to extract.
-            if (\preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== false){
+            if (false !== \preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches)){
                 $operator = $matches[2];
 
                 switch($operator){

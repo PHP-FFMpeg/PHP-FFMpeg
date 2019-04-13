@@ -186,7 +186,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
             $delta = $currentTime - $this->lastOutput;
 
             // Check the type of the currentSize variable and convert it to an integer if needed.
-            if(!\is_numeric($currentSize)) {
+            if (!\is_numeric($currentSize)) {
                 $currentSize = (int)$currentSize;
             }
 

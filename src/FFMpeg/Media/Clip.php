@@ -10,8 +10,9 @@ use FFMpeg\Coordinate\TimeCode;
  *
  * Use input seeking, see http://trac.ffmpeg.org/wiki/Seeking
  */
-class Clip extends Video
+class Clip extends Video implements IVideoOwned
 {
+    use TVideoOwned;
 
     /** @var TimeCode Start time */
     private $start;
@@ -32,23 +33,13 @@ class Clip extends Video
     }
 
     /**
-     * Returns the video related to the frame.
-     *
-     * @return Video
-     */
-    public function getVideo()
-    {
-        return $this->video;
-    }
-
-    /**
      * Return base part of command.
      *
      * @return array
      */
     protected function basePartOfCommand()
     {
-        $arr = array('-y', '-ss', (string) $this->start, '-i', $this->pathfile);
+        $arr = ['-y', '-ss', (string) $this->start, '-i', $this->pathfile];
 
         if (null !== $this->duration) {
             $arr[] = '-t';

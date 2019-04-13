@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -28,21 +29,21 @@ use Neutron\TemporaryFilesystem\Manager as FsManager;
 
 class Concat extends AbstractMediaType
 {
-    /** @var array */
+    /** @var string[] */
     private $sources;
 
     public function __construct($sources, FFMpegDriver $driver, FFProbe $ffprobe)
     {
-        parent::__construct($sources, $driver, $ffprobe);
+        parent::__construct($sources[0], $driver, $ffprobe);
         $this->sources = $sources;
     }
 
     /**
      * Returns the path to the sources.
      *
-     * @return string
+     * @return string[]
      */
-    public function getSources()
+    public function getSources(): array
     {
         return $this->sources;
     }
@@ -73,13 +74,13 @@ class Concat extends AbstractMediaType
      * Saves the concatenated video in the given array, considering that the sources videos are all encoded with the same codec.
      *
      * @param string  $outputPathfile
-     * @param bool    $streamCopy
+     * @param bool    $copyStream
      *
      * @return Concat
      *
      * @throws RuntimeException
      */
-    public function saveFromSameCodecs($outputPathfile, $streamCopy = TRUE)
+    public function saveFromSameCodecs(string $outputPathfile, bool $copyStream = true)
     {
         /**
          * @see https://ffmpeg.org/ffmpeg-formats.html#concat
@@ -93,23 +94,25 @@ class Concat extends AbstractMediaType
         // Set the content of this file
         $fileStream = @fopen($sourcesFile, 'w');
 
-        if($fileStream === false) {
+        if (false === $fileStream) {
             throw new ExecutionFailureException('Cannot open the temporary file.');
         }
 
-        $count_videos = 0;
-        if(is_array($this->sources) && (count($this->sources) > 0)) {
+        $addNewline = false;
+        if (is_array($this->sources) && (count($this->sources) > 0)) {
             foreach ($this->sources as $videoPath) {
-                $line = "";
+                $line = '';
 
-                if($count_videos != 0)
+                if ($addNewline) {
                     $line .= "\n";
+                } else {
+                    // save for next iteration
+                    $addNewline = true;
+                }
 
-                $line .= "file " . addcslashes($videoPath, '\'"\\\0 ');
+                $line .= 'file ' . addcslashes($videoPath, '\'"\\\0 ');
 
                 fwrite($fileStream, $line);
-
-                $count_videos++;
             }
         }
         else {
@@ -118,13 +121,13 @@ class Concat extends AbstractMediaType
         fclose($fileStream);
 
 
-        $commands = array(
+        $commands = [
             '-f', 'concat', '-safe', '0',
             '-i', $sourcesFile
-        );
+        ];
 
         // Check if stream copy is activated
-        if($streamCopy === TRUE) {
+        if ($copyStream) {
             $commands[] = '-c';
             $commands[] = 'copy';
         }
@@ -137,19 +140,18 @@ class Concat extends AbstractMediaType
         }
 
         // Set the output file in the command
-        $commands = array_merge($commands, array($outputPathfile));
+        $commands = array_merge($commands, [$outputPathfile]);
 
         // Execute the command
         try {
             $this->driver->command($commands);
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($outputPathfile);
-            // TODO@v1: paste this line into an `finally` block.
-            $this->cleanupTemporaryFile($sourcesFile);
             throw new RuntimeException('Unable to save concatenated video', $e->getCode(), $e);
+        } finally {
+            $this->cleanupTemporaryFile($sourcesFile);
         }
 
-        $this->cleanupTemporaryFile($sourcesFile);
         return $this;
     }
 
@@ -170,7 +172,7 @@ class Concat extends AbstractMediaType
          */
 
         // Check the validity of the parameter
-        if(!is_array($this->sources) || (count($this->sources) == 0)) {
+        if (!is_array($this->sources) || (count($this->sources) == 0)) {
             throw new InvalidArgumentException('The list of videos is not a valid array.');
         }
 

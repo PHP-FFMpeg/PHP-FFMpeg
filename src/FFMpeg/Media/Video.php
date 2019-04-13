@@ -14,14 +14,13 @@ use FFMpeg\Coordinate\Dimension;
 
 class Video extends AbstractVideo
 {
-
     /**
      * Gets the frame at timecode.
      *
      * @param  TimeCode $at
      * @return Frame
      */
-    public function frame(TimeCode $at)
+    public function frame(TimeCode $at): Frame
     {
         return new Frame($this, $this->driver, $this->ffprobe, $at);
     }
@@ -34,7 +33,7 @@ class Video extends AbstractVideo
      * @param  integer $duration
      * @return Gif
      */
-    public function gif(TimeCode $at, Dimension $dimension, $duration = null)
+    public function gif(TimeCode $at, Dimension $dimension, $duration = null): Gif
     {
         return new Gif($this, $this->driver, $this->ffprobe, $at, $dimension, $duration);
     }
@@ -42,10 +41,10 @@ class Video extends AbstractVideo
     /**
      * Concatenates a list of videos into one unique video.
      *
-     * @param  array $sources
+     * @param  string[] $sources
      * @return Concat
      */
-    public function concat($sources)
+    public function concat(array $sources): Concat
     {
         return new Concat($sources, $this->driver, $this->ffprobe);
     }
@@ -55,9 +54,9 @@ class Video extends AbstractVideo
      *
      * @param TimeCode $start Start time
      * @param TimeCode $duration Duration
-     * @return \FFMpeg\Media\Clip
+     * @return Clip
      */
-    public function clip(TimeCode $start, TimeCode $duration = null)
+    public function clip(TimeCode $start, TimeCode $duration = null): Clip
     {
         return new Clip($this, $this->driver, $this->ffprobe, $start, $duration);
     }

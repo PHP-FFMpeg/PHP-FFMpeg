@@ -143,10 +143,10 @@ class Audio extends AbstractStreamableMedia
     /**
      * Concatenates a list of audio files into one unique audio file.
      *
-     * @param  array $sources
+     * @param  string[] $sources
      * @return Concat
      */
-    public function concat($sources)
+    public function concat(array $sources): Concat
     {
         return new Concat($sources, $this->driver, $this->ffprobe);
     }
