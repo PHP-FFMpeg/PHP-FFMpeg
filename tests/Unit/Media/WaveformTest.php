@@ -61,7 +61,7 @@ class WaveformTest extends AbstractMediaTestCase
         return [
             [
                 [
-                    '-y', '-i', null, '-filter_complex',
+                    '-y', '-i', __FILE__, '-filter_complex',
                     'showwavespic=colors=#FFFFFF:s=640x120',
                     '-frames:v', '1',
                 ],

@@ -80,14 +80,12 @@ class ResizeFilter implements VideoFilterInterface
         $dimensions = null;
         $commands = [];
 
-        foreach ($video->getStreams() as $stream) {
-            if ($stream->isVideo()) {
-                try {
-                    $dimensions = $stream->getDimensions();
-                    break;
-                } catch (RuntimeException $e) {
-
-                }
+        foreach ($video->getStreams()->videos() as $stream) {
+            try {
+                $dimensions = $stream->getDimensions();
+                break;
+            } catch (RuntimeException $e) {
+                // ignore
             }
         }
 
@@ -134,6 +132,8 @@ class ResizeFilter implements VideoFilterInterface
                 break;
         }
 
-        return new Dimension($width, $height);
+        // float dimensions like 1.223232323 don't make that much sense …
+        // the (int) cast rounds then down to the next integer ((int) M_PI -> 3)
+        return new Dimension((int) $width, (int) $height);
     }
 }

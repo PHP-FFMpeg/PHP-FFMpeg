@@ -49,7 +49,7 @@ class WatermarkFilterTest extends TestCase
         $filter = new WatermarkFilter(__DIR__ . '/../../../files/watermark.png', [
             'position' => 'relative',
             'bottom' => 5, 'right' => 4,
-        ));
+        ]);
         $this->assertEquals(['-vf', 'movie=' . __DIR__ . '/../../../files/watermark.png [watermark]; [in][watermark] overlay=main_w - 4 - overlay_w:main_h - 5 - overlay_h [out]'], $filter->apply($video, $format));
 
         // test position relative

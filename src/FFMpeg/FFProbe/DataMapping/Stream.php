@@ -79,7 +79,8 @@ class Stream extends AbstractData implements MapableData
             }
         }
 
-        return new Dimension($width, $height);
+        // round down to next hole integers (quarter a pixel doesn't make sense ;))
+        return new Dimension((int) $width, (int) $height);
     }
 
     /**
