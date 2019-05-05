@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -11,9 +12,9 @@
 
 namespace FFMpeg\FFProbe\DataMapping;
 
+use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Exception\LogicException;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Coordinate\Dimension;
 
 class Stream extends AbstractData implements MapableData
 {
@@ -100,7 +101,9 @@ class Stream extends AbstractData implements MapableData
                 return $int > 0;
             });
             if (2 === \count($data)) {
-                return \array_map(function ($int) { return (int) $int; }, $data);
+                return \array_map(function ($int) {
+                    return (int) $int;
+                }, $data);
             }
         }
 

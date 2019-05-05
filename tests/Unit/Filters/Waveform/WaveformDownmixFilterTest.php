@@ -2,12 +2,11 @@
 
 namespace Tests\FFMpeg\Unit\Filters\Waveform;
 
-use Tests\FFMpeg\Unit\TestCase;
+use FFMpeg\FFProbe\DataMapping\Stream;
+use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use FFMpeg\Filters\Waveform\WaveformDownmixFilter;
 use FFMpeg\Media\Waveform;
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\FFProbe\DataMapping\StreamCollection;
-use FFMpeg\FFProbe\DataMapping\Stream;
+use Tests\FFMpeg\Unit\TestCase;
 
 class WaveformDownmixFilterTest extends TestCase
 {
@@ -18,11 +17,11 @@ class WaveformDownmixFilterTest extends TestCase
 
         $audio = $this->getAudioMock(__FILE__);
         $audio->expects($this->once())
-                ->method('getStreams')
-                ->will($this->returnValue($streams));
+            ->method('getStreams')
+            ->will($this->returnValue($streams));
 
         $waveform = new Waveform($audio, $this->getFFMpegDriverMock(), $this->getFFProbeMock(), 640, 120);
-        $filter = new WaveformDownmixFilter(TRUE);
+        $filter = new WaveformDownmixFilter(true);
         $this->assertEquals(['"aformat=channel_layouts=mono"'], $filter->apply($waveform));
     }
 }

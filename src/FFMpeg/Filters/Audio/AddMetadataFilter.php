@@ -11,8 +11,8 @@
 
 namespace FFMpeg\Filters\Audio;
 
-use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Filters\Audio\AudioFilterInterface;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
@@ -45,7 +45,7 @@ class AddMetadataFilter implements AudioFilterInterface
 
         $metadata = [];
 
-        if (array_key_exists("artwork", $meta)) {
+        if (isset($meta['artwork']) || \array_key_exists("artwork", $meta)) {
             $metadata[] = "-i";
             $metadata[] = $meta['artwork'];
             $metadata[] = "-map";

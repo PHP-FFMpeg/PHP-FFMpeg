@@ -1,10 +1,11 @@
 <?php
+declare (strict_types = 1);
 
 namespace Tests\FFMpeg\Unit\Media;
 
 abstract class AbstractStreamableTestCase extends AbstractMediaTestCase
 {
-    public function testGetStreams()
+    public function testGetStreams(): void
     {
         $classname = $this->getClassName();
         $ffprobe = $this->getFFProbeMock();
@@ -19,7 +20,7 @@ abstract class AbstractStreamableTestCase extends AbstractMediaTestCase
         $this->assertSame($format, $media->getFormat());
     }
 
-    public function testGetFormat()
+    public function testGetFormat(): void
     {
         $classname = $this->getClassName();
         $ffprobe = $this->getFFProbeMock();
@@ -34,5 +35,5 @@ abstract class AbstractStreamableTestCase extends AbstractMediaTestCase
         $this->assertSame($streams, $media->getStreams());
     }
 
-    abstract protected function getClassName();
+    abstract protected function getClassName(): string;
 }

@@ -11,7 +11,7 @@ class VideoFiltersTest extends TestCase
     /**
      * @dataProvider provideResizeOptions
      */
-    public function testResize($mode, $forceStandards)
+    public function testResize($mode, $forceStandards): void
     {
         $capturedFilter = null;
 
@@ -21,7 +21,7 @@ class VideoFiltersTest extends TestCase
 
         $video->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Video\ResizeFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Video\ResizeFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
@@ -43,7 +43,7 @@ class VideoFiltersTest extends TestCase
         ];
     }
 
-    public function testResample()
+    public function testResample(): void
     {
         $capturedFilter = null;
 
@@ -65,7 +65,7 @@ class VideoFiltersTest extends TestCase
         $this->assertSame($gop, $capturedFilter->getGOP());
     }
 
-    public function testSynchronize()
+    public function testSynchronize(): void
     {
         $video = $this->getVideoMock();
         $filters = new VideoFilters($video);

@@ -11,8 +11,8 @@
 
 namespace FFMpeg\FFProbe;
 
-use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\FFProbe;
 
 class OutputParser implements OutputParserInterface
 {
@@ -39,7 +39,7 @@ class OutputParser implements OutputParserInterface
 
         foreach (explode(PHP_EOL, $data) as $line) {
 
-            if (in_array($line, ['[FORMAT]', '[/FORMAT]'])) {
+            if ('[FORMAT]' === $line || '[/FORMAT]' === $line) {
                 continue;
             }
 
@@ -100,7 +100,7 @@ class OutputParser implements OutputParserInterface
                 continue;
             }
 
-            if (in_array($key, array('index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'))) {
+            if (in_array($key, ['index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'])) {
                 $value = (int) $value;
             }
 

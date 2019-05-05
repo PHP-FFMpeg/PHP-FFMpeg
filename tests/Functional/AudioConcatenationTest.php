@@ -2,7 +2,6 @@
 
 namespace Tests\FFMpeg\Functional;
 
-use FFMpeg\Format\Audio\Mp3;
 use FFMpeg\Media\Audio;
 
 class AudioConcatenationTest extends FunctionalTestCase
@@ -23,7 +22,7 @@ class AudioConcatenationTest extends FunctionalTestCase
         clearstatcache();
         $filename = __DIR__ . '/output/concat-output.mp3';
 
-        $audio->concat($files)->saveFromSameCodecs($filename, TRUE);
+        $audio->concat($files)->saveFromSameCodecs($filename, true);
 
         $this->assertFileExists($filename);
         @unlink($filename);

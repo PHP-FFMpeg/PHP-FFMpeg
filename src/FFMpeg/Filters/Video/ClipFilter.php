@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -37,7 +38,7 @@ class ClipFilter implements VideoFilterInterface
     /**
      * @return TimeCode
      */
-    public function getStart()
+    public function getStart(): TimeCode
     {
         return $this->start;
     }
@@ -45,7 +46,7 @@ class ClipFilter implements VideoFilterInterface
     /**
      * @return TimeCode
      */
-    public function getDuration()
+    public function getDuration(): TimeCode
     {
         return $this->duration;
     }

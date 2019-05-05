@@ -2,9 +2,9 @@
 
 namespace Tests\FFMpeg\Unit\Media;
 
-use FFMpeg\Media\Audio;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\AudioInterface;
+use FFMpeg\Media\Audio;
 
 class AudioTest extends AbstractStreamableTestCase
 {
@@ -113,7 +113,7 @@ class AudioTest extends AbstractStreamableTestCase
         $filter->expects($this->once())
             ->method('apply')
             ->with($audio, $format)
-            ->will($this->returnValue(array('extra-filter-command')));
+            ->will($this->returnValue(['extra-filter-command']));
 
         $capturedCommands = [];
 
@@ -213,7 +213,7 @@ class AudioTest extends AbstractStreamableTestCase
         $formatExtra = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
         $formatExtra->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array('extra', 'param')));
+            ->will($this->returnValue(['extra', 'param']));
         $formatExtra->expects($this->any())
             ->method('getAudioKiloBitrate')
             ->will($this->returnValue(665));
@@ -221,7 +221,7 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getAudioChannels')
             ->will($this->returnValue(5));
 
-        $listeners = array($this->getMockBuilder(\Alchemy\BinaryDriver\Listeners\ListenerInterface::class)->getMock());
+        $listeners = [$this->getMockBuilder(\Alchemy\BinaryDriver\Listeners\ListenerInterface::class)->getMock()];
 
         $progressableFormat = $this->getMockBuilder('Tests\FFMpeg\Unit\Media\AudioProg')
             ->disableOriginalConstructor()->getMock();
@@ -238,56 +238,56 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getAudioChannels')
             ->will($this->returnValue(5));
 
-        return array(
-            array(false, array(
-                    '-y', '-i', __FILE__,
-                    '-b:a', '663k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $format),
-            array(false, array(
-                    '-y', '-i', __FILE__,
-                    '-acodec', 'patati-patata-audio',
-                    '-b:a', '664k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $audioFormat),
-            array(false, array(
-                    '-y', '-i', __FILE__,
-                    'extra', 'param',
-                    '-b:a', '665k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $formatExtra),
-            array(true, array(
-                    '-y', '-i', __FILE__,
-                    '-threads', 24,
-                    '-b:a', '663k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $format),
-            array(true, array(
-                    '-y', '-i', __FILE__,
-                    'extra', 'param',
-                    '-threads', 24,
-                    '-b:a', '665k',
-                    '-ac', '5',
-                    '/target/file',
-                ), null, $formatExtra),
-            array(false, array(
-                    '-y', '-i', __FILE__,
-                    '-b:a', '666k',
-                    '-ac', '5',
-                    '/target/file',
-                ), $listeners, $progressableFormat),
-            array(true, array(
-                    '-y', '-i', __FILE__,
-                    '-threads', 24,
-                    '-b:a', '666k',
-                    '-ac', '5',
-                    '/target/file',
-                ), $listeners, $progressableFormat),
-        );
+        return [
+            [false, [
+                '-y', '-i', __FILE__,
+                '-b:a', '663k',
+                '-ac', '5',
+                '/target/file',
+            ], null, $format],
+            [false, [
+                '-y', '-i', __FILE__,
+                '-acodec', 'patati-patata-audio',
+                '-b:a', '664k',
+                '-ac', '5',
+                '/target/file',
+            ], null, $audioFormat],
+            [false, [
+                '-y', '-i', __FILE__,
+                'extra', 'param',
+                '-b:a', '665k',
+                '-ac', '5',
+                '/target/file',
+            ], null, $formatExtra],
+            [true, [
+                '-y', '-i', __FILE__,
+                '-threads', 24,
+                '-b:a', '663k',
+                '-ac', '5',
+                '/target/file',
+            ], null, $format],
+            [true, [
+                '-y', '-i', __FILE__,
+                'extra', 'param',
+                '-threads', 24,
+                '-b:a', '665k',
+                '-ac', '5',
+                '/target/file',
+            ], null, $formatExtra],
+            [false, [
+                '-y', '-i', __FILE__,
+                '-b:a', '666k',
+                '-ac', '5',
+                '/target/file',
+            ], $listeners, $progressableFormat],
+            [true, [
+                '-y', '-i', __FILE__,
+                '-threads', 24,
+                '-b:a', '666k',
+                '-ac', '5',
+                '/target/file',
+            ], $listeners, $progressableFormat],
+        ];
     }
 
     public function testSaveShouldNotStoreCodecFiltersInTheMedia()
@@ -326,23 +326,23 @@ class AudioTest extends AbstractStreamableTestCase
 
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array('param')));
+            ->will($this->returnValue(['param']));
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
         $audio->save($format, $outputPathfile);
         $audio->save($format, $outputPathfile);
 
-        $expected = array(
+        $expected = [
             '-y', '-i', __FILE__, 'param', '-threads', 24, '/target/file',
-        );
+        ];
 
         foreach ($capturedCommands as $capturedCommand) {
             $this->assertEquals($expected, $capturedCommand);
         }
     }
 
-    public function getClassName()
+    public function getClassName(): string
     {
-        return 'FFMpeg\Media\Audio';
+        return \FFMpeg\Media\Audio::class;
     }
 }

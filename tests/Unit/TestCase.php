@@ -8,7 +8,7 @@ class TestCase extends BaseTestCase
 {
     public function assertScalar($value)
     {
-        $this->assertTrue(is_scalar($value));
+        $this->assertTrue(\is_scalar($value));
     }
 
     public function getLoggerMock()
@@ -30,28 +30,28 @@ class TestCase extends BaseTestCase
 
     public function getDimensionMock()
     {
-        return $this->getMockBuilder('FFMpeg\Coordinate\Dimension')
+        return $this->getMockBuilder(\FFMpeg\Coordinate\Dimension::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     public function getFramerateMock()
     {
-        return $this->getMockBuilder('FFMpeg\Coordinate\Framerate')
+        return $this->getMockBuilder(\FFMpeg\Coordinate\Framerate::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     public function getFrameMock()
     {
-        return $this->getMockBuilder('FFMpeg\Media\Frame')
+        return $this->getMockBuilder(\FFMpeg\Media\Frame::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     public function getWaveformMock()
     {
-        return $this->getMockBuilder('FFMpeg\Media\Waveform')
+        return $this->getMockBuilder(\FFMpeg\Media\Waveform::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -79,7 +79,7 @@ class TestCase extends BaseTestCase
 
     public function getStreamMock()
     {
-        return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\Stream')
+        return $this->getMockBuilder(\FFMpeg\FFProbe\DataMapping\Stream::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -131,14 +131,20 @@ class TestCase extends BaseTestCase
             ->getMock();
     }
 
-    protected function getAudioMock()
+    protected function getAudioMock(string $filename = null)
     {
-        return $this->getMockBuilder(\FFMpeg\Media\Audio::class)
+        $audio = $this->getMockBuilder(\FFMpeg\Media\Audio::class)
             ->disableOriginalConstructor()
             ->getMock();
+
+        $audio->expects($this->any())
+            ->method('getPathfile')
+            ->will($this->returnValue($filename));
+
+        return $audio;
     }
 
-    protected function getVideoMock($filename = null)
+    protected function getVideoMock(string $filename = null)
     {
         $video = $this->getMockBuilder(\FFMpeg\Media\Video::class)
             ->disableOriginalConstructor()

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -14,9 +14,9 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Exception\InvalidArgumentException;
-use FFMpeg\Media\Video;
-use FFMpeg\Format\VideoInterface;
 use FFMpeg\Filters\TPriorityFilter;
+use FFMpeg\Format\VideoInterface;
+use FFMpeg\Media\Video;
 
 class RotateFilter implements VideoFilterInterface
 {
@@ -50,7 +50,8 @@ class RotateFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        if (in_array($this->angle, [self::ROTATE_90, self::ROTATE_270], true)) {
+        // swap width and height if needed by rotation factor
+        if (self::ROTATE_90 === $this->angle || self::ROTATE_270 === $this->angle) {
             foreach ($video->getStreams()->videos() as $stream) {
                 if ($stream->has('width') && $stream->has('height')) {
                     $width = $stream->get('width');
