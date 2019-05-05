@@ -13,6 +13,6 @@ class SynchronizeFilterTest extends TestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\VideoInterface::class)->getMock();
 
         $filter = new SynchronizeFilter();
-        $this->assertEquals(array('-async', '1', '-metadata:s:v:0', 'start_time=0'), $filter->apply($video, $format));
+        $this->assertEquals(['-async', '1', '-metadata:s:v:0', 'start_time=0'], $filter->apply($video, $format));
     }
 }

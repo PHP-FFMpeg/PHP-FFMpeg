@@ -56,8 +56,8 @@ class AudioProgressListenerTest extends TestCase
 
     public function provideData()
     {
-        return array(
-            array(
+        return [
+            [
                 2894412,
                 180.900750,
                 'size=     712kB time=00:00:45.50 bitrate= 128.1kbits/s',
@@ -70,8 +70,8 @@ class AudioProgressListenerTest extends TestCase
                 563,
                 1,
                 1
-            ),
-            array(
+            ],
+            [
                 2894412,
                 180.900750,
                 'size=     712kB time=00:00:45.50 bitrate= 128.1kbits/s',
@@ -84,7 +84,7 @@ class AudioProgressListenerTest extends TestCase
                 563,
                 1,
                 2
-            )
-        );
+            ]
+        ];
     }
 }

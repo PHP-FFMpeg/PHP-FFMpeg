@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -37,12 +37,12 @@ class Point
         } else {
             if (!\is_int($x) || !\is_int($y)) {
                 throw new InvalidArgumentException(
-                    'When creating non-dynamic points, the expression of the coordinates must be given as integers.'
+                    'When creating non-dynamic points, the expression of the coordinates must be given as ints.'
                 );
             }
 
-            $this->x = (int)$x;
-            $this->y = (int)$y;
+            $this->x = (int) $x;
+            $this->y = (int) $y;
         }
 
         $this->isDynamicPoint = $isDynamicPoint;

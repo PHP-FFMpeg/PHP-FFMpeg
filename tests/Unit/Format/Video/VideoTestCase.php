@@ -29,7 +29,7 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testGetKiloBitrate()
     {
-        $this->assertInternalType('integer', $this->getFormat()->getKiloBitrate());
+        $this->assertInternalType('int', $this->getFormat()->getKiloBitrate());
     }
 
     public function testSetKiloBitrate()
@@ -72,13 +72,13 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testGetPasses()
     {
-        $this->assertInternalType('integer', $this->getFormat()->getPasses());
+        $this->assertInternalType('int', $this->getFormat()->getPasses());
         $this->assertGreaterThan(0, $this->getFormat()->getPasses());
     }
 
     public function testGetModulus()
     {
-        $this->assertInternalType('integer', $this->getFormat()->getModulus());
+        $this->assertInternalType('int', $this->getFormat()->getModulus());
         $this->assertGreaterThan(0, $this->getFormat()->getModulus());
         $this->assertEquals(0, $this->getFormat()->getModulus() % 2);
     }

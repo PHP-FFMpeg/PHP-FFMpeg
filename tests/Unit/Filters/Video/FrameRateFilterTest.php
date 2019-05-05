@@ -2,9 +2,9 @@
 
 namespace Tests\FFMpeg\Unit\Filters\Video;
 
+use FFMpeg\Coordinate\FrameRate;
 use FFMpeg\Filters\Video\FrameRateFilter;
 use Tests\FFMpeg\Unit\TestCase;
-use FFMpeg\Coordinate\FrameRate;
 
 class FrameRateFilterTest extends TestCase
 {
@@ -19,7 +19,7 @@ class FrameRateFilterTest extends TestCase
             ->method('supportBFrames')
             ->will($this->returnValue(true));
 
-        $expected = array('-r', 54, '-b_strategy', '1', '-bf', '3', '-g', 42);
+        $expected = ['-r', 54, '-b_strategy', '1', '-bf', '3', '-g', 42];
 
         $filter = new FrameRateFilter($framerate, $gop);
         $this->assertEquals($expected, $filter->apply($video, $format));
@@ -36,7 +36,7 @@ class FrameRateFilterTest extends TestCase
             ->method('supportBFrames')
             ->will($this->returnValue(false));
 
-        $expected = array('-r', 54);
+        $expected = ['-r', 54];
 
         $filter = new FrameRateFilter($framerate, $gop);
         $this->assertEquals($expected, $filter->apply($video, $format));

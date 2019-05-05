@@ -98,18 +98,19 @@ class Audio extends AbstractStreamableMedia
      * @since 0.11.0
      */
     protected function buildCommand(FormatInterface $format, $outputPathfile) {
-        $commands = array('-y', '-i', $this->pathfile);
+        $commands = ['-y', '-i', $this->pathfile];
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
         if (null !== $format->getAudioCodec()) {
-            $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+            $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
         }
 
+        // let all filters apply their subcommands to the final command
         foreach ($filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this, $format));
         }
@@ -130,12 +131,12 @@ class Audio extends AbstractStreamableMedia
     /**
      * Gets the waveform of the video.
      *
-     * @param  integer $width
-     * @param  integer $height
-     * @param array $colors Array of colors for ffmpeg to use. Color format is #000000 (RGB hex string with #)
+     * @param   int $width
+     * @param   int $height
+     * @param   string[] $colors Array of colors for ffmpeg to use. Color format is #000000 (RGB hex string with #)
      * @return Waveform
      */
-    public function waveform($width = 640, $height = 120, $colors = array(Waveform::DEFAULT_COLOR))
+    public function waveform($width = 640, $height = 120, $colors = [Waveform::DEFAULT_COLOR])
     {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height, $colors);
     }

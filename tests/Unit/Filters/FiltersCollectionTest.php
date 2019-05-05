@@ -2,8 +2,8 @@
 
 namespace Tests\FFMpeg\Unit\Filters;
 
-use FFMpeg\Filters\FiltersCollection;
 use FFMpeg\Filters\Audio\SimpleFilter;
+use FFMpeg\Filters\FiltersCollection;
 use Tests\FFMpeg\Unit\TestCase;
 
 class FiltersCollectionTest extends TestCase
@@ -26,28 +26,32 @@ class FiltersCollectionTest extends TestCase
         $coll->add($this->getMockBuilder(\FFMpeg\Filters\FilterInterface::class)->getMock());
         $coll->add($this->getMockBuilder(\FFMpeg\Filters\FilterInterface::class)->getMock());
 
-        $this->assertInstanceOf('\ArrayIterator', $coll->getIterator());
+        $this->assertInstanceOf(\ArrayIterator::class, $coll->getIterator());
         $this->assertCount(2, $coll->getIterator());
     }
 
     public function testEmptyIterator()
     {
         $coll = new FiltersCollection();
-        $this->assertInstanceOf('\ArrayIterator', $coll->getIterator());
+
+        $iterator = $coll->getIterator();
+        $this->assertInstanceOf(\ArrayIterator::class, $iterator);
+        $this->assertFalse($iterator->valid());
+        $this->assertCount(0, $iterator);
     }
 
     public function testIteratorSort()
     {
         $coll = new FiltersCollection();
-        $coll->add(new SimpleFilter(array('a')));
-        $coll->add(new SimpleFilter(array('1'), 12));
-        $coll->add(new SimpleFilter(array('b')));
-        $coll->add(new SimpleFilter(array('2'), 12));
-        $coll->add(new SimpleFilter(array('c')));
-        $coll->add(new SimpleFilter(array('3'), 10));
-        $coll->add(new SimpleFilter(array('d')));
-        $coll->add(new SimpleFilter(array('4'), -2));
-        $coll->add(new SimpleFilter(array('e')));
+        $coll->add(new SimpleFilter(['a']));
+        $coll->add(new SimpleFilter(['1'], 12));
+        $coll->add(new SimpleFilter(['b']));
+        $coll->add(new SimpleFilter(['2'], 12));
+        $coll->add(new SimpleFilter(['c']));
+        $coll->add(new SimpleFilter(['3'], 10));
+        $coll->add(new SimpleFilter(['d']));
+        $coll->add(new SimpleFilter(['4'], -2));
+        $coll->add(new SimpleFilter(['e']));
 
         $data = [];
         $video = $this->getVideoMock();

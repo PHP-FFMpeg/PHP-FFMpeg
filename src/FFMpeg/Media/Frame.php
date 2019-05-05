@@ -12,12 +12,12 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Driver\FFMpegDriver;
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\FFProbe;
 use FFMpeg\Filters\Frame\FrameFilterInterface;
 use FFMpeg\Filters\Frame\FrameFilters;
-use FFMpeg\Driver\FFMpegDriver;
-use FFMpeg\FFProbe;
-use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Coordinate\TimeCode;
 
 class Frame extends AbstractMediaType implements IVideoOwned
 {
@@ -60,7 +60,7 @@ class Frame extends AbstractMediaType implements IVideoOwned
     /**
      * @return TimeCode
      */
-    public function getTimeCode()
+    public function getTimeCode(): TimeCode
     {
         return $this->timecode;
     }
@@ -71,13 +71,13 @@ class Frame extends AbstractMediaType implements IVideoOwned
      * Uses the `unaccurate method by default.`
      *
      * @param string  $pathfile
-     * @param Boolean $accurate
+     * @param bool $accurate
      *
      * @return Frame
      *
      * @throws RuntimeException
      */
-    public function save($pathfile, $accurate = false, $returnBase64 = false)
+    public function save(string $pathfile, bool $accurate = false, bool $returnBase64 = false)
     {
         $videoDuration = Timecode::fromSeconds((float) $this->getVideo()->getFormat()->get('duration'));
 
@@ -95,13 +95,13 @@ class Frame extends AbstractMediaType implements IVideoOwned
                 '-y', '-ss', (string) $this->timecode,
                 '-i', $this->pathfile,
                 '-vframes', '1',
-                '-f', $outputFormat
+                '-f', $outputFormat,
             ];
         } else {
             $commands = [
                 '-y', '-i', $this->pathfile,
                 '-vframes', '1', '-ss', (string) $this->timecode,
-                '-f', $outputFormat
+                '-f', $outputFormat,
             ];
         }
 
@@ -114,7 +114,7 @@ class Frame extends AbstractMediaType implements IVideoOwned
         }
 
         if (!$returnBase64) {
-            $commands = array_merge($commands, [$pathfile]);
+            $commands[] = $pathfile;
         }
 
         try {

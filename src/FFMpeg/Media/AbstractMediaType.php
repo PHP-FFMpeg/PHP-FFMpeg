@@ -104,8 +104,8 @@ abstract class AbstractMediaType implements MediaTypeInterface
 
     protected function cleanupTemporaryFile($filename)
     {
-        if (file_exists($filename) && is_writable($filename)) {
-            unlink($filename);
+        if (\file_exists($filename) && \is_writable($filename)) {
+            \unlink($filename);
         }
 
         return $this;

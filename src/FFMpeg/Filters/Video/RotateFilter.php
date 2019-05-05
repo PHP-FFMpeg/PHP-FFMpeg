@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -39,7 +40,7 @@ class RotateFilter implements VideoFilterInterface
     /**
      * @return Dimension
      */
-    public function getAngle()
+    public function getAngle(): Dimension
     {
         return $this->angle;
     }
@@ -49,7 +50,7 @@ class RotateFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        if (in_array($this->angle, array(self::ROTATE_90, self::ROTATE_270), true)) {
+        if (in_array($this->angle, [self::ROTATE_90, self::ROTATE_270], true)) {
             foreach ($video->getStreams()->videos() as $stream) {
                 if ($stream->has('width') && $stream->has('height')) {
                     $width = $stream->get('width');

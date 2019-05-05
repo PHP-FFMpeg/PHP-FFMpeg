@@ -12,10 +12,10 @@ use Tests\FFMpeg\Unit\TestCase;
 class CropFilterTest extends TestCase
 {
 
-    public function testCommandParamsAreCorrectAndStreamIsUpdated()
+    public function testCommandParamsAreCorrectAndStreamIsUpdated(): void
     {
-        $stream = new Stream(array('width' => 320, 'height' => 240, 'codec_type' => 'video'));
-        $streams = new StreamCollection(array($stream));
+        $stream = new Stream(['width' => 320, 'height' => 240, 'codec_type' => 'video']);
+        $streams = new StreamCollection([$stream]);
 
         $video = $this->getVideoMock();
         $video->expects($this->once())
@@ -27,10 +27,10 @@ class CropFilterTest extends TestCase
         $dimension = new Dimension(200, 150);
         $point = new Point(25, 35);
         $filter = new CropFilter($point, $dimension);
-        $expected = array(
+        $expected = [
             '-filter:v',
-            'crop=' . $dimension->getWidth() . ":" . $dimension->getHeight() . ":" . $point->getX() . ":" . $point->getY()
-        );
+            'crop=' . $dimension->getWidth() . ":" . $dimension->getHeight() . ":" . $point->getX() . ":" . $point->getY(),
+        ];
         $this->assertEquals($expected, $filter->apply($video, $format));
 
         $this->assertEquals(200, $stream->get('width'));

@@ -7,11 +7,11 @@ use Tests\FFMpeg\Unit\TestCase;
 
 class CustomFrameFilterTest extends TestCase
 {
-    public function testApplyCustomFrameFilter()
+    public function testApplyCustomFrameFilter(): void
     {
         $frame = $this->getFrameMock();
 
         $filter = new CustomFrameFilter('whatever i put would end up as a filter');
-        $this->assertEquals(array('-vf', 'whatever i put would end up as a filter'), $filter->apply($frame));
+        $this->assertEquals(['-vf', 'whatever i put would end up as a filter'], $filter->apply($frame));
     }
 }

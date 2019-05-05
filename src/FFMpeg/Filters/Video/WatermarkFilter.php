@@ -24,7 +24,7 @@ class WatermarkFilter implements VideoFilterInterface
     private $watermarkPath;
     /** @var array */
     private $coordinates;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct($watermarkPath, array $coordinates = [], int $priority = 0)

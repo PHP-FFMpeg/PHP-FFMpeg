@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -13,13 +13,13 @@ declare(strict_types=1);
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Driver\FFMpegDriver;
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\FFProbe;
 use FFMpeg\Filters\Gif\GifFilterInterface;
 use FFMpeg\Filters\Gif\GifFilters;
-use FFMpeg\Driver\FFMpegDriver;
-use FFMpeg\FFProbe;
-use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Coordinate\Dimension;
 
 class Gif extends AbstractMediaType implements IVideoOwned
 {
@@ -29,7 +29,7 @@ class Gif extends AbstractMediaType implements IVideoOwned
     private $timecode;
     /** @var Dimension */
     private $dimension;
-    /** @var integer */
+    /** @var int */
     private $duration;
     /** @var Video */
     private $video;
@@ -96,12 +96,12 @@ class Gif extends AbstractMediaType implements IVideoOwned
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
         $commands = [
-            '-ss', (string)$this->timecode
+            '-ss', (string) $this->timecode,
         ];
 
         if (null !== $this->duration) {
             $commands[] = '-t';
-            $commands[] = (string)$this->duration;
+            $commands[] = (string) $this->duration;
         }
 
         $commands[] = '-i';

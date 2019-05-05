@@ -53,16 +53,24 @@ class ClipTest extends AbstractMediaTestCase
 
     public function provideBuildOptions()
     {
-        return array(
-            array('SS01', null, array(
+        return [
+            [
+                'SS01',
+                null,
+                [
                     '-y', '-ss', 'SS01',
-                    '-i', __FILE__)
-            ),
-            array('SS02', 'D02', array(
+                    '-i', __FILE__
+                ]
+            ],
+            [
+                'SS02',
+                'D02',
+                [
                     '-y', '-ss', 'SS02',
                     '-i', __FILE__,
-                    '-t', 'D02')
-            )
-        );
+                    '-t', 'D02'
+                ]
+            ]
+        ];
     }
 }

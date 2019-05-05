@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -12,12 +12,12 @@ declare(strict_types=1);
 
 namespace FFMpeg\Format\Video;
 
-use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\FFProbe;
 use FFMpeg\Format\Audio\DefaultAudio;
+use FFMpeg\Format\ProgressListener\VideoProgressListener;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\MediaTypeInterface;
-use FFMpeg\Format\ProgressListener\VideoProgressListener;
 
 /**
  * The abstract default Video format
@@ -80,8 +80,8 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     {
         if (!in_array($videoCodec, $this->getAvailableVideoCodecs())) {
             throw new InvalidArgumentException(sprintf(
-                    'The given video codec %s is not available for this format, available formats are %s.',
-                    $videoCodec, implode(', ', $this->getAvailableVideoCodecs())
+                'The given video codec %s is not available for this format, available formats are %s.',
+                $videoCodec, implode(', ', $this->getAvailableVideoCodecs())
             ));
         }
 
@@ -129,7 +129,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
         $format = $this;
         $listener = new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration);
         $listener->on('progress', function () use ($format, $media) {
-            $format->emit('progress', array_merge(array($media, $format), func_get_args()));
+            $format->emit('progress', array_merge([$media, $format], func_get_args()));
         });
 
         return [$listener];

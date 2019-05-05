@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -21,7 +21,7 @@ class CustomFilter implements AudioFilterInterface
 
     /** @var string */
     private $filter;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     /**

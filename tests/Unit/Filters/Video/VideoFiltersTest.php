@@ -2,9 +2,9 @@
 
 namespace Tests\FFMpeg\Unit\Filters\Video;
 
-use Tests\FFMpeg\Unit\TestCase;
-use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Filters\Video\ResizeFilter;
+use FFMpeg\Filters\Video\VideoFilters;
+use Tests\FFMpeg\Unit\TestCase;
 
 class VideoFiltersTest extends TestCase
 {
@@ -33,14 +33,14 @@ class VideoFiltersTest extends TestCase
         $this->assertSame($dimension, $capturedFilter->getDimension());
     }
 
-    public function provideResizeOptions()
+    public function provideResizeOptions(): array
     {
-        return array(
-            array(ResizeFilter::RESIZEMODE_FIT, true),
-            array(ResizeFilter::RESIZEMODE_SCALE_WIDTH, true),
-            array(ResizeFilter::RESIZEMODE_SCALE_HEIGHT, false),
-            array(ResizeFilter::RESIZEMODE_INSET, false),
-        );
+        return [
+            [ResizeFilter::RESIZEMODE_FIT, true],
+            [ResizeFilter::RESIZEMODE_SCALE_WIDTH, true],
+            [ResizeFilter::RESIZEMODE_SCALE_HEIGHT, false],
+            [ResizeFilter::RESIZEMODE_INSET, false],
+        ];
     }
 
     public function testResample()
@@ -54,7 +54,7 @@ class VideoFiltersTest extends TestCase
 
         $video->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Video\FrameRateFilter'))
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Video\FrameRateFilter::class))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
             }));
@@ -72,7 +72,7 @@ class VideoFiltersTest extends TestCase
 
         $video->expects($this->once())
             ->method('addFilter')
-            ->with($this->isInstanceOf('FFMpeg\Filters\Video\SynchronizeFilter'));
+            ->with($this->isInstanceOf(\FFMpeg\Filters\Video\SynchronizeFilter::class));
 
         $filters->synchronize();
     }

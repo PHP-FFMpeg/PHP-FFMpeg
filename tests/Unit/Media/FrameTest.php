@@ -2,9 +2,9 @@
 
 namespace Tests\FFMpeg\Unit\Media;
 
-use FFMpeg\Media\Frame;
 use FFMpeg\Coordinate\Timecode;
 use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Media\Frame;
 
 class FrameTest extends AbstractMediaTestCase
 {
@@ -86,8 +86,7 @@ class FrameTest extends AbstractMediaTestCase
         if (!$base64) {
             $frame = new Frame($video, $driver, $ffprobe, $timecode);
             $this->assertSame($frame, $frame->save($pathfile, $accurate, $base64));
-        }
-        else {
+        } else {
             $frame = new Frame($video, $driver, $ffprobe, $timecode);
             $frame->save($pathfile, $accurate, $base64);
         }
@@ -120,29 +119,29 @@ class FrameTest extends AbstractMediaTestCase
 
     public function provideSaveOptions()
     {
-        return array(
-            array(false, false, array(
+        return [
+            [false, false, [
                 '-y', '-ss', 'timecode',
                 '-i', __FILE__,
                 '-vframes', '1',
-                '-f', 'image2')
-            ),
-            array(true, false, array(
+                '-f', 'image2'],
+            ],
+            [true, false, [
                 '-y', '-i', __FILE__,
                 '-vframes', '1', '-ss', 'timecode',
-                '-f', 'image2')
-            ),
-            array(false, true, array(
-                    '-y', '-ss', 'timecode',
-                    '-i', __FILE__,
-                    '-vframes', '1',
-                    '-f', 'image2pipe', '-')
-            ),
-            array(true, true, array(
-                    '-y', '-i', __FILE__,
-                    '-vframes', '1', '-ss', 'timecode',
-                    '-f', 'image2pipe', '-')
-            )
-        );
+                '-f', 'image2'],
+            ],
+            [false, true, [
+                '-y', '-ss', 'timecode',
+                '-i', __FILE__,
+                '-vframes', '1',
+                '-f', 'image2pipe', '-'],
+            ],
+            [true, true, [
+                '-y', '-i', __FILE__,
+                '-vframes', '1', '-ss', 'timecode',
+                '-f', 'image2pipe', '-'],
+            ],
+        ];
     }
 }

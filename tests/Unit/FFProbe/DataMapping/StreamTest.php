@@ -1,34 +1,34 @@
 <?php
-
+declare(strict_types=1);
 namespace Tests\FFMpeg\Unit\FFProbe\DataMapping;
 
 use FFMpeg\Coordinate\Dimension;
-use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\FFProbe\DataMapping\Stream;
+use Tests\FFMpeg\Unit\TestCase;
 
 class StreamTest extends TestCase
 {
     /**
      * @dataProvider provideAudioCases
      */
-    public function testIsAudio($isAudio, $properties)
+    public function testIsAudio($isAudio, $properties): void
     {
         $stream = new Stream($properties);
         $this->assertSame($isAudio, $stream->isAudio());
     }
 
-    public function provideAudioCases()
+    public function provideAudioCases(): array
     {
-        return array(
-            array(true, array('codec_type' => 'audio')),
-            array(false, array('codec_type' => 'video')),
-        );
+        return [
+            [true, ['codec_type' => 'audio']],
+            [false, ['codec_type' => 'video']],
+        ];
     }
 
     /**
      * @dataProvider provideVideoCases
      */
-    public function testIsVideo($isVideo, $properties)
+    public function testIsVideo($isVideo, $properties): void
     {
         $stream = new Stream($properties);
         $this->assertSame($isVideo, $stream->isVideo());
@@ -36,10 +36,10 @@ class StreamTest extends TestCase
 
     public function provideVideoCases()
     {
-        return array(
-            array(true, array('codec_type' => 'video')),
-            array(false, array('codec_type' => 'audio')),
-        );
+        return [
+            [true, ['codec_type' => 'video']],
+            [false, ['codec_type' => 'audio']],
+        ];
     }
 
     /**
@@ -48,13 +48,13 @@ class StreamTest extends TestCase
      */
     public function testGetDimensionsFromAudio()
     {
-        $stream = new Stream(array('codec_type' => 'audio'));
+        $stream = new Stream(['codec_type' => 'audio']);
         $stream->getDimensions();
     }
 
     public function testGetDimensionsFromVideo()
     {
-        $stream = new Stream(array('codec_type' => 'video', 'width' => 960, 'height' => 720));
+        $stream = new Stream(['codec_type' => 'video', 'width' => 960, 'height' => 720]);
         $this->assertEquals(new Dimension(960, 720), $stream->getDimensions());
     }
 
@@ -63,72 +63,72 @@ class StreamTest extends TestCase
      * @expectedException FFMpeg\Exception\RuntimeException
      * @expectedExceptionMessage Unable to extract dimensions.
      */
-    public function testUnableToGetDimensionsFromVideo($properties)
+    public function testUnableToGetDimensionsFromVideo($properties): void
     {
-        $stream = new Stream(array('codec_type' => 'video', 'width' => 960));
+        $stream = new Stream(['codec_type' => 'video', 'width' => 960]);
         $stream->getDimensions();
     }
 
-    public function provideInvalidPropertiesForDimensionsExtraction()
+    public function provideInvalidPropertiesForDimensionsExtraction(): array
     {
-        return array(
-            array('codec_type' => 'video', 'width' => 960),
-            array('codec_type' => 'video', 'height' => 960),
-        );
+        return [
+            ['codec_type' => 'video', 'width' => 960],
+            ['codec_type' => 'video', 'height' => 960],
+        ];
     }
 
     /**
      * @dataProvider providePropertiesForDimensionsExtraction
      */
-    public function testGetDimensionsFromVideoWithDisplayRatio($data)
+    public function testGetDimensionsFromVideoWithDisplayRatio($data): void
     {
-        $stream = new Stream(array(
+        $stream = new Stream([
             'codec_type' => 'video',
             'width' => $data['width'],
-            'height' =>  $data['height'],
-            'sample_aspect_ratio' =>  $data['sar'],
-            'display_aspect_ratio' =>  $data['dar']
-        ));
+            'height' => $data['height'],
+            'sample_aspect_ratio' => $data['sar'],
+            'display_aspect_ratio' => $data['dar'],
+        ]);
         $this->assertEquals(new Dimension($data['result_width'], $data['result_height']), $stream->getDimensions());
     }
 
     /**
      * @dataProvider provideInvalidRatios
      */
-    public function testGetDimensionsFromVideoWithInvalidDisplayRatio($invalidRatio)
+    public function testGetDimensionsFromVideoWithInvalidDisplayRatio($invalidRatio): void
     {
         $stream = new Stream(['codec_type' => 'video', 'width' => 960, 'height' => 720, 'sample_aspect_ratio' => $invalidRatio, 'display_aspect_ratio' => '16:9']);
         $this->assertEquals(new Dimension(960, 720), $stream->getDimensions());
     }
 
-    public function provideInvalidRatios()
+    public function provideInvalidRatios(): array
     {
-        return array(array('0:1'), array('2:1:3'));
+        return [['0:1'], ['2:1:3']];
     }
 
-    public function providePropertiesForDimensionsExtraction()
+    public function providePropertiesForDimensionsExtraction(): array
     {
-        return array(
-            array(
-                array('width' => '960', 'height' => '720',
-                'sar' => '4:3', 'dar' => '16:9',
-                'result_width' => '1280', 'result_height' => '720'),
-            ),
-            array(
-                array('width' => '1920', 'height' => '1080',
-                'sar' => '1:1', 'dar' => '16:9',
-                'result_width' => '1920', 'result_height' => '1080'),
-            ),
-            array(
-                array('width' => '640', 'height' => '480',
-                'sar' => '75:74', 'dar' => '50:37',
-                'result_width' => '649', 'result_height' => '480'),
-            ),
-            array(
-                array('width' => '720', 'height' => '576',
-                  'sar' => '52:28', 'dar' => '16:9',
-                  'result_width' => '1337', 'result_height' => '752'),
-            ),
-        );
+        return [
+            [
+                ['width' => '960', 'height' => '720',
+                    'sar' => '4:3', 'dar' => '16:9',
+                    'result_width' => '1280', 'result_height' => '720'],
+            ],
+            [
+                ['width' => '1920', 'height' => '1080',
+                    'sar' => '1:1', 'dar' => '16:9',
+                    'result_width' => '1920', 'result_height' => '1080'],
+            ],
+            [
+                ['width' => '640', 'height' => '480',
+                    'sar' => '75:74', 'dar' => '50:37',
+                    'result_width' => '649', 'result_height' => '480'],
+            ],
+            [
+                ['width' => '720', 'height' => '576',
+                    'sar' => '52:28', 'dar' => '16:9',
+                    'result_width' => '1337', 'result_height' => '752'],
+            ],
+        ];
     }
 }

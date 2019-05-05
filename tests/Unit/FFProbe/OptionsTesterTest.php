@@ -19,7 +19,7 @@ class OptionsTesterTest extends TestCase
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->once())
             ->method('command')
-            ->with(array('-help', '-loglevel', 'quiet'))
+            ->with(['-help', '-loglevel', 'quiet'])
             ->will($this->throwException(new ExecutionFailureException('Failed to execute')));
 
         $tester = new OptionsTester($ffprobe, $cache);
@@ -57,10 +57,10 @@ class OptionsTesterTest extends TestCase
     {
         $data = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/help.raw');
 
-        return array(
-            array(true, $data, '-print_format'),
-            array(false, $data, '-another_print_format'),
-        );
+        return [
+            [true, $data, '-print_format'],
+            [false, $data, '-another_print_format'],
+        ];
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -13,9 +14,9 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Media\Video;
-use FFMpeg\Format\VideoInterface;
 use FFMpeg\Filters\TPriorityFilter;
+use FFMpeg\Format\VideoInterface;
+use FFMpeg\Media\Video;
 
 class ResizeFilter implements VideoFilterInterface
 {
@@ -34,12 +35,12 @@ class ResizeFilter implements VideoFilterInterface
     private $dimension;
     /** @var string */
     private $mode;
-    /** @var Boolean */
+    /** @var bool */
     private $forceStandards;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
-    public function __construct(Dimension $dimension, $mode = self::RESIZEMODE_FIT, $forceStandards = true, $priority = 0)
+    public function __construct(Dimension $dimension, string $mode = self::RESIZEMODE_FIT, bool $forceStandards = true, int $priority = 0)
     {
         $this->dimension = $dimension;
         $this->mode = $mode;
@@ -50,7 +51,7 @@ class ResizeFilter implements VideoFilterInterface
     /**
      * @return Dimension
      */
-    public function getDimension()
+    public function getDimension(): Dimension
     {
         return $this->dimension;
     }
@@ -58,15 +59,15 @@ class ResizeFilter implements VideoFilterInterface
     /**
      * @return string
      */
-    public function getMode()
+    public function getMode(): string
     {
         return $this->mode;
     }
 
     /**
-     * @return Boolean
+     * @return bool
      */
-    public function areStandardsForced()
+    public function areStandardsForced(): bool
     {
         return $this->forceStandards;
     }
@@ -102,7 +103,7 @@ class ResizeFilter implements VideoFilterInterface
         return $commands;
     }
 
-    private function getComputedDimensions(Dimension $dimension, $modulus)
+    private function getComputedDimensions(Dimension $dimension, int $modulus): Dimension
     {
         $originalRatio = $dimension->getRatio($this->forceStandards);
 

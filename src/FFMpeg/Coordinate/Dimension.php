@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -33,7 +33,7 @@ class Dimension
     public function __construct(int $width, int $height)
     {
         if ($width <= 0 || $height <= 0) {
-            throw new InvalidArgumentException('Width and height should be positive integer when constructing a dimension.');
+            throw new InvalidArgumentException('Width and height should be positive int when constructing a dimension.');
         }
 
         $this->width = $width;

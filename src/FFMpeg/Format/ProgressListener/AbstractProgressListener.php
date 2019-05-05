@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -13,24 +14,24 @@ namespace FFMpeg\Format\ProgressListener;
 
 use Alchemy\BinaryDriver\Listeners\ListenerInterface;
 use Evenement\EventEmitter;
-use FFMpeg\FFProbe;
 use FFMpeg\Exception\RuntimeException;
+use FFMpeg\FFProbe;
 
 /**
  * @author Robert Gruendler <r.gruendler@gmail.com>
  */
 abstract class AbstractProgressListener extends EventEmitter implements ListenerInterface
 {
-    /** @var integer */
+    /** @var int */
     private $duration;
 
-    /** @var integer */
+    /** @var int */
     private $totalSize;
 
-    /** @var integer */
+    /** @var int */
     private $currentSize;
 
-    /** @var integer */
+    /** @var int */
     private $currentTime;
 
     /** @var float */
@@ -185,9 +186,9 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
         if (null !== $this->lastOutput) {
             $delta = $currentTime - $this->lastOutput;
 
-            // Check the type of the currentSize variable and convert it to an integer if needed.
+            // Check the type of the currentSize variable and convert it to an int if needed.
             if (!\is_numeric($currentSize)) {
-                $currentSize = (int)$currentSize;
+                $currentSize = (int) $currentSize;
             }
 
             $deltaSize = $currentSize - $this->currentSize;
@@ -241,9 +242,9 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
         }
 
         return [
-            'percent'   => $this->percent,
+            'percent' => $this->percent,
             'remaining' => $this->remaining,
-            'rate'      => $this->rate
+            'rate' => $this->rate,
         ];
     }
 

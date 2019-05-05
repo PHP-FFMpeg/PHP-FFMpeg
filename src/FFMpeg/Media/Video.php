@@ -9,8 +9,8 @@
  */
 namespace FFMpeg\Media;
 
-use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Coordinate\TimeCode;
 
 class Video extends AbstractVideo
 {
@@ -30,7 +30,7 @@ class Video extends AbstractVideo
      *
      * @param  TimeCode $at
      * @param  Dimension $dimension
-     * @param  integer $duration
+     * @param  int $duration
      * @return Gif
      */
     public function gif(TimeCode $at, Dimension $dimension, $duration = null): Gif

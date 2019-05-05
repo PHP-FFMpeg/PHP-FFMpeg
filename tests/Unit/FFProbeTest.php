@@ -2,10 +2,10 @@
 
 namespace Tests\FFMpeg\Unit;
 
+use Alchemy\BinaryDriver\Configuration;
+use Alchemy\BinaryDriver\ConfigurationInterface;
 use FFMpeg\FFProbe;
 use Symfony\Component\Process\ExecutableFinder;
-use Alchemy\BinaryDriver\ConfigurationInterface;
-use Alchemy\BinaryDriver\Configuration;
 
 class FFProbeTest extends TestCase
 {
@@ -59,12 +59,12 @@ class FFProbeTest extends TestCase
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
 
-        return array(
-            array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json'), false),
-            array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json'), false),
-            array($stream, 'streams', array('-show_streams'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams'), true),
-            array($format, 'format', array('-show_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format'), true),
-        );
+        return [
+            [$stream, 'streams', ['-show_streams', '-print_format'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams', '-print_format', 'json'], false],
+            [$format, 'format', ['-show_format', '-print_format'], FFProbe::TYPE_FORMAT, [__FILE__, '-show_format', '-print_format', 'json'], false],
+            [$stream, 'streams', ['-show_streams'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams'], true],
+            [$format, 'format', ['-show_format'], FFProbe::TYPE_FORMAT, [__FILE__, '-show_format'], true],
+        ];
     }
 
     /**
@@ -73,7 +73,7 @@ class FFProbeTest extends TestCase
     public function testProbeWithoutCache($output, $method, $commands, $type, $caughtCommands, $isRaw)
     {
         $pathfile = __FILE__;
-        $data = array('key' => 'value');
+        $data = ['key' => 'value'];
         $rawData = 'raw data';
 
         $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
@@ -120,7 +120,7 @@ class FFProbeTest extends TestCase
             ->setFFProbeDriver($driver)
             ->setParser($parser);
 
-        $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
+        $this->assertEquals($output, call_user_func([$ffprobe, $method], $pathfile));
     }
 
     public function provideDataForInvalidJson()
@@ -128,10 +128,10 @@ class FFProbeTest extends TestCase
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
 
-        return array(
-            array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json')),
-            array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json')),
-        );
+        return [
+            [$stream, 'streams', ['-show_streams', '-print_format'], FFProbe::TYPE_STREAMS, [__FILE__, '-show_streams', '-print_format', 'json']],
+            [$format, 'format', ['-show_format', '-print_format'], FFProbe::TYPE_FORMAT, [__FILE__, '-show_format', '-print_format', 'json']],
+        ];
     }
 
     /**
@@ -140,7 +140,7 @@ class FFProbeTest extends TestCase
     public function testProbeWithWrongJson($output, $method, $commands, $type, $caughtCommands)
     {
         $pathfile = __FILE__;
-        $data = array('key' => 'value');
+        $data = ['key' => 'value'];
 
         $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
 
@@ -176,7 +176,7 @@ class FFProbeTest extends TestCase
             ->setFFProbeDriver($driver)
             ->setParser($parser);
 
-        $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
+        $this->assertEquals($output, call_user_func([$ffprobe, $method], $pathfile));
     }
 
     public function provideProbingDataWithCache()
@@ -184,10 +184,10 @@ class FFProbeTest extends TestCase
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
 
-        return array(
-            array($stream, 'streams'),
-            array($format, 'format'),
-        );
+        return [
+            [$stream, 'streams'],
+            [$format, 'format'],
+        ];
     }
 
     /**
@@ -224,15 +224,15 @@ class FFProbeTest extends TestCase
             ->setMapper($mapper)
             ->setFFProbeDriver($driver);
 
-        $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
+        $this->assertEquals($output, call_user_func([$ffprobe, $method], $pathfile));
     }
 
     public function provideProbeMethod()
     {
-        return array(
-            array('streams'),
-            array('format'),
-        );
+        return [
+            ['streams'],
+            ['format'],
+        ];
     }
 
     /**
@@ -245,7 +245,7 @@ class FFProbeTest extends TestCase
 
         $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
         $ffprobe->setOptionsTester($this->getFFProbeOptionsTesterMock());
-        call_user_func(array($ffprobe, $method), $pathfile);
+        call_user_func([$ffprobe, $method], $pathfile);
     }
 
     /**
@@ -256,7 +256,7 @@ class FFProbeTest extends TestCase
         $finder = new ExecutableFinder();
 
         $found = false;
-        foreach (array('avprobe', 'ffprobe') as $name) {
+        foreach (['ffprobe', 'avprobe') as $name) {
             if (null !== $finder->find($name)) {
                 $found = true;
             }
@@ -285,11 +285,11 @@ class FFProbeTest extends TestCase
 
     public function provideCreateOptions()
     {
-        return array(
-            array(null, array('key' => 'value'), null),
-            array($this->getLoggerMock(), array('key' => 'value'), null),
-            array(null, new Configuration(), null),
-            array(null, array('key' => 'value'), $this->getCacheMock()),
-        );
+        return [
+            [null, ['key' => 'value'], null],
+            [$this->getLoggerMock(), ['key' => 'value'], null],
+            [null, new Configuration(), null],
+            [null, ['key' => 'value'], $this->getCacheMock()],
+        ];
     }
 }

@@ -326,7 +326,7 @@ $video->filters()->framerate($framerate, $gop);
 The framerate filter takes two parameters:
 
 - `$framerate`, an instance of `FFMpeg\Coordinate\Framerate`
-- `$gop`, a [GOP](https://wikipedia.org/wiki/Group_of_pictures) value (integer)
+- `$gop`, a [GOP](https://wikipedia.org/wiki/Group_of_pictures) value (int)
 
 ###### Synchronize
 
@@ -442,7 +442,7 @@ $audio->filters()->resample($rate);
 
 The resample filter takes two parameters :
 
-- `$rate`, a valid audio sample rate value (integer)
+- `$rate`, a valid audio sample rate value (int)
 
 #### Frame
 

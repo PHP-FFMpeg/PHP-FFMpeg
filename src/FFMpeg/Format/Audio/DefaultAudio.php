@@ -13,21 +13,21 @@ namespace FFMpeg\Format\Audio;
 
 use Evenement\EventEmitter;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\FFProbe;
 use FFMpeg\Format\AudioInterface;
-use FFMpeg\Media\MediaTypeInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\ProgressListener\AudioProgressListener;
-use FFMpeg\FFProbe;
+use FFMpeg\Media\MediaTypeInterface;
 
 abstract class DefaultAudio extends EventEmitter implements AudioInterface, ProgressableInterface
 {
     /** @var string */
     protected $audioCodec;
 
-    /** @var integer */
+    /** @var int */
     protected $audioKiloBitrate = 128;
 
-    /** @var integer */
+    /** @var int */
     protected $audioChannels = null;
 
     /**
@@ -58,8 +58,8 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     {
         if (!in_array($audioCodec, $this->getAvailableAudioCodecs())) {
             throw new InvalidArgumentException(sprintf(
-                    'Wrong audiocodec value for %s, available formats are %s'
-                    , $audioCodec, implode(', ', $this->getAvailableAudioCodecs())
+                'Wrong audiocodec value for %s, available formats are %s'
+                , $audioCodec, implode(', ', $this->getAvailableAudioCodecs())
             ));
         }
 
@@ -79,7 +79,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * Sets the kiloBitrate value.
      *
-     * @param  integer                  $kiloBitrate
+     * @param  int                  $kiloBitrate
      * @throws InvalidArgumentException
      */
     public function setAudioKiloBitrate($kiloBitrate)
@@ -94,8 +94,8 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-	 * @inheritDoc
-	 */
+     * @inheritDoc
+     */
     public function getAudioChannels()
     {
         return $this->audioChannels;
@@ -104,7 +104,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * Sets the channels value.
      *
-     * @param  integer                  $channels
+     * @param  int                  $channels
      * @throws InvalidArgumentException
      */
     public function setAudioChannels($channels)
@@ -126,7 +126,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
         $format = $this;
         $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration);
         $listener->on('progress', function () use ($media, $format) {
-           $format->emit('progress', array_merge(array($media, $format), func_get_args()));
+            $format->emit('progress', array_merge([$media, $format], func_get_args()));
         });
 
         return [$listener];

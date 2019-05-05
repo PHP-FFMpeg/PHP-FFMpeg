@@ -34,11 +34,11 @@ class MapperTest extends TestCase
         $format = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_format.json'), true);
         $streams = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_streams.json'), true);
 
-        return array(
-            array(FFProbe::TYPE_FORMAT, $format, new Format($format['format'])),
-            array(FFProbe::TYPE_STREAMS, $streams, new StreamCollection(array_map(function ($streamData) {
+        return [
+            [FFProbe::TYPE_FORMAT, $format, new Format($format['format'])],
+            [FFProbe::TYPE_STREAMS, $streams, new StreamCollection(array_map(function ($streamData) {
                 return new Stream($streamData);
-            }, $streams['streams']))),
-        );
+            }, $streams['streams']))],
+        ];
     }
 }

@@ -13,8 +13,8 @@ class WaveformDownmixFilterTest extends TestCase
 {
     public function testApply()
     {
-        $stream = new Stream(array('codec_type' => 'audio', 'width' => 960, 'height' => 720));
-        $streams = new StreamCollection(array($stream));
+        $stream = new Stream(['codec_type' => 'audio', 'width' => 960, 'height' => 720]);
+        $streams = new StreamCollection([$stream]);
 
         $audio = $this->getAudioMock(__FILE__);
         $audio->expects($this->once())
@@ -23,6 +23,6 @@ class WaveformDownmixFilterTest extends TestCase
 
         $waveform = new Waveform($audio, $this->getFFMpegDriverMock(), $this->getFFProbeMock(), 640, 120);
         $filter = new WaveformDownmixFilter(TRUE);
-        $this->assertEquals(array('"aformat=channel_layouts=mono"'), $filter->apply($waveform));
+        $this->assertEquals(['"aformat=channel_layouts=mono"'], $filter->apply($waveform));
     }
 }

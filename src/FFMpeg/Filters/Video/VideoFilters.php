@@ -11,13 +11,13 @@
 
 namespace FFMpeg\Filters\Video;
 
-use FFMpeg\Coordinate\Point;
-use FFMpeg\Media\Video;
-use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\FrameRate;
-use FFMpeg\Filters\Audio\AudioResamplableFilter;
+use FFMpeg\Coordinate\Point;
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Filters\Audio\AudioFilters;
+use FFMpeg\Filters\Audio\AudioResamplableFilter;
+use FFMpeg\Media\Video;
 
 class VideoFilters extends AudioFilters
 {
@@ -31,11 +31,11 @@ class VideoFilters extends AudioFilters
      *
      * @param Dimension $dimension
      * @param string    $mode
-     * @param Boolean   $forceStandards
+     * @param bool      $forceStandards
      *
      * @return VideoFilters
      */
-    public function resize(Dimension $dimension, $mode = ResizeFilter::RESIZEMODE_FIT, $forceStandards = true)
+    public function resize(Dimension $dimension, string $mode = ResizeFilter::RESIZEMODE_FIT, bool $forceStandards = true)
     {
         $this->media->addFilter(new ResizeFilter($dimension, $mode, $forceStandards));
 
@@ -46,11 +46,11 @@ class VideoFilters extends AudioFilters
      * Changes the video framerate.
      *
      * @param FrameRate $framerate
-     * @param Integer      $gop
+     * @param int      $gop
      *
      * @return VideoFilters
      */
-    public function framerate(FrameRate $framerate, $gop)
+    public function framerate(FrameRate $framerate, int $gop)
     {
         $this->media->addFilter(new FrameRateFilter($framerate, $gop));
 
@@ -60,12 +60,12 @@ class VideoFilters extends AudioFilters
     /**
      * Extract multiple frames from the video
      *
-     * @param string $frameRate
-     * @param string  $destinationFolder
+     * @param   string    $frameRate
+     * @param   string    $destinationFolder
      *
      * @return $this
      */
-    public function extractMultipleFrames($frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, $destinationFolder = __DIR__)
+    public function extractMultipleFrames(string $frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, string $destinationFolder = __DIR__)
     {
         $this->media->addFilter(new ExtractMultipleFramesFilter($frameRate, $destinationFolder));
 
@@ -102,7 +102,7 @@ class VideoFilters extends AudioFilters
     /**
      * Resamples the audio file.
      *
-     * @param Integer $rate
+     * @param int $rate
      *
      * @return AudioFilters
      */

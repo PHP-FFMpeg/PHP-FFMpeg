@@ -11,8 +11,8 @@
 
 namespace FFMpeg\Filters\Audio;
 
-use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Filters\TPriorityFilter;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Media\Audio;
 
@@ -35,7 +35,6 @@ class AudioClipFilter implements AudioFilterInterface
      */
     private $priority;
 
-
     public function __construct(TimeCode $start, ?TimeCode $duration = null, int $priority = 0)
     {
         $this->start = $start;
@@ -54,7 +53,7 @@ class AudioClipFilter implements AudioFilterInterface
     }
 
     /**
-     * Returns how long the audio is being cutted. Returns null when the duration is infinite,
+     * Returns how long the audio is being cutted. Returns null when the duration is infinite.
      *
      * @return TimeCode|null
      */

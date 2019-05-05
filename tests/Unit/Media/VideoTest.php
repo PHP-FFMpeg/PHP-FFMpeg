@@ -130,7 +130,7 @@ class VideoTest extends AbstractStreamableTestCase
         $filter->expects($this->once())
             ->method('apply')
             ->with($video, $format)
-            ->will($this->returnValue(array('extra-filter-command')));
+            ->will($this->returnValue(['extra-filter-command']));
 
         $capturedCommands = [];
 

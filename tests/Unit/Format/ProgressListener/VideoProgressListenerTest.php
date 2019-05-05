@@ -56,8 +56,8 @@ class VideoProgressListenerTest extends TestCase
 
     public function provideData()
     {
-        return array(
-            array(
+        return [
+            [
                 147073958,
                 281.147533,
                 281.147533,
@@ -71,8 +71,8 @@ class VideoProgressListenerTest extends TestCase
                 3868,
                 1,
                 1
-            ),
-            array(
+            ],
+            [
                 147073958,
                 281.147533,
                 281.147533,
@@ -86,8 +86,8 @@ class VideoProgressListenerTest extends TestCase
                 3868,
                 1,
                 2
-            ),
-            array(
+            ],
+            [
                 147073958,
                 281.147533,
                 35,
@@ -101,7 +101,7 @@ class VideoProgressListenerTest extends TestCase
                 3868,
                 2,
                 2
-            )
-        );
+            ]
+        ];
     }
 }

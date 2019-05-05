@@ -21,7 +21,7 @@ class AudioMetadataTest extends TestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         $filters = new AudioFilters($audio);
-        $filters->addMetadata(array('title' => "Hello World"));
+        $filters->addMetadata(['title' => "Hello World"]);
         $this->assertEquals(["-metadata", "title=Hello World"], $capturedFilter->apply($audio, $format));
     }
 
@@ -39,9 +39,9 @@ class AudioMetadataTest extends TestCase
         $format = $this->getMockBuilder(\FFMpeg\Format\AudioInterface::class)->getMock();
 
         $filters = new AudioFilters($audio);
-        $filters->addMetadata(array('genre' => 'Some Genre', 'artwork' => "/path/to/file.jpg"));
-        $this->assertEquals(array(0 => "-i", 1 => "/path/to/file.jpg", 2 => "-map", 3 => "0", 4 => "-map", 5 => "1", 6 => "-metadata", 7 => "genre=Some Genre"), $capturedFilter->apply($audio, $format));
-        $this->assertEquals(array(0 => "-i", 1 => "/path/to/file.jpg", 2 => "-map", 3 => "0", 4 => "-map", 5 => "1", 6 => "-metadata", 7 => "genre=Some Genre"), $capturedFilter->apply($audio, $format));
+        $filters->addMetadata(['genre' => 'Some Genre', 'artwork' => "/path/to/file.jpg"]);
+        $this->assertEquals([0 => "-i", 1 => "/path/to/file.jpg", 2 => "-map", 3 => "0", 4 => "-map", 5 => "1", 6 => "-metadata", 7 => "genre=Some Genre"], $capturedFilter->apply($audio, $format));
+        $this->assertEquals([0 => "-i", 1 => "/path/to/file.jpg", 2 => "-map", 3 => "0", 4 => "-map", 5 => "1", 6 => "-metadata", 7 => "genre=Some Genre"], $capturedFilter->apply($audio, $format));
     }
 
     public function testRemoveMetadata()
@@ -59,6 +59,6 @@ class AudioMetadataTest extends TestCase
 
         $filters = new AudioFilters($audio);
         $filters->addMetadata();
-        $this->assertEquals(["-map_metadata", "-1", "-vn"], $capturedFilter->apply($audio, $format));
+        $this->assertEquals(['-map_metadata', '-1', '-vn'], $capturedFilter->apply($audio, $format));
     }
 }

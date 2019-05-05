@@ -12,12 +12,12 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\FFProbe;
 use FFMpeg\Filters\Waveform\WaveformFilterInterface;
 use FFMpeg\Filters\Waveform\WaveformFilters;
-use FFMpeg\Driver\FFMpegDriver;
-use FFMpeg\FFProbe;
-use FFMpeg\Exception\RuntimeException;
 
 class Waveform extends AbstractMediaType implements IAudioOwned
 {
@@ -34,7 +34,7 @@ class Waveform extends AbstractMediaType implements IAudioOwned
     protected $height;
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $colors;
 
@@ -77,8 +77,9 @@ class Waveform extends AbstractMediaType implements IAudioOwned
      * Saving waveforms to png is strongly suggested.
      *
      * @param array $colors
+     * @return void
      */
-    public function setColors(array $colors)
+    public function setColors(array $colors): void
     {
         foreach ($colors as $row => $value) {
             if (!\preg_match('/^#(?:[0-9a-fA-F]{6})$/', $value)) {
@@ -101,7 +102,7 @@ class Waveform extends AbstractMediaType implements IAudioOwned
      *
      * @return string[]
      */
-    public function getColors()
+    public function getColors(): array
     {
         return $this->colors;
     }
@@ -125,7 +126,7 @@ class Waveform extends AbstractMediaType implements IAudioOwned
      *
      * @throws RuntimeException
      */
-    public function save($pathfile)
+    public function save(string $pathfile)
     {
         /**
          * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
@@ -133,8 +134,8 @@ class Waveform extends AbstractMediaType implements IAudioOwned
          */
         $commands = [
             '-y', '-i', $this->pathfile, '-filter_complex',
-            'showwavespic=colors='.$this->compileColors().':s='.$this->width.'x'.$this->height,
-            '-frames:v', '1'
+            'showwavespic=colors=' . $this->compileColors() . ':s=' . $this->width . 'x' . $this->height,
+            '-frames:v', '1',
         ];
 
         foreach ($this->filters as $filter) {

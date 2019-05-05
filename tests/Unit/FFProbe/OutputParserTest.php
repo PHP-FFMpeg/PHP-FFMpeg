@@ -34,9 +34,9 @@ class OutputParserTest extends TestCase
         $rawFormat = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_format.raw');
         $rawStreams = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_streams.raw');
 
-        return array(
-            array(FFProbe::TYPE_FORMAT, $rawFormat, $expectedFormat),
-            array(FFProbe::TYPE_STREAMS, $rawStreams, $expectedStreams),
-        );
+        return [
+            [FFProbe::TYPE_FORMAT, $rawFormat, $expectedFormat],
+            [FFProbe::TYPE_STREAMS, $rawStreams, $expectedStreams],
+        ];
     }
 }

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace FFMpeg\Filters\Audio;
 
@@ -22,7 +22,7 @@ class ImageVideoFilter implements AudioFilterInterface
     use TPriorityFilter;
 
     protected const FFMPEG_PRESETS = [
-        'ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow'
+        'ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow',
     ];
 
     /**
@@ -52,17 +52,10 @@ class ImageVideoFilter implements AudioFilterInterface
      */
     public function apply(Audio $audio, AudioInterface $format): array
     {
-        $commands = ['-loop', '1', '-i', $this->artwork];
-
         if (!in_array($this->preset, self::FFMPEG_PRESETS)) {
             throw new InvalidArgumentException('Undefined preset. Please pass a preset type to the method.');
         }
 
-        $commands[] = '-preset';
-        $commands[] = $this->preset;
-
-        $commands[] = '-shortest';
-
-        return $commands;
+        return ['-loop', '1', '-i', $this->artwork, '-preset', $this->preset, '-shortest'];
     }
 }
