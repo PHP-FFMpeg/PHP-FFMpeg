@@ -76,13 +76,43 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getConfiguration')
             ->will($this->returnValue($configuration));
 
-        $failure = new ExecutionFailureException('failed to encode');
+        $failure = new ExecutionFailureException('ffmpeg', 'failed to encode');
         $driver->expects($this->once())
             ->method('command')
             ->will($this->throwException($failure));
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
         $this->setExpectedException('FFMpeg\Exception\RuntimeException');
+        $audio->save($format, $outputPathfile);
+    }
+
+    /**
+     * @requires PHP >= 5.5
+     */
+    public function testOutputsFullError()
+    {
+        $driver = $this->getFFMpegDriverMock();
+        $ffprobe = $this->getFFProbeMock();
+        $outputPathfile = '/target/file';
+
+        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array()));
+
+        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+
+        $driver->expects($this->any())
+            ->method('getConfiguration')
+            ->will($this->returnValue($configuration));
+
+        $failure = new ExecutionFailureException('ffmpeg', 'failed to encode', 'invalid file');
+        $driver->expects($this->once())
+            ->method('command')
+            ->will($this->throwException($failure));
+
+        $audio = new Audio(__FILE__, $driver, $ffprobe);
+        $this->setExpectedException('FFMpeg\Exception\CommandExecutionException', 'invalid file');
         $audio->save($format, $outputPathfile);
     }
 

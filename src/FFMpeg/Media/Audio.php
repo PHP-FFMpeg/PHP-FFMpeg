@@ -12,6 +12,7 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Exception\CommandExecutionException;
 use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Filters\Audio\SimpleFilter;
@@ -71,7 +72,7 @@ class Audio extends AbstractStreamableMedia
             $this->driver->command($commands, false, $listeners);
         } catch (ExecutionFailureException $e) {
             $this->cleanupTemporaryFile($outputPathfile);
-            throw new RuntimeException('Encoding failed', $e->getCode(), $e);
+            throw new CommandExecutionException($e, $e->getCode());
         }
 
         return $this;

@@ -10,6 +10,7 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Exception\CommandExecutionException;
 use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
@@ -103,7 +104,7 @@ abstract class AbstractVideo extends Audio
         $this->fs->clean($this->fsId);
 
         if (null !== $failure) {
-            throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
+            throw new CommandExecutionException($failure, $failure->getCode());
         }
 
         return $this;
