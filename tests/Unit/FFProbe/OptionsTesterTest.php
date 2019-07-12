@@ -20,7 +20,7 @@ class OptionsTesterTest extends TestCase
         $ffprobe->expects($this->once())
             ->method('command')
             ->with(array('-help', '-loglevel', 'quiet'))
-            ->will($this->throwException(new ExecutionFailureException('Failed to execute')));
+            ->will($this->throwException(new ExecutionFailureException('ffprobe', 'Failed to execute')));
 
         $tester = new OptionsTester($ffprobe, $cache);
         $tester->has('-print_format');
