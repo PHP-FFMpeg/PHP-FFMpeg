@@ -153,7 +153,7 @@ $video
     ->synchronize();
 
 $video
-    ->->save(new FFMpeg\Format\Video\X264(), '/path/to/new/file');
+    ->save(new FFMpeg\Format\Video\X264(), '/path/to/new/file');
 ```
 
 If you want to extract multiple images from the video without encoding to a video use this method:
