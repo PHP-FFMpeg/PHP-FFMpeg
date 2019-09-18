@@ -25,6 +25,9 @@ use FFMpeg\Filters\Video\ClipFilter;
 abstract class AbstractVideo extends Audio
 {
 
+    /** @var string */
+    protected $options;
+
     /**
      * FileSystem Manager instance
      * @var Manager
@@ -124,6 +127,29 @@ abstract class AbstractVideo extends Audio
         $this->fs->clean($this->fsId);
 
         return $finalCommands;
+    }
+
+    /**
+     * Gets global FFmpeg options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Sets global FFmpeg options
+     *
+     * @param array $options
+     * @return Video
+     */
+    public function setOptions($options = array())
+    {
+        $this->options = array_reverse($options);
+
+        return $this;
     }
 
     /**
@@ -287,6 +313,16 @@ abstract class AbstractVideo extends Audio
      */
     protected function basePartOfCommand()
     {
-        return array('-y', '-i', $this->pathfile);
+        $base = array('-y', '-i', $this->pathfile);
+
+        if(is_array($this->options))
+        {
+            foreach ($this->options as $option)
+            {
+                array_unshift($base, $option);
+            }
+        }
+        return $base;
     }
 }
+
