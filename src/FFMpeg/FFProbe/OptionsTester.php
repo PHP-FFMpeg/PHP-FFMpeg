@@ -20,8 +20,12 @@ class OptionsTester implements OptionsTesterInterface
 {
     /** @var FFProbeDriver */
     private $ffprobe;
-    /** @var Cache */
+    /** @var CacheInterface */
     private $cache;
+
+    public const OPTION_CACHE_KEY_TEMPLATE = 'php-ffmpeg-option-%s';
+
+    public const HELP_CACHE_KEY = 'php-ffmpeg-help-output';
 
     public function __construct(FFProbeDriver $ffprobe, CacheInterface $cache)
     {
@@ -34,7 +38,7 @@ class OptionsTester implements OptionsTesterInterface
      */
     public function has(string $name): bool
     {
-        $id = sprintf('option-%s', $name);
+        $id = sprintf(self::OPTION_CACHE_KEY_TEMPLATE, $name);
 
         if ($this->cache->has($id)) {
             return $this->cache->get($id);
@@ -42,7 +46,7 @@ class OptionsTester implements OptionsTesterInterface
 
         $output = $this->retrieveHelpOutput();
 
-        $ret = (bool) preg_match('/^'.$name.'/m', $output);
+        $ret = (bool) preg_match('/^' . $name . '/m', $output);
 
         $this->cache->set($id, $ret);
 
@@ -51,7 +55,7 @@ class OptionsTester implements OptionsTesterInterface
 
     private function retrieveHelpOutput(): string
     {
-        $id = 'help';
+        $id = self::HELP_CACHE_KEY;
 
         if ($this->cache->has($id)) {
             return $this->cache->get($id);

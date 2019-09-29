@@ -1,5 +1,6 @@
 <?php
-declare (strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -81,7 +82,8 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
         if (!in_array($videoCodec, $this->getAvailableVideoCodecs())) {
             throw new InvalidArgumentException(sprintf(
                 'The given video codec %s is not available for this format, available formats are %s.',
-                $videoCodec, implode(', ', $this->getAvailableVideoCodecs())
+                $videoCodec,
+                implode(', ', $this->getAvailableVideoCodecs())
             ));
         }
 

@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FFMpeg\Filters\Audio\Metadata;
 
-class Metadata {
+class Metadata
+{
     /** @var string */
     protected $title;
 
@@ -53,5 +55,10 @@ class Metadata {
         $this->description = $description;
     }
 
-    public function toFFMpegCommandPart(): array {}
+    // TODO: Implement this
+    public function toFFMpegCommandPart(): array
+    {
+        throw new \RuntimeException("TODO: Implement");
+        return [];
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -125,5 +126,4 @@ class TimeCode
         // convert everything to seconds and compare
         return ($this->toSeconds() > $timecode->toSeconds());
     }
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -8,6 +10,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace FFMpeg\Format;
 
 interface FormatInterface
@@ -22,7 +25,7 @@ interface FormatInterface
     /**
      * Returns an array of extra parameters to add to ffmpeg commandline.
      *
-     * @return []
+     * @return string[]
      */
     public function getExtraParams();
 }

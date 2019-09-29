@@ -12,5 +12,4 @@
 namespace FFMpeg\Exception;
 
 class LogicException extends \LogicException implements ExceptionInterface
-{
-}
+{ }

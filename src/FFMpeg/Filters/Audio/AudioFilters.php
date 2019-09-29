@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FFMpeg\Filters\Audio;
@@ -89,7 +90,7 @@ class AudioFilters
      *
      * @return AudioFilters
      */
-    public function addVideoArtwork(string $artwork, string $preset) : AudioFilters
+    public function addVideoArtwork(string $artwork, string $preset): AudioFilters
     {
         $this->media->addFilter(new ImageVideoFilter($artwork, $preset));
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -12,5 +14,4 @@
 namespace FFMpeg\FFProbe\DataMapping;
 
 class Format extends AbstractData implements MapableData
-{
-}
+{ }

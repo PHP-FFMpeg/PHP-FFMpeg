@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -16,5 +17,4 @@ namespace FFMpeg\Exception;
  * This interface is implemented by every exception thrown by PHP-FFMpeg
  */
 interface ExceptionInterface
-{
-}
+{ }

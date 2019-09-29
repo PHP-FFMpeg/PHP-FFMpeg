@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -182,8 +184,8 @@ class FFProbe
     public function isValid($pathfile)
     {
         try {
-            return $this->format($pathfile)->get('duration') > 0;
-        } catch(\Exception $e) {
+            return $this->format($pathfile)->get('duration') > 0.0;
+        } catch (\Exception $e) {
             // complete invalid data
             return false;
         }
@@ -237,7 +239,8 @@ class FFProbe
         if (!$this->optionsTester->has($command)) {
             throw new RuntimeException(sprintf(
                 'This version of ffprobe is too old and '
-                . 'does not support `%s` option, please upgrade', $command
+                    . 'does not support `%s` option, please upgrade',
+                $command
             ));
         }
 
@@ -283,10 +286,10 @@ class FFProbe
 
     private function parseJson($data)
     {
-        $ret = @json_decode($data, true);
+        $ret = @\json_decode($data, true);
 
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new RuntimeException(sprintf('Unable to parse json %s', $ret));
+        if (JSON_ERROR_NONE !== \json_last_error()) {
+            throw new RuntimeException(sprintf('Unable to parse json! Error message: %s', \json_last_error_msg()));
         }
 
         return $ret;

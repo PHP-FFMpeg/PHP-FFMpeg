@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -97,7 +98,7 @@ class FFMpeg
 
         if (0 < count($streams->videos())) {
             return new Video($pathfile, $this->driver, $this->ffprobe);
-        } elseif (0 < count($streams->audios())) {
+        } else if (0 < count($streams->audios())) {
             return new Audio($pathfile, $this->driver, $this->ffprobe);
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -58,8 +60,9 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     {
         if (!in_array($audioCodec, $this->getAvailableAudioCodecs())) {
             throw new InvalidArgumentException(sprintf(
-                'Wrong audiocodec value for %s, available formats are %s'
-                , $audioCodec, implode(', ', $this->getAvailableAudioCodecs())
+                'Wrong audiocodec value for %s, available formats are %s',
+                $audioCodec,
+                implode(', ', $this->getAvailableAudioCodecs())
             ));
         }
 

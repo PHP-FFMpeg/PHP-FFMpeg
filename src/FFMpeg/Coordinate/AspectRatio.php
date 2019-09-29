@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -83,7 +84,7 @@ class AspectRatio
 
     /**
      * Rotated 3:2
-    */
+     */
     const AR_ROTATED_2_3 = '2/3';
 
     /**

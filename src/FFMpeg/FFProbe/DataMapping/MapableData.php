@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FFMpeg\FFProbe\DataMapping;
@@ -13,4 +14,5 @@ namespace FFMpeg\FFProbe\DataMapping;
  * @package     FFMpeg\FFProbe
  * @subpackage  DataMapping
  */
-interface MapableData {}
+interface MapableData
+{ }

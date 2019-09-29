@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -60,7 +62,8 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
      * @throws \FFMpeg\Exception\InvalidArgumentException
      * @return ExtractMultipleFramesFilter
      */
-    public function setFrameFileType($frameFileType) {
+    public function setFrameFileType($frameFileType)
+    {
         if (in_array($frameFileType, self::$supportedFrameFileTypes)) {
             $this->frameFileType = $frameFileType;
             return $this;
@@ -102,10 +105,10 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             }
 
             // Get the number of frames per second we have to extract.
-            if (false !== \preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches)){
+            if (false !== \preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches)) {
                 $operator = $matches[2];
 
-                switch($operator){
+                switch ($operator) {
                     case '/':
                         $nbFramesPerSecond = $matches[1] / $matches[3];
                         break;
@@ -133,9 +136,8 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             // Set the parameters
             $commands[] = '-vf';
             $commands[] = 'fps=' . $this->frameRate;
-            $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.' . $this->frameFileType;
-        }
-        catch (RuntimeException $e) {
+            $commands[] = $this->destinationFolder . 'frame-%' . $nbDigitsInFileNames . 'd.' . $this->frameFileType;
+        } catch (RuntimeException $e) {
             throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode());
         }
 

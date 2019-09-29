@@ -1,5 +1,6 @@
 <?php
-declare (strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of PHP-FFmpeg.
@@ -95,7 +96,6 @@ class ResizeFilter implements VideoFilterInterface
             // Using Filter to have ordering
             $commands[] = '-vf';
             $commands[] = '[in]scale=' . $dimensions->getWidth() . ':' . $dimensions->getHeight() . ' [out]';
-
         }
 
         return $commands;

@@ -12,5 +12,4 @@
 namespace FFMpeg\Exception;
 
 class RuntimeException extends \RuntimeException implements ExceptionInterface
-{
-}
+{ }

@@ -12,5 +12,4 @@
 namespace FFMpeg\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
-{
-}
+{ }

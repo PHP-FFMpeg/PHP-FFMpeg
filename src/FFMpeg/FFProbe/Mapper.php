@@ -34,7 +34,8 @@ class Mapper implements MapperInterface
                 return $this->mapStreams($data);
             default:
                 throw new InvalidArgumentException(sprintf(
-                    'Invalid type `%s`.', $type
+                    'Invalid type `%s`.',
+                    $type
                 ));
         }
     }

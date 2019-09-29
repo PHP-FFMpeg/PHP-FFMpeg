@@ -12,5 +12,4 @@
 namespace FFMpeg\Exception;
 
 class ExecutableNotFoundException extends RuntimeException
-{
-}
+{ }

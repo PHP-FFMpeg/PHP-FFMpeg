@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -85,7 +87,8 @@ class Audio extends AbstractStreamableMedia
      * @return string
      * @since 0.11.0
      */
-    public function getFinalCommand(FormatInterface $format, string $outputPathfile) {
+    public function getFinalCommand(FormatInterface $format, string $outputPathfile)
+    {
         return implode(' ', $this->buildCommand($format, $outputPathfile));
     }
 
@@ -97,7 +100,8 @@ class Audio extends AbstractStreamableMedia
      * @return string[] An array which are the components of the command
      * @since 0.11.0
      */
-    protected function buildCommand(FormatInterface $format, $outputPathfile) {
+    protected function buildCommand(FormatInterface $format, $outputPathfile)
+    {
         $commands = ['-y', '-i', $this->pathfile];
 
         $filters = clone $this->filters;

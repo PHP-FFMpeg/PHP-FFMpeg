@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -114,8 +115,7 @@ class Concat extends AbstractMediaType
 
                 fwrite($fileStream, $line);
             }
-        }
-        else {
+        } else {
             throw new InvalidArgumentException('The list of videos is not a valid array.');
         }
         fclose($fileStream);
@@ -197,10 +197,10 @@ class Concat extends AbstractMediaType
         $commands[] = '-filter_complex';
 
         $complex_filter = '';
-        for($i=0; $i<$nbSources; $i++) {
-            $complex_filter .= '['.$i.':v:0] ['.$i.':a:0] ';
+        for ($i = 0; $i < $nbSources; $i++) {
+            $complex_filter .= '[' . $i . ':v:0] [' . $i . ':a:0] ';
         }
-        $complex_filter .= 'concat=n='.$nbSources.':v=1:a=1 [v] [a]';
+        $complex_filter .= 'concat=n=' . $nbSources . ':v=1:a=1 [v] [a]';
 
         $commands[] = $complex_filter;
         $commands[] = '-map';
@@ -215,15 +215,13 @@ class Concat extends AbstractMediaType
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
             $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
-        if ($format instanceof VideoInterface) {
-            if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
-            }
+
+        if ($format instanceof VideoInterface && null !== $format->getVideoCodec()) {
+            $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
         }
-        if ($format instanceof AudioInterface) {
-            if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
-            }
+
+        if ($format instanceof AudioInterface && null !== $format->getAudioCodec()) {
+            $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
         }
 
         // Add the filters
