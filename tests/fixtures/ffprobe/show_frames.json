@@ -1,0 +1,46 @@
+{
+    "frames": [
+        {
+            "best_effort_timestamp": 4318824,
+            "best_effort_timestamp_time": "47.986933",
+            "coded_picture_number": 0,
+            "display_picture_number": 0,
+            "height": 400,
+            "interlaced_frame": 0,
+            "key_frame": 1,
+            "media_type": "video",
+            "pict_type": "I",
+            "pix_fmt": "yuvj420p",
+            "pkt_dts": 4318824,
+            "pkt_dts_time": "47.986933",
+            "pkt_duration": 1,
+            "pkt_duration_time": "0.000011",
+            "pkt_pts": 4318824,
+            "pkt_pts_time": "47.986933",
+            "pkt_size": "25139",
+            "repeat_pict": 0,
+            "stream_index": 1,
+            "top_field_first": 0,
+            "width": 400
+        },
+        {
+            "best_effort_timestamp": 677191680,
+            "best_effort_timestamp_time": "47.986939",
+            "channel_layout": "stereo",
+            "channels": 2,
+            "key_frame": 1,
+            "media_type": "audio",
+            "nb_samples": 1152,
+            "pkt_dts": 677191680,
+            "pkt_dts_time": "47.986939",
+            "pkt_duration": 368640,
+            "pkt_duration_time": "0.026122",
+            "pkt_pos": "793977",
+            "pkt_pts": 677191680,
+            "pkt_pts_time": "47.986939",
+            "pkt_size": "418",
+            "sample_fmt": "s16p",
+            "stream_index": 0
+        }
+    ]
+}

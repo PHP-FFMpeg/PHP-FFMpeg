@@ -86,4 +86,14 @@ class StreamCollectionTest extends TestCase
 
         $this->assertSame($stream1, $coll->first());
     }
+
+    public function testLast()
+    {
+        $stream1 = $this->getStreamMock();
+        $stream2 = $this->getStreamMock();
+
+        $coll = new StreamCollection(array($stream1, $stream2));
+
+        $this->assertSame($stream2, $coll->last());
+    }
 }

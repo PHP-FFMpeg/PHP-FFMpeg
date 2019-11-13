@@ -124,6 +124,20 @@ class TestCase extends BaseTestCase
             ->getMock();
     }
 
+    public function getProbeFrameMock()
+    {
+        return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\Frame')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    public function getProbeFrameCollectionMock()
+    {
+        return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\FrameCollection')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function getStreamCollectionMock()
     {
         return $this->getMockBuilder('FFMpeg\FFProbe\DataMapping\StreamCollection')
