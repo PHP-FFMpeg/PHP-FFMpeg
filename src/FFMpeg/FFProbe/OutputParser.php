@@ -28,6 +28,9 @@ class OutputParser implements OutputParserInterface
             case FFProbe::TYPE_STREAMS:
                 return $this->parseStreams($data);
                 break;
+            case FFProbe::TYPE_FRAMES:
+                return $this->parseFrames($data);
+                break;
             default:
                 throw new InvalidArgumentException(sprintf('Unknown data type %s', $type));
         }
@@ -121,5 +124,44 @@ class OutputParser implements OutputParserInterface
         }
 
         return array('streams' => $ret);
+    }
+
+    private function parseFrames($data)
+    {
+        $ret = array();
+        $n = -1;
+
+        foreach (explode(PHP_EOL, $data) as $line) {
+
+            if ($line == '[FRAME]') {
+                $n ++;
+                $ret[$n] = array();
+                continue;
+            }
+            if ($line == '[/FRAME]') {
+                continue;
+            }
+
+            $chunks = explode('=', $line);
+            $key = array_shift($chunks);
+
+            if ('' === trim($key)) {
+                continue;
+            }
+
+            $value = trim(implode('=', $chunks));
+
+            if ('N/A' === $value) {
+                continue;
+            }
+
+            if (in_array($key, array('stream_index', 'key_frame', 'pkt_pts', 'pkt_dts', 'best_effort_timestamp', 'pkt_duration', 'pkt_pos', 'pkt_size', 'nb_samples', 'channels', 'width', 'height', 'coded_picture_number', 'display_picture_number', 'interlaced_frame', 'top_field_first', 'repeat_pict'))) {
+                $value = (int) $value;
+            }
+
+            $ret[$n][$key] = $value;
+        }
+
+        return array('frames' => $ret);
     }
 }

@@ -34,6 +34,19 @@ class StreamCollection implements \Countable, \IteratorAggregate
     }
 
     /**
+     * Returns the last stream of the collection, null if the collection is
+     * empty.
+     *
+     * @return null|Stream
+     */
+    public function last()
+    {
+        $stream = end($this->streams);
+
+        return $stream ?: null;
+    }
+
+    /**
      * Adds a stream to the collection.
      *
      * @param Stream $stream
