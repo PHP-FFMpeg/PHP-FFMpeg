@@ -94,7 +94,14 @@ class FFMpeg
             throw new RuntimeException(sprintf('Unable to probe "%s".', $pathfile));
         }
 
-        if (0 < count($streams->videos())) {
+        $hasVideo = false;
+        foreach ($streams->videos() as $videoStream) {
+            $videoDisposition = $videoStream->get('disposition');
+            if ($videoDisposition['attached_pic'] !== 1) {
+                $hasVideo = true;
+            }
+        }
+        if ($hasVideo) {
             return new Video($pathfile, $this->driver, $this->ffprobe);
         } elseif (0 < count($streams->audios())) {
             return new Audio($pathfile, $this->driver, $this->ffprobe);
