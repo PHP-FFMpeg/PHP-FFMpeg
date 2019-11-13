@@ -1,0 +1,99 @@
+{
+    "name": "FFMpeg\\Driver\\FFMpegDriver",
+    "line": 21,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Driver",
+    "file": "src\/FFMpeg\/Driver\/FFMpegDriver.php",
+    "hash": "fb805d21f4503c064945d813c9cec8fdc195ed3d",
+    "parent": "Alchemy\\BinaryDriver\\AbstractBinary",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "AbstractBinary": "Alchemy\\BinaryDriver\\AbstractBinary",
+        "Configuration": "Alchemy\\BinaryDriver\\Configuration",
+        "ConfigurationInterface": "Alchemy\\BinaryDriver\\ConfigurationInterface",
+        "BinaryDriverExecutableNotFound": "Alchemy\\BinaryDriver\\Exception\\ExecutableNotFoundException",
+        "ExecutableNotFoundException": "FFMpeg\\Exception\\ExecutableNotFoundException",
+        "LoggerInterface": "Psr\\Log\\LoggerInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "getName": {
+            "name": "getName",
+            "line": 26,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "create": {
+            "name": "create",
+            "line": 39,
+            "short_desc": "Creates an FFMpegDriver.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Driver\\FFMpegDriver",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "logger": {
+                    "name": "logger",
+                    "line": 39,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Psr\\Log\\LoggerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "LoggerInterface",
+                    "default": "null",
+                    "is_by_ref": false
+                },
+                "configuration": {
+                    "name": "configuration",
+                    "line": 39,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "Alchemy\\BinaryDriver\\Configuration",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "array()",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

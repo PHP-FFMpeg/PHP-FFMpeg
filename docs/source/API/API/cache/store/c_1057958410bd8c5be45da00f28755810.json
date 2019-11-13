@@ -1,0 +1,211 @@
+{
+    "name": "FFMpeg\\Filters\\Audio\\AudioClipFilter",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Audio",
+    "file": "src\/FFMpeg\/Filters\/Audio\/AudioClipFilter.php",
+    "hash": "b222ce04f6429021ee258f8e452019bbef9f4407",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "TimeCode": "FFMpeg\\Coordinate\\TimeCode",
+        "AudioInterface": "FFMpeg\\Format\\AudioInterface",
+        "Audio": "FFMpeg\\Media\\Audio"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Audio\\AudioFilterInterface": "FFMpeg\\Filters\\Audio\\AudioFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 36,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "start": {
+                    "name": "start",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": "null",
+                    "is_by_ref": false
+                },
+                "priority": {
+                    "name": "priority",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 45,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "inheritDoc": [
+                    [
+                        ""
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getStart": {
+            "name": "getStart",
+            "line": 54,
+            "short_desc": "Returns the start position the audio is being cutted",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\TimeCode",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getDuration": {
+            "name": "getDuration",
+            "line": 63,
+            "short_desc": "Returns how long the audio is being cutted.",
+            "long_desc": "Returns null when the duration is infinite,",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\TimeCode",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 70,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": {
+                "inheritDoc": [
+                    [
+                        ""
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "audio": {
+                    "name": "audio",
+                    "line": 70,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Audio",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Audio",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 70,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\AudioInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "AudioInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

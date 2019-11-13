@@ -1,0 +1,262 @@
+{
+    "name": "FFMpeg\\Media\\Frame",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/Frame.php",
+    "hash": "f2ff4b4bd35b7c45abf44c376cbe7a7c42b32305",
+    "parent": "FFMpeg\\Media\\AbstractMediaType",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ExecutionFailureException": "Alchemy\\BinaryDriver\\Exception\\ExecutionFailureException",
+        "FrameFilterInterface": "FFMpeg\\Filters\\Frame\\FrameFilterInterface",
+        "FrameFilters": "FFMpeg\\Filters\\Frame\\FrameFilters",
+        "FFMpegDriver": "FFMpeg\\Driver\\FFMpegDriver",
+        "FFProbe": "FFMpeg\\FFProbe",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "TimeCode": "FFMpeg\\Coordinate\\TimeCode"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 29,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "video": {
+                    "name": "video",
+                    "line": 29,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "driver": {
+                    "name": "driver",
+                    "line": 29,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFMpegDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFMpegDriver",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 29,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "timecode": {
+                    "name": "timecode",
+                    "line": 29,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getVideo": {
+            "name": "getVideo",
+            "line": 41,
+            "short_desc": "Returns the video related to the frame.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Video",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "filters": {
+            "name": "filters",
+            "line": 51,
+            "short_desc": "Returns the available filters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Frame\\FrameFilters",
+                    false
+                ]
+            ],
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addFilter": {
+            "name": "addFilter",
+            "line": 61,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Frame",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "line": 61,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Filters\\Frame\\FrameFilterInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FrameFilterInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getTimeCode": {
+            "name": "getTimeCode",
+            "line": 71,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\TimeCode",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "save": {
+            "name": "save",
+            "line": 88,
+            "short_desc": "Saves the frame in the given filename.",
+            "long_desc": "Uses the `unaccurate method by default.`",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Frame",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [
+                "\"3\" @param tags are expected but only \"2\" found"
+            ],
+            "parameters": {
+                "pathfile": {
+                    "name": "pathfile",
+                    "line": 88,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "accurate": {
+                    "name": "accurate",
+                    "line": 88,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "false",
+                    "is_by_ref": false
+                },
+                "returnBase64": {
+                    "name": "returnBase64",
+                    "line": 88,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "false",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

@@ -1,0 +1,103 @@
+{
+    "name": "FFMpeg\\Filters\\Frame\\DisplayRatioFixerFilter",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Frame",
+    "file": "src\/FFMpeg\/Filters\/Frame\/DisplayRatioFixerFilter.php",
+    "hash": "74767da6b7007dcc49c29c8e2b6f2e9975096a78",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "Frame": "FFMpeg\\Media\\Frame"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Frame\\FrameFilterInterface": "FFMpeg\\Filters\\Frame\\FrameFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "priority": {
+                    "name": "priority",
+                    "line": 22,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 30,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 38,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "frame": {
+                    "name": "frame",
+                    "line": 38,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Frame",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Frame",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

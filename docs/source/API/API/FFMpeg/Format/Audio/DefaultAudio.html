@@ -108,7 +108,7 @@
                     array
                 </td>
                 <td class="last">
-                    <a href="#method_createProgressListener">createProgressListener</a>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total)
+                    <a href="#method_createProgressListener">createProgressListener</a>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total, Integer $duration)
                     <p>Creates the progress listener.</p>
                 </td>
                 <td></td>
@@ -346,7 +346,7 @@
                 <h3 id="method_createProgressListener">
         <div class="location">at line 124</div>
         <code>            public            array
-    <strong>createProgressListener</strong>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total)</code>
+    <strong>createProgressListener</strong>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total, Integer $duration)</code>
     </h3>
     <div class="details">
         <p>Creates the progress listener.</p>
@@ -377,6 +377,11 @@
                 <td>Integer</td>
                 <td>$total</td>
                 <td>The total pass number</td>
+            </tr>
+                    <tr>
+                <td>Integer</td>
+                <td>$duration</td>
+                <td>The new video duration</td>
             </tr>
             </table>
 

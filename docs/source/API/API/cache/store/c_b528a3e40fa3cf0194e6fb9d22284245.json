@@ -1,0 +1,216 @@
+{
+    "name": "FFMpeg\\Filters\\Audio\\AudioFilters",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Audio",
+    "file": "src\/FFMpeg\/Filters\/Audio\/AudioFilters.php",
+    "hash": "acaf20a5e1c9e9dfcb121fde26b9373950b6d6e5",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "AddMetadataFilter": "FFMpeg\\Filters\\Audio\\AddMetadataFilter",
+        "Audio": "FFMpeg\\Media\\Audio",
+        "TimeCode": "FFMpeg\\Coordinate\\TimeCode"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "media": {
+                    "name": "media",
+                    "line": 22,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Audio",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Audio",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "resample": {
+            "name": "resample",
+            "line": 34,
+            "short_desc": "Resamples the audio file.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Audio\\AudioFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "rate": {
+                    "name": "rate",
+                    "line": 34,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "addMetadata": {
+            "name": "addMetadata",
+            "line": 55,
+            "short_desc": "Add metadata to an audio file.",
+            "long_desc": "If no arguments are given then filter\nwill remove all metadata from the audio file",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "data": {
+                    "name": "data",
+                    "line": 55,
+                    "short_desc": "If array must contain one of these key\/value pairs: - \"title\": Title metadata - \"artist\": Artist metadata - \"composer\": Composer metadata - \"album\": Album metadata - \"track\": Track metadata - \"artwork\": Song artwork. String of file path - \"year\": Year metadata - \"genre\": Genre metadata - \"description\": Description metadata",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Array",
+                            false
+                        ],
+                        [
+                            "Null",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "clip": {
+            "name": "clip",
+            "line": 69,
+            "short_desc": "Cuts the audio at `$start`, optionally define the end",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Audio\\AudioFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "start": {
+                    "name": "start",
+                    "line": 69,
+                    "short_desc": "Where the clipping starts(seek to time)",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 69,
+                    "short_desc": "How long the clipped audio should be",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "custom": {
+            "name": "custom",
+            "line": 82,
+            "short_desc": "Applies a custom filter",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Audio\\AudioFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "parameters": {
+                    "name": "parameters",
+                    "line": 82,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

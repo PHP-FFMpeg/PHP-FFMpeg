@@ -1,0 +1,246 @@
+{
+    "name": "FFMpeg\\Filters\\Video\\ResizeFilter",
+    "line": 19,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Video",
+    "file": "src\/FFMpeg\/Filters\/Video\/ResizeFilter.php",
+    "hash": "0cb782de92a8b211838b66a1194ca043168c9092",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Dimension": "FFMpeg\\Coordinate\\Dimension",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "Video": "FFMpeg\\Media\\Video",
+        "VideoInterface": "FFMpeg\\Format\\VideoInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Video\\VideoFilterInterface": "FFMpeg\\Filters\\Video\\VideoFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 39,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "dimension": {
+                    "name": "dimension",
+                    "line": 39,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\Dimension",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Dimension",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "mode": {
+                    "name": "mode",
+                    "line": 39,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "self::RESIZEMODE_FIT",
+                    "is_by_ref": false
+                },
+                "forceStandards": {
+                    "name": "forceStandards",
+                    "line": 39,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "true",
+                    "is_by_ref": false
+                },
+                "priority": {
+                    "name": "priority",
+                    "line": 39,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 50,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getDimension": {
+            "name": "getDimension",
+            "line": 58,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\Dimension",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getMode": {
+            "name": "getMode",
+            "line": 66,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "areStandardsForced": {
+            "name": "areStandardsForced",
+            "line": 74,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 82,
+            "short_desc": "Applies the filter on the the Video media given an format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "video": {
+                    "name": "video",
+                    "line": 82,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 82,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\VideoInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "VideoInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "RESIZEMODE_FIT": {
+            "name": "RESIZEMODE_FIT",
+            "line": 22,
+            "short_desc": "fits to the dimensions, might introduce anamorphosis",
+            "long_desc": ""
+        },
+        "RESIZEMODE_INSET": {
+            "name": "RESIZEMODE_INSET",
+            "line": 24,
+            "short_desc": "resizes the video inside the given dimension, no anamorphosis",
+            "long_desc": ""
+        },
+        "RESIZEMODE_SCALE_WIDTH": {
+            "name": "RESIZEMODE_SCALE_WIDTH",
+            "line": 26,
+            "short_desc": "resizes the video to fit the dimension width, no anamorphosis",
+            "long_desc": ""
+        },
+        "RESIZEMODE_SCALE_HEIGHT": {
+            "name": "RESIZEMODE_SCALE_HEIGHT",
+            "line": 28,
+            "short_desc": "resizes the video to fit the dimension height, no anamorphosis",
+            "long_desc": ""
+        }
+    }
+}

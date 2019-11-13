@@ -1,0 +1,140 @@
+{
+    "name": "FFMpeg\\Filters\\Audio\\SimpleFilter",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Audio",
+    "file": "src\/FFMpeg\/Filters\/Audio\/SimpleFilter.php",
+    "hash": "fc684370c57627d2e537742c15e21c734a3665b1",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Audio": "FFMpeg\\Media\\Audio",
+        "AudioInterface": "FFMpeg\\Format\\AudioInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Audio\\AudioFilterInterface": "FFMpeg\\Filters\\Audio\\AudioFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 22,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "priority": {
+                    "name": "priority",
+                    "line": 22,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 31,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 39,
+            "short_desc": "Applies the filter on the the Audio media given an format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "audio": {
+                    "name": "audio",
+                    "line": 39,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Audio",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Audio",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 39,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\AudioInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "AudioInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

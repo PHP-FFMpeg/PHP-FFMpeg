@@ -1,0 +1,226 @@
+{
+    "name": "FFMpeg\\Format\\Video\\X264",
+    "line": 17,
+    "short_desc": "The X264 video format",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format\\Video",
+    "file": "src\/FFMpeg\/Format\/Video\/X264.php",
+    "hash": "7bf50d8c8a02026807835d723e97e80c932e4202",
+    "parent": "FFMpeg\\Format\\Video\\DefaultVideo",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 25,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "audioCodec": {
+                    "name": "audioCodec",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "'libfaac'",
+                    "is_by_ref": false
+                },
+                "videoCodec": {
+                    "name": "videoCodec",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "'libx264'",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "supportBFrames": {
+            "name": "supportBFrames",
+            "line": 35,
+            "short_desc": "Returns true if the current format supports B-Frames.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setBFramesSupport": {
+            "name": "setBFramesSupport",
+            "line": 45,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Format\\Video\\X264",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "support": {
+                    "name": "support",
+                    "line": 45,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\Video\\$support",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getAvailableAudioCodecs": {
+            "name": "getAvailableAudioCodecs",
+            "line": 55,
+            "short_desc": "Returns the list of available audio codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAvailableVideoCodecs": {
+            "name": "getAvailableVideoCodecs",
+            "line": 63,
+            "short_desc": "Returns the list of available video codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setPasses": {
+            "name": "setPasses",
+            "line": 73,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Format\\Video\\X264",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "passes": {
+                    "name": "passes",
+                    "line": 73,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\Video\\$passes",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPasses": {
+            "name": "getPasses",
+            "line": 82,
+            "short_desc": "Returns the number of passes.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getModulus": {
+            "name": "getModulus",
+            "line": 90,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

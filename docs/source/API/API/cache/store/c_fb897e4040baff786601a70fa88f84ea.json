@@ -1,0 +1,112 @@
+{
+    "name": "FFMpeg\\FFProbe\\OptionsTester",
+    "line": 19,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\FFProbe",
+    "file": "src\/FFMpeg\/FFProbe\/OptionsTester.php",
+    "hash": "459fe1fa6c1ce5458e83a5d62b3f138a570c59ec",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ExecutionFailureException": "Alchemy\\BinaryDriver\\Exception\\ExecutionFailureException",
+        "Cache": "Doctrine\\Common\\Cache\\Cache",
+        "FFProbeDriver": "FFMpeg\\Driver\\FFProbeDriver",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\FFProbe\\OptionsTesterInterface": "FFMpeg\\FFProbe\\OptionsTesterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 26,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 26,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFProbeDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbeDriver",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "cache": {
+                    "name": "cache",
+                    "line": 26,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Doctrine\\Common\\Cache\\Cache",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Cache",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "has": {
+            "name": "has",
+            "line": 35,
+            "short_desc": "Tells if the given option is supported by ffprobe.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "name": {
+                    "name": "name",
+                    "line": 35,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

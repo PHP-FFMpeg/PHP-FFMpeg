@@ -1,0 +1,60 @@
+{
+    "name": "FFMpeg\\FFProbe\\DataMapping\\Frame",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\FFProbe\\DataMapping",
+    "file": "src\/FFMpeg\/FFProbe\/DataMapping\/Frame.php",
+    "hash": "cf0540f170f61210e469dc1209533ce9885d5d87",
+    "parent": "FFMpeg\\FFProbe\\DataMapping\\AbstractData",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "isAudio": {
+            "name": "isAudio",
+            "line": 21,
+            "short_desc": "Returns true if the stream is an audio stream.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "isVideo": {
+            "name": "isVideo",
+            "line": 31,
+            "short_desc": "Returns true if the stream is a video stream.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

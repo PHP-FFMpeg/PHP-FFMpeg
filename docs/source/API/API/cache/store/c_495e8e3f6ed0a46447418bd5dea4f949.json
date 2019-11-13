@@ -1,0 +1,196 @@
+{
+    "name": "FFMpeg\\Filters\\Video\\FrameRateFilter",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Video",
+    "file": "src\/FFMpeg\/Filters\/Video\/FrameRateFilter.php",
+    "hash": "282f7baefa142ce9c88ab84be8c5c8547a1fa125",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "FrameRate": "FFMpeg\\Coordinate\\FrameRate",
+        "Video": "FFMpeg\\Media\\Video",
+        "VideoInterface": "FFMpeg\\Format\\VideoInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Video\\VideoFilterInterface": "FFMpeg\\Filters\\Video\\VideoFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "rate": {
+                    "name": "rate",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\FrameRate",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FrameRate",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "gop": {
+                    "name": "gop",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "priority": {
+                    "name": "priority",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 34,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getFrameRate": {
+            "name": "getFrameRate",
+            "line": 44,
+            "short_desc": "Returns the frame rate.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\FrameRate",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getGOP": {
+            "name": "getGOP",
+            "line": 56,
+            "short_desc": "Returns the GOP size.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "see": [
+                    [
+                        "https:\/\/wikipedia.org\/wiki\/Group_of_pictures"
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 64,
+            "short_desc": "Applies the filter on the the Video media given an format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "video": {
+                    "name": "video",
+                    "line": 64,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 64,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\VideoInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "VideoInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

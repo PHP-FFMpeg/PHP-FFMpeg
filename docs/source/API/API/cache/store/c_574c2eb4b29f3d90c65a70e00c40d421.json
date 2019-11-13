@@ -1,0 +1,336 @@
+{
+    "name": "FFMpeg\\Format\\Audio\\DefaultAudio",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format\\Audio",
+    "file": "src\/FFMpeg\/Format\/Audio\/DefaultAudio.php",
+    "hash": "70fd6eba95a8b4a3cfdf53388b499a25398780c6",
+    "parent": "Evenement\\EventEmitter",
+    "modifiers": 16,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "EventEmitter": "Evenement\\EventEmitter",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException",
+        "AudioInterface": "FFMpeg\\Format\\AudioInterface",
+        "MediaTypeInterface": "FFMpeg\\Media\\MediaTypeInterface",
+        "ProgressableInterface": "FFMpeg\\Format\\ProgressableInterface",
+        "AudioProgressListener": "FFMpeg\\Format\\ProgressListener\\AudioProgressListener",
+        "FFProbe": "FFMpeg\\FFProbe"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Format\\AudioInterface": "FFMpeg\\Format\\AudioInterface",
+        "FFMpeg\\Format\\ProgressableInterface": "FFMpeg\\Format\\ProgressableInterface"
+    },
+    "properties": [],
+    "methods": {
+        "getExtraParams": {
+            "name": "getExtraParams",
+            "line": 36,
+            "short_desc": "Returns an array of extra parameters to add to ffmpeg commandline.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Format\\array()",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAudioCodec": {
+            "name": "getAudioCodec",
+            "line": 44,
+            "short_desc": "Returns the audio codec.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setAudioCodec": {
+            "name": "setAudioCodec",
+            "line": 57,
+            "short_desc": "Sets the audio codec, Should be in the available ones, otherwise an exception is thrown.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "audioCodec": {
+                    "name": "audioCodec",
+                    "line": 57,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getAudioKiloBitrate": {
+            "name": "getAudioKiloBitrate",
+            "line": 74,
+            "short_desc": "Gets the audio kiloBitrate value.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setAudioKiloBitrate": {
+            "name": "setAudioKiloBitrate",
+            "line": 85,
+            "short_desc": "Sets the kiloBitrate value.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "kiloBitrate": {
+                    "name": "kiloBitrate",
+                    "line": 85,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getAudioChannels": {
+            "name": "getAudioChannels",
+            "line": 99,
+            "short_desc": "Gets the audio channels value.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setAudioChannels": {
+            "name": "setAudioChannels",
+            "line": 110,
+            "short_desc": "Sets the channels value.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "channels": {
+                    "name": "channels",
+                    "line": 110,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "createProgressListener": {
+            "name": "createProgressListener",
+            "line": 124,
+            "short_desc": "Creates the progress listener.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of listeners",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "media": {
+                    "name": "media",
+                    "line": 124,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\MediaTypeInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "MediaTypeInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 124,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "pass": {
+                    "name": "pass",
+                    "line": 124,
+                    "short_desc": "The current pas snumber",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "total": {
+                    "name": "total",
+                    "line": 124,
+                    "short_desc": "The total pass number",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 124,
+                    "short_desc": "The new video duration",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPasses": {
+            "name": "getPasses",
+            "line": 138,
+            "short_desc": "Returns the number of passes.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

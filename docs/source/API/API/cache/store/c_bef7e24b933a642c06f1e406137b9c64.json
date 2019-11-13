@@ -1,0 +1,124 @@
+{
+    "name": "FFMpeg\\Filters\\Video\\SynchronizeFilter",
+    "line": 20,
+    "short_desc": "Synchronizes audio and video in case of desynchronized movies.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Video",
+    "file": "src\/FFMpeg\/Filters\/Video\/SynchronizeFilter.php",
+    "hash": "e614f7a1594f0d11a715ca046bd9e00099019381",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "VideoInterface": "FFMpeg\\Format\\VideoInterface",
+        "Video": "FFMpeg\\Media\\Video"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Video\\VideoFilterInterface": "FFMpeg\\Filters\\Video\\VideoFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "priority": {
+                    "name": "priority",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "12",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 32,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 40,
+            "short_desc": "Applies the filter on the the Video media given an format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "video": {
+                    "name": "video",
+                    "line": 40,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 40,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\VideoInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "VideoInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

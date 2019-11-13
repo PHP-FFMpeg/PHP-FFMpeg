@@ -1,0 +1,44 @@
+{
+    "name": "FFMpeg\\Format\\ProgressListener\\VideoProgressListener",
+    "line": 23,
+    "short_desc": "Parses ffmpeg stderr progress information for video files.",
+    "long_desc": "An example:\n\n<pre>\n      frame=  171 fps=0.0 q=10.0 size=      18kB time=00:00:05.72 bitrate=  26.4kbits\/s dup=8 drop=0\n<\/pre>",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Robert",
+                "Gruendler",
+                "<r.gruendler@gmail.com>"
+            ]
+        ]
+    },
+    "namespace": "FFMpeg\\Format\\ProgressListener",
+    "file": "src\/FFMpeg\/Format\/ProgressListener\/VideoProgressListener.php",
+    "hash": "3dac687cec1e8c003ff7e5ad1f36868a0548b7ae",
+    "parent": "FFMpeg\\Format\\ProgressListener\\AbstractProgressListener",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "getPattern": {
+            "name": "getPattern",
+            "line": 25,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

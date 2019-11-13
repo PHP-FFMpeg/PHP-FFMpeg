@@ -38,7 +38,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, string $pathfile, integer $currentPass, integer $totalPass)
+                    <a href="#method___construct">__construct</a>(<a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, $pathfile, $currentPass, $totalPass, $duration)
                     <p>
 </p>
                 </td>
@@ -90,6 +90,17 @@
             </tr>
                     <tr>
                 <td class="type">
+                    int
+                </td>
+                <td class="last">
+                    <a href="#method_getCurrentTime">getCurrentTime</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     
                 </td>
                 <td class="last">
@@ -116,7 +127,7 @@
                         <h3 id="method___construct">
         <div class="location">at line 83</div>
         <code>            public            
-    <strong>__construct</strong>(<a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, string $pathfile, integer $currentPass, integer $totalPass)</code>
+    <strong>__construct</strong>(<a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, $pathfile, $currentPass, $totalPass, $duration)</code>
     </h3>
     <div class="details">
         <p>
@@ -134,20 +145,28 @@
 </td>
             </tr>
                     <tr>
-                <td>string</td>
+                <td></td>
                 <td>$pathfile</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td>integer</td>
+                <td></td>
                 <td>$currentPass</td>
-                <td>The cureent pass number</td>
+                <td>
+</td>
             </tr>
                     <tr>
-                <td>integer</td>
+                <td></td>
                 <td>$totalPass</td>
-                <td>The total number of passes</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$duration</td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -168,7 +187,7 @@
     </div>
 
                 <h3 id="method_getFFProbe">
-        <div class="location">at line 94</div>
+        <div class="location">at line 95</div>
         <code>            public            <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
     <strong>getFFProbe</strong>()</code>
     </h3>
@@ -195,7 +214,7 @@
     </div>
 
                 <h3 id="method_getPathfile">
-        <div class="location">at line 102</div>
+        <div class="location">at line 103</div>
         <code>            public            string
     <strong>getPathfile</strong>()</code>
     </h3>
@@ -222,7 +241,7 @@
     </div>
 
                 <h3 id="method_getCurrentPass">
-        <div class="location">at line 110</div>
+        <div class="location">at line 111</div>
         <code>            public            integer
     <strong>getCurrentPass</strong>()</code>
     </h3>
@@ -249,7 +268,7 @@
     </div>
 
                 <h3 id="method_getTotalPass">
-        <div class="location">at line 118</div>
+        <div class="location">at line 119</div>
         <code>            public            integer
     <strong>getTotalPass</strong>()</code>
     </h3>
@@ -275,8 +294,35 @@
                     </div>
     </div>
 
+                <h3 id="method_getCurrentTime">
+        <div class="location">at line 127</div>
+        <code>            public            int
+    <strong>getCurrentTime</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_handle">
-        <div class="location">at line 126</div>
+        <div class="location">at line 135</div>
         <code>            public            
     <strong>handle</strong>($type, $data)</code>
     </h3>
@@ -309,7 +355,7 @@
     </div>
 
                 <h3 id="method_forwardedEvents">
-        <div class="location">at line 136</div>
+        <div class="location">at line 145</div>
         <code>            public            
     <strong>forwardedEvents</strong>()</code>
     </h3>

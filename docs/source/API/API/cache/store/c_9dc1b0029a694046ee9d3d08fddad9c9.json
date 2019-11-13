@@ -1,0 +1,154 @@
+{
+    "name": "FFMpeg\\Filters\\Audio\\AudioResamplableFilter",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Audio",
+    "file": "src\/FFMpeg\/Filters\/Audio\/AudioResamplableFilter.php",
+    "hash": "a9b6f5143248acc9e76f65a86a01f463fa8ad9e2",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "AudioInterface": "FFMpeg\\Format\\AudioInterface",
+        "Audio": "FFMpeg\\Media\\Audio"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Audio\\AudioFilterInterface": "FFMpeg\\Filters\\Audio\\AudioFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "rate": {
+                    "name": "rate",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "priority": {
+                    "name": "priority",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 33,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getRate": {
+            "name": "getRate",
+            "line": 42,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 50,
+            "short_desc": "Applies the filter on the the Audio media given an format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "audio": {
+                    "name": "audio",
+                    "line": 50,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Audio",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Audio",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 50,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\AudioInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "AudioInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

@@ -1,0 +1,306 @@
+{
+    "name": "FFMpeg\\Media\\Audio",
+    "line": 24,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/Audio.php",
+    "hash": "e8c798474ce8aa640bae6a12d6f0cbe412e1f4dc",
+    "parent": "FFMpeg\\Media\\AbstractStreamableMedia",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ExecutionFailureException": "Alchemy\\BinaryDriver\\Exception\\ExecutionFailureException",
+        "AudioFilters": "FFMpeg\\Filters\\Audio\\AudioFilters",
+        "FormatInterface": "FFMpeg\\Format\\FormatInterface",
+        "SimpleFilter": "FFMpeg\\Filters\\Audio\\SimpleFilter",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException",
+        "AudioFilterInterface": "FFMpeg\\Filters\\Audio\\AudioFilterInterface",
+        "FilterInterface": "FFMpeg\\Filters\\FilterInterface",
+        "ProgressableInterface": "FFMpeg\\Format\\ProgressableInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "filters": {
+            "name": "filters",
+            "line": 31,
+            "short_desc": "Returns the available filters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Audio\\AudioFilters",
+                    false
+                ]
+            ],
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addFilter": {
+            "name": "addFilter",
+            "line": 41,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Audio",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "line": 41,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Filters\\FilterInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FilterInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "save": {
+            "name": "save",
+            "line": 60,
+            "short_desc": "Exports the audio in the desired format, applies registered filters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Audio",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "format": {
+                    "name": "format",
+                    "line": 60,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\FormatInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FormatInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "outputPathfile": {
+                    "name": "outputPathfile",
+                    "line": 60,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFinalCommand": {
+            "name": "getFinalCommand",
+            "line": 88,
+            "short_desc": "Returns the final command as a string, useful for debugging purposes.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "since": [
+                    [
+                        "0.11.0"
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "format": {
+                    "name": "format",
+                    "line": 88,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\FormatInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FormatInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "outputPathfile": {
+                    "name": "outputPathfile",
+                    "line": 88,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "waveform": {
+            "name": "waveform",
+            "line": 138,
+            "short_desc": "Gets the waveform of the video.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Waveform",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "width": {
+                    "name": "width",
+                    "line": 138,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "640",
+                    "is_by_ref": false
+                },
+                "height": {
+                    "name": "height",
+                    "line": 138,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "120",
+                    "is_by_ref": false
+                },
+                "colors": {
+                    "name": "colors",
+                    "line": 138,
+                    "short_desc": "Array of colors for ffmpeg to use. Color format is #000000 (RGB hex string with #)",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "array(Waveform::DEFAULT_COLOR)",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "concat": {
+            "name": "concat",
+            "line": 149,
+            "short_desc": "Concatenates a list of audio files into one unique audio file.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Concat",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "sources": {
+                    "name": "sources",
+                    "line": 149,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

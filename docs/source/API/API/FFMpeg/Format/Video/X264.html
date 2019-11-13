@@ -112,24 +112,14 @@
                     array
                 </td>
                 <td class="last">
-                    <a href="#method_createProgressListener">createProgressListener</a>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total)
+                    <a href="#method_createProgressListener">createProgressListener</a>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total, Integer $duration)
                     <p>Creates the progress listener.</p>
                 </td>
                 <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_createProgressListener"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
-                    integer
-                </td>
-                <td class="last">
-                    <a href="#method_setPasses">setPasses</a>(integer $passes)
-                    <p>Sets the number of passes.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    integer
+                    string
                 </td>
                 <td class="last">
                     <a href="#method_getPasses">getPasses</a>()
@@ -190,6 +180,26 @@
             </tr>
                     <tr>
                 <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getAdditionalParameters">getAdditionalParameters</a>()
+                    <p>Returns the list of available video codecs for this format.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_getAdditionalParameters"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setAdditionalParameters">setAdditionalParameters</a>(array $additionalParamaters)
+                    <p>Sets additional parameters.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_setAdditionalParameters"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     
                 </td>
                 <td class="last">
@@ -237,6 +247,17 @@
                 <td class="last">
                     <a href="#method_getAvailableVideoCodecs">getAvailableVideoCodecs</a>()
                     <p>Returns the list of available video codecs for this format.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Format/Video/X264.html"><abbr title="FFMpeg\Format\Video\X264">X264</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setPasses">setPasses</a>(<abbr title="FFMpeg\Format\Video\$passes">$passes</abbr> $passes)
+                    <p>
+</p>
                 </td>
                 <td></td>
             </tr>
@@ -461,9 +482,9 @@
     </div>
 
                 <h3 id="method_createProgressListener">
-        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_createProgressListener"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 100</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_createProgressListener"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 128</div>
         <code>            public            array
-    <strong>createProgressListener</strong>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total)</code>
+    <strong>createProgressListener</strong>(<a href="../../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a> $media, <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, Integer $pass, Integer $total, Integer $duration)</code>
     </h3>
     <div class="details">
         <p>Creates the progress listener.</p>
@@ -495,6 +516,11 @@
                 <td>$total</td>
                 <td>The total pass number</td>
             </tr>
+                    <tr>
+                <td>Integer</td>
+                <td>$duration</td>
+                <td>The new video duration</td>
+            </tr>
             </table>
 
             
@@ -512,34 +538,9 @@
                     </div>
     </div>
 
-                <h3 id="method_setPasses">
-        <div class="location">in <a href="../../../FFMpeg/Format/Video/X264.html#method_setPasses"><abbr title="FFMpeg\Format\Video\X264">X264</abbr></a> at line 68</div>
-        <code>            public            integer
-    <strong>setPasses</strong>(integer $passes)</code>
-    </h3>
-    <div class="details">
-        <p>Sets the number of passes.</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Parameters</h4>
-
-                    <table>
-        <tr>
-            <td>integer</td>
-            <td>$passes</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
                 <h3 id="method_getPasses">
-        <div class="location">in <a href="../../../FFMpeg/Format/Video/X264.html#method_getPasses"><abbr title="FFMpeg\Format\Video\X264">X264</abbr></a> at line 79</div>
-        <code>            public            integer
+        <div class="location">at line 82</div>
+        <code>            public            string
     <strong>getPasses</strong>()</code>
     </h3>
     <div class="details">
@@ -552,7 +553,7 @@
 
                     <table>
         <tr>
-            <td>integer</td>
+            <td>string</td>
             <td>
 </td>
         </tr>
@@ -564,7 +565,7 @@
     </div>
 
                 <h3 id="method_getKiloBitrate">
-        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_getKiloBitrate"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 38</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_getKiloBitrate"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 41</div>
         <code>            public            integer
     <strong>getKiloBitrate</strong>()</code>
     </h3>
@@ -590,7 +591,7 @@
     </div>
 
                 <h3 id="method_setKiloBitrate">
-        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_setKiloBitrate"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 49</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_setKiloBitrate"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 52</div>
         <code>            public            
     <strong>setKiloBitrate</strong>(integer $kiloBitrate)</code>
     </h3>
@@ -627,7 +628,7 @@
     </div>
 
                 <h3 id="method_getVideoCodec">
-        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_getVideoCodec"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 63</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_getVideoCodec"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 66</div>
         <code>            public            string
     <strong>getVideoCodec</strong>()</code>
     </h3>
@@ -653,7 +654,7 @@
     </div>
 
                 <h3 id="method_setVideoCodec">
-        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_setVideoCodec"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 75</div>
+        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_setVideoCodec"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 78</div>
         <code>            public            
     <strong>setVideoCodec</strong>(string $videoCodec)</code>
     </h3>
@@ -690,7 +691,7 @@
     </div>
 
                 <h3 id="method_getModulus">
-        <div class="location">at line 76</div>
+        <div class="location">at line 90</div>
         <code>            public            int
     <strong>getModulus</strong>()</code>
     </h3>
@@ -716,8 +717,71 @@
                     </div>
     </div>
 
+                <h3 id="method_getAdditionalParameters">
+        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_getAdditionalParameters"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 103</div>
+        <code>            public            array
+    <strong>getAdditionalParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the list of available video codecs for this format.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAdditionalParameters">
+        <div class="location">in <a href="../../../FFMpeg/Format/Video/DefaultVideo.html#method_setAdditionalParameters"><abbr title="FFMpeg\Format\Video\DefaultVideo">DefaultVideo</abbr></a> at line 114</div>
+        <code>            public            
+    <strong>setAdditionalParameters</strong>(array $additionalParamaters)</code>
+    </h3>
+    <div class="details">
+        <p>Sets additional parameters.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$additionalParamaters</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
                 <h3 id="method___construct">
-        <div class="location">at line 22</div>
+        <div class="location">at line 25</div>
         <code>            public            
     <strong>__construct</strong>($audioCodec = &#039;libfaac&#039;, $videoCodec = &#039;libx264&#039;)</code>
     </h3>
@@ -751,7 +815,7 @@
     </div>
 
                 <h3 id="method_supportBFrames">
-        <div class="location">at line 32</div>
+        <div class="location">at line 35</div>
         <code>            public            Boolean
     <strong>supportBFrames</strong>()</code>
     </h3>
@@ -777,7 +841,7 @@
     </div>
 
                 <h3 id="method_setBFramesSupport">
-        <div class="location">at line 42</div>
+        <div class="location">at line 45</div>
         <code>            public            <a href="../../../FFMpeg/Format/Video/X264.html"><abbr title="FFMpeg\Format\Video\X264">X264</abbr></a>
     <strong>setBFramesSupport</strong>(<abbr title="FFMpeg\Format\Video\$support">$support</abbr> $support)</code>
     </h3>
@@ -815,7 +879,7 @@
     </div>
 
                 <h3 id="method_getAvailableAudioCodecs">
-        <div class="location">at line 52</div>
+        <div class="location">at line 55</div>
         <code>            public            array
     <strong>getAvailableAudioCodecs</strong>()</code>
     </h3>
@@ -841,7 +905,7 @@
     </div>
 
                 <h3 id="method_getAvailableVideoCodecs">
-        <div class="location">at line 60</div>
+        <div class="location">at line 63</div>
         <code>            public            array
     <strong>getAvailableVideoCodecs</strong>()</code>
     </h3>
@@ -856,6 +920,44 @@
                     <table>
         <tr>
             <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setPasses">
+        <div class="location">at line 73</div>
+        <code>            public            <a href="../../../FFMpeg/Format/Video/X264.html"><abbr title="FFMpeg\Format\Video\X264">X264</abbr></a>
+    <strong>setPasses</strong>(<abbr title="FFMpeg\Format\Video\$passes">$passes</abbr> $passes)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="FFMpeg\Format\Video\$passes">$passes</abbr></td>
+                <td>$passes</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Format/Video/X264.html"><abbr title="FFMpeg\Format\Video\X264">X264</abbr></a></td>
             <td>
 </td>
         </tr>

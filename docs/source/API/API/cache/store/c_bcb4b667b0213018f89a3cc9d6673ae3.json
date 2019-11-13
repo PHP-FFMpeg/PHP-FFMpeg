@@ -1,0 +1,110 @@
+{
+    "name": "FFMpeg\\Filters\\Frame\\FrameFilters",
+    "line": 16,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Frame",
+    "file": "src\/FFMpeg\/Filters\/Frame\/FrameFilters.php",
+    "hash": "fef3c980615b20bc18a96daf997ca3e74bc96870",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Frame": "FFMpeg\\Media\\Frame"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 20,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "frame": {
+                    "name": "frame",
+                    "line": 20,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Frame",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Frame",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "fixDisplayRatio": {
+            "name": "fixDisplayRatio",
+            "line": 33,
+            "short_desc": "Fixes the display ratio of the output frame.",
+            "long_desc": "In case the sample ratio and display ratio are different, image may be\nanamorphozed. This filter fixes this by specifying the output size.",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Frame\\FrameFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "custom": {
+            "name": "custom",
+            "line": 47,
+            "short_desc": "Applies a custom filter: -vf foo bar",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Frame\\FrameFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "parameters": {
+                    "name": "parameters",
+                    "line": 47,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

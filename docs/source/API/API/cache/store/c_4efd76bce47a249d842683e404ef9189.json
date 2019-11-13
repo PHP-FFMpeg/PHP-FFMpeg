@@ -1,0 +1,89 @@
+{
+    "name": "FFMpeg\\Filters\\FiltersCollection",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters",
+    "file": "src\/FFMpeg\/Filters\/FiltersCollection.php",
+    "hash": "0b10c4cd6344f8b24cfff6fddc8fdf0339a69412",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": {
+        "Countable": "Countable",
+        "IteratorAggregate": "IteratorAggregate"
+    },
+    "properties": [],
+    "methods": {
+        "add": {
+            "name": "add",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\FiltersCollection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "line": 24,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Filters\\FilterInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FilterInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "count": {
+            "name": "count",
+            "line": 35,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getIterator": {
+            "name": "getIterator",
+            "line": 47,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

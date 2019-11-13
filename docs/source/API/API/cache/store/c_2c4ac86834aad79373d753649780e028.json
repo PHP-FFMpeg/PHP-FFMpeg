@@ -1,0 +1,135 @@
+{
+    "name": "FFMpeg\\Format\\Video\\WebM",
+    "line": 17,
+    "short_desc": "The WebM video format",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format\\Video",
+    "file": "src\/FFMpeg\/Format\/Video\/WebM.php",
+    "hash": "731998282cbafab27580a757cf001c176bd7adf1",
+    "parent": "FFMpeg\\Format\\Video\\DefaultVideo",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "audioCodec": {
+                    "name": "audioCodec",
+                    "line": 19,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "'libvorbis'",
+                    "is_by_ref": false
+                },
+                "videoCodec": {
+                    "name": "videoCodec",
+                    "line": 19,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "'libvpx'",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "supportBFrames": {
+            "name": "supportBFrames",
+            "line": 29,
+            "short_desc": "Returns true if the current format supports B-Frames.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getExtraParams": {
+            "name": "getExtraParams",
+            "line": 37,
+            "short_desc": "Returns an array of extra parameters to add to ffmpeg commandline.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Format\\array()",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAvailableAudioCodecs": {
+            "name": "getAvailableAudioCodecs",
+            "line": 45,
+            "short_desc": "Returns the list of available audio codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAvailableVideoCodecs": {
+            "name": "getAvailableVideoCodecs",
+            "line": 53,
+            "short_desc": "Returns the list of available video codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

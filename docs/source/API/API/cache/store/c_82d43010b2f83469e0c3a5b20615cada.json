@@ -1,0 +1,80 @@
+{
+    "name": "FFMpeg\\Filters\\Video\\VideoFilterInterface",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Video",
+    "file": "src\/FFMpeg\/Filters\/Video\/VideoFilterInterface.php",
+    "hash": "780680d9a2e5080dac81ea8dca8575afbb1c0618",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "FilterInterface": "FFMpeg\\Filters\\FilterInterface",
+        "VideoInterface": "FFMpeg\\Format\\VideoInterface",
+        "Video": "FFMpeg\\Media\\Video"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\FilterInterface": "FFMpeg\\Filters\\FilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "apply": {
+            "name": "apply",
+            "line": 28,
+            "short_desc": "Applies the filter on the the Video media given an format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "video": {
+                    "name": "video",
+                    "line": 28,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 28,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\VideoInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "VideoInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

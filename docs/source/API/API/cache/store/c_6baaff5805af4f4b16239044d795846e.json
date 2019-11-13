@@ -1,0 +1,315 @@
+{
+    "name": "FFMpeg\\Format\\Video\\DefaultVideo",
+    "line": 24,
+    "short_desc": "The abstract default Video format",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format\\Video",
+    "file": "src\/FFMpeg\/Format\/Video\/DefaultVideo.php",
+    "hash": "356ad96af47f70ef825371aa246aa30fa2db5b12",
+    "parent": "FFMpeg\\Format\\Audio\\DefaultAudio",
+    "modifiers": 16,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "FFProbe": "FFMpeg\\FFProbe",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException",
+        "DefaultAudio": "FFMpeg\\Format\\Audio\\DefaultAudio",
+        "VideoInterface": "FFMpeg\\Format\\VideoInterface",
+        "MediaTypeInterface": "FFMpeg\\Media\\MediaTypeInterface",
+        "VideoProgressListener": "FFMpeg\\Format\\ProgressListener\\VideoProgressListener"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Format\\VideoInterface": "FFMpeg\\Format\\VideoInterface"
+    },
+    "properties": [],
+    "methods": {
+        "getKiloBitrate": {
+            "name": "getKiloBitrate",
+            "line": 41,
+            "short_desc": "Gets the kiloBitrate value.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setKiloBitrate": {
+            "name": "setKiloBitrate",
+            "line": 52,
+            "short_desc": "Sets the kiloBitrate value.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "kiloBitrate": {
+                    "name": "kiloBitrate",
+                    "line": 52,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getVideoCodec": {
+            "name": "getVideoCodec",
+            "line": 66,
+            "short_desc": "Returns the video codec.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setVideoCodec": {
+            "name": "setVideoCodec",
+            "line": 78,
+            "short_desc": "Sets the video codec, Should be in the available ones, otherwise an exception is thrown.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "videoCodec": {
+                    "name": "videoCodec",
+                    "line": 78,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getModulus": {
+            "name": "getModulus",
+            "line": 95,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAdditionalParameters": {
+            "name": "getAdditionalParameters",
+            "line": 103,
+            "short_desc": "Returns the list of available video codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setAdditionalParameters": {
+            "name": "setAdditionalParameters",
+            "line": 114,
+            "short_desc": "Sets additional parameters.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "additionalParamaters": {
+                    "name": "additionalParamaters",
+                    "line": 114,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "createProgressListener": {
+            "name": "createProgressListener",
+            "line": 128,
+            "short_desc": "Creates the progress listener.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of listeners",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "media": {
+                    "name": "media",
+                    "line": 128,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\MediaTypeInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "MediaTypeInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 128,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "pass": {
+                    "name": "pass",
+                    "line": 128,
+                    "short_desc": "The current pas snumber",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "total": {
+                    "name": "total",
+                    "line": 128,
+                    "short_desc": "The total pass number",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 128,
+                    "short_desc": "The new video duration",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

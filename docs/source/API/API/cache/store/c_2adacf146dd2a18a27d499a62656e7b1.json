@@ -1,0 +1,542 @@
+{
+    "name": "FFMpeg\\Filters\\Video\\VideoFilters",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Video",
+    "file": "src\/FFMpeg\/Filters\/Video\/VideoFilters.php",
+    "hash": "c9ed139303602b28163b7407fe2dbef9a22eba92",
+    "parent": "FFMpeg\\Filters\\Audio\\AudioFilters",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Point": "FFMpeg\\Coordinate\\Point",
+        "Video": "FFMpeg\\Media\\Video",
+        "TimeCode": "FFMpeg\\Coordinate\\TimeCode",
+        "Dimension": "FFMpeg\\Coordinate\\Dimension",
+        "FrameRate": "FFMpeg\\Coordinate\\FrameRate",
+        "AudioResamplableFilter": "FFMpeg\\Filters\\Audio\\AudioResamplableFilter",
+        "AudioFilters": "FFMpeg\\Filters\\Audio\\AudioFilters"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "media": {
+                    "name": "media",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "resize": {
+            "name": "resize",
+            "line": 38,
+            "short_desc": "Resizes a video to a given dimension.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\VideoFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "dimension": {
+                    "name": "dimension",
+                    "line": 38,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\Dimension",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Dimension",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "mode": {
+                    "name": "mode",
+                    "line": 38,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "ResizeFilter::RESIZEMODE_FIT",
+                    "is_by_ref": false
+                },
+                "forceStandards": {
+                    "name": "forceStandards",
+                    "line": 38,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Boolean",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "true",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "framerate": {
+            "name": "framerate",
+            "line": 53,
+            "short_desc": "Changes the video framerate.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\VideoFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "framerate": {
+                    "name": "framerate",
+                    "line": 53,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\FrameRate",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FrameRate",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "gop": {
+                    "name": "gop",
+                    "line": 53,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "extractMultipleFrames": {
+            "name": "extractMultipleFrames",
+            "line": 68,
+            "short_desc": "Extract multiple frames from the video",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "frameRate": {
+                    "name": "frameRate",
+                    "line": 68,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC",
+                    "is_by_ref": false
+                },
+                "destinationFolder": {
+                    "name": "destinationFolder",
+                    "line": 68,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "__DIR__",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "synchronize": {
+            "name": "synchronize",
+            "line": 80,
+            "short_desc": "Synchronizes audio and video.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\VideoFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "clip": {
+            "name": "clip",
+            "line": 95,
+            "short_desc": "Clips (cuts) the video.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\VideoFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "start": {
+                    "name": "start",
+                    "line": 95,
+                    "short_desc": "Where the clipping starts(seek to time)",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 95,
+                    "short_desc": "How long the clipped audio should be",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "audioResample": {
+            "name": "audioResample",
+            "line": 109,
+            "short_desc": "Resamples the audio file.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Audio\\AudioFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "rate": {
+                    "name": "rate",
+                    "line": 109,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "pad": {
+            "name": "pad",
+            "line": 123,
+            "short_desc": "Adds padding (black bars) to a video.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\VideoFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "dimension": {
+                    "name": "dimension",
+                    "line": 123,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\Dimension",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Dimension",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "rotate": {
+            "name": "rotate",
+            "line": 130,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "angle": {
+                    "name": "angle",
+                    "line": 130,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "crop": {
+            "name": "crop",
+            "line": 145,
+            "short_desc": "Crops the video",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\VideoFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "point": {
+                    "name": "point",
+                    "line": 145,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\Point",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Point",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "dimension": {
+                    "name": "dimension",
+                    "line": 145,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\Dimension",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Dimension",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "watermark": {
+            "name": "watermark",
+            "line": 158,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "imagePath": {
+                    "name": "imagePath",
+                    "line": 158,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "coordinates": {
+                    "name": "coordinates",
+                    "line": 158,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": "array()",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "custom": {
+            "name": "custom",
+            "line": 172,
+            "short_desc": "Applies a custom filter: -vf foo bar",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\VideoFilters",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "parameters": {
+                    "name": "parameters",
+                    "line": 172,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

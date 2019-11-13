@@ -1,0 +1,58 @@
+{
+    "name": "FFMpeg\\Filters\\Frame\\FrameFilterInterface",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Frame",
+    "file": "src\/FFMpeg\/Filters\/Frame\/FrameFilterInterface.php",
+    "hash": "ca1664998ca7a964f3bde800cf11a1d404ef27c6",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "FilterInterface": "FFMpeg\\Filters\\FilterInterface",
+        "Frame": "FFMpeg\\Media\\Frame"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\FilterInterface": "FFMpeg\\Filters\\FilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "apply": {
+            "name": "apply",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "frame": {
+                    "name": "frame",
+                    "line": 19,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Frame",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Frame",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

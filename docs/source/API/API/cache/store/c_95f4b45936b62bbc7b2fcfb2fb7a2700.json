@@ -1,0 +1,80 @@
+{
+    "name": "FFMpeg\\Filters\\Audio\\AudioFilterInterface",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Audio",
+    "file": "src\/FFMpeg\/Filters\/Audio\/AudioFilterInterface.php",
+    "hash": "8fdf02d335fc63636f0fd9c97030618c59af010f",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "FilterInterface": "FFMpeg\\Filters\\FilterInterface",
+        "AudioInterface": "FFMpeg\\Format\\AudioInterface",
+        "Audio": "FFMpeg\\Media\\Audio"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\FilterInterface": "FFMpeg\\Filters\\FilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "apply": {
+            "name": "apply",
+            "line": 28,
+            "short_desc": "Applies the filter on the the Audio media given an format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "audio": {
+                    "name": "audio",
+                    "line": 28,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Audio",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Audio",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 28,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\AudioInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "AudioInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

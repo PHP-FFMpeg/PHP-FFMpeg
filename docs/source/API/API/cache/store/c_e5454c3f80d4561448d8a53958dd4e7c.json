@@ -1,0 +1,128 @@
+{
+    "name": "FFMpeg\\Filters\\Waveform\\WaveformDownmixFilter",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Waveform",
+    "file": "src\/FFMpeg\/Filters\/Waveform\/WaveformDownmixFilter.php",
+    "hash": "28fd5a7895e716a00cafee426b65918c5805001f",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "Waveform": "FFMpeg\\Media\\Waveform"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Waveform\\WaveformFilterInterface": "FFMpeg\\Filters\\Waveform\\WaveformFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 26,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "downmix": {
+                    "name": "downmix",
+                    "line": 26,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "FALSE",
+                    "is_by_ref": false
+                },
+                "priority": {
+                    "name": "priority",
+                    "line": 26,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getDownmix": {
+            "name": "getDownmix",
+            "line": 35,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 43,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 51,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "waveform": {
+                    "name": "waveform",
+                    "line": 51,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Waveform",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Waveform",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

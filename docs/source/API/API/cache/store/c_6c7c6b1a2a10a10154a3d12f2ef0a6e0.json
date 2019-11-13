@@ -1,0 +1,100 @@
+{
+    "name": "FFMpeg\\Format\\AudioInterface",
+    "line": 13,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format",
+    "file": "src\/FFMpeg\/Format\/AudioInterface.php",
+    "hash": "d3880d55d6d575b2fb5ef18ddc7379b6d00f7d0b",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Format\\FormatInterface": "FFMpeg\\Format\\FormatInterface"
+    },
+    "properties": [],
+    "methods": {
+        "getAudioKiloBitrate": {
+            "name": "getAudioKiloBitrate",
+            "line": 20,
+            "short_desc": "Gets the audio kiloBitrate value.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAudioChannels": {
+            "name": "getAudioChannels",
+            "line": 27,
+            "short_desc": "Gets the audio channels value.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAudioCodec": {
+            "name": "getAudioCodec",
+            "line": 34,
+            "short_desc": "Returns the audio codec.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAvailableAudioCodecs": {
+            "name": "getAvailableAudioCodecs",
+            "line": 41,
+            "short_desc": "Returns the list of available audio codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

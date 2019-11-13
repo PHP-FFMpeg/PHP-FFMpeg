@@ -1,0 +1,79 @@
+{
+    "name": "FFMpeg\\FFProbe\\OutputParserInterface",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\FFProbe",
+    "file": "src\/FFMpeg\/FFProbe\/OutputParserInterface.php",
+    "hash": "9d94ec72720761e297186815aea711860b85c790",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "parse": {
+            "name": "parse",
+            "line": 26,
+            "short_desc": "Parses ffprobe raw output.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    "In case the type is not supported"
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "type": {
+                    "name": "type",
+                    "line": 26,
+                    "short_desc": "One of FFProbe::TYPE_* constant",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "data": {
+                    "name": "data",
+                    "line": 26,
+                    "short_desc": "The data",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

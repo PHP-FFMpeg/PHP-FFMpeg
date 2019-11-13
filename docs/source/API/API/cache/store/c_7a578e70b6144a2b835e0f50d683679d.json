@@ -1,0 +1,128 @@
+{
+    "name": "FFMpeg\\Format\\ProgressableInterface",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format",
+    "file": "src\/FFMpeg\/Format\/ProgressableInterface.php",
+    "hash": "d6293b3ccecb2fa65dad55ba9cc461e3292032d7",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "EventEmitterInterface": "Evenement\\EventEmitterInterface",
+        "FFProbe": "FFMpeg\\FFProbe",
+        "MediaTypeInterface": "FFMpeg\\Media\\MediaTypeInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "Evenement\\EventEmitterInterface": "Evenement\\EventEmitterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "createProgressListener": {
+            "name": "createProgressListener",
+            "line": 31,
+            "short_desc": "Creates the progress listener.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of listeners",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "media": {
+                    "name": "media",
+                    "line": 31,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\MediaTypeInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "MediaTypeInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 31,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "pass": {
+                    "name": "pass",
+                    "line": 31,
+                    "short_desc": "The current pas snumber",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "total": {
+                    "name": "total",
+                    "line": 31,
+                    "short_desc": "The total pass number",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 31,
+                    "short_desc": "The new video duration",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

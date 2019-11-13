@@ -1,0 +1,55 @@
+{
+    "name": "FFMpeg\\Format\\Audio\\Flac",
+    "line": 17,
+    "short_desc": "The Flac audio format",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format\\Audio",
+    "file": "src\/FFMpeg\/Format\/Audio\/Flac.php",
+    "hash": "28a6737f6890dc37ac7bd1e73745e9422aec2334",
+    "parent": "FFMpeg\\Format\\Audio\\DefaultAudio",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAvailableAudioCodecs": {
+            "name": "getAvailableAudioCodecs",
+            "line": 27,
+            "short_desc": "Returns the list of available audio codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

@@ -1,0 +1,739 @@
+{
+    "name": "FFMpeg\\FFProbe",
+    "line": 32,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg",
+    "file": "src\/FFMpeg\/FFProbe.php",
+    "hash": "1238804bbebad1d58250b006da1d8f623ec4c093",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ConfigurationInterface": "Alchemy\\BinaryDriver\\ConfigurationInterface",
+        "ExecutionFailureException": "Alchemy\\BinaryDriver\\Exception\\ExecutionFailureException",
+        "ArrayCache": "Doctrine\\Common\\Cache\\ArrayCache",
+        "Cache": "Doctrine\\Common\\Cache\\Cache",
+        "FFProbeDriver": "FFMpeg\\Driver\\FFProbeDriver",
+        "Format": "FFMpeg\\FFProbe\\DataMapping\\Format",
+        "FrameCollection": "FFMpeg\\FFProbe\\DataMapping\\FrameCollection",
+        "Mapper": "FFMpeg\\FFProbe\\Mapper",
+        "MapperInterface": "FFMpeg\\FFProbe\\MapperInterface",
+        "OptionsTester": "FFMpeg\\FFProbe\\OptionsTester",
+        "OptionsTesterInterface": "FFMpeg\\FFProbe\\OptionsTesterInterface",
+        "OutputParser": "FFMpeg\\FFProbe\\OutputParser",
+        "OutputParserInterface": "FFMpeg\\FFProbe\\OutputParserInterface",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "StreamCollection": "FFMpeg\\FFProbe\\DataMapping\\StreamCollection",
+        "LoggerInterface": "Psr\\Log\\LoggerInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 49,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 49,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFProbeDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbeDriver",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "cache": {
+                    "name": "cache",
+                    "line": 49,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Doctrine\\Common\\Cache\\Cache",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Cache",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getParser": {
+            "name": "getParser",
+            "line": 61,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\OutputParserInterface",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setParser": {
+            "name": "setParser",
+            "line": 71,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "parser": {
+                    "name": "parser",
+                    "line": 71,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe\\OutputParserInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "OutputParserInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFFProbeDriver": {
+            "name": "getFFProbeDriver",
+            "line": 81,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Driver\\FFProbeDriver",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setFFProbeDriver": {
+            "name": "setFFProbeDriver",
+            "line": 91,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 91,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFProbeDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbeDriver",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "setOptionsTester": {
+            "name": "setOptionsTester",
+            "line": 103,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "tester": {
+                    "name": "tester",
+                    "line": 103,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe\\OptionsTesterInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "OptionsTesterInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getOptionsTester": {
+            "name": "getOptionsTester",
+            "line": 113,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\OptionsTesterInterface",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setCache": {
+            "name": "setCache",
+            "line": 123,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "cache": {
+                    "name": "cache",
+                    "line": 123,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Doctrine\\Common\\Cache\\Cache",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Cache",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getCache": {
+            "name": "getCache",
+            "line": 133,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Doctrine\\Common\\Cache\\Cache",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getMapper": {
+            "name": "getMapper",
+            "line": 141,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\MapperInterface",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setMapper": {
+            "name": "setMapper",
+            "line": 151,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "mapper": {
+                    "name": "mapper",
+                    "line": 151,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe\\MapperInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "MapperInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "format": {
+            "name": "format",
+            "line": 171,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\Format",
+                    false
+                ]
+            ],
+            "hint_desc": "A Format object",
+            "tags": {
+                "api\n\n": [
+                    [
+                        "Probes",
+                        "the",
+                        "format",
+                        "of",
+                        "a",
+                        "given",
+                        "file."
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ],
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "pathfile": {
+                    "name": "pathfile",
+                    "line": 171,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "options": {
+                    "name": "options",
+                    "line": 171,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "array()",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "isValid": {
+            "name": "isValid",
+            "line": 186,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "api\n\n": [
+                    [
+                        "Checks",
+                        "wether",
+                        "the",
+                        "given",
+                        "`$pathfile`",
+                        "is",
+                        "considered",
+                        "a",
+                        "valid",
+                        "media",
+                        "file."
+                    ]
+                ],
+                "since": [
+                    [
+                        "0.10.0"
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "pathfile": {
+                    "name": "pathfile",
+                    "line": 186,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "streams": {
+            "name": "streams",
+            "line": 209,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\StreamCollection",
+                    false
+                ]
+            ],
+            "hint_desc": "A collection of streams",
+            "tags": {
+                "api\n\n": [
+                    [
+                        "Probes",
+                        "the",
+                        "streams",
+                        "contained",
+                        "in",
+                        "a",
+                        "given",
+                        "file."
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ],
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "pathfile": {
+                    "name": "pathfile",
+                    "line": 209,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "options": {
+                    "name": "options",
+                    "line": 209,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "array()",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "frames": {
+            "name": "frames",
+            "line": 228,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\FrameCollection",
+                    false
+                ]
+            ],
+            "hint_desc": "A collection of streams",
+            "tags": {
+                "api\n\n": [
+                    [
+                        "Probes",
+                        "the",
+                        "streams",
+                        "contained",
+                        "in",
+                        "a",
+                        "given",
+                        "file."
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ],
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "pathfile": {
+                    "name": "pathfile",
+                    "line": 228,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "options": {
+                    "name": "options",
+                    "line": 228,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "array()",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "create": {
+            "name": "create",
+            "line": 245,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "api\n\n": [
+                    [
+                        "Creates",
+                        "an",
+                        "FFProbe."
+                    ]
+                ]
+            },
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "configuration": {
+                    "name": "configuration",
+                    "line": 245,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "Alchemy\\BinaryDriver\\ConfigurationInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "array()",
+                    "is_by_ref": false
+                },
+                "logger": {
+                    "name": "logger",
+                    "line": 245,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Psr\\Log\\LoggerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "LoggerInterface",
+                    "default": "null",
+                    "is_by_ref": false
+                },
+                "cache": {
+                    "name": "cache",
+                    "line": 245,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Doctrine\\Common\\Cache\\Cache",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Cache",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "TYPE_STREAMS": {
+            "name": "TYPE_STREAMS",
+            "line": 34,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "TYPE_FORMAT": {
+            "name": "TYPE_FORMAT",
+            "line": 35,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "TYPE_FRAMES": {
+            "name": "TYPE_FRAMES",
+            "line": 36,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

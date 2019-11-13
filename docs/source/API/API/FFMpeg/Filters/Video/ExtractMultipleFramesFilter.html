@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>FFMpeg\Filters\Video\ExtractMultipleFramesFilter | PHP-FFMpeg API</title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">PHP-FFMpeg API</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../FFMpeg/Filters/Video.html">FFMpeg\Filters\Video</a>\ExtractMultipleFramesFilter</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>ExtractMultipleFramesFilter</strong>        implements
+        <a href="../../../FFMpeg/Filters/Video/VideoFilterInterface.html"><abbr title="FFMpeg\Filters\Video\VideoFilterInterface">VideoFilterInterface</abbr></a></p>
+
+    
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>FRAMERATE_EVERY_SEC</td>
+                <td class="last">
+                    <p><em>will extract a frame every second</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>FRAMERATE_EVERY_2SEC</td>
+                <td class="last">
+                    <p><em>will extract a frame every 2 seconds</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>FRAMERATE_EVERY_5SEC</td>
+                <td class="last">
+                    <p><em>will extract a frame every 5 seconds</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>FRAMERATE_EVERY_10SEC</td>
+                <td class="last">
+                    <p><em>will extract a frame every 10 seconds</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>FRAMERATE_EVERY_30SEC</td>
+                <td class="last">
+                    <p><em>will extract a frame every 30 seconds</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>FRAMERATE_EVERY_60SEC</td>
+                <td class="last">
+                    <p><em>will extract a frame every minute</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Filters/Video/ExtractMultipleFramesFilter.html"><abbr title="FFMpeg\Filters\Video\ExtractMultipleFramesFilter">ExtractMultipleFramesFilter</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setFrameFileType">setFrameFileType</a>(string $frameFileType)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_getPriority">getPriority</a>()
+                    <p>Returns the priority of the filter.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getFrameRate">getFrameRate</a>()
+                    <p>{@inheritdoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getDestinationFolder">getDestinationFolder</a>()
+                    <p>{@inheritdoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_apply">apply</a>(<a href="../../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a> $video, <a href="../../../FFMpeg/Format/VideoInterface.html"><abbr title="FFMpeg\Format\VideoInterface">VideoInterface</abbr></a> $format)
+                    <p>Applies the filter on the the Video media given an format.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 43</div>
+        <code>            public            
+    <strong>__construct</strong>($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$frameRate</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$destinationFolder</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$priority</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setFrameFileType">
+        <div class="location">at line 61</div>
+        <code>            public            <a href="../../../FFMpeg/Filters/Video/ExtractMultipleFramesFilter.html"><abbr title="FFMpeg\Filters\Video\ExtractMultipleFramesFilter">ExtractMultipleFramesFilter</abbr></a>
+    <strong>setFrameFileType</strong>(string $frameFileType)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$frameFileType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/Video/ExtractMultipleFramesFilter.html"><abbr title="FFMpeg\Filters\Video\ExtractMultipleFramesFilter">ExtractMultipleFramesFilter</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../FFMpeg/Exception/InvalidArgumentException.html"><abbr title="FFMpeg\Exception\InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getPriority">
+        <div class="location">at line 73</div>
+        <code>            public            integer
+    <strong>getPriority</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the priority of the filter.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFrameRate">
+        <div class="location">at line 81</div>
+        <code>            public            
+    <strong>getFrameRate</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritdoc}</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDestinationFolder">
+        <div class="location">at line 89</div>
+        <code>            public            
+    <strong>getDestinationFolder</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritdoc}</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_apply">
+        <div class="location">at line 97</div>
+        <code>            public            array
+    <strong>apply</strong>(<a href="../../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a> $video, <a href="../../../FFMpeg/Format/VideoInterface.html"><abbr title="FFMpeg\Format\VideoInterface">VideoInterface</abbr></a> $format)</code>
+    </h3>
+    <div class="details">
+        <p>Applies the filter on the the Video media given an format.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a></td>
+                <td>$video</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../FFMpeg/Format/VideoInterface.html"><abbr title="FFMpeg\Format\VideoInterface">VideoInterface</abbr></a></td>
+                <td>$format</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>An array of arguments</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

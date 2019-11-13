@@ -1,0 +1,229 @@
+{
+    "name": "FFMpeg\\Coordinate\\TimeCode",
+    "line": 16,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Coordinate",
+    "file": "src\/FFMpeg\/Coordinate\/TimeCode.php",
+    "hash": "d6d3d253cfb66d4ef960e989de762dcba35ce9dd",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "hours": {
+                    "name": "hours",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "minutes": {
+                    "name": "minutes",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "seconds": {
+                    "name": "seconds",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "frames": {
+                    "name": "frames",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "__toString": {
+            "name": "__toString",
+            "line": 32,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "fromString": {
+            "name": "fromString",
+            "line": 46,
+            "short_desc": "Creates timecode from string.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\TimeCode",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    "In case an invalid timecode is supplied"
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "timecode": {
+                    "name": "timecode",
+                    "line": 46,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "fromSeconds": {
+            "name": "fromSeconds",
+            "line": 74,
+            "short_desc": "Creates timecode from number of seconds.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\TimeCode",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "quantity": {
+                    "name": "quantity",
+                    "line": 74,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "float",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "toSeconds": {
+            "name": "toSeconds",
+            "line": 97,
+            "short_desc": "Returns this timecode in seconds",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "isAfter": {
+            "name": "isAfter",
+            "line": 115,
+            "short_desc": "Helper function wether `$timecode` is after this one",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "timecode": {
+                    "name": "timecode",
+                    "line": 115,
+                    "short_desc": "The Timecode to compare",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

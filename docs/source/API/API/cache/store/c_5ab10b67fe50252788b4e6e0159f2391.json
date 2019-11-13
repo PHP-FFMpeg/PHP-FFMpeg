@@ -1,0 +1,92 @@
+{
+    "name": "FFMpeg\\FFProbe\\DataMapping\\Stream",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\FFProbe\\DataMapping",
+    "file": "src\/FFMpeg\/FFProbe\/DataMapping\/Stream.php",
+    "hash": "fac7f8c8278999c8e347f985f4c29b24dca069de",
+    "parent": "FFMpeg\\FFProbe\\DataMapping\\AbstractData",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "LogicException": "FFMpeg\\Exception\\LogicException",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "Dimension": "FFMpeg\\Coordinate\\Dimension"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "isAudio": {
+            "name": "isAudio",
+            "line": 25,
+            "short_desc": "Returns true if the stream is an audio stream.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "isVideo": {
+            "name": "isVideo",
+            "line": 35,
+            "short_desc": "Returns true if the stream is a video stream.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getDimensions": {
+            "name": "getDimensions",
+            "line": 48,
+            "short_desc": "Returns the dimension of the video stream.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\Dimension",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "LogicException",
+                    "In case the stream is not a video stream."
+                ],
+                [
+                    "RuntimeException",
+                    "In case the dimensions can not be extracted."
+                ]
+            ],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

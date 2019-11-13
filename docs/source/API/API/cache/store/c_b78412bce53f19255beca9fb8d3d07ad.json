@@ -1,0 +1,140 @@
+{
+    "name": "FFMpeg\\Media\\Clip",
+    "line": 13,
+    "short_desc": "Video clip.",
+    "long_desc": "Use input seeking, see http:\/\/trac.ffmpeg.org\/wiki\/Seeking",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/Clip.php",
+    "hash": "2e3485f67e1c888ac6fb38c39281c8de94d7d54b",
+    "parent": "FFMpeg\\Media\\Video",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "FFMpegDriver": "FFMpeg\\Driver\\FFMpegDriver",
+        "FFProbe": "FFMpeg\\FFProbe",
+        "TimeCode": "FFMpeg\\Coordinate\\TimeCode"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 25,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "video": {
+                    "name": "video",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "driver": {
+                    "name": "driver",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFMpegDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFMpegDriver",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "start": {
+                    "name": "start",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getVideo": {
+            "name": "getVideo",
+            "line": 39,
+            "short_desc": "Returns the video related to the frame.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Video",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

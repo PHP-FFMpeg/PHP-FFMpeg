@@ -1,0 +1,90 @@
+{
+    "name": "FFMpeg\\FFMpegServiceProvider",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg",
+    "file": "src\/FFMpeg\/FFMpegServiceProvider.php",
+    "hash": "688399dfaae0872e021b655c8c15b26f66e7172d",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ArrayCache": "Doctrine\\Common\\Cache\\ArrayCache",
+        "Application": "Silex\\Application",
+        "ServiceProviderInterface": "Silex\\ServiceProviderInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "Silex\\ServiceProviderInterface": "Silex\\ServiceProviderInterface"
+    },
+    "properties": [],
+    "methods": {
+        "register": {
+            "name": "register",
+            "line": 20,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "app": {
+                    "name": "app",
+                    "line": 20,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Silex\\Application",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Application",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "boot": {
+            "name": "boot",
+            "line": 61,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "app": {
+                    "name": "app",
+                    "line": 61,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Silex\\Application",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Application",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

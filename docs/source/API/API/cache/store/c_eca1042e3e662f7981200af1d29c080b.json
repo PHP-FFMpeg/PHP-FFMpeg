@@ -1,0 +1,290 @@
+{
+    "name": "FFMpeg\\Media\\Gif",
+    "line": 23,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/Gif.php",
+    "hash": "764262bbedcf29379f062339c38c642592f09913",
+    "parent": "FFMpeg\\Media\\AbstractMediaType",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ExecutionFailureException": "Alchemy\\BinaryDriver\\Exception\\ExecutionFailureException",
+        "GifFilterInterface": "FFMpeg\\Filters\\Gif\\GifFilterInterface",
+        "GifFilters": "FFMpeg\\Filters\\Gif\\GifFilters",
+        "FFMpegDriver": "FFMpeg\\Driver\\FFMpegDriver",
+        "FFProbe": "FFMpeg\\FFProbe",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "TimeCode": "FFMpeg\\Coordinate\\TimeCode",
+        "Dimension": "FFMpeg\\Coordinate\\Dimension"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 34,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "video": {
+                    "name": "video",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "driver": {
+                    "name": "driver",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFMpegDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFMpegDriver",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "timecode": {
+                    "name": "timecode",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "dimension": {
+                    "name": "dimension",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\Dimension",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Dimension",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getVideo": {
+            "name": "getVideo",
+            "line": 48,
+            "short_desc": "Returns the video related to the gif.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Video",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "filters": {
+            "name": "filters",
+            "line": 58,
+            "short_desc": "Returns the available filters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Gif\\GifFilters",
+                    false
+                ]
+            ],
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addFilter": {
+            "name": "addFilter",
+            "line": 68,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Gif",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "line": 68,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Filters\\Gif\\GifFilterInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GifFilterInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getTimeCode": {
+            "name": "getTimeCode",
+            "line": 78,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\TimeCode",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getDimension": {
+            "name": "getDimension",
+            "line": 86,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\Dimension",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "save": {
+            "name": "save",
+            "line": 100,
+            "short_desc": "Saves the gif in the given filename.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Gif",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "pathfile": {
+                    "name": "pathfile",
+                    "line": 100,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

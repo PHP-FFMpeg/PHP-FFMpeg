@@ -1,0 +1,217 @@
+{
+    "name": "FFMpeg\\Media\\Video",
+    "line": 15,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/Video.php",
+    "hash": "a85066a79c2f3056a7a569dce3aa742d40c301bf",
+    "parent": "FFMpeg\\Media\\AbstractVideo",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "TimeCode": "FFMpeg\\Coordinate\\TimeCode",
+        "Dimension": "FFMpeg\\Coordinate\\Dimension"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "frame": {
+            "name": "frame",
+            "line": 24,
+            "short_desc": "Gets the frame at timecode.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Frame",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "at": {
+                    "name": "at",
+                    "line": 24,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "gif": {
+            "name": "gif",
+            "line": 37,
+            "short_desc": "Extracts a gif from a sequence of the video.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Gif",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "at": {
+                    "name": "at",
+                    "line": 37,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "dimension": {
+                    "name": "dimension",
+                    "line": 37,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\Dimension",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Dimension",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 37,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "concat": {
+            "name": "concat",
+            "line": 48,
+            "short_desc": "Concatenates a list of videos into one unique video.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Concat",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "sources": {
+                    "name": "sources",
+                    "line": 48,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "clip": {
+            "name": "clip",
+            "line": 60,
+            "short_desc": "Clips the video at the given time(s).",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\FFMpeg\\Media\\Clip",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "start": {
+                    "name": "start",
+                    "line": 60,
+                    "short_desc": "Start time",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "duration": {
+                    "name": "duration",
+                    "line": 60,
+                    "short_desc": "Duration",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\TimeCode",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "TimeCode",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

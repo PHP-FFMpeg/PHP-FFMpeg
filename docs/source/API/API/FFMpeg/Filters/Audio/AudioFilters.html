@@ -53,13 +53,43 @@
                 </td>
                 <td></td>
             </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_addMetadata">addMetadata</a>(Array|Null $data = null)
+                    <p>Add metadata to an audio file.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_clip">clip</a>(<a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)
+                    <p>Cuts the audio at <code>$start</code>, optionally define the end</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_custom">custom</a>(string $parameters)
+                    <p>Applies a custom filter</p>
+                </td>
+                <td></td>
+            </tr>
             </table>
 
 
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 11</div>
+        <div class="location">at line 22</div>
         <code>            public            
     <strong>__construct</strong>(<a href="../../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a> $media)</code>
     </h3>
@@ -87,7 +117,7 @@
     </div>
 
                 <h3 id="method_resample">
-        <div class="location">at line 23</div>
+        <div class="location">at line 34</div>
         <code>            public            <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
     <strong>resample</strong>(Integer $rate)</code>
     </h3>
@@ -102,6 +132,110 @@
                     <tr>
                 <td>Integer</td>
                 <td>$rate</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addMetadata">
+        <div class="location">at line 55</div>
+        <code>            public            
+    <strong>addMetadata</strong>(Array|Null $data = null)</code>
+    </h3>
+    <div class="details">
+        <p>Add metadata to an audio file.</p>
+        <p>If no arguments are given then filter
+will remove all metadata from the audio file</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>Array|Null</td>
+                <td>$data</td>
+                <td>If array must contain one of these key/value pairs: - "title": Title metadata - "artist": Artist metadata - "composer": Composer metadata - "album": Album metadata - "track": Track metadata - "artwork": Song artwork. String of file path - "year": Year metadata - "genre": Genre metadata - "description": Description metadata</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_clip">
+        <div class="location">at line 69</div>
+        <code>            public            <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
+    <strong>clip</strong>(<a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)</code>
+    </h3>
+    <div class="details">
+        <p>Cuts the audio at <code>$start</code>, optionally define the end</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$start</td>
+                <td>Where the clipping starts(seek to time)</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$duration</td>
+                <td>How long the clipped audio should be</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_custom">
+        <div class="location">at line 82</div>
+        <code>            public            <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
+    <strong>custom</strong>(string $parameters)</code>
+    </h3>
+    <div class="details">
+        <p>Applies a custom filter</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$parameters</td>
                 <td>
 </td>
             </tr>
