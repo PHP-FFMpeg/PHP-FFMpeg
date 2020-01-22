@@ -503,7 +503,7 @@ $video
 
 The boolean parameter of the save function allows you to use the copy parameter which accelerates drastically the generation of the encoded file.
 
-To concatenate videos encoded with the same codec, do as follow:
+To concatenate videos encoded with the different codec, do as follow:
 
 ```php
 // In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
