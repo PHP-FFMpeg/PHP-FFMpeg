@@ -20,6 +20,7 @@ php:
   - 7.1
   - 7.2
   - 7.3
+  - 7.4
 
 matrix:
   include:
@@ -37,4 +38,4 @@ install:
   - composer update --prefer-dist $COMPOSER_FLAGS
 
 script:
-  - vendor/bin/phpunit --verbose
+  - vendor/bin/simple-phpunit --verbose

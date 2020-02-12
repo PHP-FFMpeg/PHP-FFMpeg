@@ -18,7 +18,7 @@ class AudioClipTest extends TestCase {
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
         }));
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
 
         $filters = new AudioFilters($audio);
 
@@ -36,7 +36,7 @@ class AudioClipTest extends TestCase {
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
         }));
-        $format = $this->getMock('FFMpeg\Format\AudioInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
 
         $filters = new AudioFilters($audio);
 

@@ -54,7 +54,7 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testCreateProgressListener()
     {
-        $media = $this->getMock('FFMpeg\Media\MediaTypeInterface');
+        $media = $this->getMockBuilder('FFMpeg\Media\MediaTypeInterface')->getMock();
         $media->expects($this->any())
             ->method('getPathfile')
             ->will($this->returnValue(__FILE__));

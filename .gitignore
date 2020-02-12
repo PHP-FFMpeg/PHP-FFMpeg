@@ -4,5 +4,6 @@
 composer.phar
 composer.lock
 phpunit.xml
+.phpunit.result.cache
 sami.phar
 .idea/
