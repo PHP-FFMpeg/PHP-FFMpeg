@@ -42,10 +42,10 @@ class FFMpegDriverTest extends TestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\ExecutableNotFoundException
      */
     public function testCreateFailureThrowsAnException()
     {
+        $this->expectException('\FFMpeg\Exception\ExecutableNotFoundException');
         FFMpegDriver::create($this->getLoggerMock(), array('ffmpeg.binaries' => '/path/to/nowhere'));
     }
 }

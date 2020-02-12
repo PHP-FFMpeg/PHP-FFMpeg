@@ -43,11 +43,11 @@ class StreamTest extends TestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\LogicException
      * @expectedExceptionMessage Dimensions can only be retrieved from video streams.
      */
     public function testGetDimensionsFromAudio()
     {
+        $this->expectException('\FFMpeg\Exception\LogicException');
         $stream = new Stream(array('codec_type' => 'audio'));
         $stream->getDimensions();
     }
@@ -60,11 +60,11 @@ class StreamTest extends TestCase
 
     /**
      * @dataProvider provideInvalidPropertiesForDimensionsExtraction
-     * @expectedException FFMpeg\Exception\RuntimeException
      * @expectedExceptionMessage Unable to extract dimensions.
      */
     public function testUnableToGetDimensionsFromVideo($properties)
     {
+        $this->expectException('\FFMpeg\Exception\RuntimeException');
         $stream = new Stream(array('codec_type' => 'video', 'width' => 960));
         $stream->getDimensions();
     }

@@ -3,24 +3,25 @@
 namespace Tests\FFMpeg\Unit\FFProbe;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Exception\RuntimeException;
 use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\FFProbe\OptionsTester;
 
 class OptionsTesterTest extends TestCase
 {
     /**
-     * @expectedException FFMpeg\Exception\RuntimeException
      * @expectedExceptionMessage Your FFProbe version is too old and does not support `-help` option, please upgrade.
      */
     public function testHasOptionWithOldFFProbe()
     {
+        $this->expectException('\FFMpeg\Exception\RuntimeException');
         $cache = $this->getCacheMock();
 
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->once())
             ->method('command')
             ->with(array('-help', '-loglevel', 'quiet'))
-            ->will($this->throwException(new ExecutionFailureException('Failed to execute')));
+            ->will($this->throwException(new RuntimeException('Failed to execute')));
 
         $tester = new OptionsTester($ffprobe, $cache);
         $tester->has('-print_format');

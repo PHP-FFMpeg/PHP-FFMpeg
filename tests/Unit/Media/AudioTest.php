@@ -2,6 +2,7 @@
 
 namespace Tests\FFMpeg\Unit\Media;
 
+use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Audio;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\AudioInterface;
@@ -55,7 +56,7 @@ class AudioTest extends AbstractStreamableTestCase
         $filters->expects($this->never())
             ->method('add');
 
-        $this->setExpectedException('FFMpeg\Exception\InvalidArgumentException');
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $audio->addFilter($filter);
     }
 
@@ -70,19 +71,19 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('getExtraParams')
             ->will($this->returnValue(array()));
 
-        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
             ->will($this->returnValue($configuration));
 
-        $failure = new ExecutionFailureException('failed to encode');
+        $failure = new RuntimeException('failed to encode');
         $driver->expects($this->once())
             ->method('command')
             ->will($this->throwException($failure));
 
         $audio = new Audio(__FILE__, $driver, $ffprobe);
-        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
+        $this->expectException('\FFMpeg\Exception\RuntimeException');
         $audio->save($format, $outputPathfile);
     }
 

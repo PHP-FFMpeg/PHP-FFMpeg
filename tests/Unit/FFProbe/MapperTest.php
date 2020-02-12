@@ -21,10 +21,10 @@ class MapperTest extends TestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
      */
     public function testMapInvalidArgument()
     {
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $mapper = new Mapper();
         $mapper->map('cool type', 'data');
     }

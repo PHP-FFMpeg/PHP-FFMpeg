@@ -14,7 +14,7 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testSupportBFrames()
     {
-        $this->assertInternalType('boolean', $this->getFormat()->supportBFrames());
+        $this->assertIsBool($this->getFormat()->supportBFrames());
     }
 
     public function testSetVideoCodec()
@@ -29,7 +29,7 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testGetKiloBitrate()
     {
-        $this->assertInternalType('integer', $this->getFormat()->getKiloBitrate());
+        $this->assertIsInt($this->getFormat()->getKiloBitrate());
     }
 
     public function testSetKiloBitrate()
@@ -40,10 +40,10 @@ abstract class VideoTestCase extends AudioTestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
      */
     public function testSetInvalidVideoCodec()
     {
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $this->getFormat()->setVideoCodec('invalid-random-video-codec');
     }
 
@@ -72,13 +72,13 @@ abstract class VideoTestCase extends AudioTestCase
 
     public function testGetPasses()
     {
-        $this->assertInternalType('integer', $this->getFormat()->getPasses());
+        $this->assertIsInt($this->getFormat()->getPasses());
         $this->assertGreaterThan(0, $this->getFormat()->getPasses());
     }
 
     public function testGetModulus()
     {
-        $this->assertInternalType('integer', $this->getFormat()->getModulus());
+        $this->assertIsInt($this->getFormat()->getModulus());
         $this->assertGreaterThan(0, $this->getFormat()->getModulus());
         $this->assertEquals(0, $this->getFormat()->getModulus() % 2);
     }

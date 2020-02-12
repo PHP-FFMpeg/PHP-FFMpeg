@@ -2,6 +2,7 @@
 
 namespace Tests\FFMpeg\Unit\Media;
 
+use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Format\VideoInterface;
@@ -93,13 +94,13 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getConfiguration')
             ->will($this->returnValue($configuration));
 
-        $failure = new ExecutionFailureException('failed to encode');
+        $failure = new RuntimeException('failed to encode');
         $driver->expects($this->once())
             ->method('command')
             ->will($this->throwException($failure));
 
         $video = new Video(__FILE__, $driver, $ffprobe);
-        $this->setExpectedException('FFMpeg\Exception\RuntimeException');
+        $this->expectException('\FFMpeg\Exception\RuntimeException');
         $video->save($format, $outputPathfile);
     }
 

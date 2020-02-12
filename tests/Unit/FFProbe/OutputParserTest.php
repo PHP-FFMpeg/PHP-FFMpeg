@@ -18,10 +18,10 @@ class OutputParserTest extends TestCase
     }
 
     /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
      */
     public function testParseWithInvalidArgument()
     {
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $parser = new OutputParser();
         $parser->parse('comme ca', 'data');
     }
