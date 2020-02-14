@@ -2,15 +2,10 @@
 
 namespace Tests\FFMpeg\Unit;
 
-use PHPUnit\Framework\TestCase as BaseTestCase;
+use Tests\FFMpeg\BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
-    public function assertScalar($value)
-    {
-        $this->assertTrue(is_scalar($value));
-    }
-
     public function getLoggerMock()
     {
         return $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
