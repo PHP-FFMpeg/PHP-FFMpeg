@@ -12,10 +12,12 @@
 namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Media\Video;
+use FFMpeg\Filters\ComplexMedia\ComplexCompatibleFilter;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Media\ComplexMedia;
+use FFMpeg\Media\Video;
 
-class PadFilter implements VideoFilterInterface
+class PadFilter implements VideoFilterInterface, ComplexCompatibleFilter
 {
     /** @var Dimension */
     private $dimension;
@@ -49,10 +51,29 @@ class PadFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
+        return $this->getCommands();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function applyComplex(ComplexMedia $media)
+    {
+        return $this->getCommands();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getCommands()
+    {
         $commands = array();
 
         $commands[] = '-vf';
-        $commands[] = 'scale=iw*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight() .'/ih):ih*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight() .'/ih),pad=' . $this->dimension->getWidth() . ':' . $this->dimension->getHeight() . ':(' . $this->dimension->getWidth() . '-iw)/2:(' . $this->dimension->getHeight() .'-ih)/2';
+        $commands[] = 'scale=iw*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight()
+            . '/ih):ih*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight() . '/ih),pad='
+            . $this->dimension->getWidth() . ':' . $this->dimension->getHeight() . ':(' . $this->dimension->getWidth()
+            . '-iw)/2:(' . $this->dimension->getHeight() . '-ih)/2';
 
         return $commands;
     }

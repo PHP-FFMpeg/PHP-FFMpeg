@@ -16,6 +16,7 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Audio;
+use FFMpeg\Media\ComplexMedia;
 use FFMpeg\Media\Video;
 use Psr\Log\LoggerInterface;
 
@@ -100,6 +101,18 @@ class FFMpeg
         }
 
         throw new InvalidArgumentException('Unable to detect file format, only audio and video supported');
+    }
+
+    /**
+     * Opens multiple input sources.
+     *
+     * @param string[] $inputs Array of files to be opened.
+     *
+     * @return ComplexMedia
+     */
+    public function openComplex($inputs)
+    {
+        return new ComplexMedia($inputs, $this->driver, $this->ffprobe);
     }
 
     /**
