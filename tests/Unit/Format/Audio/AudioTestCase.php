@@ -34,8 +34,6 @@ abstract class AudioTestCase extends TestCase
         }
     }
 
-    /**
-     */
     public function testSetInvalidAudioCodec()
     {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
@@ -59,16 +57,12 @@ abstract class AudioTestCase extends TestCase
         $this->assertEquals(256, $format->getAudioKiloBitrate());
     }
 
-    /**
-     */
     public function testSetInvalidKiloBitrate()
     {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $this->getFormat()->setAudioKiloBitrate(0);
     }
 
-    /**
-     */
     public function testSetNegativeKiloBitrate()
     {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
@@ -87,16 +81,12 @@ abstract class AudioTestCase extends TestCase
         $this->assertEquals(2, $format->getAudioChannels());
     }
 
-    /**
-     */
     public function testSetInvalidChannels()
     {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $this->getFormat()->setAudioChannels(0);
     }
 
-    /**
-     */
     public function testSetNegativeChannels()
     {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');

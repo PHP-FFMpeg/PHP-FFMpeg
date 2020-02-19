@@ -64,8 +64,6 @@ class ExtractMultipleFramesFilterTest extends TestCase
         );
     }
 
-    /**
-     */
     public function testInvalidFrameFileType() {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $filter = new ExtractMultipleFramesFilter('1/1', '/');

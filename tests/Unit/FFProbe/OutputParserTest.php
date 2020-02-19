@@ -17,8 +17,6 @@ class OutputParserTest extends TestCase
         $this->assertEquals($expectedOutput, $parser->parse($type, $data));
     }
 
-    /**
-     */
     public function testParseWithInvalidArgument()
     {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');

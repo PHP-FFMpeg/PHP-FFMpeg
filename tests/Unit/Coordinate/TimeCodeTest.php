@@ -28,8 +28,6 @@ class TimeCodeTest extends TestCase
         );
     }
 
-    /**
-     */
     public function testFromInvalidString()
     {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');

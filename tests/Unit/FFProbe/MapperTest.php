@@ -20,8 +20,6 @@ class MapperTest extends TestCase
         $this->assertEquals($expected, $mapper->map($type, $data));
     }
 
-    /**
-     */
     public function testMapInvalidArgument()
     {
         $this->expectException('\FFMpeg\Exception\InvalidArgumentException');

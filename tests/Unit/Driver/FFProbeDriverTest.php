@@ -41,8 +41,6 @@ class FFProbeDriverTest extends TestCase
         $this->assertEquals($conf, $ffprobe->getConfiguration());
     }
 
-    /**
-     */
     public function testCreateFailureThrowsAnException()
     {
         $this->expectException('\FFMpeg\Exception\ExecutableNotFoundException');

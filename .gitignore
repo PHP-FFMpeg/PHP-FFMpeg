@@ -8,3 +8,4 @@ phpunit.xml
 /tests/Functional/output/output-*
 sami.phar
 .idea/
+/phpunit

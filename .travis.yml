@@ -16,9 +16,14 @@ matrix:
   include:
     - php: 5.4
       env:
+        - PHPUNIT_VERSION=4
         - COMPOSER_FLAGS="--prefer-lowest"
     - php: 5.4
+      env:
+        - PHPUNIT_VERSION=4
     - php: 5.5
+      env:
+        - PHPUNIT_VERSION=4
     - php: 5.6
     - php: 7.0
     - php: 7.1
@@ -30,11 +35,26 @@ before_install:
   - sudo add-apt-repository ppa:mc3man/trusty-media -y
   - sudo apt-get update -q
   - composer self-update
-  - if [ "$COMPOSER_FLAGS" == "--prefer-lowest" ]; then composer require "roave/security-advisories" dev-master --no-update; fi;
+  - echo "$PHPUNIT_VERSION"
+  - |
+    if [ "$PHPUNIT_VERSION" ]; then
+      composer remove symfony/phpunit-bridge --dev
+      wget -O phpunit "https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar"
+      chmod +x phpunit
+    fi;
+  - |
+    if [ "$COMPOSER_FLAGS" == "--prefer-lowest" ]; then
+      composer require "roave/security-advisories" dev-master --no-update
+    fi;
 
 install:
   - sudo apt-get install -y ffmpeg
   - composer update --prefer-dist $COMPOSER_FLAGS
 
 script:
-  - vendor/bin/phpunit --verbose
+  - |
+    if [ "$PHPUNIT_VERSION" ]; then
+      ./phpunit --verbose
+    else
+      ./vendor/bin/simple-phpunit --verbose
+    fi;

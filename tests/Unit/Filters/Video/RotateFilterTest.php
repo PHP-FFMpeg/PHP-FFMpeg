@@ -61,12 +61,12 @@ class RotateFilterTest extends TestCase
         );
     }
 
-    /**
-     * @expectedExceptionMessage Invalid angle value.
-     */
     public function testApplyInvalidAngle()
     {
-        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
+        $this->expectException(
+            '\FFMpeg\Exception\InvalidArgumentException',
+            'Invalid angle value.'
+        );
         new RotateFilter('90');
     }
 }
