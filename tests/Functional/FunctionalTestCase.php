@@ -14,4 +14,16 @@ abstract class FunctionalTestCase extends TestCase
     {
         return FFMpeg::create(array('timeout' => 300));
     }
+
+    /**
+     * Get ffmpeg version.
+     *
+     * @return string
+     */
+    public function getFFMpegVersion()
+    {
+        preg_match('#version\s(\S+)#',
+            $this->getFFMpeg()->getFFMpegDriver()->command('-version'), $version);
+        return $version[1];
+    }
 }

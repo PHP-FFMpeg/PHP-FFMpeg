@@ -156,6 +156,14 @@ class ComplexMediaTest extends FunctionalTestCase
     public function testXStackFilter()
     {
         $ffmpeg = $this->getFFMpeg();
+        $ffmpegVersion = $this->getFFMpegVersion();
+        if (version_compare($ffmpegVersion, XStackFilter::MINIMAL_FFMPEG_VERSION) === -1) {
+            $this->markTestSkipped('XStack filter is supported starting from '
+                . XStackFilter::MINIMAL_FFMPEG_VERSION . ' ffmpeg version, your version is '
+                . $ffmpegVersion);
+            return;
+        }
+
         $inputs = array(realpath(__DIR__ . '/../files/Test.ogv'));
         $format = new X264('aac', 'libx264');
         $output = __DIR__ . '/output/' . self::PATH_PREFIX . 'xstack_test.mp4';

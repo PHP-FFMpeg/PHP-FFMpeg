@@ -12,6 +12,7 @@ use FFMpeg\Media\ComplexMedia;
  */
 class XStackFilter extends AbstractComplexFilter
 {
+    const MINIMAL_FFMPEG_VERSION = '4.1';
     const LAYOUT_2X2 = '0_0|0_h0|w0_0|w0_h0';
     const LAYOUT_1X4 = '0_0|0_h0|0_h0+h1|0_h0+h1+h2';
     const LAYOUT_3X3 = '0_0|0_h0|0_h0+h1|w0_0|w0_h0|w0_h0+h1|w0+w3_0|w0+w3_h0|w0+w3_h0+h1';
