@@ -47,31 +47,6 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getAdditionalParameters()
-    {
-        return $this->additionalParameters;
-    }
-
-    /**
-     * Sets additional parameters.
-     *
-     * @param  array                    $additionalParameters
-     * @throws InvalidArgumentException
-     */
-    public function setAdditionalParameters($additionalParameters)
-    {
-        if (!is_array($additionalParameters)) {
-            throw new InvalidArgumentException('Wrong additionalParamaters value');
-        }
-
-        $this->additionalParameters = $additionalParameters;
-
-        return $this;
-    }
-
-    /**
      * Sets the audio codec, Should be in the available ones, otherwise an
      * exception is thrown.
      *
@@ -146,10 +121,10 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * {@inheritdoc}
      */
-    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total)
+    public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
     {
         $format = $this;
-        $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $pass, $total);
+        $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration);
         $listener->on('progress', function () use ($media, $format) {
            $format->emit('progress', array_merge(array($media, $format), func_get_args()));
         });

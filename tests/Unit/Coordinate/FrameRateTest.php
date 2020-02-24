@@ -15,10 +15,10 @@ class FrameRateTest extends TestCase
 
     /**
      * @dataProvider provideInvalidFrameRates
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
      */
     public function testInvalidFrameRate($value)
     {
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         new FrameRate($value);
     }
 

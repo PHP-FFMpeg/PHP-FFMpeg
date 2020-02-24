@@ -36,4 +36,18 @@ class FrameFilters
 
         return $this;
     }
+
+    /**
+     * Applies a custom filter: -vf foo bar
+     *
+     * @param string    $parameters
+     *
+     * @return FrameFilters
+     */
+    public function custom($parameters)
+    {
+        $this->frame->addFilter(new CustomFrameFilter($parameters));
+
+        return $this;
+    }
 }

@@ -8,12 +8,12 @@ use FFMpeg\FFProbe\DataMapping\Stream;
 
 class FFMpegTest extends TestCase
 {
-    /**
-     * @expectedException \FFMpeg\Exception\RuntimeException
-     * @expectedExceptionMessage Unable to probe "/path/to/unknown/file".
-     */
     public function testOpenInvalid()
     {
+        $this->expectException(
+            '\FFMpeg\Exception\RuntimeException',
+            'Unable to probe "/path/to/unknown/file"'
+        );
         $ffmpeg = new FFMpeg($this->getFFMpegDriverMock(), $this->getFFProbeMock());
         $ffmpeg->open('/path/to/unknown/file');
     }
@@ -57,11 +57,9 @@ class FFMpegTest extends TestCase
         $this->assertInstanceOf('FFMpeg\Media\Video', $ffmpeg->open(__FILE__));
     }
 
-    /**
-     * @expectedException \FFMpeg\Exception\InvalidArgumentException
-     */
     public function testOpenUnknown()
     {
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
             ->method('streams')

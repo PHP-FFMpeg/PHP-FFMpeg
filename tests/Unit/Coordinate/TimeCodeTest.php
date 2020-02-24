@@ -28,11 +28,9 @@ class TimeCodeTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
-     */
     public function testFromInvalidString()
     {
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         TimeCode::fromString('lalali lala');
     }
 

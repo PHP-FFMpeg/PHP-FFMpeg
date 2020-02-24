@@ -3,8 +3,9 @@
 namespace Tests\FFMpeg\Functional;
 
 use FFMpeg\FFMpeg;
+use Tests\FFMpeg\BaseTestCase;
 
-abstract class FunctionalTestCase extends \PHPUnit_Framework_TestCase
+abstract class FunctionalTestCase extends BaseTestCase
 {
     /**
      * @return FFMpeg
