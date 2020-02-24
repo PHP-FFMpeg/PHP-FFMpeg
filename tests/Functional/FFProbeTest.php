@@ -25,11 +25,10 @@ class FFProbeTest extends FunctionalTestCase
         $this->assertFalse($ffprobe->isValid(__DIR__ . '/../files/WrongFile.mp4'));
     }
 
-    /**
-     * @expectedException FFMpeg\Exception\RuntimeException
-     */
     public function testProbeOnNonExistantFile()
     {
+        $this->expectException('\FFMpeg\Exception\RuntimeException');
+
         $ffprobe = FFProbe::create();
         $ffprobe->streams('/path/to/no/file');
     }

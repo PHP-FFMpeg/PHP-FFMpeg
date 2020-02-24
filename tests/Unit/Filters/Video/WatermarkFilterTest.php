@@ -17,7 +17,7 @@ class WatermarkFilterTest extends TestCase
 
         $video = $this->getVideoMock();
 
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
 
         $filter = new WatermarkFilter(__DIR__ . '/../../../files/watermark.png');
         $this->assertEquals(array('-vf', 'movie='.__DIR__ .'/../../../files/watermark.png [watermark]; [in][watermark] overlay=0:0 [out]'), $filter->apply($video, $format));
@@ -30,7 +30,7 @@ class WatermarkFilterTest extends TestCase
     public function testDifferentCoordinaates()
     {
         $video = $this->getVideoMock();
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
 
         // test position absolute
         $filter = new WatermarkFilter(__DIR__ . '/../../../files/watermark.png', array(

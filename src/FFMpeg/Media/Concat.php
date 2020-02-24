@@ -94,7 +94,7 @@ class Concat extends AbstractMediaType
         $fileStream = @fopen($sourcesFile, 'w');
 
         if($fileStream === false) {
-            throw new ExecutionFailureException('Cannot open the temporary file.');
+            throw new RuntimeException('Cannot open the temporary file.');
         }
 
         $count_videos = 0;

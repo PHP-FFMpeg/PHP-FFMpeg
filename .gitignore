@@ -4,5 +4,8 @@
 composer.phar
 composer.lock
 phpunit.xml
+.phpunit.result.cache
+/tests/Functional/output/output-*
 sami.phar
 .idea/
+/phpunit

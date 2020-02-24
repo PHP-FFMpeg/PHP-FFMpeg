@@ -9,10 +9,10 @@ class DimensionTest extends TestCase
 {
     /**
      * @dataProvider provideInvalidDimensions
-     * @expectedException FFMpeg\Exception\InvalidArgumentException
      */
     public function testInvalidDimensions($width, $height)
     {
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         new Dimension($width, $height);
     }
 

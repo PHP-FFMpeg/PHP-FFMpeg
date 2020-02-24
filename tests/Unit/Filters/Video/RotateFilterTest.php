@@ -22,7 +22,7 @@ class RotateFilterTest extends TestCase
             ->method('getStreams')
             ->will($this->returnValue($streams));
 
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
 
         $filter = new RotateFilter($value);
         $this->assertEquals(array('-vf', $value, '-metadata:s:v:0', 'rotate=0'), $filter->apply($video, $format));
@@ -48,7 +48,7 @@ class RotateFilterTest extends TestCase
         $video->expects($this->never())
             ->method('getStreams');
 
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
 
         $filter = new RotateFilter($value);
         $this->assertEquals(array('-vf', $value, '-metadata:s:v:0', 'rotate=0'), $filter->apply($video, $format));
@@ -61,12 +61,12 @@ class RotateFilterTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \FFMpeg\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Invalid angle value.
-     */
     public function testApplyInvalidAngle()
     {
+        $this->expectException(
+            '\FFMpeg\Exception\InvalidArgumentException',
+            'Invalid angle value.'
+        );
         new RotateFilter('90');
     }
 }
