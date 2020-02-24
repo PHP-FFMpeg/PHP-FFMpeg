@@ -61,7 +61,9 @@ class FrameTest extends AbstractMediaTestCase
 
         $pathfile = '/target/destination';
 
-        array_push($commands, $pathfile);
+        if (!$base64) {
+            array_push($commands, $pathfile);
+        }
 
         $driver->expects($this->once())
             ->method('command')

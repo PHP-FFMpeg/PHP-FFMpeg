@@ -9,11 +9,22 @@
  */
 namespace FFMpeg\Media;
 
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Coordinate\Dimension;
+use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Filters\Audio\SimpleFilter;
+use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\Filters\Video\VideoFilters;
+use FFMpeg\Filters\FilterInterface;
+use FFMpeg\Format\FormatInterface;
+use FFMpeg\Format\ProgressableInterface;
+use FFMpeg\Format\AudioInterface;
+use FFMpeg\Format\VideoInterface;
+use Neutron\TemporaryFilesystem\Manager as FsManager;
+use FFMpeg\Filters\Video\ClipFilter;
 
-class Video extends AbstractVideo
+abstract class AbstractVideo extends Audio
 {
+
     /**
      * FileSystem Manager instance
      * @var Manager
@@ -65,16 +76,16 @@ class Video extends AbstractVideo
             try {
                 /** add listeners here */
                 $listeners = null;
-        
+
                 if ($format instanceof ProgressableInterface) {
                     $filters = clone $this->filters;
                     $duration = 0;
-                    
+
                     // check the filters of the video, and if the video has the ClipFilter then
                     // take the new video duration and send to the
                     // FFMpeg\Format\ProgressListener\AbstractProgressListener class
                     foreach ($filters as $filter) {
-                        if($filter instanceof ClipFilter){
+                        if ($filter instanceof ClipFilter) {
                             $duration = $filter->getDuration()->toSeconds();
                             break;
                         }
@@ -102,10 +113,11 @@ class Video extends AbstractVideo
      * NOTE: This method is different to the Audio's one, because Video is using passes.
      * @inheritDoc
      */
-    public function getFinalCommand(FormatInterface $format, $outputPathfile) {
+    public function getFinalCommand(FormatInterface $format, $outputPathfile)
+    {
         $finalCommands = array();
 
-        foreach($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
+        foreach ($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
             $finalCommands[] = implode(' ', $passCommands);
         }
 
@@ -120,8 +132,9 @@ class Video extends AbstractVideo
      * @inheritDoc
      * @return string[][]
      */
-    protected function buildCommand(FormatInterface $format, $outputPathfile) {
-        $commands = array('-y', '-i', $this->pathfile);
+    protected function buildCommand(FormatInterface $format, $outputPathfile)
+    {
+        $commands = $this->basePartOfCommand();
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
@@ -191,22 +204,22 @@ class Video extends AbstractVideo
 
         // Merge Filters into one command
         $videoFilterVars = $videoFilterProcesses = array();
-        for($i=0;$i<count($commands);$i++) {
+        for ($i = 0; $i < count($commands); $i++) {
             $command = $commands[$i];
-            if ( $command == '-vf' ) {
+            if ($command === '-vf') {
                 $commandSplits = explode(";", $commands[$i + 1]);
-                if ( count($commandSplits) == 1 ) {
+                if (count($commandSplits) == 1) {
                     $commandSplit = $commandSplits[0];
                     $command = trim($commandSplit);
-                    if ( preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match) ) {
+                    if (preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match)) {
                         $videoFilterProcesses[] = $match[1];
                     } else {
                         $videoFilterProcesses[] = $command;
                     }
                 } else {
-                    foreach($commandSplits as $commandSplit) {
+                    foreach ($commandSplits as $commandSplit) {
                         $command = trim($commandSplit);
-                        if ( preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match) ) {
+                        if (preg_match("/^\[[^\]]+\](.*?)\[[^\]]+\]$/is", $command, $match)) {
                             $videoFilterProcesses[] = $match[1];
                         } else {
                             $videoFilterVars[] = $command;
@@ -220,11 +233,11 @@ class Video extends AbstractVideo
         }
         $videoFilterCommands = $videoFilterVars;
         $lastInput = 'in';
-        foreach($videoFilterProcesses as $i => $process) {
-            $command = '[' . $lastInput .']';
+        foreach ($videoFilterProcesses as $i => $process) {
+            $command = '[' . $lastInput . ']';
             $command .= $process;
             $lastInput = 'p' . $i;
-            if($i === (count($videoFilterProcesses) - 1)) {
+            if ($i === (count($videoFilterProcesses) - 1)) {
                 $command .= '[out]';
             } else {
                 $command .= '[' . $lastInput . ']';
@@ -234,7 +247,7 @@ class Video extends AbstractVideo
         }
         $videoFilterCommand = implode(';', $videoFilterCommands);
 
-        if($videoFilterCommand) {
+        if ($videoFilterCommand) {
             $commands[] = '-vf';
             $commands[] = $videoFilterCommand;
         }
@@ -245,11 +258,11 @@ class Video extends AbstractVideo
         $passes = array();
         $totalPasses = $format->getPasses();
 
-        if(!$totalPasses) {
+        if (!$totalPasses) {
             throw new InvalidArgumentException('Pass number should be a positive value.');
         }
 
-        for($i = 1; $i <= $totalPasses; $i++) {
+        for ($i = 1; $i <= $totalPasses; $i++) {
             $pass = $commands;
 
             if ($totalPasses > 1) {
@@ -257,11 +270,6 @@ class Video extends AbstractVideo
                 $pass[] = $i;
                 $pass[] = '-passlogfile';
                 $pass[] = $passPrefix;
-            }
-          
-            if ($format->getAudioCodec() === 'aac'){
-                $pass[] = '-strict';
-                $pass[] = '-2';
             }
 
             $pass[] = $outputPathfile;
@@ -273,49 +281,12 @@ class Video extends AbstractVideo
     }
 
     /**
-     * Gets the frame at timecode.
+     * Return base part of command.
      *
-     * @param  TimeCode $at
-     * @return Frame
+     * @return array
      */
-    public function frame(TimeCode $at)
+    protected function basePartOfCommand()
     {
-        return new Frame($this, $this->driver, $this->ffprobe, $at);
-    }
-
-    /**
-     * Extracts a gif from a sequence of the video.
-     *
-     * @param  TimeCode $at
-     * @param  Dimension $dimension
-     * @param  integer $duration
-     * @return Gif
-     */
-    public function gif(TimeCode $at, Dimension $dimension, $duration = null)
-    {
-        return new Gif($this, $this->driver, $this->ffprobe, $at, $dimension, $duration);
-    }
-
-    /**
-     * Concatenates a list of videos into one unique video.
-     *
-     * @param  array $sources
-     * @return Concat
-     */
-    public function concat($sources)
-    {
-        return new Concat($sources, $this->driver, $this->ffprobe);
-    }
-
-    /**
-     * Clips the video at the given time(s).
-     *
-     * @param TimeCode $start Start time
-     * @param TimeCode $duration Duration
-     * @return \FFMpeg\Media\Clip
-     */
-    public function clip(TimeCode $start, TimeCode $duration = null)
-    {
-        return new Clip($this, $this->driver, $this->ffprobe, $start, $duration);
+        return array('-y', '-i', $this->pathfile);
     }
 }
