@@ -17,7 +17,7 @@ class ExtractMultipleFramesFilterTest extends TestCase
         $video = $this->getVideoMock();
         $pathfile = '/path/to/file'.mt_rand();
 
-        $format = $this->getMock('FFMpeg\Format\VideoInterface');
+        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
         $format->expects($this->any())
             ->method('getModulus')
             ->will($this->returnValue($modulus));
@@ -64,10 +64,8 @@ class ExtractMultipleFramesFilterTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \FFMpeg\Exception\InvalidArgumentException
-     */
     public function testInvalidFrameFileType() {
+        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
         $filter = new ExtractMultipleFramesFilter('1/1', '/');
         $filter->setFrameFileType('webm');
     }

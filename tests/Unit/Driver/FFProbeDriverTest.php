@@ -41,11 +41,9 @@ class FFProbeDriverTest extends TestCase
         $this->assertEquals($conf, $ffprobe->getConfiguration());
     }
 
-    /**
-     * @expectedException FFMpeg\Exception\ExecutableNotFoundException
-     */
     public function testCreateFailureThrowsAnException()
     {
+        $this->expectException('\FFMpeg\Exception\ExecutableNotFoundException');
         FFProbeDriver::create(array('ffprobe.binaries' => '/path/to/nowhere'));
     }
 }

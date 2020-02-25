@@ -7,10 +7,13 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="true"
          verbose="false"
          bootstrap="tests/bootstrap.php"
 >
+    <php>
+        <env name="SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT" value="true"/>
+    </php>
+
     <testsuites>
         <testsuite name="unit">
             <directory>tests/Unit</directory>
@@ -21,10 +24,9 @@
     </testsuites>
 
     <filter>
-      <blacklist>
-        <directory>vendor</directory>
-        <directory>tests</directory>
-      </blacklist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/</directory>
+        </whitelist>
     </filter>
 </phpunit>
 
