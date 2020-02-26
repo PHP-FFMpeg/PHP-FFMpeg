@@ -60,6 +60,8 @@ class FFMpeg
     /**
      * Sets the ffmpeg driver.
      *
+     * @param FFMpegDriver $ffmpeg
+     *
      * @return FFMpeg
      */
     public function setFFMpegDriver(FFMpegDriver $ffmpeg)

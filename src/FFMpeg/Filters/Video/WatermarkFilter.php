@@ -46,6 +46,26 @@ class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'watermark';
+    }
+
+    /**
+     * Get minimal version of ffmpeg starting with which this filter is supported.
+     *
+     * @return string
+     */
+    public function getMinimalFFMpegVersion()
+    {
+        return '0.8';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function apply(Video $video, VideoInterface $format)

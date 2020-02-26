@@ -71,6 +71,26 @@ class ComplexFilterContainer implements ComplexFilterInterface
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->baseFilter->getName();
+    }
+
+    /**
+     * Get minimal version of ffmpeg starting with which this filter is supported.
+     *
+     * @return string
+     */
+    public function getMinimalFFMpegVersion()
+    {
+        return $this->baseFilter->getMinimalFFMpegVersion();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function applyComplex(ComplexMedia $media)

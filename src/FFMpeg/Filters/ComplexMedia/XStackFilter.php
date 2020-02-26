@@ -6,13 +6,14 @@ use FFMpeg\Media\ComplexMedia;
 
 /**
  * "xstack" filter.
- * Warning: this filter is supported starting from 4.1 ffmpeg version.
+ * This filter helps you to create a collage from the given videos.
+ * This filter is supported starting from 4.1 ffmpeg version.
+ * (On early versions you can use combinations of hstack and vstack filters).
  *
  * @see https://ffmpeg.org/ffmpeg-filters.html#xstack
  */
 class XStackFilter extends AbstractComplexFilter
 {
-    const MINIMAL_FFMPEG_VERSION = '4.1';
     const LAYOUT_2X2 = '0_0|0_h0|w0_0|w0_h0';
     const LAYOUT_1X4 = '0_0|0_h0|0_h0+h1|0_h0+h1+h2';
     const LAYOUT_3X3 = '0_0|0_h0|0_h0+h1|w0_0|w0_h0|w0_h0+h1|w0+w3_0|w0+w3_h0|w0+w3_h0+h1';
@@ -57,13 +58,33 @@ class XStackFilter extends AbstractComplexFilter
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'xstack';
+    }
+
+    /**
+     * Get minimal version of ffmpeg starting with which this filter is supported.
+     *
+     * @return string
+     */
+    public function getMinimalFFMpegVersion()
+    {
+        return '4.1';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function applyComplex(ComplexMedia $media)
     {
         return array(
             '-filter_complex',
-            'xstack' . $this->buildFilterOptions(array(
+            $this->getName() . $this->buildFilterOptions(array(
                 'inputs' => $this->inputsCount,
                 'layout' => $this->layout
             ))

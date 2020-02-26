@@ -45,13 +45,23 @@ class ANullSrcFilter extends AbstractComplexFilter
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'anullsrc';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function applyComplex(ComplexMedia $media)
     {
         return array(
             '-filter_complex',
-            'anullsrc' . $this->buildFilterOptions(array(
+            $this->getName() . $this->buildFilterOptions(array(
                 'channel_layout' => $this->channelLayout,
                 'sample_rate' => $this->sampleRate,
                 'nb_samples' => $this->nbSamples,

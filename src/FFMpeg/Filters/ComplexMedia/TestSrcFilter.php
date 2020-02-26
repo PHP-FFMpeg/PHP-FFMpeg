@@ -190,6 +190,16 @@ class TestSrcFilter extends AbstractComplexFilter
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->type;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function applyComplex(ComplexMedia $media)

@@ -155,11 +155,12 @@ class ComplexMediaTest extends FunctionalTestCase
      */
     public function testXStackFilter()
     {
+        $xStack = new XStackFilter('', 0);
         $ffmpeg = $this->getFFMpeg();
-        $ffmpegVersion = $this->getFFMpegVersion();
-        if (version_compare($ffmpegVersion, XStackFilter::MINIMAL_FFMPEG_VERSION) === -1) {
-            $this->markTestSkipped('XStack filter is supported starting from '
-                . XStackFilter::MINIMAL_FFMPEG_VERSION . ' ffmpeg version, your version is '
+        $ffmpegVersion = $ffmpeg->getFFMpegDriver()->getVersion();
+        if (version_compare($ffmpegVersion, $xStack->getMinimalFFMpegVersion(), '<')) {
+            $this->markTestSkipped('XStack filter is supported starting from ffmpeg version '
+                . $xStack->getMinimalFFMpegVersion() . ', your version is '
                 . $ffmpegVersion);
             return;
         }
@@ -223,12 +224,12 @@ class ComplexMediaTest extends FunctionalTestCase
         $complexMedia1 = $ffmpeg->openComplex(array(__FILE__));
         $complexMedia1
             ->map(array('test'), $format, 'outputFile.mp4', false);
-        $this->assertContains('acodec', $complexMedia1->getFinalCommand());
+        $this->assertStringContainsString('acodec', $complexMedia1->getFinalCommand());
 
         $complexMedia2 = $ffmpeg->openComplex(array(__FILE__));
         $complexMedia2
             ->map(array('test'), $format, 'outputFile.mp4', true);
-        $this->assertNotContains('acodec', $complexMedia2->getFinalCommand());
+        $this->assertStringNotContainsString('acodec', $complexMedia2->getFinalCommand());
     }
 
     public function testForceDisableVideo()
@@ -239,11 +240,11 @@ class ComplexMediaTest extends FunctionalTestCase
         $complexMedia1 = $ffmpeg->openComplex(array(__FILE__));
         $complexMedia1->map(array('test'), $format,
             'outputFile.mp4', false, false);
-        $this->assertContains('vcodec', $complexMedia1->getFinalCommand());
+        $this->assertStringContainsString('vcodec', $complexMedia1->getFinalCommand());
 
         $complexMedia2 = $ffmpeg->openComplex(array(__FILE__));
         $complexMedia2->map(array('test'), $format,
             'outputFile.mp4', false, true);
-        $this->assertNotContains('vcodec', $complexMedia2->getFinalCommand());
+        $this->assertStringNotContainsString('vcodec', $complexMedia2->getFinalCommand());
     }
 }

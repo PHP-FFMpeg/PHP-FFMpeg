@@ -28,6 +28,16 @@ abstract class AbstractComplexFilter implements ComplexCompatibleFilter
     }
 
     /**
+     * Get minimal version of ffmpeg starting with which this filter is supported.
+     *
+     * @return string
+     */
+    public function getMinimalFFMpegVersion()
+    {
+        return '0.3';
+    }
+
+    /**
      * Generate the config of the filter.
      *
      * @param array $params Associative array of filter options. The options may be null.

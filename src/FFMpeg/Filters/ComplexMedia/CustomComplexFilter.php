@@ -24,6 +24,16 @@ class CustomComplexFilter extends AbstractComplexFilter
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'custom_filter';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function applyComplex(ComplexMedia $media)

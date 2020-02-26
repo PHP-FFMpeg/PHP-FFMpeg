@@ -55,6 +55,26 @@ class SineFilter extends AbstractComplexFilter
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'sine';
+    }
+
+    /**
+     * Get minimal version of ffmpeg starting with which this filter is supported.
+     *
+     * @return string
+     */
+    public function getMinimalFFMpegVersion()
+    {
+        return '2.0';
+    }
+
+    /**
      * Apply the complex filter to the given media.
      *
      * @param ComplexMedia $media
@@ -65,7 +85,7 @@ class SineFilter extends AbstractComplexFilter
     {
         return array(
             '-filter_complex',
-            'sine' . $this->buildFilterOptions(array(
+            $this->getName() . $this->buildFilterOptions(array(
                 'frequency' => $this->frequency,
                 'beep_factor' => $this->beep_factor,
                 'sample_rate' => $this->sample_rate,

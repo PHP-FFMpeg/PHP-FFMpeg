@@ -47,6 +47,26 @@ class PadFilter implements VideoFilterInterface, ComplexCompatibleFilter
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'pad';
+    }
+
+    /**
+     * Get minimal version of ffmpeg starting with which this filter is supported.
+     *
+     * @return string
+     */
+    public function getMinimalFFMpegVersion()
+    {
+        return '0.4.9';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function apply(Video $video, VideoInterface $format)

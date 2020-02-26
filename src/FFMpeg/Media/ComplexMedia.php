@@ -221,9 +221,11 @@ class ComplexMedia extends AbstractMediaType
      * Apply added filters and execute ffmpeg command.
      *
      * @return ComplexMedia
+     * @throws RuntimeException
      */
     public function save()
     {
+        $this->assertFiltersAreCompatibleToCurrentFFMpegVersion();
         $command = $this->buildCommand();
 
         try {
@@ -317,6 +319,28 @@ class ComplexMedia extends AbstractMediaType
         }
 
         return $in . $strCommand . $out;
+    }
+
+    /**
+     * @return void
+     * @throws RuntimeException
+     */
+    protected function assertFiltersAreCompatibleToCurrentFFMpegVersion()
+    {
+        $messages = array();
+        $currentVersion = $this->getFFMpegDriver()->getVersion();
+        /** @var ComplexFilterInterface $filter */
+        foreach ($this->filters as $filter) {
+            if (version_compare($currentVersion, $filter->getMinimalFFMpegVersion(), '<')) {
+                $messages[] = $filter->getName() . ' filter is supported starting from '
+                    . $filter->getMinimalFFMpegVersion() . ' ffmpeg version';
+            }
+        }
+
+        if (!empty($messages)) {
+            throw new RuntimeException(implode('; ', $messages)
+                . '; your ffmpeg version is ' . $currentVersion);
+        }
     }
 
     /**
