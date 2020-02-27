@@ -200,6 +200,31 @@ class TestSrcFilter extends AbstractComplexFilter
     }
 
     /**
+     * Get minimal version of ffmpeg starting with which this filter is supported.
+     *
+     * @return string
+     */
+    public function getMinimalFFMpegVersion()
+    {
+        switch ($this->type) {
+            case self::PAL75BARS:
+            case self::PAL100BARS:
+                return '4.1';
+            case self::YUVTESTSRC:
+                return '3.2';
+            case self::ALLRGB:
+            case self::ALLYUV:
+                return '2.8';
+            case self::SMPTEHDBARS:
+                return '2.0';
+            case self::SMPTEBARS:
+                return '1.0';
+            default:
+                return '0.3';
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function applyComplex(ComplexMedia $media)

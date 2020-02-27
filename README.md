@@ -532,7 +532,7 @@ ComplexMedia already contains some built-in filters.
 For example:
 
 ```php
-$complexMedia = $ffmpeg->openComplex(array ('video_1.mp4', 'video_2.mp4'));
+$complexMedia = $ffmpeg->openComplex(array('video_1.mp4', 'video_2.mp4'));
 $complexMedia->filters()
     ->custom('[0:v][1:v]', 'hstack', '[v]');
 $complexMedia
@@ -580,7 +580,7 @@ As you can see, you can take multiple input sources, perform the complicated pro
 You do not have to use `-filter_complex`. For example, just extract the audio from the video:
 
 ```php
-$complexMedia = $ffmpeg->openComplex(array ('video.mp4'));
+$complexMedia = $ffmpeg->openComplex(array('video.mp4'));
 $complexMedia
     ->map(array('0:a'), new Mp3(), 'output.mp3')
     ->save();
