@@ -34,7 +34,7 @@ class ConcatTest extends AbstractMediaTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $filter = $this->getMock('FFMpeg\Filters\Concat\ConcatFilterInterface');
+        $filter = $this->getMockBuilder('FFMpeg\Filters\Concat\ConcatFilterInterface')->getMock();
 
         $filters->expects($this->once())
             ->method('add')
@@ -115,7 +115,7 @@ class ConcatTest extends AbstractMediaTestCase
 
         array_push($commands, $pathfile);
 
-        $configuration = $this->getMock('Alchemy\BinaryDriver\ConfigurationInterface');
+        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
 
         $driver->expects($this->any())
             ->method('getConfiguration')
@@ -136,9 +136,9 @@ class ConcatTest extends AbstractMediaTestCase
                 array(
                     '-i', __FILE__,
                     '-i', 'concat-2.mp4',
-                    '-filter_complex', 
+                    '-filter_complex',
                     '[0:v:0] [0:a:0] [1:v:0] [1:a:0] concat=n=2:v=1:a=1 [v] [a]',
-                    '-map', '[v]', 
+                    '-map', '[v]',
                     '-map', '[a]'
                 ),
             ),
