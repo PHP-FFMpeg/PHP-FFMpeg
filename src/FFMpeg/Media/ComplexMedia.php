@@ -14,11 +14,12 @@ use FFMpeg\Filters\FiltersCollection;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
+use FFMpeg\Format\ProgressListener\AbstractProgressListener;
 use FFMpeg\Format\VideoInterface;
 
 /**
  * Complex media may have multiple inputs and multiple outputs.
- * This class accepts only filters for -filter_complex.
+ * This class accepts only filters for -filter_complex option.
  * But you can set initial and additional parameters of the ffmpeg command.
  *
  * @see http://trac.ffmpeg.org/wiki/Creating%20multiple%20outputs
@@ -46,7 +47,7 @@ class ComplexMedia extends AbstractMediaType
     private $mapCommands;
 
     /**
-     * @var array
+     * @var AbstractProgressListener[]
      */
     private $listeners;
 
@@ -88,6 +89,8 @@ class ComplexMedia extends AbstractMediaType
     }
 
     /**
+     * Add complex filter.
+     *
      * @param string                  $in
      * @param ComplexCompatibleFilter $filter
      * @param string                  $out
@@ -117,7 +120,6 @@ class ComplexMedia extends AbstractMediaType
 
     /**
      * @return string[]
-     * @return void
      */
     public function getInitialParameters()
     {
@@ -137,7 +139,6 @@ class ComplexMedia extends AbstractMediaType
 
     /**
      * @return string[]
-     * @return void
      */
     public function getAdditionalParameters()
     {
@@ -180,18 +181,21 @@ class ComplexMedia extends AbstractMediaType
     }
 
     /**
-     * @param string[]        $outs Output labels of the -filter_complex part.
-     * @param FormatInterface $format
-     * @param string          $outputPathfile
+     * Select the streams for output.
+     *
+     * @param string[]        $outs           Output labels of the -filter_complex part.
+     * @param FormatInterface $format         Format of the output file.
+     * @param string          $outputFilename Output filename.
      * @param bool            $forceDisableAudio
      * @param bool            $forceDisableVideo
      *
      * @return $this
+     * @see https://ffmpeg.org/ffmpeg.html#Manual-stream-selection
      */
     public function map(
         array $outs,
         FormatInterface $format,
-        $outputPathfile,
+        $outputFilename,
         $forceDisableAudio = false,
         $forceDisableVideo = false
     ) {
@@ -202,12 +206,13 @@ class ComplexMedia extends AbstractMediaType
         }
 
         // Apply format params.
-        $commands = array_merge($commands, $this->applyFormatParams($format, $forceDisableAudio, $forceDisableVideo));
+        $commands = array_merge($commands,
+            $this->applyFormatParams($format, $forceDisableAudio, $forceDisableVideo));
 
         // Set output file.
-        $commands[] = $outputPathfile;
+        $commands[] = $outputFilename;
 
-        // Create listener.
+        // Create a listener.
         if ($format instanceof ProgressableInterface) {
             $listener = $format->createProgressListener($this, $this->ffprobe, 1, 1, 0);
             $this->listeners = array_merge($this->listeners, $listener);
@@ -220,7 +225,7 @@ class ComplexMedia extends AbstractMediaType
     /**
      * Apply added filters and execute ffmpeg command.
      *
-     * @return ComplexMedia
+     * @return void
      * @throws RuntimeException
      */
     public function save()
@@ -233,8 +238,6 @@ class ComplexMedia extends AbstractMediaType
         } catch (ExecutionFailureException $e) {
             throw new RuntimeException('Encoding failed', $e->getCode(), $e);
         }
-
-        return $this;
     }
 
     /**
@@ -256,7 +259,7 @@ class ComplexMedia extends AbstractMediaType
                 $commands[] = '-vcodec';
                 $commands[] = $format->getVideoCodec();
             }
-            // If the user passed some additional parameters.
+            // If the user passed some additional format parameters.
             if ($format->getAdditionalParameters() !== null) {
                 $commands = array_merge($commands, $format->getAdditionalParameters());
             }
@@ -348,19 +351,35 @@ class ComplexMedia extends AbstractMediaType
      */
     protected function buildCommand()
     {
-        $commands = array('-y');
-        if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $commands[] = '-threads';
-            $commands[] = $this->driver->getConfiguration()->get('ffmpeg.threads');
-        }
-
-        return array_merge($commands,
+        $globalOptions = array('threads', 'filter_threads', 'filter_complex_threads');
+        return array_merge(array('-y'),
+            $this->buildConfiguredGlobalOptions($globalOptions),
             $this->getInitialParameters(),
             $this->buildInputsPart($this->inputs),
             $this->buildComplexFilterPart($this->filters),
             $this->mapCommands,
             $this->getAdditionalParameters()
         );
+    }
+
+    /**
+     * @param string[] $optionNames
+     *
+     * @return array
+     */
+    private function buildConfiguredGlobalOptions($optionNames)
+    {
+        $commands = array();
+        foreach ($optionNames as $optionName) {
+            if (!$this->driver->getConfiguration()->has('ffmpeg.' . $optionName)) {
+                continue;
+            }
+
+            $commands[] = '-' . $optionName;
+            $commands[] = $this->driver->getConfiguration()->get('ffmpeg.' . $optionName);
+        }
+
+        return $commands;
     }
 
     /**

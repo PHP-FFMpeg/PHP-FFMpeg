@@ -576,8 +576,8 @@ Then saves audios from the original videos into the 4 different formats and save
 
 As you can see, you can take multiple input sources, perform the complicated processing for them and produce multiple output files in the same time, in the one ffmpeg command.
 
-#### Just give me map!
-You do not have to use `-filter_complex`. For example, just extract the audio from the video:
+#### Just give me a map!
+You do not have to use `-filter_complex`. You can use only `-map` options. For example, just extract the audio from the video:
 
 ```php
 $complexMedia = $ffmpeg->openComplex(array('video.mp4'));

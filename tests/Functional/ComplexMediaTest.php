@@ -13,14 +13,14 @@ class ComplexMediaTest extends FunctionalTestCase
     /**
      * Path prefix to avoid conflicts with another tests.
      */
-    const PATH_PREFIX = 'complex_media_';
+    const OUTPUT_PATH_PREFIX = 'output/complex_media_';
 
     public function testRunWithoutComplexFilterTestExtractAudio()
     {
         $ffmpeg = $this->getFFMpeg();
         $inputs = array(realpath(__DIR__ . '/../files/Test.ogv'));
         $format = new Mp3();
-        $output = __DIR__ . '/output/' . self::PATH_PREFIX . 'extracted_with_map.mp3';
+        $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'extracted_with_map.mp3';
 
         // You can run it without -filter_complex, just using -map.
         $complexMedia = $ffmpeg->openComplex($inputs);
@@ -40,7 +40,7 @@ class ComplexMediaTest extends FunctionalTestCase
         $inputs = array(realpath(__DIR__ . '/../files/Audio.mp3'));
         $format = new Mp3();
         $format->setAudioKiloBitrate(30);
-        $output = __DIR__ . '/output/' . self::PATH_PREFIX . 'audio_test.mp3';
+        $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'audio_test.mp3';
 
         $complexMedia = $ffmpeg->openComplex($inputs);
         $complexMedia
@@ -61,7 +61,7 @@ class ComplexMediaTest extends FunctionalTestCase
             realpath(__DIR__ . '/../files/portrait.MOV')
         );
         $format = new X264('aac', 'libx264');
-        $output = __DIR__ . '/output/' . self::PATH_PREFIX . 'multiple_inputs_test.mp4';
+        $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'multiple_inputs_test.mp4';
 
         $complexMedia = $ffmpeg->openComplex($inputs);
         $complexMedia->filters()
@@ -88,9 +88,9 @@ class ComplexMediaTest extends FunctionalTestCase
         $formatX264 = new X264('aac', 'libx264');
         $formatMp3 = new Mp3();
 
-        $outputMp3 = __DIR__ . '/output/' . self::PATH_PREFIX . 'test_multiple_outputs.mp3';
-        $outputVideo1 = __DIR__ . '/output/' . self::PATH_PREFIX . 'test_multiple_outputs_v1.mp4';
-        $outputVideo2 = __DIR__ . '/output/' . self::PATH_PREFIX . 'test_multiple_outputs_v2.mp4';
+        $outputMp3 = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'test_multiple_outputs.mp3';
+        $outputVideo1 = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'test_multiple_outputs_v1.mp4';
+        $outputVideo2 = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'test_multiple_outputs_v2.mp4';
 
         $complexMedia = $ffmpeg->openComplex($inputs);
         $complexMedia->filters()
@@ -131,7 +131,7 @@ class ComplexMediaTest extends FunctionalTestCase
         $ffmpeg = $this->getFFMpeg();
         $inputs = array(realpath(__DIR__ . '/../files/Test.ogv'));
         $format = new X264('aac', 'libx264');
-        $output = __DIR__ . '/output/' . self::PATH_PREFIX . 'testsrc.mp4';
+        $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'testsrc.mp4';
 
         $complexMedia = $ffmpeg->openComplex($inputs);
         $complexMedia->filters()
@@ -167,7 +167,7 @@ class ComplexMediaTest extends FunctionalTestCase
 
         $inputs = array(realpath(__DIR__ . '/../files/Test.ogv'));
         $format = new X264('aac', 'libx264');
-        $output = __DIR__ . '/output/' . self::PATH_PREFIX . 'xstack_test.mp4';
+        $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'xstack_test.mp4';
 
         $complexMedia = $ffmpeg->openComplex($inputs);
         $complexMedia->filters()
@@ -194,7 +194,7 @@ class ComplexMediaTest extends FunctionalTestCase
         $inputs = array(realpath(__DIR__ . '/../files/Test.ogv'));
         $watermark = realpath(__DIR__ . '/../files/watermark.png');
         $format = new X264('aac', 'libx264');
-        $output = __DIR__ . '/output/' . self::PATH_PREFIX . 'test_of_compatibility_with_existed_filters.mp4';
+        $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'test_of_compatibility_with_existed_filters.mp4';
 
         $complexMedia = $ffmpeg->openComplex($inputs);
         $complexMedia->filters()
@@ -246,5 +246,23 @@ class ComplexMediaTest extends FunctionalTestCase
         $complexMedia2->map(array('test'), $format,
             'outputFile.mp4', false, true);
         $this->assertStringNotContainsString('vcodec', $complexMedia2->getFinalCommand());
+    }
+
+    public function testGlobalOptions()
+    {
+        $configuration = array(
+            'ffmpeg.threads' => 3,
+            'ffmpeg.filter_threads' => 13,
+            'ffmpeg.filter_complex_threads' => 24,
+        );
+
+        $ffmpeg = $this->getFFMpeg($configuration);
+        $complexMedia = $ffmpeg->openComplex(array(__FILE__));
+        $command = $complexMedia->getFinalCommand();
+
+        foreach ($configuration as $optionName => $optionValue) {
+            $optionName = str_replace('ffmpeg.', '', $optionName);
+            $this->assertStringContainsString('-' . $optionName . ' ' . $optionValue, $command);
+        }
     }
 }
