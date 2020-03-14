@@ -99,6 +99,7 @@ class FFMpeg
             $videoDisposition = $videoStream->get('disposition');
             if ($videoDisposition['attached_pic'] !== 1) {
                 $hasVideo = true;
+                break;
             }
         }
         if ($hasVideo) {
