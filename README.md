@@ -630,6 +630,18 @@ $format->setAdditionalParameters(array('foo', 'bar'));
 $video->save($format, 'video.avi');
 ```
 
+##### Add initial parameters
+
+You can also add initial parameters to your encoding requests based on your video format. This can be expecially handy in overriding a default input codec in FFMpeg.
+
+The argument of the setInitialParameters method is an array.
+
+```php
+$format = new FFMpeg\Format\Video\X264();
+$format->setInitialParameters(array('-acodec', 'libopus'));
+$video->save($format, 'video.avi');
+```
+
 ##### Create your own format
 
 The easiest way to create a format is to extend the abstract
