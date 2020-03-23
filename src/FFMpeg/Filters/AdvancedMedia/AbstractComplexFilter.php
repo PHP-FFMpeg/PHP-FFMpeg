@@ -1,6 +1,6 @@
 <?php
 
-namespace FFMpeg\Filters\ComplexMedia;
+namespace FFMpeg\Filters\AdvancedMedia;
 
 abstract class AbstractComplexFilter implements ComplexCompatibleFilter
 {

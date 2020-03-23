@@ -12,9 +12,9 @@
 namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Exception\InvalidArgumentException;
-use FFMpeg\Filters\ComplexMedia\ComplexCompatibleFilter;
+use FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter;
 use FFMpeg\Format\VideoInterface;
-use FFMpeg\Media\ComplexMedia;
+use FFMpeg\Media\AdvancedMedia;
 use FFMpeg\Media\Video;
 
 class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
@@ -76,7 +76,7 @@ class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
     /**
      * {@inheritdoc}
      */
-    public function applyComplex(ComplexMedia $media)
+    public function applyComplex(AdvancedMedia $media)
     {
         return $this->getCommands();
     }

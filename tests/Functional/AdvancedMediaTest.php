@@ -3,17 +3,17 @@
 namespace Tests\FFMpeg\Functional;
 
 use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Filters\ComplexMedia\TestSrcFilter;
-use FFMpeg\Filters\ComplexMedia\XStackFilter;
+use FFMpeg\Filters\AdvancedMedia\TestSrcFilter;
+use FFMpeg\Filters\AdvancedMedia\XStackFilter;
 use FFMpeg\Format\Audio\Mp3;
 use FFMpeg\Format\Video\X264;
 
-class ComplexMediaTest extends FunctionalTestCase
+class AdvancedMediaTest extends FunctionalTestCase
 {
     /**
      * Path prefix to avoid conflicts with another tests.
      */
-    const OUTPUT_PATH_PREFIX = 'output/complex_media_';
+    const OUTPUT_PATH_PREFIX = 'output/advanced_media_';
 
     public function testRunWithoutComplexFilterTestExtractAudio()
     {
@@ -23,8 +23,8 @@ class ComplexMediaTest extends FunctionalTestCase
         $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'extracted_with_map.mp3';
 
         // You can run it without -filter_complex, just using -map.
-        $complexMedia = $ffmpeg->openComplex($inputs);
-        $complexMedia
+        $advancedMedia = $ffmpeg->openAdvanced($inputs);
+        $advancedMedia
             ->map(array('0:a'), $format, $output)
             ->save();
 
@@ -42,8 +42,8 @@ class ComplexMediaTest extends FunctionalTestCase
         $format->setAudioKiloBitrate(30);
         $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'audio_test.mp3';
 
-        $complexMedia = $ffmpeg->openComplex($inputs);
-        $complexMedia
+        $advancedMedia = $ffmpeg->openAdvanced($inputs);
+        $advancedMedia
             ->map(array('0:a'), $format, $output)
             ->save();
 
@@ -63,10 +63,10 @@ class ComplexMediaTest extends FunctionalTestCase
         $format = new X264('aac', 'libx264');
         $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'multiple_inputs_test.mp4';
 
-        $complexMedia = $ffmpeg->openComplex($inputs);
-        $complexMedia->filters()
+        $advancedMedia = $ffmpeg->openAdvanced($inputs);
+        $advancedMedia->filters()
             ->custom('[0:v][1:v]', 'hstack', '[v]');
-        $complexMedia
+        $advancedMedia
             ->map(array('0:a', '[v]'), $format, $output)
             ->save();
 
@@ -77,7 +77,7 @@ class ComplexMediaTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \FFMpeg\Media\ComplexMedia::map
+     * @covers \FFMpeg\Media\AdvancedMedia::map
      */
     public function testMultipleOutputsTestAbsenceOfInputs()
     {
@@ -92,14 +92,14 @@ class ComplexMediaTest extends FunctionalTestCase
         $outputVideo1 = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'test_multiple_outputs_v1.mp4';
         $outputVideo2 = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'test_multiple_outputs_v2.mp4';
 
-        $complexMedia = $ffmpeg->openComplex($inputs);
-        $complexMedia->filters()
+        $advancedMedia = $ffmpeg->openAdvanced($inputs);
+        $advancedMedia->filters()
             ->sine('[a]', 5)
             ->testSrc('[v1]', TestSrcFilter::TESTSRC, '160x120', 5)
             ->testSrc('[v2]', TestSrcFilter::TESTSRC, '160x120', 5)
             ->custom('[v1]', 'negate', '[v1negate]')
             ->custom('[v2]', 'edgedetect', '[v2edgedetect]');
-        $complexMedia
+        $advancedMedia
             ->map(array('[a]'), $formatMp3, $outputMp3)
             ->map(array('[v1negate]'), $formatX264, $outputVideo1)
             ->map(array('[v2edgedetect]'), $formatX264, $outputVideo2)
@@ -123,8 +123,8 @@ class ComplexMediaTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \FFMpeg\Filters\ComplexMedia\TestSrcFilter
-     * @covers \FFMpeg\Filters\ComplexMedia\SineFilter
+     * @covers \FFMpeg\Filters\AdvancedMedia\TestSrcFilter
+     * @covers \FFMpeg\Filters\AdvancedMedia\SineFilter
      */
     public function testTestSrcFilterTestSineFilter()
     {
@@ -133,11 +133,11 @@ class ComplexMediaTest extends FunctionalTestCase
         $format = new X264('aac', 'libx264');
         $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'testsrc.mp4';
 
-        $complexMedia = $ffmpeg->openComplex($inputs);
-        $complexMedia->filters()
+        $advancedMedia = $ffmpeg->openAdvanced($inputs);
+        $advancedMedia->filters()
             ->sine('[a]', 10)
             ->testSrc('[v]', TestSrcFilter::TESTSRC, '160x120', 10);
-        $complexMedia
+        $advancedMedia
             ->map(array('[a]', '[v]'), $format, $output)
             ->save();
 
@@ -150,8 +150,8 @@ class ComplexMediaTest extends FunctionalTestCase
     /**
      * XStack filter is supported starting from 4.1 ffmpeg version.
      *
-     * @covers \FFMpeg\Filters\ComplexMedia\XStackFilter
-     * @covers \FFMpeg\Filters\ComplexMedia\SineFilter
+     * @covers \FFMpeg\Filters\AdvancedMedia\XStackFilter
+     * @covers \FFMpeg\Filters\AdvancedMedia\SineFilter
      */
     public function testXStackFilter()
     {
@@ -169,8 +169,8 @@ class ComplexMediaTest extends FunctionalTestCase
         $format = new X264('aac', 'libx264');
         $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'xstack_test.mp4';
 
-        $complexMedia = $ffmpeg->openComplex($inputs);
-        $complexMedia->filters()
+        $advancedMedia = $ffmpeg->openAdvanced($inputs);
+        $advancedMedia->filters()
             ->sine('[a]', 5)
             ->testSrc('[v1]', TestSrcFilter::TESTSRC, '160x120', 5)
             ->testSrc('[v2]', TestSrcFilter::TESTSRC, '160x120', 5)
@@ -178,7 +178,7 @@ class ComplexMediaTest extends FunctionalTestCase
             ->testSrc('[v4]', TestSrcFilter::TESTSRC, '160x120', 5)
             ->xStack('[v1][v2][v3][v4]',
                 XStackFilter::LAYOUT_2X2, 4, '[v]');
-        $complexMedia
+        $advancedMedia
             ->map(array('[a]', '[v]'), $format, $output)
             ->save();
 
@@ -196,8 +196,8 @@ class ComplexMediaTest extends FunctionalTestCase
         $format = new X264('aac', 'libx264');
         $output = __DIR__ . '/' . self::OUTPUT_PATH_PREFIX . 'test_of_compatibility_with_existed_filters.mp4';
 
-        $complexMedia = $ffmpeg->openComplex($inputs);
-        $complexMedia->filters()
+        $advancedMedia = $ffmpeg->openAdvanced($inputs);
+        $advancedMedia->filters()
             // For unknown reasons WatermarkFilter produce an error on Windows,
             // because the path to the watermark becomes corrupted.
             // This behaviour related with Alchemy\BinaryDriver\AbstractBinary::command().
@@ -206,7 +206,7 @@ class ComplexMediaTest extends FunctionalTestCase
             // But on Linux systems filter works as expected.
             //->watermark('[0:v]', $watermark, '[v]')
             ->pad('[0:v]', new Dimension(300, 100), '[v]');
-        $complexMedia
+        $advancedMedia
             ->map(array('0:a', '[v]'), $format, $output)
             ->save();
 
@@ -221,15 +221,15 @@ class ComplexMediaTest extends FunctionalTestCase
         $ffmpeg = $this->getFFMpeg();
         $format = new X264();
 
-        $complexMedia1 = $ffmpeg->openComplex(array(__FILE__));
-        $complexMedia1
+        $advancedMedia1 = $ffmpeg->openAdvanced(array(__FILE__));
+        $advancedMedia1
             ->map(array('test'), $format, 'outputFile.mp4', false);
-        $this->assertStringContainsString('acodec', $complexMedia1->getFinalCommand());
+        $this->assertStringContainsString('acodec', $advancedMedia1->getFinalCommand());
 
-        $complexMedia2 = $ffmpeg->openComplex(array(__FILE__));
-        $complexMedia2
+        $advancedMedia2 = $ffmpeg->openAdvanced(array(__FILE__));
+        $advancedMedia2
             ->map(array('test'), $format, 'outputFile.mp4', true);
-        $this->assertStringNotContainsString('acodec', $complexMedia2->getFinalCommand());
+        $this->assertStringNotContainsString('acodec', $advancedMedia2->getFinalCommand());
     }
 
     public function testForceDisableVideo()
@@ -237,15 +237,15 @@ class ComplexMediaTest extends FunctionalTestCase
         $ffmpeg = $this->getFFMpeg();
         $format = new X264();
 
-        $complexMedia1 = $ffmpeg->openComplex(array(__FILE__));
-        $complexMedia1->map(array('test'), $format,
+        $advancedMedia1 = $ffmpeg->openAdvanced(array(__FILE__));
+        $advancedMedia1->map(array('test'), $format,
             'outputFile.mp4', false, false);
-        $this->assertStringContainsString('vcodec', $complexMedia1->getFinalCommand());
+        $this->assertStringContainsString('vcodec', $advancedMedia1->getFinalCommand());
 
-        $complexMedia2 = $ffmpeg->openComplex(array(__FILE__));
-        $complexMedia2->map(array('test'), $format,
+        $advancedMedia2 = $ffmpeg->openAdvanced(array(__FILE__));
+        $advancedMedia2->map(array('test'), $format,
             'outputFile.mp4', false, true);
-        $this->assertStringNotContainsString('vcodec', $complexMedia2->getFinalCommand());
+        $this->assertStringNotContainsString('vcodec', $advancedMedia2->getFinalCommand());
     }
 
     public function testGlobalOptions()
@@ -257,8 +257,8 @@ class ComplexMediaTest extends FunctionalTestCase
         );
 
         $ffmpeg = $this->getFFMpeg($configuration);
-        $complexMedia = $ffmpeg->openComplex(array(__FILE__));
-        $command = $complexMedia->getFinalCommand();
+        $advancedMedia = $ffmpeg->openAdvanced(array(__FILE__));
+        $command = $advancedMedia->getFinalCommand();
 
         foreach ($configuration as $optionName => $optionValue) {
             $optionName = str_replace('ffmpeg.', '', $optionName);

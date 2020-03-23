@@ -66,7 +66,7 @@ class FFMpegDriver extends AbstractBinary
     {
         preg_match('#version\s(\S+)#', $this->command('-version'), $version);
         if (!isset($version[1])) {
-            throw  new RuntimeException('Cannot to parse the ffmpeg version!');
+            throw new RuntimeException('Cannot to parse the ffmpeg version!');
         }
 
         return $version[1];

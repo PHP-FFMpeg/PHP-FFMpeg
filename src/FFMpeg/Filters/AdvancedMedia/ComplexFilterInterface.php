@@ -1,7 +1,10 @@
 <?php
 
-namespace FFMpeg\Filters\ComplexMedia;
+namespace FFMpeg\Filters\AdvancedMedia;
 
+/**
+ * A filter that is completely ready to use inside "-filter_complex" option.
+ */
 interface ComplexFilterInterface extends ComplexCompatibleFilter
 {
     /**

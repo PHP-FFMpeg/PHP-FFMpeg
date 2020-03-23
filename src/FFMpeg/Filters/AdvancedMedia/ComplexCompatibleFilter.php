@@ -1,10 +1,13 @@
 <?php
 
-namespace FFMpeg\Filters\ComplexMedia;
+namespace FFMpeg\Filters\AdvancedMedia;
 
 use FFMpeg\Filters\FilterInterface;
-use FFMpeg\Media\ComplexMedia;
+use FFMpeg\Media\AdvancedMedia;
 
+/**
+ * A filter that can be used inside "-filter_complex" option.
+ */
 interface ComplexCompatibleFilter extends FilterInterface
 {
     /**
@@ -24,9 +27,9 @@ interface ComplexCompatibleFilter extends FilterInterface
     /**
      * Apply the complex filter to the given media.
      *
-     * @param ComplexMedia $media
+     * @param AdvancedMedia $media
      *
      * @return string[] An array of arguments.
      */
-    public function applyComplex(ComplexMedia $media);
+    public function applyComplex(AdvancedMedia $media);
 }

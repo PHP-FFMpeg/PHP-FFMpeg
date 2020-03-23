@@ -1,8 +1,8 @@
 <?php
 
-namespace FFMpeg\Filters\ComplexMedia;
+namespace FFMpeg\Filters\AdvancedMedia;
 
-use FFMpeg\Media\ComplexMedia;
+use FFMpeg\Media\AdvancedMedia;
 
 /**
  * @see https://ffmpeg.org/ffmpeg-filters.html#anullsrc
@@ -57,7 +57,7 @@ class ANullSrcFilter extends AbstractComplexFilter
     /**
      * {@inheritdoc}
      */
-    public function applyComplex(ComplexMedia $media)
+    public function applyComplex(AdvancedMedia $media)
     {
         return array(
             '-filter_complex',

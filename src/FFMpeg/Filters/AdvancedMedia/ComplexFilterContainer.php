@@ -1,11 +1,11 @@
 <?php
 
-namespace FFMpeg\Filters\ComplexMedia;
+namespace FFMpeg\Filters\AdvancedMedia;
 
-use FFMpeg\Media\ComplexMedia;
+use FFMpeg\Media\AdvancedMedia;
 
 /**
- * Container for the complex filter.
+ * Container for the complex compatible filter.
  */
 class ComplexFilterContainer implements ComplexFilterInterface
 {
@@ -93,7 +93,7 @@ class ComplexFilterContainer implements ComplexFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function applyComplex(ComplexMedia $media)
+    public function applyComplex(AdvancedMedia $media)
     {
         return $this->baseFilter->applyComplex($media);
     }

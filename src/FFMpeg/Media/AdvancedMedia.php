@@ -6,10 +6,10 @@ use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\FFProbe;
-use FFMpeg\Filters\ComplexMedia\ComplexCompatibleFilter;
-use FFMpeg\Filters\ComplexMedia\ComplexFilterContainer;
-use FFMpeg\Filters\ComplexMedia\ComplexFilterInterface;
-use FFMpeg\Filters\ComplexMedia\ComplexFilters;
+use FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter;
+use FFMpeg\Filters\AdvancedMedia\ComplexFilterContainer;
+use FFMpeg\Filters\AdvancedMedia\ComplexFilterInterface;
+use FFMpeg\Filters\AdvancedMedia\ComplexFilters;
 use FFMpeg\Filters\FiltersCollection;
 use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\FormatInterface;
@@ -18,13 +18,13 @@ use FFMpeg\Format\ProgressListener\AbstractProgressListener;
 use FFMpeg\Format\VideoInterface;
 
 /**
- * Complex media may have multiple inputs and multiple outputs.
+ * AdvancedMedia may have multiple inputs and multiple outputs.
  * This class accepts only filters for -filter_complex option.
  * But you can set initial and additional parameters of the ffmpeg command.
  *
  * @see http://trac.ffmpeg.org/wiki/Creating%20multiple%20outputs
  */
-class ComplexMedia extends AbstractMediaType
+class AdvancedMedia extends AbstractMediaType
 {
     /**
      * @var string[]
@@ -52,7 +52,7 @@ class ComplexMedia extends AbstractMediaType
     private $listeners;
 
     /**
-     * ComplexMedia constructor.
+     * AdvancedMedia constructor.
      *
      * @param string[]     $inputs Array of files to be opened.
      * @param FFMpegDriver $driver
@@ -110,7 +110,7 @@ class ComplexMedia extends AbstractMediaType
     {
         foreach ($filters as $filter) {
             if (!($filter instanceof ComplexFilterInterface)) {
-                throw new RuntimeException ('For ComplexMedia you can set filters collection'
+                throw new RuntimeException ('For AdvancedMedia you can set filters collection'
                     . ' contains only objects that implement ComplexFilterInterface!');
             }
         }
@@ -129,7 +129,7 @@ class ComplexMedia extends AbstractMediaType
     /**
      * @param string[] $initialParameters
      *
-     * @return ComplexMedia
+     * @return AdvancedMedia
      */
     public function setInitialParameters(array $initialParameters)
     {
@@ -148,7 +148,7 @@ class ComplexMedia extends AbstractMediaType
     /**
      * @param string[] $additionalParameters
      *
-     * @return ComplexMedia
+     * @return AdvancedMedia
      */
     public function setAdditionalParameters(array $additionalParameters)
     {

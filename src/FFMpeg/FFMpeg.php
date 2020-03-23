@@ -16,7 +16,7 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Audio;
-use FFMpeg\Media\ComplexMedia;
+use FFMpeg\Media\AdvancedMedia;
 use FFMpeg\Media\Video;
 use Psr\Log\LoggerInterface;
 
@@ -110,11 +110,11 @@ class FFMpeg
      *
      * @param string[] $inputs Array of files to be opened.
      *
-     * @return ComplexMedia
+     * @return AdvancedMedia
      */
-    public function openComplex($inputs)
+    public function openAdvanced($inputs)
     {
-        return new ComplexMedia($inputs, $this->driver, $this->ffprobe);
+        return new AdvancedMedia($inputs, $this->driver, $this->ffprobe);
     }
 
     /**

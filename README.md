@@ -520,22 +520,22 @@ $video
 
 More details about concatenation in FFMPEG can be found [here](https://trac.ffmpeg.org/wiki/Concatenate), [here](https://ffmpeg.org/ffmpeg-formats.html#concat-1) and [here](https://ffmpeg.org/ffmpeg.html#Stream-copy).
 
-### ComplexMedia
-ComplexMedia may have multiple inputs and multiple outputs.
+### AdvancedMedia
+AdvancedMedia may have multiple inputs and multiple outputs.
 
 This class has been developed primarily to use with `-filter_complex`.
 
 So, its `filters()` method accepts only filters that can be used inside `-filter_complex` command.
-ComplexMedia already contains some built-in filters.
+AdvancedMedia already contains some built-in filters.
 
 #### Base usage
 For example:
 
 ```php
-$complexMedia = $ffmpeg->openComplex(array('video_1.mp4', 'video_2.mp4'));
-$complexMedia->filters()
+$advancedMedia = $ffmpeg->openAdvanced(array('video_1.mp4', 'video_2.mp4'));
+$advancedMedia->filters()
     ->custom('[0:v][1:v]', 'hstack', '[v]');
-$complexMedia
+$advancedMedia
     ->map(array('0:a', '[v]'), new X264('aac', 'libx264'), 'output.mp4')
     ->save();
 ```
@@ -545,7 +545,7 @@ This code takes 2 input videos, stacks they horizontally in 1 output video and a
 
 
 #### Complicated example
-A more difficult example of possibilities of the ComplexMedia. Consider all input videos already have the same resolution and duration. ("xstack" filter has been added in the 4.1 version of the ffmpeg).
+A more difficult example of possibilities of the AdvancedMedia. Consider all input videos already have the same resolution and duration. ("xstack" filter has been added in the 4.1 version of the ffmpeg).
 
 ```php
 $inputs = array(
@@ -555,14 +555,14 @@ $inputs = array(
     'video_4.mp4',
 );
 
-$complexMedia = $ffmpeg->openComplex($inputs);
-$complexMedia->filters()
+$advancedMedia = $ffmpeg->openAdvanced($inputs);
+$advancedMedia->filters()
     ->custom('[0:v]', 'negate', '[v0negate]')
     ->custom('[1:v]', 'edgedetect', '[v1edgedetect]')
     ->custom('[2:v]', 'hflip', '[v2hflip]')
     ->custom('[3:v]', 'vflip', '[v3vflip]')
     ->xStack('[v0negate][v1edgedetect][v2hflip][v3vflip]', XStackFilter::LAYOUT_2X2, 4, '[resultv]');
-$complexMedia
+$advancedMedia
     ->map(array('0:a'), new Mp3(), 'video_1.mp3')
     ->map(array('1:a'), new Flac(), 'video_2.flac')
     ->map(array('2:a'), new Wav(), 'video_3.wav')
@@ -580,18 +580,18 @@ As you can see, you can take multiple input sources, perform the complicated pro
 You do not have to use `-filter_complex`. You can use only `-map` options. For example, just extract the audio from the video:
 
 ```php
-$complexMedia = $ffmpeg->openComplex(array('video.mp4'));
-$complexMedia
+$advancedMedia = $ffmpeg->openAdvanced(array('video.mp4'));
+$advancedMedia
     ->map(array('0:a'), new Mp3(), 'output.mp3')
     ->save();
 ```
 
 #### Customisation
-If you need you can extra customize the result ffmpeg command of the ComplexMedia:
+If you need you can extra customize the result ffmpeg command of the AdvancedMedia:
 
 ```php
-$complexMedia = $ffmpeg->openComplex($inputs);
-$complexMedia
+$advancedMedia = $ffmpeg->openAdvanced($inputs);
+$advancedMedia
     ->setInitialParameters(array('the', 'params', 'that', 'will', 'be', 'added', 'before', '-i', 'part', 'of', 'the', 'command'))
     ->setAdditionalParameters(array('the', 'params', 'that', 'will', 'be', 'added', 'at', 'the', 'end', 'of', 'the', 'command'));
 ```

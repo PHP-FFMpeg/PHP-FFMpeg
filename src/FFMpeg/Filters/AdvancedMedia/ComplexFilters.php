@@ -1,25 +1,25 @@
 <?php
 
-namespace FFMpeg\Filters\ComplexMedia;
+namespace FFMpeg\Filters\AdvancedMedia;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Filters\Video\PadFilter;
 use FFMpeg\Filters\Video\WatermarkFilter;
-use FFMpeg\Media\ComplexMedia;
+use FFMpeg\Media\AdvancedMedia;
 
 class ComplexFilters
 {
     /**
-     * @var ComplexMedia
+     * @var AdvancedMedia
      */
     protected $media;
 
     /**
      * ComplexFilters constructor.
      *
-     * @param ComplexMedia $media
+     * @param AdvancedMedia $media
      */
-    public function __construct(ComplexMedia $media)
+    public function __construct(AdvancedMedia $media)
     {
         $this->media = $media;
     }
