@@ -8,10 +8,12 @@ use Tests\FFMpeg\BaseTestCase;
 abstract class FunctionalTestCase extends BaseTestCase
 {
     /**
+     * @param array $configuration
+     *
      * @return FFMpeg
      */
-    public function getFFMpeg()
+    public function getFFMpeg($configuration = array())
     {
-        return FFMpeg::create(array('timeout' => 300));
+        return FFMpeg::create(array_merge(array('timeout' => 300), $configuration));
     }
 }

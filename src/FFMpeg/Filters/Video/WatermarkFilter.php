@@ -12,10 +12,12 @@
 namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Media\AdvancedMedia;
 use FFMpeg\Media\Video;
 
-class WatermarkFilter implements VideoFilterInterface
+class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
 {
     /** @var string */
     private $watermarkPath;
@@ -44,9 +46,45 @@ class WatermarkFilter implements VideoFilterInterface
     }
 
     /**
+     * Get name of the filter.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'watermark';
+    }
+
+    /**
+     * Get minimal version of ffmpeg starting with which this filter is supported.
+     *
+     * @return string
+     */
+    public function getMinimalFFMpegVersion()
+    {
+        return '0.8';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function apply(Video $video, VideoInterface $format)
+    {
+        return $this->getCommands();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function applyComplex(AdvancedMedia $media)
+    {
+        return $this->getCommands();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getCommands()
     {
         $position = isset($this->coordinates['position']) ? $this->coordinates['position'] : 'absolute';
 
@@ -55,7 +93,7 @@ class WatermarkFilter implements VideoFilterInterface
                 if (isset($this->coordinates['top'])) {
                     $y = $this->coordinates['top'];
                 } elseif (isset($this->coordinates['bottom'])) {
-                    $y = sprintf('main_h - %d - overlay_h', $this->coordinates['bottom']);
+                    $y = 'main_h - ' . $this->coordinates['bottom'] . ' - overlay_h';
                 } else {
                     $y = 0;
                 }
@@ -63,7 +101,7 @@ class WatermarkFilter implements VideoFilterInterface
                 if (isset($this->coordinates['left'])) {
                     $x = $this->coordinates['left'];
                 } elseif (isset($this->coordinates['right'])) {
-                    $x = sprintf('main_w - %d - overlay_w', $this->coordinates['right']);
+                    $x = 'main_w - ' . $this->coordinates['right'] . ' - overlay_w';
                 } else {
                     $x = 0;
                 }
@@ -75,6 +113,9 @@ class WatermarkFilter implements VideoFilterInterface
                 break;
         }
 
-        return array('-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s [out]', $this->watermarkPath, $x, $y));
+        return array(
+            '-vf',
+            'movie=' . $this->watermarkPath . ' [watermark]; [in][watermark] overlay=' . $x . ':' . $y . ' [out]',
+        );
     }
 }

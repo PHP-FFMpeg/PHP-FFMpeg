@@ -16,6 +16,7 @@ use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Audio;
+use FFMpeg\Media\AdvancedMedia;
 use FFMpeg\Media\Video;
 use Psr\Log\LoggerInterface;
 
@@ -59,6 +60,8 @@ class FFMpeg
     /**
      * Sets the ffmpeg driver.
      *
+     * @param FFMpegDriver $ffmpeg
+     *
      * @return FFMpeg
      */
     public function setFFMpegDriver(FFMpegDriver $ffmpeg)
@@ -100,6 +103,18 @@ class FFMpeg
         }
 
         throw new InvalidArgumentException('Unable to detect file format, only audio and video supported');
+    }
+
+    /**
+     * Opens multiple input sources.
+     *
+     * @param string[] $inputs Array of files to be opened.
+     *
+     * @return AdvancedMedia
+     */
+    public function openAdvanced($inputs)
+    {
+        return new AdvancedMedia($inputs, $this->driver, $this->ffprobe);
     }
 
     /**
