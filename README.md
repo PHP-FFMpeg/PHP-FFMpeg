@@ -325,7 +325,7 @@ $video->filters()->framerate($framerate, $gop);
 
 The framerate filter takes two parameters:
 
-- `$framerate`, an instance of `FFMpeg\Coordinate\Framerate`
+- `$framerate`, an instance of `FFMpeg\Coordinate\FrameRate`
 - `$gop`, a [GOP](https://wikipedia.org/wiki/Group_of_pictures) value (integer)
 
 ###### Synchronize
