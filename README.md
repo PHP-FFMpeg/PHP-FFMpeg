@@ -596,6 +596,25 @@ $advancedMedia
     ->setAdditionalParameters(array('the', 'params', 'that', 'will', 'be', 'added', 'at', 'the', 'end', 'of', 'the', 'command'));
 ```
 
+##### Add inputs parameters
+If you need you can add extra parameters for each input of the AdvancedMedia:
+
+```php
+$inputs = [
+    'color=c=black:s=640x480',
+    'video_2.mp4',
+    'video_3.mp4',
+];
+$extraInputsParams = [
+    0 => ['-f', 'lavfi', '-t', '10'],          // extra params for firts input 'color=c=black:s=640x480' (key 0 in $inputs array)
+    2 => ['some', 'other', 'extra', 'params'], // extra params for third input 'video_3.mp4' (key 2 in $inputs array)
+];
+$advancedMedia = $ffmpeg->openAdvanced($inputs);
+$advancedMedia->setInputsParameters($extraInputsParams);
+```
+Final command will be looks like:
+`-f lavfi -t 10 -i color=c=black:s=640x480 -i /path/to/video_2.mp4 some other extra params -i /path/to/video_3.mp4`
+
 #### Formats
 
 A format implements `FFMpeg\Format\FormatInterface`. To save to a video file,
