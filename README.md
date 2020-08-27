@@ -290,29 +290,61 @@ $video->save(new FFMpeg\Format\Video\X264(), $new_file);
 
 Watermark a video with a given image.
 
+The watermark filter takes parameters:
+
+`$watermarkPath`, the path to your watermark file.
+`$coordinates`, an array defining how you want your watermark positioned. 
+
+You can use relative, absolute or preset position option for positioning:
+
+Relative:
+
 ```php
 $video
     ->filters()
     ->watermark($watermarkPath, array(
-        'position' => 'relative',
+        'position' => WatermarkFilter::POSITION_RELATIVE,
         'bottom' => 50,
         'right' => 50,
     ));
 ```
 
-The watermark filter takes two parameters:
-
-`$watermarkPath`, the path to your watermark file.
-`$coordinates`, an array defining how you want your watermark positioned. You can use relative positioning as demonstrated above or absolute as such:
+Absolute:
 
 ```php
 $video
     ->filters()
     ->watermark($watermarkPath, array(
-        'position' => 'absolute',
+        'position' => WatermarkFilter::POSITION_ABSOLUTE,
         'x' => 1180,
         'y' => 620,
     ));
+```
+
+Presets:
+
+```php
+$video
+    ->filters()
+    ->watermark($watermarkPath, array(
+       'position' => WatermarkFilter::POSITION_PRESET,
+       'place'    => WatermarkFilter::PRESET_PLACE_CENTER_CENTER,
+        //Additionally, you can specify an offset:
+       'x'        => 0,  
+       'y'        => 10,
+    ));
+```
+The watermark presets list:
+```php
+WatermarkFilter::PRESET_PLACE_TOP_LEFT      = 'top-left';
+WatermarkFilter::PRESET_PLACE_TOP_CENTER    = 'top-center';
+WatermarkFilter::PRESET_PLACE_TOP_RIGHT     = 'top-right';
+WatermarkFilter::PRESET_PLACE_BOTTOM_LEFT   = 'bottom-left';
+WatermarkFilter::PRESET_PLACE_BOTTOM_CENTER = 'bottom-center';
+WatermarkFilter::PRESET_PLACE_BOTTOM_RIGHT  = 'bottom-right';
+WatermarkFilter::PRESET_PLACE_CENTER_LEFT   = 'center-left';
+WatermarkFilter::PRESET_PLACE_CENTER_CENTER = 'center-center';
+WatermarkFilter::PRESET_PLACE_CENTER_RIGHT  = 'center-right';
 ```
 
 ###### Framerate
