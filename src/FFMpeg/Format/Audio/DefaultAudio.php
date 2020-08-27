@@ -30,6 +30,9 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /** @var integer */
     protected $audioChannels = null;
 
+    /** @var Array */
+    protected $additionalParamaters;
+    
     /**
      * {@inheritdoc}
      */
@@ -138,5 +141,30 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     public function getPasses()
     {
         return 1;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdditionalParameters()
+    {
+        return $this->additionalParamaters;
+    }
+
+    /**
+     * Sets additional parameters.
+     *
+     * @param  array                    $additionalParamaters
+     * @throws InvalidArgumentException
+     */
+    public function setAdditionalParameters($additionalParamaters)
+    {
+        if (!is_array($additionalParamaters)) {
+            throw new InvalidArgumentException('Wrong additionalParamaters value. Must be an array.');
+        }
+
+        $this->additionalParamaters = $additionalParamaters;
+
+        return $this;
     }
 }
