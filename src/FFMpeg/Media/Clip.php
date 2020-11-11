@@ -35,7 +35,6 @@ class Clip extends Video
     /**
      * Returns the video related to the frame.
      *
-     * @param FormatInterface $format
      * @return Video
      */
     public function getVideo()

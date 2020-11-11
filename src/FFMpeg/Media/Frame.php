@@ -78,12 +78,11 @@ class Frame extends AbstractMediaType
      *
      * Uses the `unaccurate method by default.`
      *
-     * @param string  $pathfile
+     * @param string $pathfile
      * @param Boolean $accurate
+     * @param bool $returnBase64
      *
      * @return Frame
-     *
-     * @throws RuntimeException
      */
     public function save($pathfile, $accurate = false, $returnBase64 = false)
     {
