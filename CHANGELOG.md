@@ -7,8 +7,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [Unreleased]
 ------------
 
+[0.17.0] - 2020-12-18
+---------------------
+
 ### Added
 
+- PHP 8 support (@kornrunner)
+
+[0.x.0] - xxxx-xx-xx
+--------------------
+
+### Added
+
+- Missing CHANGELOG updates for quite some time
 - Add pull request and issue templates.
 - Usage of new codec "aac" of ffmpeg 3
 
