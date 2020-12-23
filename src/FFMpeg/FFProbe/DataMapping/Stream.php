@@ -20,7 +20,7 @@ class Stream extends AbstractData
     /**
      * Returns true if the stream is an audio stream.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isAudio()
     {
@@ -30,7 +30,7 @@ class Stream extends AbstractData
     /**
      * Returns true if the stream is a video stream.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isVideo()
     {
