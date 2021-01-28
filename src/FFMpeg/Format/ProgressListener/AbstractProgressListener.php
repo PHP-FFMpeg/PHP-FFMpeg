@@ -74,11 +74,10 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
     /**
      * @param FFProbe $ffprobe
-     * @param string  $pathfile
-     * @param integer $currentPass The cureent pass number
-     * @param integer $totalPass   The total number of passes
-     *
-     * @throws RuntimeException
+     * @param string $pathfile
+     * @param int $currentPass The current pass number
+     * @param int $totalPass The total number of passes
+     * @param int $duration
      */
     public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass, $duration = 0)
     {
