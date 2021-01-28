@@ -24,7 +24,7 @@ class RotateFilter implements VideoFilterInterface
 
     /** @var string */
     private $angle;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct($angle, $priority = 0)
