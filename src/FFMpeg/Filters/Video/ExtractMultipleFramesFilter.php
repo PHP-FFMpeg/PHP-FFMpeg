@@ -133,7 +133,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
                 $nbDigitsInFileNames = "06";
 
             // Set the parameters
-            $commands[] = '-vf';
+            $commands[] = '-filter:v';
             $commands[] = 'fps=' . $this->frameRate;
             $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.' . $this->frameFileType;
         }
