@@ -21,7 +21,7 @@ class PadFilter implements VideoFilterInterface, ComplexCompatibleFilter
 {
     /** @var Dimension */
     private $dimension;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct(Dimension $dimension, $priority = 0)

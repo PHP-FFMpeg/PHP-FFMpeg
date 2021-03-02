@@ -18,7 +18,7 @@ class AudioResamplableFilter implements AudioFilterInterface
 {
     /** @var string */
     private $rate;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct($rate, $priority = 0)

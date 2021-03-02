@@ -24,10 +24,10 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /** @var string */
     protected $audioCodec;
 
-    /** @var integer */
+    /** @var int */
     protected $audioKiloBitrate = 128;
 
-    /** @var integer */
+    /** @var int */
     protected $audioChannels = null;
 
     /**
@@ -79,7 +79,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * Sets the kiloBitrate value.
      *
-     * @param  integer                  $kiloBitrate
+     * @param  int                  $kiloBitrate
      * @throws InvalidArgumentException
      */
     public function setAudioKiloBitrate($kiloBitrate)
@@ -104,7 +104,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /**
      * Sets the channels value.
      *
-     * @param  integer                  $channels
+     * @param  int                  $channels
      * @throws InvalidArgumentException
      */
     public function setAudioChannels($channels)
