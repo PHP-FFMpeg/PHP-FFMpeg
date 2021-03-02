@@ -31,7 +31,7 @@ class Video extends AbstractVideo
      *
      * @param  TimeCode $at
      * @param  Dimension $dimension
-     * @param  integer $duration
+     * @param  int $duration
      * @return Gif
      */
     public function gif(TimeCode $at, Dimension $dimension, $duration = null)

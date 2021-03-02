@@ -23,7 +23,7 @@ class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
     private $watermarkPath;
     /** @var array */
     private $coordinates;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct($watermarkPath, array $coordinates = array(), $priority = 0)

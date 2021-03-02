@@ -21,16 +21,16 @@ use FFMpeg\Exception\RuntimeException;
  */
 abstract class AbstractProgressListener extends EventEmitter implements ListenerInterface
 {
-    /** @var integer */
+    /** @var int */
     private $duration;
 
-    /** @var integer */
+    /** @var int */
     private $totalSize;
 
-    /** @var integer */
+    /** @var int */
     private $currentSize;
 
-    /** @var integer */
+    /** @var int */
     private $currentTime;
 
     /** @var double */
@@ -45,40 +45,39 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /** @var bool */
     private $initialized = false;
 
-    /** @var integer */
+    /** @var int */
     private $currentPass;
 
-    /** @var integer */
+    /** @var int */
     private $totalPass;
 
     /**
      * Transcoding rate in kb/s
      *
-     * @var integer
+     * @var int
      */
     private $rate;
 
     /**
      * Percentage of transcoding progress (0 - 100)
      *
-     * @var integer
+     * @var int
      */
     private $percent = 0;
 
     /**
      * Time remaining (seconds)
      *
-     * @var integer
+     * @var int
      */
     private $remaining = null;
 
     /**
      * @param FFProbe $ffprobe
-     * @param string  $pathfile
-     * @param integer $currentPass The cureent pass number
-     * @param integer $totalPass   The total number of passes
-     *
-     * @throws RuntimeException
+     * @param string $pathfile
+     * @param int $currentPass The current pass number
+     * @param int $totalPass The total number of passes
+     * @param int $duration
      */
     public function __construct(FFProbe $ffprobe, $pathfile, $currentPass, $totalPass, $duration = 0)
     {
@@ -106,7 +105,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getCurrentPass()
     {
@@ -114,7 +113,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTotalPass()
     {

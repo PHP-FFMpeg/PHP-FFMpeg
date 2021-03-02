@@ -16,7 +16,7 @@ interface VideoInterface extends AudioInterface
     /**
      * Gets the kiloBitrate value.
      *
-     * @return integer
+     * @return int
      */
     public function getKiloBitrate();
 
@@ -28,7 +28,7 @@ interface VideoInterface extends AudioInterface
      *
      * @see http://www.undeadborn.net/tools/rescalculator.php
      *
-     * @return integer
+     * @return int
      */
     public function getModulus();
 

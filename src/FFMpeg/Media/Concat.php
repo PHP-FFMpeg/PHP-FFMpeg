@@ -156,11 +156,10 @@ class Concat extends AbstractMediaType
     /**
      * Saves the concatenated video in the given filename, considering that the sources videos are all encoded with the same codec.
      *
-     * @param string  $outputPathfile
+     * @param FormatInterface $format
+     * @param string $outputPathfile
      *
      * @return Concat
-     *
-     * @throws RuntimeException
      */
     public function saveFromDifferentCodecs(FormatInterface $format, $outputPathfile)
     {

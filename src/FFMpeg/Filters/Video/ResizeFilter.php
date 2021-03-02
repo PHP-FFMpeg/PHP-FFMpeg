@@ -33,7 +33,7 @@ class ResizeFilter implements VideoFilterInterface
     private $mode;
     /** @var bool */
     private $forceStandards;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct(Dimension $dimension, $mode = self::RESIZEMODE_FIT, $forceStandards = true, $priority = 0)
