@@ -18,7 +18,7 @@ class CustomFrameFilter implements FrameFilterInterface
 {
     /** @var string */
     private $filter;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     /**

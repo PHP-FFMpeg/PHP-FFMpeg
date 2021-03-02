@@ -31,7 +31,7 @@ class VideoFilters extends AudioFilters
      *
      * @param Dimension $dimension
      * @param string    $mode
-     * @param Boolean   $forceStandards
+     * @param bool   $forceStandards
      *
      * @return VideoFilters
      */

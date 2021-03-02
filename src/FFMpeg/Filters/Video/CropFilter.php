@@ -17,7 +17,7 @@ use FFMpeg\Media\Video;
 
 class CropFilter implements VideoFilterInterface
 {
-    /** @var integer */
+    /** @var int */
     protected $priority;
     /** @var Dimension */
     protected $dimension;

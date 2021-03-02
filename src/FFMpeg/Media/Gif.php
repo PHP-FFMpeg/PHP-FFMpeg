@@ -26,7 +26,7 @@ class Gif extends AbstractMediaType
     private $timecode;
     /** @var Dimension */
     private $dimension;
-    /** @var integer */
+    /** @var int */
     private $duration;
     /** @var Video */
     private $video;

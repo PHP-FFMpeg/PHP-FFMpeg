@@ -47,7 +47,7 @@ class ComplexFilterContainer implements ComplexFilterInterface
     /**
      * Returns the priority of the filter.
      *
-     * @return integer
+     * @return int
      */
     public function getPriority()
     {

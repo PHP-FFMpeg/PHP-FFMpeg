@@ -28,7 +28,7 @@ class Point
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getX()
     {
@@ -36,7 +36,7 @@ class Point
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getY()
     {
