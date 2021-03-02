@@ -15,14 +15,14 @@ interface AudioInterface extends FormatInterface
     /**
      * Gets the audio kiloBitrate value.
      *
-     * @return integer
+     * @return int
      */
     public function getAudioKiloBitrate();
 
     /**
      * Gets the audio channels value.
      *
-     * @return integer
+     * @return int
      */
     public function getAudioChannels();
 

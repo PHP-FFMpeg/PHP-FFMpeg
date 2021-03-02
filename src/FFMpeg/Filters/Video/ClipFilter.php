@@ -21,7 +21,7 @@ class ClipFilter implements VideoFilterInterface
     private $start;
     /** @var TimeCode */
     private $duration;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0)
