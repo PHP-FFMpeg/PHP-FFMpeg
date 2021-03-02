@@ -17,7 +17,7 @@ class CustomFilter implements AudioFilterInterface
 {
     /** @var string */
     private $filter;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     /**

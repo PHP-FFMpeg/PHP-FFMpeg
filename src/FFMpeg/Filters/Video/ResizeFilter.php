@@ -31,9 +31,9 @@ class ResizeFilter implements VideoFilterInterface
     private $dimension;
     /** @var string */
     private $mode;
-    /** @var Boolean */
+    /** @var bool */
     private $forceStandards;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct(Dimension $dimension, $mode = self::RESIZEMODE_FIT, $forceStandards = true, $priority = 0)
@@ -69,7 +69,7 @@ class ResizeFilter implements VideoFilterInterface
     }
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function areStandardsForced()
     {

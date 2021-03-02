@@ -38,7 +38,7 @@ class FiltersCollection implements \Countable, \IteratorAggregate
             return 0;
         }
 
-        return count(call_user_func_array('array_merge', $this->filters));
+        return count(call_user_func_array('array_merge', array_values($this->filters)));
     }
 
     /**
@@ -51,7 +51,7 @@ class FiltersCollection implements \Countable, \IteratorAggregate
                 $this->sorted = $this->filters;
             } else {
                 krsort($this->filters);
-                $this->sorted = call_user_func_array('array_merge', $this->filters);
+                $this->sorted = call_user_func_array('array_merge', array_values($this->filters));
             }
         }
 

@@ -22,8 +22,8 @@ class Dimension
     private $height;
 
     /**
-     * @param integer $width
-     * @param integer $height
+     * @param int $width
+     * @param int $height
      *
      * @throws InvalidArgumentException when one of the parameteres is invalid
      */
@@ -40,7 +40,7 @@ class Dimension
     /**
      * Returns width.
      *
-     * @return integer
+     * @return int
      */
     public function getWidth()
     {
@@ -50,7 +50,7 @@ class Dimension
     /**
      * Returns height.
      *
-     * @return integer
+     * @return int
      */
     public function getHeight()
     {
@@ -60,7 +60,7 @@ class Dimension
     /**
      * Returns the ratio.
      *
-     * @param type $forceStandards Whether or not force the use of standards ratios;
+     * @param bool $forceStandards Whether or not force the use of standards ratios;
      *
      * @return AspectRatio
      */
