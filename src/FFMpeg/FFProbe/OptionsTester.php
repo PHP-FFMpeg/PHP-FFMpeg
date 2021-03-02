@@ -42,7 +42,7 @@ class OptionsTester implements OptionsTesterInterface
 
         $output = $this->retrieveHelpOutput();
 
-        $ret = (Boolean) preg_match('/^'.$name.'/m', $output);
+        $ret = (bool) preg_match('/^'.$name.'/m', $output);
 
         $this->cache->save($id, $ret);
 

@@ -17,7 +17,7 @@ class CustomFilter implements VideoFilterInterface
 {
     /** @var string */
     private $filter;
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     /**

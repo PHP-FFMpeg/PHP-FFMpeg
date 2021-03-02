@@ -77,13 +77,11 @@ class OptionsTesterTest extends TestCase
             ->method('fetch')
             ->will($this->returnValue($data));
 
-        $cache->expects($this->at(0))
+        $cache->expects($this->exactly(2))
             ->method('contains')
-            ->will($this->returnValue(false));
-
-        $cache->expects($this->at(1))
-            ->method('contains')
-            ->will($this->returnValue(true));
+            ->willReturnOnConsecutiveCalls(
+                $this->returnValue(false),
+                $this->returnValue(true));
 
         $cache->expects($this->once())
             ->method('save');

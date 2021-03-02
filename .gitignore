@@ -6,6 +6,7 @@ composer.lock
 phpunit.xml
 .phpunit.result.cache
 /tests/Functional/output/output-*
-sami.phar
+/docs/doctum.phar
+/docs/source/API/API/cache/twig/*
 .idea/
 /phpunit

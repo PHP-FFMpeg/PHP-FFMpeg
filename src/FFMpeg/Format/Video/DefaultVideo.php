@@ -35,6 +35,9 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /** @var Array */
     protected $additionalParamaters;
 
+    /** @var Array */
+    protected $initialParamaters;
+
     /**
      * {@inheritdoc}
      */
@@ -46,7 +49,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * Sets the kiloBitrate value.
      *
-     * @param  integer                  $kiloBitrate
+     * @param  int                  $kiloBitrate
      * @throws InvalidArgumentException
      */
     public function setKiloBitrate($kiloBitrate)
@@ -90,7 +93,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getModulus()
     {
@@ -118,6 +121,31 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
         }
 
         $this->additionalParamaters = $additionalParamaters;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getInitialParameters()
+    {
+        return $this->initialParamaters;
+    }
+
+    /**
+     * Sets initial parameters.
+     *
+     * @param  array                    $initialParamaters
+     * @throws InvalidArgumentException
+     */
+    public function setInitialParameters($initialParamaters)
+    {
+        if (!is_array($initialParamaters)) {
+            throw new InvalidArgumentException('Wrong initialParamaters value');
+        }
+
+        $this->initialParamaters = $initialParamaters;
 
         return $this;
     }

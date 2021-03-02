@@ -30,9 +30,14 @@ matrix:
     - php: 7.2
     - php: 7.3
     - php: 7.4
+    - php: 8.0
+      dist: bionic
+    - php: nightly
+      env:
+        - COMPOSER_DEV_STABILITY=true
 
 before_install:
-  - sudo add-apt-repository ppa:mc3man/trusty-media -y
+  - sudo add-apt-repository ppa:mc3man/${TRAVIS_DIST}-media -y
   - sudo apt-get update -q
   - composer self-update
   - echo "$PHPUNIT_VERSION"
@@ -45,6 +50,10 @@ before_install:
   - |
     if [ "$COMPOSER_FLAGS" == "--prefer-lowest" ]; then
       composer require "roave/security-advisories" dev-master --no-update
+    fi;
+  - |
+    if [ "$COMPOSER_DEV_STABILITY" == "true" ]; then
+      composer config minimum-stability dev
     fi;
 
 install:
