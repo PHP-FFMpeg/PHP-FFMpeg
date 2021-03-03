@@ -86,6 +86,10 @@ abstract class AbstractVideo extends Audio
                     // FFMpeg\Format\ProgressListener\AbstractProgressListener class
                     foreach ($filters as $filter) {
                         if ($filter instanceof ClipFilter) {
+                            if ($filter->getDuration() === NULL) {
+                                continue;
+                            }
+                            
                             $duration = $filter->getDuration()->toSeconds();
                             break;
                         }
