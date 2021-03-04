@@ -3,7 +3,6 @@
 namespace Tests\FFMpeg\Unit\Format\Video;
 
 use Tests\FFMpeg\Unit\Format\Audio\AudioTestCase;
-use FFMpeg\Exception\InvalidArgumentException;
 
 abstract class VideoTestCase extends AudioTestCase
 {
