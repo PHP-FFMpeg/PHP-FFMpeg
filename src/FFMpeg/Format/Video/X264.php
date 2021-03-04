@@ -81,7 +81,7 @@ class X264 extends DefaultVideo
      */
     public function getPasses()
     {
-        return $this->passes;
+        return $this->getKiloBitrate() === 0 ? 1 : $this->passes;
     }
 
     /**

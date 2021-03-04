@@ -39,9 +39,16 @@ abstract class VideoTestCase extends AudioTestCase
         $this->assertEquals(2560, $format->getKiloBitrate());
     }
 
+    public function testSetKiloBitrateBelowZero()
+    {
+        $this->expectException('FFMpeg\Exception\InvalidArgumentException');
+        $format = $this->getFormat();
+        $format->setKiloBitrate(-1);
+    }
+
     public function testSetInvalidVideoCodec()
     {
-        $this->expectException('\FFMpeg\Exception\InvalidArgumentException');
+        $this->expectException('FFMpeg\Exception\InvalidArgumentException');
         $this->getFormat()->setVideoCodec('invalid-random-video-codec');
     }
 
