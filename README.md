@@ -111,7 +111,7 @@ video. Frames can be extracted.
 You can transcode videos using the `FFMpeg\Media\Video:save` method. You will
 pass a `FFMpeg\Format\FormatInterface` for that.
 
-Please note that audio and video bitrate are set on the format.
+Please note that audio and video bitrate are set on the format. You can disable the `-b:v` option by setting the kilo bitrate to 0.
 
 ```php
 $format = new FFMpeg\Format\Video\X264();
