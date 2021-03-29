@@ -27,11 +27,22 @@ class Video extends AbstractVideo
     }
 
     /**
+     * Gets the frame at timecode.
+     *
+     * @param  TimeCode $at
+     * @return Frame
+     */
+    public function frames(string $fps, ?string $scale = null)
+    {
+        return new Frames($this, $this->driver, $this->ffprobe, $fps, $scale);
+    }
+
+    /**
      * Extracts a gif from a sequence of the video.
      *
      * @param  TimeCode $at
      * @param  Dimension $dimension
-     * @param  int $duration
+     * @param  integer $duration
      * @return Gif
      */
     public function gif(TimeCode $at, Dimension $dimension, $duration = null)
