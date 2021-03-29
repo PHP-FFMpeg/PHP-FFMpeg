@@ -12,11 +12,9 @@ Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PH
 
 ### How this library works:
 
-This library requires a working FFMpeg install. You will need both FFMpeg and FFProbe binaries to use it.
+This library requires a working [FFMpeg install](https://ffmpeg.org/download.html). You will need both FFMpeg and FFProbe binaries to use it.
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
 otherwise you should have to explicitly give the binaries path on load.
-
-For Windows users: Please find the binaries at http://ffmpeg.zeranoe.com/builds/.
 
 ### Known issues:
 
