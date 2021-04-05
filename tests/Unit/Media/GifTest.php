@@ -87,6 +87,29 @@ class GifTest extends AbstractMediaTestCase
         $this->assertSame($gif, $gif->save($pathfile));
     }
 
+    /**
+     * @dataProvider provideSaveHighQualityOptions
+     */
+    public function testSaveWithHighQuality($dimension, $duration, $paletteFilename, $commands)
+    {
+        $driver = $this->getFFMpegDriverMock();
+        $ffprobe = $this->getFFProbeMock();
+        $timecode = $this->getTimeCodeMock();
+
+        $timecode->expects($this->once())
+            ->method('__toString')
+            ->will($this->returnValue('timecode'));
+
+        $pathfile = '/target/destination';
+
+        $driver->expects($this->at(0))
+            ->method('command')
+            ->with($commands);
+
+        $gif = new Gif($this->getVideoMock(__FILE__), $driver, $ffprobe, $timecode, $dimension, $duration);
+        $this->assertSame($gif, $gif->saveWithHighQuality($pathfile, $paletteFilename));
+    }
+
     public function provideSaveOptions()
     {
         return array(
@@ -110,6 +133,26 @@ class GifTest extends AbstractMediaTestCase
                     'scale=320:-1', '-gifflags',
                     '+transdiff', '-y'
                 )
+            ),
+        );
+    }
+
+    public function provideSaveHighQualityOptions()
+    {
+        return array(
+            array(
+                new Dimension(320, 240),
+                3,
+                'tmp/palette.png',
+                array(
+                    '-ss', 'timecode',
+                    '-t', '3',
+                    '-i', __FILE__,
+                    '-vf',
+                    'fps=30,scale=320:-1:flags=lanczos,palettegen',
+                    '-y',
+                    'tmp/palette.png'
+                ),
             ),
         );
     }
