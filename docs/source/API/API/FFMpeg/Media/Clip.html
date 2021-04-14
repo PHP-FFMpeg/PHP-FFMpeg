@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>FFMpeg\Media\Clip | PHP-FFMpeg API</title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">PHP-FFMpeg API</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../FFMpeg/Media.html">FFMpeg\Media</a>\Clip</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>Clip</strong>        extends <a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a></p>
+
+            <div class="description">
+            <p>Video clip.</p>
+            <p>Use input seeking, see http://trac.ffmpeg.org/wiki/Seeking</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a> $video, <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver, <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, <a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getFFMpegDriver">getFFMpegDriver</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFMpegDriver"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setFFMpegDriver">setFFMpegDriver</a>(<a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFMpegDriver"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getFFProbe">getFFProbe</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFProbe"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setFFProbe">setFFProbe</a>(<a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFProbe"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getPathfile">getPathfile</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getPathfile"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setFiltersCollection">setFiltersCollection</a>(<a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a> $filters)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFiltersCollection"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getFiltersCollection">getFiltersCollection</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFiltersCollection"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/FFProbe/DataMapping/StreamCollection.html"><abbr title="FFMpeg\FFProbe\DataMapping\StreamCollection">StreamCollection</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getStreams">getStreams</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractStreamableMedia.html#method_getStreams"><abbr title="FFMpeg\Media\AbstractStreamableMedia">AbstractStreamableMedia</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/FFProbe/DataMapping/Format.html"><abbr title="FFMpeg\FFProbe\DataMapping\Format">Format</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getFormat">getFormat</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractStreamableMedia.html#method_getFormat"><abbr title="FFMpeg\Media\AbstractStreamableMedia">AbstractStreamableMedia</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_filters">filters</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractVideo.html#method_filters"><abbr title="FFMpeg\Media\AbstractVideo">AbstractVideo</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_addFilter">addFilter</a>(<a href="../../FFMpeg/Filters/FilterInterface.html"><abbr title="FFMpeg\Filters\FilterInterface">FilterInterface</abbr></a> $filter)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractVideo.html#method_addFilter"><abbr title="FFMpeg\Media\AbstractVideo">AbstractVideo</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_save">save</a>(<a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a> $format, string $outputPathfile)
+                    <p>Exports the video in the desired format, applies registered filters.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractVideo.html#method_save"><abbr title="FFMpeg\Media\AbstractVideo">AbstractVideo</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getFinalCommand">getFinalCommand</a>(<a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a> $format, string $outputPathfile)
+                    <p>NOTE: This method is different to the Audio's one, because Video is using passes.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractVideo.html#method_getFinalCommand"><abbr title="FFMpeg\Media\AbstractVideo">AbstractVideo</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_waveform">waveform</a>(integer $width = 640, integer $height = 120, array $colors = array(Waveform::DEFAULT_COLOR))
+                    <p>Gets the waveform of the video.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Audio.html#method_waveform"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/Concat.html"><abbr title="FFMpeg\Media\Concat">Concat</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_concat">concat</a>(array $sources)
+                    <p>Concatenates a list of videos into one unique video.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Video.html#method_concat"><abbr title="FFMpeg\Media\Video">Video</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/Frame.html"><abbr title="FFMpeg\Media\Frame">Frame</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_frame">frame</a>(<a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $at)
+                    <p>Gets the frame at timecode.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Video.html#method_frame"><abbr title="FFMpeg\Media\Video">Video</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/Gif.html"><abbr title="FFMpeg\Media\Gif">Gif</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_gif">gif</a>(<a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $at, <a href="../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension, integer $duration = null)
+                    <p>Extracts a gif from a sequence of the video.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Video.html#method_gif"><abbr title="FFMpeg\Media\Video">Video</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/Clip.html"><abbr title="FFMpeg\Media\Clip">Clip</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_clip">clip</a>(<a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)
+                    <p>Clips the video at the given time(s).</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Video.html#method_clip"><abbr title="FFMpeg\Media\Video">Video</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getVideo">getVideo</a>()
+                    <p>Returns the video related to the frame.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 25</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a> $video, <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver, <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, <a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a></td>
+                <td>$video</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+                <td>$driver</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$start</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$duration</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFFMpegDriver">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFMpegDriver"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 40</div>
+        <code>            public            <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+    <strong>getFFMpegDriver</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setFFMpegDriver">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFMpegDriver"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 50</div>
+        <code>            public            <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFFMpegDriver</strong>(<a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+                <td>$driver</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFFProbe">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFProbe"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 60</div>
+        <code>            public            <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>getFFProbe</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setFFProbe">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFProbe"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 70</div>
+        <code>            public            <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFFProbe</strong>(<a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getPathfile">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getPathfile"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 80</div>
+        <code>            public            string
+    <strong>getPathfile</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setFiltersCollection">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFiltersCollection"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 90</div>
+        <code>            public            <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFiltersCollection</strong>(<a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a> $filters)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a></td>
+                <td>$filters</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFiltersCollection">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFiltersCollection"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 100</div>
+        <code>            public            <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>getFiltersCollection</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getStreams">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractStreamableMedia.html#method_getStreams"><abbr title="FFMpeg\Media\AbstractStreamableMedia">AbstractStreamableMedia</abbr></a> at line 24</div>
+        <code>            public            <a href="../../FFMpeg/FFProbe/DataMapping/StreamCollection.html"><abbr title="FFMpeg\FFProbe\DataMapping\StreamCollection">StreamCollection</abbr></a>
+    <strong>getStreams</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/FFProbe/DataMapping/StreamCollection.html"><abbr title="FFMpeg\FFProbe\DataMapping\StreamCollection">StreamCollection</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFormat">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractStreamableMedia.html#method_getFormat"><abbr title="FFMpeg\Media\AbstractStreamableMedia">AbstractStreamableMedia</abbr></a> at line 36</div>
+        <code>            public            <a href="../../FFMpeg/FFProbe/DataMapping/Format.html"><abbr title="FFMpeg\FFProbe\DataMapping\Format">Format</abbr></a>
+    <strong>getFormat</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/FFProbe/DataMapping/Format.html"><abbr title="FFMpeg\FFProbe\DataMapping\Format">Format</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_filters">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractVideo.html#method_filters"><abbr title="FFMpeg\Media\AbstractVideo">AbstractVideo</abbr></a> at line 44</div>
+        <code>            public            <a href="../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
+    <strong>filters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addFilter">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractVideo.html#method_addFilter"><abbr title="FFMpeg\Media\AbstractVideo">AbstractVideo</abbr></a> at line 53</div>
+        <code>            public            <a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a>
+    <strong>addFilter</strong>(<a href="../../FFMpeg/Filters/FilterInterface.html"><abbr title="FFMpeg\Filters\FilterInterface">FilterInterface</abbr></a> $filter)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Filters/FilterInterface.html"><abbr title="FFMpeg\Filters\FilterInterface">FilterInterface</abbr></a></td>
+                <td>$filter</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_save">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractVideo.html#method_save"><abbr title="FFMpeg\Media\AbstractVideo">AbstractVideo</abbr></a> at line 68</div>
+        <code>            public            <a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a>
+    <strong>save</strong>(<a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a> $format, string $outputPathfile)</code>
+    </h3>
+    <div class="details">
+        <p>Exports the video in the desired format, applies registered filters.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a></td>
+                <td>$format</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$outputPathfile</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFinalCommand">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractVideo.html#method_getFinalCommand"><abbr title="FFMpeg\Media\AbstractVideo">AbstractVideo</abbr></a> at line 116</div>
+        <code>            public            string
+    <strong>getFinalCommand</strong>(<a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a> $format, string $outputPathfile)</code>
+    </h3>
+    <div class="details">
+        <p>NOTE: This method is different to the Audio's one, because Video is using passes.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a></td>
+                <td>$format</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$outputPathfile</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_waveform">
+        <div class="location">in <a href="../../FFMpeg/Media/Audio.html#method_waveform"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a> at line 138</div>
+        <code>            public            <a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a>
+    <strong>waveform</strong>(integer $width = 640, integer $height = 120, array $colors = array(Waveform::DEFAULT_COLOR))</code>
+    </h3>
+    <div class="details">
+        <p>Gets the waveform of the video.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$width</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$height</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$colors</td>
+                <td>Array of colors for ffmpeg to use. Color format is #000000 (RGB hex string with #)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_concat">
+        <div class="location">in <a href="../../FFMpeg/Media/Video.html#method_concat"><abbr title="FFMpeg\Media\Video">Video</abbr></a> at line 48</div>
+        <code>            public            <a href="../../FFMpeg/Media/Concat.html"><abbr title="FFMpeg\Media\Concat">Concat</abbr></a>
+    <strong>concat</strong>(array $sources)</code>
+    </h3>
+    <div class="details">
+        <p>Concatenates a list of videos into one unique video.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$sources</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/Concat.html"><abbr title="FFMpeg\Media\Concat">Concat</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_frame">
+        <div class="location">in <a href="../../FFMpeg/Media/Video.html#method_frame"><abbr title="FFMpeg\Media\Video">Video</abbr></a> at line 24</div>
+        <code>            public            <a href="../../FFMpeg/Media/Frame.html"><abbr title="FFMpeg\Media\Frame">Frame</abbr></a>
+    <strong>frame</strong>(<a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $at)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the frame at timecode.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$at</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/Frame.html"><abbr title="FFMpeg\Media\Frame">Frame</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_gif">
+        <div class="location">in <a href="../../FFMpeg/Media/Video.html#method_gif"><abbr title="FFMpeg\Media\Video">Video</abbr></a> at line 37</div>
+        <code>            public            <a href="../../FFMpeg/Media/Gif.html"><abbr title="FFMpeg\Media\Gif">Gif</abbr></a>
+    <strong>gif</strong>(<a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $at, <a href="../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension, integer $duration = null)</code>
+    </h3>
+    <div class="details">
+        <p>Extracts a gif from a sequence of the video.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$at</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a></td>
+                <td>$dimension</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$duration</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/Gif.html"><abbr title="FFMpeg\Media\Gif">Gif</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_clip">
+        <div class="location">in <a href="../../FFMpeg/Media/Video.html#method_clip"><abbr title="FFMpeg\Media\Video">Video</abbr></a> at line 60</div>
+        <code>            public            <a href="../../FFMpeg/Media/Clip.html"><abbr title="FFMpeg\Media\Clip">Clip</abbr></a>
+    <strong>clip</strong>(<a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)</code>
+    </h3>
+    <div class="details">
+        <p>Clips the video at the given time(s).</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$start</td>
+                <td>Start time</td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$duration</td>
+                <td>Duration</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/Clip.html"><abbr title="FFMpeg\Media\Clip">Clip</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getVideo">
+        <div class="location">at line 39</div>
+        <code>            public            <a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a>
+    <strong>getVideo</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the video related to the frame.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

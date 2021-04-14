@@ -1,0 +1,23 @@
+{
+    "name": "FFMpeg\\Exception\\LogicException",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Exception",
+    "file": "src\/FFMpeg\/Exception\/LogicException.php",
+    "hash": "4e8d24c7ac8465366b62958c30a45d1f677587cb",
+    "parent": "LogicException",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Exception\\ExceptionInterface": "FFMpeg\\Exception\\ExceptionInterface"
+    },
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

@@ -1,0 +1,116 @@
+{
+    "name": "FFMpeg\\Format\\Video\\WMV3",
+    "line": 17,
+    "short_desc": "The WMV video format",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format\\Video",
+    "file": "src\/FFMpeg\/Format\/Video\/WMV3.php",
+    "hash": "5b32ee16bf425cdf30e36c777176146e16feef22",
+    "parent": "FFMpeg\\Format\\Video\\DefaultVideo",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "audioCodec": {
+                    "name": "audioCodec",
+                    "line": 19,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "'wmav3'",
+                    "is_by_ref": false
+                },
+                "videoCodec": {
+                    "name": "videoCodec",
+                    "line": 19,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "'wmv3'",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "supportBFrames": {
+            "name": "supportBFrames",
+            "line": 29,
+            "short_desc": "Returns true if the current format supports B-Frames.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAvailableAudioCodecs": {
+            "name": "getAvailableAudioCodecs",
+            "line": 37,
+            "short_desc": "Returns the list of available audio codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAvailableVideoCodecs": {
+            "name": "getAvailableVideoCodecs",
+            "line": 45,
+            "short_desc": "Returns the list of available video codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

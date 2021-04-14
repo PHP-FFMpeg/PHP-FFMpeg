@@ -58,12 +58,15 @@ class FFProbeTest extends TestCase
     {
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
+        $frame = $this->getProbeFrameMock();
 
         return array(
             array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json'), false),
             array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json'), false),
+            array($frame, 'frames', array('-show_frames', '-print_format'), FFProbe::TYPE_FRAMES, array(__FILE__, '-show_frames', '-print_format', 'json'), false),
             array($stream, 'streams', array('-show_streams'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams'), true),
             array($format, 'format', array('-show_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format'), true),
+            array($frame, 'frames', array('-show_frames'), FFProbe::TYPE_FRAMES, array(__FILE__, '-show_frames'), true),
         );
     }
 
@@ -127,10 +130,12 @@ class FFProbeTest extends TestCase
     {
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
+        $frame = $this->getProbeFrameMock();
 
         return array(
             array($stream, 'streams', array('-show_streams', '-print_format'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-print_format', 'json')),
             array($format, 'format', array('-show_format', '-print_format'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-print_format', 'json')),
+            array($frame, 'frames', array('-show_frames', '-print_format'), FFProbe::TYPE_FRAMES, array(__FILE__, '-show_frames', '-print_format', 'json')),
         );
     }
 
@@ -183,10 +188,12 @@ class FFProbeTest extends TestCase
     {
         $stream = $this->getStreamMock();
         $format = $this->getFormatMock();
+        $frame = $this->getProbeFrameMock();
 
         return array(
             array($stream, 'streams'),
             array($format, 'format'),
+            array($frame, 'frames'),
         );
     }
 
@@ -232,6 +239,7 @@ class FFProbeTest extends TestCase
         return array(
             array('streams'),
             array('format'),
+            array('frames'),
         );
     }
 

@@ -1,0 +1,84 @@
+{
+    "name": "FFMpeg\\FFProbe\\OutputParser",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\FFProbe",
+    "file": "src\/FFMpeg\/FFProbe\/OutputParser.php",
+    "hash": "595560125b3e7cb4f8d55a4f47d47ec720a25510",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "FFProbe": "FFMpeg\\FFProbe",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\FFProbe\\OutputParserInterface": "FFMpeg\\FFProbe\\OutputParserInterface"
+    },
+    "properties": [],
+    "methods": {
+        "parse": {
+            "name": "parse",
+            "line": 22,
+            "short_desc": "Parses ffprobe raw output.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    "In case the type is not supported"
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "type": {
+                    "name": "type",
+                    "line": 22,
+                    "short_desc": "One of FFProbe::TYPE_* constant",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "data": {
+                    "name": "data",
+                    "line": 22,
+                    "short_desc": "The data",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

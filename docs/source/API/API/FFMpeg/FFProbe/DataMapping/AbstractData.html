@@ -59,7 +59,7 @@
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_get">get</a>(string $property)
+                    <a href="#method_get">get</a>(string $property, mixed $default = null)
                     <p>Returns the property value given its name.</p>
                 </td>
                 <td></td>
@@ -110,7 +110,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 20</div>
+        <div class="location">at line 18</div>
         <code>            public            
     <strong>__construct</strong>(array $properties)</code>
     </h3>
@@ -138,7 +138,7 @@
     </div>
 
                 <h3 id="method_has">
-        <div class="location">at line 31</div>
+        <div class="location">at line 29</div>
         <code>            public            Boolean
     <strong>has</strong>(string $property)</code>
     </h3>
@@ -175,9 +175,9 @@
     </div>
 
                 <h3 id="method_get">
-        <div class="location">at line 44</div>
+        <div class="location">at line 42</div>
         <code>            public            mixed
-    <strong>get</strong>(string $property)</code>
+    <strong>get</strong>(string $property, mixed $default = null)</code>
     </h3>
     <div class="details">
         <p>Returns the property value given its name.</p>
@@ -190,6 +190,12 @@
                     <tr>
                 <td>string</td>
                 <td>$property</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$default</td>
                 <td>
 </td>
             </tr>
@@ -207,21 +213,12 @@
     </table>
 
             
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>In case the data does not have the property</td>
-            </tr>
-            </table>
-
             
                     </div>
     </div>
 
                 <h3 id="method_set">
-        <div class="location">at line 61</div>
+        <div class="location">at line 59</div>
         <code>            public            <a href="../../../FFMpeg/FFProbe/DataMapping/AbstractData.html"><abbr title="FFMpeg\FFProbe\DataMapping\AbstractData">AbstractData</abbr></a>
     <strong>set</strong>(string $property, mixed $value)</code>
     </h3>
@@ -264,7 +261,7 @@
     </div>
 
                 <h3 id="method_keys">
-        <div class="location">at line 73</div>
+        <div class="location">at line 71</div>
         <code>            public            array
     <strong>keys</strong>()</code>
     </h3>
@@ -290,7 +287,7 @@
     </div>
 
                 <h3 id="method_all">
-        <div class="location">at line 83</div>
+        <div class="location">at line 81</div>
         <code>            public            array
     <strong>all</strong>()</code>
     </h3>
@@ -316,7 +313,7 @@
     </div>
 
                 <h3 id="method_count">
-        <div class="location">at line 91</div>
+        <div class="location">at line 89</div>
         <code>            public            
     <strong>count</strong>()</code>
     </h3>

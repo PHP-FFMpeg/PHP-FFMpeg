@@ -1,0 +1,219 @@
+{
+    "name": "FFMpeg\\Media\\AbstractVideo",
+    "line": 25,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/AbstractVideo.php",
+    "hash": "4c0c1056d7e5bddd99f59181dff20782e7c86173",
+    "parent": "FFMpeg\\Media\\Audio",
+    "modifiers": 16,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ExecutionFailureException": "Alchemy\\BinaryDriver\\Exception\\ExecutionFailureException",
+        "SimpleFilter": "FFMpeg\\Filters\\Audio\\SimpleFilter",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "VideoFilters": "FFMpeg\\Filters\\Video\\VideoFilters",
+        "FilterInterface": "FFMpeg\\Filters\\FilterInterface",
+        "FormatInterface": "FFMpeg\\Format\\FormatInterface",
+        "ProgressableInterface": "FFMpeg\\Format\\ProgressableInterface",
+        "AudioInterface": "FFMpeg\\Format\\AudioInterface",
+        "VideoInterface": "FFMpeg\\Format\\VideoInterface",
+        "FsManager": "Neutron\\TemporaryFilesystem\\Manager",
+        "ClipFilter": "FFMpeg\\Filters\\Video\\ClipFilter"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "filters": {
+            "name": "filters",
+            "line": 44,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Audio\\AudioFilters",
+                    false
+                ]
+            ],
+            "hint_desc": null,
+            "tags": {
+                "inheritDoc\n": [
+                    [
+                        "@return",
+                        "VideoFilters"
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addFilter": {
+            "name": "addFilter",
+            "line": 53,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Audio",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "inheritDoc\n": [
+                    [
+                        "@return",
+                        "Video"
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "line": 53,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Filters\\FilterInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FilterInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "save": {
+            "name": "save",
+            "line": 68,
+            "short_desc": "Exports the video in the desired format, applies registered filters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Video",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "format": {
+                    "name": "format",
+                    "line": 68,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\FormatInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FormatInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "outputPathfile": {
+                    "name": "outputPathfile",
+                    "line": 68,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFinalCommand": {
+            "name": "getFinalCommand",
+            "line": 116,
+            "short_desc": "NOTE: This method is different to the Audio's one, because Video is using passes.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "inheritDoc": [
+                    [
+                        ""
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "format": {
+                    "name": "format",
+                    "line": 116,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\FormatInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FormatInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "outputPathfile": {
+                    "name": "outputPathfile",
+                    "line": 116,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

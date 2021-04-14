@@ -1,0 +1,304 @@
+{
+    "name": "FFMpeg\\FFMpeg",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg",
+    "file": "src\/FFMpeg\/FFMpeg.php",
+    "hash": "0d1b826fb2a44c049740679334e7b6a5b59ae68b",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ConfigurationInterface": "Alchemy\\BinaryDriver\\ConfigurationInterface",
+        "FFMpegDriver": "FFMpeg\\Driver\\FFMpegDriver",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "Audio": "FFMpeg\\Media\\Audio",
+        "Video": "FFMpeg\\Media\\Video",
+        "LoggerInterface": "Psr\\Log\\LoggerInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 29,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "ffmpeg": {
+                    "name": "ffmpeg",
+                    "line": 29,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFMpegDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFMpegDriver",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 29,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "setFFProbe": {
+            "name": "setFFProbe",
+            "line": 42,
+            "short_desc": "Sets FFProbe.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFMpeg",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 42,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFFProbe": {
+            "name": "getFFProbe",
+            "line": 54,
+            "short_desc": "Gets FFProbe.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setFFMpegDriver": {
+            "name": "setFFMpegDriver",
+            "line": 64,
+            "short_desc": "Sets the ffmpeg driver.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFMpeg",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "ffmpeg": {
+                    "name": "ffmpeg",
+                    "line": 64,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFMpegDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFMpegDriver",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFFMpegDriver": {
+            "name": "getFFMpegDriver",
+            "line": 76,
+            "short_desc": "Gets the ffmpeg driver.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Driver\\FFMpegDriver",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "open": {
+            "name": "open",
+            "line": 90,
+            "short_desc": "Opens a file in order to be processed.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Audio",
+                    false
+                ],
+                [
+                    "FFMpeg\\Media\\Video",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "pathfile": {
+                    "name": "pathfile",
+                    "line": 90,
+                    "short_desc": "A pathfile",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "create": {
+            "name": "create",
+            "line": 114,
+            "short_desc": "Creates a new FFMpeg instance.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFMpeg",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "configuration": {
+                    "name": "configuration",
+                    "line": 114,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "Alchemy\\BinaryDriver\\ConfigurationInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "array()",
+                    "is_by_ref": false
+                },
+                "logger": {
+                    "name": "logger",
+                    "line": 114,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Psr\\Log\\LoggerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "LoggerInterface",
+                    "default": "null",
+                    "is_by_ref": false
+                },
+                "probe": {
+                    "name": "probe",
+                    "line": 114,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

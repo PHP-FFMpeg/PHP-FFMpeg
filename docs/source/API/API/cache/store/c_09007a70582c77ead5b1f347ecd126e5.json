@@ -1,0 +1,21 @@
+{
+    "name": "FFMpeg\\Exception\\ExceptionInterface",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Exception",
+    "file": "src\/FFMpeg\/Exception\/ExceptionInterface.php",
+    "hash": "a8ea4b6beb62ed782ec33f97df5d81e49c319207",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

@@ -13,6 +13,8 @@ namespace FFMpeg\FFProbe;
 
 use FFMpeg\FFProbe;
 use FFMpeg\FFProbe\DataMapping\Format;
+use FFMpeg\FFProbe\DataMapping\Frame;
+use FFMpeg\FFProbe\DataMapping\FrameCollection;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use FFMpeg\FFProbe\DataMapping\Stream;
 use FFMpeg\Exception\InvalidArgumentException;
@@ -29,6 +31,8 @@ class Mapper implements MapperInterface
                 return $this->mapFormat($data);
             case FFProbe::TYPE_STREAMS:
                 return $this->mapStreams($data);
+            case FFProbe::TYPE_FRAMES:
+                return $this->mapFrames($data);
             default:
                 throw new InvalidArgumentException(sprintf(
                     'Invalid type `%s`.', $type
@@ -50,5 +54,16 @@ class Mapper implements MapperInterface
         }
 
         return $streams;
+    }
+
+    private function mapFrames($data)
+    {
+        $frames = new FrameCollection();
+
+        foreach ($data['frames'] as $properties) {
+            $frames->add(new Frame($properties));
+        }
+
+        return $frames;
     }
 }

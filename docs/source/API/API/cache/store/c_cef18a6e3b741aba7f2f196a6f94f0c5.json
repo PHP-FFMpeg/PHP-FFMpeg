@@ -1,0 +1,93 @@
+{
+    "name": "FFMpeg\\FFProbe\\Mapper",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\FFProbe",
+    "file": "src\/FFMpeg\/FFProbe\/Mapper.php",
+    "hash": "de90b32d243e395d523f562aa1dbd3a8cb18185c",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "FFProbe": "FFMpeg\\FFProbe",
+        "Format": "FFMpeg\\FFProbe\\DataMapping\\Format",
+        "Frame": "FFMpeg\\FFProbe\\DataMapping\\Frame",
+        "FrameCollection": "FFMpeg\\FFProbe\\DataMapping\\FrameCollection",
+        "StreamCollection": "FFMpeg\\FFProbe\\DataMapping\\StreamCollection",
+        "Stream": "FFMpeg\\FFProbe\\DataMapping\\Stream",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\FFProbe\\MapperInterface": "FFMpeg\\FFProbe\\MapperInterface"
+    },
+    "properties": [],
+    "methods": {
+        "map": {
+            "name": "map",
+            "line": 27,
+            "short_desc": "Maps data given its type.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\Format",
+                    false
+                ],
+                [
+                    "FFMpeg\\FFProbe\\Stream",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    "In case the type is not supported"
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "type": {
+                    "name": "type",
+                    "line": 27,
+                    "short_desc": "One of FFProbe::TYPE_* constant",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "data": {
+                    "name": "data",
+                    "line": 27,
+                    "short_desc": "The data",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

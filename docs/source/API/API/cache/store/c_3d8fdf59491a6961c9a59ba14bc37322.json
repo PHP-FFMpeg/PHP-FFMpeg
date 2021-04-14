@@ -1,0 +1,200 @@
+{
+    "name": "FFMpeg\\FFProbe\\DataMapping\\StreamCollection",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\FFProbe\\DataMapping",
+    "file": "src\/FFMpeg\/FFProbe\/DataMapping\/StreamCollection.php",
+    "hash": "958bc86b078a708f31e6f829b177ce6fe7666052",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": {
+        "Countable": "Countable",
+        "IteratorAggregate": "IteratorAggregate"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 18,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "streams": {
+                    "name": "streams",
+                    "line": 18,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": "array()",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "first": {
+            "name": "first",
+            "line": 29,
+            "short_desc": "Returns the first stream of the collection, null if the collection is empty.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "null",
+                    false
+                ],
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\Stream",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "add": {
+            "name": "add",
+            "line": 43,
+            "short_desc": "Adds a stream to the collection.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\StreamCollection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "stream": {
+                    "name": "stream",
+                    "line": 43,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe\\DataMapping\\Stream",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Stream",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "videos": {
+            "name": "videos",
+            "line": 55,
+            "short_desc": "Returns a new StreamCollection with only video streams.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\StreamCollection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "audios": {
+            "name": "audios",
+            "line": 67,
+            "short_desc": "Returns a new StreamCollection with only audio streams.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\StreamCollection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "count": {
+            "name": "count",
+            "line": 77,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "all": {
+            "name": "all",
+            "line": 87,
+            "short_desc": "Returns the array of contained streams.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getIterator": {
+            "name": "getIterator",
+            "line": 95,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

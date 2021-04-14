@@ -1,0 +1,280 @@
+{
+    "name": "FFMpeg\\Media\\Concat",
+    "line": 29,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/Concat.php",
+    "hash": "df53053f2783ed4936960bb05b8e61686768826e",
+    "parent": "FFMpeg\\Media\\AbstractMediaType",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ExecutionFailureException": "Alchemy\\BinaryDriver\\Exception\\ExecutionFailureException",
+        "InvalidArgumentException": "Alchemy\\BinaryDriver\\Exception\\InvalidArgumentException",
+        "ConcatFilterInterface": "FFMpeg\\Filters\\Concat\\ConcatFilterInterface",
+        "ConcatFilters": "FFMpeg\\Filters\\Concat\\ConcatFilters",
+        "FFMpegDriver": "FFMpeg\\Driver\\FFMpegDriver",
+        "FFProbe": "FFMpeg\\FFProbe",
+        "SimpleFilter": "FFMpeg\\Filters\\Audio\\SimpleFilter",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "FormatInterface": "FFMpeg\\Format\\FormatInterface",
+        "FilterInterface": "FFMpeg\\Filters\\FilterInterface",
+        "ProgressableInterface": "FFMpeg\\Format\\ProgressableInterface",
+        "AudioInterface": "FFMpeg\\Format\\AudioInterface",
+        "VideoInterface": "FFMpeg\\Format\\VideoInterface",
+        "FsManager": "Neutron\\TemporaryFilesystem\\Manager"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 34,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "sources": {
+                    "name": "sources",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "driver": {
+                    "name": "driver",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFMpegDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFMpegDriver",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getSources": {
+            "name": "getSources",
+            "line": 45,
+            "short_desc": "Returns the path to the sources.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "filters": {
+            "name": "filters",
+            "line": 55,
+            "short_desc": "Returns the available filters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Concat\\ConcatFilters",
+                    false
+                ]
+            ],
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addFilter": {
+            "name": "addFilter",
+            "line": 65,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Concat",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "line": 65,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Filters\\Concat\\ConcatFilterInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "ConcatFilterInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "saveFromSameCodecs": {
+            "name": "saveFromSameCodecs",
+            "line": 82,
+            "short_desc": "Saves the concatenated video in the given array, considering that the sources videos are all encoded with the same codec.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Concat",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "outputPathfile": {
+                    "name": "outputPathfile",
+                    "line": 82,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "streamCopy": {
+                    "name": "streamCopy",
+                    "line": 82,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "bool",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "TRUE",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "saveFromDifferentCodecs": {
+            "name": "saveFromDifferentCodecs",
+            "line": 165,
+            "short_desc": "Saves the concatenated video in the given filename, considering that the sources videos are all encoded with the same codec.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Concat",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [
+                "\"2\" @param tags are expected but only \"1\" found"
+            ],
+            "parameters": {
+                "format": {
+                    "name": "format",
+                    "line": 165,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\FormatInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FormatInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "outputPathfile": {
+                    "name": "outputPathfile",
+                    "line": 165,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

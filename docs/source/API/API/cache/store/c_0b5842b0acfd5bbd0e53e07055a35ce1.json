@@ -1,0 +1,41 @@
+{
+    "name": "FFMpeg\\Filters\\FilterInterface",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters",
+    "file": "src\/FFMpeg\/Filters\/FilterInterface.php",
+    "hash": "cfe4ed42a9a5eed222c2dea0568918b91d9b27c9",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "getPriority": {
+            "name": "getPriority",
+            "line": 21,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

@@ -1,0 +1,333 @@
+{
+    "name": "FFMpeg\\Coordinate\\AspectRatio",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Coordinate",
+    "file": "src\/FFMpeg\/Coordinate\/AspectRatio.php",
+    "hash": "e9fcc3c8aacb8639d5b67dda616945f3011481c7",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 67,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "ratio": {
+                    "name": "ratio",
+                    "line": 67,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getValue": {
+            "name": "getValue",
+            "line": 77,
+            "short_desc": "Returns the value of the ratio.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "float",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "calculateWidth": {
+            "name": "calculateWidth",
+            "line": 90,
+            "short_desc": "Computes the best width for given height and modulus.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "height": {
+                    "name": "height",
+                    "line": 90,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "modulus": {
+                    "name": "modulus",
+                    "line": 90,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "1",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "calculateHeight": {
+            "name": "calculateHeight",
+            "line": 109,
+            "short_desc": "Computes the best height for given width and modulus.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "width": {
+                    "name": "width",
+                    "line": 109,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "modulus": {
+                    "name": "modulus",
+                    "line": 109,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "1",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "create": {
+            "name": "create",
+            "line": 151,
+            "short_desc": "Creates a ratio based on Dimension.",
+            "long_desc": "The strategy parameter forces by default to use standardized ratios. If\ncustom ratio need to be used, disable it.",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\AspectRatio",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "dimension": {
+                    "name": "dimension",
+                    "line": 151,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\Dimension",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Dimension",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "forceStandards": {
+                    "name": "forceStandards",
+                    "line": 151,
+                    "short_desc": "Whether to force or not standard ratios",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Boolean",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "true",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "AR_4_3": {
+            "name": "AR_4_3",
+            "line": 20,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_16_9": {
+            "name": "AR_16_9",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_8_5": {
+            "name": "AR_8_5",
+            "line": 25,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_25_16": {
+            "name": "AR_25_16",
+            "line": 28,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_3_2": {
+            "name": "AR_3_2",
+            "line": 31,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_5_3": {
+            "name": "AR_5_3",
+            "line": 33,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_5_4": {
+            "name": "AR_5_4",
+            "line": 36,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_1_1": {
+            "name": "AR_1_1",
+            "line": 37,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_1_DOT_85_1": {
+            "name": "AR_1_DOT_85_1",
+            "line": 40,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_2_DOT_39_1": {
+            "name": "AR_2_DOT_39_1",
+            "line": 42,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_ROTATED_3_4": {
+            "name": "AR_ROTATED_3_4",
+            "line": 47,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_ROTATED_9_16": {
+            "name": "AR_ROTATED_9_16",
+            "line": 49,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_ROTATED_2_3": {
+            "name": "AR_ROTATED_2_3",
+            "line": 52,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_ROTATED_3_5": {
+            "name": "AR_ROTATED_3_5",
+            "line": 54,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_ROTATED_4_5": {
+            "name": "AR_ROTATED_4_5",
+            "line": 57,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_ROTATED_1_DOT_85": {
+            "name": "AR_ROTATED_1_DOT_85",
+            "line": 60,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AR_ROTATED_2_DOT_39": {
+            "name": "AR_ROTATED_2_DOT_39",
+            "line": 62,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

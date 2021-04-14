@@ -1,0 +1,63 @@
+{
+    "name": "FFMpeg\\Media\\AbstractStreamableMedia",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/AbstractStreamableMedia.php",
+    "hash": "3f61fb91f7378bd85c7c0f7b870e9c6949e55bae",
+    "parent": "FFMpeg\\Media\\AbstractMediaType",
+    "modifiers": 16,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Format": "FFMpeg\\FFProbe\\DataMapping\\Format",
+        "StreamCollection": "FFMpeg\\FFProbe\\DataMapping\\StreamCollection"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "getStreams": {
+            "name": "getStreams",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\StreamCollection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getFormat": {
+            "name": "getFormat",
+            "line": 36,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\FFProbe\\DataMapping\\Format",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

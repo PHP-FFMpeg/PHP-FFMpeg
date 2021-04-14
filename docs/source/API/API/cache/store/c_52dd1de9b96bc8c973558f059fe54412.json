@@ -1,0 +1,21 @@
+{
+    "name": "FFMpeg\\Exception\\ExecutableNotFoundException",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Exception",
+    "file": "src\/FFMpeg\/Exception\/ExecutableNotFoundException.php",
+    "hash": "b94d9119109abd3a4d347fb44338e3fc12da1eeb",
+    "parent": "FFMpeg\\Exception\\RuntimeException",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

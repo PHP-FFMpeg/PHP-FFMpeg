@@ -1,0 +1,254 @@
+{
+    "name": "FFMpeg\\Filters\\Video\\ExtractMultipleFramesFilter",
+    "line": 19,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Video",
+    "file": "src\/FFMpeg\/Filters\/Video\/ExtractMultipleFramesFilter.php",
+    "hash": "6cd66ec5562018e4063f20ae147e4c069505719b",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException",
+        "Video": "FFMpeg\\Media\\Video",
+        "VideoInterface": "FFMpeg\\Format\\VideoInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\Video\\VideoFilterInterface": "FFMpeg\\Filters\\Video\\VideoFilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 43,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "frameRate": {
+                    "name": "frameRate",
+                    "line": 43,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "self::FRAMERATE_EVERY_SEC",
+                    "is_by_ref": false
+                },
+                "destinationFolder": {
+                    "name": "destinationFolder",
+                    "line": 43,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "__DIR__",
+                    "is_by_ref": false
+                },
+                "priority": {
+                    "name": "priority",
+                    "line": 43,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "setFrameFileType": {
+            "name": "setFrameFileType",
+            "line": 61,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Video\\ExtractMultipleFramesFilter",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\FFMpeg\\Exception\\InvalidArgumentException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "frameFileType": {
+                    "name": "frameFileType",
+                    "line": 61,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPriority": {
+            "name": "getPriority",
+            "line": 73,
+            "short_desc": "Returns the priority of the filter.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getFrameRate": {
+            "name": "getFrameRate",
+            "line": 81,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getDestinationFolder": {
+            "name": "getDestinationFolder",
+            "line": 89,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apply": {
+            "name": "apply",
+            "line": 97,
+            "short_desc": "Applies the filter on the the Video media given an format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of arguments",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "video": {
+                    "name": "video",
+                    "line": 97,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Video",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Video",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 97,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Format\\VideoInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "VideoInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "FRAMERATE_EVERY_SEC": {
+            "name": "FRAMERATE_EVERY_SEC",
+            "line": 22,
+            "short_desc": "will extract a frame every second",
+            "long_desc": ""
+        },
+        "FRAMERATE_EVERY_2SEC": {
+            "name": "FRAMERATE_EVERY_2SEC",
+            "line": 24,
+            "short_desc": "will extract a frame every 2 seconds",
+            "long_desc": ""
+        },
+        "FRAMERATE_EVERY_5SEC": {
+            "name": "FRAMERATE_EVERY_5SEC",
+            "line": 26,
+            "short_desc": "will extract a frame every 5 seconds",
+            "long_desc": ""
+        },
+        "FRAMERATE_EVERY_10SEC": {
+            "name": "FRAMERATE_EVERY_10SEC",
+            "line": 28,
+            "short_desc": "will extract a frame every 10 seconds",
+            "long_desc": ""
+        },
+        "FRAMERATE_EVERY_30SEC": {
+            "name": "FRAMERATE_EVERY_30SEC",
+            "line": 30,
+            "short_desc": "will extract a frame every 30 seconds",
+            "long_desc": ""
+        },
+        "FRAMERATE_EVERY_60SEC": {
+            "name": "FRAMERATE_EVERY_60SEC",
+            "line": 32,
+            "short_desc": "will extract a frame every minute",
+            "long_desc": ""
+        }
+    }
+}

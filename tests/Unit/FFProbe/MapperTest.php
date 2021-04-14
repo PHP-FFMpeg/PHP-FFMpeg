@@ -7,7 +7,9 @@ use FFMpeg\FFProbe\Mapper;
 use FFMpeg\FFProbe;
 use FFMpeg\FFProbe\DataMapping\Format;
 use FFMpeg\FFProbe\DataMapping\Stream;
+use FFMpeg\FFProbe\DataMapping\Frame;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
+use FFMpeg\FFProbe\DataMapping\FrameCollection;
 
 class MapperTest extends TestCase
 {
@@ -31,12 +33,16 @@ class MapperTest extends TestCase
     {
         $format = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_format.json'), true);
         $streams = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_streams.json'), true);
+        $frames = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_frames.json'), true);
 
         return array(
             array(FFProbe::TYPE_FORMAT, $format, new Format($format['format'])),
             array(FFProbe::TYPE_STREAMS, $streams, new StreamCollection(array_map(function ($streamData) {
                 return new Stream($streamData);
             }, $streams['streams']))),
+            array(FFProbe::TYPE_FRAMES, $frames, new FrameCollection(array_map(function ($frameData) {
+                return new Frame($frameData);
+            }, $frames['frames']))),
         );
     }
 }

@@ -1,0 +1,150 @@
+{
+    "name": "FFMpeg\\Format\\VideoInterface",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format",
+    "file": "src\/FFMpeg\/Format\/VideoInterface.php",
+    "hash": "cbb857570e9cd310295da26babb3a58d0e0cc18b",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Format\\AudioInterface": "FFMpeg\\Format\\AudioInterface"
+    },
+    "properties": [],
+    "methods": {
+        "getKiloBitrate": {
+            "name": "getKiloBitrate",
+            "line": 21,
+            "short_desc": "Gets the kiloBitrate value.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getModulus": {
+            "name": "getModulus",
+            "line": 33,
+            "short_desc": "Returns the modulus used by the Resizable video.",
+            "long_desc": "This used to calculate the target dimensions while maintaining the best\naspect ratio.",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "see": [
+                    [
+                        "http:\/\/www.undeadborn.net\/tools\/rescalculator.php"
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getVideoCodec": {
+            "name": "getVideoCodec",
+            "line": 40,
+            "short_desc": "Returns the video codec.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "supportBFrames": {
+            "name": "supportBFrames",
+            "line": 49,
+            "short_desc": "Returns true if the current format supports B-Frames.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": {
+                "see": [
+                    [
+                        "https:\/\/wikipedia.org\/wiki\/Video_compression_picture_types"
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAvailableVideoCodecs": {
+            "name": "getAvailableVideoCodecs",
+            "line": 56,
+            "short_desc": "Returns the list of available video codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAdditionalParameters": {
+            "name": "getAdditionalParameters",
+            "line": 63,
+            "short_desc": "Returns the list of available video codecs for this format.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

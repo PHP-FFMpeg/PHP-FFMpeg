@@ -1,0 +1,23 @@
+{
+    "name": "FFMpeg\\Format\\FrameInterface",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format",
+    "file": "src\/FFMpeg\/Format\/FrameInterface.php",
+    "hash": "c846f893352d6d7e8334e3ac340b45300b8cebeb",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Format\\FormatInterface": "FFMpeg\\Format\\FormatInterface"
+    },
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

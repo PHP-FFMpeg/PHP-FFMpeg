@@ -28,13 +28,16 @@ class OutputParserTest extends TestCase
     {
         $expectedFormat = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_format.json'), true);
         $expectedStreams = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_streams.json'), true);
+        $expectedFrames = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_frames.json'), true);
 
         $rawFormat = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_format.raw');
         $rawStreams = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_streams.raw');
+        $rawFrames = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_frames.raw');
 
         return array(
             array(FFProbe::TYPE_FORMAT, $rawFormat, $expectedFormat),
             array(FFProbe::TYPE_STREAMS, $rawStreams, $expectedStreams),
+            array(FFProbe::TYPE_FRAMES, $rawFrames, $expectedFrames),
         );
     }
 }

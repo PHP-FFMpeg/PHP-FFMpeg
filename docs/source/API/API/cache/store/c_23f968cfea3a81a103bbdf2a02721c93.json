@@ -1,0 +1,150 @@
+{
+    "name": "FFMpeg\\Coordinate\\Dimension",
+    "line": 19,
+    "short_desc": "Dimension object, used for manipulating width and height couples",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Coordinate",
+    "file": "src\/FFMpeg\/Coordinate\/Dimension.php",
+    "hash": "8bf62fd6d7c3c6c7af0d1e8ff61926f2d331bbda",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 30,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "InvalidArgumentException",
+                    "when one of the parameteres is invalid"
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "width": {
+                    "name": "width",
+                    "line": 30,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "height": {
+                    "name": "height",
+                    "line": 30,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getWidth": {
+            "name": "getWidth",
+            "line": 45,
+            "short_desc": "Returns width.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getHeight": {
+            "name": "getHeight",
+            "line": 55,
+            "short_desc": "Returns height.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getRatio": {
+            "name": "getRatio",
+            "line": 67,
+            "short_desc": "Returns the ratio.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Coordinate\\AspectRatio",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "forceStandards": {
+                    "name": "forceStandards",
+                    "line": 67,
+                    "short_desc": "Whether or not force the use of standards ratios;",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Coordinate\\type",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "true",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

@@ -1,0 +1,21 @@
+{
+    "name": "FFMpeg\\FFProbe\\DataMapping\\Format",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\FFProbe\\DataMapping",
+    "file": "src\/FFMpeg\/FFProbe\/DataMapping\/Format.php",
+    "hash": "b49dfcfc07ef236aa6098cfeb85b1abd261c3cc2",
+    "parent": "FFMpeg\\FFProbe\\DataMapping\\AbstractData",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

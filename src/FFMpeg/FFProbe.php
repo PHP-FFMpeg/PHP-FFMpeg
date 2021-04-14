@@ -17,6 +17,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\FFProbe\DataMapping\Format;
+use FFMpeg\FFProbe\DataMapping\FrameCollection;
 use FFMpeg\FFProbe\Mapper;
 use FFMpeg\FFProbe\MapperInterface;
 use FFMpeg\FFProbe\OptionsTester;
@@ -32,6 +33,7 @@ class FFProbe
 {
     const TYPE_STREAMS = 'streams';
     const TYPE_FORMAT = 'format';
+    const TYPE_FRAMES = 'frames';
 
     /** @var Cache */
     private $cache;
@@ -159,15 +161,17 @@ class FFProbe
      * Probes the format of a given file.
      *
      * @param string $pathfile
+     * @param array $options
      *
      * @return Format A Format object
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function format($pathfile)
+    public function format($pathfile, $options = array())
     {
-        return $this->probe($pathfile, '-show_format', static::TYPE_FORMAT);
+        array_unshift($options, '-show_format');
+        return $this->probe($pathfile, $options, static::TYPE_FORMAT);
     }
 
     /**
@@ -195,15 +199,36 @@ class FFProbe
      * Probes the streams contained in a given file.
      *
      * @param string $pathfile
+     * @param array $options
      *
      * @return StreamCollection A collection of streams
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function streams($pathfile)
+    public function streams($pathfile, $options = array())
     {
-        return $this->probe($pathfile, '-show_streams', static::TYPE_STREAMS);
+        array_unshift($options, '-show_streams');
+        return $this->probe($pathfile, $options, static::TYPE_STREAMS);
+    }
+
+    /**
+     * @api
+     *
+     * Probes the streams contained in a given file.
+     *
+     * @param string $pathfile
+     * @param array $options
+     *
+     * @return FrameCollection A collection of streams
+     *
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     */
+    public function frames($pathfile, $options = array())
+    {
+        array_unshift($options, '-show_frames');
+        return $this->probe($pathfile, $options, static::TYPE_FRAMES);
     }
 
     /**
@@ -226,22 +251,32 @@ class FFProbe
         return new static(FFProbeDriver::create($configuration, $logger), $cache);
     }
 
-    private function probe($pathfile, $command, $type, $allowJson = true)
+    private function probe($pathfile, $options, $type, $allowJson = true)
     {
-        $id = sprintf('%s-%s', $command, $pathfile);
+        $id = sprintf('%s-%s', md5(json_encode($options)), $pathfile);
 
         if ($this->cache->contains($id)) {
             return $this->cache->fetch($id);
         }
 
-        if (!$this->optionsTester->has($command)) {
-            throw new RuntimeException(sprintf(
-                'This version of ffprobe is too old and '
-                . 'does not support `%s` option, please upgrade', $command
-            ));
-        }
+        $commands = array($pathfile);
 
-        $commands = array($pathfile, $command);
+        foreach ($options as $option) {
+            $option = explode(' ', $option);
+
+            if (!$this->optionsTester->has($option[0])) {
+                throw new RuntimeException(sprintf(
+                    'This version of ffprobe is too old and '
+                    . 'does not support `%s` option, please upgrade', $option[0]
+                ));
+            }
+
+            $commands[] = $option[0];
+            if (!empty($option[1]) && substr($option[1], 0, 1) !== '-') {
+                // option values can't be empty or start with a dash character
+                $commands[] = $option[1];
+            }
+        }
 
         $parseIsToDo = false;
 
@@ -270,7 +305,7 @@ class FFProbe
                 // Malformed json may be retrieved
                 $data = $this->parseJson($output);
             } catch (RuntimeException $e) {
-                return $this->probe($pathfile, $command, $type, false);
+                return $this->probe($pathfile, $options, $type, false);
             }
         }
 

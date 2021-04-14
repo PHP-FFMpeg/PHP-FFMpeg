@@ -55,6 +55,36 @@
             </tr>
                     <tr>
                 <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_addMetadata">addMetadata</a>(Array|Null $data = null)
+                    <p>Add metadata to an audio file.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../FFMpeg/Filters/Audio/AudioFilters.html#method_addMetadata"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_clip">clip</a>(<a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)
+                    <p>Clips (cuts) the video.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_custom">custom</a>(string $parameters)
+                    <p>Applies a custom filter: -vf foo bar</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
                 </td>
                 <td class="last">
@@ -68,8 +98,18 @@
                     <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_framerate">framerate</a>(<a href="../../../FFMpeg/Coordinate/FrameRate.html"><abbr title="FFMpeg\Coordinate\FrameRate">FrameRate</abbr></a> $framerate, <abbr title="FFMpeg\Filters\Video\type">type</abbr> $gop)
+                    <a href="#method_framerate">framerate</a>(<a href="../../../FFMpeg/Coordinate/FrameRate.html"><abbr title="FFMpeg\Coordinate\FrameRate">FrameRate</abbr></a> $framerate, Integer $gop)
                     <p>Changes the video framerate.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="FFMpeg\Filters\Video\$this">$this</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_extractMultipleFrames">extractMultipleFrames</a>(string $frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, string $destinationFolder = __DIR__)
+                    <p>Extract multiple frames from the video</p>
                 </td>
                 <td></td>
             </tr>
@@ -85,21 +125,21 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_clip">clip</a>(<a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)
-                    <p>Clips (cuts) the video.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
                     <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_audioResample">audioResample</a>(Integer $rate)
                     <p>Resamples the audio file.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_pad">pad</a>(<a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension)
+                    <p>Adds padding (black bars) to a video.</p>
                 </td>
                 <td></td>
             </tr>
@@ -111,6 +151,16 @@
                     <a href="#method_rotate">rotate</a>($angle)
                     <p>
 </p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_crop">crop</a>(<a href="../../../FFMpeg/Coordinate/Point.html"><abbr title="FFMpeg\Coordinate\Point">Point</abbr></a> $point, <a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension)
+                    <p>Crops the video</p>
                 </td>
                 <td></td>
             </tr>
@@ -131,7 +181,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 23</div>
+        <div class="location">at line 24</div>
         <code>            public            
     <strong>__construct</strong>(<a href="../../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a> $media)</code>
     </h3>
@@ -159,7 +209,7 @@
     </div>
 
                 <h3 id="method_resample">
-        <div class="location">in <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html#method_resample"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a> at line 23</div>
+        <div class="location">in <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html#method_resample"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a> at line 34</div>
         <code>            public            <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
     <strong>resample</strong>(Integer $rate)</code>
     </h3>
@@ -195,8 +245,112 @@
                     </div>
     </div>
 
+                <h3 id="method_addMetadata">
+        <div class="location">in <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html#method_addMetadata"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a> at line 55</div>
+        <code>            public            
+    <strong>addMetadata</strong>(Array|Null $data = null)</code>
+    </h3>
+    <div class="details">
+        <p>Add metadata to an audio file.</p>
+        <p>If no arguments are given then filter
+will remove all metadata from the audio file</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>Array|Null</td>
+                <td>$data</td>
+                <td>If array must contain one of these key/value pairs: - "title": Title metadata - "artist": Artist metadata - "composer": Composer metadata - "album": Album metadata - "track": Track metadata - "artwork": Song artwork. String of file path - "year": Year metadata - "genre": Genre metadata - "description": Description metadata</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_clip">
+        <div class="location">at line 95</div>
+        <code>            public            <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
+    <strong>clip</strong>(<a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)</code>
+    </h3>
+    <div class="details">
+        <p>Clips (cuts) the video.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$start</td>
+                <td>Where the clipping starts(seek to time)</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
+                <td>$duration</td>
+                <td>How long the clipped audio should be</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_custom">
+        <div class="location">at line 172</div>
+        <code>            public            <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
+    <strong>custom</strong>(string $parameters)</code>
+    </h3>
+    <div class="details">
+        <p>Applies a custom filter: -vf foo bar</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$parameters</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_resize">
-        <div class="location">at line 37</div>
+        <div class="location">at line 38</div>
         <code>            public            <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
     <strong>resize</strong>(<a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension, string $mode = ResizeFilter::RESIZEMODE_FIT, Boolean $forceStandards = true)</code>
     </h3>
@@ -245,9 +399,9 @@
     </div>
 
                 <h3 id="method_framerate">
-        <div class="location">at line 52</div>
+        <div class="location">at line 53</div>
         <code>            public            <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
-    <strong>framerate</strong>(<a href="../../../FFMpeg/Coordinate/FrameRate.html"><abbr title="FFMpeg\Coordinate\FrameRate">FrameRate</abbr></a> $framerate, <abbr title="FFMpeg\Filters\Video\type">type</abbr> $gop)</code>
+    <strong>framerate</strong>(<a href="../../../FFMpeg/Coordinate/FrameRate.html"><abbr title="FFMpeg\Coordinate\FrameRate">FrameRate</abbr></a> $framerate, Integer $gop)</code>
     </h3>
     <div class="details">
         <p>Changes the video framerate.</p>
@@ -264,7 +418,7 @@
 </td>
             </tr>
                     <tr>
-                <td><abbr title="FFMpeg\Filters\Video\type">type</abbr></td>
+                <td>Integer</td>
                 <td>$gop</td>
                 <td>
 </td>
@@ -287,8 +441,51 @@
                     </div>
     </div>
 
+                <h3 id="method_extractMultipleFrames">
+        <div class="location">at line 68</div>
+        <code>            public            <abbr title="FFMpeg\Filters\Video\$this">$this</abbr>
+    <strong>extractMultipleFrames</strong>(string $frameRate = ExtractMultipleFramesFilter::FRAMERATE_EVERY_2SEC, string $destinationFolder = __DIR__)</code>
+    </h3>
+    <div class="details">
+        <p>Extract multiple frames from the video</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$frameRate</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$destinationFolder</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="FFMpeg\Filters\Video\$this">$this</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_synchronize">
-        <div class="location">at line 64</div>
+        <div class="location">at line 80</div>
         <code>            public            <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
     <strong>synchronize</strong>()</code>
     </h3>
@@ -313,51 +510,8 @@
                     </div>
     </div>
 
-                <h3 id="method_clip">
-        <div class="location">at line 79</div>
-        <code>            public            <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
-    <strong>clip</strong>(<a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $start, <a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a> $duration = null)</code>
-    </h3>
-    <div class="details">
-        <p>Clips (cuts) the video.</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
-                <td>$start</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td><a href="../../../FFMpeg/Coordinate/TimeCode.html"><abbr title="FFMpeg\Coordinate\TimeCode">TimeCode</abbr></a></td>
-                <td>$duration</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
                 <h3 id="method_audioResample">
-        <div class="location">at line 93</div>
+        <div class="location">at line 109</div>
         <code>            public            <a href="../../../FFMpeg/Filters/Audio/AudioFilters.html"><abbr title="FFMpeg\Filters\Audio\AudioFilters">AudioFilters</abbr></a>
     <strong>audioResample</strong>(Integer $rate)</code>
     </h3>
@@ -393,8 +547,45 @@
                     </div>
     </div>
 
+                <h3 id="method_pad">
+        <div class="location">at line 123</div>
+        <code>            public            <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
+    <strong>pad</strong>(<a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension)</code>
+    </h3>
+    <div class="details">
+        <p>Adds padding (black bars) to a video.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a></td>
+                <td>$dimension</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_rotate">
-        <div class="location">at line 100</div>
+        <div class="location">at line 130</div>
         <code>            public            
     <strong>rotate</strong>($angle)</code>
     </h3>
@@ -421,8 +612,51 @@
                     </div>
     </div>
 
+                <h3 id="method_crop">
+        <div class="location">at line 145</div>
+        <code>            public            <a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a>
+    <strong>crop</strong>(<a href="../../../FFMpeg/Coordinate/Point.html"><abbr title="FFMpeg\Coordinate\Point">Point</abbr></a> $point, <a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension)</code>
+    </h3>
+    <div class="details">
+        <p>Crops the video</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/Point.html"><abbr title="FFMpeg\Coordinate\Point">Point</abbr></a></td>
+                <td>$point</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a></td>
+                <td>$dimension</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/Video/VideoFilters.html"><abbr title="FFMpeg\Filters\Video\VideoFilters">VideoFilters</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_watermark">
-        <div class="location">at line 113</div>
+        <div class="location">at line 158</div>
         <code>            public            <abbr title="FFMpeg\Filters\Video\$this">$this</abbr>
     <strong>watermark</strong>(string $imagePath, array $coordinates = array())</code>
     </h3>

@@ -1,0 +1,58 @@
+{
+    "name": "FFMpeg\\Filters\\Concat\\ConcatFilterInterface",
+    "line": 17,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Concat",
+    "file": "src\/FFMpeg\/Filters\/Concat\/ConcatFilterInterface.php",
+    "hash": "a185898606f7713266e836f24642f609c886785b",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "FilterInterface": "FFMpeg\\Filters\\FilterInterface",
+        "Concat": "FFMpeg\\Media\\Concat"
+    },
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Filters\\FilterInterface": "FFMpeg\\Filters\\FilterInterface"
+    },
+    "properties": [],
+    "methods": {
+        "apply": {
+            "name": "apply",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "concat": {
+                    "name": "concat",
+                    "line": 19,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Concat",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Concat",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

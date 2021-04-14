@@ -1,0 +1,60 @@
+{
+    "name": "FFMpeg\\Format\\FormatInterface",
+    "line": 13,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Format",
+    "file": "src\/FFMpeg\/Format\/FormatInterface.php",
+    "hash": "89b9c804aa0c6a59cc1b5d32af91ba9e87f9f1db",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "getPasses": {
+            "name": "getPasses",
+            "line": 20,
+            "short_desc": "Returns the number of passes.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getExtraParams": {
+            "name": "getExtraParams",
+            "line": 27,
+            "short_desc": "Returns an array of extra parameters to add to ffmpeg commandline.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Format\\array()",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

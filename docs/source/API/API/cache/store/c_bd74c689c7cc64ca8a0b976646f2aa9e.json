@@ -1,0 +1,55 @@
+{
+    "name": "FFMpeg\\Filters\\Gif\\GifFilters",
+    "line": 16,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Filters\\Gif",
+    "file": "src\/FFMpeg\/Filters\/Gif\/GifFilters.php",
+    "hash": "a172635da99755e891f1997c4c903239e019ff24",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Gif": "FFMpeg\\Media\\Gif"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 20,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gif": {
+                    "name": "gif",
+                    "line": 20,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Gif",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Gif",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

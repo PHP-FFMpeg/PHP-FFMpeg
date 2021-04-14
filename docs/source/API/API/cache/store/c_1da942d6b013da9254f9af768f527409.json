@@ -1,0 +1,23 @@
+{
+    "name": "FFMpeg\\Exception\\RuntimeException",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Exception",
+    "file": "src\/FFMpeg\/Exception\/RuntimeException.php",
+    "hash": "94b034160f13f78b3f21e147aedd8f95576f3166",
+    "parent": "RuntimeException",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Exception\\ExceptionInterface": "FFMpeg\\Exception\\ExceptionInterface"
+    },
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

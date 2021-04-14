@@ -1,0 +1,298 @@
+{
+    "name": "FFMpeg\\Media\\Waveform",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Media",
+    "file": "src\/FFMpeg\/Media\/Waveform.php",
+    "hash": "00c1e530946ec4be8913c54c55ad1e02a787cb76",
+    "parent": "FFMpeg\\Media\\AbstractMediaType",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ExecutionFailureException": "Alchemy\\BinaryDriver\\Exception\\ExecutionFailureException",
+        "InvalidArgumentException": "FFMpeg\\Exception\\InvalidArgumentException",
+        "WaveformFilterInterface": "FFMpeg\\Filters\\Waveform\\WaveformFilterInterface",
+        "WaveformFilters": "FFMpeg\\Filters\\Waveform\\WaveformFilters",
+        "FFMpegDriver": "FFMpeg\\Driver\\FFMpegDriver",
+        "FFProbe": "FFMpeg\\FFProbe",
+        "RuntimeException": "FFMpeg\\Exception\\RuntimeException"
+    },
+    "errors": [],
+    "interfaces": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 36,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "audio": {
+                    "name": "audio",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Media\\Audio",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Audio",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "driver": {
+                    "name": "driver",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Driver\\FFMpegDriver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFMpegDriver",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "ffprobe": {
+                    "name": "ffprobe",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\FFProbe",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "FFProbe",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "width": {
+                    "name": "width",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "height": {
+                    "name": "height",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "colors": {
+                    "name": "colors",
+                    "line": 36,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "array(self::DEFAULT_COLOR)",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getAudio": {
+            "name": "getAudio",
+            "line": 51,
+            "short_desc": "Returns the audio related to the waveform.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Audio",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "filters": {
+            "name": "filters",
+            "line": 61,
+            "short_desc": "Returns the available filters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Filters\\Waveform\\WaveformFilters",
+                    false
+                ]
+            ],
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addFilter": {
+            "name": "addFilter",
+            "line": 71,
+            "short_desc": "{@inheritdoc}",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Waveform",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "line": 71,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "FFMpeg\\Filters\\Waveform\\WaveformFilterInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "WaveformFilterInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "setColors": {
+            "name": "setColors",
+            "line": 86,
+            "short_desc": "Parameter should be an array containing at least one valid color represented as a HTML color string.",
+            "long_desc": "For\nexample #FFFFFF or #000000. By default the color is set to black. Keep in mind that if you save the waveform\nas jpg file, it will appear completely black and to avoid this you can set the waveform color to white (#FFFFFF).\nSaving waveforms to png is strongly suggested.",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "colors": {
+                    "name": "colors",
+                    "line": 86,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getColors": {
+            "name": "getColors",
+            "line": 112,
+            "short_desc": "Returns an array of colors that will be passed to ffmpeg to use for waveform generation.",
+            "long_desc": "Colors are applied ONLY\nto the waveform. Background cannot be controlled that easily and it is probably easier to save the waveform\nas a transparent png file and then add background of choice.",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "save": {
+            "name": "save",
+            "line": 136,
+            "short_desc": "Saves the waveform in the given filename.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "FFMpeg\\Media\\Waveform",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "RuntimeException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "pathfile": {
+                    "name": "pathfile",
+                    "line": 136,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "DEFAULT_COLOR": {
+            "name": "DEFAULT_COLOR",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

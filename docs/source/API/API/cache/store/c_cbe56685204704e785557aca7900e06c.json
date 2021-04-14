@@ -1,0 +1,23 @@
+{
+    "name": "FFMpeg\\Exception\\InvalidArgumentException",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "FFMpeg\\Exception",
+    "file": "src\/FFMpeg\/Exception\/InvalidArgumentException.php",
+    "hash": "7b3c37264e64ad4525408f0b1ddc998950963cbc",
+    "parent": "InvalidArgumentException",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": {
+        "FFMpeg\\Exception\\ExceptionInterface": "FFMpeg\\Exception\\ExceptionInterface"
+    },
+    "properties": [],
+    "methods": [],
+    "constants": []
+}
