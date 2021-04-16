@@ -82,6 +82,24 @@ class Stream extends AbstractData
     }
 
     /**
+     * Returns the rotation of the video stream, in degrees.
+     * Use this to determine if the dimensions are rotated.
+     *
+     * @return Integer
+     *
+     * @throws LogicException   In case the stream is not a video stream.
+     */
+    public function getRotation()
+    {
+      if (!$this->isVideo()) {
+        throw new LogicException('Rotation can only be retrieved from video streams.');
+      }
+      $tags = $this->get('tags');
+      if(empty($tags['rotate'])) return 0;
+      return intval($tags['rotate']);
+    }
+
+    /**
      * Extracts a ratio from a string in a \d+:\d+ format given a key name.
      *
      * @param  Stream     $stream The stream where to look for the ratio.
