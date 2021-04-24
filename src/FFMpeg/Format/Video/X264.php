@@ -62,7 +62,7 @@ class X264 extends DefaultVideo
      */
     public function getAvailableVideoCodecs()
     {
-        return array('libx264');
+        return array('libx264', 'copy');
     }
 
     /**
