@@ -42,7 +42,6 @@
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "silex/silex": "~1.0",
         "symfony/phpunit-bridge": "^5.0.4",
         "symfony/process": "2.8 || 3.3"
     },

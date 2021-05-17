@@ -7,6 +7,13 @@ use Silex\Application;
 
 class FFMpegServiceProviderTest extends TestCase
 {
+    protected function setUp()
+    {
+        if (!class_exists('\Application\Silex')) {
+            $this->markTestSkipped('You must have silex/silex installed.');
+        }
+    }
+
     public function testWithConfig()
     {
         $app = new Application();
