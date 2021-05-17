@@ -1,0 +1,68 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+      - v1.x
+  pull_request:
+
+jobs:
+  test:
+    name: PHP ${{ matrix.php-version }} + ${{ matrix.dependencies }}
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version:
+          - '5.6'
+          - '7.0'
+          - '7.1'
+          - '7.2'
+          - '7.3'
+          - '7.4'
+          - '8.0'
+        dependencies: [highest]
+        stability: [stable]
+        composer-options: ["--prefer-dist --prefer-stable"]
+        include:
+          - php-version: '5.6'
+            dependencies: lowest
+          - php-version: '8.0'
+            dependencies: dev
+            composer-options: ""
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install PHP with extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer:v2
+
+      - name: Install FFMPEG
+        uses: FedericoCarboni/setup-ffmpeg@v1
+        with:
+          # Not strictly necessary, but it may prevent rate limit
+          # errors especially on GitHub-hosted macos machines.
+          token: ${{ secrets.GITHUB_TOKEN }}
+        id: setup-ffmpeg
+
+      - name: Add PHPUnit matcher
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: "Set minimum stability dev"
+        if: matrix.stability == 'dev'
+        run: composer config minimum-stability dev
+
+      - name: "Install Composer dependencies (${{ matrix.dependencies }})"
+        uses: "ramsey/composer-install@v1"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "${{ matrix.composer-options }}"
+
+      - name: Run Tests
+        run: vendor/bin/simple-phpunit --verbose

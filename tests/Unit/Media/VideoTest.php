@@ -699,7 +699,6 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('command')
             ->with($this->isType('array'), false, $this->anything())
             ->will($this->returnCallback(function ($commands, $errors, $listeners) {
-                var_dump($commands);
                 $this->assertTrue(!in_array('-b:v', $commands));
             }));
 
