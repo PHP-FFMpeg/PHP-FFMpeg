@@ -16,6 +16,9 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
 
+/**
+ * @deprecated Use \FFMpeg\Media\Video::frames instead
+ */
 class ExtractMultipleFramesFilter implements VideoFilterInterface
 {
     /** will extract a frame every second */
@@ -38,7 +41,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     private $frameFileType = 'jpg';
 
     /** @var array */
-    private static $supportedFrameFileTypes = ['jpg', 'jpeg', 'png'];
+    private static $supportedFrameFileTypes = array('jpg', 'jpeg', 'png');
 
     public function __construct($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority = 0)
     {
@@ -93,6 +96,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
 
     /**
      * {@inheritdoc}
+     * @deprecated Use \FFMpeg\Media\Video::frames instead
      */
     public function apply(Video $video, VideoInterface $format)
     {
