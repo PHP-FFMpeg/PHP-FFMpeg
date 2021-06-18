@@ -22,7 +22,7 @@ class X264 extends DefaultVideo
     /** @var int */
     private $passes = 2;
 
-    public function __construct($audioCodec = 'libfaac', $videoCodec = 'libx264')
+    public function __construct($audioCodec = 'aac', $videoCodec = 'libx264')
     {
         $this
             ->setAudioCodec($audioCodec)
@@ -81,7 +81,7 @@ class X264 extends DefaultVideo
      */
     public function getPasses()
     {
-        return $this->passes;
+        return $this->getKiloBitrate() === 0 ? 1 : $this->passes;
     }
 
     /**
