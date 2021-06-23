@@ -10,7 +10,7 @@ class FFMpegServiceProviderTest extends TestCase
     protected function setUp()
     {
         if (!class_exists('\Application\Silex')) {
-            $this->markTestSkipped('You must have silex/silex installed.');
+            $this->markTestSkipped('You MUST have silex/silex installed.');
         }
     }
 
