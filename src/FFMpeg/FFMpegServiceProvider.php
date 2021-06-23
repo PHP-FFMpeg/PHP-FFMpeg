@@ -15,6 +15,9 @@ use Doctrine\Common\Cache\ArrayCache;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
+/**
+ * @deprecated
+ */
 class FFMpegServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
