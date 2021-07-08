@@ -9,11 +9,16 @@ class OptionsTesterTest extends TestCase
 {
     public function testHasOptionWithOldFFProbe()
     {
-        $this->expectException(
-            '\FFMpeg\Exception\RuntimeException',
-            'Your FFProbe version is too old and does not support `-help` option, please upgrade.'
-        );
+        $this->expectException('\FFMpeg\Exception\RuntimeException');
+        $this->expectExceptionMessage('Your FFProbe version is too old and does not support `-help` option, please upgrade.');
+
         $cache = $this->getCacheMock();
+        $optionItem = $this->getCacheItemMock();
+        $helpItem = $this->getCacheItemMock();
+
+        $cache->expects($this->exactly(2))
+            ->method('getItem')
+            ->willReturnOnConsecutiveCalls($optionItem, $helpItem);
 
         $executionFailerExceptionMock = $this->getMockBuilder('Alchemy\BinaryDriver\Exception\ExecutionFailureException')
             ->disableOriginalConstructor()
@@ -35,22 +40,38 @@ class OptionsTesterTest extends TestCase
     public function testHasOptionWithCacheEmpty($isPresent, $data, $optionName)
     {
         $cache = $this->getCacheMock();
-
-        $cache->expects($this->never())
-            ->method('fetch');
-
-        $cache->expects($this->exactly(2))
-            ->method('contains')
-            ->will($this->returnValue(false));
+        $optionItem = $this->getCacheItemMock();
+        $helpItem = $this->getCacheItemMock();
 
         $cache->expects($this->exactly(2))
-            ->method('save');
+            ->method('getItem')
+            ->willReturnOnConsecutiveCalls($optionItem, $helpItem);
+
+        $optionItem->expects($this->once())
+            ->method('isHit')
+            ->willReturn(false);
+
+        $helpItem->expects($this->once())
+            ->method('isHit')
+            ->willReturn(false);
 
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->once())
             ->method('command')
             ->with(array('-help', '-loglevel', 'quiet'))
             ->will($this->returnValue($data));
+
+        $helpItem->expects($this->once())
+            ->method('set')
+            ->with($data);
+
+        $optionItem->expects($this->once())
+            ->method('set')
+            ->with($isPresent);
+
+        $cache->expects($this->exactly(2))
+            ->method('save')
+            ->withConsecutive([$helpItem], [$optionItem]);
 
         $tester = new OptionsTester($ffprobe, $cache);
         $this->assertTrue($isPresent === $tester->has($optionName));
@@ -72,19 +93,32 @@ class OptionsTesterTest extends TestCase
     public function testHasOptionWithHelpCacheLoaded($isPresent, $data, $optionName)
     {
         $cache = $this->getCacheMock();
-
-        $cache->expects($this->once())
-            ->method('fetch')
-            ->will($this->returnValue($data));
+        $optionItem = $this->getCacheItemMock();
+        $helpItem = $this->getCacheItemMock();
 
         $cache->expects($this->exactly(2))
-            ->method('contains')
-            ->willReturnOnConsecutiveCalls(
-                $this->returnValue(false),
-                $this->returnValue(true));
+            ->method('getItem')
+            ->willReturnOnConsecutiveCalls($optionItem, $helpItem);
+
+        $optionItem->expects($this->once())
+            ->method('isHit')
+            ->willReturn(false);
+
+        $helpItem->expects($this->once())
+            ->method('isHit')
+            ->willReturn(true);
+
+        $helpItem->expects($this->once())
+            ->method('get')
+            ->willReturn($data);
+
+        $optionItem->expects($this->once())
+            ->method('set')
+            ->with($isPresent);
 
         $cache->expects($this->once())
-            ->method('save');
+            ->method('save')
+            ->with($optionItem);
 
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->never())
@@ -100,16 +134,19 @@ class OptionsTesterTest extends TestCase
     public function testHasOptionWithCacheFullyLoaded($isPresent, $data, $optionName)
     {
         $cache = $this->getCacheMock();
+        $optionItem = $this->getCacheItemMock();
 
         $cache->expects($this->once())
-            ->method('fetch')
-            ->with('option-' . $optionName)
-            ->will($this->returnValue($isPresent));
+            ->method('getItem')
+            ->willReturn($optionItem);
 
-        $cache->expects($this->once())
-            ->method('contains')
-            ->with('option-' . $optionName)
-            ->will($this->returnValue(true));
+        $optionItem->expects($this->once())
+            ->method('isHit')
+            ->willReturn(true);
+
+        $optionItem->expects($this->once())
+            ->method('get')
+            ->willReturn($isPresent);
 
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->never())

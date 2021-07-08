@@ -10,10 +10,8 @@ class FFMpegTest extends TestCase
 {
     public function testOpenInvalid()
     {
-        $this->expectException(
-            '\FFMpeg\Exception\RuntimeException',
-            'Unable to probe "/path/to/unknown/file"'
-        );
+        $this->expectException('\FFMpeg\Exception\RuntimeException');
+        $this->expectExceptionMessage('Unable to probe "/path/to/unknown/file"');
         $ffmpeg = new FFMpeg($this->getFFMpegDriverMock(), $this->getFFProbeMock());
         $ffmpeg->open('/path/to/unknown/file');
     }

@@ -15,7 +15,6 @@ class ExtractMultipleFramesFilterTest extends TestCase
     public function testApply($frameRate, $frameFileType,$destinationFolder, $duration, $modulus, $expected)
     {
         $video = $this->getVideoMock();
-        $pathfile = '/path/to/file'.mt_rand();
 
         $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
         $format->expects($this->any())

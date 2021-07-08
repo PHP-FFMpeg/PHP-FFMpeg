@@ -5,8 +5,6 @@ namespace Tests\FFMpeg\Unit\Media;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\Video\X264;
-use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Format\VideoInterface;
 
 class VideoTest extends AbstractStreamableTestCase
 {
@@ -699,7 +697,6 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('command')
             ->with($this->isType('array'), false, $this->anything())
             ->will($this->returnCallback(function ($commands, $errors, $listeners) {
-                var_dump($commands);
                 $this->assertTrue(!in_array('-b:v', $commands));
             }));
 
