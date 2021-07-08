@@ -3,9 +3,7 @@
 namespace Tests\FFMpeg\Unit\Filters\Audio;
 
 use FFMpeg\Filters\Audio\CustomFilter;
-use FFMpeg\Filters\Audio\FrameRateFilter;
 use Tests\FFMpeg\Unit\TestCase;
-use FFMpeg\Coordinate\FrameRate;
 
 class CustomFilterTest extends TestCase
 {

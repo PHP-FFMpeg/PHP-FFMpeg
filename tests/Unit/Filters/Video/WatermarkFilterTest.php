@@ -3,8 +3,6 @@
 namespace Tests\FFMpeg\Unit\Filters\Video;
 
 use FFMpeg\FFProbe\DataMapping\Stream;
-use FFMpeg\FFProbe\DataMapping\StreamCollection;
-use FFMpeg\Filters\Video\RotateFilter;
 use FFMpeg\Filters\Video\WatermarkFilter;
 use Tests\FFMpeg\Unit\TestCase;
 
@@ -13,7 +11,6 @@ class WatermarkFilterTest extends TestCase
     public function testApplyWatermark()
     {
         $stream = new Stream(array('width' => 320, 'height' => 240, 'codec_type' => 'video'));
-        $streams = new StreamCollection(array($stream));
 
         $video = $this->getVideoMock();
 
