@@ -20,15 +20,6 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - php-version: '5.3'
-                      phpunit-version: 4
-                      dependency-versions: 'lowest'
-                    - php-version: '5.4'
-                      phpunit-version: 4
-                    - php-version: '5.5'
-                      phpunit-version: 4
-                    - php-version: '5.6'
-                    - php-version: '7.0'
                     - php-version: '7.1'
                     - php-version: '7.2'
                     - php-version: '7.3'

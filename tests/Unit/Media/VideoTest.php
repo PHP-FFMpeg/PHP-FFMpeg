@@ -5,8 +5,6 @@ namespace Tests\FFMpeg\Unit\Media;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Video;
 use FFMpeg\Format\Video\X264;
-use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Format\VideoInterface;
 
 class VideoTest extends AbstractStreamableTestCase
 {

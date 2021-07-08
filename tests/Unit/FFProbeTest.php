@@ -99,14 +99,26 @@ class FFProbeTest extends TestCase
         $tester = $this->getFFProbeOptionsTesterMockWithOptions($commands);
 
         $cache = $this->getCacheMock();
+        $item = $this->getCacheItemMock();
+
         $cache->expects($this->once())
-            ->method('contains')
-            ->will($this->returnValue(false));
-        $cache->expects($this->never())
-            ->method('fetch');
+            ->method('getItem')
+            ->willReturn($item);
+
+        $item->expects($this->once())
+            ->method('isHit')
+            ->willReturn(false);
+
+        $item->expects($this->never())
+            ->method('get');
+
+        $item->expects($this->once())
+            ->method('set')
+            ->with($output);
+
         $cache->expects($this->once())
             ->method('save')
-            ->with($this->anything(), $output);
+            ->with($item);
 
         $driver = $this->getFFProbeDriverMock();
         $driver->expects($this->once())
@@ -159,11 +171,18 @@ class FFProbeTest extends TestCase
         $tester = $this->getFFProbeOptionsTesterMockWithOptions($commands);
 
         $cache = $this->getCacheMock();
+        $item = $this->getCacheItemMock();
+
         $cache->expects($this->exactly(2))
-            ->method('contains')
-            ->will($this->returnValue(false));
-        $cache->expects($this->never())
-            ->method('fetch');
+            ->method('getItem')
+            ->willReturn($item);
+
+        $item->expects($this->exactly(2))
+            ->method('isHit')
+            ->willReturn(false);
+
+        $item->expects($this->never())
+            ->method('get');
 
         $driver = $this->getFFProbeDriverMock();
         $driver->expects($this->exactly(2))
@@ -206,12 +225,20 @@ class FFProbeTest extends TestCase
         $tester = $this->getFFProbeOptionsTesterMock();
 
         $cache = $this->getCacheMock();
+        $item = $this->getCacheItemMock();
+
         $cache->expects($this->once())
-            ->method('contains')
-            ->will($this->returnValue(true));
-        $cache->expects($this->once())
-            ->method('fetch')
-            ->will($this->returnValue($output));
+            ->method('getItem')
+            ->willReturn($item);
+
+        $item->expects($this->once())
+            ->method('isHit')
+            ->willReturn(true);
+
+        $item->expects($this->once())
+            ->method('get')
+            ->willReturn($output);
+
         $cache->expects($this->never())
             ->method('save');
 
@@ -243,7 +270,12 @@ class FFProbeTest extends TestCase
         $this->expectException('\FFMpeg\Exception\RuntimeException');
         $pathfile = __FILE__;
 
-        $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
+        $cache = $this->getCacheMock();
+        $cache->expects($this->once())
+            ->method('getItem')
+            ->willReturn($this->getCacheItemMock());
+
+        $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $cache);
         $ffprobe->setOptionsTester($this->getFFProbeOptionsTesterMock());
         call_user_func(array($ffprobe, $method), $pathfile);
     }

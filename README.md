@@ -1,12 +1,12 @@
 # php-ffmpeg
 
-[![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
+[![Build Status](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/ci.yml)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983/big.png)](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983)
 
 An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 
-Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
+Check another amazing repo: [PHP FFMpeg extras](https://github.com/PHP-FFMpeg/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
 
 ## Your attention please
 
@@ -714,30 +714,15 @@ $ffprobe = FFMpeg\FFProbe::create();
 $ffprobe->isValid('/path/to/file/to/check'); // returns bool
 ```
 
-## Using with Silex Microframework
+## Tests
 
-The service provider is easy to set up:
+Tests can be run using docker:
 
-```php
-$app = new Silex\Application();
-$app->register(new FFMpeg\FFMpegServiceProvider());
-
-$video = $app['ffmpeg']->open('video.mpeg');
-```
-
-Available options are as follow:
-
-```php
-$app->register(new FFMpeg\FFMpegServiceProvider(), array(
-    'ffmpeg.configuration' => array(
-        'ffmpeg.threads'   => 4,
-        'ffmpeg.timeout'   => 300,
-        'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
-        'ffprobe.timeout'  => 30,
-        'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
-    ),
-    'ffmpeg.logger' => $logger,
-));
+```bash
+# Build the testing image
+docker build -t php-ffmpeg
+# Run the test suites
+docker run --rm php-ffmpeg
 ```
 
 ## License

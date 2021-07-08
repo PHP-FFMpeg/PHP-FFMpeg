@@ -12,18 +12,18 @@
 namespace FFMpeg\FFProbe;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\Exception\RuntimeException;
+use Psr\Cache\CacheItemPoolInterface;
 
 class OptionsTester implements OptionsTesterInterface
 {
     /** @var FFProbeDriver */
     private $ffprobe;
-    /** @var Cache */
+    /** @var CacheItemPoolInterface */
     private $cache;
 
-    public function __construct(FFProbeDriver $ffprobe, Cache $cache)
+    public function __construct(FFProbeDriver $ffprobe, CacheItemPoolInterface $cache)
     {
         $this->ffprobe = $ffprobe;
         $this->cache = $cache;
@@ -34,27 +34,35 @@ class OptionsTester implements OptionsTesterInterface
      */
     public function has($name)
     {
-        $id = sprintf('option-%s', $name);
+        if (PHP_VERSION_ID < 72000) {
+            // symfony/cache:4.* does not accept slashes '/' in keys
+            $key = sprintf('option-%s', md5($name));
+        } else {
+            $key = sprintf('option-%s', $name);
+        }
 
-        if ($this->cache->contains($id)) {
-            return $this->cache->fetch($id);
+        $item = $this->cache->getItem($key);
+
+        if ($item->isHit()) {
+            return $item->get();
         }
 
         $output = $this->retrieveHelpOutput();
 
         $ret = (bool) preg_match('/^'.$name.'/m', $output);
+        $item->set($ret);
 
-        $this->cache->save($id, $ret);
+        $this->cache->save($item);
 
         return $ret;
     }
 
     private function retrieveHelpOutput()
     {
-        $id = 'help';
+        $item = $this->cache->getItem('help');
 
-        if ($this->cache->contains($id)) {
-            return $this->cache->fetch($id);
+        if ($item->isHit()) {
+            return $item->get();
         }
 
         try {
@@ -63,7 +71,9 @@ class OptionsTester implements OptionsTesterInterface
             throw new RuntimeException('Your FFProbe version is too old and does not support `-help` option, please upgrade.', $e->getCode(), $e);
         }
 
-        $this->cache->save($id, $output);
+        $item->set($output);
+
+        $this->cache->save($item);
 
         return $output;
     }

@@ -20,7 +20,7 @@ class AspectRatio
     const AR_4_3 = '4/3';
     // named 16:9 or 1.77:1 HD video standard
     const AR_16_9 = '16/9';
-    
+
     // named 8:5 or 16:10 or 1.6:1
     const AR_8_5 = '8/5';
 
@@ -142,7 +142,7 @@ class AspectRatio
      * custom ratio need to be used, disable it.
      *
      * @param Dimension $dimension
-     * @param bool   $forceStandards Whether to force or not standard ratios
+     * @param bool      $forceStandards Whether to force or not standard ratios
      *
      * @return AspectRatio
      *
@@ -214,27 +214,27 @@ class AspectRatio
 
     private static function nearestStrategy($incoming)
     {
-        $availables = array(
-            static::AR_4_3 => static::valueFromName(static::AR_4_3),
-            static::AR_16_9 => static::valueFromName(static::AR_16_9),
-            static::AR_8_5 => static::valueFromName(static::AR_8_5),
-            static::AR_25_16 => static::valueFromName(static::AR_25_16),
-            static::AR_1_1 => static::valueFromName(static::AR_1_1),
-            static::AR_1_DOT_85_1 => static::valueFromName(static::AR_1_DOT_85_1),
-            static::AR_2_DOT_39_1 => static::valueFromName(static::AR_2_DOT_39_1),
-            static::AR_3_2 => static::valueFromName(static::AR_3_2),
-            static::AR_5_3 => static::valueFromName(static::AR_5_3),
-            static::AR_5_4 => static::valueFromName(static::AR_5_4),
+        $availables = [
+            static::AR_4_3              => static::valueFromName(static::AR_4_3),
+            static::AR_16_9             => static::valueFromName(static::AR_16_9),
+            static::AR_8_5              => static::valueFromName(static::AR_8_5),
+            static::AR_25_16            => static::valueFromName(static::AR_25_16),
+            static::AR_1_1              => static::valueFromName(static::AR_1_1),
+            static::AR_1_DOT_85_1       => static::valueFromName(static::AR_1_DOT_85_1),
+            static::AR_2_DOT_39_1       => static::valueFromName(static::AR_2_DOT_39_1),
+            static::AR_3_2              => static::valueFromName(static::AR_3_2),
+            static::AR_5_3              => static::valueFromName(static::AR_5_3),
+            static::AR_5_4              => static::valueFromName(static::AR_5_4),
 
             // Rotated
-            static::AR_ROTATED_4_5 => static::valueFromName(static::AR_ROTATED_4_5),
-            static::AR_ROTATED_9_16 => static::valueFromName(static::AR_ROTATED_9_16),
-            static::AR_ROTATED_2_3 => static::valueFromName(static::AR_ROTATED_2_3),
-            static::AR_ROTATED_3_5 => static::valueFromName(static::AR_ROTATED_3_5),
-            static::AR_ROTATED_3_4 => static::valueFromName(static::AR_ROTATED_3_4),
+            static::AR_ROTATED_4_5      => static::valueFromName(static::AR_ROTATED_4_5),
+            static::AR_ROTATED_9_16     => static::valueFromName(static::AR_ROTATED_9_16),
+            static::AR_ROTATED_2_3      => static::valueFromName(static::AR_ROTATED_2_3),
+            static::AR_ROTATED_3_5      => static::valueFromName(static::AR_ROTATED_3_5),
+            static::AR_ROTATED_3_4      => static::valueFromName(static::AR_ROTATED_3_4),
             static::AR_ROTATED_1_DOT_85 => static::valueFromName(static::AR_ROTATED_1_DOT_85),
             static::AR_ROTATED_2_DOT_39 => static::valueFromName(static::AR_ROTATED_2_DOT_39),
-        );
+        ];
         asort($availables);
 
         $previous = $current = null;

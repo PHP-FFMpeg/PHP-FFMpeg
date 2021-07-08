@@ -5,7 +5,6 @@ namespace Tests\FFMpeg\Unit\Filters\Waveform;
 use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\Filters\Waveform\WaveformDownmixFilter;
 use FFMpeg\Media\Waveform;
-use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use FFMpeg\FFProbe\DataMapping\Stream;
 
@@ -16,7 +15,7 @@ class WaveformDownmixFilterTest extends TestCase
         $stream = new Stream(array('codec_type' => 'audio', 'width' => 960, 'height' => 720));
         $streams = new StreamCollection(array($stream));
 
-        $audio = $this->getAudioMock(__FILE__);
+        $audio = $this->getAudioMock();
         $audio->expects($this->once())
                 ->method('getStreams')
                 ->will($this->returnValue($streams));

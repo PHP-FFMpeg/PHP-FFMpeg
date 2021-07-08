@@ -2,9 +2,6 @@
 
 namespace Tests\FFMpeg\Functional;
 
-use FFMpeg\Format\Audio\Mp3;
-use FFMpeg\Media\Audio;
-
 class AudioConcatenationTest extends FunctionalTestCase
 {
     public function testSimpleAudioFileConcatTest()

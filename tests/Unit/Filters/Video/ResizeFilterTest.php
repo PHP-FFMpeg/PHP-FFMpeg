@@ -16,7 +16,6 @@ class ResizeFilterTest extends TestCase
     public function testApply(Dimension $dimension, $mode, $width, $height, $modulus, $expected, $forceStandards = true)
     {
         $video = $this->getVideoMock();
-        $pathfile = '/path/to/file'.mt_rand();
 
         $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
         $format->expects($this->any())

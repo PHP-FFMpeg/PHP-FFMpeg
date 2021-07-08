@@ -3,9 +3,7 @@
 namespace Tests\FFMpeg\Unit\Filters\Video;
 
 use FFMpeg\Filters\Video\CustomFilter;
-use FFMpeg\Filters\Video\FrameRateFilter;
 use Tests\FFMpeg\Unit\TestCase;
-use FFMpeg\Coordinate\FrameRate;
 
 class CustomFilterTest extends TestCase
 {

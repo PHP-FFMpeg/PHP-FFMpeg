@@ -9,6 +9,8 @@ use FFMpeg\FFProbe\DataMapping\Format;
 use FFMpeg\FFProbe\DataMapping\Stream;
 use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
+use function json_decode;
+
 class MapperTest extends TestCase
 {
     /**
