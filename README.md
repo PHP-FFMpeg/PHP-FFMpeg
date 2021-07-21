@@ -735,6 +735,8 @@ $app->register(new FFMpeg\FFMpegServiceProvider(), array(
         'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
         'ffprobe.timeout'  => 30,
         'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
+        'ffprobe.analyzeduration' => 5000000000,
+        'ffprobe.probesize' => 1000000000,
     ),
     'ffmpeg.logger' => $logger,
 ));

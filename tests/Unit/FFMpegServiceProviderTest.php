@@ -15,6 +15,8 @@ class FFMpegServiceProviderTest extends TestCase
                 'ffmpeg.threads'   => 12,
                 'ffmpeg.timeout'   => 10666,
                 'ffprobe.timeout'  => 4242,
+                'ffprobe.analyzeduration' => 5000000000,
+                'ffprobe.probesize' => 1000000000,
             )
         ));
 
@@ -25,6 +27,8 @@ class FFMpegServiceProviderTest extends TestCase
         $this->assertEquals(12, $app['ffmpeg']->getFFMpegDriver()->getConfiguration()->get('ffmpeg.threads'));
         $this->assertEquals(10666, $app['ffmpeg']->getFFMpegDriver()->getProcessBuilderFactory()->getTimeout());
         $this->assertEquals(4242, $app['ffmpeg.ffprobe']->getFFProbeDriver()->getProcessBuilderFactory()->getTimeout());
+        $this->assertEquals(5000000000, $app['ffmpeg.ffprobe']->getFFProbeDriver()->getConfiguration()->get('ffprobe.analyzeduration'));
+        $this->assertEquals(1000000000, $app['ffmpeg.ffprobe']->getFFProbeDriver()->getConfiguration()->get('ffprobe.probesize'));
     }
 
     public function testWithoutConfig()

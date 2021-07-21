@@ -38,4 +38,13 @@ class FFProbeTest extends FunctionalTestCase
         $ffprobe = FFProbe::create();
         $this->assertGreaterThan(0, count($ffprobe->streams('http://vjs.zencdn.net/v/oceans.mp4')));
     }
+
+    public function testLongProbeOnFile()
+    {
+        $ffprobe = FFProbe::create(array(
+            'analyzeduration' => 5000000000,
+            'probesize' => 1000000000,
+        ));
+        $this->assertGreaterThan(0, count($ffprobe->streams(__DIR__ . '/../files/Audio.mp3')));
+    }
 }

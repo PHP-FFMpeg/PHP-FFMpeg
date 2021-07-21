@@ -245,6 +245,31 @@ class FFProbe
 
         $parseIsToDo = false;
 
+        $config = $this->getFFProbeDriver()->getConfiguration();
+
+        if ($config && $config->has('ffprobe.analyzeduration')) {
+            if (!$this->optionsTester->has('\s*-analyzeduration')) {
+                throw new RuntimeException(
+                    'This version of ffprobe is too old and '
+                    . 'does not support `-analyzeduration` option, please upgrade'
+                );
+            }
+
+            $commands[] = '-analyzeduration';
+            $commands[] = $config->get('ffprobe.analyzeduration');
+        }
+        if ($config && $config->has('ffprobe.probesize')) {
+            if (!$this->optionsTester->has('\s*-probesize')) {
+                throw new RuntimeException(
+                    'This version of ffprobe is too old and '
+                    . 'does not support `-probesize` option, please upgrade'
+                );
+            }
+
+            $commands[] = '-probesize';
+            $commands[] = $config->get('ffprobe.probesize');
+        }
+
         if ($allowJson && $this->optionsTester->has('-print_format')) {
             // allowed in latest PHP-FFmpeg version
             $commands[] = '-print_format';
