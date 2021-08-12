@@ -10,6 +10,8 @@ Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PH
 
 ## Your attention please
 
+**This project is currently not actively maintained.**
+
 ### How this library works:
 
 This library requires a working [FFMpeg install](https://ffmpeg.org/download.html). You will need both FFMpeg and FFProbe binaries to use it.
