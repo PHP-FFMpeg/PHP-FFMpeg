@@ -191,6 +191,11 @@ abstract class AbstractVideo extends Audio
                 $commands[] = '-ac';
                 $commands[] = $format->getAudioChannels();
             }
+            if (null !== $format->getAdditionalParameters()) {
+                foreach ($format->getAdditionalParameters() as $additionalParameter) {
+                    $commands[] = $additionalParameter;
+                }
+            }
         }
 
         // If the user passed some additional parameters
