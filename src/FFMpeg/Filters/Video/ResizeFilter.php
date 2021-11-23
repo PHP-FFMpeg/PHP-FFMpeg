@@ -13,19 +13,19 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Media\Video;
 
 class ResizeFilter implements VideoFilterInterface
 {
     /** fits to the dimensions, might introduce anamorphosis */
-    const RESIZEMODE_FIT = 'fit';
+    public const RESIZEMODE_FIT = 'fit';
     /** resizes the video inside the given dimension, no anamorphosis */
-    const RESIZEMODE_INSET = 'inset';
+    public const RESIZEMODE_INSET = 'inset';
     /** resizes the video to fit the dimension width, no anamorphosis */
-    const RESIZEMODE_SCALE_WIDTH = 'width';
+    public const RESIZEMODE_SCALE_WIDTH = 'width';
     /** resizes the video to fit the dimension height, no anamorphosis */
-    const RESIZEMODE_SCALE_HEIGHT = 'height';
+    public const RESIZEMODE_SCALE_HEIGHT = 'height';
 
     /** @var Dimension */
     private $dimension;
@@ -82,7 +82,7 @@ class ResizeFilter implements VideoFilterInterface
     public function apply(Video $video, VideoInterface $format)
     {
         $dimensions = null;
-        $commands = array();
+        $commands = [];
 
         foreach ($video->getStreams() as $stream) {
             if ($stream->isVideo()) {
@@ -90,7 +90,6 @@ class ResizeFilter implements VideoFilterInterface
                     $dimensions = $stream->getDimensions();
                     break;
                 } catch (RuntimeException $e) {
-
                 }
             }
         }
@@ -100,8 +99,7 @@ class ResizeFilter implements VideoFilterInterface
 
             // Using Filter to have ordering
             $commands[] = '-vf';
-            $commands[] = '[in]scale=' . $dimensions->getWidth() . ':' . $dimensions->getHeight() . ' [out]';
-            
+            $commands[] = '[in]scale='.$dimensions->getWidth().':'.$dimensions->getHeight().' [out]';
         }
 
         return $commands;

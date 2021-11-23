@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         verbose="false"
-         bootstrap="tests/bootstrap.php"
->
+<phpunit backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" verbose="false" bootstrap="tests/bootstrap.php">
     <php>
         <env name="SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT" value="true"/>
     </php>

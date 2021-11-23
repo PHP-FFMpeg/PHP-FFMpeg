@@ -2,8 +2,8 @@
 
 namespace Tests\FFMpeg\Unit\Filters\Frame;
 
-use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\Filters\Frame\FrameFilters;
+use Tests\FFMpeg\Unit\TestCase;
 
 class FrameFiltersTest extends TestCase
 {

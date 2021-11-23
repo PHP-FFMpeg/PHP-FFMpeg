@@ -20,9 +20,6 @@ interface AudioFilterInterface extends FilterInterface
     /**
      * Applies the filter on the the Audio media given an format.
      *
-     * @param Audio          $audio
-     * @param AudioInterface $format
-     *
      * @return array An array of arguments
      */
     public function apply(Audio $audio, AudioInterface $format);

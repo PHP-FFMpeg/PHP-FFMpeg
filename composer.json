@@ -1,8 +1,17 @@
 {
-    "name": "php-ffmpeg/php-ffmpeg",
+    "name": "protonemedia/php-ffmpeg",
     "type": "library",
     "description": "FFMpeg PHP, an Object Oriented library to communicate with AVconv / ffmpeg",
-    "keywords": ["video processing", "video", "audio processing", "audio", "avconv", "ffmpeg", "avprobe", "ffprobe"],
+    "keywords": [
+        "video processing",
+        "video",
+        "audio processing",
+        "audio",
+        "avconv",
+        "ffmpeg",
+        "avprobe",
+        "ffprobe"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -29,22 +38,29 @@
             "name": "Jens Hausdorf",
             "email": "hello@jens-hausdorf.de",
             "homepage": "https://jens-hausdorf.de"
+        },
+        {
+            "name": "Pascal Baljet",
+            "email": "pascal@protone.media",
+            "homepage": "https://protone.media"
         }
     ],
     "require": {
-        "php": ">=5.3.9",
-        "alchemy/binary-driver": "^1.5 || ~2.0.0 || ^5.0",
+        "php": "^8.0",
+        "alchemy/binary-driver": "^5.0",
         "doctrine/cache": "^1.0",
-        "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
-        "neutron/temporary-filesystem": "^2.1.1 || ^3.0"
+        "evenement/evenement": "^3.0",
+        "monolog/monolog": "^2.0",
+        "spatie/temporary-directory": "^2.0"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
         "silex/silex": "~1.0",
-        "symfony/phpunit-bridge": "^5.0.4",
-        "symfony/process": "2.8 || 3.3"
+        "symfony/process": "2.8 || 3.3",
+        "symfony/phpunit-bridge": "^5.3",
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-0": {

@@ -12,7 +12,7 @@
 namespace FFMpeg\Format\Audio;
 
 /**
- * The Flac audio format
+ * The Flac audio format.
  */
 class Flac extends DefaultAudio
 {
@@ -26,6 +26,6 @@ class Flac extends DefaultAudio
      */
     public function getAvailableAudioCodecs()
     {
-        return array('flac');
+        return ['flac'];
     }
 }

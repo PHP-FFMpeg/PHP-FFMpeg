@@ -6,7 +6,6 @@ use FFMpeg\Media\Waveform;
 
 class WaveformTest extends AbstractMediaTestCase
 {
-
     public function testFiltersReturnFilters()
     {
         $driver = $this->getFFMpegDriverMock();
@@ -58,14 +57,14 @@ class WaveformTest extends AbstractMediaTestCase
 
     public function provideSaveOptions()
     {
-        return array(
-            array(
-                array(
-                    '-y', '-i', NULL, '-filter_complex',
+        return [
+            [
+                [
+                    '-y', '-i', null, '-filter_complex',
                     'showwavespic=colors=#FFFFFF:s=640x120',
                     '-frames:v', '1',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

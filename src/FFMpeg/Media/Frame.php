@@ -12,12 +12,12 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Driver\FFMpegDriver;
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\FFProbe;
 use FFMpeg\Filters\Frame\FrameFilterInterface;
 use FFMpeg\Filters\Frame\FrameFilters;
-use FFMpeg\Driver\FFMpegDriver;
-use FFMpeg\FFProbe;
-use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Coordinate\TimeCode;
 
 class Frame extends AbstractMediaType
 {
@@ -79,8 +79,8 @@ class Frame extends AbstractMediaType
      * Uses the `unaccurate method by default.`
      *
      * @param string $pathfile
-     * @param bool $accurate
-     * @param bool $returnBase64
+     * @param bool   $accurate
+     * @param bool   $returnBase64
      *
      * @return Frame
      *
@@ -89,27 +89,28 @@ class Frame extends AbstractMediaType
     public function save($pathfile, $accurate = false, $returnBase64 = false)
     {
         /**
-         * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg
+         * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg.
+         *
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
-        $outputFormat = $returnBase64 ? "image2pipe" : "image2";
+        $outputFormat = $returnBase64 ? 'image2pipe' : 'image2';
         if (!$accurate) {
-            $commands = array(
+            $commands = [
                 '-y', '-ss', (string) $this->timecode,
                 '-i', $this->pathfile,
                 '-vframes', '1',
-                '-f', $outputFormat
-            );
+                '-f', $outputFormat,
+            ];
         } else {
-            $commands = array(
+            $commands = [
                 '-y', '-i', $this->pathfile,
                 '-vframes', '1', '-ss', (string) $this->timecode,
-                '-f', $outputFormat
-            );
+                '-f', $outputFormat,
+            ];
         }
-        
-        if($returnBase64) {
-            array_push($commands, "-");
+
+        if ($returnBase64) {
+            array_push($commands, '-');
         }
 
         foreach ($this->filters as $filter) {
@@ -117,15 +118,15 @@ class Frame extends AbstractMediaType
         }
 
         if (!$returnBase64) {
-            $commands = array_merge($commands, array($pathfile));
+            $commands = array_merge($commands, [$pathfile]);
         }
 
         try {
-            if(!$returnBase64) {
+            if (!$returnBase64) {
                 $this->driver->command($commands);
+
                 return $this;
-            }
-            else {
+            } else {
                 return $this->driver->command($commands);
             }
         } catch (ExecutionFailureException $e) {

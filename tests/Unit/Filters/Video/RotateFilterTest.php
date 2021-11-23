@@ -14,8 +14,8 @@ class RotateFilterTest extends TestCase
      */
     public function testApplyWithSizeTransformation($value)
     {
-        $stream = new Stream(array('width' => 320, 'height' => 240, 'codec_type' => 'video'));
-        $streams = new StreamCollection(array($stream));
+        $stream = new Stream(['width' => 320, 'height' => 240, 'codec_type' => 'video']);
+        $streams = new StreamCollection([$stream]);
 
         $video = $this->getVideoMock();
         $video->expects($this->once())
@@ -25,7 +25,7 @@ class RotateFilterTest extends TestCase
         $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
 
         $filter = new RotateFilter($value);
-        $this->assertEquals(array('-vf', $value, '-metadata:s:v:0', 'rotate=0'), $filter->apply($video, $format));
+        $this->assertEquals(['-vf', $value, '-metadata:s:v:0', 'rotate=0'], $filter->apply($video, $format));
 
         $this->assertEquals(240, $stream->get('width'));
         $this->assertEquals(320, $stream->get('height'));
@@ -33,10 +33,10 @@ class RotateFilterTest extends TestCase
 
     public function provide90degresTranspositions()
     {
-        return array(
-            array(RotateFilter::ROTATE_90),
-            array(RotateFilter::ROTATE_270),
-        );
+        return [
+            [RotateFilter::ROTATE_90],
+            [RotateFilter::ROTATE_270],
+        ];
     }
 
     /**
@@ -51,14 +51,14 @@ class RotateFilterTest extends TestCase
         $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
 
         $filter = new RotateFilter($value);
-        $this->assertEquals(array('-vf', $value, '-metadata:s:v:0', 'rotate=0'), $filter->apply($video, $format));
+        $this->assertEquals(['-vf', $value, '-metadata:s:v:0', 'rotate=0'], $filter->apply($video, $format));
     }
 
     public function provideDegresWithoutTranspositions()
     {
-        return array(
-            array(RotateFilter::ROTATE_180),
-        );
+        return [
+            [RotateFilter::ROTATE_180],
+        ];
     }
 
     public function testApplyInvalidAngle()

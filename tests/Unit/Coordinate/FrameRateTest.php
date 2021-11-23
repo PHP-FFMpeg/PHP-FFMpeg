@@ -2,8 +2,8 @@
 
 namespace Tests\FFMpeg\Unit\Coordinate;
 
-use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\Coordinate\FrameRate;
+use Tests\FFMpeg\Unit\TestCase;
 
 class FrameRateTest extends TestCase
 {
@@ -24,8 +24,8 @@ class FrameRateTest extends TestCase
 
     public function provideInvalidFrameRates()
     {
-        return array(
-            array(0), array(-1.5), array(-2),
-        );
+        return [
+            [0], [-1.5], [-2],
+        ];
     }
 }

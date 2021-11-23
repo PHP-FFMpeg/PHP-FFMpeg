@@ -36,8 +36,7 @@ class AudioResamplableFilter implements AudioFilterInterface
     }
 
     /**
-     *
-     * @return Integer
+     * @return int
      */
     public function getRate()
     {
@@ -49,6 +48,6 @@ class AudioResamplableFilter implements AudioFilterInterface
      */
     public function apply(Audio $audio, AudioInterface $format)
     {
-        return array('-ac', 2, '-ar', $this->rate);
+        return ['-ac', 2, '-ar', $this->rate];
     }
 }

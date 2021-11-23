@@ -16,22 +16,22 @@ use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
+use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\RuntimeException;
 use FFMpeg\FFProbe\DataMapping\Format;
+use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use FFMpeg\FFProbe\Mapper;
 use FFMpeg\FFProbe\MapperInterface;
 use FFMpeg\FFProbe\OptionsTester;
 use FFMpeg\FFProbe\OptionsTesterInterface;
 use FFMpeg\FFProbe\OutputParser;
 use FFMpeg\FFProbe\OutputParserInterface;
-use FFMpeg\Exception\InvalidArgumentException;
-use FFMpeg\Exception\RuntimeException;
-use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use Psr\Log\LoggerInterface;
 
 class FFProbe
 {
-    const TYPE_STREAMS = 'streams';
-    const TYPE_FORMAT = 'format';
+    public const TYPE_STREAMS = 'streams';
+    public const TYPE_FORMAT = 'format';
 
     /** @var Cache */
     private $cache;
@@ -62,8 +62,6 @@ class FFProbe
     }
 
     /**
-     * @param OutputParserInterface $parser
-     *
      * @return FFProbe
      */
     public function setParser(OutputParserInterface $parser)
@@ -82,8 +80,6 @@ class FFProbe
     }
 
     /**
-     * @param FFProbeDriver $ffprobe
-     *
      * @return FFProbe
      */
     public function setFFProbeDriver(FFProbeDriver $ffprobe)
@@ -94,8 +90,6 @@ class FFProbe
     }
 
     /**
-     * @param OptionsTesterInterface $tester
-     *
      * @return FFProbe
      */
     public function setOptionsTester(OptionsTesterInterface $tester)
@@ -114,8 +108,6 @@ class FFProbe
     }
 
     /**
-     * @param Cache $cache
-     *
      * @return FFProbe
      */
     public function setCache(Cache $cache)
@@ -142,8 +134,6 @@ class FFProbe
     }
 
     /**
-     * @param MapperInterface $mapper
-     *
      * @return FFProbe
      */
     public function setMapper(MapperInterface $mapper)
@@ -176,14 +166,16 @@ class FFProbe
      * Checks wether the given `$pathfile` is considered a valid media file.
      *
      * @param string $pathfile
+     *
      * @return bool
+     *
      * @since 0.10.0
      */
     public function isValid($pathfile)
     {
         try {
             return $this->format($pathfile)->get('duration') > 0;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // complete invalid data
             return false;
         }
@@ -217,7 +209,7 @@ class FFProbe
      *
      * @return FFProbe
      */
-    public static function create($configuration = array(), LoggerInterface $logger = null, Cache $cache = null)
+    public static function create($configuration = [], LoggerInterface $logger = null, Cache $cache = null)
     {
         if (null === $cache) {
             $cache = new ArrayCache();
@@ -235,13 +227,10 @@ class FFProbe
         }
 
         if (!$this->optionsTester->has($command)) {
-            throw new RuntimeException(sprintf(
-                'This version of ffprobe is too old and '
-                . 'does not support `%s` option, please upgrade', $command
-            ));
+            throw new RuntimeException(sprintf('This version of ffprobe is too old and '.'does not support `%s` option, please upgrade', $command));
         }
 
-        $commands = array($pathfile, $command);
+        $commands = [$pathfile, $command];
 
         $parseIsToDo = false;
 

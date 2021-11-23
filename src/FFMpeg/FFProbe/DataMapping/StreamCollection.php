@@ -15,7 +15,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
 {
     private $streams;
 
-    public function __construct(array $streams = array())
+    public function __construct(array $streams = [])
     {
         $this->streams = array_values($streams);
     }
@@ -24,7 +24,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
      * Returns the first stream of the collection, null if the collection is
      * empty.
      *
-     * @return null|Stream
+     * @return Stream|null
      */
     public function first()
     {
@@ -35,8 +35,6 @@ class StreamCollection implements \Countable, \IteratorAggregate
 
     /**
      * Adds a stream to the collection.
-     *
-     * @param Stream $stream
      *
      * @return StreamCollection
      */

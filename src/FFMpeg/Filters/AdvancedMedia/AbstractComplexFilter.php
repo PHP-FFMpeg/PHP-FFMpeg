@@ -42,19 +42,19 @@ abstract class AbstractComplexFilter implements ComplexCompatibleFilter
      *
      * @param array $params Associative array of filter options. The options may be null.
      *
-     * @return string The string of the form "=name1=value1:name2=value2" or empty string.
+     * @return string the string of the form "=name1=value1:name2=value2" or empty string
      */
     protected function buildFilterOptions(array $params)
     {
-        $config = array();
+        $config = [];
         foreach ($params as $paramName => $paramValue) {
-            if ($paramValue !== null) {
-                $config[] = $paramName . '=' . $paramValue;
+            if (null !== $paramValue) {
+                $config[] = $paramName.'='.$paramValue;
             }
         }
 
         if (!empty($config)) {
-            return '=' . implode(':', $config);
+            return '='.implode(':', $config);
         }
 
         return '';

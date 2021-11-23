@@ -1,11 +1,11 @@
 <?php
+
 namespace Tests\FFMpeg\Unit\Media;
 
 use FFMpeg\Media\Clip;
 
 class ClipTest extends AbstractMediaTestCase
 {
-
     /**
      * @dataProvider provideBuildOptions
      */
@@ -41,7 +41,7 @@ class ClipTest extends AbstractMediaTestCase
             ->will($this->returnValue(1));
         $format->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $clip = new Clip($this->getVideoMock(__FILE__), $driver, $ffprobe, $start, $duration);
         $fc = $clip->getFinalCommand($format, $outputPathfile);
@@ -52,16 +52,16 @@ class ClipTest extends AbstractMediaTestCase
 
     public function provideBuildOptions()
     {
-        return array(
-            array('SS01', null, array(
-                    '-y', '-ss', 'SS01',
-                    '-i', __FILE__)
-            ),
-            array('SS02', 'D02', array(
-                    '-y', '-ss', 'SS02',
-                    '-i', __FILE__,
-                    '-t', 'D02')
-            )
-        );
+        return [
+            ['SS01', null, [
+                '-y', '-ss', 'SS01',
+                '-i', __FILE__, ],
+            ],
+            ['SS02', 'D02', [
+                '-y', '-ss', 'SS02',
+                '-i', __FILE__,
+                '-t', 'D02', ],
+            ],
+        ];
     }
 }

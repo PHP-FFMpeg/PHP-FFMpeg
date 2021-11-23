@@ -12,13 +12,13 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Filters\Audio\AudioFilters;
-use FFMpeg\Format\FormatInterface;
-use FFMpeg\Filters\Audio\SimpleFilter;
-use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Filters\Audio\AudioFilterInterface;
+use FFMpeg\Filters\Audio\AudioFilters;
+use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Filters\FilterInterface;
+use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
 
 class Audio extends AbstractStreamableMedia
@@ -52,9 +52,10 @@ class Audio extends AbstractStreamableMedia
     /**
      * Exports the audio in the desired format, applies registered filters.
      *
-     * @param FormatInterface   $format
-     * @param string            $outputPathfile
+     * @param string $outputPathfile
+     *
      * @return Audio
+     *
      * @throws RuntimeException
      */
     public function save(FormatInterface $format, $outputPathfile)
@@ -80,34 +81,38 @@ class Audio extends AbstractStreamableMedia
     /**
      * Returns the final command as a string, useful for debugging purposes.
      *
-     * @param FormatInterface   $format
-     * @param string            $outputPathfile
+     * @param string $outputPathfile
+     *
      * @return string
+     *
      * @since 0.11.0
      */
-    public function getFinalCommand(FormatInterface $format, $outputPathfile) {
+    public function getFinalCommand(FormatInterface $format, $outputPathfile)
+    {
         return implode(' ', $this->buildCommand($format, $outputPathfile));
     }
 
     /**
-     * Builds the command which will be executed with the provided format
+     * Builds the command which will be executed with the provided format.
      *
-     * @param FormatInterface   $format
-     * @param string            $outputPathfile
+     * @param string $outputPathfile
+     *
      * @return string[] An array which are the components of the command
+     *
      * @since 0.11.0
      */
-    protected function buildCommand(FormatInterface $format, $outputPathfile) {
-        $commands = array('-y', '-i', $this->pathfile);
+    protected function buildCommand(FormatInterface $format, $outputPathfile)
+    {
+        $commands = ['-y', '-i', $this->pathfile];
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
         if (null !== $format->getAudioCodec()) {
-            $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+            $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
         }
 
         foreach ($filters as $filter) {
@@ -116,7 +121,7 @@ class Audio extends AbstractStreamableMedia
 
         if (null !== $format->getAudioKiloBitrate()) {
             $commands[] = '-b:a';
-            $commands[] = $format->getAudioKiloBitrate() . 'k';
+            $commands[] = $format->getAudioKiloBitrate().'k';
         }
         if (null !== $format->getAudioChannels()) {
             $commands[] = '-ac';
@@ -130,12 +135,13 @@ class Audio extends AbstractStreamableMedia
     /**
      * Gets the waveform of the video.
      *
-     * @param  int $width
-     * @param  int $height
+     * @param int   $width
+     * @param int   $height
      * @param array $colors Array of colors for ffmpeg to use. Color format is #000000 (RGB hex string with #)
+     *
      * @return Waveform
      */
-    public function waveform($width = 640, $height = 120, $colors = array(Waveform::DEFAULT_COLOR))
+    public function waveform($width = 640, $height = 120, $colors = [Waveform::DEFAULT_COLOR])
     {
         return new Waveform($this, $this->driver, $this->ffprobe, $width, $height, $colors);
     }
@@ -143,7 +149,8 @@ class Audio extends AbstractStreamableMedia
     /**
      * Concatenates a list of audio files into one unique audio file.
      *
-     * @param  array $sources
+     * @param array $sources
+     *
      * @return Concat
      */
     public function concat($sources)

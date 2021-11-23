@@ -11,31 +11,31 @@
 
 namespace FFMpeg\Format\Video;
 
-use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\FFProbe;
 use FFMpeg\Format\Audio\DefaultAudio;
+use FFMpeg\Format\ProgressListener\VideoProgressListener;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\MediaTypeInterface;
-use FFMpeg\Format\ProgressListener\VideoProgressListener;
 
 /**
- * The abstract default Video format
+ * The abstract default Video format.
  */
 abstract class DefaultVideo extends DefaultAudio implements VideoInterface
 {
     /** @var string */
     protected $videoCodec;
 
-    /** @var Integer */
+    /** @var int */
     protected $kiloBitrate = 1000;
 
-    /** @var Integer */
+    /** @var int */
     protected $modulus = 16;
 
-    /** @var Array */
+    /** @var array */
     protected $additionalParamaters;
 
-    /** @var Array */
+    /** @var array */
     protected $initialParamaters;
 
     /**
@@ -49,7 +49,8 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * Sets the kiloBitrate value.
      *
-     * @param  int                  $kiloBitrate
+     * @param int $kiloBitrate
+     *
      * @throws InvalidArgumentException
      */
     public function setKiloBitrate($kiloBitrate)
@@ -75,16 +76,14 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      * Sets the video codec, Should be in the available ones, otherwise an
      * exception is thrown.
      *
-     * @param  string                   $videoCodec
+     * @param string $videoCodec
+     *
      * @throws InvalidArgumentException
      */
     public function setVideoCodec($videoCodec)
     {
-        if ( ! in_array($videoCodec, $this->getAvailableVideoCodecs())) {
-            throw new InvalidArgumentException(sprintf(
-                    'Wrong videocodec value for %s, available formats are %s'
-                    , $videoCodec, implode(', ', $this->getAvailableVideoCodecs())
-            ));
+        if (!in_array($videoCodec, $this->getAvailableVideoCodecs())) {
+            throw new InvalidArgumentException(sprintf('Wrong videocodec value for %s, available formats are %s', $videoCodec, implode(', ', $this->getAvailableVideoCodecs())));
         }
 
         $this->videoCodec = $videoCodec;
@@ -111,7 +110,8 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * Sets additional parameters.
      *
-     * @param  array                    $additionalParamaters
+     * @param array $additionalParamaters
+     *
      * @throws InvalidArgumentException
      */
     public function setAdditionalParameters($additionalParamaters)
@@ -136,7 +136,8 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     /**
      * Sets initial parameters.
      *
-     * @param  array                    $initialParamaters
+     * @param array $initialParamaters
+     *
      * @throws InvalidArgumentException
      */
     public function setInitialParameters($initialParamaters)
@@ -156,11 +157,11 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
     {
         $format = $this;
-        $listeners = array(new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration));
+        $listeners = [new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration)];
 
         foreach ($listeners as $listener) {
             $listener->on('progress', function () use ($format, $media) {
-               $format->emit('progress', array_merge(array($media, $format), func_get_args()));
+                $format->emit('progress', array_merge([$media, $format], func_get_args()));
             });
         }
 

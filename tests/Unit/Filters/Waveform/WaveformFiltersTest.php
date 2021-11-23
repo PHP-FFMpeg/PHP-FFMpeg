@@ -2,8 +2,8 @@
 
 namespace Tests\FFMpeg\Unit\Filters\Waveform;
 
-use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\Filters\Waveform\WaveformFilters;
+use Tests\FFMpeg\Unit\TestCase;
 
 class WaveformFiltersTest extends TestCase
 {

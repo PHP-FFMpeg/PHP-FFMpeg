@@ -14,72 +14,72 @@ class TestSrcFilter extends AbstractComplexFilter
     /**
      * Source returns frames of size 4096x4096 of all rgb colors.
      */
-    const ALLRGB = 'allrgb';
+    public const ALLRGB = 'allrgb';
 
     /**
      * Source returns frames of size 4096x4096 of all yuv colors.
      */
-    const ALLYUV = 'allyuv';
+    public const ALLYUV = 'allyuv';
 
     /**
      * Source provides an uniformly colored input.
      */
-    const COLOR = 'color';
+    public const COLOR = 'color';
 
     /**
      * Source provides an identity Hald CLUT.
      */
-    const HALDCLUTSRC = 'haldclutsrc';
+    public const HALDCLUTSRC = 'haldclutsrc';
 
     /**
      * Source returns unprocessed video frames.
      * It is mainly useful to be employed in analysis / debugging tools,
      * or as the source for filters which ignore the input data.
      */
-    const NULLSRC = 'nullsrc';
+    public const NULLSRC = 'nullsrc';
 
     /**
      * Source generates a color bars pattern, based on EBU PAL recommendations with 75% color levels.
      */
-    const PAL75BARS = 'pal75bars';
+    public const PAL75BARS = 'pal75bars';
 
     /**
      * Source generates a color bars pattern, based on EBU PAL recommendations with 100% color levels.
      */
-    const PAL100BARS = 'pal100bars';
+    public const PAL100BARS = 'pal100bars';
 
     /**
      * Source generates an RGB test pattern useful for detecting RGB vs BGR issues.
      * You should see a red, green and blue stripe from top to bottom.
      */
-    const RGBTESTSRC = 'rgbtestsrc';
+    public const RGBTESTSRC = 'rgbtestsrc';
 
     /**
      * Source generates a color bars pattern, based on the SMPTE Engineering Guideline EG 1-1990.
      */
-    const SMPTEBARS = 'smptebars';
+    public const SMPTEBARS = 'smptebars';
 
     /**
      * Source generates a color bars pattern, based on the SMPTE RP 219-2002.
      */
-    const SMPTEHDBARS = 'smptehdbars';
+    public const SMPTEHDBARS = 'smptehdbars';
 
     /**
      * Source generates a test video pattern, showing a color pattern, a scrolling gradient and a timestamp.
      * This is mainly intended for testing purposes.
      */
-    const TESTSRC = 'testsrc';
+    public const TESTSRC = 'testsrc';
 
     /**
      * Source is similar to testsrc, but supports more pixel formats instead of just rgb24.
      * This allows using it as an input for other tests without requiring a format conversion.
      */
-    const TESTSRC2 = 'testsrc2';
+    public const TESTSRC2 = 'testsrc2';
 
     /**
      * Source generates an YUV test pattern. You should see a y, cb and cr stripe from top to bottom.
      */
-    const YUVTESTSRC = 'yuvtestsrc';
+    public const YUVTESTSRC = 'yuvtestsrc';
 
     /**
      * @var string|null
@@ -229,9 +229,9 @@ class TestSrcFilter extends AbstractComplexFilter
      */
     public function applyComplex(AdvancedMedia $media)
     {
-        return array(
+        return [
             '-filter_complex',
-            $this->type . $this->buildFilterOptions(array(
+            $this->type.$this->buildFilterOptions([
                 'level' => $this->level,
                 'color' => $this->color,
                 'size' => $this->size,
@@ -239,8 +239,8 @@ class TestSrcFilter extends AbstractComplexFilter
                 'duration' => $this->duration,
                 'sar' => $this->sar,
                 'alpha' => $this->alpha,
-                'decimals' => $this->decimals
-            ))
-        );
+                'decimals' => $this->decimals,
+            ]),
+        ];
     }
 }

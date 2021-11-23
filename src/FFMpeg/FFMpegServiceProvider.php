@@ -19,14 +19,14 @@ class FFMpegServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
-        $app['ffmpeg.configuration'] = array();
-        $app['ffmpeg.default.configuration'] = array(
-            'ffmpeg.threads'   => 4,
-            'ffmpeg.timeout'   => 300,
-            'ffmpeg.binaries'  => array('avconv', 'ffmpeg'),
-            'ffprobe.timeout'  => 30,
-            'ffprobe.binaries' => array('avprobe', 'ffprobe'),
-        );
+        $app['ffmpeg.configuration'] = [];
+        $app['ffmpeg.default.configuration'] = [
+            'ffmpeg.threads' => 4,
+            'ffmpeg.timeout' => 300,
+            'ffmpeg.binaries' => ['avconv', 'ffmpeg'],
+            'ffprobe.timeout' => 30,
+            'ffprobe.binaries' => ['avprobe', 'ffprobe'],
+        ];
         $app['ffmpeg.logger'] = null;
 
         $app['ffmpeg.configuration.build'] = $app->share(function (Application $app) {

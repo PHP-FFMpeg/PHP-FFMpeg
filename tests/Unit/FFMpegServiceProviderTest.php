@@ -10,13 +10,13 @@ class FFMpegServiceProviderTest extends TestCase
     public function testWithConfig()
     {
         $app = new Application();
-        $app->register(new FFMpegServiceProvider(), array(
-            'ffmpeg.configuration' => array(
-                'ffmpeg.threads'   => 12,
-                'ffmpeg.timeout'   => 10666,
-                'ffprobe.timeout'  => 4242,
-            )
-        ));
+        $app->register(new FFMpegServiceProvider(), [
+            'ffmpeg.configuration' => [
+                'ffmpeg.threads' => 12,
+                'ffmpeg.timeout' => 10666,
+                'ffprobe.timeout' => 4242,
+            ],
+        ]);
 
         $this->assertInstanceOf('FFMpeg\FFMpeg', $app['ffmpeg']);
         $this->assertSame($app['ffmpeg'], $app['ffmpeg.ffmpeg']);
@@ -44,11 +44,11 @@ class FFMpegServiceProviderTest extends TestCase
     public function testWithFFMpegBinaryConfig()
     {
         $app = new Application();
-        $app->register(new FFMpegServiceProvider(), array(
-            'ffmpeg.configuration' => array(
+        $app->register(new FFMpegServiceProvider(), [
+            'ffmpeg.configuration' => [
                 'ffmpeg.binaries' => '/path/to/ffmpeg',
-            )
-        ));
+            ],
+        ]);
 
         $this->expectException('\FFMpeg\Exception\ExecutableNotFoundException', 'Unable to load FFMpeg');
         $app['ffmpeg'];
@@ -57,11 +57,11 @@ class FFMpegServiceProviderTest extends TestCase
     public function testWithFFMprobeBinaryConfig()
     {
         $app = new Application();
-        $app->register(new FFMpegServiceProvider(), array(
-            'ffmpeg.configuration' => array(
+        $app->register(new FFMpegServiceProvider(), [
+            'ffmpeg.configuration' => [
                 'ffprobe.binaries' => '/path/to/ffprobe',
-            )
-        ));
+            ],
+        ]);
 
         $this->expectException('\FFMpeg\Exception\ExecutableNotFoundException', 'Unable to load FFProbe');
         $app['ffmpeg.ffprobe'];

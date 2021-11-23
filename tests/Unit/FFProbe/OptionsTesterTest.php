@@ -2,8 +2,8 @@
 
 namespace Tests\FFMpeg\Unit\FFProbe;
 
-use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\FFProbe\OptionsTester;
+use Tests\FFMpeg\Unit\TestCase;
 
 class OptionsTesterTest extends TestCase
 {
@@ -22,7 +22,7 @@ class OptionsTesterTest extends TestCase
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->once())
             ->method('command')
-            ->with(array('-help', '-loglevel', 'quiet'))
+            ->with(['-help', '-loglevel', 'quiet'])
             ->will($this->throwException($executionFailerExceptionMock));
 
         $tester = new OptionsTester($ffprobe, $cache);
@@ -49,7 +49,7 @@ class OptionsTesterTest extends TestCase
         $ffprobe = $this->getFFProbeDriverMock();
         $ffprobe->expects($this->once())
             ->method('command')
-            ->with(array('-help', '-loglevel', 'quiet'))
+            ->with(['-help', '-loglevel', 'quiet'])
             ->will($this->returnValue($data));
 
         $tester = new OptionsTester($ffprobe, $cache);
@@ -58,12 +58,12 @@ class OptionsTesterTest extends TestCase
 
     public function provideOptions()
     {
-        $data = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/help.raw');
+        $data = file_get_contents(__DIR__.'/../../fixtures/ffprobe/help.raw');
 
-        return array(
-            array(true, $data, '-print_format'),
-            array(false, $data, '-another_print_format'),
-        );
+        return [
+            [true, $data, '-print_format'],
+            [false, $data, '-another_print_format'],
+        ];
     }
 
     /**
@@ -81,7 +81,8 @@ class OptionsTesterTest extends TestCase
             ->method('contains')
             ->willReturnOnConsecutiveCalls(
                 $this->returnValue(false),
-                $this->returnValue(true));
+                $this->returnValue(true)
+            );
 
         $cache->expects($this->once())
             ->method('save');
@@ -103,12 +104,12 @@ class OptionsTesterTest extends TestCase
 
         $cache->expects($this->once())
             ->method('fetch')
-            ->with('option-' . $optionName)
+            ->with('option-'.$optionName)
             ->will($this->returnValue($isPresent));
 
         $cache->expects($this->once())
             ->method('contains')
-            ->with('option-' . $optionName)
+            ->with('option-'.$optionName)
             ->will($this->returnValue(true));
 
         $ffprobe = $this->getFFProbeDriverMock();

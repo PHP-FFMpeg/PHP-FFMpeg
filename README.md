@@ -1,9 +1,5 @@
 # php-ffmpeg
 
-[![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983/big.png)](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983)
-
 An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 
 Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
@@ -27,7 +23,7 @@ appear in latest ffmpeg version.
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
 ```bash
-$ composer require php-ffmpeg/php-ffmpeg
+$ composer require protonemedia/php-ffmpeg
 ```
 
 ## Basic Usage

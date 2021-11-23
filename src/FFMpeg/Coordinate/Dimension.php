@@ -14,7 +14,7 @@ namespace FFMpeg\Coordinate;
 use FFMpeg\Exception\InvalidArgumentException;
 
 /**
- * Dimension object, used for manipulating width and height couples
+ * Dimension object, used for manipulating width and height couples.
  */
 class Dimension
 {

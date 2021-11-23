@@ -2,13 +2,14 @@
 
 namespace Tests\FFMpeg\Unit\Filters\Audio;
 
-use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Filters\Audio\AudioFilters;
 use Tests\FFMpeg\Unit\TestCase;
 
-class AudioClipTest extends TestCase {
-
-    public function testClipping() {
+class AudioClipTest extends TestCase
+{
+    public function testClipping()
+    {
         $capturedFilter = null;
 
         $audio = $this->getAudioMock();
@@ -17,16 +18,17 @@ class AudioClipTest extends TestCase {
             ->with($this->isInstanceOf('FFMpeg\Filters\Audio\AudioClipFilter'))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
-        }));
+            }));
         $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
 
         $filters = new AudioFilters($audio);
 
         $filters->clip(TimeCode::fromSeconds(5));
-        $this->assertEquals(array(0 => '-ss', 1 => '00:00:05.00', 2 => '-acodec', 3 => 'copy'), $capturedFilter->apply($audio, $format));
+        $this->assertEquals([0 => '-ss', 1 => '00:00:05.00', 2 => '-acodec', 3 => 'copy'], $capturedFilter->apply($audio, $format));
     }
 
-    public function testClippingWithDuration() {
+    public function testClippingWithDuration()
+    {
         $capturedFilter = null;
 
         $audio = $this->getAudioMock();
@@ -35,13 +37,12 @@ class AudioClipTest extends TestCase {
             ->with($this->isInstanceOf('FFMpeg\Filters\Audio\AudioClipFilter'))
             ->will($this->returnCallback(function ($filter) use (&$capturedFilter) {
                 $capturedFilter = $filter;
-        }));
+            }));
         $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
 
         $filters = new AudioFilters($audio);
 
         $filters->clip(TimeCode::fromSeconds(5), TimeCode::fromSeconds(5));
-        $this->assertEquals(array(0 => '-ss', 1 => '00:00:05.00', 2 => '-t', 3 => '00:00:05.00', 4 => '-acodec', 5 => 'copy'), $capturedFilter->apply($audio, $format));
+        $this->assertEquals([0 => '-ss', 1 => '00:00:05.00', 2 => '-t', 3 => '00:00:05.00', 4 => '-acodec', 5 => 'copy'], $capturedFilter->apply($audio, $format));
     }
-
 }

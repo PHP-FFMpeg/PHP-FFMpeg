@@ -38,9 +38,9 @@ class FrameFilters
     }
 
     /**
-     * Applies a custom filter: -vf foo bar
+     * Applies a custom filter: -vf foo bar.
      *
-     * @param string    $parameters
+     * @param string $parameters
      *
      * @return FrameFilters
      */

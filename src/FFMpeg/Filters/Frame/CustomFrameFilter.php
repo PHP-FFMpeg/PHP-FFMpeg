@@ -11,7 +11,6 @@
 
 namespace FFMpeg\Filters\Frame;
 
-use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Media\Frame;
 
 class CustomFrameFilter implements FrameFilterInterface
@@ -22,7 +21,7 @@ class CustomFrameFilter implements FrameFilterInterface
     private $priority;
 
     /**
-     * A custom filter, useful if you want to build complex filters
+     * A custom filter, useful if you want to build complex filters.
      *
      * @param string $filter
      * @param int    $priority
@@ -46,9 +45,8 @@ class CustomFrameFilter implements FrameFilterInterface
      */
     public function apply(Frame $frame)
     {
-        $commands = array('-vf', $this->filter);
+        $commands = ['-vf', $this->filter];
 
         return $commands;
     }
 }
-

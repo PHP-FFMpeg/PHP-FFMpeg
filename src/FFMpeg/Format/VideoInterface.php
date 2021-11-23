@@ -63,7 +63,7 @@ interface VideoInterface extends AudioInterface
     public function getAdditionalParameters();
 
     /**
-     * Returns the list of initial parameters for this format
+     * Returns the list of initial parameters for this format.
      *
      * @return array
      */

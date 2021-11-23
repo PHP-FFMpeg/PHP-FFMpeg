@@ -2,8 +2,8 @@
 
 namespace Tests\FFMpeg\Unit\Format\Audio;
 
-use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\Format\Audio\DefaultAudio;
+use Tests\FFMpeg\Unit\TestCase;
 
 abstract class AudioTestCase extends TestCase
 {

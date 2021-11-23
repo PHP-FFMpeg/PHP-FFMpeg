@@ -12,13 +12,13 @@ class VideoTranscodeTest extends FunctionalTestCase
 {
     public function testSimpleTranscodeX264()
     {
-        $filename = __DIR__ . '/output/output-x264.mp4';
+        $filename = __DIR__.'/output/output-x264.mp4';
         if (is_file($filename)) {
-            unlink(__DIR__ . '/output/output-x264.mp4');
+            unlink(__DIR__.'/output/output-x264.mp4');
         }
 
         $ffmpeg = $this->getFFMpeg();
-        $video = $ffmpeg->open(__DIR__ . '/../files/Test.ogv');
+        $video = $ffmpeg->open(__DIR__.'/../files/Test.ogv');
 
         $this->assertInstanceOf('FFMpeg\Media\Video', $video);
 
@@ -42,13 +42,13 @@ class VideoTranscodeTest extends FunctionalTestCase
 
     public function testAacTranscodeX264()
     {
-        $filename = __DIR__ . '/output/output-x264_2.mp4';
+        $filename = __DIR__.'/output/output-x264_2.mp4';
         if (is_file($filename)) {
-            unlink(__DIR__ . '/output/output-x264_2.mp4');
+            unlink(__DIR__.'/output/output-x264_2.mp4');
         }
 
         $ffmpeg = $this->getFFMpeg();
-        $video = $ffmpeg->open(__DIR__ . '/../files/sample.3gp');
+        $video = $ffmpeg->open(__DIR__.'/../files/sample.3gp');
 
         $this->assertInstanceOf('FFMpeg\Media\Video', $video);
 
@@ -70,39 +70,37 @@ class VideoTranscodeTest extends FunctionalTestCase
         unlink($filename);
     }
 
-    /**
-     */
     public function testTranscodeInvalidFile()
     {
         $this->expectException('\FFMpeg\Exception\RuntimeException');
         $ffmpeg = $this->getFFMpeg();
-        $ffmpeg->open(__DIR__ . '/../files/UnknownFileTest.ogv');
+        $ffmpeg->open(__DIR__.'/../files/UnknownFileTest.ogv');
     }
 
     public function testSaveInvalidForgedVideo()
     {
         $ffmpeg = $this->getFFMpeg();
-        $video = new Video(__DIR__ . '/../files/UnknownFileTest.ogv', $ffmpeg->getFFMpegDriver(), $ffmpeg->getFFProbe());
+        $video = new Video(__DIR__.'/../files/UnknownFileTest.ogv', $ffmpeg->getFFMpegDriver(), $ffmpeg->getFFProbe());
 
         $this->expectException('\FFMpeg\Exception\RuntimeException');
-        $video->save(new X264('aac'), __DIR__ . '/output/output-x264.mp4');
+        $video->save(new X264('aac'), __DIR__.'/output/output-x264.mp4');
     }
 
     public function testTranscodePortraitVideo()
     {
         $info = $this->getNameAndVersion();
 
-        if ($info['name'] === 'avconv' && version_compare($info['version'], '0.9', '<')) {
+        if ('avconv' === $info['name'] && version_compare($info['version'], '0.9', '<')) {
             $this->markTestSkipped('This version of avconv is buggy and does not support this test.');
         }
 
-        $filename = __DIR__ . '/output/output-x264.mp4';
+        $filename = __DIR__.'/output/output-x264.mp4';
         if (is_file($filename)) {
-            unlink(__DIR__ . '/output/output-x264.mp4');
+            unlink(__DIR__.'/output/output-x264.mp4');
         }
 
         $ffmpeg = $this->getFFMpeg();
-        $video = $ffmpeg->open(__DIR__ . '/../files/portrait.MOV');
+        $video = $ffmpeg->open(__DIR__.'/../files/portrait.MOV');
 
         $video->filters()
             ->resize(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET)
@@ -131,18 +129,18 @@ class VideoTranscodeTest extends FunctionalTestCase
             ->getBinary();
 
         $output = $matches = null;
-        exec($binary . ' -version 2>&1', $output);
+        exec($binary.' -version 2>&1', $output);
 
         if (!isset($output[0])) {
-            return array('name' => null, 'version' => null);
+            return ['name' => null, 'version' => null];
         }
 
         preg_match('/^([a-z]+)\s+version\s+([0-9\.]+)/i', $output[0], $matches);
 
         if (count($matches) > 0) {
-            return array('name' => $matches[1], 'version' => $matches[2]);
+            return ['name' => $matches[1], 'version' => $matches[2]];
         }
 
-        return array('name' => null, 'version' => null);
+        return ['name' => null, 'version' => null];
     }
 }

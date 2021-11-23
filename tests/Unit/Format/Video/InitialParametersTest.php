@@ -10,7 +10,7 @@ class InitialParametersTest extends TestCase
     public function testApplyInitialParameters()
     {
         $format = new X264();
-        $format->setInitialParameters(array('-acodec', 'libopus'));
-        $this->assertEquals(array('-acodec', 'libopus'), $format->getInitialParameters());
+        $format->setInitialParameters(['-acodec', 'libopus']);
+        $this->assertEquals(['-acodec', 'libopus'], $format->getInitialParameters());
     }
 }

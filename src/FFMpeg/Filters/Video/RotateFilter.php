@@ -13,14 +13,14 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Exception\InvalidArgumentException;
-use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Media\Video;
 
 class RotateFilter implements VideoFilterInterface
 {
-    const ROTATE_90 = 'transpose=1';
-    const ROTATE_180 = 'hflip,vflip';
-    const ROTATE_270 = 'transpose=2';
+    public const ROTATE_90 = 'transpose=1';
+    public const ROTATE_180 = 'hflip,vflip';
+    public const ROTATE_270 = 'transpose=2';
 
     /** @var string */
     private $angle;
@@ -54,7 +54,7 @@ class RotateFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        if (in_array($this->angle, array(self::ROTATE_90, self::ROTATE_270), true)) {
+        if (in_array($this->angle, [self::ROTATE_90, self::ROTATE_270], true)) {
             foreach ($video->getStreams()->videos() as $stream) {
                 if ($stream->has('width') && $stream->has('height')) {
                     $width = $stream->get('width');
@@ -64,7 +64,7 @@ class RotateFilter implements VideoFilterInterface
             }
         }
 
-        return array('-vf', $this->angle, '-metadata:s:v:0', 'rotate=0');
+        return ['-vf', $this->angle, '-metadata:s:v:0', 'rotate=0'];
     }
 
     private function setAngle($angle)

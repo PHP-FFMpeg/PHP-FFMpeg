@@ -3,8 +3,8 @@
 namespace Tests\FFMpeg\Unit;
 
 use FFMpeg\FFMpeg;
-use FFMpeg\FFProbe\DataMapping\StreamCollection;
 use FFMpeg\FFProbe\DataMapping\Stream;
+use FFMpeg\FFProbe\DataMapping\StreamCollection;
 
 class FFMpegTest extends TestCase
 {
@@ -23,10 +23,10 @@ class FFMpegTest extends TestCase
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('audios')
-            ->will($this->returnValue(new StreamCollection(array(new Stream(array())))));
+            ->will($this->returnValue(new StreamCollection([new Stream([])])));
         $streams->expects($this->once())
             ->method('videos')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
@@ -43,7 +43,7 @@ class FFMpegTest extends TestCase
         $streams = $this->getStreamCollectionMock();
         $streams->expects($this->once())
             ->method('videos')
-            ->will($this->returnValue(new StreamCollection(array(new Stream(array())))));
+            ->will($this->returnValue(new StreamCollection([new Stream([])])));
         $streams->expects($this->never())
             ->method('audios');
 
@@ -80,7 +80,7 @@ class FFMpegTest extends TestCase
         $logger = $this->getLoggerMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $ffmpeg = FFMpeg::create(array('timeout' => 42), $logger, $ffprobe);
+        $ffmpeg = FFMpeg::create(['timeout' => 42], $logger, $ffprobe);
         $this->assertInstanceOf('FFMpeg\FFMpeg', $ffmpeg);
 
         $this->assertSame($logger, $ffmpeg->getFFMpegDriver()->getProcessRunner()->getLogger());

@@ -2,9 +2,9 @@
 
 namespace Tests\FFMpeg\Unit\Filters\Video;
 
-use Tests\FFMpeg\Unit\TestCase;
-use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Filters\Video\ResizeFilter;
+use FFMpeg\Filters\Video\VideoFilters;
+use Tests\FFMpeg\Unit\TestCase;
 
 class VideoFiltersTest extends TestCase
 {
@@ -35,12 +35,12 @@ class VideoFiltersTest extends TestCase
 
     public function provideResizeOptions()
     {
-        return array(
-            array(ResizeFilter::RESIZEMODE_FIT, true),
-            array(ResizeFilter::RESIZEMODE_SCALE_WIDTH, true),
-            array(ResizeFilter::RESIZEMODE_SCALE_HEIGHT, false),
-            array(ResizeFilter::RESIZEMODE_INSET, false),
-        );
+        return [
+            [ResizeFilter::RESIZEMODE_FIT, true],
+            [ResizeFilter::RESIZEMODE_SCALE_WIDTH, true],
+            [ResizeFilter::RESIZEMODE_SCALE_HEIGHT, false],
+            [ResizeFilter::RESIZEMODE_INSET, false],
+        ];
     }
 
     public function testResample()

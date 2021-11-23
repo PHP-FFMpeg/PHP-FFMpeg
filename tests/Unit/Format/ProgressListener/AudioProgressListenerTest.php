@@ -2,29 +2,37 @@
 
 namespace Tests\FFMpeg\Unit\Format\ProgressListener;
 
-use Tests\FFMpeg\Unit\TestCase;
-use FFMpeg\Format\ProgressListener\AudioProgressListener;
 use FFMpeg\FFProbe\DataMapping\Format;
+use FFMpeg\Format\ProgressListener\AudioProgressListener;
+use Tests\FFMpeg\Unit\TestCase;
 
 class AudioProgressListenerTest extends TestCase
 {
     /**
      * @dataProvider provideData
      */
-    public function testHandle($size, $duration,
-        $data, $expectedPercent, $expectedRemaining, $expectedRate,
-        $data2, $expectedPercent2, $expectedRemaining2, $expectedRate2,
-        $currentPass, $totalPass
-    )
-    {
+    public function testHandle(
+        $size,
+        $duration,
+        $data,
+        $expectedPercent,
+        $expectedRemaining,
+        $expectedRate,
+        $data2,
+        $expectedPercent2,
+        $expectedRemaining2,
+        $expectedRate2,
+        $currentPass,
+        $totalPass
+    ) {
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
             ->method('format')
             ->with(__FILE__)
-            ->will($this->returnValue(new Format(array(
-                'size'     => $size,
+            ->will($this->returnValue(new Format([
+                'size' => $size,
                 'duration' => $duration,
-            ))));
+            ])));
 
         $listener = new AudioProgressListener($ffprobe, __FILE__, $currentPass, $totalPass);
         $phpunit = $this;
@@ -40,7 +48,7 @@ class AudioProgressListenerTest extends TestCase
                 $phpunit->assertLessThan($expectedRate2 + 3, $rate);
                 $phpunit->assertGreaterThan($expectedRate2 - 3, $rate);
             }
-            $n++;
+            ++$n;
         });
         // first one does not trigger progress event
         $listener->handle('any-type'.mt_rand(), $data);
@@ -53,8 +61,8 @@ class AudioProgressListenerTest extends TestCase
 
     public function provideData()
     {
-        return array(
-            array(
+        return [
+            [
                 2894412,
                 180.900750,
                 'size=     712kB time=00:00:45.50 bitrate= 128.1kbits/s',
@@ -66,9 +74,9 @@ class AudioProgressListenerTest extends TestCase
                 2,
                 563,
                 1,
-                1
-            ),
-            array(
+                1,
+            ],
+            [
                 2894412,
                 180.900750,
                 'size=     712kB time=00:00:45.50 bitrate= 128.1kbits/s',
@@ -80,8 +88,8 @@ class AudioProgressListenerTest extends TestCase
                 2,
                 563,
                 1,
-                2
-            )
-        );
+                2,
+            ],
+        ];
     }
 }

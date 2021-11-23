@@ -11,8 +11,8 @@ class AdvancedMediaTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $advancedMedia = new AdvancedMedia(array(__FILE__, __FILE__), $driver, $ffprobe);
-        $this->assertSame(array(__FILE__, __FILE__), $advancedMedia->getInputs());
+        $advancedMedia = new AdvancedMedia([__FILE__, __FILE__], $driver, $ffprobe);
+        $this->assertSame([__FILE__, __FILE__], $advancedMedia->getInputs());
     }
 
     public function testGetInputsCount()
@@ -20,7 +20,7 @@ class AdvancedMediaTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $advancedMedia = new AdvancedMedia(array(__FILE__, __FILE__), $driver, $ffprobe);
+        $advancedMedia = new AdvancedMedia([__FILE__, __FILE__], $driver, $ffprobe);
         $this->assertEquals(2, $advancedMedia->getInputsCount());
     }
 
@@ -29,7 +29,7 @@ class AdvancedMediaTest extends AbstractMediaTestCase
         $driver = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $advancedMedia = new AdvancedMedia(array(__FILE__, __FILE__), $driver, $ffprobe);
+        $advancedMedia = new AdvancedMedia([__FILE__, __FILE__], $driver, $ffprobe);
         $this->assertInstanceOf('FFMpeg\Filters\AdvancedMedia\ComplexFilters', $advancedMedia->filters());
     }
 }

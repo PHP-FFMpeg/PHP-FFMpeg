@@ -2,29 +2,38 @@
 
 namespace Tests\FFMpeg\Unit\Format\ProgressListener;
 
-use Tests\FFMpeg\Unit\TestCase;
-use FFMpeg\Format\ProgressListener\VideoProgressListener;
 use FFMpeg\FFProbe\DataMapping\Format;
+use FFMpeg\Format\ProgressListener\VideoProgressListener;
+use Tests\FFMpeg\Unit\TestCase;
 
 class VideoProgressListenerTest extends TestCase
 {
     /**
      * @dataProvider provideData
      */
-    public function testHandle($size, $duration, $newVideoDuration,
-        $data, $expectedPercent, $expectedRemaining, $expectedRate,
-        $data2, $expectedPercent2, $expectedRemaining2, $expectedRate2,
-        $currentPass, $totalPass
-    )
-    {
+    public function testHandle(
+        $size,
+        $duration,
+        $newVideoDuration,
+        $data,
+        $expectedPercent,
+        $expectedRemaining,
+        $expectedRate,
+        $data2,
+        $expectedPercent2,
+        $expectedRemaining2,
+        $expectedRate2,
+        $currentPass,
+        $totalPass
+    ) {
         $ffprobe = $this->getFFProbeMock();
         $ffprobe->expects($this->once())
             ->method('format')
             ->with(__FILE__)
-            ->will($this->returnValue(new Format(array(
-                'size'     => $size,
+            ->will($this->returnValue(new Format([
+                'size' => $size,
                 'duration' => $duration,
-            ))));
+            ])));
 
         $listener = new VideoProgressListener($ffprobe, __FILE__, $currentPass, $totalPass, $newVideoDuration);
         $phpunit = $this;
@@ -40,7 +49,7 @@ class VideoProgressListenerTest extends TestCase
                 $phpunit->assertLessThan($expectedRate2 + 10, $rate);
                 $phpunit->assertGreaterThan($expectedRate2 - 10, $rate);
             }
-            $n++;
+            ++$n;
         });
         // first one does not trigger progress event
         $listener->handle('any-type'.mt_rand(), $data);
@@ -53,8 +62,8 @@ class VideoProgressListenerTest extends TestCase
 
     public function provideData()
     {
-        return array(
-            array(
+        return [
+            [
                 147073958,
                 281.147533,
                 281.147533,
@@ -67,9 +76,9 @@ class VideoProgressListenerTest extends TestCase
                 32,
                 3868,
                 1,
-                1
-            ),
-            array(
+                1,
+            ],
+            [
                 147073958,
                 281.147533,
                 281.147533,
@@ -82,9 +91,9 @@ class VideoProgressListenerTest extends TestCase
                 32,
                 3868,
                 1,
-                2
-            ),
-            array(
+                2,
+            ],
+            [
                 147073958,
                 281.147533,
                 35,
@@ -97,8 +106,8 @@ class VideoProgressListenerTest extends TestCase
                 0,
                 3868,
                 2,
-                2
-            )
-        );
+                2,
+            ],
+        ];
     }
 }

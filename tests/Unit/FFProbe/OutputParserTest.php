@@ -2,9 +2,9 @@
 
 namespace Tests\FFMpeg\Unit\FFProbe;
 
-use Tests\FFMpeg\Unit\TestCase;
-use FFMpeg\FFProbe\OutputParser;
 use FFMpeg\FFProbe;
+use FFMpeg\FFProbe\OutputParser;
+use Tests\FFMpeg\Unit\TestCase;
 
 class OutputParserTest extends TestCase
 {
@@ -26,15 +26,15 @@ class OutputParserTest extends TestCase
 
     public function provideTypeDataAndOutput()
     {
-        $expectedFormat = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_format.json'), true);
-        $expectedStreams = json_decode(file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_streams.json'), true);
+        $expectedFormat = json_decode(file_get_contents(__DIR__.'/../../fixtures/ffprobe/show_format.json'), true);
+        $expectedStreams = json_decode(file_get_contents(__DIR__.'/../../fixtures/ffprobe/show_streams.json'), true);
 
-        $rawFormat = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_format.raw');
-        $rawStreams = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/show_streams.raw');
+        $rawFormat = file_get_contents(__DIR__.'/../../fixtures/ffprobe/show_format.raw');
+        $rawStreams = file_get_contents(__DIR__.'/../../fixtures/ffprobe/show_streams.raw');
 
-        return array(
-            array(FFProbe::TYPE_FORMAT, $rawFormat, $expectedFormat),
-            array(FFProbe::TYPE_STREAMS, $rawStreams, $expectedStreams),
-        );
+        return [
+            [FFProbe::TYPE_FORMAT, $rawFormat, $expectedFormat],
+            [FFProbe::TYPE_STREAMS, $rawStreams, $expectedStreams],
+        ];
     }
 }

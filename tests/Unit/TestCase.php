@@ -161,7 +161,7 @@ class TestCase extends BaseTestCase
 
         $FormatInterface->expects($this->any())
             ->method('getExtraParams')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         return $FormatInterface;
     }

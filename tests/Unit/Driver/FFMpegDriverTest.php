@@ -4,17 +4,17 @@ namespace Tests\FFMpeg\Unit\Driver;
 
 use Alchemy\BinaryDriver\Configuration;
 use FFMpeg\Driver\FFMpegDriver;
-use Tests\FFMpeg\Unit\TestCase;
 use Symfony\Component\Process\ExecutableFinder;
+use Tests\FFMpeg\Unit\TestCase;
 
 class FFMpegDriverTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $executableFinder = new ExecutableFinder();
 
         $found = false;
-        foreach (array('avconv', 'ffmpeg') as $name) {
+        foreach (['avconv', 'ffmpeg'] as $name) {
             if (null !== $executableFinder->find($name)) {
                 $found = true;
                 break;
@@ -29,7 +29,7 @@ class FFMpegDriverTest extends TestCase
     public function testCreate()
     {
         $logger = $this->getLoggerMock();
-        $ffmpeg = FFMpegDriver::create($logger, array());
+        $ffmpeg = FFMpegDriver::create($logger, []);
         $this->assertInstanceOf('FFMpeg\Driver\FFMpegDriver', $ffmpeg);
         $this->assertEquals($logger, $ffmpeg->getProcessRunner()->getLogger());
     }
@@ -44,6 +44,6 @@ class FFMpegDriverTest extends TestCase
     public function testCreateFailureThrowsAnException()
     {
         $this->expectException('\FFMpeg\Exception\ExecutableNotFoundException');
-        FFMpegDriver::create($this->getLoggerMock(), array('ffmpeg.binaries' => '/path/to/nowhere'));
+        FFMpegDriver::create($this->getLoggerMock(), ['ffmpeg.binaries' => '/path/to/nowhere']);
     }
 }

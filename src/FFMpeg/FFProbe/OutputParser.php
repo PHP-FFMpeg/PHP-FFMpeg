@@ -11,8 +11,8 @@
 
 namespace FFMpeg\FFProbe;
 
-use FFMpeg\FFProbe;
 use FFMpeg\Exception\InvalidArgumentException;
+use FFMpeg\FFProbe;
 
 class OutputParser implements OutputParserInterface
 {
@@ -35,11 +35,10 @@ class OutputParser implements OutputParserInterface
 
     private function parseFormat($data)
     {
-        $ret = array();
+        $ret = [];
 
         foreach (explode(PHP_EOL, $data) as $line) {
-
-            if (in_array($line, array('[FORMAT]', '[/FORMAT]'))) {
+            if (in_array($line, ['[FORMAT]', '[/FORMAT]'])) {
                 continue;
             }
 
@@ -58,7 +57,7 @@ class OutputParser implements OutputParserInterface
 
             if (0 === strpos($key, 'TAG:')) {
                 if (!isset($ret['tags'])) {
-                    $ret['tags'] = array();
+                    $ret['tags'] = [];
                 }
                 $ret['tags'][substr($key, 4)] = $value;
             } else {
@@ -66,22 +65,21 @@ class OutputParser implements OutputParserInterface
             }
         }
 
-        return array('format' => $ret);
+        return ['format' => $ret];
     }
 
     private function parseStreams($data)
     {
-        $ret = array();
+        $ret = [];
         $n = -1;
 
         foreach (explode(PHP_EOL, $data) as $line) {
-
-            if ($line == '[STREAM]') {
-                $n ++;
-                $ret[$n] = array();
+            if ('[STREAM]' == $line) {
+                ++$n;
+                $ret[$n] = [];
                 continue;
             }
-            if ($line == '[/STREAM]') {
+            if ('[/STREAM]' == $line) {
                 continue;
             }
 
@@ -101,18 +99,18 @@ class OutputParser implements OutputParserInterface
                 continue;
             }
 
-            if (in_array($key, array('index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'))) {
+            if (in_array($key, ['index', 'width', 'height', 'channels', 'bits_per_sample', 'has_b_frames', 'level', 'start_pts', 'duration_ts'])) {
                 $value = (int) $value;
             }
 
             if (0 === strpos($key, 'TAG:')) {
                 if (!isset($ret[$n]['tags'])) {
-                    $ret[$n]['tags'] = array();
+                    $ret[$n]['tags'] = [];
                 }
                 $ret[$n]['tags'][substr($key, 4)] = $value;
             } elseif (0 === strpos($key, 'DISPOSITION:')) {
                 if (!isset($ret[$n]['disposition'])) {
-                    $ret[$n]['disposition'] = array();
+                    $ret[$n]['disposition'] = [];
                 }
                 $ret[$n]['disposition'][substr($key, 12)] = $value;
             } else {
@@ -120,6 +118,6 @@ class OutputParser implements OutputParserInterface
             }
         }
 
-        return array('streams' => $ret);
+        return ['streams' => $ret];
     }
 }

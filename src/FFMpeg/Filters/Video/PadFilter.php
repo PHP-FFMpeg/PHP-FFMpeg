@@ -87,13 +87,13 @@ class PadFilter implements VideoFilterInterface, ComplexCompatibleFilter
      */
     protected function getCommands()
     {
-        $commands = array();
+        $commands = [];
 
         $commands[] = '-vf';
-        $commands[] = 'scale=iw*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight()
-            . '/ih):ih*min(' . $this->dimension->getWidth() . '/iw\,' . $this->dimension->getHeight() . '/ih),pad='
-            . $this->dimension->getWidth() . ':' . $this->dimension->getHeight() . ':(' . $this->dimension->getWidth()
-            . '-iw)/2:(' . $this->dimension->getHeight() . '-ih)/2';
+        $commands[] = 'scale=iw*min('.$this->dimension->getWidth().'/iw\,'.$this->dimension->getHeight()
+            .'/ih):ih*min('.$this->dimension->getWidth().'/iw\,'.$this->dimension->getHeight().'/ih),pad='
+            .$this->dimension->getWidth().':'.$this->dimension->getHeight().':('.$this->dimension->getWidth()
+            .'-iw)/2:('.$this->dimension->getHeight().'-ih)/2';
 
         return $commands;
     }

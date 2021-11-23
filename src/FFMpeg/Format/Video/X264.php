@@ -12,7 +12,7 @@
 namespace FFMpeg\Format\Video;
 
 /**
- * The X264 video format
+ * The X264 video format.
  */
 class X264 extends DefaultVideo
 {
@@ -54,7 +54,7 @@ class X264 extends DefaultVideo
      */
     public function getAvailableAudioCodecs()
     {
-        return array('copy', 'aac', 'libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac');
+        return ['copy', 'aac', 'libvo_aacenc', 'libfaac', 'libmp3lame', 'libfdk_aac'];
     }
 
     /**
@@ -62,7 +62,7 @@ class X264 extends DefaultVideo
      */
     public function getAvailableVideoCodecs()
     {
-        return array('libx264');
+        return ['libx264'];
     }
 
     /**
@@ -73,6 +73,7 @@ class X264 extends DefaultVideo
     public function setPasses($passes)
     {
         $this->passes = $passes;
+
         return $this;
     }
 
@@ -81,7 +82,7 @@ class X264 extends DefaultVideo
      */
     public function getPasses()
     {
-        return $this->getKiloBitrate() === 0 ? 1 : $this->passes;
+        return 0 === $this->getKiloBitrate() ? 1 : $this->passes;
     }
 
     /**

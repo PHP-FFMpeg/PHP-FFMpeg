@@ -14,11 +14,9 @@ namespace FFMpeg\Filters;
 class FiltersCollection implements \Countable, \IteratorAggregate
 {
     private $sorted;
-    private $filters = array();
+    private $filters = [];
 
     /**
-     * @param FilterInterface $filter
-     *
      * @return FiltersCollection
      */
     public function add(FilterInterface $filter)

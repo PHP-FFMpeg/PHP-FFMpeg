@@ -2,8 +2,8 @@
 
 namespace Tests\FFMpeg\Unit\Media;
 
-use FFMpeg\Media\Gif;
 use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Media\Gif;
 
 class GifTest extends AbstractMediaTestCase
 {
@@ -89,28 +89,28 @@ class GifTest extends AbstractMediaTestCase
 
     public function provideSaveOptions()
     {
-        return array(
-            array(
+        return [
+            [
                 new Dimension(320, 240), 3,
-                array(
+                [
                     '-ss', 'timecode',
                     '-t', '3',
                     '-i', __FILE__,
                     '-vf',
                     'scale=320:-1', '-gifflags',
-                    '+transdiff', '-y'
-                ),
-            ),
-            array(
+                    '+transdiff', '-y',
+                ],
+            ],
+            [
                 new Dimension(320, 240), null,
-                array(
+                [
                     '-ss', 'timecode',
                     '-i', __FILE__,
                     '-vf',
                     'scale=320:-1', '-gifflags',
-                    '+transdiff', '-y'
-                )
-            ),
-        );
+                    '+transdiff', '-y',
+                ],
+            ],
+        ];
     }
 }

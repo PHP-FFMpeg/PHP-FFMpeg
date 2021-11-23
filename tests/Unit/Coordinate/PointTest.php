@@ -2,8 +2,8 @@
 
 namespace Tests\FFMpeg\Unit\Coordinate;
 
-use Tests\FFMpeg\Unit\TestCase;
 use FFMpeg\Coordinate\Point;
+use Tests\FFMpeg\Unit\TestCase;
 
 class PointTest extends TestCase
 {
@@ -16,8 +16,8 @@ class PointTest extends TestCase
 
     public function testDynamicPointGetters()
     {
-        $point = new Point("t*100", "t", true);
-        $this->assertEquals("t*100", $point->getX());
-        $this->assertEquals("t", $point->getY());
+        $point = new Point('t*100', 't', true);
+        $this->assertEquals('t*100', $point->getX());
+        $this->assertEquals('t', $point->getY());
     }
 }

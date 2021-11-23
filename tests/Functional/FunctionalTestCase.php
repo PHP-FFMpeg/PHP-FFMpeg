@@ -12,8 +12,8 @@ abstract class FunctionalTestCase extends BaseTestCase
      *
      * @return FFMpeg
      */
-    public function getFFMpeg($configuration = array())
+    public function getFFMpeg($configuration = [])
     {
-        return FFMpeg::create(array_merge(array('timeout' => 300), $configuration));
+        return FFMpeg::create(array_merge(['timeout' => 300], $configuration));
     }
 }

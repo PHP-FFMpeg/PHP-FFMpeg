@@ -16,8 +16,6 @@ class ComplexFilters
 
     /**
      * ComplexFilters constructor.
-     *
-     * @param AdvancedMedia $media
      */
     public function __construct(AdvancedMedia $media)
     {
@@ -34,21 +32,22 @@ class ComplexFilters
     public function custom($in, $parameters, $out)
     {
         $this->media->addFilter($in, new CustomComplexFilter($parameters), $out);
+
         return $this;
     }
 
     /**
      * Adds padding (black bars) to a video.
      *
-     * @param string    $in
-     * @param Dimension $dimension
-     * @param string    $out
+     * @param string $in
+     * @param string $out
      *
      * @return ComplexFilters
      */
     public function pad($in, Dimension $dimension, $out)
     {
         $this->media->addFilter($in, new PadFilter($dimension), $out);
+
         return $this;
     }
 
@@ -58,13 +57,13 @@ class ComplexFilters
      * @param string $in
      * @param string $imagePath
      * @param string $out
-     * @param array  $coordinates
      *
      * @return $this
      */
-    public function watermark($in, $imagePath, $out, array $coordinates = array())
+    public function watermark($in, $imagePath, $out, array $coordinates = [])
     {
         $this->media->addFilter($in, new WatermarkFilter($imagePath, $coordinates), $out);
+
         return $this;
     }
 
@@ -78,11 +77,13 @@ class ComplexFilters
      * @param string $out
      *
      * @return ComplexFilters
+     *
      * @see https://ffmpeg.org/ffmpeg-filters.html#xstack
      */
     public function xStack($in, $layout, $inputsCount, $out)
     {
         $this->media->addFilter($in, new XStackFilter($layout, $inputsCount), $out);
+
         return $this;
     }
 
@@ -101,6 +102,7 @@ class ComplexFilters
      * @param float|null  $decimals
      *
      * @return ComplexFilters
+     *
      * @see https://ffmpeg.org/ffmpeg-filters.html#allrgb_002c-allyuv_002c-color_002c-haldclutsrc_002c-nullsrc_002c-pal75bars_002c-pal100bars_002c-rgbtestsrc_002c-smptebars_002c-smptehdbars_002c-testsrc_002c-testsrc2_002c-yuvtestsrc
      */
     public function testSrc(
@@ -115,8 +117,12 @@ class ComplexFilters
         $alpha = null,
         $decimals = null
     ) {
-        $this->media->addFilter('',
-            new TestSrcFilter($type, $size, $duration, $sar, $rate, $level, $color, $alpha, $decimals), $out);
+        $this->media->addFilter(
+            '',
+            new TestSrcFilter($type, $size, $duration, $sar, $rate, $level, $color, $alpha, $decimals),
+            $out
+        );
+
         return $this;
     }
 
@@ -129,6 +135,7 @@ class ComplexFilters
      * @param int|null    $nbSamples
      *
      * @return ComplexFilters
+     *
      * @see https://ffmpeg.org/ffmpeg-filters.html#anullsrc
      */
     public function aNullSrc(
@@ -138,6 +145,7 @@ class ComplexFilters
         $nbSamples = null
     ) {
         $this->media->addFilter('', new ANullSrcFilter($channelLayout, $sampleRate, $nbSamples), $out);
+
         return $this;
     }
 
@@ -152,6 +160,7 @@ class ComplexFilters
      * @param string|null $samples_per_frame
      *
      * @return $this
+     *
      * @see https://ffmpeg.org/ffmpeg-filters.html#sine
      */
     public function sine(
@@ -162,8 +171,12 @@ class ComplexFilters
         $sample_rate = null,
         $samples_per_frame = null
     ) {
-        $this->media->addFilter('',
-            new SineFilter($duration, $frequency, $beep_factor, $sample_rate, $samples_per_frame), $out);
+        $this->media->addFilter(
+            '',
+            new SineFilter($duration, $frequency, $beep_factor, $sample_rate, $samples_per_frame),
+            $out
+        );
+
         return $this;
     }
 }
