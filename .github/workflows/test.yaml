@@ -10,7 +10,7 @@ on:
 
 jobs:
     test:
-        name: "Test ${{ matrix.php-version }}"
+        name: "PHP ${{ matrix.php-version }} ${{ matrix.dependency-versions }} ${{ matrix.composer-stability }}"
         runs-on: ubuntu-latest
 
         env:
@@ -35,6 +35,9 @@ jobs:
                     - php-version: '7.4'
                     - php-version: '8.0'
                     - php-version: '8.1'
+                    - php-version: '8.1'
+                      dependency-versions: 'highest'
+                      composer-stability: 'dev'
 
         steps:
             - name: Checkout project
@@ -53,6 +56,11 @@ jobs:
                   composer remove symfony/phpunit-bridge --dev
                   wget -O phpunit "https://phar.phpunit.de/phpunit-${{ matrix.phpunit-version }}.phar"
                   chmod +x phpunit
+                  composer require "roave/security-advisories" dev-master --no-update
+
+            - name: Set composer stability
+              if: ${{ matrix.composer-stability }}
+              run: composer config minimum-stability ${{ matrix.composer-stability }}
 
             - name: Install composer dependencies
               uses: ramsey/composer-install@v1
