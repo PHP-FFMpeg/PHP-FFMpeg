@@ -51,8 +51,8 @@
         "evenement/evenement": "^3.0",
         "monolog/monolog": "^2.0",
         "spatie/temporary-directory": "^2.0",
-        "psr/log": "^1.0",
-        "symfony/process": "^5.0"
+        "psr/log": "^1.0|^2.0",
+        "symfony/process": "^5.4|^6.0"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"

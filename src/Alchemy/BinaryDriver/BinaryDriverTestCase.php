@@ -47,7 +47,7 @@ class BinaryDriverTestCase extends TestCase
 
         foreach ([
             'getOutput' => $output,
-            'getErrorOutput' => $error,
+            'getErrorOutput' => $error ?: "",
             'getCommandLine' => $commandLine,
         ] as $command => $value) {
             $process
