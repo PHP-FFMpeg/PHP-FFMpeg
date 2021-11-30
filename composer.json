@@ -46,35 +46,29 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "alchemy/binary-driver": "^5.0",
+        "php": "^8.0 || ^8.1",
         "doctrine/cache": "^1.0",
         "evenement/evenement": "^3.0",
-        "monolog/monolog": "^2.0",
-        "spatie/temporary-directory": "^2.0"
+        "psr/log": "^1.0 || ^2.0",
+        "spatie/temporary-directory": "^2.0",
+        "symfony/process": "^5.4 || ^6.0"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "silex/silex": "~1.0",
-        "symfony/process": "2.8 || 3.3",
-        "symfony/phpunit-bridge": "^5.3",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
-        "psr-0": {
-            "FFMpeg": "src"
+        "psr-4": {
+            "FFMpeg\\": "src/FFMpeg",
+            "Alchemy\\BinaryDriver\\": "src/Alchemy/BinaryDriver"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\FFMpeg\\": "tests"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.x-dev"
+            "Alchemy\\Tests\\BinaryDriver\\": "tests/Alchemy/BinaryDriver",
+            "Tests\\FFMpeg\\": "tests/FFMpeg"
         }
     }
 }
