@@ -9,10 +9,10 @@
             <directory>tests/Alchemy/BinaryDriver</directory>
         </testsuite>
         <testsuite name="FFMpeg Unit">
-            <directory>tests/FFmpeg/Unit</directory>
+            <directory>tests/FFMpeg/Unit</directory>
         </testsuite>
         <testsuite name="FFMpeg Functional">
-            <directory>tests/FFmpeg/Functional</directory>
+            <directory>tests/FFMpeg/Functional</directory>
         </testsuite>
     </testsuites>
 
