@@ -46,7 +46,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.0|^8.1",
         "alchemy/binary-driver": "^5.0",
         "doctrine/cache": "^1.0",
         "evenement/evenement": "^3.0",
@@ -60,7 +60,7 @@
         "silex/silex": "~1.0",
         "symfony/process": "2.8 || 3.3",
         "symfony/phpunit-bridge": "^5.3",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-0": {
