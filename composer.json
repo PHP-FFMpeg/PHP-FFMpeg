@@ -46,19 +46,17 @@
         }
     ],
     "require": {
-        "php": "^8.0|^8.1",
+        "php": "^8.0 || ^8.1",
         "doctrine/cache": "^1.0",
         "evenement/evenement": "^3.0",
-        "monolog/monolog": "^2.0",
+        "psr/log": "^1.0 || ^2.0",
         "spatie/temporary-directory": "^2.0",
-        "psr/log": "^1.0|^2.0",
-        "symfony/process": "^5.4|^6.0"
+        "symfony/process": "^5.4 || ^6.0"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.3",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
