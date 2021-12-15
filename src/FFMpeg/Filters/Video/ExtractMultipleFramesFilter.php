@@ -38,7 +38,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
     private $frameFileType = 'jpg';
 
     /** @var array */
-    private static $supportedFrameFileTypes = ['jpg', 'jpeg', 'png'];
+    private static $supportedFrameFileTypes = array('jpg', 'jpeg', 'png');
 
     public function __construct($frameRate = self::FRAMERATE_EVERY_SEC, $destinationFolder = __DIR__, $priority = 0)
     {

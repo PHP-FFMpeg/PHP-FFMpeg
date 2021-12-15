@@ -1,0 +1,80 @@
+name: Test
+
+on:
+    pull_request: ~
+    push:
+        branches:
+            - 'master'
+    schedule:
+        - cron: "0 0 * * *"
+
+jobs:
+    test:
+        name: "PHP ${{ matrix.php-version }} ${{ matrix.dependency-versions }} ${{ matrix.composer-stability }}"
+        runs-on: ubuntu-latest
+
+        env:
+            PHPUNIT_VERSION: ${{ matrix.phpunit-version }}
+
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - php-version: '5.3'
+                      phpunit-version: 4
+                      dependency-versions: 'lowest'
+                    - php-version: '5.4'
+                      phpunit-version: 4
+                    - php-version: '5.5'
+                      phpunit-version: 4
+                    - php-version: '5.6'
+                    - php-version: '7.0'
+                    - php-version: '7.1'
+                    - php-version: '7.2'
+                    - php-version: '7.3'
+                    - php-version: '7.4'
+                    - php-version: '8.0'
+                    - php-version: '8.1'
+                    - php-version: '8.1'
+                      dependency-versions: 'highest'
+                      composer-stability: 'dev'
+
+        steps:
+            - name: Checkout project
+              uses: actions/checkout@v2
+
+            - name: Install and configure PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-version }}
+                  tools: composer:v2
+                  coverage: none
+
+            - name: Install phpunit
+              if: ${{ matrix.phpunit-version }}
+              run: |
+                  composer remove symfony/phpunit-bridge --dev
+                  wget -O phpunit "https://phar.phpunit.de/phpunit-${{ matrix.phpunit-version }}.phar"
+                  chmod +x phpunit
+                  composer require "roave/security-advisories" dev-master --no-update
+
+            - name: Set composer stability
+              if: ${{ matrix.composer-stability }}
+              run: composer config minimum-stability ${{ matrix.composer-stability }}
+
+            - name: Install composer dependencies
+              uses: ramsey/composer-install@v1
+              with:
+                  dependency-versions: ${{ matrix.dependency-versions }}
+
+            - name: Install ffmpeg
+              uses: FedericoCarboni/setup-ffmpeg@v1
+
+            - name: Run tests
+              if: ${{ matrix.phpunit-version }}
+              run: |
+                  if [ "$PHPUNIT_VERSION" ]; then
+                      ./phpunit --verbose
+                  else
+                      ./vendor/bin/simple-phpunit --verbose
+                  fi;
