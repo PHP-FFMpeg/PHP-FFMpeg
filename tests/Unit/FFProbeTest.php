@@ -125,6 +125,77 @@ class FFProbeTest extends TestCase
         $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
     }
 
+    public function provideDataWithAnalyzeOptions()
+    {
+        $stream = $this->getStreamMock();
+        $format = $this->getFormatMock();
+
+        return array(
+            array($stream, 'streams', array('-show_streams', '\s*-analyzeduration', '\s*-probesize'), FFProbe::TYPE_STREAMS, array(__FILE__, '-show_streams', '-analyzeduration', 5000000000, '-probesize', 1000000000)),
+            array($format, 'format', array('-show_format', '\s*-analyzeduration', '\s*-probesize'), FFProbe::TYPE_FORMAT, array(__FILE__, '-show_format', '-analyzeduration', 5000000000, '-probesize', 1000000000)),
+        );
+    }
+
+    /**
+     * @dataProvider provideDataWithAnalyzeOptions
+     */
+    public function testProbeWithAnalyzeOptions($output, $method, $commands, $type, $caughtCommands)
+    {
+        $pathfile = __FILE__;
+        $data = array('key' => 'value');
+        $rawData = 'raw data';
+        $conf = FFProbe::create(array(
+            'ffprobe.analyzeduration' => 5000000000,
+            'ffprobe.probesize' => 1000000000,
+        ))->getFFProbeDriver()->getConfiguration();
+
+        $this->assertTrue($conf->has('ffprobe.analyzeduration'));
+        $this->assertSame(1000000000, $conf->get('ffprobe.probesize'));
+
+        $ffprobe = new FFProbe($this->getFFProbeDriverMock(), $this->getCacheMock());
+
+        $mapper = $this->getFFProbeMapperMock();
+        $mapper->expects($this->once())
+            ->method('map')
+            ->with($type, $data)
+            ->will($this->returnValue($output));
+
+        $parser = $this->getFFProbeParserMock();
+        $parser->expects($this->once())
+            ->method('parse')
+            ->with($type, $rawData)
+            ->will($this->returnValue($data));
+
+        $tester = $this->getFFProbeOptionsTesterMockWithOptions($commands);
+
+        $cache = $this->getCacheMock();
+        $cache->expects($this->once())
+            ->method('contains')
+            ->will($this->returnValue(false));
+        $cache->expects($this->never())
+            ->method('fetch');
+        $cache->expects($this->once())
+            ->method('save')
+            ->with($this->anything(), $output);
+
+        $driver = $this->getFFProbeDriverMock();
+        $driver->expects($this->once())
+            ->method('command')
+            ->with($caughtCommands)
+            ->willReturn($rawData);
+        $driver->expects($this->once())
+            ->method('getConfiguration')
+            ->willReturn($conf);
+
+        $ffprobe->setOptionsTester($tester)
+            ->setCache($cache)
+            ->setMapper($mapper)
+            ->setFFProbeDriver($driver)
+            ->setParser($parser);
+
+        $this->assertEquals($output, call_user_func(array($ffprobe, $method), $pathfile));
+    }
+
     public function provideDataForInvalidJson()
     {
         $stream = $this->getStreamMock();
