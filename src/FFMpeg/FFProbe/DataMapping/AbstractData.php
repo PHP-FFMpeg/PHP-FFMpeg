@@ -86,6 +86,7 @@ abstract class AbstractData implements \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->properties);

@@ -11,10 +11,13 @@
 
 namespace FFMpeg;
 
-use Doctrine\Common\Cache\ArrayCache;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
+/**
+ * @deprecated
+ */
 class FFMpegServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
@@ -44,7 +47,7 @@ class FFMpegServiceProvider implements ServiceProviderInterface
         });
 
         $app['ffprobe.cache'] = $app->share(function () {
-            return new ArrayCache();
+            return new ArrayAdapter;
         });
 
         $app['ffmpeg.ffprobe'] = $app->share(function (Application $app) {

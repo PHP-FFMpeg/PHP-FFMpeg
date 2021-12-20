@@ -1,8 +1,6 @@
 # php-ffmpeg
 
-[![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983/big.png)](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983)
+[![Test](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/test.yaml/badge.svg)](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/test.yaml)
 
 An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 
@@ -712,32 +710,6 @@ You can validate media files using PHP-FFMpeg's FFProbe wrapper.
 ```php
 $ffprobe = FFMpeg\FFProbe::create();
 $ffprobe->isValid('/path/to/file/to/check'); // returns bool
-```
-
-## Using with Silex Microframework
-
-The service provider is easy to set up:
-
-```php
-$app = new Silex\Application();
-$app->register(new FFMpeg\FFMpegServiceProvider());
-
-$video = $app['ffmpeg']->open('video.mpeg');
-```
-
-Available options are as follow:
-
-```php
-$app->register(new FFMpeg\FFMpegServiceProvider(), array(
-    'ffmpeg.configuration' => array(
-        'ffmpeg.threads'   => 4,
-        'ffmpeg.timeout'   => 300,
-        'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
-        'ffprobe.timeout'  => 30,
-        'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
-    ),
-    'ffmpeg.logger' => $logger,
-));
 ```
 
 ## License
