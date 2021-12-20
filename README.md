@@ -714,32 +714,6 @@ $ffprobe = FFMpeg\FFProbe::create();
 $ffprobe->isValid('/path/to/file/to/check'); // returns bool
 ```
 
-## Using with Silex Microframework
-
-The service provider is easy to set up:
-
-```php
-$app = new Silex\Application();
-$app->register(new FFMpeg\FFMpegServiceProvider());
-
-$video = $app['ffmpeg']->open('video.mpeg');
-```
-
-Available options are as follow:
-
-```php
-$app->register(new FFMpeg\FFMpegServiceProvider(), array(
-    'ffmpeg.configuration' => array(
-        'ffmpeg.threads'   => 4,
-        'ffmpeg.timeout'   => 300,
-        'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
-        'ffprobe.timeout'  => 30,
-        'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
-    ),
-    'ffmpeg.logger' => $logger,
-));
-```
-
 ## License
 
 This project is licensed under the [MIT license](http://opensource.org/licenses/MIT).

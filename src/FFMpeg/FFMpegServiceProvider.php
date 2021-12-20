@@ -15,6 +15,9 @@ use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
+/**
+ * @deprecated
+ */
 class FFMpegServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
