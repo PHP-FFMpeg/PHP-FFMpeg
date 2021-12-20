@@ -32,6 +32,7 @@ class FiltersCollection implements \Countable, \IteratorAggregate
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         if (0 === count($this->filters)) {
@@ -44,6 +45,7 @@ class FiltersCollection implements \Countable, \IteratorAggregate
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         if (null === $this->sorted) {

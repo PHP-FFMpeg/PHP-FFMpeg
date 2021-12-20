@@ -2,10 +2,11 @@
 
 namespace Tests\FFMpeg\Unit;
 
-use FFMpeg\FFProbe;
-use Symfony\Component\Process\ExecutableFinder;
-use Alchemy\BinaryDriver\ConfigurationInterface;
 use Alchemy\BinaryDriver\Configuration;
+use Alchemy\BinaryDriver\ConfigurationInterface;
+use FFMpeg\FFProbe;
+use Symfony\Component\Cache\CacheItem;
+use Symfony\Component\Process\ExecutableFinder;
 
 class FFProbeTest extends TestCase
 {
@@ -100,13 +101,14 @@ class FFProbeTest extends TestCase
 
         $cache = $this->getCacheMock();
         $cache->expects($this->once())
-            ->method('contains')
+            ->method('hasItem')
             ->will($this->returnValue(false));
-        $cache->expects($this->never())
-            ->method('fetch');
+        $cache->expects($this->once())
+            ->method('getItem')
+            ->will($this->returnValue(new CacheItem));
         $cache->expects($this->once())
             ->method('save')
-            ->with($this->anything(), $output);
+            ->with($this->anything());
 
         $driver = $this->getFFProbeDriverMock();
         $driver->expects($this->once())
@@ -160,10 +162,11 @@ class FFProbeTest extends TestCase
 
         $cache = $this->getCacheMock();
         $cache->expects($this->exactly(2))
-            ->method('contains')
+            ->method('hasItem')
             ->will($this->returnValue(false));
-        $cache->expects($this->never())
-            ->method('fetch');
+        $cache->expects($this->once())
+            ->method('getItem')
+            ->will($this->returnValue(new CacheItem));
 
         $driver = $this->getFFProbeDriverMock();
         $driver->expects($this->exactly(2))
@@ -205,13 +208,16 @@ class FFProbeTest extends TestCase
 
         $tester = $this->getFFProbeOptionsTesterMock();
 
+        $cacheItem = new CacheItem;
+        $cacheItem->set($output);
+
         $cache = $this->getCacheMock();
         $cache->expects($this->once())
-            ->method('contains')
+            ->method('hasItem')
             ->will($this->returnValue(true));
         $cache->expects($this->once())
-            ->method('fetch')
-            ->will($this->returnValue($output));
+            ->method('getItem')
+            ->will($this->returnValue($cacheItem));
         $cache->expects($this->never())
             ->method('save');
 

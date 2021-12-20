@@ -74,6 +74,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->streams);
@@ -92,6 +93,7 @@ class StreamCollection implements \Countable, \IteratorAggregate
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->streams);
