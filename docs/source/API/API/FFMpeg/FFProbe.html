@@ -1,51 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="robots" content="index, follow, all" />
-        <title>FFMpeg\FFProbe | PHP-FFMpeg API</title>
-                    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
-                            </head>
-        <body id="class">
-            <div class="header">
-        <ul>
-            <li><a href="../classes.html">Classes</a></li>
-                            <li><a href="../namespaces.html">Namespaces</a></li>
-                        <li><a href="../interfaces.html">Interfaces</a></li>
-            <li><a href="../traits.html">Traits</a></li>
-            <li><a href="../doc-index.html">Index</a></li>
-            
-        </ul>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>FFMpeg\FFProbe | PHP-FFMpeg API</title>
 
-        <div id="title">PHP-FFMpeg API</div>
+            <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../fonts/doctum-font.css">
+        <script src="../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../js/bootstrap.min.js"></script>
+        <script src="../js/typeahead.min.js"></script>
+        <script src="../doctum.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 
-            <div class="type">Class</div>
-    <h1><a href="../FFMpeg.html">FFMpeg</a>\FFProbe</h1>
+    </head>
+
+    <body id="class" data-name="class:FFMpeg_FFProbe" data-root-path="../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
     </div>
-        <div class="content">
-                <p>    class
-    <strong>FFProbe</strong></p>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../index.html">PHP-FFMpeg API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../classes.html">Classes</a></li>
+                    <li><a href="../namespaces.html">Namespaces</a></li>
+                    <li><a href="../interfaces.html">Interfaces</a></li>
+                    <li><a href="../traits.html">Traits</a></li>
+                    <li><a href="../doc-index.html">Index</a></li>
+                    <li><a href="../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../FFMpeg.html">FFMpeg</a></li><li class="backslash">\</li><li>FFProbe</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>FFProbe    
+            </h1>
+    </div>
 
     
-            <h2>Constants</h2>
-
-            <table>
-                    <tr>
-                <td>TYPE_STREAMS</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
+    <p>        class
+    <strong>FFProbe</strong>
 </p>
+
+        
+    
+        
+
+            
+        
+            <h2>Constants</h2>    <table class="table table-condensed">
+                    <tr>
+                <td>
+                                                                                                                        TYPE_STREAMS
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
-                <td>TYPE_FORMAT</td>
+                <td>
+                                                                                                                        TYPE_FORMAT
+                                    </td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
             </table>
@@ -54,683 +108,812 @@
     
             <h2>Methods</h2>
 
-            <table>
-                    <tr>
-                <td class="type">
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method___construct">__construct</a>(<a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a> $ffprobe, <abbr title="Doctrine\Common\Cache\Cache">Cache</abbr> $cache)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>(<a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a> $ffprobe, <abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr> $cache)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe/OutputParserInterface.html"><abbr title="FFMpeg\FFProbe\OutputParserInterface">OutputParserInterface</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getParser">getParser</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_setParser">setParser</a>(<a href="../FFMpeg/FFProbe/OutputParserInterface.html"><abbr title="FFMpeg\FFProbe\OutputParserInterface">OutputParserInterface</abbr></a> $parser)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getFFProbeDriver">getFFProbeDriver</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_setFFProbeDriver">setFFProbeDriver</a>(<a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a> $ffprobe)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_setOptionsTester">setOptionsTester</a>(<a href="../FFMpeg/FFProbe/OptionsTesterInterface.html"><abbr title="FFMpeg\FFProbe\OptionsTesterInterface">OptionsTesterInterface</abbr></a> $tester)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe/OptionsTesterInterface.html"><abbr title="FFMpeg\FFProbe\OptionsTesterInterface">OptionsTesterInterface</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getOptionsTester">getOptionsTester</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_setCache">setCache</a>(<abbr title="Doctrine\Common\Cache\Cache">Cache</abbr> $cache)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <abbr title="Doctrine\Common\Cache\Cache">Cache</abbr>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setCache">setCache</a>(<abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr> $cache)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="FFMpeg\Cache">Cache</abbr>
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getCache">getCache</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe/MapperInterface.html"><abbr title="FFMpeg\FFProbe\MapperInterface">MapperInterface</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getMapper">getMapper</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_setMapper">setMapper</a>(<a href="../FFMpeg/FFProbe/MapperInterface.html"><abbr title="FFMpeg\FFProbe\MapperInterface">MapperInterface</abbr></a> $mapper)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe/DataMapping/Format.html"><abbr title="FFMpeg\FFProbe\DataMapping\Format">Format</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_format">format</a>(string $pathfile)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_isValid">isValid</a>(string $pathfile)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../FFMpeg/FFProbe/DataMapping/StreamCollection.html"><abbr title="FFMpeg\FFProbe\DataMapping\StreamCollection">StreamCollection</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_streams">streams</a>(string $pathfile)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     static&nbsp;<a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_create">create</a>(array|<abbr title="Alchemy\BinaryDriver\ConfigurationInterface">ConfigurationInterface</abbr> $configuration = array(), <abbr title="Psr\Log\LoggerInterface">LoggerInterface</abbr> $logger = null, <abbr title="Doctrine\Common\Cache\Cache">Cache</abbr> $cache = null)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-            </table>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_create">create</a>(array|<abbr title="Alchemy\BinaryDriver\ConfigurationInterface">ConfigurationInterface</abbr> $configuration = array(), <abbr title="Psr\Log\LoggerInterface">LoggerInterface</abbr> $logger = null, <abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr> $cache = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
 
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
         <div class="location">at line 47</div>
-        <code>            public            
-    <strong>__construct</strong>(<a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a> $ffprobe, <abbr title="Doctrine\Common\Cache\Cache">Cache</abbr> $cache)</code>
+        <code>                    
+    <strong>__construct</strong>(<a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a> $ffprobe, <abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr> $cache)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a></td>
                 <td>$ffprobe</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
-                <td><abbr title="Doctrine\Common\Cache\Cache">Cache</abbr></td>
+                <td><abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr></td>
                 <td>$cache</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getParser">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getParser">
         <div class="location">at line 59</div>
-        <code>            public            <a href="../FFMpeg/FFProbe/OutputParserInterface.html"><abbr title="FFMpeg\FFProbe\OutputParserInterface">OutputParserInterface</abbr></a>
-    <strong>getParser</strong>()</code>
+        <code>                    <a href="../FFMpeg/FFProbe/OutputParserInterface.html"><abbr title="FFMpeg\FFProbe\OutputParserInterface">OutputParserInterface</abbr></a>
+    <strong>getParser</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe/OutputParserInterface.html"><abbr title="FFMpeg\FFProbe\OutputParserInterface">OutputParserInterface</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_setParser">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setParser">
         <div class="location">at line 69</div>
-        <code>            public            <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-    <strong>setParser</strong>(<a href="../FFMpeg/FFProbe/OutputParserInterface.html"><abbr title="FFMpeg\FFProbe\OutputParserInterface">OutputParserInterface</abbr></a> $parser)</code>
+        <code>                    <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>setParser</strong>(<a href="../FFMpeg/FFProbe/OutputParserInterface.html"><abbr title="FFMpeg\FFProbe\OutputParserInterface">OutputParserInterface</abbr></a> $parser)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../FFMpeg/FFProbe/OutputParserInterface.html"><abbr title="FFMpeg\FFProbe\OutputParserInterface">OutputParserInterface</abbr></a></td>
                 <td>$parser</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getFFProbeDriver">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFFProbeDriver">
         <div class="location">at line 79</div>
-        <code>            public            <a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a>
-    <strong>getFFProbeDriver</strong>()</code>
+        <code>                    <a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a>
+    <strong>getFFProbeDriver</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_setFFProbeDriver">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFFProbeDriver">
         <div class="location">at line 89</div>
-        <code>            public            <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-    <strong>setFFProbeDriver</strong>(<a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a> $ffprobe)</code>
+        <code>                    <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>setFFProbeDriver</strong>(<a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a> $ffprobe)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../FFMpeg/Driver/FFProbeDriver.html"><abbr title="FFMpeg\Driver\FFProbeDriver">FFProbeDriver</abbr></a></td>
                 <td>$ffprobe</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_setOptionsTester">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setOptionsTester">
         <div class="location">at line 101</div>
-        <code>            public            <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-    <strong>setOptionsTester</strong>(<a href="../FFMpeg/FFProbe/OptionsTesterInterface.html"><abbr title="FFMpeg\FFProbe\OptionsTesterInterface">OptionsTesterInterface</abbr></a> $tester)</code>
+        <code>                    <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>setOptionsTester</strong>(<a href="../FFMpeg/FFProbe/OptionsTesterInterface.html"><abbr title="FFMpeg\FFProbe\OptionsTesterInterface">OptionsTesterInterface</abbr></a> $tester)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../FFMpeg/FFProbe/OptionsTesterInterface.html"><abbr title="FFMpeg\FFProbe\OptionsTesterInterface">OptionsTesterInterface</abbr></a></td>
                 <td>$tester</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getOptionsTester">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getOptionsTester">
         <div class="location">at line 111</div>
-        <code>            public            <a href="../FFMpeg/FFProbe/OptionsTesterInterface.html"><abbr title="FFMpeg\FFProbe\OptionsTesterInterface">OptionsTesterInterface</abbr></a>
-    <strong>getOptionsTester</strong>()</code>
+        <code>                    <a href="../FFMpeg/FFProbe/OptionsTesterInterface.html"><abbr title="FFMpeg\FFProbe\OptionsTesterInterface">OptionsTesterInterface</abbr></a>
+    <strong>getOptionsTester</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe/OptionsTesterInterface.html"><abbr title="FFMpeg\FFProbe\OptionsTesterInterface">OptionsTesterInterface</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_setCache">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setCache">
         <div class="location">at line 121</div>
-        <code>            public            <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-    <strong>setCache</strong>(<abbr title="Doctrine\Common\Cache\Cache">Cache</abbr> $cache)</code>
+        <code>                    <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>setCache</strong>(<abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr> $cache)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
-                <td><abbr title="Doctrine\Common\Cache\Cache">Cache</abbr></td>
+                <td><abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr></td>
                 <td>$cache</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getCache">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCache">
         <div class="location">at line 131</div>
-        <code>            public            <abbr title="Doctrine\Common\Cache\Cache">Cache</abbr>
-    <strong>getCache</strong>()</code>
+        <code>                    <abbr title="FFMpeg\Cache">Cache</abbr>
+    <strong>getCache</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
-            <td><abbr title="Doctrine\Common\Cache\Cache">Cache</abbr></td>
-            <td>
-</td>
+            <td><abbr title="FFMpeg\Cache">Cache</abbr></td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getMapper">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMapper">
         <div class="location">at line 139</div>
-        <code>            public            <a href="../FFMpeg/FFProbe/MapperInterface.html"><abbr title="FFMpeg\FFProbe\MapperInterface">MapperInterface</abbr></a>
-    <strong>getMapper</strong>()</code>
+        <code>                    <a href="../FFMpeg/FFProbe/MapperInterface.html"><abbr title="FFMpeg\FFProbe\MapperInterface">MapperInterface</abbr></a>
+    <strong>getMapper</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe/MapperInterface.html"><abbr title="FFMpeg\FFProbe\MapperInterface">MapperInterface</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_setMapper">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setMapper">
         <div class="location">at line 149</div>
-        <code>            public            <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-    <strong>setMapper</strong>(<a href="../FFMpeg/FFProbe/MapperInterface.html"><abbr title="FFMpeg\FFProbe\MapperInterface">MapperInterface</abbr></a> $mapper)</code>
+        <code>                    <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>setMapper</strong>(<a href="../FFMpeg/FFProbe/MapperInterface.html"><abbr title="FFMpeg\FFProbe\MapperInterface">MapperInterface</abbr></a> $mapper)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../FFMpeg/FFProbe/MapperInterface.html"><abbr title="FFMpeg\FFProbe\MapperInterface">MapperInterface</abbr></a></td>
                 <td>$mapper</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_format">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_format">
         <div class="location">at line 168</div>
-        <code>            public            <a href="../FFMpeg/FFProbe/DataMapping/Format.html"><abbr title="FFMpeg\FFProbe\DataMapping\Format">Format</abbr></a>
-    <strong>format</strong>(string $pathfile)</code>
+        <code>                    <a href="../FFMpeg/FFProbe/DataMapping/Format.html"><abbr title="FFMpeg\FFProbe\DataMapping\Format">Format</abbr></a>
+    <strong>format</strong>(string $pathfile)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>string</td>
                 <td>$pathfile</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe/DataMapping/Format.html"><abbr title="FFMpeg\FFProbe\DataMapping\Format">Format</abbr></a></td>
-            <td>A Format object</td>
+            <td><p>A Format object</p></td>
         </tr>
     </table>
 
             
                             <h4>Exceptions</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>
-</td>
+                <td><a href="../FFMpeg/Exception/InvalidArgumentException.html"><abbr title="FFMpeg\Exception\InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
             </tr>
                     <tr>
-                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
-                <td>
-</td>
+                <td><a href="../FFMpeg/Exception/RuntimeException.html"><abbr title="FFMpeg\Exception\RuntimeException">RuntimeException</abbr></a></td>
+                <td></td>
             </tr>
             </table>
 
             
+            
                     </div>
     </div>
 
-                <h3 id="method_streams">
-        <div class="location">at line 185</div>
-        <code>            public            <a href="../FFMpeg/FFProbe/DataMapping/StreamCollection.html"><abbr title="FFMpeg\FFProbe\DataMapping\StreamCollection">StreamCollection</abbr></a>
-    <strong>streams</strong>(string $pathfile)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isValid">
+        <div class="location">at line 182</div>
+        <code>                    bool
+    <strong>isValid</strong>(string $pathfile)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details"><i>Since: 0.10.0</i>
+            <br>    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>string</td>
                 <td>$pathfile</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_streams">
+        <div class="location">at line 204</div>
+        <code>                    <a href="../FFMpeg/FFProbe/DataMapping/StreamCollection.html"><abbr title="FFMpeg\FFProbe\DataMapping\StreamCollection">StreamCollection</abbr></a>
+    <strong>streams</strong>(string $pathfile)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pathfile</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe/DataMapping/StreamCollection.html"><abbr title="FFMpeg\FFProbe\DataMapping\StreamCollection">StreamCollection</abbr></a></td>
-            <td>A collection of streams</td>
+            <td><p>A collection of streams</p></td>
         </tr>
     </table>
 
             
                             <h4>Exceptions</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>
-</td>
+                <td><a href="../FFMpeg/Exception/InvalidArgumentException.html"><abbr title="FFMpeg\Exception\InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td></td>
             </tr>
                     <tr>
-                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
-                <td>
-</td>
+                <td><a href="../FFMpeg/Exception/RuntimeException.html"><abbr title="FFMpeg\Exception\RuntimeException">RuntimeException</abbr></a></td>
+                <td></td>
             </tr>
             </table>
 
             
+            
                     </div>
     </div>
 
-                <h3 id="method_create">
-        <div class="location">at line 201</div>
-        <code>        static    public            <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-    <strong>create</strong>(array|<abbr title="Alchemy\BinaryDriver\ConfigurationInterface">ConfigurationInterface</abbr> $configuration = array(), <abbr title="Psr\Log\LoggerInterface">LoggerInterface</abbr> $logger = null, <abbr title="Doctrine\Common\Cache\Cache">Cache</abbr> $cache = null)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_create">
+        <div class="location">at line 220</div>
+        <code>        static            <a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>create</strong>(array|<abbr title="Alchemy\BinaryDriver\ConfigurationInterface">ConfigurationInterface</abbr> $configuration = array(), <abbr title="Psr\Log\LoggerInterface">LoggerInterface</abbr> $logger = null, <abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr> $cache = null)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>array|<abbr title="Alchemy\BinaryDriver\ConfigurationInterface">ConfigurationInterface</abbr></td>
                 <td>$configuration</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td><abbr title="Psr\Log\LoggerInterface">LoggerInterface</abbr></td>
                 <td>$logger</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
-                <td><abbr title="Doctrine\Common\Cache\Cache">Cache</abbr></td>
+                <td><abbr title="Psr\Cache\CacheItemPoolInterface">CacheItemPoolInterface</abbr></td>
                 <td>$cache</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-    
             </div>
-            <div id="footer">
-        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
     </div>
     </body>
+
 </html>

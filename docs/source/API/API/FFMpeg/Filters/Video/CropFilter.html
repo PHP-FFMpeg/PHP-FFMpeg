@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>FFMpeg\Filters\Video\CropFilter | PHP-FFMpeg API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../../fonts/doctum-font.css">
+        <script src="../../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../doctum.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    </head>
+
+    <body id="class" data-name="class:FFMpeg_Filters_Video_CropFilter" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">PHP-FFMpeg API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                    <li><a href="../../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../../FFMpeg.html">FFMpeg</a></li><li class="backslash">\</li><li><a href="../../../FFMpeg/Filters.html">Filters</a></li><li class="backslash">\</li><li><a href="../../../FFMpeg/Filters/Video.html">Video</a></li><li class="backslash">\</li><li>CropFilter</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>CropFilter    
+            </h1>
+    </div>
+
+    
+    <p>        class
+    <strong>CropFilter</strong>        implements
+        <a href="../../../FFMpeg/Filters/Video/VideoFilterInterface.html"><abbr title="FFMpeg\Filters\Video\VideoFilterInterface">VideoFilterInterface</abbr></a>
+</p>
+
+        
+    
+        
+
+            
+        
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_priority">
+                                        protected                                        int
+                                                                                
+                                    </td>
+                <td>$priority</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_dimension">
+                                        protected                                        <a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a>
+                                                                                
+                                    </td>
+                <td>$dimension</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_point">
+                                        protected                                        <a href="../../../FFMpeg/Coordinate/Point.html"><abbr title="FFMpeg\Coordinate\Point">Point</abbr></a>
+                                                                                
+                                    </td>
+                <td>$point</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>(<a href="../../../FFMpeg/Coordinate/Point.html"><abbr title="FFMpeg\Coordinate\Point">Point</abbr></a> $point, <a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension, $priority = 0)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPriority">getPriority</a>()
+        
+                                            <p><p>Returns the priority of the filter.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_apply">apply</a>(<a href="../../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a> $video, <a href="../../../FFMpeg/Format/VideoInterface.html"><abbr title="FFMpeg\Format\VideoInterface">VideoInterface</abbr></a> $format)
+        
+                                            <p><p>Applies the filter on the the Video media given an format.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 27</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../FFMpeg/Coordinate/Point.html"><abbr title="FFMpeg\Coordinate\Point">Point</abbr></a> $point, <a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension, $priority = 0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/Point.html"><abbr title="FFMpeg\Coordinate\Point">Point</abbr></a></td>
+                <td>$point</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a></td>
+                <td>$dimension</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$priority</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPriority">
+        <div class="location">at line 37</div>
+        <code>                    int
+    <strong>getPriority</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Returns the priority of the filter.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_apply">
+        <div class="location">at line 45</div>
+        <code>                    array
+    <strong>apply</strong>(<a href="../../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a> $video, <a href="../../../FFMpeg/Format/VideoInterface.html"><abbr title="FFMpeg\Format\VideoInterface">VideoInterface</abbr></a> $format)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Applies the filter on the the Video media given an format.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a></td>
+                <td>$video</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../../FFMpeg/Format/VideoInterface.html"><abbr title="FFMpeg\Format\VideoInterface">VideoInterface</abbr></a></td>
+                <td>$format</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td><p>An array of arguments</p></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
+    </div>
+    </body>
+
+</html>

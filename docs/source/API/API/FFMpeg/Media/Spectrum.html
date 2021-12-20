@@ -1,0 +1,2384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>FFMpeg\Media\Spectrum | PHP-FFMpeg API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../fonts/doctum-font.css">
+        <script src="../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../doctum.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    </head>
+
+    <body id="class" data-name="class:FFMpeg_Media_Spectrum" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">PHP-FFMpeg API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                    <li><a href="../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../FFMpeg.html">FFMpeg</a></li><li class="backslash">\</li><li><a href="../../FFMpeg/Media.html">Media</a></li><li class="backslash">\</li><li>Spectrum</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>Spectrum    
+            </h1>
+    </div>
+
+    
+    <p>        class
+    <strong>Spectrum</strong>        extends <a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a>
+</p>
+
+        
+    
+        
+
+            <div class="description">
+            <p><p>Class Spectrum
+Generates an audio spectrum image using FFMPeg's <code>showspectrumpic</code> command</p></p>                    </div>
+            
+        
+            <h2>Constants</h2>    <table class="table table-condensed">
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_COLOR
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_MODE
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_SCALE
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_FSCALE
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_SATURATION
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_WIN_FUNC
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_ORIENTATION
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_GAIN
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_LEGEND
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_ROTATION
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_START
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        DEFAULT_STOP
+                                    </td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+            </table>
+
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_pathfile">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td>$pathfile</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#property_pathfile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_driver">
+                                        protected                                        <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+                                                                                
+                                    </td>
+                <td>$driver</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#property_driver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_ffprobe">
+                                        protected                                        <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+                                                                                
+                                    </td>
+                <td>$ffprobe</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#property_ffprobe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_filters">
+                                        protected                                        <a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a>
+                                                                                
+                                    </td>
+                <td>$filters</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#property_filters">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_audio">
+                                        protected                                        <a href="../../FFMpeg/Media/Video.html"><abbr title="FFMpeg\Media\Video">Video</abbr></a>
+                                                                                
+                                    </td>
+                <td>$audio</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#property_audio">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_width">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$width</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#property_width">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_height">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$height</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#property_height">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_colors">
+                                        protected                                        array
+                                                                                
+                                    </td>
+                <td>$colors</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#property_colors">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_mode">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td>$mode</td>
+                <td class="last"><p>Whether to generate a <code>combined</code> spectrogram for all channels, or a <code>separate</code> one for each</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_color">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td>$color</td>
+                <td class="last"><p>The color palette to use, see setColor() for options</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_scale">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td>$scale</td>
+                <td class="last"><p>The scale to use for color intensity</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_fscale">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td>$fscale</td>
+                <td class="last"><p>The scale to use for the frequency axis</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_saturation">
+                                        protected                                        float
+                                                                                
+                                    </td>
+                <td>$saturation</td>
+                <td class="last"><p>A saturation scaling factor, between -10.0 and 10.0. Negative values invert the color palette</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_win_func">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td>$win_func</td>
+                <td class="last"><p>The windowing function to use when calculating the spectrum. See setWinFunc() for options</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_orientation">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td>$orientation</td>
+                <td class="last"><p>Frequency axis orientation, <code>horizontal</code> or <code>vertical</code></p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_gain">
+                                        protected                                        float
+                                                                                
+                                    </td>
+                <td>$gain</td>
+                <td class="last"><p>Gain for calculating color values</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_legend">
+                                        protected                                        bool
+                                                                                
+                                    </td>
+                <td>$legend</td>
+                <td class="last"><p>Whether to display axes and labels</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_rotation">
+                                        protected                                        float
+                                                                                
+                                    </td>
+                <td>$rotation</td>
+                <td class="last"><p>Rotation of colors within the palette, between -1.0 and 1.0</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_start">
+                                        protected                                        int
+                                                                                
+                                    </td>
+                <td>$start</td>
+                <td class="last"><p>Starting frequency for the spectrum in Hz. Must be positive and not greater than stop frequency</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_stop">
+                                        protected                                        int
+                                                                                
+                                    </td>
+                <td>$stop</td>
+                <td class="last"><p>Ending frequency for the spectrum in Hz. Must be positive and not less than start frequency</p></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>(<a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a> $audio, <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver, <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, $width, $height, $colors = array(self::DEFAULT_COLOR))
+        
+                                            <p><p>Spectrum constructor.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFFMpegDriver">getFFMpegDriver</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFMpegDriver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFFMpegDriver">setFFMpegDriver</a>(<a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFMpegDriver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFFProbe">getFFProbe</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFProbe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFFProbe">setFFProbe</a>(<a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFProbe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPathfile">getPathfile</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getPathfile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFiltersCollection">setFiltersCollection</a>(<a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a> $filters)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFiltersCollection">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFiltersCollection">getFiltersCollection</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFiltersCollection">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_cleanupTemporaryFile">cleanupTemporaryFile</a>($filename)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_cleanupTemporaryFile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getAudio">getAudio</a>()
+        
+                                            <p><p>Returns the audio related to the waveform.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#method_getAudio">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_filters">filters</a>()
+        
+                                            <p><p>Returns the available filters.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#method_filters">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_addFilter">addFilter</a>(<a href="../../FFMpeg/Filters/Waveform/WaveformFilterInterface.html"><abbr title="FFMpeg\Filters\Waveform\WaveformFilterInterface">WaveformFilterInterface</abbr></a> $filter)
+        
+                                            <p><p>{@inheritdoc}</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#method_addFilter">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setColors">setColors</a>(array $colors)
+        
+                                            <p><p>Parameter should be an array containing at least one valid color represented as a HTML color string. For
+example #FFFFFF or #000000. By default the color is set to black. Keep in mind that if you save the waveform
+as jpg file, it will appear completely black and to avoid this you can set the waveform color to white (#FFFFFF).</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#method_setColors">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getColors">getColors</a>()
+        
+                                            <p><p>Returns an array of colors that will be passed to ffmpeg to use for waveform generation. Colors are applied ONLY
+to the waveform. Background cannot be controlled that easily and it is probably easier to save the waveform
+as a transparent png file and then add background of choice.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#method_getColors">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_compileColors">compileColors</a>()
+        
+                                            <p><p>Compiles the selected colors into a string, using a pipe separator.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/Waveform.html#method_compileColors">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_save">save</a>(string $pathfile)
+        
+                                            <p><p>Generates and saves the spectrum in the given filename.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setMode">setMode</a>(string $mode = &#039;combined&#039;)
+        
+                                            <p><p>Set the rendering mode.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getMode">getMode</a>()
+        
+                                            <p><p>Get the current rendering mode.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setColor">setColor</a>(string $color = &#039;intensity&#039;)
+        
+                                            <p><p>Set the color palette to use.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getColor">getColor</a>()
+        
+                                            <p><p>Get the current color palette.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setScale">setScale</a>(string $scale = &#039;log&#039;)
+        
+                                            <p><p>Set the scale to use for color intensity</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getScale">getScale</a>()
+        
+                                            <p><p>Get the current color intensity scale.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFscale">setFscale</a>(string $fscale = &#039;lin&#039;)
+        
+                                            <p><p>Set the frequency axis scale.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFscale">getFscale</a>()
+        
+                                            <p><p>Get the current frequency axis scale.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setSaturation">setSaturation</a>(float $saturation = 1.0)
+        
+                                            <p><p>Set the color saturation scaling factor.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    float
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getSaturation">getSaturation</a>()
+        
+                                            <p><p>Get the current saturation scaling value.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setWinFunc">setWinFunc</a>(string $win_func = &#039;hann&#039;)
+        
+                                            <p><p>Set the windowing function to use when calculating the spectrum.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getWinFunc">getWinFunc</a>()
+        
+                                            <p><p>Get the current windowing function.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setOrientation">setOrientation</a>(string $orientation = &#039;vertical&#039;)
+        
+                                            <p><p>Set the orientation of the generated spectrum.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getOrientation">getOrientation</a>()
+        
+                                            <p><p>Get the current orientation.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setGain">setGain</a>(float $gain = 1.0)
+        
+                                            <p><p>Set the gain used for calculating colour values.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    float
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getGain">getGain</a>()
+        
+                                            <p><p>Get the current colour gain factor.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setLegend">setLegend</a>(bool $legend = true)
+        
+                                            <p><p>Turn the graph legends (axes and scales) on and off.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getLegend">getLegend</a>()
+        
+                                            <p><p>Get the current legend state.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setRotation">setRotation</a>(float $rotation = 0.0)
+        
+                                            <p><p>Set the color rotation value. This rotates the colour palette, not the resulting image.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    float
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getRotation">getRotation</a>()
+        
+                                            <p><p>Get the color palette rotation value.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setStart">setStart</a>(int $start = 0)
+        
+                                            <p><p>Set the starting frequency for the spectrum.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getStart">getStart</a>()
+        
+                                            <p><p>Get the current starting frequency.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setStop">setStop</a>(int $stop = 0)
+        
+                                            <p><p>Set the ending frequency for the spectrum.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getStop">getStop</a>()
+        
+                                            <p><p>Get the current ending frequency.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_compileOptions">compileOptions</a>()
+        
+                                            <p><p>Compile options into a parameter string</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 115</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a> $audio, <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver, <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, $width, $height, $colors = array(self::DEFAULT_COLOR))
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Spectrum constructor.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a></td>
+                <td>$audio</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+                <td>$driver</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$width</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$height</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$colors</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFFMpegDriver">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFMpegDriver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 40</div>
+        <code>                    <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+    <strong>getFFMpegDriver</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFFMpegDriver">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFMpegDriver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 50</div>
+        <code>                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFFMpegDriver</strong>(<a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+                <td>$driver</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFFProbe">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFProbe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 60</div>
+        <code>                    <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>getFFProbe</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFFProbe">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFProbe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 70</div>
+        <code>                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFFProbe</strong>(<a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPathfile">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getPathfile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 80</div>
+        <code>                    string
+    <strong>getPathfile</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFiltersCollection">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFiltersCollection">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 90</div>
+        <code>                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFiltersCollection</strong>(<a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a> $filters)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a></td>
+                <td>$filters</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFiltersCollection">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFiltersCollection">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 100</div>
+        <code>                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>getFiltersCollection</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_cleanupTemporaryFile">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_cleanupTemporaryFile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 105</div>
+        <code>            protected        
+    <strong>cleanupTemporaryFile</strong>($filename)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$filename</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAudio">
+        <div class="location">in <a href="../../FFMpeg/Media/Waveform.html#method_getAudio">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a> at line 51</div>
+        <code>                    <a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a>
+    <strong>getAudio</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Returns the audio related to the waveform.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/Audio.html"><abbr title="FFMpeg\Media\Audio">Audio</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_filters">
+        <div class="location">in <a href="../../FFMpeg/Media/Waveform.html#method_filters">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a> at line 61</div>
+        <code>                    
+    <strong>filters</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Returns the available filters.</p></p>                        
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addFilter">
+        <div class="location">in <a href="../../FFMpeg/Media/Waveform.html#method_addFilter">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a> at line 71</div>
+        <code>                    <a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a>
+    <strong>addFilter</strong>(<a href="../../FFMpeg/Filters/Waveform/WaveformFilterInterface.html"><abbr title="FFMpeg\Filters\Waveform\WaveformFilterInterface">WaveformFilterInterface</abbr></a> $filter)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>{@inheritdoc}</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Filters/Waveform/WaveformFilterInterface.html"><abbr title="FFMpeg\Filters\Waveform\WaveformFilterInterface">WaveformFilterInterface</abbr></a></td>
+                <td>$filter</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setColors">
+        <div class="location">in <a href="../../FFMpeg/Media/Waveform.html#method_setColors">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a> at line 86</div>
+        <code>                    
+    <strong>setColors</strong>(array $colors)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Parameter should be an array containing at least one valid color represented as a HTML color string. For
+example #FFFFFF or #000000. By default the color is set to black. Keep in mind that if you save the waveform
+as jpg file, it will appear completely black and to avoid this you can set the waveform color to white (#FFFFFF).</p></p>                <p><p>Saving waveforms to png is strongly suggested.</p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$colors</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getColors">
+        <div class="location">in <a href="../../FFMpeg/Media/Waveform.html#method_getColors">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a> at line 112</div>
+        <code>                    array
+    <strong>getColors</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Returns an array of colors that will be passed to ffmpeg to use for waveform generation. Colors are applied ONLY
+to the waveform. Background cannot be controlled that easily and it is probably easier to save the waveform
+as a transparent png file and then add background of choice.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_compileColors">
+        <div class="location">in <a href="../../FFMpeg/Media/Waveform.html#method_compileColors">
+<abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a> at line 122</div>
+        <code>            protected        string
+    <strong>compileColors</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Compiles the selected colors into a string, using a pipe separator.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_save">
+        <div class="location">at line 570</div>
+        <code>                    <a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a>
+    <strong>save</strong>(string $pathfile)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generates and saves the spectrum in the given filename.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pathfile</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/Waveform.html"><abbr title="FFMpeg\Media\Waveform">Waveform</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Exception/RuntimeException.html"><abbr title="FFMpeg\Exception\RuntimeException">RuntimeException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setMode">
+        <div class="location">at line 134</div>
+        <code>                    $this
+    <strong>setMode</strong>(string $mode = &#039;combined&#039;)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the rendering mode.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$mode</td>
+                <td><p><code>combined</code> to create a single spectrogram for all channels, or <code>separate</code> for each channel separately, all within the same image</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMode">
+        <div class="location">at line 152</div>
+        <code>                    string
+    <strong>getMode</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current rendering mode.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setColor">
+        <div class="location">at line 164</div>
+        <code>                    $this
+    <strong>setColor</strong>(string $color = &#039;intensity&#039;)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the color palette to use.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$color</td>
+                <td><p>One of the available preset palette names: <code>channel</code>, <code>intensity</code>, <code>moreland</code>, <code>nebulae</code>, <code>fire</code>, <code>fiery</code>, <code>fruit</code>, <code>cool</code>, <code>magma</code>, <code>green</code>, <code>viridis</code>, <code>plasma</code>, <code>cividis</code>, <code>terrain</code>, or <code>random</code> to have it pick a random one</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getColor">
+        <div class="location">at line 200</div>
+        <code>                    string
+    <strong>getColor</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current color palette.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setScale">
+        <div class="location">at line 212</div>
+        <code>                    $this
+    <strong>setScale</strong>(string $scale = &#039;log&#039;)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the scale to use for color intensity</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$scale</td>
+                <td><p>One of <code>lin</code>, <code>sqrt</code>, <code>log</code>, <code>4thrt</code>, or <code>5thrt</code>.</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getScale">
+        <div class="location">at line 234</div>
+        <code>                    string
+    <strong>getScale</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current color intensity scale.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFscale">
+        <div class="location">at line 246</div>
+        <code>                    $this
+    <strong>setFscale</strong>(string $fscale = &#039;lin&#039;)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the frequency axis scale.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$fscale</td>
+                <td><p>One of <code>lin</code> or <code>log</code>.</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFscale">
+        <div class="location">at line 265</div>
+        <code>                    string
+    <strong>getFscale</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current frequency axis scale.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setSaturation">
+        <div class="location">at line 277</div>
+        <code>                    $this
+    <strong>setSaturation</strong>(float $saturation = 1.0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the color saturation scaling factor.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>float</td>
+                <td>$saturation</td>
+                <td><p>A value between -10.0 and 10.0 to multiply saturation values by. Negative values invert the saturation.</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getSaturation">
+        <div class="location">at line 293</div>
+        <code>                    float
+    <strong>getSaturation</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current saturation scaling value.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>float</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setWinFunc">
+        <div class="location">at line 305</div>
+        <code>                    $this
+    <strong>setWinFunc</strong>(string $win_func = &#039;hann&#039;)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the windowing function to use when calculating the spectrum.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$win_func</td>
+                <td><p>One of <code>rect</code>, <code>bartlett</code>, <code>hann</code>, <code>hanning</code>, <code>hamming</code>, <code>blackman</code>, <code>welch</code>, <code>flattop</code>, <code>bharris</code>, <code>bnuttall</code>, <code>bhann</code>, <code>sine</code>, <code>nuttall</code>, <code>lanczos</code>, <code>gauss</code>, <code>tukey</code>, <code>dolph</code>, <code>cauchy</code>, <code>parzen</code>, <code>poisson</code>, or <code>bohman</code>.</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getWinFunc">
+        <div class="location">at line 343</div>
+        <code>                    string
+    <strong>getWinFunc</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current windowing function.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setOrientation">
+        <div class="location">at line 355</div>
+        <code>                    $this
+    <strong>setOrientation</strong>(string $orientation = &#039;vertical&#039;)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the orientation of the generated spectrum.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$orientation</td>
+                <td><p><code>vertical</code> or <code>horizontal</code></p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getOrientation">
+        <div class="location">at line 376</div>
+        <code>                    string
+    <strong>getOrientation</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current orientation.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setGain">
+        <div class="location">at line 388</div>
+        <code>                    $this
+    <strong>setGain</strong>(float $gain = 1.0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the gain used for calculating colour values.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>float</td>
+                <td>$gain</td>
+                <td><p>A multiplying factor: Use larger values for files with quieter audio.</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getGain">
+        <div class="location">at line 400</div>
+        <code>                    float
+    <strong>getGain</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current colour gain factor.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>float</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLegend">
+        <div class="location">at line 412</div>
+        <code>                    $this
+    <strong>setLegend</strong>(bool $legend = true)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Turn the graph legends (axes and scales) on and off.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$legend</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLegend">
+        <div class="location">at line 424</div>
+        <code>                    bool
+    <strong>getLegend</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current legend state.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRotation">
+        <div class="location">at line 436</div>
+        <code>                    $this
+    <strong>setRotation</strong>(float $rotation = 0.0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the color rotation value. This rotates the colour palette, not the resulting image.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>float</td>
+                <td>$rotation</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRotation">
+        <div class="location">at line 452</div>
+        <code>                    float
+    <strong>getRotation</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the color palette rotation value.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>float</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setStart">
+        <div class="location">at line 464</div>
+        <code>                    $this
+    <strong>setStart</strong>(int $start = 0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the starting frequency for the spectrum.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$start</td>
+                <td><p>The starting frequency, in Hz. Must be positive and not greater than the stop frequency.</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getStart">
+        <div class="location">at line 480</div>
+        <code>                    int
+    <strong>getStart</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current starting frequency.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setStop">
+        <div class="location">at line 492</div>
+        <code>                    $this
+    <strong>setStop</strong>(int $stop = 0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Set the ending frequency for the spectrum.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$stop</td>
+                <td><p>The ending frequency, in Hz. Must be positive and not less than the start frequency.</p></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getStop">
+        <div class="location">at line 508</div>
+        <code>                    int
+    <strong>getStop</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the current ending frequency.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_compileOptions">
+        <div class="location">at line 518</div>
+        <code>            protected        string
+    <strong>compileOptions</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Compile options into a parameter string</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
+    </div>
+    </body>
+
+</html>

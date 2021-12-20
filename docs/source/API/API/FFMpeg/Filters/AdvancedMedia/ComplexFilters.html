@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>FFMpeg\Filters\AdvancedMedia\ComplexFilters | PHP-FFMpeg API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../../fonts/doctum-font.css">
+        <script src="../../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../doctum.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    </head>
+
+    <body id="class" data-name="class:FFMpeg_Filters_AdvancedMedia_ComplexFilters" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">PHP-FFMpeg API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                    <li><a href="../../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../../FFMpeg.html">FFMpeg</a></li><li class="backslash">\</li><li><a href="../../../FFMpeg/Filters.html">Filters</a></li><li class="backslash">\</li><li><a href="../../../FFMpeg/Filters/AdvancedMedia.html">AdvancedMedia</a></li><li class="backslash">\</li><li>ComplexFilters</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>ComplexFilters    
+            </h1>
+    </div>
+
+    
+    <p>        class
+    <strong>ComplexFilters</strong>
+</p>
+
+        
+    
+        
+
+            
+        
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_media">
+                                        protected                                        <a href="../../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a>
+                                                                                
+                                    </td>
+                <td>$media</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>(<a href="../../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a> $media)
+        
+                                            <p><p>ComplexFilters constructor.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_custom">custom</a>(string $in, string $parameters, string $out)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_pad">pad</a>(string $in, <a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension, string $out)
+        
+                                            <p><p>Adds padding (black bars) to a video.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_watermark">watermark</a>(string $in, string $imagePath, string $out, array $coordinates = array())
+        
+                                            <p><p>Adds a watermark image to a video.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_xStack">xStack</a>(string $in, string $layout, int $inputsCount, string $out)
+        
+                                            <p><p>Apply &quot;xstack&quot; filter.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_testSrc">testSrc</a>(string $out, string|null $type = TestSrcFilter::TESTSRC, string|null $size = &#039;320x240&#039;, string|null $duration = null, string|null $sar = null, string|null $rate = null, string|null $level = null, string|null $color = null, int|null $alpha = null, float|null $decimals = null)
+        
+                                            <p><p>This filter build various types of computed inputs.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_aNullSrc">aNullSrc</a>(string $out, string|null $channelLayout = null, int|null $sampleRate = null, int|null $nbSamples = null)
+        
+                                            <p><p>Apply &quot;anullsrc&quot; filter.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_sine">sine</a>($out, string $duration, int|null $frequency = null, string|null $beep_factor = null, int|null $sample_rate = null, string|null $samples_per_frame = null)
+        
+                                            <p><p>Apply &quot;sine&quot; filter.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 22</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a> $media)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>ComplexFilters constructor.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a></td>
+                <td>$media</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_custom">
+        <div class="location">at line 34</div>
+        <code>                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+    <strong>custom</strong>(string $in, string $parameters, string $out)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$in</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$parameters</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$out</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_pad">
+        <div class="location">at line 49</div>
+        <code>                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+    <strong>pad</strong>(string $in, <a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a> $dimension, string $out)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Adds padding (black bars) to a video.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$in</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../../FFMpeg/Coordinate/Dimension.html"><abbr title="FFMpeg\Coordinate\Dimension">Dimension</abbr></a></td>
+                <td>$dimension</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$out</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_watermark">
+        <div class="location">at line 65</div>
+        <code>                    $this
+    <strong>watermark</strong>(string $in, string $imagePath, string $out, array $coordinates = array())
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Adds a watermark image to a video.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$in</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$imagePath</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$out</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$coordinates</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_xStack">
+        <div class="location">at line 83</div>
+        <code>                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+    <strong>xStack</strong>(string $in, string $layout, int $inputsCount, string $out)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Apply &quot;xstack&quot; filter.</p></p>                <p><p>Warning: this filter is supported starting from 4.1 ffmpeg version.</p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$in</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$layout</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$inputsCount</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$out</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+                                            <a href="https://ffmpeg.org/ffmpeg-filters.html#xstack">https://ffmpeg.org/ffmpeg-filters.html#xstack</a>
+                                    </td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_testSrc">
+        <div class="location">at line 106</div>
+        <code>                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+    <strong>testSrc</strong>(string $out, string|null $type = TestSrcFilter::TESTSRC, string|null $size = &#039;320x240&#039;, string|null $duration = null, string|null $sar = null, string|null $rate = null, string|null $level = null, string|null $color = null, int|null $alpha = null, float|null $decimals = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>This filter build various types of computed inputs.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$out</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$size</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$duration</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$sar</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$rate</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$level</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$color</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$alpha</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$decimals</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+                                            <a href="https://ffmpeg.org/ffmpeg-filters.html#allrgb_002c-allyuv_002c-color_002c-haldclutsrc_002c-nullsrc_002c-pal75bars_002c-pal100bars_002c-rgbtestsrc_002c-smptebars_002c-smptehdbars_002c-testsrc_002c-testsrc2_002c-yuvtestsrc">https://ffmpeg.org/ffmpeg-filters.html#allrgb_002c-allyuv_002c-color_002c-haldclutsrc_002c-nullsrc_002c-pal75bars_002c-pal100bars_002c-rgbtestsrc_002c-smptebars_002c-smptehdbars_002c-testsrc_002c-testsrc2_002c-yuvtestsrc</a>
+                                    </td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_aNullSrc">
+        <div class="location">at line 134</div>
+        <code>                    <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a>
+    <strong>aNullSrc</strong>(string $out, string|null $channelLayout = null, int|null $sampleRate = null, int|null $nbSamples = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Apply &quot;anullsrc&quot; filter.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$out</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$channelLayout</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$sampleRate</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$nbSamples</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexFilters.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexFilters">ComplexFilters</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+                                            <a href="https://ffmpeg.org/ffmpeg-filters.html#anullsrc">https://ffmpeg.org/ffmpeg-filters.html#anullsrc</a>
+                                    </td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_sine">
+        <div class="location">at line 157</div>
+        <code>                    $this
+    <strong>sine</strong>($out, string $duration, int|null $frequency = null, string|null $beep_factor = null, int|null $sample_rate = null, string|null $samples_per_frame = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Apply &quot;sine&quot; filter.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$out</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$duration</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$frequency</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$beep_factor</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$sample_rate</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$samples_per_frame</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+                                            <a href="https://ffmpeg.org/ffmpeg-filters.html#sine">https://ffmpeg.org/ffmpeg-filters.html#sine</a>
+                                    </td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
+    </div>
+    </body>
+
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>FFMpeg\Filters\AdvancedMedia\ComplexFilterInterface | PHP-FFMpeg API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../../fonts/doctum-font.css">
+        <script src="../../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../doctum.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    </head>
+
+    <body id="class" data-name="class:FFMpeg_Filters_AdvancedMedia_ComplexFilterInterface" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">PHP-FFMpeg API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                    <li><a href="../../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">interface</span></li>
+                        <li><a href="../../../FFMpeg.html">FFMpeg</a></li><li class="backslash">\</li><li><a href="../../../FFMpeg/Filters.html">Filters</a></li><li class="backslash">\</li><li><a href="../../../FFMpeg/Filters/AdvancedMedia.html">AdvancedMedia</a></li><li class="backslash">\</li><li>ComplexFilterInterface</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>ComplexFilterInterface    
+            </h1>
+    </div>
+
+    
+    <p>        interface
+    <strong>ComplexFilterInterface</strong>        implements
+        <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a>
+</p>
+
+        
+    
+        
+
+            <div class="description">
+            <p><p>A filter that is completely ready to use inside &quot;-filter_complex&quot; option.</p></p>                    </div>
+            
+        
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPriority">getPriority</a>()
+        
+                                            <p><p>Returns the priority of the filter.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Filters/FilterInterface.html#method_getPriority">
+<abbr title="FFMpeg\Filters\FilterInterface">FilterInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getName">getName</a>()
+        
+                                            <p><p>Get name of the filter.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html#method_getName">
+<abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getMinimalFFMpegVersion">getMinimalFFMpegVersion</a>()
+        
+                                            <p><p>Get minimal version of ffmpeg starting with which this filter is supported.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html#method_getMinimalFFMpegVersion">
+<abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string[]
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_applyComplex">applyComplex</a>(<a href="../../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a> $media)
+        
+                                            <p><p>Apply the complex filter to the given media.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html#method_applyComplex">
+<abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getInLabels">getInLabels</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getOutLabels">getOutLabels</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_getPriority">
+        <div class="location">in <a href="../../../FFMpeg/Filters/FilterInterface.html#method_getPriority">
+<abbr title="FFMpeg\Filters\FilterInterface">FilterInterface</abbr></a> at line 21</div>
+        <code>                    int
+    <strong>getPriority</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Returns the priority of the filter.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getName">
+        <div class="location">in <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html#method_getName">
+<abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a> at line 18</div>
+        <code>                    string
+    <strong>getName</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get name of the filter.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMinimalFFMpegVersion">
+        <div class="location">in <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html#method_getMinimalFFMpegVersion">
+<abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a> at line 25</div>
+        <code>                    string
+    <strong>getMinimalFFMpegVersion</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get minimal version of ffmpeg starting with which this filter is supported.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_applyComplex">
+        <div class="location">in <a href="../../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html#method_applyComplex">
+<abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a> at line 34</div>
+        <code>                    string[]
+    <strong>applyComplex</strong>(<a href="../../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a> $media)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Apply the complex filter to the given media.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a></td>
+                <td>$media</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string[]</td>
+            <td><p>An array of arguments.</p></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInLabels">
+        <div class="location">at line 13</div>
+        <code>                    string
+    <strong>getInLabels</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getOutLabels">
+        <div class="location">at line 18</div>
+        <code>                    string
+    <strong>getOutLabels</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
+    </div>
+    </body>
+
+</html>

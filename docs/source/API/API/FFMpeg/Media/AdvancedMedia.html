@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>FFMpeg\Media\AdvancedMedia | PHP-FFMpeg API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../fonts/doctum-font.css">
+        <script src="../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../doctum.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    </head>
+
+    <body id="class" data-name="class:FFMpeg_Media_AdvancedMedia" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">PHP-FFMpeg API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                    <li><a href="../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../FFMpeg.html">FFMpeg</a></li><li class="backslash">\</li><li><a href="../../FFMpeg/Media.html">Media</a></li><li class="backslash">\</li><li>AdvancedMedia</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>AdvancedMedia    
+            </h1>
+    </div>
+
+    
+    <p>        class
+    <strong>AdvancedMedia</strong>        extends <a href="../../FFMpeg/Media/AbstractMediaType.html"><abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a>
+</p>
+
+        
+    
+        
+
+            <div class="description">
+            <p><p>AdvancedMedia may have multiple inputs and multiple outputs.</p></p>            <p><p>This class accepts only filters for -filter_complex option.
+But you can set initial and additional parameters of the ffmpeg command.</p></p>        </div>
+            
+        
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_pathfile">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td>$pathfile</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#property_pathfile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_driver">
+                                        protected                                        <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+                                                                                
+                                    </td>
+                <td>$driver</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#property_driver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_ffprobe">
+                                        protected                                        <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+                                                                                
+                                    </td>
+                <td>$ffprobe</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#property_ffprobe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_filters">
+                                        protected                                        <a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a>
+                                                                                
+                                    </td>
+                <td>$filters</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#property_filters">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>(string[] $inputs, <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver, <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
+        
+                                            <p><p>AdvancedMedia constructor.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFFMpegDriver">getFFMpegDriver</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFMpegDriver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFFMpegDriver">setFFMpegDriver</a>(<a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFMpegDriver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFFProbe">getFFProbe</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFProbe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFFProbe">setFFProbe</a>(<a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFProbe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPathfile">getPathfile</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getPathfile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFiltersCollection">setFiltersCollection</a>(<a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a> $filters)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFiltersCollection">getFiltersCollection</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFiltersCollection">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_cleanupTemporaryFile">cleanupTemporaryFile</a>($filename)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../FFMpeg/Media/AbstractMediaType.html#method_cleanupTemporaryFile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_filters">filters</a>()
+        
+                                            <p><p>Returns the available filters.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_addFilter">addFilter</a>(string $in, <a href="../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a> $filter, string $out)
+        
+                                            <p><p>Add complex filter.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string[]
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getInitialParameters">getInitialParameters</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setInitialParameters">setInitialParameters</a>(array $initialParameters)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string[]
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getAdditionalParameters">getAdditionalParameters</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setAdditionalParameters">setAdditionalParameters</a>(array $additionalParameters)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string[]
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getInputs">getInputs</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getInputsCount">getInputsCount</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFinalCommand">getFinalCommand</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_map">map</a>(array $outs, <a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a> $format, string $outputFilename, bool $forceDisableAudio = false, bool $forceDisableVideo = false)
+        
+                                            <p><p>Select the streams for output.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_save">save</a>()
+        
+                                            <p><p>Apply added filters and execute ffmpeg command.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_assertFiltersAreCompatibleToCurrentFFMpegVersion">assertFiltersAreCompatibleToCurrentFFMpegVersion</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_buildCommand">buildCommand</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 61</div>
+        <code>                    
+    <strong>__construct</strong>(string[] $inputs, <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver, <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>AdvancedMedia constructor.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string[]</td>
+                <td>$inputs</td>
+                <td><p>Array of files to be opened.</p></td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+                <td>$driver</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFFMpegDriver">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFMpegDriver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 40</div>
+        <code>                    <a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a>
+    <strong>getFFMpegDriver</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFFMpegDriver">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFMpegDriver">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 50</div>
+        <code>                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFFMpegDriver</strong>(<a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a> $driver)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Driver/FFMpegDriver.html"><abbr title="FFMpeg\Driver\FFMpegDriver">FFMpegDriver</abbr></a></td>
+                <td>$driver</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFFProbe">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFFProbe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 60</div>
+        <code>                    <a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>getFFProbe</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFFProbe">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_setFFProbe">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 70</div>
+        <code>                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFFProbe</strong>(<a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
+                <td>$ffprobe</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPathfile">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getPathfile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 80</div>
+        <code>                    string
+    <strong>getPathfile</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFiltersCollection">
+        <div class="location">at line 109</div>
+        <code>                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>setFiltersCollection</strong>(<a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a> $filters)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Filters/FiltersCollection.html"><abbr title="FFMpeg\Filters\FiltersCollection">FiltersCollection</abbr></a></td>
+                <td>$filters</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFiltersCollection">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_getFiltersCollection">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 100</div>
+        <code>                    <a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a>
+    <strong>getFiltersCollection</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/MediaTypeInterface.html"><abbr title="FFMpeg\Media\MediaTypeInterface">MediaTypeInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_cleanupTemporaryFile">
+        <div class="location">in <a href="../../FFMpeg/Media/AbstractMediaType.html#method_cleanupTemporaryFile">
+<abbr title="FFMpeg\Media\AbstractMediaType">AbstractMediaType</abbr></a> at line 105</div>
+        <code>            protected        
+    <strong>cleanupTemporaryFile</strong>($filename)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$filename</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_filters">
+        <div class="location">at line 86</div>
+        <code>                    
+    <strong>filters</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Returns the available filters.</p></p>                        
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addFilter">
+        <div class="location">at line 100</div>
+        <code>                    $this
+    <strong>addFilter</strong>(string $in, <a href="../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a> $filter, string $out)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Add complex filter.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$in</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Filters/AdvancedMedia/ComplexCompatibleFilter.html"><abbr title="FFMpeg\Filters\AdvancedMedia\ComplexCompatibleFilter">ComplexCompatibleFilter</abbr></a></td>
+                <td>$filter</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$out</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInitialParameters">
+        <div class="location">at line 124</div>
+        <code>                    string[]
+    <strong>getInitialParameters</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string[]</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInitialParameters">
+        <div class="location">at line 134</div>
+        <code>                    <a href="../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a>
+    <strong>setInitialParameters</strong>(array $initialParameters)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$initialParameters</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAdditionalParameters">
+        <div class="location">at line 143</div>
+        <code>                    string[]
+    <strong>getAdditionalParameters</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string[]</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setAdditionalParameters">
+        <div class="location">at line 153</div>
+        <code>                    <a href="../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a>
+    <strong>setAdditionalParameters</strong>(array $additionalParameters)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$additionalParameters</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../FFMpeg/Media/AdvancedMedia.html"><abbr title="FFMpeg\Media\AdvancedMedia">AdvancedMedia</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputs">
+        <div class="location">at line 162</div>
+        <code>                    string[]
+    <strong>getInputs</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string[]</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputsCount">
+        <div class="location">at line 170</div>
+        <code>                    int
+    <strong>getInputsCount</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFinalCommand">
+        <div class="location">at line 178</div>
+        <code>                    string
+    <strong>getFinalCommand</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_map">
+        <div class="location">at line 195</div>
+        <code>                    $this
+    <strong>map</strong>(array $outs, <a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a> $format, string $outputFilename, bool $forceDisableAudio = false, bool $forceDisableVideo = false)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Select the streams for output.</p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$outs</td>
+                <td><p>Output labels of the -filter_complex part.</p></td>
+            </tr>
+                    <tr>
+                <td><a href="../../FFMpeg/Format/FormatInterface.html"><abbr title="FFMpeg\Format\FormatInterface">FormatInterface</abbr></a></td>
+                <td>$format</td>
+                <td><p>Format of the output file.</p></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$outputFilename</td>
+                <td><p>Output filename.</p></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$forceDisableAudio</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$forceDisableVideo</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+                                            <a href="https://ffmpeg.org/ffmpeg.html#Manual-stream-selection">https://ffmpeg.org/ffmpeg.html#Manual-stream-selection</a>
+                                    </td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_save">
+        <div class="location">at line 231</div>
+        <code>                    void
+    <strong>save</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Apply added filters and execute ffmpeg command.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Exception/RuntimeException.html"><abbr title="FFMpeg\Exception\RuntimeException">RuntimeException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_assertFiltersAreCompatibleToCurrentFFMpegVersion">
+        <div class="location">at line 331</div>
+        <code>            protected        void
+    <strong>assertFiltersAreCompatibleToCurrentFFMpegVersion</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../FFMpeg/Exception/RuntimeException.html"><abbr title="FFMpeg\Exception\RuntimeException">RuntimeException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_buildCommand">
+        <div class="location">at line 352</div>
+        <code>            protected        array
+    <strong>buildCommand</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
+    </div>
+    </body>
+
+</html>

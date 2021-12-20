@@ -1,369 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="robots" content="index, follow, all" />
-        <title>FFMpeg\Format\ProgressListener\AudioProgressListener | PHP-FFMpeg API</title>
-                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
-                            </head>
-        <body id="class">
-            <div class="header">
-        <ul>
-            <li><a href="../../../classes.html">Classes</a></li>
-                            <li><a href="../../../namespaces.html">Namespaces</a></li>
-                        <li><a href="../../../interfaces.html">Interfaces</a></li>
-            <li><a href="../../../traits.html">Traits</a></li>
-            <li><a href="../../../doc-index.html">Index</a></li>
-            
-        </ul>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>FFMpeg\Format\ProgressListener\AudioProgressListener | PHP-FFMpeg API</title>
 
-        <div id="title">PHP-FFMpeg API</div>
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../../fonts/doctum-font.css">
+        <script src="../../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../doctum.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 
-            <div class="type">Class</div>
-    <h1><a href="../../../FFMpeg/Format/ProgressListener.html">FFMpeg\Format\ProgressListener</a>\AudioProgressListener</h1>
+    </head>
+
+    <body id="class" data-name="class:FFMpeg_Format_ProgressListener_AudioProgressListener" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
     </div>
-        <div class="content">
-                <p>    class
-    <strong>AudioProgressListener</strong>        extends <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></p>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">PHP-FFMpeg API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                    <li><a href="../../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../../FFMpeg.html">FFMpeg</a></li><li class="backslash">\</li><li><a href="../../../FFMpeg/Format.html">Format</a></li><li class="backslash">\</li><li><a href="../../../FFMpeg/Format/ProgressListener.html">ProgressListener</a></li><li class="backslash">\</li><li>AudioProgressListener</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>AudioProgressListener    
+            </h1>
+    </div>
+
+    
+    <p>        class
+    <strong>AudioProgressListener</strong>        extends <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a>
+</p>
+
+        
+    
+        
 
             <div class="description">
-            <p>Parses ffmpeg stderr progress information.</p>
-            <p>An example:</p>
-
-<pre>
+            <p><p>Parses ffmpeg stderr progress information. An example:</p></p>            <p><pre>
       size=    3552kB time=00:03:47.29 bitrate= 128.0kbits/s
-</pre>
-</p>
-        </div>
-    
+</pre></p>        </div>
+            
+        
     
     
             <h2>Methods</h2>
 
-            <table>
-                    <tr>
-                <td class="type">
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method___construct">__construct</a>(<a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, string $pathfile, integer $currentPass, integer $totalPass)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method___construct"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>(<a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, string $pathfile, int $currentPass, int $totalPass, int $duration = 0)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method___construct">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getFFProbe">getFFProbe</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getFFProbe"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getFFProbe">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getPathfile">getPathfile</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getPathfile"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    integer
-                </td>
-                <td class="last">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getPathfile">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getCurrentPass">getCurrentPass</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getCurrentPass"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    integer
-                </td>
-                <td class="last">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getCurrentPass">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getTotalPass">getTotalPass</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getTotalPass"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getTotalPass">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getCurrentTime">getCurrentTime</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getCurrentTime">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_handle">handle</a>($type, $data)
-                    <p>{@inheritdoc}</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_handle"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p><p>{@inheritdoc}</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_handle">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_forwardedEvents">forwardedEvents</a>()
-                    <p>{@inheritdoc}</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_forwardedEvents"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+        
+                                            <p><p>{@inheritdoc}</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_forwardedEvents">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8">
                     <a href="#method_getPattern">getPattern</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-            </table>
+        
+                                            <p><p>Get the regex pattern to match a ffmpeg stderr status line</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
 
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method___construct"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 83</div>
-        <code>            public            
-    <strong>__construct</strong>(<a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, string $pathfile, integer $currentPass, integer $totalPass)</code>
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method___construct">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 82</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a> $ffprobe, string $pathfile, int $currentPass, int $totalPass, int $duration = 0)
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
                 <td>$ffprobe</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$pathfile</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
-                <td>integer</td>
+                <td>int</td>
                 <td>$currentPass</td>
-                <td>The cureent pass number</td>
+                <td><p>The current pass number</p></td>
             </tr>
                     <tr>
-                <td>integer</td>
+                <td>int</td>
                 <td>$totalPass</td>
-                <td>The total number of passes</td>
+                <td><p>The total number of passes</p></td>
             </tr>
-            </table>
-
-            
-            
-                            <h4>Exceptions</h4>
-
-                    <table>
                     <tr>
-                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
-                <td>
-</td>
+                <td>int</td>
+                <td>$duration</td>
+                <td></td>
             </tr>
             </table>
 
+            
+            
+            
             
                     </div>
     </div>
 
-                <h3 id="method_getFFProbe">
-        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getFFProbe"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 94</div>
-        <code>            public            <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
-    <strong>getFFProbe</strong>()</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFFProbe">
+        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getFFProbe">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 94</div>
+        <code>                    <a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a>
+    <strong>getFFProbe</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../../../FFMpeg/FFProbe.html"><abbr title="FFMpeg\FFProbe">FFProbe</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getPathfile">
-        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getPathfile"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 102</div>
-        <code>            public            string
-    <strong>getPathfile</strong>()</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPathfile">
+        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getPathfile">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 102</div>
+        <code>                    string
+    <strong>getPathfile</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getCurrentPass">
-        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getCurrentPass"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 110</div>
-        <code>            public            integer
-    <strong>getCurrentPass</strong>()</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCurrentPass">
+        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getCurrentPass">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 110</div>
+        <code>                    int
+    <strong>getCurrentPass</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
-            <td>integer</td>
-            <td>
-</td>
+            <td>int</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getTotalPass">
-        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getTotalPass"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 118</div>
-        <code>            public            integer
-    <strong>getTotalPass</strong>()</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTotalPass">
+        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getTotalPass">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 118</div>
+        <code>                    int
+    <strong>getTotalPass</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
         <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
-            <td>integer</td>
-            <td>
-</td>
+            <td>int</td>
+            <td></td>
         </tr>
     </table>
 
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_handle">
-        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_handle"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 126</div>
-        <code>            public            
-    <strong>handle</strong>($type, $data)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCurrentTime">
+        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_getCurrentTime">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 126</div>
+        <code>                    int
+    <strong>getCurrentTime</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>{@inheritdoc}</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_handle">
+        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_handle">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 134</div>
+        <code>                    
+    <strong>handle</strong>($type, $data)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>{@inheritdoc}</p></p>                        
+        </div>
         <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$type</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$data</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_forwardedEvents">
-        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_forwardedEvents"><abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 136</div>
-        <code>            public            
-    <strong>forwardedEvents</strong>()</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_forwardedEvents">
+        <div class="location">in <a href="../../../FFMpeg/Format/ProgressListener/AbstractProgressListener.html#method_forwardedEvents">
+<abbr title="FFMpeg\Format\ProgressListener\AbstractProgressListener">AbstractProgressListener</abbr></a> at line 144</div>
+        <code>                    
+    <strong>forwardedEvents</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>{@inheritdoc}</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>{@inheritdoc}</p></p>                        
+        </div>
         <div class="tags">
             
             
             
+            
                     </div>
     </div>
 
-                <h3 id="method_getPattern">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPattern">
         <div class="location">at line 25</div>
-        <code>            public            
-    <strong>getPattern</strong>()</code>
+        <code>                    
+    <strong>getPattern</strong>()
+        </code>
     </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the regex pattern to match a ffmpeg stderr status line</p></p>                        
+        </div>
         <div class="tags">
+            
             
             
             
                     </div>
     </div>
+
+            </div>
+            </div>
 
     
-            </div>
-            <div id="footer">
-        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
     </div>
     </body>
+
 </html>
