@@ -52,7 +52,7 @@ class WaveformTest extends AbstractMediaTestCase
             ->method('command')
             ->with($commands);
 
-        $waveform = new Waveform($this->getAudioMock(__FILE__), $driver, $ffprobe, 640, 120, ['#FFFFFF']);
+        $waveform = new Waveform($this->getAudioMock(__FILE__), $driver, $ffprobe, 640, 120, array('#FFFFFF'));
         $this->assertSame($waveform, $waveform->save($pathfile));
     }
 
