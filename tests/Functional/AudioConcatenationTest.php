@@ -11,10 +11,10 @@ class AudioConcatenationTest extends FunctionalTestCase
     {
         $ffmpeg = $this->getFFMpeg();
 
-        $files = [
+        $files = array(
             realpath(__DIR__ . '/../files/Jahzzar_-_05_-_Siesta.mp3'),
             realpath(__DIR__ . '/../files/02_-_Favorite_Secrets.mp3'),
-        ];
+        );
 
         $audio = $ffmpeg->open(reset($files));
 

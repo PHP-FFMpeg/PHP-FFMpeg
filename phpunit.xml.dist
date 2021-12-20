@@ -12,6 +12,7 @@
 >
     <php>
         <env name="SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT" value="true"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
     </php>
 
     <testsuites>
