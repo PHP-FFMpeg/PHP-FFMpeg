@@ -133,4 +133,20 @@ class StreamTest extends TestCase
             ),
         );
     }
+
+    public function testGetRotationFromVideo()
+    {
+      $stream = new Stream(array(
+          'codec_type' => 'video',
+          'tags' => array()
+      ));
+      $this->assertEquals(0, $stream->getRotation());
+
+      $stream = new Stream(array(
+          'codec_type' => 'video',
+          'tags' => array('rotate' => 90)
+      ));
+      $this->assertEquals(90, $stream->getRotation());
+    }
+
 }
