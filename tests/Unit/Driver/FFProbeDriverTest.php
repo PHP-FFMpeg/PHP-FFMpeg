@@ -9,8 +9,10 @@ use Symfony\Component\Process\ExecutableFinder;
 
 class FFProbeDriverTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
+        parent::setUp();
+        
         $executableFinder = new ExecutableFinder();
 
         $found = false;

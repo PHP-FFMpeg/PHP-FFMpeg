@@ -9,8 +9,10 @@ use Symfony\Component\Process\ExecutableFinder;
 
 class FFMpegDriverTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
+        parent::setUp();
+        
         $executableFinder = new ExecutableFinder();
 
         $found = false;
