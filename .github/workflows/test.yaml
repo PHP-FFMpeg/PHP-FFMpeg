@@ -44,4 +44,4 @@ jobs:
         uses: FedericoCarboni/setup-ffmpeg@v1
 
       - name: Run tests
-        run: ./phpunit --verbose
+        run: ./vendor/bin/phpunit --verbose
