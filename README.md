@@ -1,8 +1,6 @@
 # php-ffmpeg
 
-[![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983/big.png)](https://insight.sensiolabs.com/projects/607f3111-e2d7-44e8-8bcc-54dd64521983)
+[![Test](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/test.yaml/badge.svg)](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/test.yaml)
 
 An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 
