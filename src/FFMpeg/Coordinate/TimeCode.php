@@ -75,8 +75,16 @@ class TimeCode
     {
         $minutes = $hours = $frames = 0;
 
-        $frames = round(100 * ($quantity - floor($quantity)));
-        $seconds = floor($quantity);
+        $carriedOverWholeSeconds = 0; // Becomes 1 if rounded frames is 100
+
+        $frames = (int)round(100 * ($quantity - floor($quantity)));
+
+        if ($frames === 100) {
+            $frames = 0;
+            $carriedOverWholeSeconds = 1;
+        }
+
+        $seconds = floor($quantity) + $carriedOverWholeSeconds;
 
         if ($seconds > 59) {
             $minutes = floor($seconds / 60);
