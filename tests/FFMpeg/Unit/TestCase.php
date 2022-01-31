@@ -13,7 +13,7 @@ class TestCase extends BaseTestCase
 
     public function getCacheMock()
     {
-        return $this->getMockBuilder('Doctrine\Common\Cache\Cache')->getMock();
+        return $this->getMockBuilder('Psr\Cache\CacheItemPoolInterface')->getMock();
     }
 
     public function getTimeCodeMock()

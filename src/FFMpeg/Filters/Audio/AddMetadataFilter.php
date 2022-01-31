@@ -23,7 +23,7 @@ class AddMetadataFilter implements AudioFilterInterface
 
     public function __construct($metaArr = null, $priority = 9)
     {
-        $this->metaArr = $metaArr;
+        $this->metaArr  = $metaArr;
         $this->priority = $priority;
     }
 

@@ -3,6 +3,7 @@
 namespace Tests\FFMpeg\Unit\FFProbe;
 
 use FFMpeg\FFProbe\OptionsTester;
+use Symfony\Component\Cache\CacheItem;
 use Tests\FFMpeg\Unit\TestCase;
 
 class OptionsTesterTest extends TestCase
@@ -36,11 +37,12 @@ class OptionsTesterTest extends TestCase
     {
         $cache = $this->getCacheMock();
 
-        $cache->expects($this->never())
-            ->method('fetch');
+        $cache->expects($this->exactly(2))
+            ->method('getItem')
+            ->will($this->returnValue(new CacheItem));
 
         $cache->expects($this->exactly(2))
-            ->method('contains')
+            ->method('hasItem')
             ->will($this->returnValue(false));
 
         $cache->expects($this->exactly(2))
@@ -58,7 +60,7 @@ class OptionsTesterTest extends TestCase
 
     public function provideOptions()
     {
-        $data = file_get_contents(__DIR__.'/../../fixtures/ffprobe/help.raw');
+        $data = file_get_contents(__DIR__ . '/../../fixtures/ffprobe/help.raw');
 
         return [
             [true, $data, '-print_format'],
@@ -73,17 +75,22 @@ class OptionsTesterTest extends TestCase
     {
         $cache = $this->getCacheMock();
 
-        $cache->expects($this->once())
-            ->method('fetch')
-            ->will($this->returnValue($data));
+        $cacheItem = new CacheItem;
+        $cacheItem->set($data);
 
         $cache->expects($this->exactly(2))
-            ->method('contains')
+            ->method('getItem')
+            ->willReturnOnConsecutiveCalls(
+                $this->returnValue($cacheItem),
+                $this->returnValue(new CacheItem)
+            );
+
+        $cache->expects($this->exactly(2))
+            ->method('hasItem')
             ->willReturnOnConsecutiveCalls(
                 $this->returnValue(false),
                 $this->returnValue(true)
             );
-
         $cache->expects($this->once())
             ->method('save');
 
@@ -102,14 +109,17 @@ class OptionsTesterTest extends TestCase
     {
         $cache = $this->getCacheMock();
 
-        $cache->expects($this->once())
-            ->method('fetch')
-            ->with('option-'.$optionName)
-            ->will($this->returnValue($isPresent));
+        $cacheItem = new CacheItem();
+        $cacheItem->set($isPresent);
 
         $cache->expects($this->once())
-            ->method('contains')
-            ->with('option-'.$optionName)
+            ->method('getItem')
+            ->with(md5('option-' . $optionName))
+            ->will($this->returnValue($cacheItem));
+
+        $cache->expects($this->once())
+            ->method('hasItem')
+            ->with(md5('option-' . $optionName))
             ->will($this->returnValue(true));
 
         $ffprobe = $this->getFFProbeDriverMock();

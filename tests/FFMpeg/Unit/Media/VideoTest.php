@@ -10,7 +10,7 @@ class VideoTest extends AbstractStreamableTestCase
 {
     public function testFiltersReturnsVideoFilters()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $video = new Video(__FILE__, $driver, $ffprobe);
@@ -19,7 +19,7 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function testAddFiltersAddsAFilter()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
@@ -40,7 +40,7 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function testAddAudioFilterAddsAFilter()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
@@ -61,7 +61,7 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function testFrameShouldReturnAFrame()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $at = $this->getTimeCodeMock();
@@ -76,10 +76,10 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function testSaveWithFailure()
     {
-        $driver = $this->getFFMpegDriverMock();
-        $ffprobe = $this->getFFProbeMock();
+        $driver         = $this->getFFMpegDriverMock();
+        $ffprobe        = $this->getFFProbeMock();
         $outputPathfile = '/target/file';
-        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $format         = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
         $format->expects($this->any())
             ->method('getPasses')
             ->will($this->returnValue(1));
@@ -105,10 +105,10 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function testSaveAppliesFilters()
     {
-        $driver = $this->getFFMpegDriverMock();
-        $ffprobe = $this->getFFProbeMock();
+        $driver         = $this->getFFMpegDriverMock();
+        $ffprobe        = $this->getFFProbeMock();
         $outputPathfile = '/target/file';
-        $format = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
+        $format         = $this->getMockBuilder('FFMpeg\Format\VideoInterface')->getMock();
         $format->expects($this->any())
             ->method('getExtraParams')
             ->will($this->returnValue([]));
@@ -155,7 +155,7 @@ class VideoTest extends AbstractStreamableTestCase
      */
     public function testSaveShouldSave($threads, $expectedCommands, $expectedListeners, $format)
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
@@ -179,7 +179,7 @@ class VideoTest extends AbstractStreamableTestCase
                 ->method('get');
         }
 
-        $capturedCommands = [];
+        $capturedCommands  = [];
         $capturedListeners = null;
 
         $driver->expects($this->exactly(count($expectedCommands)))
@@ -582,7 +582,7 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function testSaveShouldNotStoreCodecFiltersInTheMedia()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
@@ -678,10 +678,10 @@ class VideoTest extends AbstractStreamableTestCase
 
     public function testCaseWhereKiloBitRateIsEqualToZero()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $pathfile = '/target/destination';
+        $pathfile       = '/target/destination';
         $outputPathfile = '/target/file';
 
         $format = new X264();
@@ -693,11 +693,13 @@ class VideoTest extends AbstractStreamableTestCase
             ->method('getConfiguration')
             ->will($this->returnValue($configuration));
 
+        $self = $this;
+
         $driver->expects($this->exactly(1))
             ->method('command')
             ->with($this->isType('array'), false, $this->anything())
-            ->will($this->returnCallback(function ($commands, $errors, $listeners) {
-                $this->assertTrue(!in_array('-b:v', $commands));
+            ->will($this->returnCallback(function ($commands, $errors, $listeners) use ($self) {
+                $self->assertTrue(!in_array('-b:v', $commands));
             }));
 
         $video = new Video(__FILE__, $driver, $ffprobe);

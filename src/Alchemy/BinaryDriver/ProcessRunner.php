@@ -28,19 +28,17 @@ class ProcessRunner implements ProcessRunnerInterface
     public function __construct(LoggerInterface $logger, $name)
     {
         $this->logger = $logger;
-        $this->name = $name;
+        $this->name   = $name;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return ProcessRunner
+     * @return void
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**
@@ -57,7 +55,9 @@ class ProcessRunner implements ProcessRunnerInterface
     public function run(Process $process, SplObjectStorage $listeners, $bypassErrors)
     {
         $this->logger->info(sprintf(
-            '%s running command %s', $this->name, $process->getCommandLine()
+            '%s running command %s',
+            $this->name,
+            $process->getCommandLine()
         ));
 
         try {
@@ -67,7 +67,6 @@ class ProcessRunner implements ProcessRunnerInterface
                 $this->doExecutionFailure($process->getCommandLine(), $process->getErrorOutput(), $e);
             }
         }
-
 
         if (!$bypassErrors && !$process->isSuccessful()) {
             $this->doExecutionFailure($process->getCommandLine(), $process->getErrorOutput());
@@ -92,11 +91,17 @@ class ProcessRunner implements ProcessRunnerInterface
     private function doExecutionFailure($command, $errorOutput, \Exception $e = null)
     {
         $this->logger->error($this->createErrorMessage($command, $errorOutput));
-        throw new ExecutionFailureException($this->name, $command, $errorOutput,
-            $e ? $e->getCode() : 0, $e ?: null);
+        throw new ExecutionFailureException(
+            $this->name,
+            $command,
+            $errorOutput,
+            $e ? $e->getCode() : 0,
+            $e ?: null
+        );
     }
 
-    private function createErrorMessage($command, $errorOutput){
+    private function createErrorMessage($command, $errorOutput)
+    {
         return sprintf('%s failed to execute command %s: %s', $this->name, $command, $errorOutput);
     }
 }

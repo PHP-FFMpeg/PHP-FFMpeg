@@ -12,18 +12,18 @@
 namespace FFMpeg\FFProbe;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use Doctrine\Common\Cache\Cache;
 use FFMpeg\Driver\FFProbeDriver;
 use FFMpeg\Exception\RuntimeException;
+use Psr\Cache\CacheItemPoolInterface;
 
 class OptionsTester implements OptionsTesterInterface
 {
     /** @var FFProbeDriver */
     private $ffprobe;
-    /** @var Cache */
+    /** @var CacheItemPoolInterface */
     private $cache;
 
-    public function __construct(FFProbeDriver $ffprobe, Cache $cache)
+    public function __construct(FFProbeDriver $ffprobe, CacheItemPoolInterface $cache)
     {
         $this->ffprobe = $ffprobe;
         $this->cache = $cache;
@@ -34,17 +34,19 @@ class OptionsTester implements OptionsTesterInterface
      */
     public function has($name)
     {
-        $id = sprintf('option-%s', $name);
+        $id = md5(sprintf('option-%s', $name));
 
-        if ($this->cache->contains($id)) {
-            return $this->cache->fetch($id);
+        if ($this->cache->hasItem($id)) {
+            return $this->cache->getItem($id)->get();
         }
 
         $output = $this->retrieveHelpOutput();
 
         $ret = (bool) preg_match('/^'.$name.'/m', $output);
 
-        $this->cache->save($id, $ret);
+        $cacheItem = $this->cache->getItem($id);
+        $cacheItem->set($ret);
+        $this->cache->save($cacheItem);
 
         return $ret;
     }
@@ -53,8 +55,8 @@ class OptionsTester implements OptionsTesterInterface
     {
         $id = 'help';
 
-        if ($this->cache->contains($id)) {
-            return $this->cache->fetch($id);
+        if ($this->cache->hasItem($id)) {
+            return $this->cache->getItem($id)->get();
         }
 
         try {
@@ -63,7 +65,9 @@ class OptionsTester implements OptionsTesterInterface
             throw new RuntimeException('Your FFProbe version is too old and does not support `-help` option, please upgrade.', $e->getCode(), $e);
         }
 
-        $this->cache->save($id, $output);
+        $cacheItem = $this->cache->getItem($id);
+        $cacheItem->set($output);
+        $this->cache->save($cacheItem);
 
         return $output;
     }
