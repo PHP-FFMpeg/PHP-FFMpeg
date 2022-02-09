@@ -1,10 +1,11 @@
 # PHP-FFMPEG
 
-[![Test](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/test.yaml/badge.svg)](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/test.yaml)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/PHP-FFMpeg/PHP-FFMpeg)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+![run-tests](https://github.com/PHP-FFMpeg/PHP-FFMpeg/workflows/run-tests/badge.svg)
+[![Total Downloads](https://img.shields.io/packagist/dt/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/PHP-FFMpeg/PHP-FFMpeg)
 
 An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
-
-Check another amazing repo: [PHP FFMpeg extras](https://github.com/alchemy-fr/PHP-FFMpeg-Extras), you will find lots of Audio/Video formats there.
 
 ## Your attention please
 
@@ -21,6 +22,8 @@ otherwise you should have to explicitly give the binaries path on load.
 appear in latest ffmpeg version.
 
 ## Installation
+
+This library requires PHP 8.0 or higher. For older versions of PHP, check out the [0.x-branch](https://github.com/PHP-FFMpeg/PHP-FFMpeg/tree/0.x).
 
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
