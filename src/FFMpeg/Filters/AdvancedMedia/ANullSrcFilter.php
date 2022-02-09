@@ -59,13 +59,13 @@ class ANullSrcFilter extends AbstractComplexFilter
      */
     public function applyComplex(AdvancedMedia $media)
     {
-        return array(
+        return [
             '-filter_complex',
-            $this->getName() . $this->buildFilterOptions(array(
+            $this->getName().$this->buildFilterOptions([
                 'channel_layout' => $this->channelLayout,
                 'sample_rate' => $this->sampleRate,
                 'nb_samples' => $this->nbSamples,
-            ))
-        );
+            ]),
+        ];
     }
 }

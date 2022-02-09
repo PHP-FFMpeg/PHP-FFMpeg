@@ -26,7 +26,7 @@ class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
     /** @var int */
     private $priority;
 
-    public function __construct($watermarkPath, array $coordinates = array(), $priority = 0)
+    public function __construct($watermarkPath, array $coordinates = [], $priority = 0)
     {
         if (!file_exists($watermarkPath)) {
             throw new InvalidArgumentException(sprintf('File %s does not exist', $watermarkPath));
@@ -93,7 +93,7 @@ class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
                 if (isset($this->coordinates['top'])) {
                     $y = $this->coordinates['top'];
                 } elseif (isset($this->coordinates['bottom'])) {
-                    $y = 'main_h - ' . $this->coordinates['bottom'] . ' - overlay_h';
+                    $y = 'main_h - '.$this->coordinates['bottom'].' - overlay_h';
                 } else {
                     $y = 0;
                 }
@@ -101,7 +101,7 @@ class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
                 if (isset($this->coordinates['left'])) {
                     $x = $this->coordinates['left'];
                 } elseif (isset($this->coordinates['right'])) {
-                    $x = 'main_w - ' . $this->coordinates['right'] . ' - overlay_w';
+                    $x = 'main_w - '.$this->coordinates['right'].' - overlay_w';
                 } else {
                     $x = 0;
                 }
@@ -113,9 +113,9 @@ class WatermarkFilter implements VideoFilterInterface, ComplexCompatibleFilter
                 break;
         }
 
-        return array(
+        return [
             '-vf',
-            'movie=' . $this->watermarkPath . ' [watermark]; [in][watermark] overlay=' . $x . ':' . $y . ' [out]',
-        );
+            'movie='.$this->watermarkPath.' [watermark]; [in][watermark] overlay='.$x.':'.$y.' [out]',
+        ];
     }
 }

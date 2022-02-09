@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -7,38 +8,41 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Filters\Video\VideoFilters;
+use FFMpeg\Filters\Audio\SimpleFilter;
 use FFMpeg\Filters\FilterInterface;
+use FFMpeg\Filters\Video\ClipFilter;
+use FFMpeg\Filters\Video\VideoFilters;
+use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
-use FFMpeg\Format\AudioInterface;
 use FFMpeg\Format\VideoInterface;
-use Neutron\TemporaryFilesystem\Manager as FsManager;
-use FFMpeg\Filters\Video\ClipFilter;
+use Spatie\TemporaryDirectory\TemporaryDirectory;
 
 abstract class AbstractVideo extends Audio
 {
-
     /**
-     * FileSystem Manager instance
+     * FileSystem Manager instance.
+     *
      * @var Manager
      */
     protected $fs;
 
     /**
-     * FileSystem Manager ID
+     * FileSystem Manager ID.
+     *
      * @var int
      */
     protected $fsId;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
      * @return VideoFilters
      */
     public function filters()
@@ -47,7 +51,8 @@ abstract class AbstractVideo extends Audio
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
      * @return Video
      */
     public function addFilter(FilterInterface $filter)
@@ -60,9 +65,10 @@ abstract class AbstractVideo extends Audio
     /**
      * Exports the video in the desired format, applies registered filters.
      *
-     * @param FormatInterface   $format
-     * @param string            $outputPathfile
+     * @param string $outputPathfile
+     *
      * @return Video
+     *
      * @throws RuntimeException
      */
     public function save(FormatInterface $format, $outputPathfile)
@@ -86,10 +92,10 @@ abstract class AbstractVideo extends Audio
                     // FFMpeg\Format\ProgressListener\AbstractProgressListener class
                     foreach ($filters as $filter) {
                         if ($filter instanceof ClipFilter) {
-                            if ($filter->getDuration() === NULL) {
+                            if (null === $filter->getDuration()) {
                                 continue;
                             }
-                            
+
                             $duration = $filter->getDuration()->toSeconds();
                             break;
                         }
@@ -104,7 +110,7 @@ abstract class AbstractVideo extends Audio
             }
         }
 
-        $this->fs->clean($this->fsId);
+        $this->fs->delete();
 
         if (null !== $failure) {
             throw new RuntimeException('Encoding failed', $failure->getCode(), $failure);
@@ -115,17 +121,17 @@ abstract class AbstractVideo extends Audio
 
     /**
      * NOTE: This method is different to the Audio's one, because Video is using passes.
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getFinalCommand(FormatInterface $format, $outputPathfile)
     {
-        $finalCommands = array();
+        $finalCommands = [];
 
         foreach ($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
             $finalCommands[] = implode(' ', $passCommands);
         }
 
-        $this->fs->clean($this->fsId);
+        $this->fs->delete();
 
         return $finalCommands;
     }
@@ -133,7 +139,8 @@ abstract class AbstractVideo extends Audio
     /**
      * **NOTE:** This creates passes instead of a single command!
      *
-     * @inheritDoc
+     * {@inheritDoc}
+     *
      * @return string[][]
      */
     protected function buildCommand(FormatInterface $format, $outputPathfile)
@@ -144,16 +151,16 @@ abstract class AbstractVideo extends Audio
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(array('-threads', $this->driver->getConfiguration()->get('ffmpeg.threads'))));
+            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
         }
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(array('-vcodec', $format->getVideoCodec())));
+                $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
             }
         }
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(array('-acodec', $format->getAudioCodec())));
+                $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
             }
         }
 
@@ -162,9 +169,9 @@ abstract class AbstractVideo extends Audio
         }
 
         if ($format instanceof VideoInterface) {
-            if ($format->getKiloBitrate() !== 0) {
+            if (0 !== $format->getKiloBitrate()) {
                 $commands[] = '-b:v';
-                $commands[] = $format->getKiloBitrate() . 'k';
+                $commands[] = $format->getKiloBitrate().'k';
             }
 
             $commands[] = '-refs';
@@ -192,7 +199,7 @@ abstract class AbstractVideo extends Audio
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioKiloBitrate()) {
                 $commands[] = '-b:a';
-                $commands[] = $format->getAudioKiloBitrate() . 'k';
+                $commands[] = $format->getAudioKiloBitrate().'k';
             }
             if (null !== $format->getAudioChannels()) {
                 $commands[] = '-ac';
@@ -210,12 +217,12 @@ abstract class AbstractVideo extends Audio
         }
 
         // Merge Filters into one command
-        $videoFilterVars = $videoFilterProcesses = array();
-        for ($i = 0; $i < count($commands); $i++) {
+        $videoFilterVars = $videoFilterProcesses = [];
+        for ($i = 0; $i < count($commands); ++$i) {
             $command = $commands[$i];
-            if ($command === '-vf') {
-                $commandSplits = explode(";", $commands[$i + 1]);
-                if (count($commandSplits) == 1) {
+            if ('-vf' === $command) {
+                $commandSplits = explode(';', $commands[$i + 1]);
+                if (1 == count($commandSplits)) {
                     $commandSplit = $commandSplits[0];
                     $command = trim($commandSplit);
                     if (preg_match("/^\[in\](.*?)\[out\]$/is", $command, $match)) {
@@ -235,19 +242,19 @@ abstract class AbstractVideo extends Audio
                 }
                 unset($commands[$i]);
                 unset($commands[$i + 1]);
-                $i++;
+                ++$i;
             }
         }
         $videoFilterCommands = $videoFilterVars;
         $lastInput = 'in';
         foreach ($videoFilterProcesses as $i => $process) {
-            $command = '[' . $lastInput . ']';
+            $command = '['.$lastInput.']';
             $command .= $process;
-            $lastInput = 'p' . $i;
+            $lastInput = 'p'.$i;
             if ($i === (count($videoFilterProcesses) - 1)) {
                 $command .= '[out]';
             } else {
-                $command .= '[' . $lastInput . ']';
+                $command .= '['.$lastInput.']';
             }
 
             $videoFilterCommands[] = $command;
@@ -259,17 +266,18 @@ abstract class AbstractVideo extends Audio
             $commands[] = $videoFilterCommand;
         }
 
-        $this->fs = FsManager::create();
         $this->fsId = uniqid('ffmpeg-passes');
-        $passPrefix = $this->fs->createTemporaryDirectory(0777, 50, $this->fsId) . '/' . uniqid('pass-');
-        $passes = array();
+        $this->fs = (new TemporaryDirectory($this->fsId))->create();
+        $passPrefix = $this->fs->path(uniqid('pass-'));
+        touch($passPrefix);
+        $passes = [];
         $totalPasses = $format->getPasses();
 
         if (!$totalPasses) {
             throw new InvalidArgumentException('Pass number should be a positive value.');
         }
 
-        for ($i = 1; $i <= $totalPasses; $i++) {
+        for ($i = 1; $i <= $totalPasses; ++$i) {
             $pass = $commands;
 
             if ($totalPasses > 1) {
@@ -290,12 +298,11 @@ abstract class AbstractVideo extends Audio
     /**
      * Return base part of command.
      *
-     * @param FormatInterface $format
      * @return array
      */
     protected function basePartOfCommand(FormatInterface $format)
     {
-        $commands = array('-y');
+        $commands = ['-y'];
 
         // If the user passed some initial parameters
         if ($format instanceof VideoInterface) {

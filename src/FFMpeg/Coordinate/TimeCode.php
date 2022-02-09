@@ -91,10 +91,12 @@ class TimeCode
     }
 
     /**
-     * Returns this timecode in seconds
+     * Returns this timecode in seconds.
+     *
      * @return int
      */
-    public function toSeconds() {
+    public function toSeconds()
+    {
         $seconds = 0;
 
         $seconds += $this->hours * 60 * 60;
@@ -107,14 +109,15 @@ class TimeCode
     }
 
     /**
-     * Helper function wether `$timecode` is after this one
+     * Helper function wether `$timecode` is after this one.
      *
-     * @param   TimeCode    $timecode   The Timecode to compare
+     * @param TimeCode $timecode The Timecode to compare
+     *
      * @return bool
      */
-    public function isAfter(TimeCode $timecode) {
+    public function isAfter(TimeCode $timecode)
+    {
         // convert everything to seconds and compare
-        return ($this->toSeconds() > $timecode->toSeconds());
+        return $this->toSeconds() > $timecode->toSeconds();
     }
-
 }

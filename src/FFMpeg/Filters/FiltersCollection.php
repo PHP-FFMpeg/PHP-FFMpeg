@@ -11,20 +11,20 @@
 
 namespace FFMpeg\Filters;
 
+use Traversable;
+
 class FiltersCollection implements \Countable, \IteratorAggregate
 {
     private $sorted;
-    private $filters = array();
+    private $filters = [];
 
     /**
-     * @param FilterInterface $filter
-     *
      * @return FiltersCollection
      */
     public function add(FilterInterface $filter)
     {
         $this->filters[$filter->getPriority()][] = $filter;
-        $this->sorted = null;
+        $this->sorted                            = null;
 
         return $this;
     }
@@ -32,8 +32,7 @@ class FiltersCollection implements \Countable, \IteratorAggregate
     /**
      * {@inheritdoc}
      */
-    #[\ReturnTypeWillChange]
-    public function count()
+    public function count(): int
     {
         if (0 === count($this->filters)) {
             return 0;
@@ -45,8 +44,7 @@ class FiltersCollection implements \Countable, \IteratorAggregate
     /**
      * {@inheritdoc}
      */
-    #[\ReturnTypeWillChange]
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         if (null === $this->sorted) {
             if (0 === count($this->filters)) {

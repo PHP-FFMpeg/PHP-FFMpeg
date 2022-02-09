@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -7,18 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace FFMpeg\Media;
 
-use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Coordinate\TimeCode;
 
 class Video extends AbstractVideo
 {
-
     /**
      * Gets the frame at timecode.
      *
-     * @param  TimeCode $at
      * @return Frame
      */
     public function frame(TimeCode $at)
@@ -29,9 +29,8 @@ class Video extends AbstractVideo
     /**
      * Extracts a gif from a sequence of the video.
      *
-     * @param  TimeCode $at
-     * @param  Dimension $dimension
-     * @param  int $duration
+     * @param int $duration
+     *
      * @return Gif
      */
     public function gif(TimeCode $at, Dimension $dimension, $duration = null)
@@ -42,7 +41,8 @@ class Video extends AbstractVideo
     /**
      * Concatenates a list of videos into one unique video.
      *
-     * @param  array $sources
+     * @param array $sources
+     *
      * @return Concat
      */
     public function concat($sources)
@@ -53,8 +53,9 @@ class Video extends AbstractVideo
     /**
      * Clips the video at the given time(s).
      *
-     * @param TimeCode $start Start time
+     * @param TimeCode $start    Start time
      * @param TimeCode $duration Duration
+     *
      * @return \FFMpeg\Media\Clip
      */
     public function clip(TimeCode $start, TimeCode $duration = null)

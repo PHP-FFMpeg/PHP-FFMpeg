@@ -12,13 +12,13 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Driver\FFMpegDriver;
+use FFMpeg\Exception\RuntimeException;
+use FFMpeg\FFProbe;
 use FFMpeg\Filters\Gif\GifFilterInterface;
 use FFMpeg\Filters\Gif\GifFilters;
-use FFMpeg\Driver\FFMpegDriver;
-use FFMpeg\FFProbe;
-use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Coordinate\Dimension;
 
 class Gif extends AbstractMediaType
 {
@@ -91,7 +91,7 @@ class Gif extends AbstractMediaType
     /**
      * Saves the gif in the given filename.
      *
-     * @param string  $pathfile
+     * @param string $pathfile
      *
      * @return Gif
      *
@@ -102,19 +102,19 @@ class Gif extends AbstractMediaType
         /**
          * @see http://ffmpeg.org/ffmpeg.html#Main-options
          */
-        $commands = array(
-            '-ss', (string)$this->timecode
-        );
+        $commands = [
+            '-ss', (string) $this->timecode,
+        ];
 
-        if(null !== $this->duration) {
+        if (null !== $this->duration) {
             $commands[] = '-t';
-            $commands[] = (string)$this->duration;
+            $commands[] = (string) $this->duration;
         }
 
         $commands[] = '-i';
         $commands[] = $this->pathfile;
         $commands[] = '-vf';
-        $commands[] = 'scale=' . $this->dimension->getWidth() . ':-1';
+        $commands[] = 'scale='.$this->dimension->getWidth().':-1';
         $commands[] = '-gifflags';
         $commands[] = '+transdiff';
         $commands[] = '-y';
@@ -123,7 +123,7 @@ class Gif extends AbstractMediaType
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        $commands = array_merge($commands, array($pathfile));
+        $commands = array_merge($commands, [$pathfile]);
 
         try {
             $this->driver->command($commands);

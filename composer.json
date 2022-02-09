@@ -2,7 +2,16 @@
     "name": "php-ffmpeg/php-ffmpeg",
     "type": "library",
     "description": "FFMpeg PHP, an Object Oriented library to communicate with AVconv / ffmpeg",
-    "keywords": ["video processing", "video", "audio processing", "audio", "avconv", "ffmpeg", "avprobe", "ffprobe"],
+    "keywords": [
+        "video processing",
+        "video",
+        "audio processing",
+        "audio",
+        "avconv",
+        "ffmpeg",
+        "avprobe",
+        "ffprobe"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -29,35 +38,37 @@
             "name": "Jens Hausdorf",
             "email": "hello@jens-hausdorf.de",
             "homepage": "https://jens-hausdorf.de"
+        },
+        {
+            "name": "Pascal Baljet",
+            "email": "pascal@protone.media",
+            "homepage": "https://protone.media"
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "alchemy/binary-driver": "^1.5 || ~2.0.0 || ^5.0",
-        "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
-        "neutron/temporary-filesystem": "^2.1.1 || ^3.0",
-        "symfony/cache": "^3.1 || ^4.0 || ^5.0 || ^6.0"
+        "php": "^8.0 || ^8.1",
+        "evenement/evenement": "^3.0",
+        "psr/log": "^1.0 || ^2.0 || ^3.0",
+        "spatie/temporary-directory": "^2.0",
+        "symfony/process": "^5.4 || ^6.0",
+        "symfony/cache": "^5.4 || ^6.0"
     },
     "suggest": {
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.0.4",
-        "symfony/process": "2.8 || 3.3"
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
-        "psr-0": {
-            "FFMpeg": "src"
+        "psr-4": {
+            "FFMpeg\\": "src/FFMpeg",
+            "Alchemy\\BinaryDriver\\": "src/Alchemy/BinaryDriver"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\FFMpeg\\": "tests"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.x-dev"
+            "Alchemy\\Tests\\BinaryDriver\\": "tests/Alchemy/BinaryDriver",
+            "Tests\\FFMpeg\\": "tests/FFMpeg"
         }
     }
 }

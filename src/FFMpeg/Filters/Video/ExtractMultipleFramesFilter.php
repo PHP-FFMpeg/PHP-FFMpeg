@@ -13,25 +13,25 @@ namespace FFMpeg\Filters\Video;
 
 use FFMpeg\Exception\InvalidArgumentException;
 use FFMpeg\Exception\RuntimeException;
-use FFMpeg\Media\Video;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\Media\Video;
 
 class ExtractMultipleFramesFilter implements VideoFilterInterface
 {
     /** will extract a frame every second */
-    const FRAMERATE_EVERY_SEC = '1/1';
+    public const FRAMERATE_EVERY_SEC = '1/1';
     /** will extract a frame every 2 seconds */
-    const FRAMERATE_EVERY_2SEC = '1/2';
+    public const FRAMERATE_EVERY_2SEC = '1/2';
     /** will extract a frame every 5 seconds */
-    const FRAMERATE_EVERY_5SEC = '1/5';
+    public const FRAMERATE_EVERY_5SEC = '1/5';
     /** will extract a frame every 10 seconds */
-    const FRAMERATE_EVERY_10SEC = '1/10';
+    public const FRAMERATE_EVERY_10SEC = '1/10';
     /** will extract a frame every 30 seconds */
-    const FRAMERATE_EVERY_30SEC = '1/30';
+    public const FRAMERATE_EVERY_30SEC = '1/30';
     /** will extract a frame every minute */
-    const FRAMERATE_EVERY_60SEC = '1/60';
+    public const FRAMERATE_EVERY_60SEC = '1/60';
 
-    /** @var integer */
+    /** @var int */
     private $priority;
     private $frameRate;
     private $destinationFolder;
@@ -46,25 +46,30 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
         $this->frameRate = $frameRate;
 
         // Make sure that the destination folder has a trailing slash
-        if(strcmp( substr($destinationFolder, -1), "/") != 0)
-            $destinationFolder .= "/";
+        if (0 != strcmp(substr($destinationFolder, -1), '/')) {
+            $destinationFolder .= '/';
+        }
 
         // Set the destination folder
         $this->destinationFolder = $destinationFolder;
     }
 
-	/**
-	 * @param string $frameFileType
-	 * @throws \FFMpeg\Exception\InvalidArgumentException
-	 * @return ExtractMultipleFramesFilter
-	 */
-    public function setFrameFileType($frameFileType) {
-    	if (in_array($frameFileType, self::$supportedFrameFileTypes)) {
-    		$this->frameFileType = $frameFileType;
-    		return $this;
-    	}
+    /**
+     * @param string $frameFileType
+     *
+     * @throws \FFMpeg\Exception\InvalidArgumentException
+     *
+     * @return ExtractMultipleFramesFilter
+     */
+    public function setFrameFileType($frameFileType)
+    {
+        if (in_array($frameFileType, self::$supportedFrameFileTypes)) {
+            $this->frameFileType = $frameFileType;
 
-    	throw new InvalidArgumentException('Invalid frame file type, use: ' . implode(',', self::$supportedFrameFileTypes));
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Invalid frame file type, use: '.implode(',', self::$supportedFrameFileTypes));
     }
 
     /**
@@ -96,7 +101,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        $commands = array();
+        $commands = [];
         $duration = 0;
 
         try {
@@ -108,37 +113,37 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
             }
 
             // Get the number of frames per second we have to extract.
-            if(preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches) !== FALSE){
+            if (false !== preg_match('/(\d+)(?:\s*)([\+\-\*\/])(?:\s*)(\d+)/', $this->frameRate, $matches)) {
                 $operator = $matches[2];
 
-                switch($operator){
+                switch ($operator) {
                     case '/':
                         $nbFramesPerSecond = $matches[1] / $matches[3];
                         break;
 
                     default:
-                        throw new InvalidArgumentException('The frame rate is not a proper division: ' . $this->frameRate);
+                        throw new InvalidArgumentException('The frame rate is not a proper division: '.$this->frameRate);
                         break;
                 }
             }
 
             // Set the number of digits to use in the exported filenames
-            $nbImages = ceil( $duration * $nbFramesPerSecond );
+            $nbImages = ceil($duration * $nbFramesPerSecond);
 
-            if($nbImages < 100)
-                $nbDigitsInFileNames = "02";
-            elseif($nbImages < 1000)
-                $nbDigitsInFileNames = "03";
-            else
-                $nbDigitsInFileNames = "06";
+            if ($nbImages < 100) {
+                $nbDigitsInFileNames = '02';
+            } elseif ($nbImages < 1000) {
+                $nbDigitsInFileNames = '03';
+            } else {
+                $nbDigitsInFileNames = '06';
+            }
 
             // Set the parameters
             $commands[] = '-vf';
-            $commands[] = 'fps=' . $this->frameRate;
-            $commands[] = $this->destinationFolder . 'frame-%'.$nbDigitsInFileNames.'d.' . $this->frameFileType;
-        }
-        catch (RuntimeException $e) {
-            throw new RuntimeException('An error occured while extracting the frames: ' . $e->getMessage() . '. The code: ' . $e->getCode());
+            $commands[] = 'fps='.$this->frameRate;
+            $commands[] = $this->destinationFolder.'frame-%'.$nbDigitsInFileNames.'d.'.$this->frameFileType;
+        } catch (RuntimeException $e) {
+            throw new RuntimeException('An error occured while extracting the frames: '.$e->getMessage().'. The code: '.$e->getCode());
         }
 
         return $commands;

@@ -16,14 +16,13 @@ use FFMpeg\Media\Waveform;
 
 class WaveformDownmixFilter implements WaveformFilterInterface
 {
-
     /** @var bool */
     private $downmix;
     /** @var int */
     private $priority;
 
     // By default, the downmix value is set to FALSE.
-    public function __construct($downmix = FALSE, $priority = 0)
+    public function __construct($downmix = false, $priority = 0)
     {
         $this->downmix = $downmix;
         $this->priority = $priority;
@@ -50,21 +49,18 @@ class WaveformDownmixFilter implements WaveformFilterInterface
      */
     public function apply(Waveform $waveform)
     {
-        $commands = array();
+        $commands = [];
 
         foreach ($waveform->getAudio()->getStreams() as $stream) {
             if ($stream->isAudio()) {
                 try {
-                    
                     // If the downmix parameter is set to TRUE, we add an option to the FFMPEG command
-                    if($this->downmix == TRUE) {
+                    if (true == $this->downmix) {
                         $commands[] = '"aformat=channel_layouts=mono"';
                     }
-                    
+
                     break;
-
                 } catch (RuntimeException $e) {
-
                 }
             }
         }

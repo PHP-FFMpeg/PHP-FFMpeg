@@ -1,66 +1,48 @@
-name: Test
+name: run-tests
 
-on:
-  pull_request: ~
-  push:
-    branches:
-      - "master"
-  schedule:
-    - cron: "0 0 * * *"
+on: [push, pull_request]
 
 jobs:
-  test:
-    name: "PHP ${{ matrix.php-version }} ${{ matrix.dependency-versions }} ${{ matrix.composer-stability }}"
-    runs-on: ubuntu-latest
+    test:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: true
+            matrix:
+                os: [ubuntu-20.04]
+                php: [8.1, 8.0]
+                ffmpeg: [5.0, 4.4]
+                dependency-version: [prefer-lowest, prefer-stable]
 
-    env:
-      PHPUNIT_VERSION: ${{ matrix.phpunit-version }}
+        name: ${{ matrix.os }} - P${{ matrix.php }} - FF${{ matrix.ffmpeg }} - ${{ matrix.dependency-version }}
 
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-20.04]
-        php-version: [8.1, 8.0, 7.4, 7.3, 7.2, 7.1, 7.0, 5.6, 5.5]
-        dependency-versions: [prefer-lowest, prefer-stable]
-        include:
-          - php-version: 5.5
-            phpunit-version: 4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-    steps:
-      - name: Checkout project
-        uses: actions/checkout@v2
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, mysql, mysqli, pdo_mysql, fileinfo
+                  coverage: none
 
-      - name: Install and configure PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-version }}
-          tools: composer:v2
-          coverage: none
+            - name: Install FFmpeg
+              uses: Iamshankhadeep/setup-ffmpeg@ffmpeg-5.0-20220119
+              with:
+                  version: ${{ matrix.ffmpeg }}
+              id: setup-ffmpeg
 
-      - name: Install phpunit
-        if: ${{ matrix.phpunit-version }}
-        run: |
-          composer remove symfony/phpunit-bridge --dev
-          wget -O phpunit "https://phar.phpunit.de/phpunit-${{ matrix.phpunit-version }}.phar"
-          chmod +x phpunit
-          composer require "roave/security-advisories" dev-master --no-update
+            - name: Install dependencies
+              run: |
+                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
-      - name: Set composer stability
-        if: ${{ matrix.composer-stability }}
-        run: composer config minimum-stability ${{ matrix.composer-stability }}
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ~/.composer/cache/files
+                  key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}-dep-${{ matrix.dependency-version }}
 
-      - name: Install composer dependencies
-        uses: ramsey/composer-install@v1
-        with:
-          dependency-versions: ${{ matrix.dependency-versions }}
-
-      - name: Install ffmpeg
-        uses: FedericoCarboni/setup-ffmpeg@v1
-
-      - name: Run tests
-        run: |
-          if [ "$PHPUNIT_VERSION" ]; then
-              ./phpunit --verbose
-          else
-              ./vendor/bin/simple-phpunit --verbose
-          fi;
+            - name: Execute tests
+              run: vendor/bin/phpunit
+              env:
+                  FFMPEG_TEMPORARY_FILES_ROOT: ${{ github.workspace }}

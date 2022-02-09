@@ -38,6 +38,6 @@ class CustomComplexFilter extends AbstractComplexFilter
      */
     public function applyComplex(AdvancedMedia $media)
     {
-        return array('-filter_complex', $this->filter);
+        return ['-filter_complex', $this->filter];
     }
 }

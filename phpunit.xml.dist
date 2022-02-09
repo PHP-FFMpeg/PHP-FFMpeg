@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         verbose="false"
-         bootstrap="tests/bootstrap.php"
->
+<phpunit backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" verbose="false" bootstrap="tests/bootstrap.php">
     <php>
         <env name="SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT" value="true"/>
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
     </php>
-
     <testsuites>
-        <testsuite name="unit">
-            <directory>tests/Unit</directory>
+        <testsuite name="Alchemy">
+            <directory>tests/Alchemy/BinaryDriver</directory>
         </testsuite>
-        <testsuite name="functional">
-            <directory>tests/Functional</directory>
+        <testsuite name="FFMpeg Unit">
+            <directory>tests/FFMpeg/Unit</directory>
+        </testsuite>
+        <testsuite name="FFMpeg Functional">
+            <directory>tests/FFMpeg/Functional</directory>
         </testsuite>
     </testsuites>
-
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/</directory>

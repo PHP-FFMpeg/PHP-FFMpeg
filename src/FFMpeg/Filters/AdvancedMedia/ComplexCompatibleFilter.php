@@ -27,9 +27,7 @@ interface ComplexCompatibleFilter extends FilterInterface
     /**
      * Apply the complex filter to the given media.
      *
-     * @param AdvancedMedia $media
-     *
-     * @return string[] An array of arguments.
+     * @return string[] an array of arguments
      */
     public function applyComplex(AdvancedMedia $media);
 }

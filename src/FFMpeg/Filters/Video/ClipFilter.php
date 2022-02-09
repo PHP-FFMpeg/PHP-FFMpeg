@@ -11,9 +11,9 @@
 
 namespace FFMpeg\Filters\Video;
 
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
-use FFMpeg\Coordinate\TimeCode;
 
 class ClipFilter implements VideoFilterInterface
 {
@@ -60,11 +60,11 @@ class ClipFilter implements VideoFilterInterface
      */
     public function apply(Video $video, VideoInterface $format)
     {
-        $commands = array('-ss', (string) $this->start);
+        $commands = ['-ss', (string) $this->start];
 
-        if ($this->duration !== null) {
-          $commands[] = '-t';
-          $commands[] = (string) $this->duration;
+        if (null !== $this->duration) {
+            $commands[] = '-t';
+            $commands[] = (string) $this->duration;
         }
 
         return $commands;

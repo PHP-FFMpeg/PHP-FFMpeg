@@ -30,8 +30,8 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 class FFProbe
 {
-    const TYPE_STREAMS = 'streams';
-    const TYPE_FORMAT = 'format';
+    public const TYPE_STREAMS = 'streams';
+    public const TYPE_FORMAT  = 'format';
 
     /** @var CacheItemPoolInterface */
     private $cache;
@@ -46,11 +46,11 @@ class FFProbe
 
     public function __construct(FFProbeDriver $ffprobe, CacheItemPoolInterface $cache)
     {
-        $this->ffprobe = $ffprobe;
+        $this->ffprobe       = $ffprobe;
         $this->optionsTester = new OptionsTester($ffprobe, $cache);
-        $this->parser = new OutputParser();
-        $this->mapper = new Mapper();
-        $this->cache = $cache;
+        $this->parser        = new OutputParser();
+        $this->mapper        = new Mapper();
+        $this->cache         = $cache;
     }
 
     /**
@@ -62,8 +62,6 @@ class FFProbe
     }
 
     /**
-     * @param OutputParserInterface $parser
-     *
      * @return FFProbe
      */
     public function setParser(OutputParserInterface $parser)
@@ -82,8 +80,6 @@ class FFProbe
     }
 
     /**
-     * @param FFProbeDriver $ffprobe
-     *
      * @return FFProbe
      */
     public function setFFProbeDriver(FFProbeDriver $ffprobe)
@@ -94,8 +90,6 @@ class FFProbe
     }
 
     /**
-     * @param OptionsTesterInterface $tester
-     *
      * @return FFProbe
      */
     public function setOptionsTester(OptionsTesterInterface $tester)
@@ -142,8 +136,6 @@ class FFProbe
     }
 
     /**
-     * @param MapperInterface $mapper
-     *
      * @return FFProbe
      */
     public function setMapper(MapperInterface $mapper)
@@ -176,14 +168,16 @@ class FFProbe
      * Checks wether the given `$pathfile` is considered a valid media file.
      *
      * @param string $pathfile
+     *
      * @return bool
+     *
      * @since 0.10.0
      */
     public function isValid($pathfile)
     {
         try {
             return $this->format($pathfile)->get('duration') > 0;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // complete invalid data
             return false;
         }
@@ -217,7 +211,7 @@ class FFProbe
      *
      * @return FFProbe
      */
-    public static function create($configuration = array(), LoggerInterface $logger = null, CacheItemPoolInterface $cache = null)
+    public static function create($configuration = [], LoggerInterface $logger = null, CacheItemPoolInterface $cache = null)
     {
         if (null === $cache) {
             $cache = new ArrayAdapter();
@@ -235,13 +229,10 @@ class FFProbe
         }
 
         if (!$this->optionsTester->has($command)) {
-            throw new RuntimeException(sprintf(
-                'This version of ffprobe is too old and '
-                . 'does not support `%s` option, please upgrade', $command
-            ));
+            throw new RuntimeException(sprintf('This version of ffprobe is too old and ' . 'does not support `%s` option, please upgrade', $command));
         }
 
-        $commands = array($pathfile, $command);
+        $commands = [$pathfile, $command];
 
         $parseIsToDo = false;
 

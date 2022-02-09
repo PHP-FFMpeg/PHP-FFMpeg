@@ -14,10 +14,10 @@ use FFMpeg\Media\AdvancedMedia;
  */
 class XStackFilter extends AbstractComplexFilter
 {
-    const LAYOUT_2X2 = '0_0|0_h0|w0_0|w0_h0';
-    const LAYOUT_1X4 = '0_0|0_h0|0_h0+h1|0_h0+h1+h2';
-    const LAYOUT_3X3 = '0_0|0_h0|0_h0+h1|w0_0|w0_h0|w0_h0+h1|w0+w3_0|w0+w3_h0|w0+w3_h0+h1';
-    const LAYOUT_4X4 = '0_0|0_h0|0_h0+h1|0_h0+h1+h2|w0_0|w0_h0|w0_h0+h1|w0_h0+h1+h2|w0+w4_0|w0+w4_h0|w0+w4_h0+h1|w0+w4_h0+h1+h2|w0+w4+w8_0|w0+w4+w8_h0|w0+w4+w8_h0+h1|w0+w4+w8_h0+h1+h2';
+    public const LAYOUT_2X2 = '0_0|0_h0|w0_0|w0_h0';
+    public const LAYOUT_1X4 = '0_0|0_h0|0_h0+h1|0_h0+h1+h2';
+    public const LAYOUT_3X3 = '0_0|0_h0|0_h0+h1|w0_0|w0_h0|w0_h0+h1|w0+w3_0|w0+w3_h0|w0+w3_h0+h1';
+    public const LAYOUT_4X4 = '0_0|0_h0|0_h0+h1|0_h0+h1+h2|w0_0|w0_h0|w0_h0+h1|w0_h0+h1+h2|w0+w4_0|w0+w4_h0|w0+w4_h0+h1|w0+w4_h0+h1+h2|w0+w4+w8_0|w0+w4+w8_h0|w0+w4+w8_h0+h1|w0+w4+w8_h0+h1+h2';
 
     /**
      * @var string
@@ -51,9 +51,10 @@ class XStackFilter extends AbstractComplexFilter
     public static function getInputByCount($count)
     {
         $result = '';
-        for ($i = 0; $i < $count; $i++) {
-            $result .= '[' . $i . ':v]';
+        for ($i = 0; $i < $count; ++$i) {
+            $result .= '['.$i.':v]';
         }
+
         return $result;
     }
 
@@ -82,12 +83,12 @@ class XStackFilter extends AbstractComplexFilter
      */
     public function applyComplex(AdvancedMedia $media)
     {
-        return array(
+        return [
             '-filter_complex',
-            $this->getName() . $this->buildFilterOptions(array(
+            $this->getName().$this->buildFilterOptions([
                 'inputs' => $this->inputsCount,
-                'layout' => $this->layout
-            ))
-        );
+                'layout' => $this->layout,
+            ]),
+        ];
     }
 }

@@ -1,4 +1,4 @@
-# php-ffmpeg
+# PHP-FFMPEG
 
 [![Test](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/test.yaml/badge.svg)](https://github.com/PHP-FFMpeg/PHP-FFMpeg/actions/workflows/test.yaml)
 
