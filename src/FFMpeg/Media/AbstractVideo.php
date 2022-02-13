@@ -71,9 +71,9 @@ abstract class AbstractVideo extends Audio
      *
      * @throws RuntimeException
      */
-    public function save(FormatInterface $format, $outputPathfile)
+    public function save(FormatInterface $format, $outputPathfile, $tempPassLogdirectory = null)
     {
-        $passes = $this->buildCommand($format, $outputPathfile);
+        $passes = $this->buildCommand($format, $outputPathfile, $tempPassLogdirectory);
 
         $failure = null;
         $totalPasses = $format->getPasses();
@@ -123,11 +123,11 @@ abstract class AbstractVideo extends Audio
      * NOTE: This method is different to the Audio's one, because Video is using passes.
      * {@inheritDoc}
      */
-    public function getFinalCommand(FormatInterface $format, $outputPathfile)
+    public function getFinalCommand(FormatInterface $format, $outputPathfile, $tempPassLogdirectory = null)
     {
         $finalCommands = [];
 
-        foreach ($this->buildCommand($format, $outputPathfile) as $pass => $passCommands) {
+        foreach ($this->buildCommand($format, $outputPathfile, $tempPassLogdirectory) as $pass => $passCommands) {
             $finalCommands[] = implode(' ', $passCommands);
         }
 
@@ -143,7 +143,7 @@ abstract class AbstractVideo extends Audio
      *
      * @return string[][]
      */
-    protected function buildCommand(FormatInterface $format, $outputPathfile)
+    protected function buildCommand(FormatInterface $format, $outputPathfile, $tempPassLogdirectory = null)
     {
         $commands = $this->basePartOfCommand($format);
 
@@ -267,7 +267,9 @@ abstract class AbstractVideo extends Audio
         }
 
         $this->fsId = uniqid('ffmpeg-passes');
-        $this->fs = (new TemporaryDirectory($this->fsId))->create();
+        
+        // With checking if ffmpeg pass log need to be written to another folder or temp folder.
+        $this->fs = (new TemporaryDirectory($tempPassLogdirectory ? ($tempPassLogdirectory . '/' . $this->fsId) : $this->fsId))->create();
         $passPrefix = $this->fs->path(uniqid('pass-'));
         touch($passPrefix);
         $passes = [];
