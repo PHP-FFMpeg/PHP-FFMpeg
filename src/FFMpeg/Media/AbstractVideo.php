@@ -267,7 +267,7 @@ abstract class AbstractVideo extends Audio
         }
 
         $this->fsId = uniqid('ffmpeg-passes');
-        $this->fs = (new TemporaryDirectory($this->fsId))->create();
+        $this->fs = $this->getTemporaryDirectory()->name($this->fsId)->create();
         $passPrefix = $this->fs->path(uniqid('pass-'));
         touch($passPrefix);
         $passes = [];

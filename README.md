@@ -79,6 +79,14 @@ $ffmpeg = FFMpeg\FFMpeg::create(array(
 ), $logger);
 ```
 
+You may pass a `temporary_directory` key to specify a path for temporary files.
+
+```php
+$ffmpeg = FFMpeg\FFMpeg::create(array(
+    'temporary_directory' => '/var/ffmpeg-tmp'
+), $logger);
+```
+
 ### Manipulate media
 
 `FFMpeg\FFMpeg` creates media based on URIs. URIs could be either a pointer to a

@@ -3,13 +3,14 @@
 namespace Tests\FFMpeg\Unit\Media;
 
 use FFMpeg\Media\Concat;
+use Mockery;
 use Spatie\TemporaryDirectory\TemporaryDirectory;
 
 class ConcatTest extends AbstractMediaTestCase
 {
     public function testGetSources()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $concat = new Concat([__FILE__, __FILE__], $driver, $ffprobe);
@@ -18,7 +19,7 @@ class ConcatTest extends AbstractMediaTestCase
 
     public function testFiltersReturnFilters()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $concat = new Concat([__FILE__, __FILE__], $driver, $ffprobe);
@@ -27,7 +28,7 @@ class ConcatTest extends AbstractMediaTestCase
 
     public function testAddFiltersAddsAFilter()
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $filters = $this->getMockBuilder('FFMpeg\Filters\FiltersCollection')
@@ -50,12 +51,23 @@ class ConcatTest extends AbstractMediaTestCase
      */
     public function testSaveFromSameCodecs($streamCopy, $commands)
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
         $pathfile = '/target/destination';
 
         array_push($commands, $pathfile);
+
+        $configuration = Mockery::mock('Alchemy\BinaryDriver\ConfigurationInterface');
+
+        $driver->expects($this->any())
+            ->method('getConfiguration')
+            ->will($this->returnValue($configuration));
+
+        $configuration->shouldReceive('get')
+            ->once()
+            ->with('temporary_directory')
+            ->andReturnNull();
 
         $driver->expects($this->exactly(1))
             ->method('command')
@@ -79,7 +91,7 @@ class ConcatTest extends AbstractMediaTestCase
 
     public function provideSaveFromSameCodecsOptions()
     {
-        $fs = (new TemporaryDirectory())->create();
+        $fs      = (new TemporaryDirectory())->create();
         $tmpFile = $fs->path('ffmpeg-concat');
         touch($tmpFile);
 
@@ -109,9 +121,9 @@ class ConcatTest extends AbstractMediaTestCase
      */
     public function testSaveFromDifferentCodecs($commands)
     {
-        $driver = $this->getFFMpegDriverMock();
+        $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
-        $format = $this->getFormatInterfaceMock();
+        $format  = $this->getFormatInterfaceMock();
 
         $pathfile = '/target/destination';
 

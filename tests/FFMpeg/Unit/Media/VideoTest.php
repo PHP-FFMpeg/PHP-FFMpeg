@@ -5,6 +5,7 @@ namespace Tests\FFMpeg\Unit\Media;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Format\Video\X264;
 use FFMpeg\Media\Video;
+use Mockery;
 
 class VideoTest extends AbstractStreamableTestCase
 {
@@ -158,25 +159,27 @@ class VideoTest extends AbstractStreamableTestCase
         $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
+        $configuration = Mockery::mock('Alchemy\BinaryDriver\ConfigurationInterface');
 
         $driver->expects($this->any())
             ->method('getConfiguration')
             ->will($this->returnValue($configuration));
 
-        $configuration->expects($this->once())
-            ->method('has')
-            ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue($threads));
+        $configuration->shouldReceive('has')
+            ->once()
+            ->with('ffmpeg.threads')
+            ->andReturn($threads);
+
+        $configuration->shouldReceive('get')
+            ->once()
+            ->with('temporary_directory')
+            ->andReturnNull();
 
         if ($threads) {
-            $configuration->expects($this->once())
-                ->method('get')
-                ->with($this->equalTo('ffmpeg.threads'))
-                ->will($this->returnValue(24));
-        } else {
-            $configuration->expects($this->never())
-                ->method('get');
+            $configuration->shouldReceive('get')
+                ->once()
+                ->with('ffmpeg.threads')
+                ->andReturn(24);
         }
 
         $capturedCommands  = [];
@@ -585,21 +588,25 @@ class VideoTest extends AbstractStreamableTestCase
         $driver  = $this->getFFMpegDriverMock();
         $ffprobe = $this->getFFProbeMock();
 
-        $configuration = $this->getMockBuilder('Alchemy\BinaryDriver\ConfigurationInterface')->getMock();
+        $configuration = Mockery::mock('Alchemy\BinaryDriver\ConfigurationInterface');
 
         $driver->expects($this->any())
             ->method('getConfiguration')
             ->will($this->returnValue($configuration));
 
-        $configuration->expects($this->any())
-            ->method('has')
-            ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue(true));
+        $configuration->shouldReceive('has')
+            ->with('ffmpeg.threads')
+            ->andReturn(true);
 
-        $configuration->expects($this->any())
-            ->method('get')
-            ->with($this->equalTo('ffmpeg.threads'))
-            ->will($this->returnValue(24));
+        $configuration->shouldReceive('get')
+            ->once()
+            ->with('ffmpeg.threads')
+            ->andReturn(24);
+
+        $configuration->shouldReceive('get')
+            ->once()
+            ->with('temporary_directory')
+            ->andReturnNull();
 
         $capturedCommands = [];
 
