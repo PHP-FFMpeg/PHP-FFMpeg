@@ -14,6 +14,7 @@ namespace FFMpeg\Media;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
 use FFMpeg\Filters\FiltersCollection;
+use Spatie\TemporaryDirectory\TemporaryDirectory;
 
 abstract class AbstractMediaType implements MediaTypeInterface
 {
@@ -94,6 +95,18 @@ abstract class AbstractMediaType implements MediaTypeInterface
     public function getFiltersCollection()
     {
         return $this->filters;
+    }
+
+    /**
+     * Returns a new instance of TemporaryDirectory with the optionally configured directory.
+     *
+     * @return \Spatie\TemporaryDirectory\TemporaryDirectory
+     */
+    public function getTemporaryDirectory(): TemporaryDirectory
+    {
+        return new TemporaryDirectory(
+            $this->driver->getConfiguration()->get('temporary_directory') ?: ''
+        );
     }
 
     protected function cleanupTemporaryFile($filename)

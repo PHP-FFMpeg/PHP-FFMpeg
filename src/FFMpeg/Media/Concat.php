@@ -85,7 +85,7 @@ class Concat extends AbstractMediaType
          */
 
         // Create the file which will contain the list of videos
-        $fs = (new TemporaryDirectory())->create();
+        $fs = $this->getTemporaryDirectory()->create();
         $sourcesFile = $fs->path('ffmpeg.concat');
 
         // Set the content of this file
