@@ -26,6 +26,6 @@ class Mp3 extends DefaultAudio
      */
     public function getAvailableAudioCodecs()
     {
-        return array('libmp3lame');
+        return array('copy','libmp3lame');
     }
 }
