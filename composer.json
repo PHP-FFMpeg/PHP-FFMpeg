@@ -47,7 +47,7 @@
     ],
     "require": {
         "php": "^8.0 || ^8.1",
-        "evenement/evenement": "^3.0",
+        "evenement/evenement": "dev-master",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "spatie/temporary-directory": "^2.0",
         "symfony/process": "^5.4 || ^6.0",
