@@ -12,7 +12,7 @@
 namespace FFMpeg\Format\Video;
 
 /**
- * The Ogg video format
+ * The Ogg video format.
  */
 class Ogg extends DefaultVideo
 {
@@ -36,7 +36,7 @@ class Ogg extends DefaultVideo
      */
     public function getAvailableAudioCodecs()
     {
-        return array('libvorbis');
+        return ['libvorbis'];
     }
 
     /**
@@ -44,6 +44,6 @@ class Ogg extends DefaultVideo
      */
     public function getAvailableVideoCodecs()
     {
-        return array('libtheora');
+        return ['libtheora'];
     }
 }

@@ -77,21 +77,19 @@ class SineFilter extends AbstractComplexFilter
     /**
      * Apply the complex filter to the given media.
      *
-     * @param AdvancedMedia $media
-     *
-     * @return string[] An array of arguments.
+     * @return string[] an array of arguments
      */
     public function applyComplex(AdvancedMedia $media)
     {
-        return array(
+        return [
             '-filter_complex',
-            $this->getName() . $this->buildFilterOptions(array(
+            $this->getName().$this->buildFilterOptions([
                 'frequency' => $this->frequency,
                 'beep_factor' => $this->beep_factor,
                 'sample_rate' => $this->sample_rate,
                 'duration' => $this->duration,
                 'samples_per_frame' => $this->samples_per_frame,
-            ))
-        );
+            ]),
+        ];
     }
 }

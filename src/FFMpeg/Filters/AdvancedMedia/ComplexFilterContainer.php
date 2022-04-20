@@ -32,9 +32,8 @@ class ComplexFilterContainer implements ComplexFilterInterface
     /**
      * ComplexFilter constructor.
      *
-     * @param string                  $inLabels
-     * @param ComplexCompatibleFilter $baseFilter
-     * @param string                  $outLabels
+     * @param string $inLabels
+     * @param string $outLabels
      */
     public function __construct($inLabels, ComplexCompatibleFilter $baseFilter, $outLabels)
     {
@@ -47,7 +46,7 @@ class ComplexFilterContainer implements ComplexFilterInterface
     /**
      * Returns the priority of the filter.
      *
-     * @return integer
+     * @return int
      */
     public function getPriority()
     {

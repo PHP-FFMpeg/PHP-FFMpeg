@@ -23,8 +23,9 @@ abstract class AbstractData implements \Countable
     /**
      * Returns true if data has property.
      *
-     * @param  string  $property
-     * @return Boolean
+     * @param string $property
+     *
+     * @return bool
      */
     public function has($property)
     {
@@ -34,8 +35,8 @@ abstract class AbstractData implements \Countable
     /**
      * Returns the property value given its name.
      *
-     * @param  string $property
-     * @param  mixed  $default
+     * @param string $property
+     * @param mixed  $default
      *
      * @return mixed
      */
@@ -86,7 +87,7 @@ abstract class AbstractData implements \Countable
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return count($this->properties);
     }

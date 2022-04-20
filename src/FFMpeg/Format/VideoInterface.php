@@ -16,7 +16,7 @@ interface VideoInterface extends AudioInterface
     /**
      * Gets the kiloBitrate value.
      *
-     * @return integer
+     * @return int
      */
     public function getKiloBitrate();
 
@@ -28,7 +28,7 @@ interface VideoInterface extends AudioInterface
      *
      * @see http://www.undeadborn.net/tools/rescalculator.php
      *
-     * @return integer
+     * @return int
      */
     public function getModulus();
 
@@ -44,7 +44,7 @@ interface VideoInterface extends AudioInterface
      *
      * @see https://wikipedia.org/wiki/Video_compression_picture_types
      *
-     * @return Boolean
+     * @return bool
      */
     public function supportBFrames();
 
@@ -56,7 +56,14 @@ interface VideoInterface extends AudioInterface
     public function getAvailableVideoCodecs();
 
     /**
-     * Returns the list of initial parameters for this format
+     * Returns the list of additional parameters for this format.
+     *
+     * @return array
+     */
+    public function getAdditionalParameters();
+
+    /**
+     * Returns the list of initial parameters for this format.
      *
      * @return array
      */

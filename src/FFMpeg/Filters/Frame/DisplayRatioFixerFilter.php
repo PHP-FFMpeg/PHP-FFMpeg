@@ -16,7 +16,7 @@ use FFMpeg\Media\Frame;
 
 class DisplayRatioFixerFilter implements FrameFilterInterface
 {
-    /** @var integer */
+    /** @var int */
     private $priority;
 
     public function __construct($priority = 0)
@@ -38,17 +38,16 @@ class DisplayRatioFixerFilter implements FrameFilterInterface
     public function apply(Frame $frame)
     {
         $dimensions = null;
-        $commands = array();
+        $commands = [];
 
         foreach ($frame->getVideo()->getStreams() as $stream) {
             if ($stream->isVideo()) {
                 try {
                     $dimensions = $stream->getDimensions();
                     $commands[] = '-s';
-                    $commands[] = $dimensions->getWidth() . 'x' . $dimensions->getHeight();
+                    $commands[] = $dimensions->getWidth().'x'.$dimensions->getHeight();
                     break;
                 } catch (RuntimeException $e) {
-
                 }
             }
         }

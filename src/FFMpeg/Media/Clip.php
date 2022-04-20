@@ -1,9 +1,10 @@
 <?php
+
 namespace FFMpeg\Media;
 
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\FFProbe;
-use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Format\FormatInterface;
 
 /**
@@ -13,7 +14,6 @@ use FFMpeg\Format\FormatInterface;
  */
 class Clip extends Video
 {
-
     /** @var TimeCode Start time */
     private $start;
 
@@ -35,7 +35,6 @@ class Clip extends Video
     /**
      * Returns the video related to the frame.
      *
-     * @param FormatInterface $format
      * @return Video
      */
     public function getVideo()
@@ -50,9 +49,9 @@ class Clip extends Video
      */
     protected function basePartOfCommand(FormatInterface $format)
     {
-        $arr = array('-y', '-ss', (string) $this->start, '-i', $this->pathfile);
+        $arr = ['-y', '-ss', (string) $this->start, '-i', $this->pathfile];
 
-        if (is_null($this->duration) === false) {
+        if (false === is_null($this->duration)) {
             $arr[] = '-t';
             $arr[] = (string) $this->duration;
         }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of PHP-FFmpeg.
  *
@@ -17,7 +18,7 @@ use FFMpeg\Media\Video;
 
 class CropFilter implements VideoFilterInterface
 {
-    /** @var integer */
+    /** @var int */
     protected $priority;
     /** @var Dimension */
     protected $dimension;
@@ -51,10 +52,10 @@ class CropFilter implements VideoFilterInterface
             }
         }
 
-        return array(
+        return [
             '-filter:v',
-            'crop=' .
-            $this->dimension->getWidth() .':' . $this->dimension->getHeight() . ':' . $this->point->getX() . ':' . $this->point->getY()
-        );
+            'crop='.
+            $this->dimension->getWidth().':'.$this->dimension->getHeight().':'.$this->point->getX().':'.$this->point->getY(),
+        ];
     }
 }

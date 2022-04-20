@@ -1,0 +1,48 @@
+name: run-tests
+
+on: [push, pull_request]
+
+jobs:
+    test:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: true
+            matrix:
+                os: [ubuntu-20.04]
+                php: [8.1, 8.0]
+                ffmpeg: [5.0, 4.4]
+                dependency-version: [prefer-lowest, prefer-stable]
+
+        name: ${{ matrix.os }} - P${{ matrix.php }} - FF${{ matrix.ffmpeg }} - ${{ matrix.dependency-version }}
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, mysql, mysqli, pdo_mysql, fileinfo
+                  coverage: none
+
+            - name: Install FFmpeg
+              uses: Iamshankhadeep/setup-ffmpeg@ffmpeg-5.0-20220119
+              with:
+                  version: ${{ matrix.ffmpeg }}
+              id: setup-ffmpeg
+
+            - name: Install dependencies
+              run: |
+                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ~/.composer/cache/files
+                  key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}-dep-${{ matrix.dependency-version }}
+
+            - name: Execute tests
+              run: vendor/bin/phpunit
+              env:
+                  FFMPEG_TEMPORARY_FILES_ROOT: ${{ github.workspace }}
