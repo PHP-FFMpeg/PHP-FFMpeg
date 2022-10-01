@@ -43,4 +43,9 @@ class AudioSampleFormatFilter implements AudioFilterInterface
     {
         return $this->priority;
     }
+
+    public function getFormat()
+    {
+        return $this->format;
+    }
 }

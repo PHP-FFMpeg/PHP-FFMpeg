@@ -3,14 +3,18 @@
 namespace Tests\FFMpeg\Unit\Filters\Audio;
 
 use FFMpeg\Filters\Audio\AudioSampleFormatFilter;
-use PHPUnit\Framework\TestCase;
+use Tests\FFMpeg\Unit\TestCase;
 
-class AudioSampleFormatFilterTest extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+final class AudioSampleFormatFilterTest extends TestCase
 {
-    public function testGetRate()
+    public function testGetFormat()
     {
         $filter = new AudioSampleFormatFilter('s16');
-        $this->assertEquals('s16', $filter->getRate());
+        static::assertSame('s16', $filter->getFormat());
     }
 
     public function testApply()
@@ -19,6 +23,6 @@ class AudioSampleFormatFilterTest extends TestCase
         $format = $this->getMockBuilder('FFMpeg\Format\AudioInterface')->getMock();
 
         $filter = new AudioSampleFormatFilter('s16');
-        $this->assertEquals(['-sample_fmt', 's16'], $filter->apply($audio, $format));
+        static::assertSame(['-sample_fmt', 's16'], $filter->apply($audio, $format));
     }
 }
