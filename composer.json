@@ -46,7 +46,7 @@
         }
     ],
     "require": {
-        "php": "^8.0 || ^8.1",
+        "php": "^8.0 || ^8.1 || ^8.2",
         "evenement/evenement": "^3.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "spatie/temporary-directory": "^2.0",
