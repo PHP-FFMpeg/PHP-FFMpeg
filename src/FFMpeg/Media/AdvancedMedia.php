@@ -42,6 +42,12 @@ class AdvancedMedia extends AbstractMediaType
     private $additionalParameters;
 
     /**
+     *
+     * @var array[]
+     */
+    private $inputsParameters;
+    
+    /**
      * @var string[]
      */
     private $mapCommands;
@@ -54,7 +60,9 @@ class AdvancedMedia extends AbstractMediaType
     /**
      * AdvancedMedia constructor.
      *
-     * @param string[] $inputs array of files to be opened
+     * @param string[]     $inputs Array of files to be opened.
+     * @param FFMpegDriver $driver
+     * @param FFProbe      $ffprobe
      */
     public function __construct($inputs, FFMpegDriver $driver, FFProbe $ffprobe)
     {
@@ -70,10 +78,11 @@ class AdvancedMedia extends AbstractMediaType
         parent::__construct($pathfile, $driver, $ffprobe);
         $this->filters = new FiltersCollection();
         $this->inputs = $inputs;
-        $this->initialParameters = [];
-        $this->additionalParameters = [];
-        $this->mapCommands = [];
-        $this->listeners = [];
+        $this->initialParameters = array();
+        $this->additionalParameters = array();
+        $this->inputsParameters = array();
+        $this->mapCommands = array();
+        $this->listeners = array();
     }
 
     /**
@@ -89,26 +98,27 @@ class AdvancedMedia extends AbstractMediaType
     /**
      * Add complex filter.
      *
-     * @param string $in
-     * @param string $out
+     * @param string                  $in
+     * @param ComplexCompatibleFilter $filter
+     * @param string                  $out
      *
      * @return $this
      */
     public function addFilter($in, ComplexCompatibleFilter $filter, $out)
     {
         $this->filters->add(new ComplexFilterContainer($in, $filter, $out));
-
         return $this;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function setFiltersCollection(FiltersCollection $filters)
     {
         foreach ($filters as $filter) {
             if (!($filter instanceof ComplexFilterInterface)) {
-                throw new RuntimeException('For AdvancedMedia you can set filters collection'.' contains only objects that implement ComplexFilterInterface!');
+                throw new RuntimeException ('For AdvancedMedia you can set filters collection'
+                    . ' contains only objects that implement ComplexFilterInterface!');
             }
         }
 
@@ -131,7 +141,6 @@ class AdvancedMedia extends AbstractMediaType
     public function setInitialParameters(array $initialParameters)
     {
         $this->initialParameters = $initialParameters;
-
         return $this;
     }
 
@@ -151,10 +160,27 @@ class AdvancedMedia extends AbstractMediaType
     public function setAdditionalParameters(array $additionalParameters)
     {
         $this->additionalParameters = $additionalParameters;
-
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getInputsParameters()
+    {
+        return $this->inputsParameters;
+    }
+
+    /**
+     * @param array $parameters
+     * @return AdvancedMedia
+     */
+    public function setInputsParameters(array $parameters)
+    {
+        $this->inputsParameters = $parameters;
+        return $this;
+    }
+    
     /**
      * @return string[]
      */
@@ -182,14 +208,13 @@ class AdvancedMedia extends AbstractMediaType
     /**
      * Select the streams for output.
      *
-     * @param string[]        $outs              output labels of the -filter_complex part
-     * @param FormatInterface $format            format of the output file
-     * @param string          $outputFilename    output filename
+     * @param string[]        $outs           Output labels of the -filter_complex part.
+     * @param FormatInterface $format         Format of the output file.
+     * @param string          $outputFilename Output filename.
      * @param bool            $forceDisableAudio
      * @param bool            $forceDisableVideo
      *
      * @return $this
-     *
      * @see https://ffmpeg.org/ffmpeg.html#Manual-stream-selection
      */
     public function map(
@@ -199,17 +224,15 @@ class AdvancedMedia extends AbstractMediaType
         $forceDisableAudio = false,
         $forceDisableVideo = false
     ) {
-        $commands = [];
+        $commands = array();
         foreach ($outs as $label) {
             $commands[] = '-map';
             $commands[] = $label;
         }
 
         // Apply format params.
-        $commands = array_merge(
-            $commands,
-            $this->applyFormatParams($format, $forceDisableAudio, $forceDisableVideo)
-        );
+        $commands = array_merge($commands,
+            $this->applyFormatParams($format, $forceDisableAudio, $forceDisableVideo));
 
         // Set output file.
         $commands[] = $outputFilename;
@@ -221,7 +244,6 @@ class AdvancedMedia extends AbstractMediaType
         }
 
         $this->mapCommands = array_merge($this->mapCommands, $commands);
-
         return $this;
     }
 
@@ -229,7 +251,6 @@ class AdvancedMedia extends AbstractMediaType
      * Apply added filters and execute ffmpeg command.
      *
      * @return void
-     *
      * @throws RuntimeException
      */
     public function save()
@@ -245,8 +266,9 @@ class AdvancedMedia extends AbstractMediaType
     }
 
     /**
-     * @param bool $forceDisableAudio
-     * @param bool $forceDisableVideo
+     * @param FormatInterface $format
+     * @param bool            $forceDisableAudio
+     * @param bool            $forceDisableVideo
      *
      * @return array
      */
@@ -256,27 +278,27 @@ class AdvancedMedia extends AbstractMediaType
         $forceDisableVideo = false
     ) {
         // Set format params.
-        $commands = [];
+        $commands = array();
         if (!$forceDisableVideo && $format instanceof VideoInterface) {
-            if (null !== $format->getVideoCodec()) {
+            if ($format->getVideoCodec() !== null) {
                 $commands[] = '-vcodec';
                 $commands[] = $format->getVideoCodec();
             }
             // If the user passed some additional format parameters.
-            if (null !== $format->getAdditionalParameters()) {
+            if ($format->getAdditionalParameters() !== null) {
                 $commands = array_merge($commands, $format->getAdditionalParameters());
             }
         }
         if (!$forceDisableAudio && $format instanceof AudioInterface) {
-            if (null !== $format->getAudioCodec()) {
+            if ($format->getAudioCodec() !== null) {
                 $commands[] = '-acodec';
                 $commands[] = $format->getAudioCodec();
             }
-            if (null !== $format->getAudioKiloBitrate()) {
+            if ($format->getAudioKiloBitrate() !== null) {
                 $commands[] = '-b:a';
-                $commands[] = $format->getAudioKiloBitrate().'k';
+                $commands[] = $format->getAudioKiloBitrate() . 'k';
             }
-            if (null !== $format->getAudioChannels()) {
+            if ($format->getAudioChannels() !== null) {
                 $commands[] = '-ac';
                 $commands[] = $format->getAudioChannels();
             }
@@ -291,6 +313,8 @@ class AdvancedMedia extends AbstractMediaType
     }
 
     /**
+     * @param ComplexFilterInterface $filter
+     *
      * @return string
      */
     private function applyComplexFilter(ComplexFilterInterface $filter)
@@ -298,8 +322,8 @@ class AdvancedMedia extends AbstractMediaType
         /** @var $format VideoInterface */
         $filterCommands = $filter->applyComplex($this);
         foreach ($filterCommands as $index => $command) {
-            if ('-vf' === $command || '-filter:v' === $command || '-filter_complex' === $command) {
-                unset($filterCommands[$index]);
+            if ($command === '-vf' || $command === '-filter:v' || $command === '-filter_complex') {
+                unset ($filterCommands[$index]);
             }
         }
 
@@ -307,7 +331,7 @@ class AdvancedMedia extends AbstractMediaType
 
         // Compatibility with the some existed filters:
         // If the command contains [in], just replace it to inLabel. If not - to add it manually.
-        if (false !== stripos($strCommand, '[in]')) {
+        if (stripos($strCommand, '[in]') !== false) {
             $strCommand = str_replace('[in]', $filter->getInLabels(), $strCommand);
             $in = '';
         } else {
@@ -315,35 +339,35 @@ class AdvancedMedia extends AbstractMediaType
         }
 
         // If the command contains [out], just replace it to outLabel. If not - to add it manually.
-        if (false !== stripos($strCommand, '[out]')) {
+        if (stripos($strCommand, '[out]') !== false) {
             $strCommand = str_replace('[out]', $filter->getOutLabels(), $strCommand);
             $out = '';
         } else {
             $out = $filter->getOutLabels();
         }
 
-        return $in.$strCommand.$out;
+        return $in . $strCommand . $out;
     }
 
     /**
      * @return void
-     *
      * @throws RuntimeException
      */
     protected function assertFiltersAreCompatibleToCurrentFFMpegVersion()
     {
-        $messages = [];
+        $messages = array();
         $currentVersion = $this->getFFMpegDriver()->getVersion();
         /** @var ComplexFilterInterface $filter */
         foreach ($this->filters as $filter) {
             if (version_compare($currentVersion, $filter->getMinimalFFMpegVersion(), '<')) {
-                $messages[] = $filter->getName().' filter is supported starting from '
-                    .$filter->getMinimalFFMpegVersion().' ffmpeg version';
+                $messages[] = $filter->getName() . ' filter is supported starting from '
+                    . $filter->getMinimalFFMpegVersion() . ' ffmpeg version';
             }
         }
 
         if (!empty($messages)) {
-            throw new RuntimeException(implode('; ', $messages).'; your ffmpeg version is '.$currentVersion);
+            throw new RuntimeException(implode('; ', $messages)
+                . '; your ffmpeg version is ' . $currentVersion);
         }
     }
 
@@ -352,10 +376,8 @@ class AdvancedMedia extends AbstractMediaType
      */
     protected function buildCommand()
     {
-        $globalOptions = ['threads', 'filter_threads', 'filter_complex_threads'];
-
-        return array_merge(
-            ['-y'],
+        $globalOptions = array('threads', 'filter_threads', 'filter_complex_threads');
+        return array_merge(array('-y'),
             $this->buildConfiguredGlobalOptions($globalOptions),
             $this->getInitialParameters(),
             $this->buildInputsPart($this->inputs),
@@ -372,14 +394,14 @@ class AdvancedMedia extends AbstractMediaType
      */
     private function buildConfiguredGlobalOptions($optionNames)
     {
-        $commands = [];
+        $commands = array();
         foreach ($optionNames as $optionName) {
-            if (!$this->driver->getConfiguration()->has('ffmpeg.'.$optionName)) {
+            if (!$this->driver->getConfiguration()->has('ffmpeg.' . $optionName)) {
                 continue;
             }
 
-            $commands[] = '-'.$optionName;
-            $commands[] = $this->driver->getConfiguration()->get('ffmpeg.'.$optionName);
+            $commands[] = '-' . $optionName;
+            $commands[] = $this->driver->getConfiguration()->get('ffmpeg.' . $optionName);
         }
 
         return $commands;
@@ -394,8 +416,9 @@ class AdvancedMedia extends AbstractMediaType
      */
     private function buildInputsPart(array $inputs)
     {
-        $commands = [];
-        foreach ($inputs as $input) {
+        $commands = array();
+        foreach ($inputs as $key => $input) {
+            $commands = array_merge($commands, $this->mapInput($key));
             $commands[] = '-i';
             $commands[] = $input;
         }
@@ -404,13 +427,34 @@ class AdvancedMedia extends AbstractMediaType
     }
 
     /**
+     * Add parameters to inputs
+     * 
+     * @param int $inputKey
+     * @return type
+     */
+    private function mapInput(int $inputKey)
+    {
+        $commands = array();
+
+        if (isset($this->inputsParameters[$inputKey])) {
+            foreach ($this->inputsParameters[$inputKey] as $param) {
+                $commands[] = $param;
+            }
+        }
+
+        return $commands;
+    }
+    
+    /**
      * Build "-filter_complex" part of the ffmpeg command.
+     *
+     * @param FiltersCollection $complexFilters
      *
      * @return array
      */
     private function buildComplexFilterPart(FiltersCollection $complexFilters)
     {
-        $commands = [];
+        $commands = array();
         /** @var ComplexFilterInterface $filter */
         foreach ($complexFilters as $filter) {
             $filterCommand = $this->applyComplexFilter($filter);
@@ -418,9 +462,8 @@ class AdvancedMedia extends AbstractMediaType
         }
 
         if (empty($commands)) {
-            return [];
+            return array();
         }
-
-        return ['-filter_complex', implode(';', $commands)];
+        return array('-filter_complex', implode(';', $commands));
     }
 }
