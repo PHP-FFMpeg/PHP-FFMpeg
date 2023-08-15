@@ -97,7 +97,7 @@ class FFMpeg
         $hasVideo = false;
         foreach ($streams->videos() as $videoStream) {
             $videoDisposition = $videoStream->get('disposition');
-            if ($videoDisposition['attached_pic'] !== 1) {
+            if (!$videoDisposition || $videoDisposition['attached_pic'] !== 1) {
                 $hasVideo = true;
                 break;
             }
