@@ -28,7 +28,7 @@ This library requires PHP 8.0 or higher. For older versions of PHP, check out th
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
 ```bash
-$ composer require php-ffmpeg/php-ffmpeg
+composer require php-ffmpeg/php-ffmpeg
 ```
 
 ## Basic Usage
