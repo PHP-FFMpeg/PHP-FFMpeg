@@ -40,4 +40,11 @@ interface AudioInterface extends FormatInterface
      * @return array
      */
     public function getAvailableAudioCodecs();
+
+    /**
+     * Returns the list of additional parameters for this format.
+     *
+     * @return array
+     */
+    public function getAdditionalParameters();
 }
