@@ -3,6 +3,7 @@
 namespace FFMpeg\Media;
 
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Driver\FFMpegDriver;
 use FFMpeg\Exception\RuntimeException;
 use FFMpeg\FFProbe;
@@ -16,6 +17,7 @@ use FFMpeg\Format\FormatInterface;
 use FFMpeg\Format\ProgressableInterface;
 use FFMpeg\Format\ProgressListener\AbstractProgressListener;
 use FFMpeg\Format\VideoInterface;
+use FFMpeg\TrimSegment;
 
 /**
  * AdvancedMedia may have multiple inputs and multiple outputs.
@@ -52,6 +54,11 @@ class AdvancedMedia extends AbstractMediaType
     private $listeners;
 
     /**
+     * @var TrimSegment[]
+     */
+    private array $trimSegments = [];
+
+    /**
      * AdvancedMedia constructor.
      *
      * @param string[] $inputs array of files to be opened
@@ -74,6 +81,13 @@ class AdvancedMedia extends AbstractMediaType
         $this->additionalParameters = [];
         $this->mapCommands = [];
         $this->listeners = [];
+    }
+
+    public function trim(TimeCode $start, TimeCode $duration, string $input)
+    {
+        $this->trimSegments[] = new TrimSegment($start, $duration, $input);
+
+        return $this;
     }
 
     /**
@@ -395,6 +409,11 @@ class AdvancedMedia extends AbstractMediaType
     private function buildInputsPart(array $inputs)
     {
         $commands = [];
+
+        foreach ($this->trimSegments as $segment) {
+            $commands = array_merge($commands, $segment->buildPartOfCommand());
+        }
+
         foreach ($inputs as $input) {
             $commands[] = '-i';
             $commands[] = $input;
