@@ -7,7 +7,7 @@ use Alchemy\BinaryDriver\ProcessBuilderFactory;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\ExecutableFinder;
 
-abstract class AbstractProcessBuilderFactoryTest extends TestCase
+trait AbstractProcessBuilderFactoryTrait
 {
     public static $phpBinary;
 
