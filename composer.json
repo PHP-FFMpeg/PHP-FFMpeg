@@ -46,7 +46,7 @@
         }
     ],
     "require": {
-        "php": "^8.0 || ^8.1 || ^8.2 || ^8.3",
+        "php": "^8.0 || ^8.1 || ^8.2 || ^8.3 || ^8.4",
         "evenement/evenement": "^3.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "spatie/temporary-directory": "^2.0",
@@ -57,7 +57,7 @@
         "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5.10",
+        "phpunit/phpunit": "^9.5.10 || ^10.0",
         "mockery/mockery": "^1.5"
     },
     "autoload": {
