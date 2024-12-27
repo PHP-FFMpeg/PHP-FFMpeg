@@ -139,7 +139,7 @@ abstract class AbstractBinary extends EventEmitter implements BinaryInterface
     /**
      * {@inheritdoc}
      */
-    public static function load($binaries, LoggerInterface $logger = null, $configuration = array())
+    public static function load($binaries, ?LoggerInterface $logger = null, $configuration = array())
     {
         $finder = new ExecutableFinder();
         $binary = null;

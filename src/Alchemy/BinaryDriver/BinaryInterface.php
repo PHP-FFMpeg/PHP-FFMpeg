@@ -63,5 +63,5 @@ interface BinaryInterface extends ConfigurationAwareInterface, ProcessBuilderFac
      *
      * @return BinaryInterface
      */
-    public static function load($binaries, LoggerInterface $logger = null, $configuration = array());
+    public static function load($binaries, ?LoggerInterface $logger = null, $configuration = array());
 }

@@ -30,7 +30,7 @@ class Listeners extends EventEmitter
      *
      * @return ListenersInterface
      */
-    public function register(ListenerInterface $listener, EventEmitter $target = null)
+    public function register(ListenerInterface $listener, ?EventEmitter $target = null)
     {
         $EElisteners = array();
 
