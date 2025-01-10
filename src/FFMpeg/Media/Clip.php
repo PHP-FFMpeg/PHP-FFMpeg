@@ -23,7 +23,7 @@ class Clip extends Video
     /** @var Video Parrent video */
     private $video;
 
-    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $start, TimeCode $duration = null)
+    public function __construct(Video $video, FFMpegDriver $driver, FFProbe $ffprobe, TimeCode $start, ?TimeCode $duration = null)
     {
         $this->start = $start;
         $this->duration = $duration;
