@@ -58,7 +58,7 @@ class Video extends AbstractVideo
      *
      * @return \FFMpeg\Media\Clip
      */
-    public function clip(TimeCode $start, TimeCode $duration = null)
+    public function clip(TimeCode $start, ?TimeCode $duration = null)
     {
         return new Clip($this, $this->driver, $this->ffprobe, $start, $duration);
     }
