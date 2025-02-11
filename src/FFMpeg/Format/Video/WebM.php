@@ -32,11 +32,11 @@ class WebM extends DefaultVideo
     }
 
     /**
-     * {@inheritDoc}
+     * Enforce webm as the default container for WebM.
      */
-    public function getExtraParams()
+    public function getFormatName(): ?string
     {
-        return ['-f', 'webm'];
+        return 'webm';
     }
 
     /**

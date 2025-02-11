@@ -28,4 +28,11 @@ class Wav extends DefaultAudio
     {
         return ['pcm_s16le'];
     }
+    /**
+     * Enforce wav as the default container for Wav.
+     */
+    public function getFormatName(): ?string
+    {
+        return 'wav';
+    }
 }
