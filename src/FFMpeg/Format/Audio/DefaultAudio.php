@@ -30,12 +30,26 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     /** @var int */
     protected $audioChannels = null;
 
+    /** @var bool */
+    protected bool $forceFormat = false;
+
+    /** @var string */
+    protected string $containerFormat;
+
     /**
-     * {@inheritdoc}
+     * Returns the final extra parameters for ffmpeg,
+     * ensuring '-f' is always present for forcing the format.
      */
-    public function getExtraParams()
+    public function getExtraParams(): array
     {
-        return [];
+        $params = $this->getDefaultParams();
+
+        if ($this->forceFormat && $formatName = $this->getFormatName()) {
+            $params[] = '-f';
+            $params[] = $formatName;
+        }
+
+        return $params;
     }
 
     /**
@@ -56,7 +70,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      */
     public function setAudioCodec($audioCodec)
     {
-        if (!in_array($audioCodec, $this->getAvailableAudioCodecs())) {
+        if (! in_array($audioCodec, $this->getAvailableAudioCodecs())) {
             throw new InvalidArgumentException(sprintf('Wrong audiocodec value for %s, available formats are %s', $audioCodec, implode(', ', $this->getAvailableAudioCodecs())));
         }
 
@@ -122,7 +136,7 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
      */
     public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
     {
-        $format = $this;
+        $format   = $this;
         $listener = new AudioProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration);
         $listener->on('progress', function () use ($media, $format) {
             $format->emit('progress', array_merge([$media, $format], func_get_args()));
@@ -137,5 +151,37 @@ abstract class DefaultAudio extends EventEmitter implements AudioInterface, Prog
     public function getPasses()
     {
         return 1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    abstract public function getFormatName(): ?string;
+
+    /**
+     * A method that returns other default parameters (codecs, etc.).
+     */
+    protected function getDefaultParams(): array
+    {
+        return [];
+    }
+
+    /**
+     * sets the container format to change the default one.
+     */
+    protected function setContainerFormat(string $container): self
+    {
+        $this->containerFormat = $container;
+        return $this;
+    }
+
+    /**
+     * If you want to use the forcing format feature, call this method with true.
+     * call setForceFormat(true).
+     */
+    public function setForceFormat(bool $force): self
+    {
+        $this->forceFormat = $force;
+        return $this;
     }
 }

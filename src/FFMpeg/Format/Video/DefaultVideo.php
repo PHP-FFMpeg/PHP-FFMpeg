@@ -82,7 +82,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      */
     public function setVideoCodec($videoCodec)
     {
-        if (!in_array($videoCodec, $this->getAvailableVideoCodecs())) {
+        if (! in_array($videoCodec, $this->getAvailableVideoCodecs())) {
             throw new InvalidArgumentException(sprintf('Wrong videocodec value for %s, available formats are %s', $videoCodec, implode(', ', $this->getAvailableVideoCodecs())));
         }
 
@@ -116,7 +116,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      */
     public function setAdditionalParameters($additionalParamaters)
     {
-        if (!is_array($additionalParamaters)) {
+        if (! is_array($additionalParamaters)) {
             throw new InvalidArgumentException('Wrong additionalParamaters value');
         }
 
@@ -142,7 +142,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      */
     public function setInitialParameters($initialParamaters)
     {
-        if (!is_array($initialParamaters)) {
+        if (! is_array($initialParamaters)) {
             throw new InvalidArgumentException('Wrong initialParamaters value');
         }
 
@@ -156,7 +156,7 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      */
     public function createProgressListener(MediaTypeInterface $media, FFProbe $ffprobe, $pass, $total, $duration = 0)
     {
-        $format = $this;
+        $format    = $this;
         $listeners = [new VideoProgressListener($ffprobe, $media->getPathfile(), $pass, $total, $duration)];
 
         foreach ($listeners as $listener) {
@@ -167,4 +167,15 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
 
         return $listeners;
     }
+
+    /**
+     * If you want to use the forcing format feature, call this method with true.
+     * call setForceFormat(true).
+     */
+    public function setForceFormat(bool $force): self
+    {
+        $this->forceFormat = $force;
+        return $this;
+    }
+
 }
