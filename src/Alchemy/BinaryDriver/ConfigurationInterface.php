@@ -36,7 +36,7 @@ interface ConfigurationInterface extends \ArrayAccess, \IteratorAggregate
      *
      * @param string $key
      *
-     * @return Boolean
+     * @return boolean
      */
     public function has($key);
 
