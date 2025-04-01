@@ -88,7 +88,7 @@ class ProcessRunner implements ProcessRunnerInterface
         };
     }
 
-    private function doExecutionFailure($command, $errorOutput, \Exception $e = null)
+    private function doExecutionFailure($command, $errorOutput, ?\Exception $e = null)
     {
         $this->logger->error($this->createErrorMessage($command, $errorOutput));
         throw new ExecutionFailureException(

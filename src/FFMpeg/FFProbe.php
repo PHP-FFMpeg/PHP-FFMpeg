@@ -211,7 +211,7 @@ class FFProbe
      *
      * @return FFProbe
      */
-    public static function create($configuration = [], LoggerInterface $logger = null, CacheItemPoolInterface $cache = null)
+    public static function create($configuration = [], ?LoggerInterface $logger = null, ?CacheItemPoolInterface $cache = null)
     {
         if (null === $cache) {
             $cache = new ArrayAdapter();

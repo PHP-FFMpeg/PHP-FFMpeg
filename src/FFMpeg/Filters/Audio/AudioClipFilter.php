@@ -32,7 +32,7 @@ class AudioClipFilter implements AudioFilterInterface
      */
     private $priority;
 
-    public function __construct(TimeCode $start, TimeCode $duration = null, $priority = 0)
+    public function __construct(TimeCode $start, ?TimeCode $duration = null, $priority = 0)
     {
         $this->start = $start;
         $this->duration = $duration;

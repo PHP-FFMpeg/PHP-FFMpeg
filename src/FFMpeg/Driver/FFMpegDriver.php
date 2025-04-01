@@ -23,6 +23,8 @@ class FFMpegDriver extends AbstractBinary
 {
     /**
      * {@inheritdoc}
+     *
+     * @return string
      */
     public function getName()
     {
@@ -37,7 +39,7 @@ class FFMpegDriver extends AbstractBinary
      *
      * @return FFMpegDriver
      */
-    public static function create(LoggerInterface $logger = null, $configuration = [])
+    public static function create(?LoggerInterface $logger = null, $configuration = [])
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);
