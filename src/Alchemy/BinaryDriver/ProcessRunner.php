@@ -71,7 +71,10 @@ class ProcessRunner implements ProcessRunnerInterface
         if (!$bypassErrors && !$process->isSuccessful()) {
             $this->doExecutionFailure($process->getCommandLine(), $process->getErrorOutput());
         } elseif (!$process->isSuccessful()) {
-            $this->logger->error($this->createErrorMessage($process->getCommandLine(), $process->getErrorOutput()));
+            $this->logger->error($this->createErrorMessage(), [[
+                'command' => $process->getCommandLine(),
+                'error_output' => $process->getErrorOutput(),
+            ]]);
             return;
         } else {
             $this->logger->info(sprintf('%s executed command successfully', $this->name));
@@ -90,7 +93,13 @@ class ProcessRunner implements ProcessRunnerInterface
 
     private function doExecutionFailure($command, $errorOutput, ?\Exception $e = null)
     {
-        $this->logger->error($this->createErrorMessage($command, $errorOutput));
+        $this->logger->error($this->createErrorMessage(), [
+            'command' => $command,
+            'error_output' => $errorOutput,
+            'exception' => $e,
+            'exception_message' => $e?->getMessage(),
+        ]);
+
         throw new ExecutionFailureException(
             $this->name,
             $command,
@@ -100,8 +109,8 @@ class ProcessRunner implements ProcessRunnerInterface
         );
     }
 
-    private function createErrorMessage($command, $errorOutput)
+    private function createErrorMessage()
     {
-        return sprintf('%s failed to execute command %s: %s', $this->name, $command, $errorOutput);
+        return sprintf('%s failed to execute command %s: %s', $this->name);
     }
 }
