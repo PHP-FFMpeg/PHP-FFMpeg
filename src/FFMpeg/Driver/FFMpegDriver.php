@@ -23,6 +23,8 @@ class FFMpegDriver extends AbstractBinary
 {
     /**
      * {@inheritdoc}
+     *
+     * @return string
      */
     public function getName()
     {
