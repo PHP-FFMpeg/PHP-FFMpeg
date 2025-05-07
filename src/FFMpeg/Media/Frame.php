@@ -109,17 +109,11 @@ class Frame extends AbstractMediaType
             ];
         }
 
-        if ($returnBase64) {
-            array_push($commands, '-');
-        }
-
         foreach ($this->filters as $filter) {
             $commands = array_merge($commands, $filter->apply($this));
         }
 
-        if (!$returnBase64) {
-            $commands = array_merge($commands, [$pathfile]);
-        }
+        array_push($commands, $returnBase64 ? '-' : $pathfile);
 
         try {
             if (!$returnBase64) {
