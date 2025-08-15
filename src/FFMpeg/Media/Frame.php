@@ -98,13 +98,13 @@ class Frame extends AbstractMediaType
             $commands = [
                 '-y', '-ss', (string) $this->timecode,
                 '-i', $this->pathfile,
-                '-vframes', '1',
+                '-vframes', '1', 'update', '1',
                 '-f', $outputFormat,
             ];
         } else {
             $commands = [
                 '-y', '-i', $this->pathfile,
-                '-vframes', '1', '-ss', (string) $this->timecode,
+                '-vframes', '1', 'update', '1', '-ss', (string) $this->timecode,
                 '-f', $outputFormat,
             ];
         }
