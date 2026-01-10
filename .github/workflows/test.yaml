@@ -27,9 +27,9 @@ jobs:
           coverage: none
 
       - name: Install FFmpeg
-        uses: Iamshankhadeep/setup-ffmpeg@ffmpeg-5.0-20220119
+        uses: FedericoCarboni/setup-ffmpeg@v3
         with:
-          version: ${{ matrix.ffmpeg }}
+          ffmpeg-version: ${{ matrix.ffmpeg }}
         id: setup-ffmpeg
 
       - name: Install dependencies
