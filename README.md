@@ -1,25 +1,25 @@
 # PHP-FFMPEG
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/PHP-FFMpeg/PHP-FFMpeg)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/foxws/PHP-FFMpeg)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 ![run-tests](https://github.com/PHP-FFMpeg/PHP-FFMpeg/workflows/run-tests/badge.svg)
-[![Total Downloads](https://img.shields.io/packagist/dt/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/PHP-FFMpeg/PHP-FFMpeg)
+[![Total Downloads](https://img.shields.io/packagist/dt/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/foxws/PHP-FFMpeg)
 
 An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 
 ## Your attention please
 
-### How this library works:
+### How this library works
 
 This library requires a working [FFMpeg install](https://ffmpeg.org/download.html). You will need both FFMpeg and FFProbe binaries to use it.
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
 otherwise you should have to explicitly give the binaries path on load.
 
-### Known issues:
+### Known issues
 
 - Using rotate and resize will produce a corrupted output when using
-[libav](http://libav.org/) 0.8. The bug is fixed in version 9. This bug does not
-appear in latest ffmpeg version.
+  [libav](http://libav.org/) 0.8. The bug is fixed in version 9. This bug does not
+  appear in latest ffmpeg version.
 
 ## Installation
 
@@ -28,7 +28,7 @@ This library requires PHP 8.0 or higher. For older versions of PHP, check out th
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
 ```bash
-$ composer require php-ffmpeg/php-ffmpeg
+composer require foxws/php-ffmpeg
 ```
 
 ## Basic Usage
@@ -162,9 +162,11 @@ $video
 $video
     ->save(new FFMpeg\Format\Video\X264(), '/path/to/new/file');
 ```
+
 By default, this will save the frames as `jpg` images.
 
 You are able to override this using `setFrameFileType` to save the frames in another format:
+
 ```php
 $frameFileType = 'jpg'; // either 'jpg', 'jpeg' or 'png'
 $filter = new ExtractMultipleFramesFilter($frameRate, $destinationFolder);
@@ -368,6 +370,7 @@ $video->filters()->crop(new FFMpeg\Coordinate\Point("t*100", 0, true), new FFMpe
 ```
 
 It takes two parameters:
+
 - `$point`, an instance of `FFMpeg\Coordinate\Point`, specifies the point to crop
 - `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`, specifies the dimension of the output video
 
@@ -411,12 +414,12 @@ You can build your own filters and some are bundled in PHP-FFMpeg - they are
 accessible through the `FFMpeg\Media\Audio::filters` method.
 
 ##### Clipping
+
 Cuts the audio at a desired point.
 
 ```php
 $audio->filters()->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
 ```
-
 
 ###### Metadata
 
@@ -433,9 +436,11 @@ $audio->filters()->addMetadata();
 ```
 
 Add artwork to the audio file
+
 ```php
 $audio->filters()->addMetadata(["artwork" => "/path/to/image/file.jpg"]);
 ```
+
 NOTE: at present ffmpeg (version 3.2.2) only supports artwork output for .mp3
 files
 
@@ -528,6 +533,7 @@ $video
 More details about concatenation in FFMPEG can be found [here](https://trac.ffmpeg.org/wiki/Concatenate), [here](https://ffmpeg.org/ffmpeg-formats.html#concat-1) and [here](https://ffmpeg.org/ffmpeg.html#Stream-copy).
 
 ### AdvancedMedia
+
 AdvancedMedia may have multiple inputs and multiple outputs.
 
 This class has been developed primarily to use with `-filter_complex`.
@@ -536,6 +542,7 @@ So, its `filters()` method accepts only filters that can be used inside `-filter
 AdvancedMedia already contains some built-in filters.
 
 #### Base usage
+
 For example:
 
 ```php
@@ -550,8 +557,8 @@ $advancedMedia
 This code takes 2 input videos, stacks they horizontally in 1 output video and adds to this new video the audio from the first video.
 (It is impossible with simple filtergraph that has only 1 input and only 1 output).
 
-
 #### Complicated example
+
 A more difficult example of possibilities of the AdvancedMedia. Consider all input videos already have the same resolution and duration. ("xstack" filter has been added in the 4.1 version of the ffmpeg).
 
 ```php
@@ -583,7 +590,8 @@ Then saves audios from the original videos into the 4 different formats and save
 
 As you can see, you can take multiple input sources, perform the complicated processing for them and produce multiple output files in the same time, in the one ffmpeg command.
 
-#### Just give me a map!
+#### Just give me a map
+
 You do not have to use `-filter_complex`. You can use only `-map` options. For example, just extract the audio from the video:
 
 ```php
@@ -594,6 +602,7 @@ $advancedMedia
 ```
 
 #### Customisation
+
 If you need you can extra customize the result ffmpeg command of the AdvancedMedia:
 
 ```php
