@@ -30,6 +30,7 @@ jobs:
         uses: FedericoCarboni/setup-ffmpeg@v3
         with:
           ffmpeg-version: ${{ matrix.ffmpeg }}
+          github-token: ${{ github.server_url == 'https://github.com' && github.token || '' }}
         id: setup-ffmpeg
 
       - name: Install dependencies
