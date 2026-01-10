@@ -6,24 +6,24 @@ Binary-Driver is a set of PHP tools to build binary drivers.
 
 ## Why ?
 
-You may wonder *Why building a library while I can use `exec` or
-[symfony/process](https://github.com/symfony/Process) ?*.
+You may wonder _Why building a library while I can use `exec` or
+[symfony/process](https://github.com/symfony/Process) ?_.
 
 Here is a simple answer :
 
- - If you use `exec`, `passthru`, `system`, `proc_open` or any low level process
-   handling in PHP, you should have a look to [symfony/process](https://github.com/symfony/Process)
-   component that will provide an OO portable, testable and secure interface to
-   deal with this. It seems easy at first approach, but if you look at this
-   component [unit tests](https://github.com/symfony/Process/tree/master/Tests),
-   you will see that handling process in a simple interface can easily become a
-   nightmare.
+- If you use `exec`, `passthru`, `system`, `proc_open` or any low level process
+  handling in PHP, you should have a look to [symfony/process](https://github.com/symfony/Process)
+  component that will provide an OO portable, testable and secure interface to
+  deal with this. It seems easy at first approach, but if you look at this
+  component [unit tests](https://github.com/symfony/Process/tree/master/Tests),
+  you will see that handling process in a simple interface can easily become a
+  nightmare.
 
- - If you already use symfony/process, and want to build binary drivers, you
-   will always have the same common set of methods and objects to configure, log,
-   debug, and generate processes.
-   This library is a base to implement any binary driver with this common set of
-   needs.
+- If you already use symfony/process, and want to build binary drivers, you
+  will always have the same common set of methods and objects to configure, log,
+  debug, and generate processes.
+  This library is a base to implement any binary driver with this common set of
+  needs.
 
 ## AbstractBinary
 
@@ -52,8 +52,8 @@ $parser->parse($driver->command(array('-a', '-l')));
 
 ### Binary detection troubleshooting
 
-If you are using Nginx with PHP-fpm, executable detection may not work because of an empty `$_ENV['path']`. 
-To avoid having an empty `PATH` environment variable, add the following line to your `fastcgi_params` 
+If you are using Nginx with PHP-fpm, executable detection may not work because of an empty `$_ENV['path']`.
+To avoid having an empty `PATH` environment variable, add the following line to your `fastcgi_params`
 config file (replace `/your/current/path/` with the output of `printenv PATH`) :
 
 ```
@@ -129,7 +129,7 @@ $driver->on('debug', function ($line) {
 ## ProcessBuilderFactory
 
 ProcessBuilderFactory ease spawning processes by generating Symfony [Process]
-(http://symfony.com/doc/master/components/process.html) objects.
+(https://symfony.com/doc/master/components/process.html) objects.
 
 ```php
 use Alchemy\BinaryDriver\ProcessBuilderFactory;
