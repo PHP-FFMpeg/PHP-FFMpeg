@@ -13,7 +13,7 @@ namespace FFMpeg\Coordinate;
 
 use FFMpeg\Exception\InvalidArgumentException;
 
-// see http://en.wikipedia.org/wiki/List_of_common_resolutions
+// see https://en.wikipedia.org/wiki/List_of_common_resolutions
 class AspectRatio
 {
     // named 4:3 or 1.33:1 Traditional TV
@@ -27,18 +27,18 @@ class AspectRatio
     // named 25:16 or 1.56:1
     public const AR_25_16 = '25/16';
 
-    // named 3:2 or 1.5:1 see http://en.wikipedia.org/wiki/135_film
+    // named 3:2 or 1.5:1 see https://en.wikipedia.org/wiki/135_film
     public const AR_3_2 = '3/2';
-    // named 5:3 or 1.66:1 see http://en.wikipedia.org/wiki/Super_16_mm
+    // named 5:3 or 1.66:1 see https://en.wikipedia.org/wiki/Super_16_mm
     public const AR_5_3 = '5/3';
 
     // mostly used in Photography
     public const AR_5_4 = '5/4';
     public const AR_1_1 = '1/1';
 
-    // 1.85:1 US widescreen cinema standard see http://en.wikipedia.org/wiki/Widescreen#Film
+    // 1.85:1 US widescreen cinema standard see https://en.wikipedia.org/wiki/Widescreen#Film
     public const AR_1_DOT_85_1 = '1.85:1';
-    // 2.39:1 or 2.40:1 Current widescreen cinema standard see http://en.wikipedia.org/wiki/Anamorphic_format
+    // 2.39:1 or 2.40:1 Current widescreen cinema standard see https://en.wikipedia.org/wiki/Anamorphic_format
     public const AR_2_DOT_39_1 = '2.39:1';
 
     // Rotated constants

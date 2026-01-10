@@ -22,7 +22,7 @@ use FFMpeg\Format\VideoInterface;
  * This class accepts only filters for -filter_complex option.
  * But you can set initial and additional parameters of the ffmpeg command.
  *
- * @see http://trac.ffmpeg.org/wiki/Creating%20multiple%20outputs
+ * @see https://trac.ffmpeg.org/wiki/Creating%20multiple%20outputs
  */
 class AdvancedMedia extends AbstractMediaType
 {
