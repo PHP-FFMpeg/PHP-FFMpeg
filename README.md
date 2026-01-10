@@ -1,24 +1,24 @@
 # PHP-FFMPEG
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/PHP-FFMpeg/PHP-FFMpeg)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/foxws/PHP-FFMpeg)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 ![run-tests](https://github.com/PHP-FFMpeg/PHP-FFMpeg/workflows/run-tests/badge.svg)
-[![Total Downloads](https://img.shields.io/packagist/dt/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/PHP-FFMpeg/PHP-FFMpeg)
+[![Total Downloads](https://img.shields.io/packagist/dt/PHP-FFMpeg/PHP-FFMpeg.svg?style=flat-square)](https://packagist.org/packages/foxws/PHP-FFMpeg)
 
 An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 
 ## Your attention please
 
-### How this library works:
+### How this library works
 
 This library requires a working [FFMpeg install](https://ffmpeg.org/download.html). You will need both FFMpeg and FFProbe binaries to use it.
 Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
 otherwise you should have to explicitly give the binaries path on load.
 
-### Known issues:
+### Known issues
 
 - Using rotate and resize will produce a corrupted output when using
-  [libav](https://libav.org/) 0.8. The bug is fixed in version 9. This bug does not
+  [libav](http://libav.org/) 0.8. The bug is fixed in version 9. This bug does not
   appear in latest ffmpeg version.
 
 ## Installation
@@ -28,7 +28,7 @@ This library requires PHP 8.0 or higher. For older versions of PHP, check out th
 The recommended way to install PHP-FFMpeg is through [Composer](https://getcomposer.org).
 
 ```bash
-$ composer require php-ffmpeg/php-ffmpeg
+composer require foxws/php-ffmpeg
 ```
 
 ## Basic Usage
@@ -590,7 +590,7 @@ Then saves audios from the original videos into the 4 different formats and save
 
 As you can see, you can take multiple input sources, perform the complicated processing for them and produce multiple output files in the same time, in the one ffmpeg command.
 
-#### Just give me a map!
+#### Just give me a map
 
 You do not have to use `-filter_complex`. You can use only `-map` options. For example, just extract the audio from the video:
 
