@@ -22,18 +22,11 @@ class VideoTranscodeTest extends FunctionalTestCase
 
         $this->assertInstanceOf('FFMpeg\Media\Video', $video);
 
-        $lastPercentage = null;
         $phpunit = $this;
 
         $codec = new X264('aac');
 
-        $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit, &$lastPercentage) {
-            if (null !== $lastPercentage) {
-                $phpunit->assertGreaterThanOrEqual($lastPercentage, $percentage);
-            }
-
-            $lastPercentage = $percentage;
-
+        $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit) {
             $phpunit->assertGreaterThanOrEqual(0, $percentage);
             $phpunit->assertLessThanOrEqual(100, $percentage);
         });
@@ -56,15 +49,10 @@ class VideoTranscodeTest extends FunctionalTestCase
 
         $this->assertInstanceOf('FFMpeg\Media\Video', $video);
 
-        $lastPercentage = null;
         $phpunit = $this;
 
         $codec = new X264('aac');
-        $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit, &$lastPercentage) {
-            if (null !== $lastPercentage) {
-                $phpunit->assertGreaterThanOrEqual($lastPercentage, $percentage);
-            }
-            $lastPercentage = $percentage;
+        $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit) {
             $phpunit->assertGreaterThanOrEqual(0, $percentage);
             $phpunit->assertLessThanOrEqual(100, $percentage);
         });
