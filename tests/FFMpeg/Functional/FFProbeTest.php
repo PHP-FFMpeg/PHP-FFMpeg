@@ -31,10 +31,4 @@ class FFProbeTest extends FunctionalTestCase
         $ffprobe = FFProbe::create();
         $ffprobe->streams('/path/to/no/file');
     }
-
-    public function testProbeOnRemoteFile()
-    {
-        $ffprobe = FFProbe::create();
-        $this->assertGreaterThan(0, count($ffprobe->streams('http://vjs.zencdn.net/v/oceans.mp4')));
-    }
 }

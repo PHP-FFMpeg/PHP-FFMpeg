@@ -100,7 +100,7 @@ class Gif extends AbstractMediaType
     public function save($pathfile)
     {
         /**
-         * @see http://ffmpeg.org/ffmpeg.html#Main-options
+         * @see https://ffmpeg.org/ffmpeg.html#Main-options
          */
         $commands = [
             '-ss', (string) $this->timecode,

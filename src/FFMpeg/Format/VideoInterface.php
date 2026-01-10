@@ -26,7 +26,7 @@ interface VideoInterface extends AudioInterface
      * This used to calculate the target dimensions while maintaining the best
      * aspect ratio.
      *
-     * @see http://www.undeadborn.net/tools/rescalculator.php
+     * @see https://www.undeadborn.net/tools/rescalculator.php
      *
      * @return int
      */

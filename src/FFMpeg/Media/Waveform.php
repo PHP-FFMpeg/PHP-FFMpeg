@@ -131,9 +131,9 @@ class Waveform extends AbstractMediaType
     public function save($pathfile)
     {
         /**
-         * might be optimized with http://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg.
+         * might be optimized with https://ffmpeg.org/trac/ffmpeg/wiki/Seeking%20with%20FFmpeg.
          *
-         * @see http://ffmpeg.org/ffmpeg.html#Main-options
+         * @see https://ffmpeg.org/ffmpeg.html#Main-options
          */
         $commands = [
             '-y', '-i', $this->pathfile, '-filter_complex',

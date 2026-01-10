@@ -15,7 +15,7 @@ use FFMpeg\Exception\InvalidArgumentException;
 
 class TimeCode
 {
-    //see http://www.dropframetimecode.org/
+    //see https://www.dropframetimecode.org/
     private $hours;
     private $minutes;
     private $seconds;

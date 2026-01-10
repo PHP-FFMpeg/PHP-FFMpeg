@@ -10,7 +10,7 @@ use FFMpeg\Format\FormatInterface;
 /**
  * Video clip.
  *
- * Use input seeking, see http://trac.ffmpeg.org/wiki/Seeking
+ * Use input seeking, see https://trac.ffmpeg.org/wiki/Seeking
  */
 class Clip extends Video
 {

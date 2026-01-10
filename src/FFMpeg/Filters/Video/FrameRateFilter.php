@@ -66,7 +66,7 @@ class FrameRateFilter implements VideoFilterInterface
         $commands = ['-r', $this->rate->getValue()];
 
         /*
-         * @see http://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping
+         * @see https://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping
          */
         if ($format->supportBFrames()) {
             $commands[] = '-b_strategy';
