@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.5, 8.4, 8.3, 8.2, 8.1, 8.0]
-        ffmpeg: [7.0, 6.0, 5.0, 4.4]
+        ffmpeg: [release]
         dependency-version: [prefer-lowest, prefer-stable]
 
     name: ${{ matrix.os }} - P${{ matrix.php }} - FF${{ matrix.ffmpeg }} - ${{ matrix.dependency-version }}
