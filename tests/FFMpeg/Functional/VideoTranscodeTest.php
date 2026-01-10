@@ -27,7 +27,7 @@ class VideoTranscodeTest extends FunctionalTestCase
 
         $codec = new X264('aac');
 
-        $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit, $lastPercentage) {
+        $codec->on('progress', function ($video, $codec, $percentage) use ($phpunit, &$lastPercentage) {
             if (null !== $lastPercentage) {
                 $phpunit->assertGreaterThanOrEqual($lastPercentage, $percentage);
             }
