@@ -34,6 +34,8 @@ class FFProbeTest extends FunctionalTestCase
 
     public function testProbeOnRemoteFile()
     {
+        $this->markTestSkipped('Remote file access is disabled for now.');
+
         $ffprobe = FFProbe::create();
         $this->assertGreaterThan(0, count($ffprobe->streams('http://vjs.zencdn.net/v/oceans.mp4')));
     }
