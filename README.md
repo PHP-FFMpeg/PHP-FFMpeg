@@ -162,6 +162,14 @@ $video
 $video
     ->save(new FFMpeg\Format\Video\X264(), '/path/to/new/file');
 ```
+
+If you want to extract multiple images from the video without encoding to a video use this method:
+
+```php
+$frames = $video->frames(FFMpeg\Media\Frames::FRAMERATE_EVERY_10SEC);
+$frames->save('/path/to/destination');
+```
+
 By default, this will save the frames as `jpg` images.
 
 You are able to override this using `setFrameFileType` to save the frames in another format:
