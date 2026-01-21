@@ -198,7 +198,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
 
         $percent = $percent / $this->totalPass + ($this->currentPass - 1) / $this->totalPass;
 
-        $this->percent = floor($percent * 100);
+        $this->percent = round($percent * 100, 2, PHP_ROUND_HALF_DOWN);
         $this->lastOutput = $currentTime;
         $this->currentSize = (int) $currentSize;
         $this->currentTime = $currentDuration;
