@@ -84,23 +84,23 @@ class FrameTest extends AbstractMediaTestCase
             [false, false, [
                 '-y', '-ss', 'timecode',
                 '-i', __FILE__,
-                '-vframes', '1',
+                '-vframes', '1', '-update', '1',
                 '-f', 'image2', ],
             ],
             [true, false, [
                 '-y', '-i', __FILE__,
-                '-vframes', '1', '-ss', 'timecode',
+                '-vframes', '1', '-update', '1', '-ss', 'timecode',
                 '-f', 'image2', ],
             ],
             [false, true, [
                 '-y', '-ss', 'timecode',
                 '-i', __FILE__,
-                '-vframes', '1',
+                '-vframes', '1', '-update', '1',
                 '-f', 'image2pipe', '-', ],
             ],
             [true, true, [
                 '-y', '-i', __FILE__,
-                '-vframes', '1', '-ss', 'timecode',
+                '-vframes', '1', '-update', '1', '-ss', 'timecode',
                 '-f', 'image2pipe', '-', ],
             ],
         ];
