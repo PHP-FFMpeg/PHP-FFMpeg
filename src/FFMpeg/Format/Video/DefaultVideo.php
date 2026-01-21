@@ -33,10 +33,10 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
     protected $modulus = 16;
 
     /** @var array */
-    protected $additionalParamaters;
+    protected $additionalParameters;
 
     /** @var array */
-    protected $initialParamaters;
+    protected $initialParameters;
 
     /**
      * {@inheritdoc}
@@ -104,23 +104,23 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      */
     public function getAdditionalParameters()
     {
-        return $this->additionalParamaters;
+        return $this->additionalParameters;
     }
 
     /**
      * Sets additional parameters.
      *
-     * @param array $additionalParamaters
+     * @param array $additionalParameters
      *
      * @throws InvalidArgumentException
      */
-    public function setAdditionalParameters($additionalParamaters)
+    public function setAdditionalParameters($additionalParameters)
     {
-        if (!is_array($additionalParamaters)) {
-            throw new InvalidArgumentException('Wrong additionalParamaters value');
+        if (!is_array($additionalParameters)) {
+            throw new InvalidArgumentException('Wrong additionalParameters value');
         }
 
-        $this->additionalParamaters = $additionalParamaters;
+        $this->additionalParameters = $additionalParameters;
 
         return $this;
     }
@@ -130,23 +130,23 @@ abstract class DefaultVideo extends DefaultAudio implements VideoInterface
      */
     public function getInitialParameters()
     {
-        return $this->initialParamaters;
+        return $this->initialParameters;
     }
 
     /**
      * Sets initial parameters.
      *
-     * @param array $initialParamaters
+     * @param array $initialParameters
      *
      * @throws InvalidArgumentException
      */
-    public function setInitialParameters($initialParamaters)
+    public function setInitialParameters($initialParameters)
     {
-        if (!is_array($initialParamaters)) {
-            throw new InvalidArgumentException('Wrong initialParamaters value');
+        if (!is_array($initialParameters)) {
+            throw new InvalidArgumentException('Wrong initialParameters value');
         }
 
-        $this->initialParamaters = $initialParamaters;
+        $this->initialParameters = $initialParameters;
 
         return $this;
     }
