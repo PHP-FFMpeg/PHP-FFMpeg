@@ -286,6 +286,11 @@ abstract class AbstractVideo extends Audio
                 $pass[] = '-passlogfile';
                 $pass[] = $passPrefix;
             }
+            
+            if($format->getAudioCodec() == 'aac'){
+                $pass[] = '-strict';
+                $pass[] = '-2';
+            }
 
             $pass[] = $outputPathfile;
 
