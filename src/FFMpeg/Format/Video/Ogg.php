@@ -46,4 +46,13 @@ class Ogg extends DefaultVideo
     {
         return ['libtheora'];
     }
+
+    /**
+     * Enforce ogg as the default container for Ogg.
+     * you can change it to ogv/oga or any other suitable type with setContainerFormat() method.
+     */
+    public function getFormatName(): ?string
+    {
+        return $this->containerFormat ?? 'ogg';
+    }
 }

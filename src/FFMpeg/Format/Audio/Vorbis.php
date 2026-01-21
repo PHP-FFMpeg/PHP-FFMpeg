@@ -24,9 +24,12 @@ class Vorbis extends DefaultAudio
     /**
      * {@inheritdoc}
      */
-    public function getExtraParams()
+    public function getExtraParams(): array
     {
-        return ['-strict', '-2'];
+        $params   = parent::getExtraParams();
+        $params[] = '-strict';
+        $params[] = '-2';
+        return $params;
     }
 
     /**
@@ -35,5 +38,14 @@ class Vorbis extends DefaultAudio
     public function getAvailableAudioCodecs()
     {
         return ['vorbis'];
+    }
+
+    /**
+     * Enforce ogg as the default container for Vorbis.
+     * you can change it to oga or any other suitable type with setContainerFormat() method.
+     */
+    public function getFormatName(): ?string
+    {
+        return 'ogg';
     }
 }

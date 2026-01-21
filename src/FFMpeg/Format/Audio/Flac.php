@@ -28,4 +28,12 @@ class Flac extends DefaultAudio
     {
         return ['flac'];
     }
+
+    /**
+     * Enforce flac as the default container for Flac.
+     */
+    public function getFormatName(): ?string
+    {
+        return 'flac';
+    }
 }
