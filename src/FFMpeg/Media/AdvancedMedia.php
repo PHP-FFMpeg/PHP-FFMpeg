@@ -40,6 +40,12 @@ class AdvancedMedia extends AbstractMediaType
      * @var string[]
      */
     private $additionalParameters;
+	
+	/**
+     *
+     * @var array[]
+     */
+    private $inputsParameters;
 
     /**
      * @var string[]
@@ -72,6 +78,7 @@ class AdvancedMedia extends AbstractMediaType
         $this->inputs = $inputs;
         $this->initialParameters = [];
         $this->additionalParameters = [];
+		$this->inputsParameters = [];
         $this->mapCommands = [];
         $this->listeners = [];
     }
@@ -154,6 +161,24 @@ class AdvancedMedia extends AbstractMediaType
 
         return $this;
     }
+	
+	/**
+     * @return array
+     */
+    public function getInputsParameters()
+    {
+        return $this->inputsParameters;
+    }
+
+    /**
+     * @param array $parameters
+     * @return AdvancedMedia
+     */
+    public function setInputsParameters(array $parameters)
+    {
+        $this->inputsParameters = $parameters;
+        return $this;
+    }
 
     /**
      * @return string[]
@@ -169,6 +194,25 @@ class AdvancedMedia extends AbstractMediaType
     public function getInputsCount()
     {
         return count($this->inputs);
+    }
+	
+	/**
+     * Add parameters to inputs
+     * 
+     * @param int $inputKey
+     * @return type
+     */
+    private function mapInput(int $inputKey)
+    {
+        $commands = array();
+
+        if (isset($this->inputsParameters[$inputKey])) {
+            foreach ($this->inputsParameters[$inputKey] as $param) {
+                $commands[] = $param;
+            }
+        }
+
+        return $commands;
     }
 
     /**
@@ -395,7 +439,8 @@ class AdvancedMedia extends AbstractMediaType
     private function buildInputsPart(array $inputs)
     {
         $commands = [];
-        foreach ($inputs as $input) {
+		foreach ($inputs as $key => $input) {
+			$commands = array_merge($commands, $this->mapInput($key));
             $commands[] = '-i';
             $commands[] = $input;
         }
