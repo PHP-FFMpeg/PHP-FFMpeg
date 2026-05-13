@@ -36,9 +36,9 @@ class Concat extends AbstractMediaType
     }
 
     /**
-     * Returns the path to the sources.
+     * Returns the paths to the sources.
      *
-     * @return string
+     * @return array
      */
     public function getSources()
     {

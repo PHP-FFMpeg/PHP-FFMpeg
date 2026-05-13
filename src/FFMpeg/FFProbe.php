@@ -120,7 +120,7 @@ class FFProbe
     }
 
     /**
-     * @return Cache
+     * @return CacheItemPoolInterface
      */
     public function getCache()
     {
