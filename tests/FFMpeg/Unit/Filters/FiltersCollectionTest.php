@@ -13,18 +13,18 @@ class FiltersCollectionTest extends TestCase
         $coll = new FiltersCollection();
         $this->assertCount(0, $coll);
 
-        $coll->add($this->getMockBuilder('FFMpeg\Filters\FilterInterface')->getMock());
+        $coll->add($this->getFilterMock());
         $this->assertCount(1, $coll);
 
-        $coll->add($this->getMockBuilder('FFMpeg\Filters\FilterInterface')->getMock());
+        $coll->add($this->getFilterMock());
         $this->assertCount(2, $coll);
     }
 
     public function testIterator()
     {
         $coll = new FiltersCollection();
-        $coll->add($this->getMockBuilder('FFMpeg\Filters\FilterInterface')->getMock());
-        $coll->add($this->getMockBuilder('FFMpeg\Filters\FilterInterface')->getMock());
+        $coll->add($this->getFilterMock());
+        $coll->add($this->getFilterMock());
 
         $this->assertInstanceOf('\ArrayIterator', $coll->getIterator());
         $this->assertCount(2, $coll->getIterator());
@@ -58,5 +58,15 @@ class FiltersCollectionTest extends TestCase
         }
 
         $this->assertEquals(['1', '2', '3', 'a', 'b', 'c', 'd', 'e', '4'], $data);
+    }
+
+    private function getFilterMock()
+    {
+        $filter = $this->getMockBuilder('FFMpeg\Filters\FilterInterface')->getMock();
+        $filter->expects($this->any())
+            ->method('getPriority')
+            ->will($this->returnValue(0));
+
+        return $filter;
     }
 }
