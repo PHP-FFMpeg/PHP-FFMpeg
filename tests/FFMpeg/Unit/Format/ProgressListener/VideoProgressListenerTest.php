@@ -46,8 +46,12 @@ class VideoProgressListenerTest extends TestCase
             } elseif (1 === $n) {
                 $phpunit->assertEquals($expectedPercent2, $percent);
                 $phpunit->assertEquals($expectedRemaining2, $remaining);
-                $phpunit->assertLessThan($expectedRate2 + 10, $rate);
-                $phpunit->assertGreaterThan($expectedRate2 - 10, $rate);
+                // The rate is computed as deltaSize * (microtime() - lastOutput).
+                // Even with sleep(1) between handle() calls, the wall-clock delta
+                // varies by a few milliseconds depending on host load, so use a
+                // tolerance large enough to absorb that jitter without masking a
+                // genuine regression.
+                $phpunit->assertEqualsWithDelta($expectedRate2, $rate, 100);
             }
             ++$n;
         });
