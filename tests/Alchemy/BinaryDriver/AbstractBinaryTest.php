@@ -156,7 +156,9 @@ class AbstractBinaryTest extends BinaryDriverTestCase
 
         $reflexion = new \ReflectionClass('Alchemy\BinaryDriver\AbstractBinary');
         $prop      = $reflexion->getProperty('listenersManager');
-        $prop->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $prop->setAccessible(true);
+        }
         $prop->setValue($imp, $listeners);
 
         $imp->listen($listener);
@@ -271,7 +273,9 @@ class AbstractBinaryTest extends BinaryDriverTestCase
 
         $reflexion = new \ReflectionClass('Alchemy\BinaryDriver\AbstractBinary');
         $prop      = $reflexion->getProperty('listenersManager');
-        $prop->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $prop->setAccessible(true);
+        }
         $prop->setValue($imp, $listeners);
 
         $imp->unlisten($listener);

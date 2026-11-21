@@ -108,6 +108,9 @@ class AudioTest extends AbstractStreamableTestCase
             ->method('apply')
             ->with($audio, $format)
             ->will($this->returnValue(['extra-filter-command']));
+        $filter->expects($this->any())
+            ->method('getPriority')
+            ->will($this->returnValue(0));
 
         $capturedCommands = [];
 
