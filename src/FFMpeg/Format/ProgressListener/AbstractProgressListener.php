@@ -153,7 +153,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
     /**
      * @param string $progress A ffmpeg stderr progress output
      *
-     * @return array the progressinfo array or null if there's no progress available yet
+     * @return array|null the progressinfo array or null if there's no progress available yet
      */
     private function parseProgress($progress)
     {
@@ -162,7 +162,7 @@ abstract class AbstractProgressListener extends EventEmitter implements Listener
         }
 
         if (null === $this->totalSize || null === $this->duration) {
-            return;
+            return null;
         }
 
         $matches = [];
