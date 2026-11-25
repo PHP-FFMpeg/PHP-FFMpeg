@@ -53,8 +53,18 @@ class Stream extends AbstractData
 
         $sampleRatio = $displayRatio = null;
 
-        $width = $this->get('width');
-        $height = $this->get('height');
+        // there are probably more robust ways to do this, but i don't know what approach to take
+        $rotation =
+            $this->get("side_data_list", [["rotation" => 0]])[0]["rotation"] ??
+            0;
+        if (($rotation + 90) % 180 === 0) {
+            // this means that the video was rotated 90 or 270, which is not a problem for the encoder but ffprobe returns the rotated dimensions.
+            $width = $this->get("height");
+            $height = $this->get("width");
+        } else {
+            $width = $this->get("width");
+            $height = $this->get("height");
+        }
 
         if (null !== $ratio = $this->extractRatio($this, 'sample_aspect_ratio')) {
             $sampleRatio = $ratio;
