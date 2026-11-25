@@ -118,6 +118,7 @@ class Concat extends AbstractMediaType
         $commands = [
             '-f', 'concat', '-safe', '0',
             '-i', $sourcesFile,
+            '-y',
         ];
 
         // Check if stream copy is activated
@@ -171,7 +172,9 @@ class Concat extends AbstractMediaType
         }
 
         // Create the commands variable
-        $commands = [];
+        $commands = [
+            '-y',
+        ];
 
         // Prepare the parameters
         $nbSources = 0;
