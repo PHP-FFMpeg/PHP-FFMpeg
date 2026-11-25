@@ -16,6 +16,9 @@ use FFMpeg\Exception\RuntimeException;
 use FFMpeg\Format\VideoInterface;
 use FFMpeg\Media\Video;
 
+/**
+ * @deprecated Use \FFMpeg\Media\Video::frames instead
+ */
 class ExtractMultipleFramesFilter implements VideoFilterInterface
 {
     /** will extract a frame every second */
@@ -98,6 +101,7 @@ class ExtractMultipleFramesFilter implements VideoFilterInterface
 
     /**
      * {@inheritdoc}
+     * @deprecated Use \FFMpeg\Media\Video::frames instead
      */
     public function apply(Video $video, VideoInterface $format)
     {

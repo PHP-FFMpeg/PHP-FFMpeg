@@ -62,4 +62,15 @@ class Video extends AbstractVideo
     {
         return new Clip($this, $this->driver, $this->ffprobe, $start, $duration);
     }
+
+    /**
+     * Gets the frames at $frameRate.
+     *
+     * @param string $frameRate
+     * @return Frames
+     */
+    public function frames($frameRate = Frames::FRAMERATE_EVERY_SEC)
+    {
+        return new Frames($this, $this->driver, $this->ffprobe, $frameRate);
+    }
 }
