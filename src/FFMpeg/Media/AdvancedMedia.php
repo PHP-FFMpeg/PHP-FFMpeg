@@ -262,6 +262,10 @@ class AdvancedMedia extends AbstractMediaType
                 $commands[] = '-vcodec';
                 $commands[] = $format->getVideoCodec();
             }
+            if ($format->getKiloBitrate() !== 0) {
+                $commands[] = '-b:v';
+                $commands[] = $format->getKiloBitrate() . 'k';
+            }
             // If the user passed some additional format parameters.
             if (null !== $format->getAdditionalParameters()) {
                 $commands = array_merge($commands, $format->getAdditionalParameters());
