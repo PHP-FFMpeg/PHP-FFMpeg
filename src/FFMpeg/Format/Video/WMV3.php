@@ -46,4 +46,13 @@ class WMV3 extends DefaultVideo
     {
         return ['wmv3'];
     }
+
+    /**
+     * Enforce wmv as the default container for WMV.
+     * you can change it to asf or any other suitable type with setContainerFormat() method.
+     */
+    public function getFormatName(): ?string
+    {
+        return $this->containerFormat ?? 'wmv';
+    }
 }

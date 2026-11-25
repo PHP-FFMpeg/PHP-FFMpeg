@@ -92,4 +92,13 @@ class X264 extends DefaultVideo
     {
         return 2;
     }
+
+    /**
+     * Enforce mp4 as the default container for X264.
+     * you can change it to mkv or any other suitable type with setContainerFormat() method.
+     */
+    public function getFormatName(): ?string
+    {
+        return $this->containerFormat ?? 'mp4';
+    }
 }

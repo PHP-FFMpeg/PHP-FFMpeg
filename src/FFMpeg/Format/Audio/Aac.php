@@ -28,4 +28,13 @@ class Aac extends DefaultAudio
     {
         return ['libfdk_aac'];
     }
+
+    /**
+     * Enforce mp4 as the default container for AAC. (produces M4A files)
+     * you can change it to adts or any other suitable type with setContainerFormat() method to get an aac file.
+     */
+    public function getFormatName(): ?string
+    {
+        return $this->containerFormat ?? 'mp4';
+    }
 }

@@ -28,4 +28,12 @@ class Mp3 extends DefaultAudio
     {
         return ['libmp3lame'];
     }
+
+    /**
+     * Enforce mp3 as the default container for MP3.
+     */
+    public function getFormatName(): ?string
+    {
+        return 'mp3';
+    }
 }
