@@ -722,6 +722,15 @@ You can validate media files using PHP-FFMpeg's FFProbe wrapper.
 $ffprobe = FFMpeg\FFProbe::create();
 $ffprobe->isValid('/path/to/file/to/check'); // returns bool
 ```
+// After determining output format
+$ext = pathinfo($outputPath, PATHINFO_EXTENSION);
+$supportedFormats = ['mp4', 'avi', 'webm'];
+
+if (!in_array($ext, $supportedFormats)) {
+    throw new \Exception("Unsupported file extension: $ext. Try one of: " . implode(', ', $supportedFormats));
+}
+$video
+    ->save(new FFMpeg\Format\Video\X264(), 'output.unsupported');
 
 ## License
 
